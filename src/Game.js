@@ -3,7 +3,6 @@ export default class Game{
     container: HTMLElement;
     ctx:Object;
     shells: Array<Object>;
-    lastTime: number;
     constructor(container:HTMLElement){
         let canvas = document.createElement('CANVAS');
         container.appendChild(canvas);
@@ -12,9 +11,7 @@ export default class Game{
 
         this.shells = [];
         this.bullets = [];
-        this.lastTime = new Date().getTime();
 
-        
         let engine = new Engine({ctx:this.ctx});
         engine.register({
             update: ({ctx}) => {
@@ -36,26 +33,18 @@ export default class Game{
             }
         })
         engine.update();  //starts
-
-
-        // requestAnimationFrame(this.update)
-
-    }
-    update = () => {
-        let nowTime = new Date().getTime();
-        let diff = nowTime - this.lastTime;
-        this.lastTime = nowTime;
-        
     }
 }
 export class Engine{
     objects:Array<Object>;
     ctx:Object
+    lastTime: number;
     constructor({ctx}){
         this.ctx = ctx
         this.objects = []
+        this.lastTime = new Date().getTime();
     }
-    register = (obj) => {
+    register = (obj:Object) => {
         obj.destroy = () => {
             let i = this.objects.indexOf(obj);
             if(i>-1){
@@ -65,7 +54,15 @@ export class Engine{
         this.objects.push(obj)
     }
     update = () => {
-        this.objects.forEach(o => {o.update({ctx:this.ctx})});
+        let nowTime = new Date().getTime();
+        let diff = nowTime - this.lastTime;
+        this.lastTime = nowTime;
+
+        this.objects.forEach(o => {o.update({
+            ctx:this.ctx, 
+            deltaTime:diff/1000
+        })});
+
         requestAnimationFrame(this.update)
     }
 }
