@@ -1,0 +1,17 @@
+bower_components
+node_modules
+coverage
+!karma.conf.js
+dist
+temp
+.sass-cache
+project.*
+heroku.txt
+.idea
+.bundled
+npm-debug.log
+karma_html
+buildstats.*
+.vscode/chrome
+.vscode/chromium
+.vscode/launch.json
