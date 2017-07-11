@@ -5,6 +5,29 @@ import Point from 'Point'
 let debugTextDiv;
 
 
+export class Player{
+    position: Point;
+    constructor(params){
+        Object.assign(this, params);
+    }
+    update({ctx, keyboard, deltaTime}){
+        /* 
+        w 87
+        a 65
+        s 83
+        d 68
+        */
+
+        if(keyboard.down(65)){
+            this.position.x -= deltaTime*100;
+        }
+        if(keyboard.down(68)){
+            this.position.x += deltaTime*100;
+        }
+        ctx.fillRect(this.position.x, this.position.y, 50, 50);
+    }
+}
+
 export default class Game{
     container: HTMLElement;
     ctx:Object;
@@ -25,41 +48,48 @@ export default class Game{
         // this.shells = [];
         // this.bullets = [];
 
+        let player = new Player({position: new Point({x: 50, y: 200})})
+
         let engine = new Engine({ctx:this.ctx});
         let firing = false;
         engine.register({
-            update: ({ctx}) => {
-                ctx.clearRect(0,0,500,500);
+            update: ({ctx, mouse}) => {
+                
                 // console.log('update');
                 if(firing){
                     engine.register(new Shell({
-                        x: 50,
-                        y: 50,
+                        x: player.position.x,
+                        y: player.position.y,
                         h: Math.random()-0.5,
                         v: -Math.random()
                     }))
+                    let diff = mouse.position.subtract(player.position);
+                    let dir = Math.atan2(diff.y, diff.x)
+                    dir += (Math.random()-0.5)/10 //spread
                     engine.register(new Bullet({
-                        x: 50,
-                        y: 50,
-                        h: 10+Math.random(),
-                        v: (Math.random()-0.5)/3
+                        x: player.position.x,
+                        y: player.position.y,
+                        // h: 10+Math.random(),
+                        // v: (Math.random()-0.5)/3
+                        h:Math.cos(dir)*10,
+                        v:Math.sin(dir)*10
                     }))
 
                 }
                 
             }
         })
+        engine.register(player);
         document.addEventListener("mousedown", (e) => {
             switch(e.button){
                 case 0:
-                    console.log('asd', firing);
-                    
                     firing = true;
                 break;
                 case 2: 
                     engine.register(new Missile({
-                        direction: 0,
-                        position: new Point({x:50, y:50}),
+                        direction: -Math.PI/2,
+                        speed: 3,
+                        position: player.position.clone(),
                         target: new Point({x:e.clientX, y: e.clientY})
                     }));
                 break;
@@ -84,6 +114,7 @@ export class Engine{
     mouse:Mouse
     constructor({ctx}){
         this.mouse = new Mouse();
+        this.keyboard = new Keyboard();
         this.ctx = ctx
         this.objects = []
         this.lastTime = new Date().getTime();
@@ -102,10 +133,14 @@ export class Engine{
         let diff = nowTime - this.lastTime;
         this.lastTime = nowTime;
 
+        
+        this.ctx.clearRect(0,0,500, 500)
+
         this.objects.forEach(o => {o.update({
             ctx:this.ctx, 
             deltaTime:diff/1000,
-            mouse:this.mouse
+            mouse:this.mouse,
+            keyboard:this.keyboard
         })});
 
         requestAnimationFrame(this.update)
@@ -126,6 +161,25 @@ export class Mouse{
     }
 }
 
+export class Keyboard{
+    keysdown: Array<number>;
+    constructor(){
+        this.keysdown = []
+        window.onkeydown = (e) => {
+            // console.log('down', e.keyCode);
+            //strip duplicates
+            if(!this.down(e.keyCode)){
+                this.keysdown.push(e.keyCode);
+            }
+        }
+        window.onkeyup = (e) => {
+            this.keysdown.splice(this.keysdown.indexOf(e.keyCode), 1);
+        }
+    }
+    down = (key) => {
+        return this.keysdown.indexOf(key)>-1;
+    }
+}
 
 export class Shell{
     x:number;//position
@@ -134,13 +188,19 @@ export class Shell{
     v:number;//momentum
     constructor(params){
         Object.assign(this, params);
+        this.time = 1 + Math.random();
     }
-    update({ctx}){
+    update({ctx, deltaTime}){
+        this.time -= deltaTime;
         this.x += this.h;
         this.y += this.v;
-        this.v += 0.01;
+        this.v *= 1-deltaTime
+        this.v += deltaTime*3;
         ctx.fillRect(this.x, this.y, 4, 4);
-        if(this.y > 130){
+        if(this.y>250 && this.v>0){
+            this.v = -this.v
+        }
+        if(this.time < 0){
             this.destroy();
         }
     }
@@ -152,13 +212,15 @@ export class Bullet{
     v:number;//momentum
     constructor(params){
         Object.assign(this, params);
+        this.time = 1
     }
-    update = ({ctx}) => {
+    update = ({ctx, deltaTime}) => {
+        this.time -= deltaTime;
         this.x += this.h;
         this.y += this.v;
         // shell.v += 0.01;
         ctx.fillRect(this.x, this.y, 4, 4);
-        if(this.x > 250){
+        if(this.time < 0){
             this.destroy();
         }
     }
@@ -188,12 +250,12 @@ export class Missile{
         if(this.guided){
             let diff = this.target.subtract(this.position);
             let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
-            if(dist < 10){
+            if(dist < 20){
                 this.explode();
             }
             let newdir = Math.atan2(diff.y, diff.x);
 
-            debugTextDiv.innerHTML = 'current: '+this.direction+"<br />target: "+newdir
+            // debugTextDiv.innerHTML = 'current: '+this.direction+"<br />target: "+newdir
 
             let dirDiff = this.direction - newdir;
             if(dirDiff > Math.PI) 
@@ -222,7 +284,7 @@ export class Missile{
                 }
             }
             if(this.speed<1)this.speed = 1;
-            if(this.speed>5)this.speed = 5;
+            if(this.speed>8)this.speed = 8;
 
             //dont spin it up too much
             // if(Math.abs(this.direction>Math.PI*2)){

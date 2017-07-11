@@ -36,6 +36,13 @@ export default class Point{
     this.y = pos.y;
   }
 
+  clone(){
+    return new Point({
+      x: this.x,
+      y: this.y
+    })
+  }
+
   add(diff:{x:number, y:number}){
     return new Point({
       x: this.x + diff.x,
