@@ -26,30 +26,54 @@ export default class Game{
         // this.bullets = [];
 
         let engine = new Engine({ctx:this.ctx});
+        let firing = false;
         engine.register({
             update: ({ctx}) => {
-                ctx.clearRect(0,0,300,150);
+                ctx.clearRect(0,0,500,500);
                 // console.log('update');
+                if(firing){
+                    engine.register(new Shell({
+                        x: 50,
+                        y: 50,
+                        h: Math.random()-0.5,
+                        v: -Math.random()
+                    }))
+                    engine.register(new Bullet({
+                        x: 50,
+                        y: 50,
+                        h: 10+Math.random(),
+                        v: (Math.random()-0.5)/3
+                    }))
+
+                }
                 
-                engine.register(new Shell({
-                    x: 50,
-                    y: 50,
-                    h: Math.random()-0.5,
-                    v: -Math.random()
-                }))
-                engine.register(new Bullet({
-                    x: 50,
-                    y: 50,
-                    h: 10+Math.random(),
-                    v: (Math.random()-0.5)/3
-                }))
             }
         })
-        engine.register(new Missile({
-            direction: 0,
-            position: new Point({x:75, y:75}),
-            target: new Point({x:150, y: 75})
-        }))
+        document.addEventListener("mousedown", (e) => {
+            switch(e.button){
+                case 0:
+                    console.log('asd', firing);
+                    
+                    firing = true;
+                break;
+                case 2: 
+                    engine.register(new Missile({
+                        direction: 0,
+                        position: new Point({x:50, y:50}),
+                        target: new Point({x:e.clientX, y: e.clientY})
+                    }));
+                break;
+            }
+        })
+        document.addEventListener("mouseup", (e) => {
+            switch(e.button){
+                case 0:
+                    firing = false;
+                break;
+            }
+        })
+
+
         engine.update();  //starts
     }
 }
@@ -95,7 +119,6 @@ export class Mouse{
         document.addEventListener('mousemove', (e) => {
             // console.log('e', e);
             this.position = new Point({x:e.clientX, y: e.clientY});
-
         })
     }
     update(){
@@ -148,7 +171,11 @@ export class Missile{
     speed: number
     constructor(params:{position:Point, direction: number, target:Point}){
         Object.assign(this, params);
-        this.speed = 1;        
+        this.speed = 1;
+        this.guided = true;
+    }
+    explode(){
+        this.destroy();
     }
     update = ({ctx, deltaTime, mouse}) => {
         // console.log('"asd');
@@ -157,39 +184,55 @@ export class Missile{
         this.position.x += Math.cos(this.direction)*this.speed;
 
         //aim at target
-        this.target = mouse.position
+        // this.target = mouse.position
+        if(this.guided){
+            let diff = this.target.subtract(this.position);
+            let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
+            if(dist < 10){
+                this.explode();
+            }
+            let newdir = Math.atan2(diff.y, diff.x);
 
-        let diff = this.target.subtract(this.position);
-        let newdir = Math.atan2(diff.y, diff.x);
+            debugTextDiv.innerHTML = 'current: '+this.direction+"<br />target: "+newdir
 
-        debugTextDiv.innerHTML = 'current: '+this.direction+"<br />target: "+newdir
+            let dirDiff = this.direction - newdir;
+            if(dirDiff > Math.PI) 
+                newdir += 2*Math.PI
+            if(dirDiff < -Math.PI) 
+                newdir -= 2*Math.PI
 
-        let dirDiff = this.direction - newdir;
-        if(dirDiff > Math.PI) 
-            newdir += 2*Math.PI
-        if(dirDiff < -Math.PI) 
-            newdir -= 2*Math.PI
+            // if(Math.abs(newdir - this.direction)>Math.PI) debugger;
 
-        // if(Math.abs(newdir - this.direction)>Math.PI) debugger;
+            let n = 5
+            dirDiff = (newdir - this.direction)
+            // console.log('dd', dirDiff);
+            // this.speed = 2 - dirDiff
+            
+            // this.direction += dirDiff * deltaTime
+            if(Math.abs(dirDiff) < 0.5){
+                this.speed += deltaTime*8;
+                this.direction += dirDiff/3
+            }else{
+                this.speed -= deltaTime*5;
+                // this.speed = (this.speed + 1) /2;
+                if(dirDiff > 0){
+                    this.direction += deltaTime *Math.PI
+                }else{
+                    this.direction -= deltaTime *Math.PI
+                }
+            }
+            if(this.speed<1)this.speed = 1;
+            if(this.speed>5)this.speed = 5;
 
-        let n = 5
-        dirDiff = (newdir - this.direction)
-        // console.log('dd', dirDiff);
-        // this.speed = 2 - dirDiff
-        
-        // this.direction += dirDiff * deltaTime
-        if(dirDiff > 0){
-            this.direction += deltaTime
-        }else{
-            this.direction -= deltaTime
+            //dont spin it up too much
+            // if(Math.abs(this.direction>Math.PI*2)){
+            //     this.direction = this.direction % (Math.PI/2);
+            // }
+            if(this.direction>Math.PI) this.direction -= Math.PI*2
+            if(this.direction<-Math.PI) this.direction += Math.PI*2
+
         }
 
-        //dont spin it up too much
-        // if(Math.abs(this.direction>Math.PI*2)){
-        //     this.direction = this.direction % (Math.PI/2);
-        // }
-        if(this.direction>Math.PI) this.direction -= Math.PI*2
-        if(this.direction<-Math.PI) this.direction += Math.PI*2
 
 
 
