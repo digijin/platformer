@@ -1,4 +1,7 @@
 // @flow
+
+import Point from 'Point'
+
 export default class Game{
     container: HTMLElement;
     ctx:Object;
@@ -16,7 +19,7 @@ export default class Game{
         engine.register({
             update: ({ctx}) => {
                 ctx.clearRect(0,0,300,150);
-                console.log('update');
+                // console.log('update');
                 
                 engine.register(new Shell({
                     x: 50,
@@ -32,6 +35,11 @@ export default class Game{
                 }))
             }
         })
+        engine.register(new Missile({
+            direction: 0,
+            position: new Point({x:75, y:75}),
+            target: new Point({x:150, y: 75})
+        }))
         engine.update();  //starts
     }
 }
@@ -101,5 +109,37 @@ export class Bullet{
         if(this.x > 250){
             this.destroy();
         }
+    }
+}
+
+export class Missile{
+    position:Point;
+    direction: number;
+    target:Point;
+    constructor(params:{position:Point, direction: number, target:Point}){
+        Object.assign(this, params);
+        
+    }
+    update = ({ctx, deltaTime}) => {
+        // console.log('"asd');
+
+        this.position.y += Math.sin(this.direction);
+        this.position.x += Math.cos(this.direction);
+
+        //aim at target
+        let diff = this.target.subtract(this.position);
+        let newdir = Math.atan2(diff.y, diff.x);
+        let dirDiff = this.direction - newdir;
+        if(dirDiff > Math.PI) 
+            newdir += 2*Math.PI
+        if(dirDiff < -Math.PI) 
+            newdir -= 2*Math.PI
+
+        let n = 5
+        this.direction += (newdir - this.direction) * deltaTime
+
+        
+
+        ctx.fillRect(this.position.x, this.position.y, 10, 10);
     }
 }
