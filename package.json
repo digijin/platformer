@@ -90,7 +90,6 @@
     "write-file-webpack-plugin": "^3.4.2"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
     "moduleFileExtensions": [
       "js",
       "jsx"
