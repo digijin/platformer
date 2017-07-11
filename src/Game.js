@@ -2,18 +2,28 @@
 
 import Point from 'Point'
 
+let debugTextDiv;
+
+
 export default class Game{
     container: HTMLElement;
     ctx:Object;
     shells: Array<Object>;
     constructor(container:HTMLElement){
         let canvas = document.createElement('CANVAS');
+        canvas.width = 500;
+        canvas.height = 500;
         container.appendChild(canvas);
-        this.ctx = canvas.getContext('2d');
-        this.ctx.fillRect(10, 10, 40, 40);
 
-        this.shells = [];
-        this.bullets = [];
+        debugTextDiv = document.createElement('div');
+        document.body.appendChild(debugTextDiv)
+        debugTextDiv.innerHTML = "debug"
+        
+        this.ctx = canvas.getContext('2d');
+        // this.ctx.fillRect(10, 10, 40, 40);
+
+        // this.shells = [];
+        // this.bullets = [];
 
         let engine = new Engine({ctx:this.ctx});
         engine.register({
@@ -47,7 +57,9 @@ export class Engine{
     objects:Array<Object>;
     ctx:Object
     lastTime: number;
+    mouse:Mouse
     constructor({ctx}){
+        this.mouse = new Mouse();
         this.ctx = ctx
         this.objects = []
         this.lastTime = new Date().getTime();
@@ -68,12 +80,29 @@ export class Engine{
 
         this.objects.forEach(o => {o.update({
             ctx:this.ctx, 
-            deltaTime:diff/1000
+            deltaTime:diff/1000,
+            mouse:this.mouse
         })});
 
         requestAnimationFrame(this.update)
     }
 }
+
+export class Mouse{
+    position: Point;
+    constructor(){
+        this.position = new Point({x:0, y:0})
+        document.addEventListener('mousemove', (e) => {
+            // console.log('e', e);
+            this.position = new Point({x:e.clientX, y: e.clientY});
+
+        })
+    }
+    update(){
+
+    }
+}
+
 
 export class Shell{
     x:number;//position
@@ -116,27 +145,53 @@ export class Missile{
     position:Point;
     direction: number;
     target:Point;
+    speed: number
     constructor(params:{position:Point, direction: number, target:Point}){
         Object.assign(this, params);
-        
+        this.speed = 1;        
     }
-    update = ({ctx, deltaTime}) => {
+    update = ({ctx, deltaTime, mouse}) => {
         // console.log('"asd');
 
-        this.position.y += Math.sin(this.direction);
-        this.position.x += Math.cos(this.direction);
+        this.position.y += Math.sin(this.direction)*this.speed;
+        this.position.x += Math.cos(this.direction)*this.speed;
 
         //aim at target
+        this.target = mouse.position
+
         let diff = this.target.subtract(this.position);
         let newdir = Math.atan2(diff.y, diff.x);
+
+        debugTextDiv.innerHTML = 'current: '+this.direction+"<br />target: "+newdir
+
         let dirDiff = this.direction - newdir;
         if(dirDiff > Math.PI) 
             newdir += 2*Math.PI
         if(dirDiff < -Math.PI) 
             newdir -= 2*Math.PI
 
+        // if(Math.abs(newdir - this.direction)>Math.PI) debugger;
+
         let n = 5
-        this.direction += (newdir - this.direction) * deltaTime
+        dirDiff = (newdir - this.direction)
+        // console.log('dd', dirDiff);
+        // this.speed = 2 - dirDiff
+        
+        // this.direction += dirDiff * deltaTime
+        if(dirDiff > 0){
+            this.direction += deltaTime
+        }else{
+            this.direction -= deltaTime
+        }
+
+        //dont spin it up too much
+        // if(Math.abs(this.direction>Math.PI*2)){
+        //     this.direction = this.direction % (Math.PI/2);
+        // }
+        if(this.direction>Math.PI) this.direction -= Math.PI*2
+        if(this.direction<-Math.PI) this.direction += Math.PI*2
+
+
 
         
 
