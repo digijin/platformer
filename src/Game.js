@@ -300,8 +300,22 @@ export class Missile{
 
 
         
-
+        //draw box
         // ctx.fillRect(this.position.x, this.position.y, 10, 10);
-        ctx.drawImage(missile, 0, 0, missile.width, missile.height, this.position.x, this.position.y, 10, 10)
+        
+        //draw image
+        // ctx.drawImage(missile, 0, 0, missile.width, missile.height, this.position.x, this.position.y, 10, 10)
+
+        //draw image rotated
+        let w = 20;
+        let h = 20;
+        ctx.translate(this.position.x, this.position.y);
+        ctx.rotate(this.direction)
+        ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
+        ctx.rotate(-this.direction)
+        ctx.translate(-this.position.x, -this.position.y);
+
+
+
     }
 }
