@@ -1,6 +1,7 @@
 // @flow
 
 import Point from 'Point'
+import missile from './missile.png'
 
 let debugTextDiv;
 
@@ -300,6 +301,7 @@ export class Missile{
 
         
 
-        ctx.fillRect(this.position.x, this.position.y, 10, 10);
+        // ctx.fillRect(this.position.x, this.position.y, 10, 10);
+        ctx.drawImage(missile, 0, 0, missile.width, missile.height, this.position.x, this.position.y, 10, 10)
     }
 }
