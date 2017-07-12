@@ -1,7 +1,7 @@
 
 
 import missile from './missile.png'
-
+import Smoke from 'Smoke'
 export default class Missile{
     position:Point;
     direction: number;
@@ -15,11 +15,16 @@ export default class Missile{
     explode(){
         this.destroy();
     }
-    update = ({ctx, deltaTime, mouse}) => {
+    update = ({ctx, deltaTime, mouse, register}) => {
         // console.log('"asd');
 
         this.position.y += Math.sin(this.direction)*this.speed;
         this.position.x += Math.cos(this.direction)*this.speed;
+
+        //smoke trail
+        console.log('asdads');
+        
+        register(new Smoke({position: this.position.clone()}))
 
         //aim at target
         // this.target = mouse.position
