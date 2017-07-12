@@ -1,4 +1,9 @@
-export class Engine{
+
+import Keyboard from 'Keyboard';
+import Missile from 'Missile';
+import Mouse from 'Mouse';
+
+export default class Engine{
     objects:Array<Object>;
     ctx:Object
     lastTime: number;

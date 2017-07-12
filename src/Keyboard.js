@@ -1,5 +1,5 @@
 
-export class Keyboard{
+export default class Keyboard{
     keysdown: Array<number>;
     constructor(){
         this.keysdown = []

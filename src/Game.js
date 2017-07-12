@@ -1,10 +1,16 @@
 // @flow
 
 import Point from 'Point'
-import missile from './missile.png'
 
 // let debugTextDiv;
 
+import Bullet from 'Bullet';
+import Engine from 'Engine';
+import Keyboard from 'Keyboard';
+import Missile from 'Missile';
+import Mouse from 'Mouse';
+import Player from 'Player';
+import Shell from 'Shell';
 
 export default class Game{
     container: HTMLElement;

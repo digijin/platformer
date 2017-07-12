@@ -1,5 +1,5 @@
 
-export class Bullet{
+export default class Bullet{
     x:number;//position
     y:number;//position
     h:number;//momentum

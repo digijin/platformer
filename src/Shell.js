@@ -1,5 +1,5 @@
 
-export class Shell{
+export default class Shell{
     x:number;//position
     y:number;//position
     h:number;//momentum

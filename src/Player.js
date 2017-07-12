@@ -1,5 +1,5 @@
 
-export class Player{
+export default class Player{
     position: Point;
     constructor(params){
         Object.assign(this, params);
@@ -20,3 +20,4 @@ export class Player{
         }
         ctx.fillRect(this.position.x, this.position.y, 50, 50);
     }
+}

@@ -1,5 +1,8 @@
 
-export class Missile{
+
+import missile from './missile.png'
+
+export default class Missile{
     position:Point;
     direction: number;
     target:Point;
