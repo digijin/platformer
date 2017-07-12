@@ -112,11 +112,12 @@ export class Engine{
     objects:Array<Object>;
     ctx:Object
     lastTime: number;
-    mouse:Mouse
+    mouse:Mouse;
+    deltaTime: number;
     constructor({ctx}){
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
-        this.ctx = ctx
+        this.ctx = ctx;
         this.objects = []
         this.lastTime = new Date().getTime();
     }
@@ -134,15 +135,18 @@ export class Engine{
         let diff = nowTime - this.lastTime;
         this.lastTime = nowTime;
 
-        
+        this.deltaTime = diff/1000
         this.ctx.clearRect(0,0,500, 500)
 
-        this.objects.forEach(o => {o.update({
-            ctx:this.ctx, 
-            deltaTime:diff/1000,
-            mouse:this.mouse,
-            keyboard:this.keyboard
-        })});
+        this.objects.forEach(o => {o.update(
+        // {
+        //     ctx:this.ctx, 
+        //     deltaTime:diff/1000,
+        //     mouse:this.mouse,
+        //     keyboard:this.keyboard
+        // }
+        this
+        )});
 
         requestAnimationFrame(this.update)
     }
@@ -153,12 +157,8 @@ export class Mouse{
     constructor(){
         this.position = new Point({x:0, y:0})
         document.addEventListener('mousemove', (e) => {
-            // console.log('e', e);
             this.position = new Point({x:e.clientX, y: e.clientY});
         })
-    }
-    update(){
-
     }
 }
 
@@ -167,7 +167,6 @@ export class Keyboard{
     constructor(){
         this.keysdown = []
         window.onkeydown = (e) => {
-            // console.log('down', e.keyCode);
             //strip duplicates
             if(!this.down(e.keyCode)){
                 this.keysdown.push(e.keyCode);
@@ -312,9 +311,7 @@ export class Missile{
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.direction)
         ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
-        ctx.rotate(-this.direction)
-        ctx.translate(-this.position.x, -this.position.y);
-
+        ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
 
 
     }
