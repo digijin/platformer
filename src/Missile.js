@@ -22,7 +22,7 @@ export default class Missile{
         this.position.x += Math.cos(this.direction)*this.speed;
 
         //smoke trail
-        console.log('asdads');
+        // console.log('asdads');
         
         register(new Smoke({position: this.position.clone()}))
 

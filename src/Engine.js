@@ -17,6 +17,7 @@ export default class Engine{
         this.lastTime = new Date().getTime();
     }
     register = (obj:Object) => {
+        // if(!this)debugger;
         obj.destroy = () => {
             let i = this.objects.indexOf(obj);
             if(i>-1){
@@ -24,6 +25,7 @@ export default class Engine{
             }
         }
         this.objects.push(obj)
+        // console.log(this.objects.length)
     }
     update = () => {
         let nowTime = new Date().getTime();
