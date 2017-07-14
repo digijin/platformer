@@ -79,13 +79,15 @@ export default class Missile{
         //draw image
         // ctx.drawImage(missile, 0, 0, missile.width, missile.height, this.position.x, this.position.y, 10, 10)
 
-        //draw image rotated
-        let w = 20;
-        let h = 20;
-        ctx.translate(this.position.x, this.position.y);
-        ctx.rotate(this.direction)
-        ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
-        ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
+        // //draw image rotated
+        // let w = 20;
+        // let h = 20;
+        // ctx.translate(this.position.x, this.position.y);
+        // ctx.rotate(this.direction)
+        // ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
+        // ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
+
+        ctx.drawSprite(missile, this.position, {w:40, h:40}, this.direction, {x:.5, y:.5});
 
 
     }
