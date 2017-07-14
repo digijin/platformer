@@ -30,6 +30,7 @@ export default class Player{
     position: Point;
     constructor(params){
         Object.assign(this, params);
+        this.size = {w:100, h:100}
     }
     update({ctx, mouse, keyboard, deltaTime, register}){
         /* 
@@ -43,14 +44,14 @@ export default class Player{
             register(new Missile({
                 direction: -Math.PI/2,
                 speed: 3,
-                position: this.position.clone(),
+                position: this.position.subtract({x:0,y:this.size.h}),
                 target: mouse.position.clone()
             }));
         }
         if(firing){
             register(new Shell({
                 x: this.position.x,
-                y: this.position.y,
+                y: this.position.y - (this.size.h/2),
                 h: Math.random()-0.5,
                 v: -Math.random()
             }))
@@ -59,7 +60,7 @@ export default class Player{
             dir += (Math.random()-0.5)/10 //spread
             register(new Bullet({
                 x: this.position.x,
-                y: this.position.y,
+                y: this.position.y - (this.size.h/2),
                 // h: 10+Math.random(),
                 // v: (Math.random()-0.5)/3
                 h:Math.cos(dir)*10,
@@ -77,6 +78,6 @@ export default class Player{
         
         // ctx.fillRect(this.position.x, this.position.y, 50, 50);
         // ctx.drawImage(mech, 0, 0, mech.width, mech.height, this.position.x, this.position.y, 50, 50);
-        ctx.drawSprite(mech, this.position, {w:100, h:100}, 0, {x:.5, y:1});
+        ctx.drawSprite(mech, this.position, this.size, 0, {x:.5, y:1});
     }
 }
