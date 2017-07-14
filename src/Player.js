@@ -31,8 +31,10 @@ export default class Player{
     constructor(params){
         Object.assign(this, params);
         this.size = {w:100, h:100}
+        this.h = 0;
+        this.v = 0;
     }
-    update({ctx, mouse, keyboard, deltaTime, register}){
+    update({ctx, mouse, keyboard, deltaTime, register, grid}){
         /* 
         w 87
         a 65
@@ -42,8 +44,8 @@ export default class Player{
         if(missile){
             missile = false;
             register(new Missile({
-                direction: -Math.PI/2,
-                speed: 3,
+                direction: (-Math.PI/2) + (Math.random()-0.5),
+                speed: 3 + Math.random(),
                 position: this.position.subtract({x:0,y:this.size.h}),
                 target: mouse.position.clone()
             }));
@@ -69,12 +71,28 @@ export default class Player{
 
         }
 
+
         if(keyboard.down(65)){
             this.position.x -= deltaTime*hSpeed;
         }
         if(keyboard.down(68)){
             this.position.x += deltaTime*hSpeed;
         }
+
+        //VERTICAL MOVEMENT
+        if(keyboard.down(32)){
+            this.v -= deltaTime*4; //BOOSTERS
+        }
+        this.v += deltaTime*3; //GRAVITY
+        this.position.y += this.v
+        //LANDING
+        let block = grid.blockAtPosition(this.position)
+        if(block.block !== 0){
+            this.position.y = block.t;
+            this.v = 0;
+        }
+
+
         
         // ctx.fillRect(this.position.x, this.position.y, 50, 50);
         // ctx.drawImage(mech, 0, 0, mech.width, mech.height, this.position.x, this.position.y, 50, 50);

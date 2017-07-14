@@ -24,6 +24,7 @@ export default class Engine{
                 this.objects.splice(i, 1);
             }
         }
+        if(obj.init)obj.init(this);
         this.objects.push(obj)
         // console.log(this.objects.length)
     }

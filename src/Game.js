@@ -4,6 +4,7 @@ import Point from 'Point'
 
 // let debugTextDiv;
 
+import Grid from 'Grid';
 import Bullet from 'Bullet';
 import Engine from 'Engine';
 import Keyboard from 'Keyboard';
@@ -47,36 +48,8 @@ export default class Game{
         let player = new Player({position: new Point({x: 50, y: 200})})
 
         let engine = new Engine({ctx:this.ctx});
-        let firing = false;
-        // engine.register({
-        //     update: ({ctx, mouse}) => {
-                
-        //         // console.log('update');
-        //         if(firing){
-        //             engine.register(new Shell({
-        //                 x: player.position.x,
-        //                 y: player.position.y,
-        //                 h: Math.random()-0.5,
-        //                 v: -Math.random()
-        //             }))
-        //             let diff = mouse.position.subtract(player.position);
-        //             let dir = Math.atan2(diff.y, diff.x)
-        //             dir += (Math.random()-0.5)/10 //spread
-        //             engine.register(new Bullet({
-        //                 x: player.position.x,
-        //                 y: player.position.y,
-        //                 // h: 10+Math.random(),
-        //                 // v: (Math.random()-0.5)/3
-        //                 h:Math.cos(dir)*10,
-        //                 v:Math.sin(dir)*10
-        //             }))
-
-        //         }
-                
-        //     }
-        // })
         engine.register(player);
-        
+        engine.register(new Grid());
 
 
         engine.update();  //starts
