@@ -9,6 +9,9 @@ export default class Context{
 	drawImage(){
 		this.context.drawImage( ...arguments);
 	}
+	clearRect(){
+		this.context.clearRect( ...arguments);
+	}
 	strokeRect(){
 		this.context.strokeRect( ...arguments);
 	}
@@ -23,6 +26,9 @@ export default class Context{
 	}
 	rotate(){
 		this.context.rotate( ...arguments);
+	}
+	setTransform(){
+		this.context.setTransform( ...arguments);
 	}
 	drawSprite = function(image, position = {x:0, y:0}, size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
 		// console.log(this);

@@ -27,8 +27,8 @@ export default class Game{
         // document.body.appendChild(debugTextDiv)
         // debugTextDiv.innerHTML = "debug"
         
-        this.ctx = canvas.getContext('2d');
-        // this.ctx = new Context(canvas.getContext('2d'))
+        // this.ctx = canvas.getContext('2d');
+        this.ctx = new Context(canvas.getContext('2d'))
 
         this.ctx.drawSprite = function(image, position = {x:0, y:0}, size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
             // console.log(this);

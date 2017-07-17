@@ -38,11 +38,12 @@ export default class Missile{
                     //we want red outlines to be on the outside
                     //pick a direction
                     let dir = Math.random()*Math.PI*2;
-                    let dist = Math.random() * 40;
+                    let dist = Math.random() * 10;
                     let offset = {x:Math.cos(dir)*dist, y:Math.sin(dir)*dist};
                     register(new Explosion({
                         position: this.position.add(offset), 
-                        rotation: dir
+                        rotation: dir,
+                        delay: Math.random()/4
                     }))
                     // register(new Explosion({position: this.position.add({x:(Math.random()-0.5)*30, y:(Math.random()-0.5)*30})}))
                 }
