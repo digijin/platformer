@@ -11,7 +11,7 @@ export default class Explosion{
         //defaults
         this.time = 1;
         // this.rotation = Math.random()*Math.PI*2
-        this.delay = Math.random()/2;
+        this.delay = 0;//Math.random()/2;
         this.size = 20 + (Math.random()*20);
 
         Object.assign(this, params)
