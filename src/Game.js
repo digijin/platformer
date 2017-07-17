@@ -11,6 +11,7 @@ import Missile from 'Missile';
 import Mouse from 'Mouse';
 import Player from 'Player';
 import Shell from 'Shell';
+import Context from 'Context';
 
 export default class Game{
     container: HTMLElement;
@@ -27,6 +28,7 @@ export default class Game{
         // debugTextDiv.innerHTML = "debug"
         
         this.ctx = canvas.getContext('2d');
+        // this.ctx = new Context(canvas.getContext('2d'))
 
         this.ctx.drawSprite = function(image, position = {x:0, y:0}, size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
             // console.log(this);
