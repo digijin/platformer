@@ -2,6 +2,7 @@
 
 import missile from './missile.png'
 import Smoke from 'Smoke'
+import Explosion from 'Explosion'
 export default class Missile{
     position:Point;
     direction: number;
@@ -33,6 +34,9 @@ export default class Missile{
             let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
             if(dist < 20){
                 this.explode();
+                for(let i = 0; i< 10; i++){
+                    register(new Explosion({position: this.position.add({x:(Math.random()-0.5)*10, y:(Math.random()-0.5)*10})}))
+                }
             }
             let newdir = Math.atan2(diff.y, diff.x);
 
