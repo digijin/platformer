@@ -9,6 +9,9 @@ import Player from 'Player';
 import Context from 'Context';
 import UI from 'UI';
 
+import MainMenu from 'Scene/MainMenu';
+import Level from 'Scene/Level';
+
 
 export default class Game{
     container: HTMLElement;
@@ -27,13 +30,14 @@ export default class Game{
 
         this.ctx = new Context(canvas.getContext('2d'))
 
-        let engine = new Engine({ctx:this.ctx, ui:ui});
+        let engine:Engine = new Engine({ctx:this.ctx, ui:ui});
 
-        
+        engine.startScene(new Level())
+        // engine.startScene(new MainMenu())
 
         //add player
-        let player = new Player({position: new Point({x: 50, y: 200})})
-        engine.register(player);
+        // let player = new Player({position: new Point({x: 50, y: 200})})
+        // engine.register(player);
         
         engine.update();  //starts
     }

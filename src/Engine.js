@@ -4,6 +4,8 @@ import Missile from 'Missile';
 import Mouse from 'Mouse';
 import State from 'State';
 
+import type SceneBase from 'Scene/Base'
+
 export default class Engine{
     objects:Array<Object>;
     ctx:Object
@@ -11,6 +13,7 @@ export default class Engine{
     mouse:Mouse;
     deltaTime: number;
     state:State
+    currentScene: SceneBase
 
     //init
     constructor({ctx, ui}){
@@ -21,6 +24,13 @@ export default class Engine{
         this.objects = []
         this.lastTime = new Date().getTime();
         this.state = new State();
+    }
+
+    startScene(scene){
+        if(this.currentScene)
+            this.currentScene.end();
+        this.currentScene = scene;
+        this.currentScene.start(this);
     }
 
     //add new objects to be tracked by engine
