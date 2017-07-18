@@ -13,10 +13,11 @@ export default class Engine{
     state:State
 
     //init
-    constructor({ctx}){
+    constructor({ctx, ui}){
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
         this.ctx = ctx;
+        this.ui = ui;
         this.objects = []
         this.lastTime = new Date().getTime();
         this.state = new State();
