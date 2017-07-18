@@ -4,9 +4,9 @@ const blocksize = 50;
 
 export default class Grid{
 
-	constructor(){
+	constructor(size = {w:20, h:20}){
 		//make empty grid
-		this.grid = Array(10).fill(0).map(x => Array(10).fill(0))
+		this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))
 
 		this.grid[0][5] = 1
 		this.grid[1][5] = 1
