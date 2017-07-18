@@ -2,6 +2,9 @@
 import Keyboard from 'Keyboard';
 import Missile from 'Missile';
 import Mouse from 'Mouse';
+import State from 'State';
+
+import type SceneBase from 'Scene/Base'
 
 export default class Engine{
     objects:Array<Object>;
@@ -9,15 +12,29 @@ export default class Engine{
     lastTime: number;
     mouse:Mouse;
     deltaTime: number;
-    constructor({ctx}){
+    state:State
+    currentScene: SceneBase
+
+    //init
+    constructor({ctx, ui}){
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
         this.ctx = ctx;
+        this.ui = ui;
         this.objects = []
         this.lastTime = new Date().getTime();
+        this.state = new State();
     }
+
+    startScene(scene){
+        if(this.currentScene)
+            this.currentScene.end();
+        this.currentScene = scene;
+        this.currentScene.start(this);
+    }
+
+    //add new objects to be tracked by engine
     register = (obj:Object) => {
-        // if(!this)debugger;
         obj.destroy = () => {
             let i = this.objects.indexOf(obj);
             if(i>-1){
@@ -26,26 +43,23 @@ export default class Engine{
         }
         if(obj.init)obj.init(this);
         this.objects.push(obj)
-        // console.log(this.objects.length)
     }
+
+    //main game loop
     update = () => {
+        //handle time
         let nowTime = new Date().getTime();
         let diff = nowTime - this.lastTime;
         this.lastTime = nowTime;
-
         this.deltaTime = diff/1000
+
+        //clear canvas
         this.ctx.clearRect(0,0,500, 500)
 
-        this.objects.forEach(o => {o.update(
-        // {
-        //     ctx:this.ctx, 
-        //     deltaTime:diff/1000,
-        //     mouse:this.mouse,
-        //     keyboard:this.keyboard
-        // }
-        this
-        )});
+        //update all object
+        this.objects.forEach(o => {o.update(this)});
 
+        //wait for next frame
         requestAnimationFrame(this.update)
     }
 }

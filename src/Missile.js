@@ -2,6 +2,7 @@
 
 import missile from './missile.png'
 import Smoke from 'Smoke'
+import Explosion from 'Explosion'
 export default class Missile{
     position:Point;
     direction: number;
@@ -33,6 +34,19 @@ export default class Missile{
             let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
             if(dist < 20){
                 this.explode();
+                for(let i = 0; i< 10; i++){
+                    //we want red outlines to be on the outside
+                    //pick a direction
+                    let dir = Math.random()*Math.PI*2;
+                    let dist = Math.random() * 20;
+                    let offset = {x:Math.cos(dir)*dist, y:Math.sin(dir)*dist};
+                    register(new Explosion({
+                        position: this.position.add(offset), 
+                        rotation: dir,
+                        delay: Math.random()/8
+                    }))
+                    // register(new Explosion({position: this.position.add({x:(Math.random()-0.5)*30, y:(Math.random()-0.5)*30})}))
+                }
             }
             let newdir = Math.atan2(diff.y, diff.x);
 
@@ -43,7 +57,6 @@ export default class Missile{
                 newdir += 2*Math.PI
             if(dirDiff < -Math.PI) 
                 newdir -= 2*Math.PI
-
             
             //recalculate now we have removed cyclic variance
             dirDiff = (newdir - this.direction)
