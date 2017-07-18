@@ -20,7 +20,7 @@ export default class Explosion{
         if(this.delay > 0){
             this.delay -= deltaTime
         }else{
-            this.time -= deltaTime;
+            this.time -= deltaTime*2;
 
             let scale = Math.sin(this.time * Math.PI)
 
