@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 let reducer = () => {
-    
+
 }
 
 export default class UI{
@@ -18,6 +18,6 @@ export default class UI{
         this.store.subscribe(this.render.bind(this))
     }
     render = () => {
-        ReactDOM.render(<Provider store={this.store}><div>hello world</div></Provider>, this.container);    
+        ReactDOM.render(<Provider store={this.store}><div>UI Layer</div></Provider>, this.container);    
     }
 }
