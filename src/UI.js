@@ -10,7 +10,8 @@ let reducer = () => {
 }
 
 export default class UI{
-    container: HTMLDivElement
+    container: HTMLDivElement;
+    store: Object;
     constructor(container:HTMLDivElement){
         this.container = container;
         this.store = createStore(reducer, this.state);
@@ -19,5 +20,8 @@ export default class UI{
     }
     render = () => {
         ReactDOM.render(<Provider store={this.store}><div>UI Layer</div></Provider>, this.container);    
+    }
+    dispatch = (action:Object) => {
+        this.store.dispatch(action)
     }
 }

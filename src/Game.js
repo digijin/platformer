@@ -21,12 +21,12 @@ export default class Game{
     shells: Array<Object>;
     constructor(container:HTMLElement){
 
-        let canvas = document.createElement('CANVAS');
+        let canvas:HTMLCanvasElement = document.createElement('canvas');
         canvas.width = 500;
         canvas.height = 500;
         container.appendChild(canvas);
 
-        let uiDiv = document.createElement('DIV');
+        let uiDiv:HTMLDivElement = document.createElement('div');
         container.appendChild(uiDiv);
         let ui = new UI(uiDiv);
 
@@ -34,18 +34,9 @@ export default class Game{
 
         let engine:Engine = new Engine({ctx:this.ctx, ui:ui});
 
-        engine.startScene(new Level())
-        // engine.startScene(new MainMenu())
+        // engine.startScene(new Level())
+        engine.startScene(new MainMenu())
 
-        let engine = new Engine({ctx:this.ctx});
-        engine.register(player);
-        engine.register(new Grid());
-
-
-        //add player
-        // let player = new Player({position: new Point({x: 50, y: 200})})
-        // engine.register(player);
-        
         engine.update();  //starts
     }
 }

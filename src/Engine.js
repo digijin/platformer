@@ -1,32 +1,37 @@
-
+//@flow
 import Keyboard from 'Keyboard';
 import Missile from 'Missile';
 import Mouse from 'Mouse';
 import State from 'State';
 
 import type SceneBase from 'Scene/Base'
+import type Context from 'Context';
+import type UI from 'UI';
 
 export default class Engine{
     objects:Array<Object>;
-    ctx:Object
+    ctx:Context
     lastTime: number;
     mouse:Mouse;
+    keyboard:Keyboard
     deltaTime: number;
     state:State
     currentScene: SceneBase
+    ui:UI
 
     //init
-    constructor({ctx, ui}){
+    constructor(params:{ctx:Context, ui:UI}){
+        
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
-        this.ctx = ctx;
-        this.ui = ui;
+        this.ctx = params.ctx;
+        this.ui = params.ui;
         this.objects = []
         this.lastTime = new Date().getTime();
         this.state = new State();
     }
 
-    startScene(scene){
+    startScene(scene:SceneBase){
         if(this.currentScene)
             this.currentScene.end();
         this.currentScene = scene;
