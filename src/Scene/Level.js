@@ -12,7 +12,7 @@ export default class Level extends Base{
         super.start(engine);
         console.log('Starting game level');
 
-        let player = new Player({position: new Point({x: 50, y: 200})})
+        let player = new Player({position: new Point({x: 50, y: 100})})
         engine.register(player);
         engine.register(new Grid());
         

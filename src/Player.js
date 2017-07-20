@@ -72,12 +72,15 @@ export default class Player{
         }
 
 
+
         if(keyboard.down(65)){
-            this.position.x -= deltaTime*hSpeed;
+            this.h = -1;
+        }else if(keyboard.down(68)){
+            this.h = 1;
+        }else {
+            this.h = 0
         }
-        if(keyboard.down(68)){
-            this.position.x += deltaTime*hSpeed;
-        }
+        this.position.x += this.h * deltaTime*hSpeed
 
         //VERTICAL MOVEMENT
         if(keyboard.down(32)){
