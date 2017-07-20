@@ -3,8 +3,8 @@
 eases use of the points system
 points stored in ingame coordinates
 */
-// import config from 'Game/config';
-// import Block from 'Game/Block';
+import config from 'config';
+import Block from 'Block';
 // import type {State} from 'Game/state'
 
 

@@ -23,7 +23,9 @@ export default class Game{
     shells: Array<Object>;
     constructor(container:HTMLElement){
 
-        let engine:Engine = new Engine(container);
+        // let engine:Engine = new Engine(container);
+        let engine:Engine = Engine.getInstance();
+        engine.init(container)
 
         // engine.startScene(new Level())
         engine.startScene(new MainMenu())

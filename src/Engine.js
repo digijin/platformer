@@ -8,6 +8,7 @@ import Context from 'Context';
 import type SceneBase from 'Scene/Base'
 import UI from 'UI';
 
+let instance;
 export default class Engine{
     objects:Array<Object>;
     ctx:Context
@@ -20,9 +21,28 @@ export default class Engine{
     ui:UI
     canvas:HTMLCanvasElement
 
+    static getInstance():Engine{
+        if(!instance){
+            instance = new Engine();
+        }
+        return instance;
+    }
+
     //init
     // constructor(params:{ctx:Context, ui:UI}){
     constructor(container){
+        // instance = this;
+
+        
+        this.mouse = new Mouse();
+        this.keyboard = new Keyboard();
+        // this.ctx = params.ctx;
+        // this.ui = params.ui;
+        this.objects = []
+        this.lastTime = new Date().getTime();
+        this.state = new State();
+    }
+    init(container){
 
         let canvas:HTMLCanvasElement = document.createElement('canvas');
         canvas.width = 500;
@@ -35,14 +55,6 @@ export default class Engine{
         this.ui = new UI(uiDiv, this);
 
         this.ctx = new Context(canvas.getContext('2d'))
-        
-        this.mouse = new Mouse();
-        this.keyboard = new Keyboard();
-        // this.ctx = params.ctx;
-        // this.ui = params.ui;
-        this.objects = []
-        this.lastTime = new Date().getTime();
-        this.state = new State();
     }
 
     startScene(scene:SceneBase){
