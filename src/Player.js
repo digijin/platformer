@@ -11,7 +11,16 @@ import config from 'config'
 import Rect from 'Rect';
 
 let firing = false;
-let missile = false
+let missile = {
+    firing:false,
+    maxEnergy: 100,
+    reloadTime: 0.3,
+    reload:0,
+    regenSpeed: 50,
+    energy:20,
+    cost: 5
+
+}
 
 document.addEventListener("mousedown", (e) => {
     switch(e.button){
@@ -19,7 +28,7 @@ document.addEventListener("mousedown", (e) => {
             firing = true;
         break;
         case 2: 
-            missile = true;
+            missile.firing = true;
         break;
     }
 })
@@ -29,10 +38,12 @@ document.addEventListener("mouseup", (e) => {
             firing = false;
         break;
         case 2:
-            missile = false;
+            missile.firing = false;
         break;
     }
 })
+
+
 
 export default class Player{
     position: Point;
@@ -54,15 +65,29 @@ export default class Player{
         s 83
         d 68
         */
-        if(missile){
-            // missile = false;
-            register(new Missile({
-                direction: (-Math.PI/2) + (Math.random()-0.5),
-                speed: 3 + Math.random(),
-                position: this.position.subtract({x:0,y:this.size.h}),
-                target: mouse.position.clone()
-            }));
+
+        //missile loading and shit
+        if(missile.reload>0){
+            missile.reload -= deltaTime
+        }else{
+            if(missile.firing){
+                missile.reload = missile.reloadTime
+                missile.energy -= missile.cost
+                // missile = false;
+                register(new Missile({
+                    direction: (-Math.PI/2) + (Math.random()-0.5),
+                    speed: 3 + Math.random(),
+                    position: this.position.subtract({x:0,y:this.size.h}),
+                    target: mouse.point.clone()
+                }));
+            }else{
+                missile.energy += missile.regenSpeed * deltaTime;
+                if(missile.energy>missile.maxEnergy){
+                    missile.energy = missile.maxEnergy
+                }
+            }
         }
+
         if(firing){
             register(new Shell({
                 x: this.position.x,
@@ -145,16 +170,13 @@ export default class Player{
 
         this.position.y += this.v
         //LANDING
-        // let block = grid.blockAtPosition(this.position)
-        // if(block.block !== '0'){
-        //     this.position.y = block.t;
-        //     this.v = 0;
-        // }
 
 
         
         // ctx.fillRect(this.position.x, this.position.y, 50, 50);
         // ctx.drawImage(mech, 0, 0, mech.width, mech.height, this.position.x, this.position.y, 50, 50);
         ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
+        ctx.context.strokeRect(10, 10, 20, 100)
+        ctx.context.fillRect(10, 10, 20, 100*(missile.energy/missile.maxEnergy))
     }
 }

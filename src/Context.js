@@ -6,6 +6,7 @@ import Point from 'Point'
 
 export default class Context{
 	engine:Engine
+	context:Context
 	constructor(context){
 		this.context = context;
 		this.engine = Engine.getInstance();

@@ -93,6 +93,7 @@ export default class Engine{
         let diff = nowTime - this.lastTime;
         this.lastTime = nowTime;
         this.deltaTime = diff/1000
+        this.mouse.update();
 
         //clear canvas
         this.ctx.clearRect(0,0,config.game.width, config.game.height)
