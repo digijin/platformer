@@ -7,19 +7,21 @@ import config from 'config';
 import Block from 'Block';
 // import type {State} from 'Game/state'
 
+// import Engine from 'Engine';
+// let engine = Engine.getInstance();
 
-export function screenToWorld(point:{x:number, y:number}, state:State): {x:number, y:number}{
-  return {
-    x: (point.x / state.view.state.scale) - state.view.state.offset.x,
-    y: (point.y / state.view.state.scale) - state.view.state.offset.y
-  };
-}
-export function worldToScreen(point:{x:number, y:number}, state:State):{x:number, y:number}{
-  return {
-    x: (state.view.state.offset.x + (point.x)) * state.view.state.scale,
-    y: (state.view.state.offset.y + (point.y)) * state.view.state.scale,
-  };
-}
+// export function screenToWorld(point:{x:number, y:number}, state:State): {x:number, y:number}{
+//   return {
+//     x: (point.x / state.view.state.scale) - state.view.state.offset.x,
+//     y: (point.y / state.view.state.scale) - state.view.state.offset.y
+//   };
+// }
+// export function worldToScreen(point:{x:number, y:number}, state:State):{x:number, y:number}{
+//   return {
+//     x: (state.view.state.offset.x + (point.x)) * state.view.state.scale,
+//     y: (state.view.state.offset.y + (point.y)) * state.view.state.scale,
+//   };
+// }
 
 
 let state:State
@@ -27,10 +29,6 @@ let state:State
 export default class Point{
   x:number;
   y:number;
-  state:State;
-  static registerState(s:State): void{
-    state = s
-  }
   constructor(pos:{x:number, y:number}): void{
     this.x = pos.x;
     this.y = pos.y;
@@ -63,17 +61,24 @@ export default class Point{
     })
   }
 
-  get screen():{x:number, y:number}{
-    if(!state) throw new Error('Point state not registered')
-    return worldToScreen({x:this.x, y:this.y}, state);
+  getBlock():{x:number, y:number}{
+    return {
+      x: Math.floor(this.x/config.grid.width),
+      y: Math.floor(this.y/config.grid.height),
+    }
   }
 
+  // get screen():{x:number, y:number}{
+  //   if(!state) throw new Error('Point state not registered')
+  //   return worldToScreen({x:this.x, y:this.y}, state);
+  // }
 
-  static fromScreen(x:number,y:number):Point{
-    if(!state) throw new Error('Point state not registered')
-    let pos: {x: number, y: number} = screenToWorld({x,y}, state);
-    return new Point(pos);
-  }
+
+  // static fromScreen(x:number,y:number):Point{
+  //   if(!state) throw new Error('Point state not registered')
+  //   let pos: {x: number, y: number} = screenToWorld({x,y}, state);
+  //   return new Point(pos);
+  // }
 
   get rounded():Point{
     return new Point({

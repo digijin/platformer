@@ -6,6 +6,7 @@ import State from 'State';
 import Context from 'Context';
 
 import type SceneBase from 'Scene/Base'
+import type Grid from 'Grid'
 import UI from 'UI';
 
 let instance;
@@ -19,6 +20,7 @@ export default class Engine{
     state:State
     currentScene: SceneBase
     ui:UI
+    grid:Grid
     canvas:HTMLCanvasElement
 
     static getInstance():Engine{
@@ -30,7 +32,7 @@ export default class Engine{
 
     //init
     // constructor(params:{ctx:Context, ui:UI}){
-    constructor(container){
+    constructor(){
         // instance = this;
 
         
@@ -42,7 +44,7 @@ export default class Engine{
         this.lastTime = new Date().getTime();
         this.state = new State();
     }
-    init(container){
+    init(container:HTMLElement){
 
         let canvas:HTMLCanvasElement = document.createElement('canvas');
         canvas.width = 500;

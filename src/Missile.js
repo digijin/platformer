@@ -4,6 +4,9 @@ import missile from './missile.png'
 import Smoke from 'Smoke'
 import Explosion from 'Explosion'
 import Point from 'Point'
+
+import type Engine from 'Engine'
+
 export default class Missile{
     position:Point;
     direction: number;
@@ -31,17 +34,26 @@ export default class Missile{
             // register(new Explosion({position: this.position.add({x:(Math.random()-0.5)*30, y:(Math.random()-0.5)*30})}))
         }
     }
-    update = ({ctx, deltaTime, mouse, register}) => {
+    update = (engine:Engine) => {
         // console.log('"asd');
 
         this.position.y += Math.sin(this.direction)*this.speed;
         this.position.x += Math.cos(this.direction)*this.speed;
 
-        this.position
+        // console.log(
+        // let block = this.position.getBlock();
+        let block = engine.grid.blockAtPosition(this.position);
+        // console.log('block', block);
+        if(block.block !== "0"){
+            this.explode(engine);
+        }
+        
+        // );
+        
         //smoke trail
         // console.log('asdads');
         
-        register(new Smoke({position: this.position.clone()}))
+        engine.register(new Smoke({position: this.position.clone()}))
 
         //aim at target
         // this.target = mouse.position
@@ -49,7 +61,7 @@ export default class Missile{
             let diff = this.target.subtract(this.position);
             let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
             if(dist < 20){
-                this.explode({register});
+                this.explode(engine);
                 
             }
             let newdir = Math.atan2(diff.y, diff.x);
@@ -67,15 +79,15 @@ export default class Missile{
 
             //TODO REMOVE HARDCODING
             if(Math.abs(dirDiff) < 0.5){
-                this.speed += deltaTime*8;
+                this.speed += engine.deltaTime*8;
                 this.direction += dirDiff/3
             }else{
-                this.speed -= deltaTime*5;
+                this.speed -= engine.deltaTime*5;
                 // this.speed = (this.speed + 1) /2;
                 if(dirDiff > 0){
-                    this.direction += deltaTime *Math.PI
+                    this.direction += engine.deltaTime *Math.PI
                 }else{
-                    this.direction -= deltaTime *Math.PI
+                    this.direction -= engine.deltaTime *Math.PI
                 }
             }
             if(this.speed<1)this.speed = 1;
@@ -104,7 +116,7 @@ export default class Missile{
         // ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
         // ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
 
-        ctx.drawSprite(missile, this.position, {w:40, h:20}, this.direction, {x:.2, y:.5});
+        engine.ctx.drawSprite(missile, this.position, {w:40, h:20}, this.direction, {x:.2, y:.5});
 
 
     }
