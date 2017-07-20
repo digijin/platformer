@@ -35,6 +35,8 @@ export default class Engine{
 
     //main game loop
     update = () => {
+        // console.log(this.objects.length);
+        
         //handle time
         let nowTime = new Date().getTime();
         let diff = nowTime - this.lastTime;

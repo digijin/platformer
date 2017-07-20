@@ -8,6 +8,8 @@ import Engine from 'Engine';
 import Player from 'Player';
 import Context from 'Context';
 
+import MainMenu from 'MainMenu/Menu';
+
 export default class Game{
     container: HTMLElement;
     ctx:Object;
@@ -26,6 +28,7 @@ export default class Game{
         //add player
         let player = new Player({position: new Point({x: 50, y: 200})})
         engine.register(player);
+        // engine.register(new MainMenu());
         
         engine.update();  //starts
     }
