@@ -1,4 +1,8 @@
 export default {
+    game: {
+        width: 800,
+        height: 800
+    },
     grid: {
         width: 50,
         height: 50

@@ -5,6 +5,10 @@ import Mouse from 'Mouse';
 import State from 'State';
 import Context from 'Context';
 
+import Point from 'Point'
+
+import config from 'config'
+
 import type SceneBase from 'Scene/Base'
 import type Grid from 'Grid'
 import UI from 'UI';
@@ -22,7 +26,7 @@ export default class Engine{
     ui:UI
     grid:Grid
     canvas:HTMLCanvasElement
-    view:{offset:{x:number, y:number}}
+    view:{offset:Point}
 
     static getInstance():Engine{
         if(!instance){
@@ -34,9 +38,9 @@ export default class Engine{
     //init
     // constructor(params:{ctx:Context, ui:UI}){
     constructor(){
-        // instance = this;
+        instance = this;
 
-        this.view = {offset:{x:0, y:0}}
+        this.view = {offset:new Point({x:20, y:0})}
         
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
@@ -49,8 +53,8 @@ export default class Engine{
     init(container:HTMLElement){
 
         let canvas:HTMLCanvasElement = document.createElement('canvas');
-        canvas.width = 500;
-        canvas.height = 500;
+        canvas.width = config.game.width;
+        canvas.height = config.game.height;
         container.appendChild(canvas);
         this.canvas = canvas
 
@@ -91,7 +95,7 @@ export default class Engine{
         this.deltaTime = diff/1000
 
         //clear canvas
-        this.ctx.clearRect(0,0,500, 500)
+        this.ctx.clearRect(0,0,config.game.width, config.game.height)
 
         //update all object
         this.objects.forEach(o => {o.update(this)});
