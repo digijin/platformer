@@ -81,13 +81,18 @@ export default class Player{
 
         //VERTICAL MOVEMENT
         if(keyboard.down(32)){
+            if(this.v == 0){
+                this.v = -1//jump
+            }
             this.v -= deltaTime*4; //BOOSTERS
+        }else{
+            this.v += deltaTime*8; //GRAVITY
         }
-        this.v += deltaTime*3; //GRAVITY
+        
         this.position.y += this.v
         //LANDING
         let block = grid.blockAtPosition(this.position)
-        if(block.block !== 0){
+        if(block.block !== '0'){
             this.position.y = block.t;
             this.v = 0;
         }

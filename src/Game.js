@@ -25,8 +25,8 @@ export default class Game{
 
         let engine:Engine = new Engine(container);
 
-        engine.startScene(new Level())
-        // engine.startScene(new MainMenu())
+        // engine.startScene(new Level())
+        engine.startScene(new MainMenu())
 
         engine.update();  //starts
     }
