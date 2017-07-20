@@ -3,10 +3,10 @@ import Keyboard from 'Keyboard';
 import Missile from 'Missile';
 import Mouse from 'Mouse';
 import State from 'State';
+import Context from 'Context';
 
 import type SceneBase from 'Scene/Base'
-import type Context from 'Context';
-import type UI from 'UI';
+import UI from 'UI';
 
 export default class Engine{
     objects:Array<Object>;
@@ -18,14 +18,28 @@ export default class Engine{
     state:State
     currentScene: SceneBase
     ui:UI
+    canvas:HTMLCanvasElement
 
     //init
-    constructor(params:{ctx:Context, ui:UI}){
+    // constructor(params:{ctx:Context, ui:UI}){
+    constructor(container){
+
+        let canvas:HTMLCanvasElement = document.createElement('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        container.appendChild(canvas);
+        this.canvas = canvas
+
+        let uiDiv:HTMLDivElement = document.createElement('div');
+        container.appendChild(uiDiv);
+        this.ui = new UI(uiDiv, this);
+
+        this.ctx = new Context(canvas.getContext('2d'))
         
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
-        this.ctx = params.ctx;
-        this.ui = params.ui;
+        // this.ctx = params.ctx;
+        // this.ui = params.ui;
         this.objects = []
         this.lastTime = new Date().getTime();
         this.state = new State();
@@ -52,6 +66,8 @@ export default class Engine{
 
     //main game loop
     update = () => {
+        // console.log(this.objects.length);
+        
         //handle time
         let nowTime = new Date().getTime();
         let diff = nowTime - this.lastTime;
