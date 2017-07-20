@@ -122,7 +122,7 @@ export default class Player{
         //VERTICAL MOVEMENT
         if(keyboard.down(32)){
             if(this.v == 0){
-                this.v = -1//jump
+                this.v = -4//jump
             }
             this.v -= deltaTime*4; //BOOSTERS
         }else{
