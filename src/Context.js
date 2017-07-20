@@ -1,9 +1,14 @@
 
 /** Wrapper for canvas.getContext('2d') */
 
+import Engine from 'Engine';
+
+
 export default class Context{
+	engine:Engine
 	constructor(context){
 		this.context = context;
+		this.engine = Engine.getInstance();
 	}
 
 	drawImage(){
@@ -32,6 +37,7 @@ export default class Context{
 	}
 	drawSprite = function(image, position = {x:0, y:0}, size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
 		// console.log(this);
+		// position = this.engine.view.offset
 		this.context.translate(position.x, position.y);
 		this.context.rotate(rotation);
 		let imageParams = [image, 0, 0, image.width, image.height]
