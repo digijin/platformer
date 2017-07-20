@@ -112,7 +112,6 @@ export default class Player{
                 this.h = 0;
                 hDelta = 0
             }
-
         }
 
         this.position.x += hDelta
@@ -129,13 +128,28 @@ export default class Player{
             this.v += deltaTime*8; //GRAVITY
         }
         
+        let vDelta = this.v;
+        
+        if(this.v > 0){
+            //GOIN DOWN
+            if( grid.blockAtPosition({x:rect.r, y: rect.b+this.v}).block !== "0"||
+                grid.blockAtPosition({x:rect.l, y: rect.b+this.v}).block !== "0"){
+                this.v = 0;
+            }
+        }else{
+            if( grid.blockAtPosition({x:rect.r, y: rect.t+this.v}).block !== "0"||
+                grid.blockAtPosition({x:rect.l, y: rect.t+this.v}).block !== "0"){
+                this.v = 0;
+            }
+        }
+
         this.position.y += this.v
         //LANDING
-        let block = grid.blockAtPosition(this.position)
-        if(block.block !== '0'){
-            this.position.y = block.t;
-            this.v = 0;
-        }
+        // let block = grid.blockAtPosition(this.position)
+        // if(block.block !== '0'){
+        //     this.position.y = block.t;
+        //     this.v = 0;
+        // }
 
 
         
