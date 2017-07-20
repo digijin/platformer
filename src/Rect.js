@@ -24,6 +24,16 @@ export default class Rect{
 		let br = Point.fromScreen(window.innerWidth,window.innerHeight);
 		return new Rect(tl, br);
 	}
+	static fromPosSizeRego(pos:Point, size: {w:number, h:number}, rego:{x:number, y:number}){
+		let t = pos.y - (size.w * rego.y)
+		let l = pos.x - (size.h * rego.x)
+		return new Rect({
+			t: t,
+			l: l,
+			r: l+size.w,
+			b: t+size.h
+		})1
+	}
 	constructor(){
 		if(arguments.length === 4){
 			this.t = arguments[0];

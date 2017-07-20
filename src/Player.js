@@ -5,6 +5,9 @@ import Missile from 'Missile';
 import Bullet from 'Bullet';
 import Shell from 'Shell';
 import mech from './mech.png'
+
+import Rect from 'Rect';
+
 let firing = false;
 let missile = false
 

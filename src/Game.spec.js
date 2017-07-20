@@ -1,5 +1,5 @@
 import * as Game from 'Game';
-
+import Engine from 'Engine'
 
 describe('Game', () => {
     it('should be defined', () => {
@@ -7,15 +7,12 @@ describe('Game', () => {
         // expect(Game.default).toBeDefined();
         // expect(Game.Engine).toBeDefined();
     })
-    it('should have Engine', () => {
-        expect(Game.Engine).toBeDefined();
-    })
 })
 
 describe('Game/Engine', () => {
     let engine;
     beforeEach(() => {
-        engine = new Game.Engine({ctx:{}});
+        engine = new Engine({ctx:{}});
     })
     it('shuld add stuff to objects', () => {
         expect(engine.objects).toBeDefined();
