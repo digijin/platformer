@@ -28,6 +28,9 @@ document.addEventListener("mouseup", (e) => {
         case 0:
             firing = false;
         break;
+        case 2:
+            missile = false;
+        break;
     }
 })
 
@@ -48,7 +51,7 @@ export default class Player{
         d 68
         */
         if(missile){
-            missile = false;
+            // missile = false;
             register(new Missile({
                 direction: (-Math.PI/2) + (Math.random()-0.5),
                 speed: 3 + Math.random(),

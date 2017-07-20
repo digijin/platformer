@@ -5,6 +5,8 @@ import Smoke from 'Smoke'
 import Explosion from 'Explosion'
 import Point from 'Point'
 
+import config  from 'config'
+
 import type Engine from 'Engine'
 
 export default class Missile{
