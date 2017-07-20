@@ -1,4 +1,4 @@
-// @flow
+
 import config from 'config';
 import Point from 'Point';
 // import {makeKey} from 'Util/index';

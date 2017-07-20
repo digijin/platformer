@@ -100,7 +100,7 @@ export default class Missile{
         // ctx.drawImage(missile, 0, 0, missile.width, missile.height, -w/2, -h/2, w, h);
         // ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
 
-        ctx.drawSprite(missile, this.position, {w:40, h:40}, this.direction, {x:.5, y:.5});
+        ctx.drawSprite(missile, this.position, {w:40, h:20}, this.direction, {x:.2, y:.5});
 
 
     }
