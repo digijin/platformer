@@ -4,6 +4,9 @@ export default {
         height: 50
     },
     player: {
-        
+        size: {
+            w: 80,
+            h: 80
+        }
     }
 }

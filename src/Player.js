@@ -6,6 +6,8 @@ import Bullet from 'Bullet';
 import Shell from 'Shell';
 import mech from './mech.png'
 
+import config from 'config'
+
 import Rect from 'Rect';
 
 let firing = false;
@@ -33,7 +35,7 @@ export default class Player{
     position: Point;
     constructor(params){
         Object.assign(this, params);
-        this.size = {w:100, h:100}
+        this.size = config.player.size
         this.h = 0;
         this.v = 0;
         this.registration = {x:.5, y:1};
@@ -92,12 +94,14 @@ export default class Player{
         let hDelta = this.h * deltaTime*hSpeed
 
         if(hDelta > 0){
-            if(grid.blockAtPosition({x:rect.r + hDelta, y: rect.b}).block !== "0"){
+            if( grid.blockAtPosition({x:rect.r + hDelta, y: rect.t}).block !== "0"||
+                grid.blockAtPosition({x:rect.r + hDelta, y: rect.b}).block !== "0"){
                 this.h = 0;
                 hDelta = 0
             }
         }else{
-            if(grid.blockAtPosition({x:rect.l + hDelta, y: rect.b}).block !== "0"){
+            if( grid.blockAtPosition({x:rect.l + hDelta, y: rect.t}).block !== "0"||
+                grid.blockAtPosition({x:rect.l + hDelta, y: rect.b}).block !== "0"){
                 this.h = 0;
                 hDelta = 0
             }

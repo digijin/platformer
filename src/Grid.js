@@ -37,6 +37,12 @@ export default class Grid{
 	blockAtPosition(pos){
 		let x = Math.floor(pos.x/blocksize)
 		let y = Math.floor(pos.y/blocksize)
+		//because y goes positive downwards, if an object is flat on the top 
+		//of a tile it will register as th e tile below
+		if(pos.y%blocksize == 0){
+			y-=1
+		}
+
 		return {block: this.grid[x][y], l: x*blocksize, t: y*blocksize}
 	}
 
