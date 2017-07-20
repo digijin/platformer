@@ -1,3 +1,4 @@
+//@flow
 export default {
     game: {
         width: 800,

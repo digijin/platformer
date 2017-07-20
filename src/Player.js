@@ -43,7 +43,11 @@ export default class Player{
         this.v = 0;
         this.registration = {x:.5, y:1};
     }
-    update({ctx, mouse, keyboard, deltaTime, register, grid}){
+    update({ctx, mouse, keyboard, deltaTime, register, grid, view}){
+
+        //adjust camera
+        view.offset = this.position.subtract({x:config.game.width/2, y:config.game.height/2})
+
         /* 
         w 87
         a 65
