@@ -6,12 +6,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import Router from 'UI/Router'
+import reducer from 'UI/reducer'
 
 import type Engine from 'Engine'
-
-let reducer = () => {
-
-}
 
 export default class UI{
     container: HTMLDivElement;
@@ -25,7 +22,7 @@ export default class UI{
         this.store.subscribe(this.render.bind(this))
     }
     render = () => {
-        ReactDOM.render(<Provider store={this.store}><div>UI Layer<Router engine={this.engine} /></div></Provider>, this.container);    
+        ReactDOM.render(<Provider store={this.store}><div><Router engine={this.engine} /></div></Provider>, this.container);    
     }
     dispatch = (action:Object) => {
         this.store.dispatch(action)
