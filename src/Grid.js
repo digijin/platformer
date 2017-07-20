@@ -42,20 +42,24 @@ export default class Grid{
 		if(pos.y%blocksize == 0){
 			y-=1
 		}
+		if(this.grid[x]){
+			return {block: this.grid[x][y], l: x*blocksize, t: y*blocksize}
+		}else{
+			return {block: "1", l: x*blocksize, t: y*blocksize}
+		}
 
-		return {block: this.grid[x][y], l: x*blocksize, t: y*blocksize}
 	}
 
 	init = (engine) => {
 		engine.grid = this;
 	}
-	update = ({ctx}) => {
+	update = (engine) => {
 		this.grid.forEach((row, x) => {
 			row.forEach((cell, y) => {
 				if(cell == 0){
-					ctx.strokeRect(x*blocksize, y*blocksize, blocksize, blocksize);	
+					engine.ctx.strokeRect((x*blocksize)-engine.view.offset.x, y*blocksize, blocksize, blocksize);	
 				}else{
-					ctx.fillRect(x*blocksize, y*blocksize, blocksize, blocksize);
+					engine.ctx.fillRect((x*blocksize)-engine.view.offset.x, y*blocksize, blocksize, blocksize);
 				}
 			})
 		})

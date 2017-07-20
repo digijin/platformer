@@ -22,6 +22,7 @@ export default class Engine{
     ui:UI
     grid:Grid
     canvas:HTMLCanvasElement
+    view:{offset:{x:number, y:number}}
 
     static getInstance():Engine{
         if(!instance){
@@ -35,6 +36,7 @@ export default class Engine{
     constructor(){
         // instance = this;
 
+        this.view = {offset:{x:0, y:0}}
         
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
