@@ -36,6 +36,7 @@ export default class Player{
         this.size = {w:100, h:100}
         this.h = 0;
         this.v = 0;
+        this.registration = {x:.5, y:1};
     }
     update({ctx, mouse, keyboard, deltaTime, register, grid}){
         /* 
@@ -74,6 +75,7 @@ export default class Player{
 
         }
 
+        let rect = Rect.fromPosSizeRego(this.position, this.size, this.registration)
 
 
         if(keyboard.down(65)){
@@ -85,7 +87,26 @@ export default class Player{
         }else {
             this.h *= 1-(deltaTime*5);
         }
-        this.position.x += this.h * deltaTime*hSpeed
+
+        //check walls
+        let hDelta = this.h * deltaTime*hSpeed
+
+        if(hDelta > 0){
+            if(grid.blockAtPosition({x:rect.r + hDelta, y: rect.b}).block !== "0"){
+                this.h = 0;
+                hDelta = 0
+            }
+        }else{
+            if(grid.blockAtPosition({x:rect.l + hDelta, y: rect.b}).block !== "0"){
+                this.h = 0;
+                hDelta = 0
+            }
+
+        }
+
+        this.position.x += hDelta
+
+
 
         //VERTICAL MOVEMENT
         if(keyboard.down(32)){
@@ -109,6 +130,6 @@ export default class Player{
         
         // ctx.fillRect(this.position.x, this.position.y, 50, 50);
         // ctx.drawImage(mech, 0, 0, mech.width, mech.height, this.position.x, this.position.y, 50, 50);
-        ctx.drawSprite(mech, this.position, this.size, 0, {x:.5, y:1});
+        ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
     }
 }

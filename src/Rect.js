@@ -32,7 +32,7 @@ export default class Rect{
 			l: l,
 			r: l+size.w,
 			b: t+size.h
-		})1
+		});
 	}
 	constructor(){
 		if(arguments.length === 4){

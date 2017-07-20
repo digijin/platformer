@@ -21,15 +21,17 @@ export default class Game{
     container: HTMLElement;
     ctx:Object;
     shells: Array<Object>;
+    engine:Engine
     constructor(container:HTMLElement){
 
+        window.game = this;
         // let engine:Engine = new Engine(container);
-        let engine:Engine = Engine.getInstance();
-        engine.init(container)
+        this.engine = Engine.getInstance();
+        this.engine.init(container)
 
         // engine.startScene(new Level())
-        engine.startScene(new MainMenu())
+        this.engine.startScene(new MainMenu())
 
-        engine.update();  //starts
+        this.engine.update();  //starts
     }
 }
