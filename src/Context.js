@@ -2,7 +2,7 @@
 /** Wrapper for canvas.getContext('2d') */
 
 import Engine from 'Engine';
-
+import Point from 'Point'
 
 export default class Context{
 	engine:Engine
@@ -35,9 +35,9 @@ export default class Context{
 	setTransform(){
 		this.context.setTransform( ...arguments);
 	}
-	drawSprite = function(image, position = {x:0, y:0}, size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
+	drawSprite = function(image, position:Point = new Point({x:0, y:0}), size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
 		// console.log(this);
-		// position = this.engine.view.offset
+		position = position.subtract(this.engine.view.offset)
 		this.context.translate(position.x, position.y);
 		this.context.rotate(rotation);
 		let imageParams = [image, 0, 0, image.width, image.height]
