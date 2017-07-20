@@ -14,11 +14,11 @@ let firing = false;
 let missile = {
     firing:false,
     maxEnergy: 100,
-    reloadTime: 0.3,
+    reloadTime: 0.2,
     reload:0,
-    regenSpeed: 50,
+    regenSpeed: 10,
     energy:20,
-    cost: 5
+    cost: 15
 
 }
 
@@ -70,7 +70,7 @@ export default class Player{
         if(missile.reload>0){
             missile.reload -= deltaTime
         }else{
-            if(missile.firing){
+            if(missile.firing && missile.energy >= missile.cost){
                 missile.reload = missile.reloadTime
                 missile.energy -= missile.cost
                 // missile = false;
@@ -95,7 +95,7 @@ export default class Player{
                 h: Math.random()-0.5,
                 v: -Math.random()
             }))
-            let diff = mouse.position.subtract(this.position);
+            let diff = mouse.point.subtract(this.position);
             let dir = Math.atan2(diff.y, diff.x)
             dir += (Math.random()-0.5)/10 //spread
             register(new Bullet({
