@@ -74,11 +74,13 @@ export default class Player{
 
 
         if(keyboard.down(65)){
-            this.h = -1;
+            this.h -= deltaTime*5;
+            if(this.h<-1)this.h=-1
         }else if(keyboard.down(68)){
-            this.h = 1;
+            this.h += deltaTime*5;
+            if(this.h>1)this.h=1
         }else {
-            this.h = 0
+            this.h *= 1-(deltaTime*5);
         }
         this.position.x += this.h * deltaTime*hSpeed
 
