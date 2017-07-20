@@ -57,9 +57,9 @@ export default class Grid{
 		this.grid.forEach((row, x) => {
 			row.forEach((cell, y) => {
 				if(cell == 0){
-					engine.ctx.strokeRect((x*blocksize)-engine.view.offset.x, y*blocksize, blocksize, blocksize);	
+					engine.ctx.strokeRect(x*blocksize, y*blocksize, blocksize, blocksize);	
 				}else{
-					engine.ctx.fillRect((x*blocksize)-engine.view.offset.x, y*blocksize, blocksize, blocksize);
+					engine.ctx.fillRect(x*blocksize, y*blocksize, blocksize, blocksize);
 				}
 			})
 		})

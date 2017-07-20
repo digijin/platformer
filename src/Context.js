@@ -17,14 +17,16 @@ export default class Context{
 	clearRect(){
 		this.context.clearRect( ...arguments);
 	}
-	strokeRect(){
-		this.context.strokeRect( ...arguments);
+	strokeRect(x,y,w,h){
+		let o = this.engine.view.offset
+		this.context.strokeRect(x-o.x,y-o.y,w,h);
 	}
 	fillText(){
 		this.context.fillText( ...arguments);
 	}
-	fillRect(){
-		this.context.fillRect( ...arguments);
+	fillRect(x,y,w,h){
+		let o = this.engine.view.offset
+		this.context.fillRect(x-o.x,y-o.y,w,h);
 	}
 	translate(){
 		this.context.translate( ...arguments);

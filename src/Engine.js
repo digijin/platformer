@@ -40,7 +40,7 @@ export default class Engine{
     constructor(){
         instance = this;
 
-        this.view = {offset:new Point({x:20, y:0})}
+        this.view = {offset:new Point({x:120, y:0})}
         
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
