@@ -16,7 +16,7 @@ let missile = {
     maxEnergy: 100,
     reloadTime: 0.2,
     reload:0,
-    regenSpeed: 10,
+    regenSpeed: 50,
     energy:20,
     cost: 15
 
