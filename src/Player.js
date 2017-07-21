@@ -14,11 +14,11 @@ let firing = false;
 let missile = {
     firing:false,
     maxEnergy: 100,
-    reloadTime: 0.2,
+    reloadTime: 0.1,
     reload:0,
-    regenSpeed: 50,
+    regenSpeed: 10,
     energy:20,
-    cost: 15
+    cost: 10
 
 }
 
@@ -76,9 +76,12 @@ export default class Player{
                 // missile = false;
                 register(new Missile({
                     direction: (-Math.PI/2) + (Math.random()-0.5),
-                    speed: 3 + Math.random(),
+                    speed: 3 + (Math.random()*5),
                     position: this.position.subtract({x:0,y:this.size.h}),
-                    target: mouse.point.clone()
+                    target: mouse.point.add(new Point({
+                        x:(Math.random()-0.5)*20, 
+                        y:(Math.random()-0.5)*20, 
+                    }))
                 }));
             }else{
                 missile.energy += missile.regenSpeed * deltaTime;
