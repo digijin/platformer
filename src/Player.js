@@ -30,6 +30,7 @@ const HAND_STATE = {
 }
 let hand = {
     speed: 800,
+    reelSpeed: 400,
     offset: new Point({x:-config.player.size.w/2, y:-config.player.size.h/2}),
     position: new Point({x:0,y:0}),
     direction: 0,
@@ -186,6 +187,7 @@ export default class Player{
         }
 
         //check walls
+        let hDelta = this.h * deltaTime*hSpeed
 
         //VERTICAL MOVEMENT
         if(keyboard.down(32)){
@@ -204,9 +206,9 @@ export default class Player{
             let diff = this.position.add(hand.offset).subtract(hand.position);
             let dir = Math.atan2(diff.y, diff.x);
             this.h = -Math.cos(dir)//* deltaTime*hSpeed
-            this.v = -Math.sin(dir)* deltaTime*hSpeed
+            this.v = -Math.sin(dir)* deltaTime*hand.reelSpeed
+            hDelta = this.h * deltaTime * hand.reelSpeed
         }
-        let hDelta = this.h * deltaTime*hSpeed
 
         if(hDelta > 0){
             if( grid.blockAtPosition({x:boundingRect.r + hDelta, y: boundingRect.t}).block !== "0"||
