@@ -11,7 +11,7 @@ export default class Shell{
         Object.assign(this, params);
         this.time = 1 + Math.random();
     }
-    update({ctx, deltaTime}){
+    update({ctx, deltaTime, grid}){
         this.time -= deltaTime;
         this.position.x += this.h;
         this.position.y += this.v;
@@ -19,7 +19,8 @@ export default class Shell{
         this.v += deltaTime*3;
         ctx.fillRect(this.position.x, this.position.y, 4, 4);
         //TODO DETECT GROUND PROPER LIKE
-        if(this.position.y>250 && this.v>0){
+        if(grid.isPositionBlocked(this.position) && this.v>0){
+        // if(this.position.y>250 && this.v>0){
             this.v = -this.v;
         }
         if(this.time < 0){
