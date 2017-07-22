@@ -208,7 +208,7 @@ export default class Player{
             let dir = Math.atan2(diff.y, diff.x);
             this.h = -Math.cos(dir)//* deltaTime*hSpeed
             this.v = -Math.sin(dir)* deltaTime*hand.reelSpeed
-            hDelta = this.h * deltaTime * hand.reelSpeeda
+            hDelta = this.h * deltaTime * hand.reelSpeed
         }
 
         if(hDelta > 0){
