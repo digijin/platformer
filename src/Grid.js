@@ -3,7 +3,7 @@
 const blocksize = 50;
 
 export default class Grid{
-	grid: Array<Array<number>>;
+	grid: Array<Array<string>>;
 
 	constructor(size:{w:number, h:number} = {w:20, h:20}){
 		//make empty grid
@@ -57,11 +57,11 @@ export default class Grid{
 
 	}
 
-	isPositionBlocked(pos){
+	isPositionBlocked(pos: {x:number, y:number}){
 		return this.blockAtPosition(pos).block != "0"
 	}
 
-	blockAtPosition(pos){
+	blockAtPosition(pos: {x:number, y:number}){
 		let x = Math.floor(pos.x/blocksize)
 		let y = Math.floor(pos.y/blocksize)
 		//because y goes positive downwards, if an object is flat on the top 

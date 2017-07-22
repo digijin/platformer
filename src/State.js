@@ -5,21 +5,21 @@
 import reducer from './State/reducer';
 
 
-export default class State{
+export default class State {
     state: Object;
-    constructor(){
-        this.state = reducer({}, {type:'INIT'});
+    constructor() {
+        this.state = reducer({}, { type: 'INIT' });
     }
-    dispatch(action:Object){
+    dispatch(action: Object) {
         this.state = reducer(this.state, action);
     }
-    getState(){
+    getState() {
         return this.state;
     }
-    save(){
+    save() {
         localStorage.setItem('save', JSON.stringify(this.state, null, 1));
     }
-    load(){
+    load() {
         this.state = JSON.parse(localStorage.getItem('save'));
     }
 }

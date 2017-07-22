@@ -26,49 +26,49 @@ import Block from 'Block';
 
 // let state:State
 
-export default class Point{
-  x:number;
-  y:number;
-  constructor(pos:{x:number, y:number}): void{
+export default class Point {
+  x: number;
+  y: number;
+  constructor(pos: { x: number, y: number }): void {
     this.x = pos.x;
     this.y = pos.y;
   }
 
-  clone(){
+  clone() {
     return new Point({
       x: this.x,
       y: this.y
     })
   }
 
-  add(diff:{x:number, y:number}){
+  add(diff: { x: number, y: number }) {
     return new Point({
       x: this.x + diff.x,
       y: this.y + diff.y,
     })
   }
-  subtract(diff:{x:number, y:number}){
+  subtract(diff: { x: number, y: number }) {
     return new Point({
       x: this.x - diff.x,
       y: this.y - diff.y,
     })
   }
-  multiply(num:number){
-    
+  multiply(num: number) {
+
     return new Point({
       x: this.x * num,
       y: this.y * num,
     })
   }
-  distanceTo(point:Point){
+  distanceTo(point: Point) {
     let diff = this.subtract(point);
     return Math.sqrt(Math.pow(diff.x, 2), Math.pow(diff.y, 2));
   }
 
-  getBlock():{x:number, y:number}{
+  getBlock(): { x: number, y: number } {
     return {
-      x: Math.floor(this.x/config.grid.width),
-      y: Math.floor(this.y/config.grid.height),
+      x: Math.floor(this.x / config.grid.width),
+      y: Math.floor(this.y / config.grid.height),
     }
   }
 
@@ -84,7 +84,7 @@ export default class Point{
   //   return new Point(pos);
   // }
 
-  get rounded():Point{
+  get rounded(): Point {
     return new Point({
       x: Math.round(this.x),
       y: Math.round(this.y)

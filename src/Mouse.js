@@ -3,15 +3,15 @@ import Point from 'Point'
 
 import Engine from 'Engine'
 
-export default class Mouse{
+export default class Mouse {
     position: Point;
     point: Point
     engine: Engine
-    constructor(){
+    constructor() {
         this.engine = Engine.getInstance();
-        this.position = new Point({x:0, y:0})
+        this.position = new Point({ x: 0, y: 0 })
         document.addEventListener('mousemove', (e) => {
-            this.position = new Point({x:e.clientX, y: e.clientY});
+            this.position = new Point({ x: e.clientX, y: e.clientY });
         })
     }
     update() {

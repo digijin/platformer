@@ -10,12 +10,12 @@ import reducer from 'UI/reducer'
 
 import type Engine from 'Engine'
 
-export default class UI{
+export default class UI {
     container: HTMLDivElement;
     store: Object;
-    engine:Engine;
+    engine: Engine;
 
-    constructor(container:HTMLDivElement, engine:Engine){
+    constructor(container: HTMLDivElement, engine: Engine) {
         this.engine = engine
         this.container = container;
         this.store = createStore(reducer, {});
@@ -23,9 +23,9 @@ export default class UI{
         this.store.subscribe(this.render.bind(this))
     }
     render = () => {
-        ReactDOM.render(<Provider store={this.store}><div><Router engine={this.engine} /></div></Provider>, this.container);    
+        ReactDOM.render(<Provider store={this.store}><div><Router engine={this.engine} /></div></Provider>, this.container);
     }
-    dispatch = (action:Object) => {
+    dispatch = (action: Object) => {
         this.store.dispatch(action)
     }
 }
