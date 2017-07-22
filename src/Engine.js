@@ -93,6 +93,15 @@ export default class Engine {
         //clear canvas
         this.ctx.clearRect(0, 0, config.game.width, config.game.height)
 
+        //sort objects on z
+        this.objects.sort((a,b) => {
+            let az = a.z
+            if(az == undefined) az = 0;
+            let bz = b.z
+            if(bz == undefined) bz = 0;
+            return az-bz;
+        })
+
         //update all object
         this.objects.forEach(o => { o.update(this) });
 

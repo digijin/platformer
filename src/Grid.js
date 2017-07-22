@@ -4,8 +4,10 @@ const blocksize = 50;
 
 export default class Grid {
 	grid: Array<Array<string>>;
+	z:number
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
+		this.z = -10
 		//make empty grid
 		// this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))
 

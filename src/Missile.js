@@ -14,10 +14,13 @@ export default class Missile {
     direction: number;
     target: Point;
     speed: number
+    z:number;
     constructor(params: { position: Point, direction: number, target: Point }) {
-        Object.assign(this, params);
         this.speed = 1;
         this.guided = true;
+        this.z = 20;
+
+        Object.assign(this, params);
     }
     explode({ register }) {
         this.destroy();

@@ -71,7 +71,9 @@ export default class Player {
     v: number;
     size: { w: number, h: number }
     registration: { x: number, y: number }
+    z:number
     constructor(params: Object) {
+        this.z = 10
         Object.assign(this, params);
         this.size = config.player.size
         this.h = 0;
