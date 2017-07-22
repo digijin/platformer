@@ -3,9 +3,13 @@ import explosion from './explosion.png'
 
 import Point from 'Point';
 
+import type Engine from 'Engine';
+
 export default class Explosion{
-    position:Point
-	time: number //life
+    position:Point;
+	time: number; //life
+    delay:number;
+    size: number;
     constructor(params){
 
         //defaults
@@ -16,15 +20,15 @@ export default class Explosion{
 
         Object.assign(this, params)
     }
-    update({ctx, deltaTime}){
+    update(engine:Engine){
         if(this.delay > 0){
-            this.delay -= deltaTime
+            this.delay -= engine.deltaTime
         }else{
-            this.time -= deltaTime*2;
+            this.time -= engine.deltaTime*2;
 
             let scale = Math.sin(this.time * Math.PI)
 
-            ctx.drawSprite(explosion, 
+            engine.ctx.drawSprite(explosion, 
                 this.position, 
                 {w:this.size*scale, h:this.size*scale}, 
                 this.rotation);

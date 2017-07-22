@@ -65,7 +65,11 @@ document.addEventListener("mouseup", (e) => {
 
 export default class Player{
     position: Point;
-    constructor(params){
+    h:number;
+    v:number;
+    size: {w:number, h:number}
+    registration: {x:number, y:number}
+    constructor(params:Object){
         Object.assign(this, params);
         this.size = config.player.size
         this.h = 0;

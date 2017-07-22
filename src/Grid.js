@@ -3,8 +3,9 @@
 const blocksize = 50;
 
 export default class Grid{
+	grid: Array<Array<number>>;
 
-	constructor(size = {w:20, h:20}){
+	constructor(size:{w:number, h:number} = {w:20, h:20}){
 		//make empty grid
 		// this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))
 
@@ -45,7 +46,7 @@ export default class Grid{
 
 
 	}
-	destroyBlockAtPosition(pos){
+	destroyBlockAtPosition(pos: {x:number, y:number}){
 		let x = Math.floor(pos.x/blocksize)
 		let y = Math.floor(pos.y/blocksize)
 		if(this.grid[x]){

@@ -10,7 +10,7 @@ export default class State{
     constructor(){
         this.state = reducer({}, {type:'INIT'});
     }
-    dispatch(action){
+    dispatch(action:Object){
         this.state = reducer(this.state, action);
     }
     getState(){
