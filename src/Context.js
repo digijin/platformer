@@ -1,3 +1,4 @@
+//@flow
 
 /** Wrapper for canvas.getContext('2d') */
 
@@ -6,26 +7,31 @@ import Point from 'Point'
 
 export default class Context{
 	engine:Engine
-	context:Context
-	constructor(context){
-		this.context = context;
+	context:CanvasRenderingContext2D
+	constructor(context:?CanvasRenderingContext2D){
+		if(context){
+			this.context = context;
+		}else{
+			throw new Error('Context has no context');
+		}
 		this.engine = Engine.getInstance();
 	}
 
-	drawImage(){
+	drawImage():void{
+		//flowhack
 		this.context.drawImage( ...arguments);
 	}
 	clearRect(){
 		this.context.clearRect( ...arguments);
 	}
-	strokeRect(x,y,w,h){
+	strokeRect(x:number,y:number,w:number,h:number){
 		let o = this.engine.view.offset
 		this.context.strokeRect(x-o.x,y-o.y,w,h);
 	}
 	fillText(){
 		this.context.fillText( ...arguments);
 	}
-	fillRect(x,y,w,h){
+	fillRect(x:number,y:number,w:number,h:number){
 		let o = this.engine.view.offset
 		this.context.fillRect(x-o.x,y-o.y,w,h);
 	}
@@ -38,7 +44,7 @@ export default class Context{
 	setTransform(){
 		this.context.setTransform( ...arguments);
 	}
-	drawSprite = function(image, position:Point = new Point({x:0, y:0}), size = {w:20,h:20}, rotation = 0, registration = {x:.5,y:.5}){
+	drawSprite = function(image:HTMLImageElement, position:Point = new Point({x:0, y:0}), size:{w:number, h:number} = {w:20,h:20}, rotation:number = 0, registration:{x:number, y:number} = {x:.5,y:.5}){
 		// console.log(this);
 		position = position.subtract(this.engine.view.offset)
 		this.context.translate(position.x, position.y);

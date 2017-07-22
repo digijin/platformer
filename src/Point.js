@@ -24,7 +24,7 @@ import Block from 'Block';
 // }
 
 
-let state:State
+// let state:State
 
 export default class Point{
   x:number;

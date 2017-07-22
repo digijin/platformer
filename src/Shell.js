@@ -3,13 +3,16 @@
 import Point from 'Point'
 import type Engine from 'Engine'
 
-export default class Shell{
+import GameObject from 'GameObject'
+
+export default class Shell extends GameObject{
     position: Point;
     h:number;//momentum
     v:number;//momentum
     time:number;
     color: string;
     constructor(params:Object){
+        super();
         this.time = 1 + Math.random();
         this.color = '#000000';
         Object.assign(this, params);

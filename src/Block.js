@@ -1,3 +1,4 @@
+//@flow
 
 import config from 'config';
 import Point from 'Point';
@@ -45,9 +46,9 @@ export default class Block{
     });
   }
 
-  get key():string{
-    return makeKey(this.x, this.y);
-  }
+  // get key():string{
+  //   return makeKey(this.x, this.y);
+  // }
 
   static fromPoint(point:Point){
     return new Block({

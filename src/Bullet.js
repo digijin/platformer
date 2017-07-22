@@ -1,12 +1,15 @@
 //@flow
 
 import type Engine from 'Engine'
-export default class Bullet{
+import GameObject from 'GameObject'
+export default class Bullet extends GameObject{
     x:number;//position
     y:number;//position
     h:number;//momentum
     v:number;//momentum
-    constructor(params){
+    time: number;
+    constructor(params:Object){
+        super(params)
         Object.assign(this, params);
         this.time = 1
     }

@@ -19,11 +19,11 @@ export default class Rect{
 	r:number
 	b:number
 	l:number
-	static screenRect(){
-		let tl = Point.fromScreen(0,0);
-		let br = Point.fromScreen(window.innerWidth,window.innerHeight);
-		return new Rect(tl, br);
-	}
+	// static screenRect(){
+	// 	let tl = Point.fromScreen(0,0);
+	// 	let br = Point.fromScreen(window.innerWidth,window.innerHeight);
+	// 	return new Rect(tl, br);
+	// }
 	static fromPosSizeRego(pos:Point, size: {w:number, h:number}, rego:{x:number, y:number}){
 		let t = pos.y - (size.w * rego.y)
 		let l = pos.x - (size.h * rego.x)
@@ -115,11 +115,11 @@ export default class Rect{
 		return list;
 	}
 
-	get renderParams():RenderParams {
-		let tl = new Point({x:this.l, y:this.t}).screen;
-		let br = new Point({x:this.r, y:this.b}).screen;
-		return {x: tl.x, y: tl.y, w: br.x-tl.x, h: br.y-tl.y};
-	}
+	// get renderParams():RenderParams {
+	// 	let tl = new Point({x:this.l, y:this.t}).screen;
+	// 	let br = new Point({x:this.r, y:this.b}).screen;
+	// 	return {x: tl.x, y: tl.y, w: br.x-tl.x, h: br.y-tl.y};
+	// }
 
 
 }

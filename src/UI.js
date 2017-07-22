@@ -14,10 +14,11 @@ export default class UI{
     container: HTMLDivElement;
     store: Object;
     engine:Engine;
+
     constructor(container:HTMLDivElement, engine:Engine){
         this.engine = engine
         this.container = container;
-        this.store = createStore(reducer, this.state);
+        this.store = createStore(reducer, {});
         this.render();
         this.store.subscribe(this.render.bind(this))
     }

@@ -1,7 +1,7 @@
 // @flow
 
 type WeaponList = {
-    [id]: {
+    [id:string]: {
         type: string
     }
 }
