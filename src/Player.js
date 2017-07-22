@@ -154,7 +154,9 @@ export default class Player{
         if(hand.state == HAND_STATE.FIRED){
             hand.position.x += Math.cos(hand.direction)*deltaTime*hand.speed
             hand.position.y += Math.sin(hand.direction)*deltaTime*hand.speed
-            if(grid.blockAtPosition(hand.position).block !== "0"){
+
+            if(grid.isPositionBlocked(hand.position)){
+            // if(grid.blockAtPosition(hand.position).block !== "0"){
                 hand.state = HAND_STATE.GRIPPED
             }
         }
@@ -178,7 +180,7 @@ export default class Player{
 
         let boundingRect = Rect.fromPosSizeRego(this.position, this.size, this.registration)
 
-
+        //HORIZONTAL
         if(keyboard.down(65)){
             this.h -= deltaTime*5;
             if(this.h<-1)this.h=-1
@@ -186,7 +188,9 @@ export default class Player{
             this.h += deltaTime*5;
             if(this.h>1)this.h=1
         }else {
-            this.h *= 1-(deltaTime*5);
+            if(this.v == 0){
+                this.h *= 1-(deltaTime*5);
+            }
         }
 
         //check walls
@@ -221,6 +225,19 @@ export default class Player{
             hDelta = this.h * deltaTime * hand.reelSpeed
         }
 
+        if(this.v > 0){
+            //GOIN DOWN
+            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.b+this.v}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.b+this.v}).block !== "0"){
+                this.v = 0;
+            }
+        }else{
+            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.t+this.v}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.t+this.v}).block !== "0"){
+                this.v = 0;
+            }
+        }
+
         if(hDelta > 0){
             if( grid.blockAtPosition({x:boundingRect.r + hDelta, y: boundingRect.t}).block !== "0"||
                 grid.blockAtPosition({x:boundingRect.r + hDelta, y: boundingRect.b}).block !== "0"){
@@ -237,19 +254,6 @@ export default class Player{
 
         this.position.x += hDelta
 
-
-        if(this.v > 0){
-            //GOIN DOWN
-            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.b+this.v}).block !== "0"||
-                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.b+this.v}).block !== "0"){
-                this.v = 0;
-            }
-        }else{
-            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.t+this.v}).block !== "0"||
-                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.t+this.v}).block !== "0"){
-                this.v = 0;
-            }
-        }
 
         this.position.y += this.v
         //LANDING

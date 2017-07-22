@@ -46,7 +46,7 @@ export default class Missile{
         // let block = this.position.getBlock();
         let block = engine.grid.blockAtPosition(this.position);
         // console.log('block', block);
-        if(block.block !== "0"){
+        if(engine.grid.isPositionBlocked(this.position)){
             this.explode(engine);
         }
         

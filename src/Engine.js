@@ -21,11 +21,11 @@ export default class Engine{
     mouse:Mouse;
     keyboard:Keyboard
     deltaTime: number;
-    state:State
-    currentScene: SceneBase
-    ui:UI
-    grid:Grid
-    canvas:HTMLCanvasElement
+    state:State;
+    currentScene: SceneBase;
+    ui:UI;
+    grid:Grid;
+    canvas:HTMLCanvasElement;
     view:{offset:Point}
 
     static getInstance():Engine{

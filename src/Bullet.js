@@ -23,7 +23,7 @@ export default class Bullet extends GameObject{
             this.destroy();
         }
         let block = engine.grid.blockAtPosition({x:this.x, y:this.y});
-        if(block.block !== "0"){
+        if(engine.grid.isPositionBlocked({x:this.x, y:this.y})){
             this.destroy();
         }
     }
