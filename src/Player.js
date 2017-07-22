@@ -22,6 +22,21 @@ let missile = {
 
 }
 
+const HAND_STATE = {
+    ARMED:0,
+    FIRED:1,
+    GRIPPED:2,
+    RELEASED:3
+}
+let hand = {
+    speed: 800,
+    offset: new Point({x:-config.player.size.w/2, y:-config.player.size.h/2}),
+    position: new Point({x:0,y:0}),
+    direction: 0,
+    // firing: false,
+    state: HAND_STATE.ARMED
+}
+
 document.addEventListener("mousedown", (e) => {
     switch(e.button){
         case 0:
@@ -112,7 +127,47 @@ export default class Player{
 
         }
 
-        let rect = Rect.fromPosSizeRego(this.position, this.size, this.registration)
+        if(hand.state == HAND_STATE.ARMED){
+            hand.position = this.position.add(hand.offset)
+        }
+
+        if(keyboard.down(69)){
+            //FIRE HAND
+            if(hand.state == HAND_STATE.ARMED){
+                hand.state = HAND_STATE.FIRED;
+                let diff = mouse.point.subtract(hand.position);
+                let dir = Math.atan2(diff.y, diff.x)
+                hand.direction = dir
+            }
+        }else{
+            if(hand.state == HAND_STATE.GRIPPED){
+                hand.state = HAND_STATE.RELEASED
+            }
+        }
+        if(hand.state == HAND_STATE.FIRED){
+            hand.position.x += Math.cos(hand.direction)*deltaTime*hand.speed
+            hand.position.y += Math.sin(hand.direction)*deltaTime*hand.speed
+            if(grid.blockAtPosition(hand.position).block !== "0"){
+                hand.state = HAND_STATE.GRIPPED
+            }
+        }
+        if(hand.state == HAND_STATE.RELEASED){
+            let target = this.position.add(hand.offset)
+            let diff = target.subtract(hand.position);
+            let dist = hand.position.distanceTo(target)
+            let speed = deltaTime*hand.speed;
+            if(speed > dist){
+                hand.position = target;
+                hand.state = HAND_STATE.ARMED
+            }else{
+                let dir = Math.atan2(diff.y, diff.x);
+                hand.position.x += Math.cos(dir)*speed
+                hand.position.y += Math.sin(dir)*speed
+            }
+        }
+
+
+        let boundingRect = Rect.fromPosSizeRego(this.position, this.size, this.registration)
 
 
         if(keyboard.down(65)){
@@ -129,14 +184,14 @@ export default class Player{
         let hDelta = this.h * deltaTime*hSpeed
 
         if(hDelta > 0){
-            if( grid.blockAtPosition({x:rect.r + hDelta, y: rect.t}).block !== "0"||
-                grid.blockAtPosition({x:rect.r + hDelta, y: rect.b}).block !== "0"){
+            if( grid.blockAtPosition({x:boundingRect.r + hDelta, y: boundingRect.t}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.r + hDelta, y: boundingRect.b}).block !== "0"){
                 this.h = 0;
                 hDelta = 0
             }
         }else{
-            if( grid.blockAtPosition({x:rect.l + hDelta, y: rect.t}).block !== "0"||
-                grid.blockAtPosition({x:rect.l + hDelta, y: rect.b}).block !== "0"){
+            if( grid.blockAtPosition({x:boundingRect.l + hDelta, y: boundingRect.t}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.l + hDelta, y: boundingRect.b}).block !== "0"){
                 this.h = 0;
                 hDelta = 0
             }
@@ -160,13 +215,13 @@ export default class Player{
         
         if(this.v > 0){
             //GOIN DOWN
-            if( grid.blockAtPosition({x:rect.r, y: rect.b+this.v}).block !== "0"||
-                grid.blockAtPosition({x:rect.l, y: rect.b+this.v}).block !== "0"){
+            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.b+this.v}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.b+this.v}).block !== "0"){
                 this.v = 0;
             }
         }else{
-            if( grid.blockAtPosition({x:rect.r, y: rect.t+this.v}).block !== "0"||
-                grid.blockAtPosition({x:rect.l, y: rect.t+this.v}).block !== "0"){
+            if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.t+this.v}).block !== "0"||
+                grid.blockAtPosition({x:boundingRect.l, y: boundingRect.t+this.v}).block !== "0"){
                 this.v = 0;
             }
         }
@@ -174,6 +229,7 @@ export default class Player{
         this.position.y += this.v
         //LANDING
 
+        //RENDER
 
         // DRAW MECH BODY
         ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
@@ -182,5 +238,14 @@ export default class Player{
         ctx.context.fillStyle = '#ff0000'
         ctx.context.strokeRect(10, 10, 20, 100)
         ctx.context.fillRect(10, 10, 20, 100*(missile.energy/missile.maxEnergy))
+
+        //HAND
+        // ctx.fillStyle = '#aaaaaa'
+        // let pos = hand.offset.add(this.position);
+        
+        ctx.fillRect(hand.position.x , hand.position.y, 10, 10);
+
+        
+        ctx.context.fillStyle = '#000000'
     }
 }

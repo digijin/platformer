@@ -60,6 +60,10 @@ export default class Point{
       y: this.y * num,
     })
   }
+  distanceTo(point:Point){
+    let diff = this.subtract(point);
+    return Math.sqrt(Math.pow(diff.x, 2), Math.pow(diff.y, 2));
+  }
 
   getBlock():{x:number, y:number}{
     return {
