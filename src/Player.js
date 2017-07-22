@@ -109,13 +109,15 @@ export default class Player{
 
         ////////////////////BULLET FIRING
         if(firing){
-            register(new Shell({
-                position: this.position.add({x:0, y: -this.size.h/2}),
-                // x: this.position.x,
-                // y: this.position.y - (this.size.h/2),
-                h: Math.random()-0.5,
-                v: -Math.random()
-            }))
+            if(Math.random() < 0.5){
+                register(new Shell({
+                    position: this.position.add({x:0, y: -this.size.h/2}),
+                    // x: this.position.x,
+                    // y: this.position.y - (this.size.h/2),
+                    h: Math.random()-0.5,
+                    v: -Math.random()
+                }))
+            }
             let diff = mouse.point.subtract(this.position);
             let dir = Math.atan2(diff.y, diff.x)
             dir += (Math.random()-0.5)/10 //spread
