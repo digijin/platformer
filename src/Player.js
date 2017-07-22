@@ -81,7 +81,7 @@ export default class Player{
         d 68
         */
 
-        //missile loading and shit
+        /////////////////MISSILE MECHANICS
         if(missile.reload>0){
             missile.reload -= deltaTime
         }else{
@@ -106,6 +106,7 @@ export default class Player{
             }
         }
 
+        ////////////////////BULLET FIRING
         if(firing){
             register(new Shell({
                 x: this.position.x,
@@ -127,6 +128,8 @@ export default class Player{
 
         }
 
+
+        ////////////////////////////HAND MECHANICS
         if(hand.state == HAND_STATE.ARMED){
             hand.position = this.position.add(hand.offset)
         }
@@ -167,6 +170,8 @@ export default class Player{
         }
 
 
+        ///////////////////////MOVEMENT
+
         let boundingRect = Rect.fromPosSizeRego(this.position, this.size, this.registration)
 
 
@@ -181,6 +186,26 @@ export default class Player{
         }
 
         //check walls
+
+        //VERTICAL MOVEMENT
+        if(keyboard.down(32)){
+            if(this.v == 0){
+                this.v = -4//jump
+            }
+            this.v -= deltaTime*4; //BOOSTERS
+        }else{
+            this.v += deltaTime*8; //GRAVITY
+        }
+        
+        
+
+        if(hand.state == HAND_STATE.GRIPPED){
+            //REEL IN
+            let diff = this.position.add(hand.offset).subtract(hand.position);
+            let dir = Math.atan2(diff.y, diff.x);
+            this.h = -Math.cos(dir)//* deltaTime*hSpeed
+            this.v = -Math.sin(dir)* deltaTime*hSpeed
+        }
         let hDelta = this.h * deltaTime*hSpeed
 
         if(hDelta > 0){
@@ -200,19 +225,6 @@ export default class Player{
         this.position.x += hDelta
 
 
-
-        //VERTICAL MOVEMENT
-        if(keyboard.down(32)){
-            if(this.v == 0){
-                this.v = -4//jump
-            }
-            this.v -= deltaTime*4; //BOOSTERS
-        }else{
-            this.v += deltaTime*8; //GRAVITY
-        }
-        
-        let vDelta = this.v;
-        
         if(this.v > 0){
             //GOIN DOWN
             if( grid.blockAtPosition({x:boundingRect.r, y: boundingRect.b+this.v}).block !== "0"||
