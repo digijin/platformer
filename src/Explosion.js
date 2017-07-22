@@ -14,7 +14,6 @@ export default class Explosion {
 
         //defaults
         this.time = 1;
-        // this.rotation = Math.random()*Math.PI*2
         this.delay = 0;//Math.random()/2;
         this.size = 20 + (Math.random() * 20);
 
@@ -33,8 +32,6 @@ export default class Explosion {
                 { w: this.size * scale, h: this.size * scale },
                 this.rotation);
 
-            // ctx.globalAlpha = this.time;
-            // ctx.globalAlpha = 1
             if (this.time < 0) {
                 this.destroy();
             }

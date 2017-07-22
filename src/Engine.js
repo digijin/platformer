@@ -36,7 +36,6 @@ export default class Engine {
     }
 
     //init
-    // constructor(params:{ctx:Context, ui:UI}){
     constructor() {
         instance = this;
 
@@ -44,8 +43,6 @@ export default class Engine {
 
         this.mouse = new Mouse();
         this.keyboard = new Keyboard();
-        // this.ctx = params.ctx;
-        // this.ui = params.ui;
         this.objects = []
         this.lastTime = new Date().getTime();
         this.state = new State();
@@ -86,8 +83,6 @@ export default class Engine {
 
     //main game loop
     update = () => {
-        // console.log(this.objects.length);
-
         //handle time
         let nowTime = new Date().getTime();
         let diff = nowTime - this.lastTime;

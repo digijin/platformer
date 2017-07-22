@@ -17,7 +17,6 @@ export default class Bullet extends GameObject {
         this.time -= engine.deltaTime;
         this.x += this.h;
         this.y += this.v;
-        // shell.v += 0.01;
         engine.ctx.fillRect(this.x, this.y, 4, 4);
         if (this.time < 0) {
             this.destroy();

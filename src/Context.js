@@ -54,7 +54,6 @@ export default class Context {
 			-size.w * registration.x,
 			-size.h * registration.y,
 			size.w, size.h)
-		// this.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
 		this.resetTransform();
 	}
 	resetTransform() {
