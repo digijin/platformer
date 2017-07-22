@@ -1,4 +1,4 @@
-
+//@flow
 
 const blocksize = 50;
 

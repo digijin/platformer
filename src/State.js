@@ -1,4 +1,4 @@
-
+//@flow
 //this for only large scale state changes that should go to disk
 //not for state used within levels
 

@@ -1,4 +1,4 @@
-
+//@flow
 import explosion from './explosion.png'
 
 import Point from 'Point';

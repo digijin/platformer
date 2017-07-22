@@ -1,4 +1,4 @@
-
+//@flow
 
 import missile from './missile.png'
 import Smoke from 'Smoke'
