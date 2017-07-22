@@ -18,7 +18,7 @@ export default class Context{
 	}
 
 	drawImage():void{
-		//flowhack
+		// FLOWHACK
 		this.context.drawImage( ...arguments);
 	}
 	clearRect(){
