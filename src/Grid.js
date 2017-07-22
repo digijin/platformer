@@ -45,6 +45,16 @@ export default class Grid{
 
 
 	}
+	destroyBlockAtPosition(pos){
+		let x = Math.floor(pos.x/blocksize)
+		let y = Math.floor(pos.y/blocksize)
+		if(this.grid[x]){
+			if(this.grid[x][y]){
+				this.grid[x][y] = "0";
+			}
+		}
+
+	}
 
 	isPositionBlocked(pos){
 		return this.blockAtPosition(pos).block != "0"

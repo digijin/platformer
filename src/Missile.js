@@ -48,6 +48,7 @@ export default class Missile{
         // console.log('block', block);
         if(engine.grid.isPositionBlocked(this.position)){
             this.explode(engine);
+            engine.grid.destroyBlockAtPosition(this.position);
         }
         
         // );
