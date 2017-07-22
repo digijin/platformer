@@ -198,6 +198,14 @@ export default class Player{
                 this.v = -4//jump
             }
             this.v -= deltaTime*4; //BOOSTERS
+            
+            register(new Shell({
+                position: this.position.subtract({x:0, y:config.player.size.h/2}),
+                color: 'red',
+                h: Math.random()-0.5,   
+                v: 5+Math.random()*2,
+                time: 0.2
+            }))
         }else{
             this.v += deltaTime*8; //GRAVITY
         }
