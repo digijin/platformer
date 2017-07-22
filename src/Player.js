@@ -175,10 +175,11 @@ export default class Player{
         //LANDING
 
 
-        
-        // ctx.fillRect(this.position.x, this.position.y, 50, 50);
-        // ctx.drawImage(mech, 0, 0, mech.width, mech.height, this.position.x, this.position.y, 50, 50);
+        // DRAW MECH BODY
         ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
+
+        // UI MISSILE
+        ctx.context.fillStyle = '#ff0000'
         ctx.context.strokeRect(10, 10, 20, 100)
         ctx.context.fillRect(10, 10, 20, 100*(missile.energy/missile.maxEnergy))
     }

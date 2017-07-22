@@ -1,4 +1,6 @@
+//@flow
 
+import type Engine from 'Engine'
 export default class Bullet{
     x:number;//position
     y:number;//position
@@ -8,13 +10,17 @@ export default class Bullet{
         Object.assign(this, params);
         this.time = 1
     }
-    update = ({ctx, deltaTime}) => {
-        this.time -= deltaTime;
+    update = (engine:Engine) => {
+        this.time -= engine.deltaTime;
         this.x += this.h;
         this.y += this.v;
         // shell.v += 0.01;
-        ctx.fillRect(this.x, this.y, 4, 4);
+        engine.ctx.fillRect(this.x, this.y, 4, 4);
         if(this.time < 0){
+            this.destroy();
+        }
+        let block = engine.grid.blockAtPosition({x:this.x, y:this.y});
+        if(block.block !== "0"){
             this.destroy();
         }
     }
