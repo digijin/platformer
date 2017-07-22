@@ -1,4 +1,3 @@
-const hSpeed = 150;
 
 import Point from 'Point'
 import Missile from 'Missile';
@@ -7,6 +6,7 @@ import Shell from 'Shell';
 import mech from './mech.png'
 
 import config from 'config'
+let hSpeed = config.player.speed;
 
 import Rect from 'Rect';
 

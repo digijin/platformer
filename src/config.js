@@ -12,6 +12,7 @@ export default {
         size: {
             w: 80,
             h: 80
-        }
+        },
+        speed: 250
     }
 }
