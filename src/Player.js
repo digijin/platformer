@@ -15,10 +15,12 @@ import Rect from 'Rect';
 let firing = false;
 let missile = {
     firing: false,
-    maxEnergy: 100,
+    maxEnergy: 800,
     reloadTime: 0.1,
     reload: 0,
     regenSpeed: 10,
+    regenBaseSpeed: 10,
+    regenSpeedIncrease: 10,//per second
     energy: 20,
     cost: 10
 
@@ -95,6 +97,7 @@ export default class Player {
             if (missile.firing && missile.energy >= missile.cost) {
                 missile.reload = missile.reloadTime
                 missile.energy -= missile.cost
+                missile.regenSpeed = missile.regenBaseSpeed;
                 // missile = false;
                 register(new Missile({
                     direction: (-Math.PI / 2) + (Math.random() - 0.5),
@@ -106,6 +109,7 @@ export default class Player {
                     }))
                 }));
             } else {
+                missile.regenSpeed += missile.regenSpeedIncrease * deltaTime;
                 missile.energy += missile.regenSpeed * deltaTime;
                 if (missile.energy > missile.maxEnergy) {
                     missile.energy = missile.maxEnergy

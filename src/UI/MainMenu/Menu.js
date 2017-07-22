@@ -7,6 +7,17 @@ class MainMenu extends React.Component {
      render(){
          return <div>
             Main Menu
+            <div id="instructions">
+            <pre>
+            a:move left
+            d:move right
+            space:jump/booster
+            e:grapple arm
+            left mouse:primary (guns)
+            right mouse:secondary (missiles)
+            
+            </pre>
+            </div>
             <button onClick={this.props.play}>Play</button>
          </div>
      } 

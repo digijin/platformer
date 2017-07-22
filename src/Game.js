@@ -17,12 +17,12 @@ import Level from 'Scene/Level';
 
 // import MainMenu from 'MainMenu/Menu';
 
-export default class Game{
+export default class Game {
     container: HTMLElement;
-    ctx:Object;
+    ctx: Object;
     shells: Array<Object>;
-    engine:Engine
-    constructor(container:HTMLElement){
+    engine: Engine
+    constructor(container: HTMLElement) {
 
         window.game = this;
         // let engine:Engine = new Engine(container);
