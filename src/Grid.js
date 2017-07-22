@@ -46,6 +46,10 @@ export default class Grid{
 
 	}
 
+	isPositionBlocked(pos){
+		return this.blockAtPosition(pos).block != "0"
+	}
+
 	blockAtPosition(pos){
 		let x = Math.floor(pos.x/blocksize)
 		let y = Math.floor(pos.y/blocksize)

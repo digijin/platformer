@@ -110,8 +110,9 @@ export default class Player{
         ////////////////////BULLET FIRING
         if(firing){
             register(new Shell({
-                x: this.position.x,
-                y: this.position.y - (this.size.h/2),
+                position: this.position.add({x:0, y: -this.size.h/2}),
+                // x: this.position.x,
+                // y: this.position.y - (this.size.h/2),
                 h: Math.random()-0.5,
                 v: -Math.random()
             }))
@@ -207,7 +208,7 @@ export default class Player{
             let dir = Math.atan2(diff.y, diff.x);
             this.h = -Math.cos(dir)//* deltaTime*hSpeed
             this.v = -Math.sin(dir)* deltaTime*hand.reelSpeed
-            hDelta = this.h * deltaTime * hand.reelSpeed
+            hDelta = this.h * deltaTime * hand.reelSpeeda
         }
 
         if(hDelta > 0){
