@@ -74,7 +74,10 @@ export default class Engine {
         obj.destroy = () => {
             let i = this.objects.indexOf(obj);
             if (i > -1) {
-                this.objects.splice(i, 1);
+                // this.objects.splice(i, 1);
+                //if I splice it out here, it will screw with the object loop
+                //so I'll mark it as null, and then filter it out post update
+                this.objects[i] = null;
             }
         }
         if (obj.init) obj.init(this);
@@ -104,6 +107,9 @@ export default class Engine {
 
         //update all object
         this.objects.forEach(o => { o.update(this) });
+
+        this.objects = this.objects.filter(o => o);
+
 
         //wait for next frame
         requestAnimationFrame(this.update)
