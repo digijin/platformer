@@ -283,6 +283,7 @@ export default class Player {
         //HAND
         // ctx.fillStyle = '#aaaaaa'
         // let pos = hand.offset.add(this.position);
+        ctx.drawLine(this.position.add(hand.offset), hand.position)
 
         ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 

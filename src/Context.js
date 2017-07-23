@@ -17,6 +17,17 @@ export default class Context {
 		this.engine = Engine.getInstance();
 	}
 
+	drawLine(from:Point, to:Point){
+		let o = this.engine.view.offset;
+		from = from.subtract(o);
+		to = to.subtract(o);
+		
+		this.context.beginPath();
+		this.context.moveTo(from.x,from.y);
+		this.context.lineTo(to.x,to.y);
+		this.context.stroke();
+	}
+
 	drawImage(): void {
 		// FLOWHACK
 		this.context.drawImage(...arguments);
