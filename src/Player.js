@@ -21,7 +21,7 @@ let missile = {
 	regenSpeed: 10,
 	regenBaseSpeed: 10,
 	regenSpeedIncrease: 10, //per second
-	energy: 20,
+	energy: 700,
 	cost: 10
 };
 
@@ -32,7 +32,7 @@ const HAND_STATE = {
 	RELEASED: 3
 };
 let hand = {
-	speed: 800,
+	speed: 1000,
 	reelSpeed: 400,
 	offset: new Point({
 		x: -config.player.size.w / 2,

@@ -114,6 +114,10 @@ export default class Engine {
 		this.objects = this.objects.filter(o => o);
 
 		//wait for next frame
-		requestAnimationFrame(this.update);
+		this.updateId = requestAnimationFrame(this.update);
+	};
+	updateId: number;
+	kill = () => {
+		cancelAnimationFrame(this.updateId);
 	};
 }
