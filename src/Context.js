@@ -55,7 +55,7 @@ export default class Context {
 	setTransform() {
 		this.context.setTransform(...arguments);
 	}
-	drawSprite = function (image: HTMLImageElement, position: Point = new Point({ x: 0, y: 0 }), size: { w: number, h: number } = { w: 20, h: 20 }, rotation: number = 0, registration: { x: number, y: number } = { x: .5, y: .5 }) {
+	drawSprite = function (image: HTMLImageElement | Object, position: Point = new Point({ x: 0, y: 0 }), size: { w: number, h: number } = { w: 20, h: 20 }, rotation: number = 0, registration: { x: number, y: number } = { x: .5, y: .5 }) {
 		// console.log(this);
 		position = position.subtract(this.engine.view.offset)
 		this.context.translate(position.x, position.y);

@@ -10,7 +10,8 @@
     "build": "gulp build",
     "functional": "./node_modules/.bin/karma start",
     "electron": "gulp build --electron && electron dist/",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow": "flow check",
+    "flow:suggest": "flow suggest src/Explosion.js",
     "flow:watch": "flow-watch",
     "postinstall": "gulp build",
     "coverage": "jest --coverage --watch"

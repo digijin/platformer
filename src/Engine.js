@@ -15,7 +15,7 @@ import UI from 'UI';
 
 let instance;
 export default class Engine {
-    objects: Array<Object>;
+    objects: Array<Object|null>;
     ctx: Context
     lastTime: number;
     mouse: Mouse;
@@ -98,15 +98,16 @@ export default class Engine {
 
         //sort objects on z
         this.objects.sort((a,b) => {
-            let az = a.z
-            if(az == undefined) az = 0;
-            let bz = b.z
-            if(bz == undefined) bz = 0;
+
+            let az = 0
+            if(a&&a.z) az = a.z;
+            let bz = 0
+            if(b&&b.z) bz = b.z;
             return az-bz;
         })
 
         //update all object
-        this.objects.forEach(o => { o.update(this) });
+        this.objects.forEach(o => { if(o){o.update(this);} });
 
         this.objects = this.objects.filter(o => o);
 
