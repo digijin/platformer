@@ -10,6 +10,7 @@ import config from "config";
 let hSpeed = config.player.speed;
 
 import Rect from "Rect";
+import type Engine from "Engine";
 
 let firing = false;
 let missile = {
@@ -81,9 +82,9 @@ export default class Player {
 		this.v = 0;
 		this.registration = { x: 0.5, y: 1 };
 	}
-	update({ ctx, mouse, keyboard, deltaTime, register, grid, view }) {
+	update(engine: Engine) {
 		//adjust camera
-		view.offset = this.position.subtract({
+		engine.view.offset = this.position.subtract({
 			x: config.game.width / 2,
 			y: config.game.height / 2
 		});
@@ -97,19 +98,19 @@ export default class Player {
 
 		/////////////////MISSILE MECHANICS
 		if (missile.reload > 0) {
-			missile.reload -= deltaTime;
+			missile.reload -= engine.deltaTime;
 		} else {
 			if (missile.firing && missile.energy >= missile.cost) {
 				missile.reload = missile.reloadTime;
 				missile.energy -= missile.cost;
 				missile.regenSpeed = missile.regenBaseSpeed;
 				// missile = false;
-				register(
+				engine.register(
 					new Missile({
 						direction: -Math.PI / 2 + (Math.random() - 0.5),
 						speed: 3 + Math.random() * 5,
 						position: this.position.subtract({ x: 0, y: this.size.h }),
-						target: mouse.point.add(
+						target: engine.mouse.point.add(
 							new Point({
 								x: (Math.random() - 0.5) * 20,
 								y: (Math.random() - 0.5) * 20
@@ -118,8 +119,8 @@ export default class Player {
 					})
 				);
 			} else {
-				missile.regenSpeed += missile.regenSpeedIncrease * deltaTime;
-				missile.energy += missile.regenSpeed * deltaTime;
+				missile.regenSpeed += missile.regenSpeedIncrease * engine.deltaTime;
+				missile.energy += missile.regenSpeed * engine.deltaTime;
 				if (missile.energy > missile.maxEnergy) {
 					missile.energy = missile.maxEnergy;
 				}
@@ -129,7 +130,7 @@ export default class Player {
 		////////////////////BULLET FIRING
 		if (firing) {
 			if (Math.random() < 0.5) {
-				register(
+				engine.register(
 					new Shell({
 						position: this.position.add({ x: 0, y: -this.size.h / 2 }),
 						// x: this.position.x,
@@ -139,10 +140,10 @@ export default class Player {
 					})
 				);
 			}
-			let diff = mouse.point.subtract(this.position);
+			let diff = engine.mouse.point.subtract(this.position);
 			let dir = Math.atan2(diff.y, diff.x);
 			dir += (Math.random() - 0.5) / 10; //spread
-			register(
+			engine.register(
 				new Bullet({
 					x: this.position.x,
 					y: this.position.y - this.size.h / 2,
@@ -159,11 +160,11 @@ export default class Player {
 			hand.position = this.position.add(hand.offset);
 		}
 
-		if (keyboard.down(69)) {
+		if (engine.keyboard.down(69)) {
 			//FIRE HAND
 			if (hand.state == HAND_STATE.ARMED) {
 				hand.state = HAND_STATE.FIRED;
-				let diff = mouse.point.subtract(hand.position);
+				let diff = engine.mouse.point.subtract(hand.position);
 				let dir = Math.atan2(diff.y, diff.x);
 				hand.direction = dir;
 			}
@@ -205,29 +206,29 @@ export default class Player {
 		);
 
 		//HORIZONTAL
-		if (keyboard.down(65)) {
-			this.h -= deltaTime * 5;
+		if (engine.keyboard.down(65)) {
+			this.h -= engine.deltaTime * 5;
 			if (this.h < -1) this.h = -1;
-		} else if (keyboard.down(68)) {
-			this.h += deltaTime * 5;
+		} else if (engine.keyboard.down(68)) {
+			this.h += engine.deltaTime * 5;
 			if (this.h > 1) this.h = 1;
 		} else {
 			if (this.v == 0) {
-				this.h *= 1 - deltaTime * 5;
+				this.h *= 1 - engine.deltaTime * 5;
 			}
 		}
 
 		//check walls
-		let hDelta = this.h * deltaTime * hSpeed;
+		let hDelta = this.h * engine.deltaTime * hSpeed;
 
 		//VERTICAL MOVEMENT
-		if (keyboard.down(32)) {
+		if (engine.keyboard.down(32)) {
 			if (this.v == 0) {
 				this.v = -4; //jump
 			}
-			this.v -= deltaTime * 4; //BOOSTERS
+			this.v -= engine.deltaTime * 4; //BOOSTERS
 
-			register(
+			engine.register(
 				new Shell({
 					position: this.position.subtract({
 						x: 0,
@@ -240,7 +241,7 @@ export default class Player {
 				})
 			);
 		} else {
-			this.v += deltaTime * 8; //GRAVITY
+			this.v += engine.deltaTime * 8; //GRAVITY
 		}
 
 		if (hand.state == HAND_STATE.GRIPPED) {
@@ -248,26 +249,34 @@ export default class Player {
 			let diff = this.position.add(hand.offset).subtract(hand.position);
 			let dir = Math.atan2(diff.y, diff.x);
 			this.h = -Math.cos(dir); //* deltaTime*hSpeed
-			this.v = -Math.sin(dir) * deltaTime * hand.reelSpeed;
-			hDelta = this.h * deltaTime * hand.reelSpeed;
+			this.v = -Math.sin(dir) * engine.deltaTime * hand.reelSpeed;
+			hDelta = this.h * engine.deltaTime * hand.reelSpeed;
 		}
 
 		if (this.v > 0) {
 			//GOIN DOWN
 			if (
-				grid.blockAtPosition({ x: boundingRect.r, y: boundingRect.b + this.v })
-					.block !== "0" ||
-				grid.blockAtPosition({ x: boundingRect.l, y: boundingRect.b + this.v })
-					.block !== "0"
+				engine.grid.blockAtPosition({
+					x: boundingRect.r,
+					y: boundingRect.b + this.v
+				}).block !== "0" ||
+				engine.grid.blockAtPosition({
+					x: boundingRect.l,
+					y: boundingRect.b + this.v
+				}).block !== "0"
 			) {
 				this.v = 0;
 			}
 		} else {
 			if (
-				grid.blockAtPosition({ x: boundingRect.r, y: boundingRect.t + this.v })
-					.block !== "0" ||
-				grid.blockAtPosition({ x: boundingRect.l, y: boundingRect.t + this.v })
-					.block !== "0"
+				engine.grid.blockAtPosition({
+					x: boundingRect.r,
+					y: boundingRect.t + this.v
+				}).block !== "0" ||
+				engine.grid.blockAtPosition({
+					x: boundingRect.l,
+					y: boundingRect.t + this.v
+				}).block !== "0"
 			) {
 				this.v = 0;
 			}
@@ -275,20 +284,28 @@ export default class Player {
 
 		if (hDelta > 0) {
 			if (
-				grid.blockAtPosition({ x: boundingRect.r + hDelta, y: boundingRect.t })
-					.block !== "0" ||
-				grid.blockAtPosition({ x: boundingRect.r + hDelta, y: boundingRect.b })
-					.block !== "0"
+				engine.grid.blockAtPosition({
+					x: boundingRect.r + hDelta,
+					y: boundingRect.t
+				}).block !== "0" ||
+				engine.grid.blockAtPosition({
+					x: boundingRect.r + hDelta,
+					y: boundingRect.b
+				}).block !== "0"
 			) {
 				this.h = 0;
 				hDelta = 0;
 			}
 		} else {
 			if (
-				grid.blockAtPosition({ x: boundingRect.l + hDelta, y: boundingRect.t })
-					.block !== "0" ||
-				grid.blockAtPosition({ x: boundingRect.l + hDelta, y: boundingRect.b })
-					.block !== "0"
+				engine.grid.blockAtPosition({
+					x: boundingRect.l + hDelta,
+					y: boundingRect.t
+				}).block !== "0" ||
+				engine.grid.blockAtPosition({
+					x: boundingRect.l + hDelta,
+					y: boundingRect.b
+				}).block !== "0"
 			) {
 				this.h = 0;
 				hDelta = 0;
@@ -303,12 +320,12 @@ export default class Player {
 		//RENDER
 
 		// DRAW MECH BODY
-		ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
+		engine.ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
 
 		// UI MISSILE
-		ctx.context.fillStyle = "#ff0000";
-		ctx.context.strokeRect(10, 10, 20, 100);
-		ctx.context.fillRect(
+		engine.ctx.context.fillStyle = "#ff0000";
+		engine.ctx.context.strokeRect(10, 10, 20, 100);
+		engine.ctx.context.fillRect(
 			10,
 			10,
 			20,
@@ -318,10 +335,10 @@ export default class Player {
 		//HAND
 		// ctx.fillStyle = '#aaaaaa'
 		// let pos = hand.offset.add(this.position);
-		ctx.drawLine(this.position.add(hand.offset), hand.position);
+		engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
 
-		ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
+		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 
-		ctx.context.fillStyle = "#000000";
+		engine.ctx.context.fillStyle = "#000000";
 	}
 }

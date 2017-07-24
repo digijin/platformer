@@ -86,7 +86,7 @@ export default class Grid {
 		// engine.ctx.strokeStyle = '#000000'd
 		this.grid.forEach((row, x) => {
 			row.forEach((cell, y) => {
-				if (cell == 0) {
+				if (cell == "0") {
 					engine.ctx.strokeRect(
 						x * blocksize,
 						y * blocksize,
