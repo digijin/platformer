@@ -19,6 +19,9 @@ export default class State {
 		localStorage.setItem("save", JSON.stringify(this.state, null, 1));
 	}
 	load() {
-		this.state = JSON.parse(localStorage.getItem("save"));
+		let data = localStorage.getItem("save");
+		if (data) {
+			this.state = JSON.parse(data);
+		}
 	}
 }

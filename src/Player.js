@@ -174,10 +174,12 @@ export default class Player {
 			}
 		}
 		if (hand.state == HAND_STATE.FIRED) {
-			hand.position.x += Math.cos(hand.direction) * deltaTime * hand.speed;
-			hand.position.y += Math.sin(hand.direction) * deltaTime * hand.speed;
+			hand.position.x +=
+				Math.cos(hand.direction) * engine.deltaTime * hand.speed;
+			hand.position.y +=
+				Math.sin(hand.direction) * engine.deltaTime * hand.speed;
 
-			if (grid.isPositionBlocked(hand.position)) {
+			if (engine.grid.isPositionBlocked(hand.position)) {
 				// if(grid.blockAtPosition(hand.position).block !== "0"){
 				hand.state = HAND_STATE.GRIPPED;
 			}
@@ -186,7 +188,7 @@ export default class Player {
 			let target = this.position.add(hand.offset);
 			let diff = target.subtract(hand.position);
 			let dist = hand.position.distanceTo(target);
-			let speed = deltaTime * hand.speed;
+			let speed = engine.deltaTime * hand.speed;
 			if (speed > dist) {
 				hand.position = target;
 				hand.state = HAND_STATE.ARMED;

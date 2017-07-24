@@ -5,11 +5,14 @@ import type Engine from "Engine";
 
 import smoke from "./smoke.png";
 
-export default class Smoke {
+import GameObject from "GameObject";
+
+export default class Smoke extends GameObject {
 	position: Point;
 	time: number; //life
 	rotation: number; //radians
 	constructor(params: Object) {
+		super();
 		Object.assign(this, params);
 		this.time = 1;
 		this.rotation = Math.random() * Math.PI * 2;
