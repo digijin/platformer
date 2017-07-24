@@ -55,6 +55,7 @@ export default class Engine {
 		this.canvas = canvas;
 
 		let uiDiv: HTMLDivElement = document.createElement("div");
+		uiDiv.id = "ui";
 		container.appendChild(uiDiv);
 		this.ui = new UI(uiDiv, this);
 
