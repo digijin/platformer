@@ -1,32 +1,36 @@
 //@flow
 
-import { extend } from 'lodash';
-import config from 'config';
+import { extend } from "lodash";
+import config from "config";
 
-import Point from 'Point';
+import Point from "Point";
 
-import Block from 'Block';
+import Block from "Block";
 
 export type RenderParams = {
 	x: number,
 	y: number,
 	w: number,
 	h: number
-}
+};
 
 export default class Rect {
-	t: number
-	r: number
-	b: number
-	l: number
+	t: number;
+	r: number;
+	b: number;
+	l: number;
 	// static screenRect(){
 	// 	let tl = Point.fromScreen(0,0);
 	// 	let br = Point.fromScreen(window.innerWidth,window.innerHeight);
 	// 	return new Rect(tl, br);
 	// }
-	static fromPosSizeRego(pos: Point, size: { w: number, h: number }, rego: { x: number, y: number }) {
-		let t = pos.y - (size.w * rego.y)
-		let l = pos.x - (size.h * rego.x)
+	static fromPosSizeRego(
+		pos: Point,
+		size: { w: number, h: number },
+		rego: { x: number, y: number }
+	) {
+		let t = pos.y - size.w * rego.y;
+		let l = pos.x - size.h * rego.x;
 		return new Rect({
 			t: t,
 			l: l,
@@ -41,7 +45,7 @@ export default class Rect {
 			this.b = arguments[2];
 			this.l = arguments[3];
 		} else if (arguments.length === 1) {
-			let a = arguments[0]
+			let a = arguments[0];
 			if (a.t !== undefined) {
 				extend(this, a);
 			} else if (a.x !== undefined) {
@@ -50,9 +54,10 @@ export default class Rect {
 				this.r = a.x + a.w;
 				this.b = a.y + a.h;
 			} else {
-				throw new Error('Rect constructor given garbage. ' + arguments.toString());
+				throw new Error(
+					"Rect constructor given garbage. " + arguments.toString()
+				);
 			}
-
 		} else if (arguments.length === 2) {
 			let p1 = arguments[0];
 			let p2 = arguments[1];
@@ -70,7 +75,6 @@ export default class Rect {
 				this.t = p2.y;
 				this.b = p1.y;
 			}
-
 		}
 	}
 	blockRect(): Rect {
@@ -82,15 +86,15 @@ export default class Rect {
 		);
 	}
 	width(): number {
-		return this.r - this.l
+		return this.r - this.l;
 	}
 
-	add(rect: { t: number; r: number; b: number; l: number }): Rect {
+	add(rect: { t: number, r: number, b: number, l: number }): Rect {
 		return new Rect(
-			(this.t + rect.t),
-			(this.r + rect.r),
-			(this.b + rect.b),
-			(this.l + rect.l)
+			this.t + rect.t,
+			this.r + rect.r,
+			this.b + rect.b,
+			this.l + rect.l
 		);
 	}
 
@@ -120,6 +124,4 @@ export default class Rect {
 	// 	let br = new Point({x:this.r, y:this.b}).screen;
 	// 	return {x: tl.x, y: tl.y, w: br.x-tl.x, h: br.y-tl.y};
 	// }
-
-
 }

@@ -1,5 +1,5 @@
 //@flow
 
-export default class GameObject{
-    destroy:Function
+export default class GameObject {
+	destroy: Function;
 }
