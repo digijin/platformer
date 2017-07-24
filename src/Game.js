@@ -27,8 +27,8 @@ export default class Game {
 		this.engine = Engine.getInstance();
 		this.engine.init(container);
 
-		this.engine.startScene(new Level());
-		// this.engine.startScene(new MainMenu())
+		// this.engine.startScene(new Level());
+		this.engine.startScene(new MainMenu());
 
 		this.engine.update(); //starts
 	}

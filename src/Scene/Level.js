@@ -16,6 +16,9 @@ export default class Level extends Base{
         engine.register(player);
         engine.register(new Enemy({position: new Point({x: 250, y: 250})}))
         engine.register(new Grid());
+
+        
+		engine.ui.dispatch({ type: "START_SCENE", scene: "level" });
         
     }
 }
