@@ -2,6 +2,8 @@
 
 const blocksize = 50;
 
+import type Engine from "Engine";
+
 export default class Grid {
 	grid: Array<Array<string>>;
 	z: number;
@@ -76,10 +78,10 @@ export default class Grid {
 		}
 	}
 
-	init = engine => {
+	init = (engine: Engine) => {
 		engine.grid = this;
 	};
-	update = engine => {
+	update = (engine: Engine) => {
 		engine.ctx.context.fillStyle = "#000000";
 		// engine.ctx.strokeStyle = '#000000'd
 		this.grid.forEach((row, x) => {

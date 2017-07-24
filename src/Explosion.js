@@ -5,12 +5,16 @@ import Point from "Point";
 
 import type Engine from "Engine";
 
-export default class Explosion {
+import GameObject from "GameObject";
+
+export default class Explosion extends GameObject {
 	position: Point;
 	time: number; //life
 	delay: number;
 	size: number;
-	constructor(params) {
+	rotation: number;
+	constructor(params: Object) {
+		super();
 		//defaults
 		this.time = 1;
 		this.delay = 0; //Math.random()/2;

@@ -14,7 +14,7 @@ export default class Keyboard {
 			this.keysdown.splice(this.keysdown.indexOf(e.keyCode), 1);
 		};
 	}
-	down = key => {
+	down = (key: number) => {
 		return this.keysdown.indexOf(key) > -1;
 	};
 }

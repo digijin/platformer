@@ -9,20 +9,24 @@ import config from "config";
 
 import type Engine from "Engine";
 
-export default class Missile {
+import GameObject from "GameObject";
+
+export default class Missile extends GameObject {
 	position: Point;
 	direction: number;
 	target: Point;
 	speed: number;
 	z: number;
+	guided: boolean;
 	constructor(params: { position: Point, direction: number, target: Point }) {
+		super();
 		this.speed = 1;
 		this.guided = true;
 		this.z = 20;
 
 		Object.assign(this, params);
 	}
-	explode({ register }) {
+	explode(engine: Engine) {
 		this.destroy();
 
 		for (let i = 0; i < 10; i++) {
@@ -31,7 +35,7 @@ export default class Missile {
 			let dir = Math.random() * Math.PI * 2;
 			let dist = Math.random() * 20;
 			let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
-			register(
+			engine.register(
 				new Explosion({
 					position: this.position.add(offset),
 					rotation: dir,
