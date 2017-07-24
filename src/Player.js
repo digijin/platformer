@@ -41,8 +41,7 @@ let hand = {
     // firing: false,
     state: HAND_STATE.ARMED
 }
-
-document.addEventListener("mousedown", (e) => {
+let md = (e:MouseEvent):void => {
     switch (e.button) {
         case 0:
             firing = true;
@@ -51,8 +50,8 @@ document.addEventListener("mousedown", (e) => {
             missile.firing = true;
             break;
     }
-})
-document.addEventListener("mouseup", (e) => {
+}
+let mu = (e:MouseEvent):void => {
     switch (e.button) {
         case 0:
             firing = false;
@@ -61,7 +60,10 @@ document.addEventListener("mouseup", (e) => {
             missile.firing = false;
             break;
     }
-})
+}
+
+document.addEventListener("mousedown", md);
+document.addEventListener("mouseup", mu)
 
 
 
