@@ -62,9 +62,11 @@ export default class Missile extends GameObject {
 			engine.grid.destroyBlockAtPosition(this.position);
 		}
 		engine.objectsTagged("actor").forEach((o: GameObject) => {
-			let a: Actor = ((o: any): Actor); //RECAST
-			if (a.getBoundingRect().contains(this.position)) {
-				this.explode(engine);
+			if (o !== this.owner) {
+				let a: Actor = ((o: any): Actor); //RECAST
+				if (a.getBoundingRect().contains(this.position)) {
+					this.explode(engine);
+				}
 			}
 		});
 
