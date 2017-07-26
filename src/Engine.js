@@ -85,7 +85,7 @@ export default class Engine {
 		this.objects.push(obj);
 	};
 
-	objectsTagged = (tag: string) => {
+	objectsTagged = (tag: string): Array<GameObject> => {
 		return this.objects.filter(o => {
 			return o && o.hasTag(tag);
 		});

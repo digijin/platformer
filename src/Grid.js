@@ -3,12 +3,14 @@
 const blocksize = 50;
 
 import type Engine from "Engine";
+import GameObject from "GameObject";
 
-export default class Grid {
+export default class Grid extends GameObject {
 	grid: Array<Array<string>>;
 	z: number;
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
+		super();
 		this.z = -10;
 		//make empty grid
 		// this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))

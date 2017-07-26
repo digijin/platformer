@@ -5,6 +5,8 @@ import Smoke from "Smoke";
 import Explosion from "Explosion";
 import Point from "Point";
 
+import type Actor from "Actor";
+
 import config from "config";
 
 import type Engine from "Engine";
@@ -53,6 +55,12 @@ export default class Missile extends GameObject {
 			this.explode(engine);
 			engine.grid.destroyBlockAtPosition(this.position);
 		}
+		engine.objectsTagged("actor").forEach((o: GameObject) => {
+			((o: any): Actor); //RECAST
+			if (o.getBoundingRect().contains(this.position)) {
+				this.explode(engine);
+			}
+		});
 
 		//smoke trail
 		engine.register(new Smoke({ position: this.position.clone() }));

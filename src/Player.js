@@ -72,6 +72,7 @@ document.addEventListener("mouseup", mu);
 export default class Player extends Actor {
 	constructor(params: Object) {
 		super(params);
+		this.tag("player");
 		this.z = 10;
 		Object.assign(this, params);
 		this.size = config.player.size;
