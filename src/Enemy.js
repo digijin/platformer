@@ -15,15 +15,19 @@ export default class Enemy {
 
 		Object.assign(this, params);
 	}
+	action: ?Generator<*, *, *>;
 	update(engine: Engine) {
+		if (!this.action) {
+			this.action = ai.bind(this)(engine);
+		}
+		if (this.action.next().done) {
+			this.action = null;
+		}
 		engine.ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
 	}
 }
 
-// export function* ai(a):Generator<*,*,*>{
-//     let b = yield a;
-//     let c = yield b;
-//     return c;
-//     return "d";//unreachable
-
-// }
+export function* ai(engine: Engine): Generator<*, *, *> {
+	// console.log(this);
+	this.position.x += engine.deltaTime;
+}
