@@ -38,6 +38,11 @@ export default class Rect {
 			b: t + size.h
 		});
 	}
+	overlaps(rect: Rect) {
+		let outsideH = this.b <= rect.t || rect.b <= this.t;
+		let outsideV = this.r <= rect.l || rect.r <= this.l;
+		return !outsideV && !outsideH;
+	}
 	constructor() {
 		if (arguments.length === 4) {
 			this.t = arguments[0];
