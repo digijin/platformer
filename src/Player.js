@@ -6,6 +6,8 @@ import Bullet from "Bullet";
 import Shell from "Shell";
 import mech from "./mech.png";
 
+import Actor from "Actor";
+
 import config from "config";
 let hSpeed = config.player.speed;
 
@@ -67,7 +69,7 @@ let mu = (e: MouseEvent): void => {
 document.addEventListener("mousedown", md);
 document.addEventListener("mouseup", mu);
 
-export default class Player {
+export default class Player extends Actor {
 	position: Point;
 	h: number;
 	v: number;
@@ -75,6 +77,7 @@ export default class Player {
 	registration: { x: number, y: number };
 	z: number;
 	constructor(params: Object) {
+		super(params);
 		this.z = 10;
 		Object.assign(this, params);
 		this.size = config.player.size;
