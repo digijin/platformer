@@ -70,12 +70,6 @@ document.addEventListener("mousedown", md);
 document.addEventListener("mouseup", mu);
 
 export default class Player extends Actor {
-	position: Point;
-	h: number;
-	v: number;
-	size: { w: number, h: number };
-	registration: { x: number, y: number };
-	z: number;
 	constructor(params: Object) {
 		super(params);
 		this.z = 10;
@@ -204,11 +198,13 @@ export default class Player extends Actor {
 
 		///////////////////////MOVEMENT
 
-		let boundingRect = Rect.fromPosSizeRego(
-			this.position,
-			this.size,
-			this.registration
-		);
+		// let boundingRect = Rect.fromPosSizeRego(
+		// 	this.position,
+		// 	this.size,
+		// 	this.registration
+		// );
+
+		let boundingRect = this.getBoundingRect();
 
 		//HORIZONTAL
 		if (engine.keyboard.down(65)) {
@@ -258,63 +254,71 @@ export default class Player extends Actor {
 			hDelta = this.h * engine.deltaTime * hand.reelSpeed;
 		}
 
-		if (this.v > 0) {
-			//GOIN DOWN
-			if (
-				engine.grid.blockAtPosition({
-					x: boundingRect.r,
-					y: boundingRect.b + this.v
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
-					x: boundingRect.l,
-					y: boundingRect.b + this.v
-				}).block !== "0"
-			) {
-				this.v = 0;
-			}
-		} else {
-			if (
-				engine.grid.blockAtPosition({
-					x: boundingRect.r,
-					y: boundingRect.t + this.v
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
-					x: boundingRect.l,
-					y: boundingRect.t + this.v
-				}).block !== "0"
-			) {
-				this.v = 0;
-			}
+		// if (this.v > 0) {
+		// 	//GOIN DOWN
+		// 	if (
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.r,
+		// 			y: boundingRect.b + this.v
+		// 		}).block !== "0" ||
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.l,
+		// 			y: boundingRect.b + this.v
+		// 		}).block !== "0"
+		// 	) {
+		// 		this.v = 0;
+		// 	}
+		// } else {
+		// 	if (
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.r,
+		// 			y: boundingRect.t + this.v
+		// 		}).block !== "0" ||
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.l,
+		// 			y: boundingRect.t + this.v
+		// 		}).block !== "0"
+		// 	) {
+		// 		this.v = 0;
+		// 	}
+		// }
+
+		// if (hDelta > 0) {
+		// 	if (
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.r + hDelta,
+		// 			y: boundingRect.t
+		// 		}).block !== "0" ||
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.r + hDelta,
+		// 			y: boundingRect.b
+		// 		}).block !== "0"
+		// 	) {
+		// 		this.h = 0;
+		// 		hDelta = 0;
+		// 	}
+		// } else {
+		// 	if (
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.l + hDelta,
+		// 			y: boundingRect.t
+		// 		}).block !== "0" ||
+		// 		engine.grid.blockAtPosition({
+		// 			x: boundingRect.l + hDelta,
+		// 			y: boundingRect.b
+		// 		}).block !== "0"
+		// 	) {
+		// 		this.h = 0;
+		// 		hDelta = 0;
+		// 	}
+		// }
+		if (!this.canMoveVert(this.v)) {
+			this.v = 0;
 		}
 
-		if (hDelta > 0) {
-			if (
-				engine.grid.blockAtPosition({
-					x: boundingRect.r + hDelta,
-					y: boundingRect.t
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
-					x: boundingRect.r + hDelta,
-					y: boundingRect.b
-				}).block !== "0"
-			) {
-				this.h = 0;
-				hDelta = 0;
-			}
-		} else {
-			if (
-				engine.grid.blockAtPosition({
-					x: boundingRect.l + hDelta,
-					y: boundingRect.t
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
-					x: boundingRect.l + hDelta,
-					y: boundingRect.b
-				}).block !== "0"
-			) {
-				this.h = 0;
-				hDelta = 0;
-			}
+		if (!this.canMoveHori(hDelta)) {
+			this.h = 0;
+			hDelta = 0;
 		}
 
 		this.position.x += hDelta;
