@@ -81,9 +81,9 @@ export default class Missile extends GameObject {
 				this.speed -= engine.deltaTime * 5;
 				// this.speed = (this.speed + 1) /2;
 				if (dirDiff > 0) {
-					this.direction += engine.deltaTime * Math.PI;
+					this.direction += engine.deltaTime * Math.PI * 2;
 				} else {
-					this.direction -= engine.deltaTime * Math.PI;
+					this.direction -= engine.deltaTime * Math.PI * 2;
 				}
 			}
 			if (this.speed < 1) this.speed = 1;

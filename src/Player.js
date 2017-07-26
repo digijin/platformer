@@ -243,7 +243,7 @@ export default class Player {
 				})
 			);
 		} else {
-			this.v += engine.deltaTime * 8; //GRAVITY
+			this.v += engine.deltaTime * 10; //GRAVITY
 		}
 
 		if (hand.state == HAND_STATE.GRIPPED) {
