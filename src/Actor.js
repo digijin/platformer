@@ -15,6 +15,7 @@ export default class Actor extends GameObject {
 	z: number;
 	constructor(params: Object) {
 		super();
+		this.tag("actor");
 		engine = Engine.getInstance();
 	}
 	getBoundingRect = (): Rect => {

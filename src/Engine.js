@@ -9,13 +9,15 @@ import Point from "Point";
 
 import config from "config";
 
+import type GameObject from "GameObject";
+
 import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
 let instance;
 export default class Engine {
-	objects: Array<Object | null>;
+	objects: Array<GameObject | null>;
 	ctx: Context;
 	lastTime: number;
 	mouse: Mouse;
@@ -81,6 +83,12 @@ export default class Engine {
 		};
 		if (obj.init) obj.init(this);
 		this.objects.push(obj);
+	};
+
+	objectsTagged = (tag: string) => {
+		return this.objects.filter(o => {
+			return o && o.hasTag(tag);
+		});
 	};
 
 	//main game loop
