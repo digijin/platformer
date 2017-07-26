@@ -38,10 +38,17 @@ export default class Rect {
 			b: t + size.h
 		});
 	}
-	overlaps(rect: Rect) {
+	overlaps(rect: Rect): boolean {
 		let outsideH = this.b <= rect.t || rect.b <= this.t;
 		let outsideV = this.r <= rect.l || rect.r <= this.l;
 		return !outsideV && !outsideH;
+	}
+	contains(point: Point): boolean {
+		if (point.x < this.l) return false;
+		if (point.x > this.r) return false;
+		if (point.y < this.t) return false;
+		if (point.y > this.b) return false;
+		return true;
 	}
 	constructor() {
 		if (arguments.length === 4) {

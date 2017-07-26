@@ -1,4 +1,5 @@
 import Rect from "Rect";
+import Point from "Point";
 
 describe("Rect", () => {
 	describe("fromPosSizeRego", () => {
@@ -23,6 +24,28 @@ describe("Rect", () => {
 			let r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });
 			let r2 = new Rect({ t: 15, r: 25, b: 25, l: 15 });
 			expect(r1.overlaps(r2)).toBe(false);
+		});
+	});
+	describe("contains", () => {
+		let rect;
+		beforeEach(() => {
+			rect = new Rect({ t: 0, r: 10, b: 10, l: 0 });
+		});
+		it("true case", () => {
+			expect(rect.contains(new Point({ x: 5, y: 5 }))).toBe(true);
+		});
+
+		it("above", () => {
+			expect(rect.contains(new Point({ x: 5, y: -5 }))).toBe(false);
+		});
+		it("below", () => {
+			expect(rect.contains(new Point({ x: 5, y: 15 }))).toBe(false);
+		});
+		it("left", () => {
+			expect(rect.contains(new Point({ x: -5, y: 5 }))).toBe(false);
+		});
+		it("right", () => {
+			expect(rect.contains(new Point({ x: 15, y: 5 }))).toBe(false);
 		});
 	});
 });
