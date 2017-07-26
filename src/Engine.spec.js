@@ -1,5 +1,7 @@
 import Engine from "Engine";
 
+import GameObject from "GameObject";
+
 describe("Game/Engine", () => {
 	let engine;
 	beforeEach(() => {

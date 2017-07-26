@@ -105,6 +105,7 @@ export default class Player extends Actor {
 				// missile = false;
 				engine.register(
 					new Missile({
+						owner: this,
 						direction: -Math.PI / 2 + (Math.random() - 0.5),
 						speed: 3 + Math.random() * 5,
 						position: this.position.subtract({ x: 0, y: this.size.h }),

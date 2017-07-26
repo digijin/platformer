@@ -20,7 +20,13 @@ export default class Missile extends GameObject {
 	speed: number;
 	z: number;
 	guided: boolean;
-	constructor(params: { position: Point, direction: number, target: Point }) {
+	owner: Actor;
+	constructor(params: {
+		position: Point,
+		direction: number,
+		target: Point,
+		owner: Actor
+	}) {
 		super();
 		this.speed = 1;
 		this.guided = true;
@@ -56,8 +62,8 @@ export default class Missile extends GameObject {
 			engine.grid.destroyBlockAtPosition(this.position);
 		}
 		engine.objectsTagged("actor").forEach((o: GameObject) => {
-			((o: any): Actor); //RECAST
-			if (o.getBoundingRect().contains(this.position)) {
+			let a: Actor = ((o: any): Actor); //RECAST
+			if (a.getBoundingRect().contains(this.position)) {
 				this.explode(engine);
 			}
 		});
