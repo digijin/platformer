@@ -2,6 +2,8 @@
 import GameObject from "GameObject";
 import Point from "Point";
 
+import config from "config";
+
 import Rect from "Rect";
 import Engine from "Engine";
 let engine: Engine;
@@ -18,6 +20,13 @@ export default class Actor extends GameObject {
 		this.tag("actor");
 		engine = Engine.getInstance();
 	}
+	gravity = () => {
+		this.v += engine.deltaTime * config.gravity; //GRAVITY
+		if (!this.canMoveVert(this.v)) {
+			this.v = 0;
+		}
+		this.position.y += this.v;
+	};
 	getBoundingRect = (): Rect => {
 		return Rect.fromPosSizeRego(this.position, this.size, this.registration);
 	};

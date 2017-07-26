@@ -11,8 +11,12 @@ export default class Enemy extends Actor {
 	position: Point;
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
+	walkSpeed: number;
+	v: number;
+	h: number;
 	constructor(params: Object) {
 		super();
+		this.walkSpeed = 50;
 		this.size = { w: 50, h: 50 };
 		this.registration = { x: 0.5, y: 1 };
 
@@ -32,5 +36,17 @@ export default class Enemy extends Actor {
 
 export function* ai(engine: Engine): Generator<*, *, *> {
 	// console.log(this);
-	this.position.x += engine.deltaTime;
+	(this: Enemy);
+	let direction = 1;
+	while (true) {
+		let hDelta = engine.deltaTime * this.walkSpeed * direction;
+		if (!this.canMoveHori(hDelta)) {
+			direction = -direction;
+		} else {
+			this.position.x += hDelta;
+		}
+
+		this.gravity();
+		yield;
+	}
 }

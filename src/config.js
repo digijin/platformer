@@ -14,5 +14,6 @@ export default {
 			h: 80
 		},
 		speed: 250
-	}
+	},
+	gravity: 10
 };

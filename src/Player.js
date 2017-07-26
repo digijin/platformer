@@ -314,9 +314,6 @@ export default class Player extends Actor {
 		// 		hDelta = 0;
 		// 	}
 		// }
-		if (!this.canMoveVert(this.v)) {
-			this.v = 0;
-		}
 
 		if (!this.canMoveHori(hDelta)) {
 			this.h = 0;
@@ -325,6 +322,9 @@ export default class Player extends Actor {
 
 		this.position.x += hDelta;
 
+		if (!this.canMoveVert(this.v)) {
+			this.v = 0;
+		}
 		this.position.y += this.v;
 		//LANDING
 
