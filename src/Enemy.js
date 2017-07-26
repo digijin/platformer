@@ -5,11 +5,14 @@ import type Point from "Point";
 
 import mech from "mech.png";
 
-export default class Enemy {
+import Actor from "Actor";
+
+export default class Enemy extends Actor {
 	position: Point;
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
 	constructor(params: Object) {
+		super();
 		this.size = { w: 50, h: 50 };
 		this.registration = { x: 0.5, y: 1 };
 

@@ -71,7 +71,7 @@ export default class Engine {
 	}
 
 	//add new objects to be tracked by engine
-	register = (obj: Object) => {
+	register = (obj: GameObject) => {
 		obj.destroy = () => {
 			let i = this.objects.indexOf(obj);
 			if (i > -1) {
@@ -81,7 +81,7 @@ export default class Engine {
 				this.objects[i] = null;
 			}
 		};
-		if (obj.init) obj.init(this);
+		obj.init(this);
 		this.objects.push(obj);
 	};
 

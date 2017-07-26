@@ -15,6 +15,7 @@ export default class Context {
 			// throw new Error("Context has no context");
 			//do nothing for testing
 			console.warn("Context has no context (ignore for jest)");
+			// FLOWHACK
 			this.context = {
 				//STUB FOR TESTING
 				clearRect: () => {}

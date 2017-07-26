@@ -13,7 +13,7 @@ export default class Actor extends GameObject {
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
 	z: number;
-	constructor(params: Object) {
+	constructor() {
 		super();
 		this.tag("actor");
 		engine = Engine.getInstance();
