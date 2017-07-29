@@ -76,9 +76,6 @@ export default class Engine {
 			let i = this.objects.indexOf(obj);
 			if (i > -1) {
 				this.objects.splice(i, 1);
-				// //if I splice it out here, it will screw with the object loop
-				// //so I'll mark it as null, and then filter it out post update
-				// this.objects[i] = null;
 			}
 		};
 		obj.init(this);
@@ -112,7 +109,7 @@ export default class Engine {
 			return az - bz;
 		});
 
-		//update all object
+		//update clone list of all object so I can delete from original
 		this.objects.slice(0).forEach(o => {
 			if (o) {
 				o.update(this);
