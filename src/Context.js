@@ -63,17 +63,18 @@ export default class Context {
 		this.context.setTransform(...arguments);
 	}
 	drawSprite = function(
-		image: HTMLImageElement | string,
+		image: string,
 		position: Point = new Point({ x: 0, y: 0 }),
 		size: { w: number, h: number } = { w: 20, h: 20 },
 		rotation: number = 0,
 		registration: { x: number, y: number } = { x: 0.5, y: 0.5 }
 	) {
 		// console.log(this);
+		let im: HTMLImageElement = (image: any);
 		position = position.subtract(this.engine.view.offset);
 		this.context.translate(position.x, position.y);
 		this.context.rotate(rotation);
-		let imageParams = [image, 0, 0, image.width, image.height];
+		let imageParams = [im, 0, 0, im.width, im.height];
 		this.context.drawImage(
 			...imageParams,
 			-size.w * registration.x,
