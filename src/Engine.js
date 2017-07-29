@@ -17,7 +17,7 @@ import UI from "UI";
 
 let instance;
 export default class Engine {
-	objects: Array<GameObject | null>;
+	objects: Array<GameObject>;
 	ctx: Context;
 	lastTime: number;
 	mouse: Mouse;
@@ -75,10 +75,10 @@ export default class Engine {
 		obj.destroy = () => {
 			let i = this.objects.indexOf(obj);
 			if (i > -1) {
-				// this.objects.splice(i, 1);
-				//if I splice it out here, it will screw with the object loop
-				//so I'll mark it as null, and then filter it out post update
-				this.objects[i] = null;
+				this.objects.splice(i, 1);
+				// //if I splice it out here, it will screw with the object loop
+				// //so I'll mark it as null, and then filter it out post update
+				// this.objects[i] = null;
 			}
 		};
 		obj.init(this);
@@ -113,13 +113,13 @@ export default class Engine {
 		});
 
 		//update all object
-		this.objects.forEach(o => {
+		this.objects.slice(0).forEach(o => {
 			if (o) {
 				o.update(this);
 			}
 		});
 
-		this.objects = this.objects.filter(o => o);
+		// this.objects = this.objects.filter(o => o);
 
 		//wait for next frame
 		this.updateId = requestAnimationFrame(this.update);

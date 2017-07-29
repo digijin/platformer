@@ -10,28 +10,28 @@ describe("Game/Engine", () => {
 	});
 	it("shuld add stuff to objects", () => {
 		expect(engine.objects).toBeDefined();
-		let obj = { test: "obj" };
+		let obj = new GameObject();
 		engine.register(obj);
 		expect(engine.objects[0]).toBe(obj);
 	});
 	it("should give objects destroy", () => {
-		let obj = {};
+		let obj = new GameObject();
 		engine.register(obj);
 		expect(obj.destroy).toBeDefined();
 	});
-	it("should null out objects when destroyed", () => {
-		let obj = {};
+	it("should remove objects when destroyed", () => {
+		let obj = new GameObject();
 		engine.register(obj);
 		obj.destroy();
-		// expect(engine.objects.length).toBe(0);
-		expect(engine.objects[0]).toBe(null);
-	});
-	it("should remove null objects after update", () => {
-		let obj = {};
-		engine.register(obj);
-		obj.destroy();
-		engine.update();
-		engine.kill();
 		expect(engine.objects.length).toBe(0);
+		// expect(engine.objects[0]).toBe(null);
 	});
+	// it("should remove null objects after update", () => {
+	// 	let obj = new GameObject();
+	// 	engine.register(obj);
+	// 	obj.destroy();
+	// 	engine.update();
+	// 	engine.kill();
+	// 	expect(engine.objects.length).toBe(0);
+	// });
 });

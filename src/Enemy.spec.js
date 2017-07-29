@@ -1,4 +1,4 @@
-import { ai } from "Enemy";
+// import { ai } from "Enemy";
 
 export function* testgen(a): Generator<*, *, *> {
 	let b = yield a;
