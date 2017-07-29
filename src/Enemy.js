@@ -25,7 +25,7 @@ export default class Enemy extends Actor {
 	action: ?Generator<*, *, *>;
 	update(engine: Engine) {
 		if (!this.action) {
-			this.action = ai.bind(this)(engine);
+			this.action = ai(this, engine);
 		}
 		if (this.action.next().done) {
 			this.action = null;
@@ -34,19 +34,31 @@ export default class Enemy extends Actor {
 	}
 }
 
-export function* ai(engine: Engine): Generator<*, *, *> {
+export function* ai(enemy: Enemy, engine: Engine): Generator<*, *, *> {
 	// console.log(this);
-	(this: Enemy);
+	const dontFall = true;
 	let direction = 1;
 	while (true) {
-		let hDelta = engine.deltaTime * this.walkSpeed * direction;
-		if (!this.canMoveHori(hDelta)) {
+		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
+		if (!enemy.canMoveHori(hDelta)) {
 			direction = -direction;
 		} else {
-			this.position.x += hDelta;
+			enemy.position.x += hDelta;
+		}
+		if (dontFall) {
+			let rect = enemy.getBoundingRect();
+
+			let check = { y: rect.b + 1, x: rect.r + 1 };
+			if (direction == -1) {
+				check.x = rect.l - 1;
+			}
+
+			if (!engine.grid.isPositionBlocked(check)) {
+				direction = -direction;
+			}
 		}
 
-		this.gravity();
+		enemy.gravity();
 		yield;
 	}
 }
