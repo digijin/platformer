@@ -5,6 +5,11 @@ const blocksize = 50;
 import type Engine from "Engine";
 import GameObject from "GameObject";
 
+import config from "config";
+
+import Block from "Block";
+import Point from "Point";
+
 export default class Grid extends GameObject {
 	grid: Array<Array<string>>;
 	z: number;
@@ -45,41 +50,54 @@ export default class Grid extends GameObject {
 			"000000100000000000000000000000000000000000000000100000000000000000000000000000000000000000100000000000000000000000000000000000d"
 		].map(a => a.split(""));
 		//flip it
-		this.grid = testdata[0].map(function(col, i) {
-			return testdata.map(function(row) {
-				return row[i];
+		this.grid = testdata[0].map(function(col, x) {
+			return testdata.map(function(row, y) {
+				return row[x];
+			});
+		});
+		this.blocks = testdata[0].map(function(col, x) {
+			return testdata.map(function(row, y) {
+				return new Block({
+					position: new Point({ x: x, y: y }),
+					type: row[x]
+				});
 			});
 		});
 	}
 
+	blocks: Array<Array<Block>>;
 	each = (fn: Function) => {};
 	destroyBlockAtPosition(pos: { x: number, y: number }) {
-		let x = Math.floor(pos.x / blocksize);
-		let y = Math.floor(pos.y / blocksize);
+		let x = Math.floor(pos.x / config.grid.width);
+		let y = Math.floor(pos.y / config.grid.height);
 		if (this.grid[x]) {
 			if (this.grid[x][y]) {
 				this.grid[x][y] = "0";
+				this.blocks[x][y].type = "0";
 			}
 		}
 	}
 
 	isPositionBlocked(pos: { x: number, y: number }) {
-		return this.blockAtPosition(pos).block != "0";
+		return this.blockAtPosition(pos).type != "0";
 	}
 
-	blockAtPosition(pos: { x: number, y: number }) {
-		let x = Math.floor(pos.x / blocksize);
-		let y = Math.floor(pos.y / blocksize);
+	blockAtPosition(pos: { x: number, y: number }): Block {
+		let x = Math.floor(pos.x / config.grid.width);
+		let y = Math.floor(pos.y / config.grid.height);
 		//because y goes positive downwards, if an object is flat on the top
 		//of a tile it will register as th e tile below
-		if (pos.y % blocksize == 0) {
+		if (pos.y % config.grid.height == 0) {
 			y -= 1;
 		}
-		if (this.grid[x]) {
-			return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
-		} else {
-			return { block: "1", l: x * blocksize, t: y * blocksize };
+		if (this.blocks[x]) {
+			// return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
+			if (this.blocks[x][y]) {
+				let block = this.blocks[x][y];
+				return block;
+			}
 		}
+		return new Block({ position: new Point({ x, y }), type: "1" });
 	}
 
 	init = (engine: Engine) => {

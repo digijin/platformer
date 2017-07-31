@@ -6,6 +6,7 @@ import Rect from "Rect";
 
 export default class Block {
 	position: Point;
+	type: string;
 	constructor(params: { position: Point, type: string }) {
 		this.position = params.position;
 		this.type = params.type;
@@ -32,10 +33,10 @@ export default class Block {
 
 	get rect(): Rect {
 		return new Rect({
-			t: this.y * config.grid.height,
-			r: (this.x + 1) * config.grid.width,
-			b: (this.y + 1) * config.grid.height,
-			l: this.x * config.grid.width
+			t: this.position.y * config.grid.height,
+			r: (this.position.x + 1) * config.grid.width,
+			b: (this.position.y + 1) * config.grid.height,
+			l: this.position.x * config.grid.width
 		});
 	}
 

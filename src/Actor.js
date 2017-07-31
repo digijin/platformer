@@ -61,27 +61,27 @@ export default class Actor extends GameObject {
 		let boundingRect = this.getBoundingRect();
 		if (amount > 0) {
 			if (
-				engine.grid.blockAtPosition({
+				engine.grid.isPositionBlocked({
 					x: boundingRect.r + amount,
 					y: boundingRect.t
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
+				}) ||
+				engine.grid.isPositionBlocked({
 					x: boundingRect.r + amount,
 					y: boundingRect.b
-				}).block !== "0"
+				})
 			) {
 				return false;
 			}
 		} else {
 			if (
-				engine.grid.blockAtPosition({
+				engine.grid.isPositionBlocked({
 					x: boundingRect.l + amount,
 					y: boundingRect.t
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
+				}) ||
+				engine.grid.isPositionBlocked({
 					x: boundingRect.l + amount,
 					y: boundingRect.b
-				}).block !== "0"
+				})
 			) {
 				return false;
 			}
@@ -94,27 +94,27 @@ export default class Actor extends GameObject {
 		if (amount > 0) {
 			//GOIN DOWN
 			if (
-				engine.grid.blockAtPosition({
+				engine.grid.isPositionBlocked({
 					x: boundingRect.r,
 					y: boundingRect.b + amount
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
+				}) ||
+				engine.grid.isPositionBlocked({
 					x: boundingRect.l,
 					y: boundingRect.b + amount
-				}).block !== "0"
+				})
 			) {
 				return false;
 			}
 		} else {
 			if (
-				engine.grid.blockAtPosition({
+				engine.grid.isPositionBlocked({
 					x: boundingRect.r,
 					y: boundingRect.t + amount
-				}).block !== "0" ||
-				engine.grid.blockAtPosition({
+				}) ||
+				engine.grid.isPositionBlocked({
 					x: boundingRect.l,
 					y: boundingRect.t + amount
-				}).block !== "0"
+				})
 			) {
 				return false;
 			}
