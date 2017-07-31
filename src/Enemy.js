@@ -16,6 +16,7 @@ export default class Enemy extends Actor {
 	h: number;
 	constructor(params: Object) {
 		super();
+		this.tag("enemy");
 		this.walkSpeed = 50;
 		this.size = { w: 50, h: 50 };
 		this.registration = { x: 0.5, y: 1 };

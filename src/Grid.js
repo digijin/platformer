@@ -51,6 +51,8 @@ export default class Grid extends GameObject {
 			});
 		});
 	}
+
+	each = (fn: Function) => {};
 	destroyBlockAtPosition(pos: { x: number, y: number }) {
 		let x = Math.floor(pos.x / blocksize);
 		let y = Math.floor(pos.y / blocksize);

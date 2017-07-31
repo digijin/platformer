@@ -5,35 +5,29 @@ import Point from "Point";
 import Rect from "Rect";
 
 export default class Block {
-	x: number;
-	y: number;
-	constructor(pos: { x: number, y: number }) {
-		this.x = pos.x;
-		this.y = pos.y;
-		if (arguments.length > 1) {
-			throw new Error("your block args are fucked, bro.");
-		}
+	position: Point;
+	constructor(params: { position: Point, type: string }) {
+		this.position = params.position;
+		this.type = params.type;
 	}
-	add(diff: { x: number, y: number }) {
-		return new Block({
-			x: this.x + diff.x,
-			y: this.y + diff.y
-		});
-	}
+
 	get center(): Point {
 		return new Point({
-			x: (this.x + 0.5) * config.grid.width,
-			y: (this.y + 0.5) * config.grid.height
+			x: (this.position.x + 0.5) * config.grid.width,
+			y: (this.position.y + 0.5) * config.grid.height
 		});
 	}
 	get point(): Point {
 		return new Point({
-			x: this.x * config.grid.width,
-			y: this.y * config.grid.height
+			x: this.position.x * config.grid.width,
+			y: this.position.y * config.grid.height
 		});
 	}
 	is(block: Block): boolean {
-		return block.x === this.x && block.y === this.y;
+		return (
+			block.position.x === this.position.x &&
+			block.position.y === this.position.y
+		);
 	}
 
 	get rect(): Rect {
@@ -49,10 +43,10 @@ export default class Block {
 	//   return makeKey(this.x, this.y);
 	// }
 
-	static fromPoint(point: Point) {
-		return new Block({
-			x: Math.floor(point.x / config.grid.width),
-			y: Math.floor(point.y / config.grid.height)
-		});
-	}
+	// static fromPoint(point: Point) {
+	// 	return new Block({
+	// 		x: Math.floor(point.x / config.grid.width),
+	// 		y: Math.floor(point.y / config.grid.height)
+	// 	});
+	// }
 }

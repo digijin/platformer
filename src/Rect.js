@@ -122,26 +122,26 @@ export default class Rect {
 		);
 	}
 
-	get units(): Array<Block> {
-		let list = [];
-		let sel = this;
-		for (let y = sel.t; y <= sel.b; y++) {
-			for (let x = sel.l; x <= sel.r; x++) {
-				list.push(new Block({ x, y }));
-			}
-		}
-		return list;
-	}
-	get blocks(): Array<Block> {
-		let list = [];
-		let sel = this.blockRect();
-		for (let y = sel.t; y <= sel.b; y++) {
-			for (let x = sel.l; x <= sel.r; x++) {
-				list.push(new Block({ x, y }));
-			}
-		}
-		return list;
-	}
+	// get units(): Array<Block> {
+	// 	let list = [];
+	// 	let sel = this;
+	// 	for (let y = sel.t; y <= sel.b; y++) {
+	// 		for (let x = sel.l; x <= sel.r; x++) {
+	// 			list.push(new Block({ x, y }));
+	// 		}
+	// 	}
+	// 	return list;
+	// }
+	// get blocks(): Array<Block> {
+	// 	let list = [];
+	// 	let sel = this.blockRect();
+	// 	for (let y = sel.t; y <= sel.b; y++) {
+	// 		for (let x = sel.l; x <= sel.r; x++) {
+	// 			list.push(new Block({ x, y }));
+	// 		}
+	// 	}
+	// 	return list;
+	// }
 
 	// get renderParams():RenderParams {
 	// 	let tl = new Point({x:this.l, y:this.t}).screen;
