@@ -22,16 +22,30 @@ export default class Actor extends GameObject {
 		engine = Engine.getInstance();
 	}
 
-	// explode = () => {
-	// 	this.destroy();
-	// 	//fill rect with explosions
-	// 	let rect: Rect = this.getBoundingRect();
-	// 	let center: Point
-	// 	//find random points
-	// 	for (let i = 0; i < 10; i++) {
-	// 		let point:
-	// 	}
-	// };
+	explode = () => {
+		this.destroy();
+		//fill rect with explosions
+		let rect: Rect = this.getBoundingRect();
+		let center: Point = rect.centerPoint();
+		//find random points
+		for (let i = 0; i < 20; i++) {
+			let point: Point = new Point({
+				x: rect.l + rect.width() * Math.random(),
+				y: rect.t + rect.height() * Math.random()
+			});
+			//direction from center
+			let diff = point.subtract(center);
+			let dir = Math.atan2(diff.y, diff.x);
+
+			this.engine.register(
+				new Explosion({
+					position: point,
+					rotation: dir,
+					delay: Math.random() / 8
+				})
+			);
+		}
+	};
 
 	gravity = () => {
 		this.v += engine.deltaTime * config.gravity; //GRAVITY
