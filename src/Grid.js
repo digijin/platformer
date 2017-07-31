@@ -66,7 +66,13 @@ export default class Grid extends GameObject {
 	}
 
 	blocks: Array<Array<Block>>;
-	each = (fn: Function) => {};
+
+	blocksFlattened = (): Array<Block> => {
+		return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
+			// return a.splice(0, 0, ...b);
+			return [].concat(a, b);
+		}, []);
+	};
 	destroyBlockAtPosition(pos: { x: number, y: number }) {
 		let x = Math.floor(pos.x / config.grid.width);
 		let y = Math.floor(pos.y / config.grid.height);
