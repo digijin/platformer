@@ -21,7 +21,7 @@ export default class Spawner extends GameObject {
 	spawnEnemy() {
 		let emptyBlocks: Array<Block> = this.engine.grid
 			.blocksFlattened()
-			.filter(b => b.type == "0");
+			.filter(b => b.type == "0"); //only empties;
 
 		if (emptyBlocks.length > 0) {
 			let block: Block =

@@ -28,7 +28,7 @@ export default class Explosion extends GameObject {
 		} else {
 			this.time -= engine.deltaTime * 2;
 
-			let scale = Math.sin(this.time * Math.PI);
+			let scale = Math.cos((1 - this.time) * Math.PI / 2);
 
 			engine.ctx.drawSprite(
 				explosion,
