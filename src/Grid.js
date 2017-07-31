@@ -11,7 +11,7 @@ import Block from "Block";
 import Point from "Point";
 
 export default class Grid extends GameObject {
-	grid: Array<Array<string>>;
+	// grid: Array<Array<string>>;
 	z: number;
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
@@ -50,11 +50,11 @@ export default class Grid extends GameObject {
 			"000000100000000000000000000000000000000000000000100000000000000000000000000000000000000000100000000000000000000000000000000000d"
 		].map(a => a.split(""));
 		//flip it
-		this.grid = testdata[0].map(function(col, x) {
-			return testdata.map(function(row, y) {
-				return row[x];
-			});
-		});
+		// this.grid = testdata[0].map(function(col, x) {
+		// 	return testdata.map(function(row, y) {
+		// 		return row[x];
+		// 	});
+		// });
 		this.blocks = testdata[0].map(function(col, x) {
 			return testdata.map(function(row, y) {
 				return new Block({
@@ -70,9 +70,9 @@ export default class Grid extends GameObject {
 	destroyBlockAtPosition(pos: { x: number, y: number }) {
 		let x = Math.floor(pos.x / config.grid.width);
 		let y = Math.floor(pos.y / config.grid.height);
-		if (this.grid[x]) {
-			if (this.grid[x][y]) {
-				this.grid[x][y] = "0";
+		if (this.blocks[x]) {
+			if (this.blocks[x][y]) {
+				// this.grid[x][y] = "0";
 				this.blocks[x][y].type = "0";
 			}
 		}
@@ -106,9 +106,9 @@ export default class Grid extends GameObject {
 	update = (engine: Engine) => {
 		engine.ctx.context.fillStyle = "#000000";
 		// engine.ctx.strokeStyle = '#000000'd
-		this.grid.forEach((row, x) => {
+		this.blocks.forEach((row, x) => {
 			row.forEach((cell, y) => {
-				if (cell == "0") {
+				if (cell.type == "0") {
 					// engine.ctx.strokeRect(
 					// 	x * blocksize,
 					// 	y * blocksize,
