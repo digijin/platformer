@@ -1,7 +1,7 @@
 //@flow
 import Point from "Point";
 
-import Engine from "Engine";
+import Engine from "Engine"; // for view offset
 
 export default class Mouse {
 	position: Point;

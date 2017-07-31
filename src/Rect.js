@@ -50,6 +50,15 @@ export default class Rect {
 		if (point.y > this.b) return false;
 		return true;
 	}
+	// width(){
+	// 	return this.r - this.l
+	// }
+	// height(){
+	// 	return this.b - this.t
+	// }
+	// centerPoint(){
+	// 	return new Point({x: ,y: })
+	// }
 	constructor() {
 		if (arguments.length === 4) {
 			this.t = arguments[0];

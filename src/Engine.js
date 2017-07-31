@@ -1,6 +1,5 @@
 //@flow
 import Keyboard from "Keyboard";
-import Missile from "Missile";
 import Mouse from "Mouse";
 import State from "State";
 import Context from "Context";

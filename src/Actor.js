@@ -6,6 +6,7 @@ import config from "config";
 
 import Rect from "Rect";
 import Engine from "Engine";
+import Explosion from "Explosion";
 let engine: Engine;
 
 export default class Actor extends GameObject {
@@ -20,6 +21,18 @@ export default class Actor extends GameObject {
 		this.tag("actor");
 		engine = Engine.getInstance();
 	}
+
+	// explode = () => {
+	// 	this.destroy();
+	// 	//fill rect with explosions
+	// 	let rect: Rect = this.getBoundingRect();
+	// 	let center: Point
+	// 	//find random points
+	// 	for (let i = 0; i < 10; i++) {
+	// 		let point:
+	// 	}
+	// };
+
 	gravity = () => {
 		this.v += engine.deltaTime * config.gravity; //GRAVITY
 		if (!this.canMoveVert(this.v)) {

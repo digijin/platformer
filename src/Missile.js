@@ -66,6 +66,7 @@ export default class Missile extends GameObject {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode(engine);
+					a.explode();
 				}
 			}
 		});
