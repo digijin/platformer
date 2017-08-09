@@ -69,7 +69,9 @@ let mu = (e: MouseEvent): void => {
 document.addEventListener("mousedown", md);
 document.addEventListener("mouseup", mu);
 
+import Leg from "Mech/Leg";
 export default class Player extends Actor {
+	leg: Leg;
 	constructor(params: Object) {
 		super(params);
 		this.tag("player");
@@ -79,6 +81,13 @@ export default class Player extends Actor {
 		this.h = 0;
 		this.v = 0;
 		this.registration = { x: 0.5, y: 1 };
+
+		this.leg = new Leg();
+	}
+
+	init(engine: Engine) {
+		super.init(engine);
+		engine.register(this.leg);
 	}
 	update(engine: Engine) {
 		//adjust camera
