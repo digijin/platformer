@@ -12,30 +12,15 @@ import config from "config";
 import type Engine from "Engine";
 
 import GameObject from "GameObject";
+import Projectile from "Projectile";
 
-export default class Missile extends GameObject {
-	position: Point;
-	direction: number;
-	target: Point;
+export default class Missile extends Projectile {
 	speed: number;
 	z: number;
 	guided: boolean;
-	owner: Actor;
-	constructor(params: {
-		position: Point,
-		direction: number,
-		target: Point,
-		owner: Actor
-	}) {
-		super();
-		this.speed = 1;
-		this.guided = true;
-		this.z = 20;
-
-		Object.assign(this, params);
-	}
-	explode(engine: Engine) {
-		this.destroy();
+	explode() {
+		// this.destroy();
+		super.explode();
 
 		for (let i = 0; i < 10; i++) {
 			//we want red outlines to be on the outside
@@ -43,7 +28,7 @@ export default class Missile extends GameObject {
 			let dir = Math.random() * Math.PI * 2;
 			let dist = Math.random() * 20;
 			let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
-			engine.register(
+			this.engine.register(
 				new Explosion({
 					position: this.position.add(offset),
 					rotation: dir,
@@ -52,27 +37,29 @@ export default class Missile extends GameObject {
 			);
 		}
 	}
-	update = (engine: Engine) => {
+	update = () => {
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
 
-		let block = engine.grid.blockAtPosition(this.position);
-		if (engine.grid.isPositionBlocked(this.position)) {
-			this.explode(engine);
-			engine.grid.destroyBlockAtPosition(this.position);
+		//CHECK GRID
+		let block = this.engine.grid.blockAtPosition(this.position);
+		if (this.engine.grid.isPositionBlocked(this.position)) {
+			this.explode();
+			this.engine.grid.destroyBlockAtPosition(this.position);
 		}
-		engine.objectsTagged("actor").forEach((o: GameObject) => {
+		//CHECK ENEMIES
+		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
-					this.explode(engine);
+					this.explode();
 					a.explode();
 				}
 			}
 		});
 
 		//smoke trail
-		engine.register(new Smoke({ position: this.position.clone() }));
+		this.engine.register(new Smoke({ position: this.position.clone() }));
 
 		//aim at target
 		if (this.guided) {
@@ -92,15 +79,15 @@ export default class Missile extends GameObject {
 
 			//TODO REMOVE HARDCODING
 			if (Math.abs(dirDiff) < 0.5) {
-				this.speed += engine.deltaTime * 8;
+				this.speed += this.engine.deltaTime * 8;
 				this.direction += dirDiff / 3;
 			} else {
-				this.speed -= engine.deltaTime * 5;
+				this.speed -= this.engine.deltaTime * 5;
 				// this.speed = (this.speed + 1) /2;
 				if (dirDiff > 0) {
-					this.direction += engine.deltaTime * Math.PI * 2;
+					this.direction += this.engine.deltaTime * Math.PI * 2;
 				} else {
-					this.direction -= engine.deltaTime * Math.PI * 2;
+					this.direction -= this.engine.deltaTime * Math.PI * 2;
 				}
 			}
 			if (this.speed < 1) this.speed = 1;
@@ -111,7 +98,7 @@ export default class Missile extends GameObject {
 			if (this.direction < -Math.PI) this.direction += Math.PI * 2;
 		}
 
-		engine.ctx.drawSprite(
+		this.engine.ctx.drawSprite(
 			missile,
 			this.position,
 			{ w: 20, h: 10 },

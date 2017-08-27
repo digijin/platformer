@@ -3,7 +3,7 @@
 import type Engine from "Engine";
 
 export default class GameObject {
-	destroy: Function;
+	destroy: () => {};
 
 	tags: Array<string>;
 	engine: Engine;
