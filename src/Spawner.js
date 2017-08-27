@@ -1,6 +1,6 @@
 // @flow
 
-const maxEnemies = 4;
+const maxEnemies = 40;
 
 import Enemy from "Enemy";
 
