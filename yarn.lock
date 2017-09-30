@@ -2281,7 +2281,7 @@ expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-express@^4.10.6, express@^4.13.3:
+express@^4.13.3:
   version "4.15.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.15.3.tgz#bab65d0f03aa80c358408972fc700f916944b662"
   dependencies:
@@ -2530,6 +2530,10 @@ form-data@~2.1.1:
 forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
+
+fpsmeter@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/fpsmeter/-/fpsmeter-0.3.1.tgz#f134d41a1af06a717b35523ee698552d7f0f3ce5"
 
 fresh@0.5.0:
   version "0.5.0"
@@ -3031,10 +3035,6 @@ ignore@^3.1.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.3.tgz#432352e57accd87ab3110e82d3fea0e47812156d"
 
-imagine-engine@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/imagine-engine/-/imagine-engine-0.3.1.tgz#887f800d1d02048a32cb141b06257ebf90fc5157"
-
 img-element-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/img-element-loader/-/img-element-loader-1.0.0.tgz#d4f2ae2d5281edf46834946a5bb9c5702315f726"
@@ -3470,10 +3470,6 @@ jasmine-es6-generator@^0.1.0:
   resolved "https://registry.yarnpkg.com/jasmine-es6-generator/-/jasmine-es6-generator-0.1.0.tgz#7e660f8ad84292bd5c80f06400e955a0d3f91299"
   dependencies:
     co "^4.5.4"
-
-javascript-astar@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/javascript-astar/-/javascript-astar-0.4.1.tgz#e49dd9a1535c9a98675091f7258e69d983811703"
 
 jest-changed-files@^17.0.2:
   version "17.0.2"

@@ -46,6 +46,7 @@
 		"file-loader": "^0.10.0",
 		"flow-bin": "^0.38.0",
 		"flow-watch": "^1.1.0",
+		"fpsmeter": "^0.3.1",
 		"glob": "~4.5.3",
 		"gulp": "~3.9.1",
 		"gulp-eslint": "^2.0.0",
@@ -89,14 +90,25 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": ["js", "jsx"],
-		"moduleDirectories": ["node_modules", "src"],
-		"modulePaths": ["/src"],
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
 		"moduleNameMapper": {
 			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": ["json", "lcov"]
+		"coverageReporters": [
+			"json",
+			"lcov"
+		]
 	}
 }

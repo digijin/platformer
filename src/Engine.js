@@ -14,6 +14,7 @@ import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
+import Fpsmeter from "fpsmeter";
 let instance;
 export default class Engine {
 	objects: Array<GameObject>;
@@ -27,6 +28,7 @@ export default class Engine {
 	ui: UI;
 	grid: Grid;
 	canvas: HTMLCanvasElement;
+	fpsmeter: Fpsmeter;
 	view: { offset: Point };
 
 	static getInstance(): Engine {
@@ -49,6 +51,12 @@ export default class Engine {
 		this.state = new State();
 	}
 	init(container: HTMLElement) {
+		this.fpsmeter = new FPSMeter(null, {
+			graph: 1,
+			theme: "transparent",
+			heat: 1,
+			history: 50
+		});
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
 		canvas.height = config.game.height;
@@ -89,6 +97,7 @@ export default class Engine {
 
 	//main game loop
 	update = () => {
+		this.fpsmeter.tickStart();
 		//handle time
 		let nowTime = new Date().getTime();
 		let diff = nowTime - this.lastTime;
@@ -119,6 +128,7 @@ export default class Engine {
 
 		//wait for next frame
 		this.updateId = requestAnimationFrame(this.update);
+		this.fpsmeter.tick();
 	};
 	updateId: number;
 	kill = () => {
