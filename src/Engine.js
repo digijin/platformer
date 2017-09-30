@@ -55,7 +55,9 @@ export default class Engine {
 			graph: 1,
 			theme: "transparent",
 			heat: 1,
-			history: 50
+			history: 50,
+			top: "auto",
+			bottom: "5px"
 		});
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
