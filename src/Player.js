@@ -82,7 +82,7 @@ export default class Player extends Actor {
 		this.v = 0;
 		this.registration = { x: 0.5, y: 1 };
 
-		this.leg = new Leg();
+		this.leg = new Leg({ parent: this });
 	}
 
 	init(engine: Engine) {
@@ -117,7 +117,10 @@ export default class Player extends Actor {
 						owner: this,
 						direction: -Math.PI / 2 + (Math.random() - 0.5),
 						speed: 3 + Math.random() * 5,
-						position: this.position.subtract({ x: 0, y: this.size.h }),
+						position: this.position.subtract({
+							x: 0,
+							y: this.size.h
+						}),
 						target: engine.mouse.point.add(
 							new Point({
 								x: (Math.random() - 0.5) * 20,
@@ -127,7 +130,8 @@ export default class Player extends Actor {
 					})
 				);
 			} else {
-				missile.regenSpeed += missile.regenSpeedIncrease * engine.deltaTime;
+				missile.regenSpeed +=
+					missile.regenSpeedIncrease * engine.deltaTime;
 				missile.energy += missile.regenSpeed * engine.deltaTime;
 				if (missile.energy > missile.maxEnergy) {
 					missile.energy = missile.maxEnergy;
@@ -140,7 +144,10 @@ export default class Player extends Actor {
 			if (Math.random() < 0.5) {
 				engine.register(
 					new Shell({
-						position: this.position.add({ x: 0, y: -this.size.h / 2 }),
+						position: this.position.add({
+							x: 0,
+							y: -this.size.h / 2
+						}),
 						// x: this.position.x,
 						// y: this.position.y - (this.size.h/2),
 						h: Math.random() - 0.5,
@@ -340,7 +347,13 @@ export default class Player extends Actor {
 		//RENDER
 
 		// DRAW MECH BODY
-		engine.ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
+		engine.ctx.drawSprite(
+			mech,
+			this.position,
+			this.size,
+			0,
+			this.registration
+		);
 
 		// UI MISSILE
 		engine.ctx.context.fillStyle = "#ff0000";
