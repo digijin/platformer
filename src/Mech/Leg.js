@@ -22,16 +22,23 @@ export default class Leg extends GameObject {
 	update() {
 		this.stride += this.engine.deltaTime * 4;
 		let stridePos = new Point({
-			x: Math.cos(this.stride) * 40,
+			x: Math.cos(this.stride) * 30,
 			y: Math.sin(this.stride) * 20
 		}).add(this.parent.position);
 
 		this.position = this.parent.position.add(this.offset);
 		this.ik(stridePos);
+		this.head(this.position);
 	}
 	ik(pos: Point) {
 		let floor = this.parent.position.y;
 		this.engine.ctx.drawLine(this.position, pos);
+	}
+	head(pos: Point) {
+		this.engine.ctx.beginPath();
+		this.engine.ctx.arc(pos.x, pos.y, 20, 0, 2 * Math.PI, false);
+		this.engine.ctx.context.fillStyle = "#ababab";
+		this.engine.ctx.fill();
 	}
 }
 

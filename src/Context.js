@@ -46,6 +46,9 @@ export default class Context {
 		let o = this.engine.view.offset;
 		this.context.strokeRect(x - o.x, y - o.y, w, h);
 	}
+	fill() {
+		this.context.fill(...arguments);
+	}
 	fillText() {
 		this.context.fillText(...arguments);
 	}
@@ -61,6 +64,27 @@ export default class Context {
 	}
 	setTransform() {
 		this.context.setTransform(...arguments);
+	}
+	beginPath() {
+		this.context.beginPath();
+	}
+	arc(
+		x: number,
+		y: number,
+		radius: number,
+		startAngle: number,
+		endAngle: number,
+		anticlockwise?: boolean
+	) {
+		let o = this.engine.view.offset;
+		this.context.arc(
+			x - o.x,
+			y - o.y,
+			radius,
+			startAngle,
+			endAngle,
+			anticlockwise
+		);
 	}
 	drawSprite = function(
 		image: string,
