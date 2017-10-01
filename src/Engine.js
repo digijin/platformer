@@ -56,8 +56,8 @@ export default class Engine {
 			theme: "transparent",
 			heat: 1,
 			history: 50,
-			top: "auto",
-			bottom: "5px"
+			left: "auto",
+			right: "5px"
 		});
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
@@ -71,7 +71,16 @@ export default class Engine {
 		this.ui = new UI(uiDiv, this);
 
 		this.ctx = new Context(canvas.getContext("2d"));
+		this.resize();
+		window.addEventListener("resize", this.resize);
 	}
+
+	resize = () => {
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+		config.game.width = this.canvas.width;
+		config.game.height = this.canvas.height;
+	};
 
 	startScene(scene: SceneBase) {
 		if (this.currentScene) this.currentScene.end();

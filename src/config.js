@@ -15,5 +15,8 @@ export default {
 		},
 		speed: 250
 	},
-	gravity: 10
+	gravity: 10,
+	debug: {
+		fpsmeter: true
+	}
 };
