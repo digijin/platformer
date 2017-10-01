@@ -40,7 +40,7 @@ export default class Point {
 		});
 	}
 
-	add(diff: { x: number, y: number }) {
+	add(diff: { x: number, y: number }): Point {
 		return new Point({
 			x: this.x + diff.x,
 			y: this.y + diff.y
@@ -61,6 +61,14 @@ export default class Point {
 	distanceTo(point: Point) {
 		let diff = this.subtract(point);
 		return Math.sqrt(Math.pow(diff.x, 2), Math.pow(diff.y, 2));
+	}
+
+	/** Moves point along a direction in radians */
+	move(direction: number, distance: number): Point {
+		return new Point({
+			x: this.x + Math.cos(direction) * distance,
+			y: this.y + Math.sin(direction) * distance
+		});
 	}
 
 	getBlock(): { x: number, y: number } {

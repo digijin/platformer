@@ -3,59 +3,79 @@
 import GameObject from "GameObject";
 
 import type Player from "Player";
-
-export default class Leg extends GameObject {
-	parent: Player;
-	constructor(params: { parent: Player }) {
-		super();
-		this.parent = params.parent;
-	}
-	update() {
-		this.engine.ctx.drawLine(
-			this.parent.position,
-			this.parent.position.add({ x: 10, y: 20 })
-		);
-	}
-}
-
-/*
-const width = 500;
-const height = 500;
+import Point from "Point";
 
 const branchLength = 100;
 const numBranches = 2;
 
-const center = { x: width / 2, y: height / 2 };
+export default class Leg extends GameObject {
+	parent: Player;
+	offset: Point;
+	position: Point;
+	stride: number;
+	constructor(params: { parent: Player }) {
+		super();
+		this.parent = params.parent;
+		this.offset = new Point({ x: 0, y: -40 });
+		this.stride = 0;
+	}
+	update() {
+		this.stride += this.engine.deltaTime * 4;
+		let stridePos = new Point({
+			x: Math.cos(this.stride) * 40,
+			y: Math.sin(this.stride) * 20
+		}).add(this.parent.position);
 
-const floor = center.y + branchLength*(numBranches-0.5)
+		this.position = this.parent.position.add(this.offset);
+		this.ik(stridePos);
+	}
+	ik(pos: Point) {
+		let floor = this.parent.position.y;
+		this.engine.ctx.drawLine(this.position, pos);
+	}
+}
 
-let canvas = document.getElementsByTagName("canvas")[0];
-canvas.width = width;
-canvas.height = height;
-let ctx = canvas.getContext("2d");
+/*
 
-ctx.font = "30px Arial";
-ctx.fillText("Use Mouse", 10, 50);
+let center = { x: width / 2, y: height / 2 }; //this.position
 
-let roller = 0;
+
 update = () => {
-  roller --;
-  let pos = {x:Math.cos(roller/40)*100, y: Math.sin(roller/40)*40}
+  
+  let roller2 = roller + Math.PI * speed
+  center.y = (height / 2) + (Math.cos(roller/speed*2)*10)
+  let pos = {x:Math.cos(roller/speed)*100, y: Math.sin(roller/speed)*40}
   pos.x += center.x
   pos.y += floor
   ik(pos);
-  console.log(pos)
+  
+  
+  //draw the head
+  ctx.beginPath()
+  ctx.arc(center.x, center.y, 60, 0, 2 * Math.PI, false);
+  ctx.fillStyle = '#ababab';
+  ctx.fill();
+  
+  pos = {x:Math.cos(roller2/speed)*100, y: Math.sin(roller2/speed)*40}
+  pos.x += center.x
+  pos.y += floor
+  ik(pos);
+  
+  // ctx.stroke();
+  
+  // console.log(pos)
   requestAnimationFrame(update);
 };
 update();
 
-document.addEventListener("mousemove", e => {
-  ik({ x: e.clientX, y: e.clientY });
-})
+// document.addEventListener("mousemove", e => {
+//   ik({ x: e.clientX, y: e.clientY });
+// })
 function ik(mouse){
   // console.log(e)
-  canvas.width = width; //reset
-  // ctx.lineWidth = 10;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.strokeStyle = "black"
   // let mouse = { x: e.clientX, y: e.clientY };
   ctx.moveTo(center.x, center.y);
   ctx.lineTo(mouse.x, mouse.y);
@@ -116,11 +136,12 @@ function ik(mouse){
   //proper draw
   
   ctx.beginPath();
-  ctx.lineWidth = 6;
-  ctx.strokeStyle = "#00FF00";
+  ctx.lineWidth = 32;
+  ctx.strokeStyle = "#ababab";
   ctx.moveTo(center.x, center.y);
   ctx.lineTo(joint.x, joint.y);
   ctx.lineTo(endpoint.x, endpoint.y)
+  ctx.lineTo(endpoint.x+30, endpoint.y)
   ctx.stroke();
 }
 
