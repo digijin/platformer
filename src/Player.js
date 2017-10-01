@@ -347,13 +347,13 @@ export default class Player extends Actor {
 		//RENDER
 
 		// DRAW MECH BODY
-		engine.ctx.drawSprite(
-			mech,
-			this.position,
-			this.size,
-			0,
-			this.registration
-		);
+		// engine.ctx.drawSprite(
+		// 	mech,
+		// 	this.position,
+		// 	this.size,
+		// 	0,
+		// 	this.registration
+		// );
 
 		// UI MISSILE
 		engine.ctx.context.fillStyle = "#ff0000";

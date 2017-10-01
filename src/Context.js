@@ -24,7 +24,14 @@ export default class Context {
 		this.engine = Engine.getInstance();
 	}
 
-	drawLine(from: Point, to: Point) {
+	drawLine(
+		from: Point,
+		to: Point,
+		style: string = "black",
+		width: number = 1
+	) {
+		this.context.strokeStyle = style;
+		this.context.lineWidth = width;
 		let o = this.engine.view.offset;
 		from = from.subtract(o);
 		to = to.subtract(o);

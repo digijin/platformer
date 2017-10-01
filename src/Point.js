@@ -60,7 +60,11 @@ export default class Point {
 	}
 	distanceTo(point: Point) {
 		let diff = this.subtract(point);
-		return Math.sqrt(Math.pow(diff.x, 2), Math.pow(diff.y, 2));
+		return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2));
+	}
+	/** in radians from 0,0 */
+	direction(): number {
+		return Math.atan2(this.y, this.x);
 	}
 
 	/** Moves point along a direction in radians */

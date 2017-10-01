@@ -5,7 +5,7 @@ import GameObject from "GameObject";
 import type Player from "Player";
 import Point from "Point";
 
-const branchLength = 100;
+const branchLength = 25;
 const numBranches = 2;
 
 export default class Leg extends GameObject {
@@ -20,7 +20,7 @@ export default class Leg extends GameObject {
 		this.stride = 0;
 	}
 	update() {
-		this.stride += this.engine.deltaTime * 4;
+		this.stride += this.engine.deltaTime;
 		let stridePos = new Point({
 			x: Math.cos(this.stride) * 30,
 			y: Math.sin(this.stride) * 20
@@ -28,17 +28,40 @@ export default class Leg extends GameObject {
 
 		this.position = this.parent.position.add(this.offset);
 		this.ik(stridePos);
-		this.head(this.position);
-	}
-	ik(pos: Point) {
-		let floor = this.parent.position.y;
-		this.engine.ctx.drawLine(this.position, pos);
+		// this.head(this.position);
 	}
 	head(pos: Point) {
 		this.engine.ctx.beginPath();
 		this.engine.ctx.arc(pos.x, pos.y, 20, 0, 2 * Math.PI, false);
 		this.engine.ctx.context.fillStyle = "#ababab";
 		this.engine.ctx.fill();
+	}
+	ik(target: Point) {
+		let floor = this.parent.position.y;
+		this.engine.ctx.drawLine(this.position, target, "#ffff00");
+		let dist = this.position.distanceTo(target);
+
+		if (dist > branchLength * numBranches) {
+			dist = branchLength * numBranches;
+		}
+		let dir = target.subtract(this.position).direction();
+		let endpoint = this.position.move(dir, dist);
+		this.engine.ctx.drawLine(this.position, endpoint, "#ff0000", 2);
+
+		if (endpoint.y > floor) {
+			let ratio =
+				(floor - this.position.y) / (endpoint.y - this.position.y);
+			dist *= ratio;
+			endpoint = this.position.move(dir, dist);
+		}
+		let midpoint = this.position.move(dir, dist / 2);
+		let b = Math.sqrt(Math.pow(branchLength, 2) - Math.pow(dist / 2, 2));
+
+		dir += Math.PI / 2;
+		let joint = midpoint.move(dir, b);
+
+		this.engine.ctx.drawLine(this.position, joint, "#555555", 5);
+		this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
 	}
 }
 
@@ -47,37 +70,6 @@ export default class Leg extends GameObject {
 let center = { x: width / 2, y: height / 2 }; //this.position
 
 
-update = () => {
-  
-  let roller2 = roller + Math.PI * speed
-  center.y = (height / 2) + (Math.cos(roller/speed*2)*10)
-  let pos = {x:Math.cos(roller/speed)*100, y: Math.sin(roller/speed)*40}
-  pos.x += center.x
-  pos.y += floor
-  ik(pos);
-  
-  
-  //draw the head
-  ctx.beginPath()
-  ctx.arc(center.x, center.y, 60, 0, 2 * Math.PI, false);
-  ctx.fillStyle = '#ababab';
-  ctx.fill();
-  
-  pos = {x:Math.cos(roller2/speed)*100, y: Math.sin(roller2/speed)*40}
-  pos.x += center.x
-  pos.y += floor
-  ik(pos);
-  
-  // ctx.stroke();
-  
-  // console.log(pos)
-  requestAnimationFrame(update);
-};
-update();
-
-// document.addEventListener("mousemove", e => {
-//   ik({ x: e.clientX, y: e.clientY });
-// })
 function ik(mouse){
   // console.log(e)
   ctx.lineWidth = 1;
@@ -88,48 +80,6 @@ function ik(mouse){
   ctx.lineTo(mouse.x, mouse.y);
   ctx.stroke();
   
-  //a^2 + b^2 = c^2
-  let dist = Math.sqrt(
-    Math.pow(mouse.x - center.x, 2) + Math.pow(mouse.y - center.y, 2)
-  );
-  if (dist > branchLength * numBranches) {
-    dist = branchLength * numBranches;
-  }
-  let dir = Math.atan2(mouse.y - center.y, mouse.x - center.x);
-  
-
-  //floor;
-  ctx.moveTo(0, floor);
-  ctx.lineTo(width, floor);
-  ctx.stroke();
-  
-  let endpoint = {
-    x: center.x + Math.cos(dir) * dist,
-    y: center.y + Math.sin(dir) * dist
-  };
-  if(endpoint.y>floor){
-    let ratio =  (floor-center.y)/ (endpoint.y - center.y)
-    dist *= ratio;
-    endpoint = {
-      x: center.x + Math.cos(dir) * dist,
-      y: center.y + Math.sin(dir) * dist
-    } 
-  }
-  
-  // console.log(center.x , Math.sin(dir) , dist)
-  let midpoint = {
-    x: center.x + Math.cos(dir) * dist / 2,
-    y: center.y + Math.sin(dir) * dist / 2
-  };
-
-  ctx.beginPath();
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "#FF0000";
-  // ctx.moveTo(0,0);
-  // console.log(midpoint)
-  ctx.moveTo(midpoint.x, midpoint.y)
-  let b = Math.sqrt(Math.pow(branchLength, 2)- Math.pow(dist/2, 2));
-  dir += Math.PI/2
   let joint = {
     x: midpoint.x + Math.cos(dir) * b,
     y: midpoint.y + Math.sin(dir) * b
@@ -151,5 +101,21 @@ function ik(mouse){
   ctx.lineTo(endpoint.x+30, endpoint.y)
   ctx.stroke();
 }
+
+update = () => {
+  
+  let roller2 = roller + Math.PI * speed
+  center.y = (height / 2) + (Math.cos(roller/speed*2)*10)
+  let pos = {x:Math.cos(roller/speed)*100, y: Math.sin(roller/speed)*40}
+  pos.x += center.x
+  pos.y += floor
+  ik(pos);
+  
+  pos = {x:Math.cos(roller2/speed)*100, y: Math.sin(roller2/speed)*40}
+  pos.x += center.x
+  pos.y += floor
+  ik(pos);
+};
+update();
 
 */
