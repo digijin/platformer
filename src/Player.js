@@ -234,6 +234,10 @@ export default class Player extends Actor {
 		} else {
 			if (this.v == 0) {
 				this.h *= 1 - engine.deltaTime * 5;
+				//cut to zero eventually (for other aimations)
+				if (Math.abs(this.h) < 0.1) {
+					this.h = 0;
+				}
 			}
 		}
 
