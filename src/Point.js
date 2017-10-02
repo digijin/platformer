@@ -83,6 +83,9 @@ export default class Point {
 	}
 
 	easeTo(point: Point, divisor: number): Point {
+		if (!divisor) {
+			throw new Error("forgot divisor");
+		}
 		return new Point({
 			x: this.x + (point.x - this.x) / divisor,
 			y: this.y + (point.y - this.y) / divisor

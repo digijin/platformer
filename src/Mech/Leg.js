@@ -38,27 +38,27 @@ export default class Leg extends GameObject {
 		} else {
 			if (this.parent.h !== 0) {
 				this.stride += this.engine.deltaTime * 10 * this.parent.h;
+
+				frontFootPosTarget = new Point({
+					x: Math.cos(this.stride) * 30,
+					y: Math.sin(this.stride) * 20
+				}).add(this.parent.position);
+				rearFootPosTarget = new Point({
+					x: Math.cos(this.stride + Math.PI) * 30,
+					y: Math.sin(this.stride + Math.PI) * 20
+				}).add(this.parent.position);
 			}
 		}
 		this.torsoOffset = this.torsoOffset.easeTo(torsoOffsetTarget, 5);
 
-		let frontFootPos = new Point({
-			x: Math.cos(this.stride) * 30,
-			y: Math.sin(this.stride) * 20
-		}).add(this.parent.position);
-		let rearFootPos = new Point({
-			x: Math.cos(this.stride + Math.PI) * 30,
-			y: Math.sin(this.stride + Math.PI) * 20
-		}).add(this.parent.position);
-		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget);
-		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget);
-
+		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget, 5);
+		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget, 5);
 		this.position = this.parent.position
 			.add(this.offset)
 			.add(this.torsoOffset);
-		this.ik(rearFootPos);
+		this.ik(this.frontFootPos);
 		this.head(this.position);
-		this.ik(frontFootPos);
+		this.ik(this.rearFootPos);
 	}
 	head(pos: Point) {
 		this.engine.ctx.beginPath();
