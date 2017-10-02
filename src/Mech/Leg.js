@@ -13,29 +13,52 @@ export default class Leg extends GameObject {
 	offset: Point;
 	position: Point;
 	stride: number;
+	torsoOffset: Point;
+	frontFootPos: Point;
+	rearFootPos: Point;
 	constructor(params: { parent: Player }) {
 		super();
 		this.parent = params.parent;
 		this.offset = new Point({ x: 0, y: -40 });
 		this.stride = 0;
+		this.torsoOffset = new Point();
+		this.frontFootPos = new Point();
+		this.rearFootPos = new Point();
 	}
 	update() {
-		if (this.parent.h !== 0) {
-			this.stride += this.engine.deltaTime * 10 * this.parent.h;
+		let torsoOffsetTarget = new Point();
+		let frontFootPosTarget = new Point({ x: 10, y: 0 }).add(
+			this.parent.position
+		);
+		let rearFootPosTarget = new Point({ x: -10, y: 0 }).add(
+			this.parent.position
+		);
+		if (this.parent.v !== 0) {
+			torsoOffsetTarget.y = -10;
+		} else {
+			if (this.parent.h !== 0) {
+				this.stride += this.engine.deltaTime * 10 * this.parent.h;
+			}
 		}
-		let stridePos = new Point({
+		this.torsoOffset = this.torsoOffset.easeTo(torsoOffsetTarget, 5);
+
+		let frontFootPos = new Point({
 			x: Math.cos(this.stride) * 30,
 			y: Math.sin(this.stride) * 20
 		}).add(this.parent.position);
-		let rearPos = new Point({
+		let rearFootPos = new Point({
 			x: Math.cos(this.stride + Math.PI) * 30,
 			y: Math.sin(this.stride + Math.PI) * 20
 		}).add(this.parent.position);
+		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget);
+		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget);
 
-		this.position = this.parent.position.add(this.offset);
-		this.ik(rearPos);
+		this.position = this.parent.position
+			.add(this.offset)
+			.add(this.torsoOffset);
+		this.ik(rearFootPos);
 		this.head(this.position);
-		this.ik(stridePos);
+		this.ik(frontFootPos);
 	}
 	head(pos: Point) {
 		this.engine.ctx.beginPath();
