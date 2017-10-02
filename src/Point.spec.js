@@ -28,4 +28,13 @@ describe("Point", () => {
 			expect(str).toBe('{"x":1,"y":2}');
 		});
 	});
+	describe("easeTo", () => {
+		it("should ease", () => {
+			let from = new Point({ x: 0, y: 0 });
+			let to = new Point({ x: 2, y: 1 });
+			let eased = from.easeTo(to, 2);
+			expect(eased.x).toBe(1);
+			expect(eased.y).toBe(0.5);
+		});
+	});
 });

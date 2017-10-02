@@ -28,7 +28,7 @@ import Block from "Block";
 export default class Point {
 	x: number;
 	y: number;
-	constructor(pos: { x: number, y: number }): void {
+	constructor(pos: { x: number, y: number } = { x: 0, y: 0 }): void {
 		this.x = pos.x;
 		this.y = pos.y;
 	}
@@ -80,6 +80,13 @@ export default class Point {
 			x: Math.floor(this.x / config.grid.width),
 			y: Math.floor(this.y / config.grid.height)
 		};
+	}
+
+	easeTo(point: Point, divisor: number): Point {
+		return new Point({
+			x: this.x + (point.x - this.x) / divisor,
+			y: this.y + (point.y - this.y) / divisor
+		});
 	}
 
 	// get screen():{x:number, y:number}{
