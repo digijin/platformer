@@ -20,25 +20,32 @@ export default class Leg extends GameObject {
 		this.stride = 0;
 	}
 	update() {
-		this.stride += this.engine.deltaTime;
+		if (this.parent.h !== 0) {
+			this.stride += this.engine.deltaTime * 10 * this.parent.h;
+		}
 		let stridePos = new Point({
 			x: Math.cos(this.stride) * 30,
 			y: Math.sin(this.stride) * 20
 		}).add(this.parent.position);
+		let rearPos = new Point({
+			x: Math.cos(this.stride + Math.PI) * 30,
+			y: Math.sin(this.stride + Math.PI) * 20
+		}).add(this.parent.position);
 
 		this.position = this.parent.position.add(this.offset);
+		this.ik(rearPos);
+		this.head(this.position);
 		this.ik(stridePos);
-		// this.head(this.position);
 	}
 	head(pos: Point) {
 		this.engine.ctx.beginPath();
-		this.engine.ctx.arc(pos.x, pos.y, 20, 0, 2 * Math.PI, false);
+		this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
 		this.engine.ctx.context.fillStyle = "#ababab";
 		this.engine.ctx.fill();
 	}
 	ik(target: Point) {
 		let floor = this.parent.position.y;
-		this.engine.ctx.drawLine(this.position, target, "#ffff00");
+		// this.engine.ctx.drawLine(this.position, target, "#ffff00");
 		let dist = this.position.distanceTo(target);
 
 		if (dist > branchLength * numBranches) {
@@ -46,7 +53,7 @@ export default class Leg extends GameObject {
 		}
 		let dir = target.subtract(this.position).direction();
 		let endpoint = this.position.move(dir, dist);
-		this.engine.ctx.drawLine(this.position, endpoint, "#ff0000", 2);
+		// this.engine.ctx.drawLine(this.position, endpoint, "#ff0000", 2);
 
 		if (endpoint.y > floor) {
 			let ratio =
