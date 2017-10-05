@@ -4541,6 +4541,10 @@ nodemon@^1.10.2:
     undefsafe "0.0.3"
     update-notifier "0.5.0"
 
+noisejs@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/noisejs/-/noisejs-2.1.0.tgz#84b4c4cd04ff43367034f65253e213e0d9fe1aff"
+
 nomnomnomnom@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/nomnomnomnom/-/nomnomnomnom-2.0.1.tgz#b2239f031c8d04da67e32836e1e3199e12f7a8e2"

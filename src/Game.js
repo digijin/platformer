@@ -15,6 +15,7 @@ import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 
 // import MainMenu from 'MainMenu/Menu';
+import GamePad from "GamePad";
 
 export default class Game {
 	container: HTMLElement;

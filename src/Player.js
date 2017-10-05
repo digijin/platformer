@@ -119,7 +119,7 @@ export default class Player extends Actor {
 						speed: 3 + Math.random() * 5,
 						position: this.position.subtract({
 							x: 0,
-							y: this.size.h
+							y: this.size.h / 2
 						}),
 						target: engine.mouse.point.add(
 							new Point({

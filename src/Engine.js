@@ -4,6 +4,9 @@ import Mouse from "Mouse";
 import State from "State";
 import Context from "Context";
 
+import Input from "unityinput";
+
+console.log(Input);
 import Point from "Point";
 
 import config from "config";

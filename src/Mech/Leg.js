@@ -49,10 +49,11 @@ export default class Leg extends GameObject {
 				}).add(this.parent.position);
 			}
 		}
+		//ease it all in
 		this.torsoOffset = this.torsoOffset.easeTo(torsoOffsetTarget, 5);
-
 		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget, 5);
 		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget, 5);
+		//and render it
 		this.position = this.parent.position
 			.add(this.offset)
 			.add(this.torsoOffset);
