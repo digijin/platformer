@@ -1,12 +1,11 @@
 //@flow
-import Keyboard from "Keyboard";
+// import Keyboard from "Keyboard";
 import Mouse from "Mouse";
 import State from "State";
 import Context from "Context";
 
 import Input from "unityinput";
 
-console.log(Input);
 import Point from "Point";
 
 import config from "config";
@@ -24,7 +23,7 @@ export default class Engine {
 	ctx: Context;
 	lastTime: number;
 	mouse: Mouse;
-	keyboard: Keyboard;
+	keyboard: Input.Keyboard;
 	deltaTime: number;
 	state: State;
 	currentScene: SceneBase;
@@ -33,7 +32,7 @@ export default class Engine {
 	canvas: HTMLCanvasElement;
 	fpsmeter: Fpsmeter;
 	view: { offset: Point };
-
+	input: Input;
 	static getInstance(): Engine {
 		if (!instance) {
 			instance = new Engine();
@@ -48,10 +47,11 @@ export default class Engine {
 		this.view = { offset: new Point({ x: 120, y: 0 }) };
 
 		this.mouse = new Mouse();
-		this.keyboard = new Keyboard();
 		this.objects = [];
 		this.lastTime = new Date().getTime();
 		this.state = new State();
+		this.input = new Input();
+		this.keyboard = this.input.keyboard;
 	}
 	init(container: HTMLElement) {
 		this.fpsmeter = new FPSMeter(null, {

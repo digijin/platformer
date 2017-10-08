@@ -16,7 +16,7 @@ export default class Leg extends GameObject {
 	torsoOffset: Point;
 	frontFootPos: Point;
 	rearFootPos: Point;
-	constructor(params: { parent: Player }) {
+	constructor(params: { parent: Playesr }) {
 		super();
 		this.parent = params.parent;
 		this.offset = new Point({ x: 0, y: -40 });
@@ -95,58 +95,3 @@ export default class Leg extends GameObject {
 		this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
 	}
 }
-
-/*
-
-let center = { x: width / 2, y: height / 2 }; //this.position
-
-
-function ik(mouse){
-  // console.log(e)
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.strokeStyle = "black"
-  // let mouse = { x: e.clientX, y: e.clientY };
-  ctx.moveTo(center.x, center.y);
-  ctx.lineTo(mouse.x, mouse.y);
-  ctx.stroke();
-  
-  let joint = {
-    x: midpoint.x + Math.cos(dir) * b,
-    y: midpoint.y + Math.sin(dir) * b
-  };
-  ctx.lineTo(joint.x, joint.y)
-
-  ctx.stroke();
-  
-  
-  
-  //proper draw
-  
-  ctx.beginPath();
-  ctx.lineWidth = 32;
-  ctx.strokeStyle = "#ababab";
-  ctx.moveTo(center.x, center.y);
-  ctx.lineTo(joint.x, joint.y);
-  ctx.lineTo(endpoint.x, endpoint.y)
-  ctx.lineTo(endpoint.x+30, endpoint.y)
-  ctx.stroke();
-}
-
-update = () => {
-  
-  let roller2 = roller + Math.PI * speed
-  center.y = (height / 2) + (Math.cos(roller/speed*2)*10)
-  let pos = {x:Math.cos(roller/speed)*100, y: Math.sin(roller/speed)*40}
-  pos.x += center.x
-  pos.y += floor
-  ik(pos);
-  
-  pos = {x:Math.cos(roller2/speed)*100, y: Math.sin(roller2/speed)*40}
-  pos.x += center.x
-  pos.y += floor
-  ik(pos);
-};
-update();
-
-*/

@@ -100,7 +100,6 @@ export default class Context {
 		rotation: number = 0,
 		registration: { x: number, y: number } = { x: 0.5, y: 0.5 }
 	) {
-		// console.log(this);
 		let im: HTMLImageElement = (image: any);
 		position = position.subtract(this.engine.view.offset);
 		this.context.translate(position.x, position.y);

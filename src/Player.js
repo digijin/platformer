@@ -175,7 +175,7 @@ export default class Player extends Actor {
 			hand.position = this.position.add(hand.offset);
 		}
 
-		if (engine.keyboard.down(69)) {
+		if (engine.input.getKey(69)) {
 			//FIRE HAND
 			if (hand.state == HAND_STATE.ARMED) {
 				hand.state = HAND_STATE.FIRED;
@@ -225,10 +225,10 @@ export default class Player extends Actor {
 		let boundingRect = this.getBoundingRect();
 
 		//HORIZONTAL
-		if (engine.keyboard.down(65)) {
+		if (engine.input.getKey(65)) {
 			this.h -= engine.deltaTime * 5;
 			if (this.h < -1) this.h = -1;
-		} else if (engine.keyboard.down(68)) {
+		} else if (engine.input.getKey(68)) {
 			this.h += engine.deltaTime * 5;
 			if (this.h > 1) this.h = 1;
 		} else {
@@ -245,7 +245,7 @@ export default class Player extends Actor {
 		let hDelta = this.h * engine.deltaTime * hSpeed;
 
 		//VERTICAL MOVEMENT
-		if (engine.keyboard.down(32)) {
+		if (engine.input.getKey(32)) {
 			if (this.v == 0) {
 				this.v = -4; //jump
 			}

@@ -31,12 +31,17 @@ export default class Enemy extends Actor {
 		if (this.action.next().done) {
 			this.action = null;
 		}
-		engine.ctx.drawSprite(mech, this.position, this.size, 0, this.registration);
+		engine.ctx.drawSprite(
+			mech,
+			this.position,
+			this.size,
+			0,
+			this.registration
+		);
 	}
 }
 
 export function* ai(enemy: Enemy, engine: Engine): Generator<*, *, *> {
-	// console.log(this);
 	const dontFall = true;
 	let direction = 1;
 	while (true) {

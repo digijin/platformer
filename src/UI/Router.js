@@ -10,10 +10,6 @@ export class Router extends React.Component {
 		engine: Engine
 	};
 	render() {
-		// console.log("scene", this.props.scene);
-		// switch(this.props.scene){
-		// 	case 'menu':
-		// }
 		if (this.props.scene == "menu") {
 			return <Menu engine={this.props.engine} />;
 		} else {
