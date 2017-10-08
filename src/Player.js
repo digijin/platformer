@@ -164,6 +164,8 @@ export default class Player extends Actor {
 						x: this.position.x,
 						y: this.position.y - this.size.h / 2
 					}),
+					owner: this,
+					time: 8,
 					// h: 10+Math.random(),
 					// v: (Math.random()-0.5)/3
 					h: Math.cos(dir) * 10,

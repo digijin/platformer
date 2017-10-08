@@ -9,15 +9,21 @@ export default class Bullet extends GameObject {
 	h: number; //momentum
 	v: number; //momentum
 	time: number;
+	owner: Actor;
 	constructor(params: {
 		position: Point,
 		h: number,
 		v: number,
-		time: number
+		time: number,
+		owner: Actor
 	}) {
 		super(params);
 		Object.assign(this, params);
 		this.time = 1;
+	}
+
+	explode() {
+		console.log("boop", arguments);
 	}
 
 	update = (engine: Engine) => {
@@ -26,9 +32,12 @@ export default class Bullet extends GameObject {
 		this.position.y += this.v;
 
 		engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
+		//CHECK TIME
 		if (this.time < 0) {
 			this.destroy();
 		}
+
+		//CHECK GRID
 		let block = engine.grid.blockAtPosition({
 			x: this.position.x,
 			y: this.position.y
@@ -41,5 +50,15 @@ export default class Bullet extends GameObject {
 		) {
 			this.destroy();
 		}
+		//CHECK ENEMIES
+		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
+			if (o !== this.owner) {
+				let a: Actor = ((o: any): Actor); //RECAST
+				if (a.getBoundingRect().contains(this.position)) {
+					// this.explode();
+					a.explode();
+				}
+			}
+		});
 	};
 }
