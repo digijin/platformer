@@ -5,7 +5,6 @@ import Point from "Point";
 // let debugTextDiv;
 
 import Grid from "Grid";
-import Bullet from "Bullet";
 import Engine from "Engine";
 import Player from "Player";
 import Context from "Context";

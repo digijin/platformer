@@ -160,8 +160,10 @@ export default class Player extends Actor {
 			dir += (Math.random() - 0.5) / 10; //spread
 			engine.register(
 				new Bullet({
-					x: this.position.x,
-					y: this.position.y - this.size.h / 2,
+					position: new Point({
+						x: this.position.x,
+						y: this.position.y - this.size.h / 2
+					}),
 					// h: 10+Math.random(),
 					// v: (Math.random()-0.5)/3
 					h: Math.cos(dir) * 10,

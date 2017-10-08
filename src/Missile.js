@@ -18,6 +18,7 @@ export default class Missile extends Projectile {
 	speed: number;
 	z: number;
 	guided: boolean;
+	position: Point;
 	explode() {
 		// this.destroy();
 		super.explode();
