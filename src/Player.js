@@ -96,20 +96,29 @@ export default class Player extends Actor {
 			y: config.game.height / 2
 		});
 
+		let gp = engine.input.gamepad.getGamePad();
+		if (gp) {
+			engine.mouse.point = this.position.add({
+				x: gp.axes[0] * 500,
+				y: gp.axes[1] * 500
+			});
+		}
+
 		/* 
         w 87
         a 65
         s 83
         d 68
 		*/
-		missile.firing = missile.firing || engine.input.getButton("special");
-		firing = firing || engine.input.getButton("fire");
 
 		/////////////////MISSILE MECHANICS
 		if (missile.reload > 0) {
 			missile.reload -= engine.deltaTime;
 		} else {
-			if (missile.firing && missile.energy >= missile.cost) {
+			if (
+				(missile.firing || engine.input.getButton("special")) &&
+				missile.energy >= missile.cost
+			) {
 				missile.reload = missile.reloadTime;
 				missile.energy -= missile.cost;
 				missile.regenSpeed = missile.regenBaseSpeed;
@@ -142,7 +151,7 @@ export default class Player extends Actor {
 		}
 
 		////////////////////BULLET FIRING
-		if (firing) {
+		if (firing || engine.input.getButton("fire")) {
 			if (Math.random() < 0.5) {
 				engine.register(
 					new Shell({
@@ -247,8 +256,7 @@ export default class Player extends Actor {
 			}
 		}
 
-		if (engine.input.gamepad.gamepads[0]) {
-			let gp = engine.input.gamepad.gamepads[0];
+		if (gp) {
 			this.h = gp.axes[0];
 		}
 
@@ -384,6 +392,8 @@ export default class Player extends Actor {
 		// ctx.fillStyle = '#aaaaaa'
 		// let pos = hand.offset.add(this.position);
 		engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
+
+		engine.ctx.drawLine(this.position, this.engine.mouse.point, null, 1);
 
 		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 
