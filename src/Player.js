@@ -101,7 +101,9 @@ export default class Player extends Actor {
         a 65
         s 83
         d 68
-        */
+		*/
+		missile.firing = missile.firing || engine.input.getButton("special");
+		firing = firing || engine.input.getButton("fire");
 
 		/////////////////MISSILE MECHANICS
 		if (missile.reload > 0) {
@@ -245,11 +247,16 @@ export default class Player extends Actor {
 			}
 		}
 
+		if (engine.input.gamepad.gamepads[0]) {
+			let gp = engine.input.gamepad.gamepads[0];
+			this.h = gp.axes[0];
+		}
+
 		//check walls
 		let hDelta = this.h * engine.deltaTime * hSpeed;
 
 		//VERTICAL MOVEMENT
-		if (engine.input.getKey(32)) {
+		if (engine.input.getKey(32) || engine.input.getButton("jump")) {
 			if (this.v == 0) {
 				this.v = -4; //jump
 			}
