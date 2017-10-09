@@ -18,5 +18,22 @@ export default {
 	gravity: 10,
 	debug: {
 		fpsmeter: true
+	},
+	input: {
+		buttons: {
+			jump: [
+				{ type: "gamepad", button: 0 },
+				{ type: "keyboard", key: "space" }
+			],
+			special: [
+				{ type: "gamepad", button: 1 },
+				{ type: "mouse", button: 2 }
+			],
+			fire: [
+				{ type: "gamepad", button: 2 },
+				{ type: "keyboard", key: "ctrl" },
+				{ type: "mouse", button: 0 }
+			]
+		}
 	}
 };

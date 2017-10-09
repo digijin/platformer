@@ -121,7 +121,7 @@ export default class Player extends Actor {
 			missile.reload -= engine.deltaTime;
 		} else {
 			if (
-				(missile.firing || engine.input.getButton("special")) &&
+				engine.input.getButton("special") &&
 				missile.energy >= missile.cost
 			) {
 				missile.reload = missile.reloadTime;
@@ -156,7 +156,7 @@ export default class Player extends Actor {
 		}
 
 		////////////////////BULLET FIRING
-		if (firing || engine.input.getButton("fire")) {
+		if (engine.input.getButton("fire")) {
 			if (Math.random() < 0.5) {
 				engine.register(
 					new Shell({
