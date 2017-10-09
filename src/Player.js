@@ -98,10 +98,15 @@ export default class Player extends Actor {
 
 		let gp = engine.input.gamepad.getGamePad();
 		if (gp) {
-			engine.mouse.point = this.position.add({
-				x: gp.axes[0] * 500,
-				y: gp.axes[1] * 500
-			});
+			engine.mouse.point = this.position
+				.add({
+					x: 0,
+					y: -this.size.h / 2
+				})
+				.add({
+					x: gp.axes[0] * 500,
+					y: gp.axes[1] * 500
+				});
 		}
 
 		/* 
