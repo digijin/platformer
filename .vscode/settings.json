@@ -1,10 +1,17 @@
 {
-  "javascript.validate.enable": false,
-  "editor.formatOnSave": true,
-  "prettier.eslintIntegration": true,
-  "prettier.useTabs": true,
+	"javascript.validate.enable": false,
+	"editor.formatOnSave": true,
+	"prettier.eslintIntegration": true,
+	"prettier.useTabs": true,
 
-  "files.exclude": {
-    "**/.vscode/**": true
-  }
+	"files.exclude": {
+		"**/.vscode/**": true
+	},
+	"search.exclude": {
+		"**/.git": true,
+		"**/dist": true,
+		"**/NOTnode_modules": true,
+		"**/bower_components": true,
+		"**/tmp": true
+	}
 }
