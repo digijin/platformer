@@ -1,10 +1,17 @@
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 sudo: required
 services:
-  - docker
-
-script: 
-  - yarn test
+- docker
+script:
+- yarn test
+deploy:
+  provider: s3
+  access_key_id: AKIAJ3W3J5JL3IMIPBPQ
+  secret_access_key:
+    secure: D8TLpZw0NCujU570AhzrPwDDotyBo2sOupT0r65KY+sROf1WJKTkEl+t8SeNHiS6aL54LSv6eyju2Rc3X1L6P//nXsB1G6zCnH6o8SWr2Ww5dycOCr3y1e5uT8H+kPYvb16lDbk/5DT1dRSPoozyNY1YBvpRMBC8DAwbJnaKUpxEyBvLZPfg0k47uiQRPdkf0LM61XftPNrCsRP1BUSOfjNnDUCILkjsu63N/YHQVNugx9hwEGwr+weiTOQYJKV0FlK5hIRfiTV88ow5DZgVyLolzbPr6ZeATrejwFGSr0PO9rtGAu+Lpzm7JpAm3whyBGNZgQ0tAhIXFpehyal89OAUasSxt0LkgjUTTOrEHoys1TZq5sRXYCVuFAPO1HoRqhvTy1L+xCy1SjZyOnJfdUf8vFwYaGzeRKORdJ8zNYwUunamfNWJ45xanRUomoqZGs0JNNQKWXhcXI2XGDbLA4qqdajCQuw4N4VmjoWVTezxDP5aNj0RihDsxDy+vKzFOBH1AR6fGYZicRqv8sYCdaykPTp0ri1mBPPJ6PUymSac2ew1yblxUwbJMqLM/0tK6RttvUKmy6q1gB+Xji0ljTz0Uf5powc4EHsg7RV5SveqDP+p+PufWP+WshPp3PmokDsAb6YOWQIQv8MTeh+oA+uu1qa7css/2bGj9tOlPhU=
+  bucket: platformer.digijin.com
+  acl: ''
+  on:
+    repo: digijin/platformer
