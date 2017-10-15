@@ -14,7 +14,8 @@
 		"flow:suggest": "flow suggest src/Explosion.js",
 		"flow:watch": "flow-watch",
 		"postinstall": "gulp build",
-		"coverage": "jest --coverage --watch"
+		"coverage": "jest --coverage --watch",
+		"deploy": "npm version patch && git push && git push --tags"
 	},
 	"repository": {
 		"type": "git",
@@ -92,25 +93,15 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": [
-			"js",
-			"jsx"
-		],
-		"moduleDirectories": [
-			"node_modules",
-			"src"
-		],
-		"modulePaths": [
-			"/src"
-		],
+		"moduleFileExtensions": ["js", "jsx"],
+		"moduleDirectories": ["node_modules", "src"],
+		"modulePaths": ["/src"],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+				"<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": [
-			"json",
-			"lcov"
-		]
+		"coverageReporters": ["json", "lcov"]
 	}
 }
