@@ -264,12 +264,15 @@ export default class Player extends Actor {
 		if (gp) {
 			this.h = gp.axes[0];
 		}
+		if (engine.input.getButton("stand")) {
+			this.h = 0;
+		}
 
 		//check walls
 		let hDelta = this.h * engine.deltaTime * hSpeed;
 
 		//VERTICAL MOVEMENT
-		if (engine.input.getKey(32) || engine.input.getButton("jump")) {
+		if (engine.input.getButton("jump")) {
 			if (this.v == 0) {
 				this.v = -4; //jump
 			}
@@ -398,7 +401,19 @@ export default class Player extends Actor {
 		// let pos = hand.offset.add(this.position);
 		engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
 
-		engine.ctx.drawLine(this.position, this.engine.mouse.point, null, 1);
+		let mpt = this.engine.mouse.point;
+		engine.ctx.drawLine(
+			mpt.add({ x: 10, y: 0 }),
+			mpt.add({ x: -10, y: 0 }),
+			"red",
+			1
+		);
+		engine.ctx.drawLine(
+			mpt.add({ x: 0, y: 10 }),
+			mpt.add({ x: 0, y: -10 }),
+			"red",
+			1
+		);
 
 		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 

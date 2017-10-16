@@ -33,7 +33,8 @@ export default {
 				{ type: "gamepad", button: 2 },
 				{ type: "keyboard", key: "ctrl" },
 				{ type: "mouse", button: 0 }
-			]
+			],
+			stand: [{ type: "gamepad", button: 5 }]
 		}
 	}
 };
