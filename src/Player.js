@@ -97,15 +97,15 @@ export default class Player extends Actor {
 		});
 
 		let gp = engine.input.gamepad.getGamePad();
-		if (gp) {
+		if (engine.input.getDevice() == "gamepad") {
 			engine.mouse.point = this.position
 				.add({
 					x: 0,
 					y: -this.size.h / 2
 				})
 				.add({
-					x: gp.axes[0] * 500,
-					y: gp.axes[1] * 500
+					x: gp.axes[0] * 300,
+					y: gp.axes[1] * 300
 				});
 		}
 
@@ -171,15 +171,16 @@ export default class Player extends Actor {
 					})
 				);
 			}
-			let diff = engine.mouse.point.subtract(this.position);
+			let gunPoint = new Point({
+				x: this.position.x,
+				y: this.position.y - this.size.h / 2
+			});
+			let diff = engine.mouse.point.subtract(gunPoint);
 			let dir = Math.atan2(diff.y, diff.x);
 			dir += (Math.random() - 0.5) / 10; //spread
 			engine.register(
 				new Bullet({
-					position: new Point({
-						x: this.position.x,
-						y: this.position.y - this.size.h / 2
-					}),
+					position: gunPoint,
 					owner: this,
 					time: 8,
 					// h: 10+Math.random(),
@@ -261,7 +262,7 @@ export default class Player extends Actor {
 			}
 		}
 
-		if (gp) {
+		if (gp && engine.input.getLastActivityDevice() == "gamepad") {
 			this.h = gp.axes[0];
 		}
 		if (engine.input.getButton("stand")) {
