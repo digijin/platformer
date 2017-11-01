@@ -62,7 +62,10 @@ export default class Leg extends GameObject {
 		this.position = this.parent.position
 			.add(this.offset)
 			.add(this.torsoOffset);
-		let facing = this.parent.h > 0 ? FACING_RIGHT : FACING_LEFT;
+		let facing =
+			this.engine.input.mouse.position.x > this.engine.canvas.width / 2
+				? FACING_RIGHT
+				: FACING_LEFT;
 		this.ik(this.frontFootPos, facing);
 		this.head(this.position);
 		this.ik(this.rearFootPos, facing);

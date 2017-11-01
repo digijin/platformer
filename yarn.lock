@@ -5932,9 +5932,9 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unityinput@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/unityinput/-/unityinput-0.0.21.tgz#122beb27d7b0b657d6717874a316da95f2066c33"
+unityinput@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/unityinput/-/unityinput-0.0.24.tgz#2d1b56b2f0f62aeb48df9cd4708f140261cc833f"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

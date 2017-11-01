@@ -23,7 +23,7 @@ export default class Engine {
 	ctx: Context;
 	lastTime: number;
 	mouse: Mouse;
-	keyboard: Input.Keyboard;
+	// keyboard: Input.Keyboard;
 	deltaTime: number;
 	state: State;
 	currentScene: SceneBase;
