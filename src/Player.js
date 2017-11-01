@@ -304,65 +304,6 @@ export default class Player extends Actor {
 			hDelta = this.h * engine.deltaTime * hand.reelSpeed;
 		}
 
-		// if (this.v > 0) {
-		// 	//GOIN DOWN
-		// 	if (
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.r,
-		// 			y: boundingRect.b + this.v
-		// 		}).block !== "0" ||
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.l,
-		// 			y: boundingRect.b + this.v
-		// 		}).block !== "0"
-		// 	) {
-		// 		this.v = 0;
-		// 	}
-		// } else {
-		// 	if (
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.r,
-		// 			y: boundingRect.t + this.v
-		// 		}).block !== "0" ||
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.l,
-		// 			y: boundingRect.t + this.v
-		// 		}).block !== "0"
-		// 	) {
-		// 		this.v = 0;
-		// 	}
-		// }
-
-		// if (hDelta > 0) {
-		// 	if (
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.r + hDelta,
-		// 			y: boundingRect.t
-		// 		}).block !== "0" ||
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.r + hDelta,
-		// 			y: boundingRect.b
-		// 		}).block !== "0"
-		// 	) {
-		// 		this.h = 0;
-		// 		hDelta = 0;
-		// 	}
-		// } else {
-		// 	if (
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.l + hDelta,
-		// 			y: boundingRect.t
-		// 		}).block !== "0" ||
-		// 		engine.grid.blockAtPosition({
-		// 			x: boundingRect.l + hDelta,
-		// 			y: boundingRect.b
-		// 		}).block !== "0"
-		// 	) {
-		// 		this.h = 0;
-		// 		hDelta = 0;
-		// 	}
-		// }
-
 		if (!this.canMoveHori(hDelta)) {
 			this.h = 0;
 			hDelta = 0;

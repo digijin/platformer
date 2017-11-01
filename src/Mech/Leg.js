@@ -8,6 +8,11 @@ import Point from "Point";
 const branchLength = 25;
 const numBranches = 2;
 
+export const FACING_RIGHT = 1;
+export const FACING_LEFT = -1;
+
+type Facing = FACING_LEFT | FACING_RIGHT;
+
 export default class Leg extends GameObject {
 	parent: Player;
 	offset: Point;
@@ -57,9 +62,10 @@ export default class Leg extends GameObject {
 		this.position = this.parent.position
 			.add(this.offset)
 			.add(this.torsoOffset);
-		this.ik(this.frontFootPos);
+		let facing = this.parent.h > 0 ? FACING_RIGHT : FACING_LEFT;
+		this.ik(this.frontFootPos, facing);
 		this.head(this.position);
-		this.ik(this.rearFootPos);
+		this.ik(this.rearFootPos, facing);
 	}
 	head(pos: Point) {
 		this.engine.ctx.beginPath();
@@ -67,7 +73,7 @@ export default class Leg extends GameObject {
 		this.engine.ctx.context.fillStyle = "#ababab";
 		this.engine.ctx.fill();
 	}
-	ik(target: Point) {
+	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
 		// this.engine.ctx.drawLine(this.position, target, "#ffff00");
 		let dist = this.position.distanceTo(target);
@@ -89,7 +95,7 @@ export default class Leg extends GameObject {
 		let b = Math.sqrt(Math.pow(branchLength, 2) - Math.pow(dist / 2, 2));
 
 		dir += Math.PI / 2;
-		let joint = midpoint.move(dir, b);
+		let joint = midpoint.move(dir, b * facing);
 
 		this.engine.ctx.drawLine(this.position, joint, "#555555", 5);
 		this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
