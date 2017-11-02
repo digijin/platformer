@@ -51,9 +51,10 @@ export default class Engine {
 		this.lastTime = new Date().getTime();
 		this.state = new State();
 		this.input = new Input(config.input);
-		this.keyboard = this.input.keyboard;
+		// this.keyboard = this.input.keyboard;
 	}
 	init(container: HTMLElement) {
+		//FLOWHACK
 		this.fpsmeter = new FPSMeter(null, {
 			graph: 1,
 			theme: "transparent",

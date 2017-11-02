@@ -1,6 +1,8 @@
 //@flow
 
 import type Engine from "Engine";
+import type Point from "Point";
+import type Actor from "Actor";
 import GameObject from "GameObject";
 export default class Bullet extends GameObject {
 	// x: number; //position

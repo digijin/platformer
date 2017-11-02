@@ -1,7 +1,7 @@
 //@flow
 
 import type Engine from "Engine";
-
+import type Point from "Point";
 import type Actor from "Actor";
 import GameObject from "GameObject";
 
@@ -10,6 +10,8 @@ export default class Projectile extends GameObject {
 	direction: number;
 	target: Point;
 	owner: Actor;
+	speed: number;
+	guided: boolean;
 
 	constructor(params: {
 		position: Point,

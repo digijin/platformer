@@ -8,10 +8,9 @@ import Point from "Point";
 const branchLength = 25;
 const numBranches = 2;
 
-export const FACING_RIGHT = 1;
-export const FACING_LEFT = -1;
-
-type Facing = FACING_LEFT | FACING_RIGHT;
+type Facing = 1 | -1;
+export const FACING_RIGHT: Facing = 1;
+export const FACING_LEFT: Facing = -1;
 
 export default class Leg extends GameObject {
 	parent: Player;
@@ -21,7 +20,7 @@ export default class Leg extends GameObject {
 	torsoOffset: Point;
 	frontFootPos: Point;
 	rearFootPos: Point;
-	constructor(params: { parent: Playesr }) {
+	constructor(params: { parent: Player }) {
 		super();
 		this.parent = params.parent;
 		this.offset = new Point({ x: 0, y: -40 });
