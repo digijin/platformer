@@ -55,14 +55,7 @@ export default class Engine {
 	}
 	init(container: HTMLElement) {
 		//FLOWHACK
-		this.fpsmeter = new FPSMeter(null, {
-			graph: 1,
-			theme: "transparent",
-			heat: 1,
-			history: 50,
-			left: "auto",
-			right: "5px"
-		});
+		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
 		canvas.height = config.game.height;

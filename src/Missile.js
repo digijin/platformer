@@ -66,7 +66,7 @@ export default class Missile extends Projectile {
 		if (this.guided) {
 			let diff = this.target.subtract(this.position);
 			let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
-			if (dist < 50) {
+			if (dist < config.missile.guidedDist) {
 				this.guided = false;
 			}
 			let newdir = Math.atan2(diff.y, diff.x);

@@ -1,7 +1,5 @@
 //@flow
 
-const blocksize = 50;
-
 import type Engine from "Engine";
 import GameObject from "GameObject";
 
@@ -124,10 +122,10 @@ export default class Grid extends GameObject {
 					// );
 				} else {
 					engine.ctx.fillRect(
-						x * blocksize,
-						y * blocksize,
-						blocksize,
-						blocksize
+						x * config.grid.width,
+						y * config.grid.height,
+						config.grid.width,
+						config.grid.height
 					);
 				}
 			});

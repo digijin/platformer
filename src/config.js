@@ -5,8 +5,8 @@ export default {
 		height: 800
 	},
 	grid: {
-		width: 50,
-		height: 50
+		width: 40,
+		height: 40
 	},
 	player: {
 		size: {
@@ -18,6 +18,20 @@ export default {
 	gravity: 10,
 	debug: {
 		fpsmeter: true
+	},
+	missile: { guidedDist: 50 },
+	fpsmeter: {
+		graph: 1,
+		theme: "transparent",
+		heat: 1,
+		history: 50,
+		left: "auto",
+		right: "5px"
+	},
+	enemy: {
+		walkSpeed: 50,
+		size: { w: 50, h: 50 },
+		registration: { x: 0.5, y: 1 }
 	},
 	input: {
 		buttons: {

@@ -7,6 +7,8 @@ import mech from "mech.png";
 
 import Actor from "Actor";
 
+import config from "config";
+
 export default class Enemy extends Actor {
 	position: Point;
 	size: { w: number, h: number };
@@ -17,9 +19,9 @@ export default class Enemy extends Actor {
 	constructor(params: Object) {
 		super();
 		this.tag("enemy");
-		this.walkSpeed = 50;
-		this.size = { w: 50, h: 50 };
-		this.registration = { x: 0.5, y: 1 };
+		this.walkSpeed = config.enemy.walkSpeed;
+		this.size = config.enemy.size;
+		this.registration = config.enemy.registration;
 
 		Object.assign(this, params);
 	}
