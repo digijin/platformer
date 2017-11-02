@@ -313,6 +313,7 @@ export default class Player extends Actor {
 
 		if (!this.canMoveVert(this.v)) {
 			this.v = 0;
+			//TODO: if going down land on ground precisely
 		}
 		this.position.y += this.v;
 		//LANDING
