@@ -359,11 +359,13 @@ export default class Player extends Actor {
 			1
 		);
 
-		let bounding = this.getBoundingRect();
-		engine.ctx.drawLine(bounding.tl(), bounding.tr(), "yellow", 1);
-		engine.ctx.drawLine(bounding.bl(), bounding.br(), "yellow", 1);
-		engine.ctx.drawLine(bounding.tl(), bounding.bl(), "yellow", 1);
-		engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
+		if (config.debug.player.boundingBox) {
+			let bounding = this.getBoundingRect();
+			engine.ctx.drawLine(bounding.tl(), bounding.tr(), "yellow", 1);
+			engine.ctx.drawLine(bounding.bl(), bounding.br(), "yellow", 1);
+			engine.ctx.drawLine(bounding.tl(), bounding.bl(), "yellow", 1);
+			engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
+		}
 
 		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 

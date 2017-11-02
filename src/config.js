@@ -11,13 +11,16 @@ export default {
 	player: {
 		size: {
 			w: 40,
-			h: 60
+			h: 50
 		},
 		speed: 250
 	},
 	gravity: 10,
 	debug: {
-		fpsmeter: true
+		fpsmeter: true,
+		player: {
+			boundingBox: false
+		}
 	},
 	missile: { guidedDist: 50 },
 	fpsmeter: {
