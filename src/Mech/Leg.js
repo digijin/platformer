@@ -82,12 +82,6 @@ export default class Leg extends GameObject {
 	}
 	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
-		this.engine.ctx.drawLine(
-			this.position,
-			this.parent.getBoundingRect().br(),
-			"#0000ff",
-			5
-		);
 		// this.engine.ctx.drawLine(this.position, target, "#ffff00");
 		let dist = this.position.distanceTo(target);
 

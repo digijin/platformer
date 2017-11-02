@@ -104,8 +104,8 @@ export default class Rect {
 	blockRect(): Rect {
 		return new Rect(
 			Math.floor(this.t / config.grid.height),
-			Math.floor(this.r / config.grid.width),
-			Math.floor(this.b / config.grid.width),
+			Math.ceil(this.r / config.grid.width),
+			Math.ceil(this.b / config.grid.width),
 			Math.floor(this.l / config.grid.height)
 		);
 	}
