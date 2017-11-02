@@ -10,7 +10,7 @@ export default {
 	},
 	player: {
 		size: {
-			w: 80,
+			w: 40,
 			h: 80
 		},
 		speed: 250

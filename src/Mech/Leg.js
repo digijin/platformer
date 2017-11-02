@@ -31,16 +31,21 @@ export default class Leg extends GameObject {
 	}
 	update() {
 		let torsoOffsetTarget = new Point();
+		//default standing targets
 		let frontFootPosTarget = new Point({ x: 10, y: 0 }).add(
 			this.parent.position
 		);
 		let rearFootPosTarget = new Point({ x: -10, y: 0 }).add(
 			this.parent.position
 		);
+		//override defaults if moving
 		if (this.parent.v !== 0) {
+			//if not on ground
 			torsoOffsetTarget.y = -10;
 		} else {
+			//on ground
 			if (this.parent.h !== 0) {
+				//if moving
 				this.stride += this.engine.deltaTime * 10 * this.parent.h;
 
 				frontFootPosTarget = new Point({
@@ -57,7 +62,6 @@ export default class Leg extends GameObject {
 		this.torsoOffset = this.torsoOffset.easeTo(torsoOffsetTarget, 5);
 		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget, 5);
 		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget, 5);
-		//and render it
 		this.position = this.parent.position
 			.add(this.offset)
 			.add(this.torsoOffset);
@@ -65,6 +69,7 @@ export default class Leg extends GameObject {
 			this.engine.input.mouse.position.x > this.engine.canvas.width / 2
 				? FACING_RIGHT
 				: FACING_LEFT;
+		//and render it
 		this.ik(this.frontFootPos, facing);
 		this.head(this.position);
 		this.ik(this.rearFootPos, facing);
@@ -77,6 +82,12 @@ export default class Leg extends GameObject {
 	}
 	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
+		this.engine.ctx.drawLine(
+			this.position,
+			this.parent.getBoundingRect().br(),
+			"#0000ff",
+			5
+		);
 		// this.engine.ctx.drawLine(this.position, target, "#ffff00");
 		let dist = this.position.distanceTo(target);
 

@@ -29,8 +29,8 @@ export default class Rect {
 		size: { w: number, h: number },
 		rego: { x: number, y: number }
 	) {
-		let t = pos.y - size.w * rego.y;
-		let l = pos.x - size.h * rego.x;
+		let t = pos.y - size.h * rego.y;
+		let l = pos.x - size.w * rego.x;
 		return new Rect({
 			t: t,
 			l: l,
@@ -111,6 +111,19 @@ export default class Rect {
 	}
 	width(): number {
 		return this.r - this.l;
+	}
+	//corners
+	tl(): Point {
+		return new Point({ x: this.l, y: this.t });
+	}
+	tr(): Point {
+		return new Point({ x: this.r, y: this.t });
+	}
+	bl(): Point {
+		return new Point({ x: this.l, y: this.b });
+	}
+	br(): Point {
+		return new Point({ x: this.r, y: this.b });
 	}
 
 	add(rect: { t: number, r: number, b: number, l: number }): Rect {

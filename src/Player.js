@@ -21,8 +21,8 @@ let missile = {
 	reloadTime: 0.1,
 	reload: 0,
 	regenSpeed: 10,
-	regenBaseSpeed: 10,
-	regenSpeedIncrease: 10, //per second
+	regenBaseSpeed: 50,
+	regenSpeedIncrease: 50, //per second
 	energy: 700,
 	cost: 10
 };
@@ -45,29 +45,29 @@ let hand = {
 	// firing: false,
 	state: HAND_STATE.ARMED
 };
-let md = (e: MouseEvent): void => {
-	switch (e.button) {
-		case 0:
-			firing = true;
-			break;
-		case 2:
-			missile.firing = true;
-			break;
-	}
-};
-let mu = (e: MouseEvent): void => {
-	switch (e.button) {
-		case 0:
-			firing = false;
-			break;
-		case 2:
-			missile.firing = false;
-			break;
-	}
-};
+// let md = (e: MouseEvent): void => {
+// 	switch (e.button) {
+// 		case 0:
+// 			firing = true;
+// 			break;
+// 		case 2:
+// 			missile.firing = true;
+// 			break;
+// 	}
+// };
+// let mu = (e: MouseEvent): void => {
+// 	switch (e.button) {
+// 		case 0:
+// 			firing = false;
+// 			break;
+// 		case 2:
+// 			missile.firing = false;
+// 			break;
+// 	}
+// };
 
-document.addEventListener("mousedown", md);
-document.addEventListener("mouseup", mu);
+// document.addEventListener("mousedown", md);
+// document.addEventListener("mouseup", mu);
 
 import Leg from "Mech/Leg";
 export default class Player extends Actor {
@@ -343,6 +343,7 @@ export default class Player extends Actor {
 		// let pos = hand.offset.add(this.position);
 		engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
 
+		//RETICULE CROSSHAIR
 		let mpt = this.engine.mouse.point;
 		engine.ctx.drawLine(
 			mpt.add({ x: 10, y: 0 }),
@@ -356,6 +357,12 @@ export default class Player extends Actor {
 			"red",
 			1
 		);
+
+		let bounding = this.getBoundingRect();
+		engine.ctx.drawLine(bounding.tl(), bounding.tr(), "yellow", 1);
+		engine.ctx.drawLine(bounding.bl(), bounding.br(), "yellow", 1);
+		engine.ctx.drawLine(bounding.tl(), bounding.bl(), "yellow", 1);
+		engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
 
 		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
 
