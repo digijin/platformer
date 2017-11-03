@@ -1,6 +1,7 @@
 //@flow
 
 import type Engine from "Engine";
+import type Rect from "Rect";
 import GameObject from "GameObject";
 
 import config from "config";
@@ -17,11 +18,8 @@ export default class Grid extends GameObject {
 		this.z = -10;
 		//make empty grid
 		// this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))
-
-		// this.grid[0][5] = 1
-		// this.grid[1][5] = 1
-		// this.grid[2][5] = 1
-		// this.grid[3][5] = 1
+	}
+	makeTest() {
 		let testdata = [
 			"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d",
 			"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d",
