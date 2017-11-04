@@ -10,14 +10,24 @@ import Block from "Block";
 import Point from "Point";
 
 export default class Grid extends GameObject {
-	// grid: Array<Array<string>>;
+	grid: Array<Array<Block>>;
 	z: number;
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
 		super();
 		this.z = -10;
 		//make empty grid
-		// this.grid = Array(size.w).fill(0).map(x => Array(size.h).fill(0))
+		// Array(3).fill(0).map(x => Array(2).fill(0).map(v => "abc"))
+		this.grid = Array(size.w)
+			.fill(0)
+			.map(
+				(i, x) => Array(size.h).fill(0)
+				// .map((j, y) => "Asd")
+			);
+		//new Block({ position: { x, y }, type: "0" })
+	}
+	getBlock(pos: { x: number, y: number }): Block {
+		return this.blocks[pos.x][pos.y];
 	}
 	makeTest() {
 		let testdata = [

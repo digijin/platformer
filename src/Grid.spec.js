@@ -7,6 +7,17 @@ describe("Grid", () => {
 	it("should be a class", () => {
 		new Grid();
 	});
+	describe("constructor", () => {
+		it("should init an array full of blocks", () => {
+			let grid = new Grid({ w: 3, h: 3 });
+			// let block = grid.getBlock({ x: 0, y: 0 });
+			// expect(grid.blocks.length).toBe(3);
+			expect(grid.blocks).toBe("asd");
+		});
+	});
+	describe("getBlock", () => {
+		it("should return a block if in range", () => {});
+	});
 	describe("blocksInRect", () => {
 		it("should return", () => {
 			config.grid.width = 20;
