@@ -9,15 +9,22 @@ describe("Grid", () => {
 	});
 	describe("constructor", () => {
 		it("should init an array full of blocks", () => {
-			let grid = new Grid({ w: 3, h: 3 });
+			let grid = new Grid({ w: 3, h: 4 });
+			// debugger;
 			// let block = grid.getBlock({ x: 0, y: 0 });
 			// expect(grid.blocks.length).toBe(3);
-			expect(grid.blocks).toBe("asd");
+			expect(grid.grid.length).toBe(3);
+			expect(grid.grid[0].length).toBe(4);
 		});
 	});
 	describe("getBlock", () => {
-		it("should return a block if in range", () => {});
+		it("should return a block if in range", () => {
+			let grid = new Grid({ w: 3, h: 3 });
+			let block = grid.getBlock({ x: 0, y: 0 });
+			expect(block).toBe(grid.grid[0][0]);
+		});
 	});
+	describe("getBlockAtPoint", () => {});
 	describe("blocksInRect", () => {
 		it("should return", () => {
 			config.grid.width = 20;

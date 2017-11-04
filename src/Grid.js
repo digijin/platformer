@@ -20,14 +20,24 @@ export default class Grid extends GameObject {
 		// Array(3).fill(0).map(x => Array(2).fill(0).map(v => "abc"))
 		this.grid = Array(size.w)
 			.fill(0)
-			.map(
-				(i, x) => Array(size.h).fill(0)
-				// .map((j, y) => "Asd")
+			.map((i, x) =>
+				Array(size.h)
+					.fill(0)
+					.map(
+						(j, y) =>
+							new Block({
+								position: new Point({ x, y }),
+								type: "0"
+							})
+					)
 			);
 		//new Block({ position: { x, y }, type: "0" })
 	}
 	getBlock(pos: { x: number, y: number }): Block {
-		return this.blocks[pos.x][pos.y];
+		return this.grid[pos.x][pos.y];
+	}
+	getBlockAtPoint(point: { x: number, y: number }): Block {
+		return this.blockAtPosition(point);
 	}
 	makeTest() {
 		let testdata = [
