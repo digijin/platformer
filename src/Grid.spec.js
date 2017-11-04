@@ -4,6 +4,9 @@ import Point from "Point";
 import Block from "Block";
 
 describe("Grid", () => {
+	it("should be a class", () => {
+		new Grid();
+	});
 	describe("blocksInRect", () => {
 		it("should return", () => {
 			config.grid.width = 20;
