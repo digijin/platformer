@@ -9,6 +9,9 @@ import Actor from "Actor";
 
 import config from "config";
 
+import patrol from "AI/patrol";
+import rabbit from "AI/rabbit";
+
 export default class Enemy extends Actor {
 	position: Point;
 	size: { w: number, h: number };
@@ -27,8 +30,20 @@ export default class Enemy extends Actor {
 	}
 	action: ?Generator<*, *, *>;
 	update(engine: Engine) {
+		//check if out of bounds
+		if (this.position.y > this.engine.grid.height * config.grid.height) {
+			this.explode();
+		}
+		//if stuck
+		if (
+			this.engine.grid
+				.getBlocksOverlappingRect(this.getBoundingRect())
+				.filter(block => !block.isEmpty()).length > 0
+		) {
+			this.explode();
+		}
 		if (!this.action) {
-			this.action = ai(this, engine);
+			this.action = rabbit(this, engine);
 		}
 		if (this.action.next().done) {
 			this.action = null;

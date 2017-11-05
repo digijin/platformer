@@ -44,10 +44,12 @@ export default {
 			],
 			special: [
 				{ type: "gamepad", button: 1 },
+				{ type: "gamepad", button: "lt" },
 				{ type: "mouse", button: 2 }
 			],
 			fire: [
 				{ type: "gamepad", button: 2 },
+				{ type: "gamepad", button: "rt" },
 				{ type: "keyboard", key: "ctrl" },
 				{ type: "mouse", button: 0 }
 			],

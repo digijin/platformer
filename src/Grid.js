@@ -1,7 +1,7 @@
 //@flow
 
 import type Engine from "Engine";
-import type Rect from "Rect";
+import Rect from "Rect";
 import GameObject from "GameObject";
 
 import config from "config";
@@ -30,9 +30,13 @@ export default class Grid extends GameObject {
 			});
 		});
 	}
+	height: number;
+	width: number;
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
 		super();
+		this.height = size.h;
+		this.width = size.w;
 		this.z = -10;
 		//make empty grid
 		// Array(3).fill(0).map(x => Array(2).fill(0).map(v => "abc"))
@@ -150,7 +154,7 @@ export default class Grid extends GameObject {
 				out.push(this.getBlock({ x, y }));
 			}
 		}
-		return out;
+		return out.filter(b => b !== undefined);
 	}
 	getBlocksOverlappingRect(rect: Rect): Array<Block> {
 		let firstCol = Math.floor(rect.l / config.grid.width);
@@ -192,33 +196,22 @@ export default class Grid extends GameObject {
 	};
 	update = (engine: Engine) => {
 		engine.ctx.context.fillStyle = "#000000";
-		// engine.ctx.strokeStyle = '#000000'd
-		this.blocks.forEach((row, x) => {
-			row.forEach((cell, y) => {
-				if (cell.type == "0") {
-					// engine.ctx.strokeRect(
-					// 	x * blocksize,
-					// 	y * blocksize,
-					// 	blocksize,
-					// 	blocksize
-					// );
-				} else {
-					// engine.ctx.fillRect( a
-					// 	x * config.grid.width,
-					// 	y * config.grid.height,
-					// 	config.grid.width,
-					// 	config.grid.height
-					// );
 
-					engine.ctx.drawSprite(
-						dirtTile,
-						cell.point,
-						{ w: config.grid.width, h: config.grid.height },
-						0,
-						{ x: 0, y: 0 }
-					);
-				}
-			});
+		//screenRect
+		let screenRect = engine.ctx.screenRect();
+		let blocks = this.getBlocksInRect(screenRect);
+		// engine.ctx.strokeStyle = '#000000'd
+		blocks.forEach((cell, y) => {
+			if (cell.type == "0") {
+			} else {
+				engine.ctx.drawSprite(
+					dirtTile,
+					cell.point,
+					{ w: config.grid.width, h: config.grid.height },
+					0,
+					{ x: 0, y: 0 }
+				);
+			}
 		});
 	};
 }

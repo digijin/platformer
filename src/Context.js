@@ -4,6 +4,7 @@
 
 import Engine from "Engine";
 import Point from "Point";
+import Rect from "Rect";
 
 export default class Context {
 	engine: Engine;
@@ -22,6 +23,14 @@ export default class Context {
 			};
 		}
 		this.engine = Engine.getInstance();
+	}
+	screenRect(): Rect {
+		return new Rect({
+			t: 0,
+			l: 0,
+			r: window.innerWidth,
+			b: window.innerHeight
+		}).move(this.engine.view.offset);
 	}
 
 	drawLine(
