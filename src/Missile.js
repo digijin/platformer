@@ -4,7 +4,7 @@ import missile from "./missile.png";
 import Smoke from "Smoke";
 import Explosion from "Explosion";
 import Point from "Point";
-
+import Rect from "Rect";
 import type Actor from "Actor";
 
 import config from "config";
@@ -44,10 +44,23 @@ export default class Missile extends Projectile {
 
 		//CHECK GRID
 		let block = this.engine.grid.blockAtPosition(this.position);
-		if (this.engine.grid.isPositionBlocked(this.position)) {
+		if (!block.isEmpty()) {
 			this.explode();
-			this.engine.grid.destroyBlockAtPosition(this.position);
+			block.destroy();
+			let r = 15;
+			let rect = new Rect({
+				t: this.position.y - r,
+				r: this.position.x + r,
+				b: this.position.y + r,
+				l: this.position.x - r
+			});
+			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+			blocks.forEach(b => b.destroy());
 		}
+		// if (this.engine.grid.isPositionBlocked(this.position)) {
+		// 	this.explode();
+		// 	this.engine.grid.destroyBlockAtPosition(this.position);
+		// }
 		//CHECK ENEMIES
 		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {

@@ -107,4 +107,15 @@ describe("Grid", () => {
 			});
 		});
 	});
+	describe("integration", () => {
+		it("should let blocks destroy", () => {
+			let grid = new Grid({ w: 10, h: 10 });
+			let block = grid.getBlockAtPoint({ x: 0, y: 0 });
+			expect(block).toBeDefined();
+			expect(block.destroy).toBeDefined();
+			block.type = "1";
+			block.destroy();
+			expect(block.isEmpty()).toBe(true);
+		});
+	});
 });

@@ -18,11 +18,11 @@ let firing = false;
 let missile = {
 	firing: false,
 	maxEnergy: 800,
-	reloadTime: 0.05,
+	reloadTime: 0.025,
 	reload: 0,
 	regenSpeed: 10,
-	regenBaseSpeed: 50,
-	regenSpeedIncrease: 50, //per second
+	regenBaseSpeed: 150,
+	regenSpeedIncrease: 150, //per second
 	energy: 700,
 	cost: 10
 };

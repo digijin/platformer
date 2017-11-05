@@ -15,6 +15,9 @@ export default class Block {
 	isEmpty(): boolean {
 		return this.type == "0";
 	}
+	destroy() {
+		this.type = "0";
+	}
 
 	get center(): Point {
 		return new Point({
