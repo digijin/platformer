@@ -10,7 +10,7 @@ import Block from "Block";
 import Point from "Point";
 
 export default class Grid extends GameObject {
-	grid: Array<Array<Block>>;
+	blocks: Array<Array<Block>>;
 	z: number;
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
@@ -18,7 +18,7 @@ export default class Grid extends GameObject {
 		this.z = -10;
 		//make empty grid
 		// Array(3).fill(0).map(x => Array(2).fill(0).map(v => "abc"))
-		this.grid = Array(size.w)
+		this.blocks = Array(size.w)
 			.fill(0)
 			.map((i, x) =>
 				Array(size.h)
@@ -34,7 +34,7 @@ export default class Grid extends GameObject {
 		//new Block({ position: { x, y }, type: "0" })
 	}
 	getBlock(pos: { x: number, y: number }): Block {
-		return this.grid[pos.x][pos.y];
+		return this.blocks[pos.x][pos.y];
 	}
 	getBlockAtPoint(point: { x: number, y: number }): Block {
 		return this.blockAtPosition(point);
@@ -122,9 +122,11 @@ export default class Grid extends GameObject {
 		let y = Math.floor(pos.y / config.grid.height);
 		//because y goes positive downwards, if an object is flat on the top
 		//of a tile it will register as th e tile below
+		// console.log(pos.y, config.grid.height);
 		if (pos.y % config.grid.height == 0) {
 			y -= 1;
 		}
+
 		if (this.blocks[x]) {
 			// return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
 			if (this.blocks[x][y]) {
