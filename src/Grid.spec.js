@@ -8,6 +8,14 @@ describe("Grid", () => {
 	it("should be a class", () => {
 		new Grid();
 	});
+	describe("generate", () => {
+		it("should modify blocks", () => {
+			let grid = new Grid();
+			grid.generate(1);
+			let filled = grid.blocksFlattened().filter(b => !b.isEmpty());
+			expect(filled.length).toBeGreaterThan(0);
+		});
+	});
 	describe("constructor", () => {
 		it("should init an array full of blocks", () => {
 			let grid = new Grid({ w: 3, h: 4 });

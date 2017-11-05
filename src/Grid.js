@@ -11,9 +11,24 @@ import Point from "Point";
 
 import dirtTile from "dirt_tile.png";
 
+import { Noise } from "noisejs";
+
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
 	z: number;
+
+	generate(seed: number) {
+		let noise = new Noise(seed);
+		this.blocks.forEach((col, x) => {
+			col.forEach((block, y) => {
+				let value = noise.simplex2(x / 50, y / 50);
+				// console.log(x, y, value);
+				if (value < 0) {
+					block.type = "1";
+				}
+			});
+		});
+	}
 
 	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
 		super();
@@ -187,7 +202,7 @@ export default class Grid extends GameObject {
 					// 	blocksize
 					// );
 				} else {
-					// engine.ctx.fillRect(
+					// engine.ctx.fillRect( a
 					// 	x * config.grid.width,
 					// 	y * config.grid.height,
 					// 	config.grid.width,
