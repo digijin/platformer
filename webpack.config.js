@@ -23,7 +23,7 @@ var webpackConfig = {
 		fs: "false",
 		path: "false"
 	},
-	devtool: "inline-source-map",
+	devtool: "eval-source-map",
 	devServer: {
 		//contentBase: dir_build,
 		outputPath: dir_build

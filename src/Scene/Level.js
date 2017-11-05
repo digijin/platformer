@@ -14,7 +14,7 @@ export default class Level extends Base {
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
 		engine.register(player);
 		engine.register(new Enemy({ position: new Point({ x: 250, y: 250 }) }));
-		let grid = new Grid({ w: 100, h: 100 });
+		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
 		grid.generate(1);
 		engine.register(grid);

@@ -10,12 +10,9 @@ export default function* rabbit(
 		} else {
 			enemy.position.x += hDelta;
 		}
-		if (enemy.v == 0 && !enemy.canMoveVert(1)) {
-			let pause = 2;
-			while (pause > 0) {
-				pause -= engine.deltaTime;
-				yield;
-			}
+
+		if (enemy.v == 0) {
+			//jump
 			enemy.v = -4;
 		}
 		enemy.gravity();
