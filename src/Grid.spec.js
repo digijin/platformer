@@ -66,6 +66,9 @@ describe("Grid", () => {
 			it("sohuld have correct elements", () => {
 				expect(blocks[0].position.x).toBe(2);
 				expect(blocks[0].position.y).toBe(2);
+
+				expect(blocks[3].position.x).toBe(3);
+				expect(blocks[3].position.y).toBe(3);
 			});
 		});
 	});

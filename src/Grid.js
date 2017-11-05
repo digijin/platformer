@@ -115,7 +115,23 @@ export default class Grid extends GameObject {
 		return this.blockAtPosition(pos).type != "0";
 	}
 
-	getBlocksInRect(rect: Rect): Array<Block> {}
+	getBlocksInRect(rect: Rect): Array<Block> {
+		let firstCol = Math.ceil(rect.l / config.grid.width);
+		let lastCol = Math.floor(rect.r / config.grid.width);
+		let firstRow = Math.ceil(rect.t / config.grid.width);
+		let lastRow = Math.floor(rect.b / config.grid.width);
+		let out = [];
+		if (lastCol < firstCol || lastRow < firstRow) {
+			//return early
+			return out;
+		}
+		for (let x = firstCol; x < lastCol; x++) {
+			for (let y = firstRow; y < lastRow; y++) {
+				out.push(this.getBlock({ x, y }));
+			}
+		}
+		return out;
+	}
 
 	blockAtPosition(pos: { x: number, y: number }): Block {
 		let x = Math.floor(pos.x / config.grid.width);
