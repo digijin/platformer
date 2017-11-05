@@ -9,6 +9,8 @@ import config from "config";
 import Block from "Block";
 import Point from "Point";
 
+import dirtTile from "dirt_tile.png";
+
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
 	z: number;
@@ -185,11 +187,19 @@ export default class Grid extends GameObject {
 					// 	blocksize
 					// );
 				} else {
-					engine.ctx.fillRect(
-						x * config.grid.width,
-						y * config.grid.height,
-						config.grid.width,
-						config.grid.height
+					// engine.ctx.fillRect(
+					// 	x * config.grid.width,
+					// 	y * config.grid.height,
+					// 	config.grid.width,
+					// 	config.grid.height
+					// );
+
+					engine.ctx.drawSprite(
+						dirtTile,
+						cell.point,
+						{ w: config.grid.width, h: config.grid.height },
+						0,
+						{ x: 0, y: 0 }
 					);
 				}
 			});
