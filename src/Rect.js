@@ -62,7 +62,12 @@ export default class Rect {
 			y: this.t + this.height() / 2
 		});
 	}
-	constructor() {
+	/**
+	 * Recommended usage to use {t,r,b,l} but can 
+	 * be spread or inferred from points
+	 * @param {*} params 
+	 */
+	constructor(params: { t: number, r: number, b: number, l: number }) {
 		if (arguments.length === 4) {
 			this.t = arguments[0];
 			this.r = arguments[1];

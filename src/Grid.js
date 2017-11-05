@@ -115,7 +115,7 @@ export default class Grid extends GameObject {
 		return this.blockAtPosition(pos).type != "0";
 	}
 
-	blocksInRect(rect: Rect): Array<Block> {}
+	getBlocksInRect(rect: Rect): Array<Block> {}
 
 	blockAtPosition(pos: { x: number, y: number }): Block {
 		let x = Math.floor(pos.x / config.grid.width);

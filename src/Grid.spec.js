@@ -2,6 +2,7 @@ import Grid from "Grid";
 import config from "config";
 import Point from "Point";
 import Block from "Block";
+import Rect from "Rect";
 
 describe("Grid", () => {
 	it("should be a class", () => {
@@ -39,16 +40,33 @@ describe("Grid", () => {
 			let block = grid.getBlockAtPoint({ x: 15, y: 15 });
 			expect(block.position.x).toBe(1);
 			expect(block.position.y).toBe(1);
+			block = grid.getBlockAtPoint({ x: 25, y: 25 });
+			expect(block.position.x).toBe(2);
+			expect(block.position.y).toBe(2);
 		});
 	});
-	describe("blocksInRect", () => {
-		it("should return", () => {
-			config.grid.width = 20;
-			config.grid.height = 20;
+	describe("getBlocksInRect", () => {
+		describe("should return", () => {
+			let grid, rect, blocks;
 
-			let grid = new Grid();
+			beforeEach(() => {
+				config.grid.width = 10;
+				config.grid.height = 10;
 
-			grid.blocks = [[new Block({ position: { x: 0, y: 0 } })], [], []];
+				grid = new Grid({ w: 10, h: 10 });
+				rect = new Rect({ t: 15, r: 45, b: 45, l: 15 });
+				blocks = grid.getBlocksInRect(rect);
+			});
+			it("should return array", () => {
+				expect(Array.isArray(blocks)).toBe(true);
+			});
+			it("should have right number of elements", () => {
+				expect(blocks.length).toBe(4);
+			});
+			it("sohuld have correct elements", () => {
+				expect(blocks[0].position.x).toBe(2);
+				expect(blocks[0].position.y).toBe(2);
+			});
 		});
 	});
 });
