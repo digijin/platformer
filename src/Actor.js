@@ -18,6 +18,9 @@ export default class Actor extends GameObject {
 	z: number;
 	constructor() {
 		super();
+		this.v = 0;
+		this.h = 0;
+
 		this.tag("actor");
 		engine = Engine.getInstance();
 	}
@@ -72,41 +75,11 @@ export default class Actor extends GameObject {
 	};
 	canMoveVert = (amount: number): boolean => {
 		let boundingRect = this.getBoundingRect();
-		// let targetRect = boundingRect.move({ x: 0, y: amount });
-		// let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-		// let obstacles = blocks.filter(block => {
-		// 	return !block.isEmpty();
-		// });
-		// return obstacles.length == 0;
-
-		if (amount > 0) {
-			//GOIN DOWN
-			if (
-				engine.grid.isPositionBlocked({
-					x: boundingRect.r,
-					y: boundingRect.b + amount
-				}) ||
-				engine.grid.isPositionBlocked({
-					x: boundingRect.l,
-					y: boundingRect.b + amount
-				})
-			) {
-				return false;
-			}
-		} else {
-			if (
-				engine.grid.isPositionBlocked({
-					x: boundingRect.r,
-					y: boundingRect.t + amount
-				}) ||
-				engine.grid.isPositionBlocked({
-					x: boundingRect.l,
-					y: boundingRect.t + amount
-				})
-			) {
-				return false;
-			}
-		}
-		return true;
+		let targetRect = boundingRect.move({ x: 0, y: amount });
+		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+		let obstacles = blocks.filter(block => {
+			return !block.isEmpty();
+		});
+		return obstacles.length == 0;
 	};
 }
