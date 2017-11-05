@@ -12,6 +12,10 @@ export default class Block {
 		this.type = params.type;
 	}
 
+	isEmpty(): boolean {
+		return this.type == "0";
+	}
+
 	get center(): Point {
 		return new Point({
 			x: (this.position.x + 0.5) * config.grid.width,

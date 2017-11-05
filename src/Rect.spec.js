@@ -48,4 +48,18 @@ describe("Rect", () => {
 			expect(rect.contains(new Point({ x: 15, y: 5 }))).toBe(false);
 		});
 	});
+
+	describe("move", () => {
+		let rect;
+		beforeEach(() => {
+			rect = new Rect({ t: 0, r: 10, b: 10, l: 0 });
+		});
+		it("should move all values", () => {
+			rect = rect.move({ x: 1, y: 2 });
+			expect(rect.t).toBe(2);
+			expect(rect.r).toBe(11);
+			expect(rect.b).toBe(12);
+			expect(rect.l).toBe(1);
+		});
+	});
 });

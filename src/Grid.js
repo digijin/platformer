@@ -138,10 +138,6 @@ export default class Grid extends GameObject {
 		let firstRow = Math.floor(rect.t / config.grid.width);
 		let lastRow = Math.ceil(rect.b / config.grid.width);
 		let out = [];
-		if (lastCol < firstCol || lastRow < firstRow) {
-			//return early
-			return out;
-		}
 		for (let x = firstCol; x < lastCol; x++) {
 			for (let y = firstRow; y < lastRow; y++) {
 				out.push(this.getBlock({ x, y }));

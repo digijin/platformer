@@ -63,6 +63,17 @@ export default class Rect {
 		});
 	}
 	/**
+	 * doesnt mutate. returns new moved rect
+	 */
+	move(amount: { x: number, y: number }) {
+		return new Rect({
+			t: this.t + amount.y,
+			r: this.r + amount.x,
+			b: this.b + amount.y,
+			l: this.l + amount.x
+		});
+	}
+	/**
 	 * Recommended usage to use {t,r,b,l} but can 
 	 * be spread or inferred from points
 	 * @param {*} params 
