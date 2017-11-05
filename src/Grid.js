@@ -23,7 +23,8 @@ export default class Grid extends GameObject {
 			col.forEach((block, y) => {
 				let value = noise.simplex2(x / 50, y / 50);
 				// console.log(x, y, value);
-				if (value < 0) {
+				value += y / col.length * 2 - 1;
+				if (value > 0) {
 					block.type = "1";
 				}
 			});
