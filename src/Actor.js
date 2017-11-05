@@ -55,38 +55,49 @@ export default class Actor extends GameObject {
 		this.position.y += this.v;
 	};
 	getBoundingRect = (): Rect => {
-		return Rect.fromPosSizeRego(this.position, this.size, this.registration);
+		return Rect.fromPosSizeRego(
+			this.position,
+			this.size,
+			this.registration
+		);
 	};
 	canMoveHori = (amount: number): boolean => {
 		let boundingRect = this.getBoundingRect();
-		if (amount > 0) {
-			if (
-				engine.grid.isPositionBlocked({
-					x: boundingRect.r + amount,
-					y: boundingRect.t
-				}) ||
-				engine.grid.isPositionBlocked({
-					x: boundingRect.r + amount,
-					y: boundingRect.b
-				})
-			) {
-				return false;
-			}
-		} else {
-			if (
-				engine.grid.isPositionBlocked({
-					x: boundingRect.l + amount,
-					y: boundingRect.t
-				}) ||
-				engine.grid.isPositionBlocked({
-					x: boundingRect.l + amount,
-					y: boundingRect.b
-				})
-			) {
-				return false;
-			}
-		}
-		return true;
+		let targetRect = boundingRect.move({ x: amount, y: 0 });
+		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+		let obstacles = blocks.filter(block => {
+			if (!block) debugger;
+			return !block.isEmpty();
+		});
+		return obstacles.length == 0;
+		// if (amount > 0) {
+		// 	if (
+		// 		engine.grid.isPositionBlocked({
+		// 			x: boundingRect.r + amount,
+		// 			y: boundingRect.t
+		// 		}) ||
+		// 		engine.grid.isPositionBlocked({
+		// 			x: boundingRect.r + amount,
+		// 			y: boundingRect.b
+		// 		})
+		// 	) {
+		// 		return false;
+		// 	}
+		// } else {
+		// 	if (
+		// 		engine.grid.isPositionBlocked({
+		// 			x: boundingRect.l + amount,
+		// 			y: boundingRect.t
+		// 		}) ||
+		// 		engine.grid.isPositionBlocked({
+		// 			x: boundingRect.l + amount,
+		// 			y: boundingRect.b
+		// 		})
+		// 	) {
+		// 		return false;
+		// 	}
+		// }
+		// return true;
 	};
 	canMoveVert = (amount: number): boolean => {
 		let boundingRect = this.getBoundingRect();

@@ -34,7 +34,9 @@ export default class Grid extends GameObject {
 		//new Block({ position: { x, y }, type: "0" })
 	}
 	getBlock(pos: { x: number, y: number }): Block {
-		return this.blocks[pos.x][pos.y];
+		if (this.blocks[pos.x]) {
+			return this.blocks[pos.x][pos.y];
+		}
 	}
 	getBlockAtPoint(point: { x: number, y: number }): Block {
 		return this.blockAtPosition(point);
@@ -143,7 +145,8 @@ export default class Grid extends GameObject {
 				out.push(this.getBlock({ x, y }));
 			}
 		}
-		return out;
+		//strip out undefined
+		return out.filter(b => b !== undefined);
 	}
 
 	blockAtPosition(pos: { x: number, y: number }): Block {
