@@ -72,4 +72,31 @@ describe("Grid", () => {
 			});
 		});
 	});
+	describe("getBlocksOverlappingRect", () => {
+		describe("should return", () => {
+			let grid, rect, blocks;
+
+			beforeEach(() => {
+				config.grid.width = 10;
+				config.grid.height = 10;
+
+				grid = new Grid({ w: 10, h: 10 });
+				rect = new Rect({ t: 15, r: 35, b: 35, l: 15 });
+				blocks = grid.getBlocksOverlappingRect(rect);
+			});
+			it("should return array", () => {
+				expect(Array.isArray(blocks)).toBe(true);
+			});
+			it("should have right number of elements", () => {
+				expect(blocks.length).toBe(9);
+			});
+			it("sohuld have correct elements", () => {
+				expect(blocks[0].position.x).toBe(1);
+				expect(blocks[0].position.y).toBe(1);
+
+				expect(blocks[8].position.x).toBe(3);
+				expect(blocks[8].position.y).toBe(3);
+			});
+		});
+	});
 });

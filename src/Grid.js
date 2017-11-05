@@ -132,6 +132,23 @@ export default class Grid extends GameObject {
 		}
 		return out;
 	}
+	getBlocksOverlappingRect(rect: Rect): Array<Block> {
+		let firstCol = Math.floor(rect.l / config.grid.width);
+		let lastCol = Math.ceil(rect.r / config.grid.width);
+		let firstRow = Math.floor(rect.t / config.grid.width);
+		let lastRow = Math.ceil(rect.b / config.grid.width);
+		let out = [];
+		if (lastCol < firstCol || lastRow < firstRow) {
+			//return early
+			return out;
+		}
+		for (let x = firstCol; x < lastCol; x++) {
+			for (let y = firstRow; y < lastRow; y++) {
+				out.push(this.getBlock({ x, y }));
+			}
+		}
+		return out;
+	}
 
 	blockAtPosition(pos: { x: number, y: number }): Block {
 		let x = Math.floor(pos.x / config.grid.width);
