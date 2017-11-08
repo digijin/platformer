@@ -35,7 +35,26 @@ export default class Grid extends GameObject {
 	height: number;
 	width: number;
 
-	constructor(size: { w: number, h: number } = { w: 20, h: 20 }) {
+	fromTestStrings(strings: Array<string>): Grid {
+		let testdata = strings.map(a => a.split(""));
+		//flip it
+		// this.grid = testdata[0].map(function(col, x) {
+		// 	return testdata.map(function(row, y) {
+		// 		return row[x];
+		// 	});
+		// });
+		this.blocks = testdata[0].map(function(col, x) {
+			return testdata.map(function(row, y) {
+				return new Block({
+					position: new Point({ x: x, y: y }),
+					type: row[x]
+				});
+			});
+		});
+		return this;
+	}
+
+	constructor(size: { w: number, h: number } = { w: 10, h: 10 }) {
 		super();
 		this.height = size.h;
 		this.width = size.w;

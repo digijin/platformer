@@ -255,7 +255,7 @@ export default class Player extends Actor {
 		} else {
 			if (this.v == 0) {
 				this.h *= 1 - engine.deltaTime * 5;
-				//cut to zero eventually (for other aimations)
+				//cut to zero eventually (for other animations)
 				if (Math.abs(this.h) < 0.1) {
 					this.h = 0;
 				}
@@ -305,8 +305,13 @@ export default class Player extends Actor {
 		}
 
 		if (!this.canMoveHori(hDelta)) {
-			this.h = 0;
-			hDelta = 0;
+			if (this.canStep(hDelta)) {
+				//step up and keep going
+				this.position.y -= config.grid.height;
+			} else {
+				this.h = 0;
+				hDelta = 0;
+			}
 		}
 
 		this.position.x += hDelta;

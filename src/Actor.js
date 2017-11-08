@@ -5,9 +5,9 @@ import Point from "Point";
 import config from "config";
 
 import Rect from "Rect";
-import Engine from "Engine";
+import type Engine from "Engine";
 import Explosion from "Explosion";
-let engine: Engine;
+// let engine: Engine;
 
 export default class Actor extends GameObject {
 	position: Point;
@@ -22,7 +22,7 @@ export default class Actor extends GameObject {
 		this.h = 0;
 
 		this.tag("actor");
-		engine = Engine.getInstance();
+		// engine = Engine.getInstance();
 	}
 
 	explode = () => {
@@ -51,7 +51,7 @@ export default class Actor extends GameObject {
 	};
 
 	gravity = () => {
-		this.v += engine.deltaTime * config.gravity; //GRAVITY
+		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
 		if (!this.canMoveVert(this.v)) {
 			this.v = 0;
 		}
@@ -81,5 +81,43 @@ export default class Actor extends GameObject {
 			return !block.isEmpty();
 		});
 		return obstacles.length == 0;
+	};
+	//whether actor can step up
+	canStep = (amount: number): boolean => {
+		let boundingRect = this.getBoundingRect();
+		let targetRect = boundingRect.move({ x: amount, y: 0 });
+		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+		let obstacles = blocks.filter(block => {
+			return !block.isEmpty();
+		});
+		//if only one block is an obstacle, and it is in lower corner
+		let step: Block;
+		if (obstacles.length == 1) {
+			if (amount > 0) {
+				//moving right
+				if (!blocks[blocks.length - 1].isEmpty()) {
+					step = blocks[blocks.length - 1];
+				}
+			} else {
+				let bl = blocks.reduce((a: Block, b: Block) => {
+					if (a.position.x < b.position.x) {
+						//more left
+						return a;
+					}
+					if (a.position.y > b.position.y) {
+						//lower
+						return a;
+					}
+					return b;
+				});
+				if (!bl.isEmpty()) {
+					step = bl;
+				}
+			}
+		}
+		if (step) {
+			return this.canMoveVert(config.grid.height);
+		}
+		return false;
 	};
 }
