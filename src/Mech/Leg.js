@@ -56,6 +56,7 @@ export default class Leg extends GameObject {
 					x: Math.cos(this.stride + Math.PI) * 30,
 					y: Math.sin(this.stride + Math.PI) * 20
 				}).add(this.parent.position);
+				torsoOffsetTarget.y += Math.sin(this.stride * 2) * 10;
 			}
 		}
 		//ease it all in
