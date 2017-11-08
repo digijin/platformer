@@ -116,7 +116,7 @@ export default class Actor extends GameObject {
 			}
 		}
 		if (step) {
-			return this.canMoveVert(config.grid.height);
+			return this.canMoveVert(-config.grid.height);
 		}
 		return false;
 	};

@@ -16,7 +16,7 @@ describe("Actor", () => {
 			"000001",
 			"000000",
 			"000000",
-			"000111",
+			"000011",
 			"111111"
 		]);
 		actor.init({ grid });
@@ -35,6 +35,9 @@ describe("Actor", () => {
 		});
 		it("should return false if there's no step", () => {
 			expect(actor.canStep(5)).toBe(false);
+		});
+		it("should return true if there's a step", () => {
+			expect(actor.canStep(15)).toBe(true);
 		});
 	});
 });
