@@ -91,10 +91,11 @@ export default class Player extends Actor {
 	}
 	update(engine: Engine) {
 		//adjust camera
-		engine.view.offset = this.position.subtract({
+		let viewTarget = this.position.subtract({
 			x: config.game.width / 2,
 			y: config.game.height / 2
 		});
+		engine.view.offset = engine.view.offset.easeTo(viewTarget, 5);
 
 		let gp = engine.input.gamepad.getGamePad();
 		if (engine.input.getDevice() == "gamepad") {
