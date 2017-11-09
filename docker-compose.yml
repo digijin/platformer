@@ -1,0 +1,9 @@
+version: '3'
+services:
+  bash:
+    build: .
+    ports:
+     - "5000:5000"
+    volumes:
+     - ./src:/var/dev/src
+     - ./dist:/var/dev/dist
