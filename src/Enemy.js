@@ -11,6 +11,7 @@ import config from "config";
 
 import patrol from "AI/patrol";
 import rabbit from "AI/rabbit";
+import type EnemyType from "EnemyType";
 
 export default class Enemy extends Actor {
 	position: Point;
@@ -19,7 +20,8 @@ export default class Enemy extends Actor {
 	walkSpeed: number;
 	v: number;
 	h: number;
-	constructor(params: Object) {
+	type: EnemyType;
+	constructor(params: { position: Point, type: EnemyType }) {
 		super();
 		this.tag("enemy");
 		this.walkSpeed = config.enemy.walkSpeed;
@@ -58,30 +60,30 @@ export default class Enemy extends Actor {
 	}
 }
 
-export function* ai(enemy: Enemy, engine: Engine): Generator<*, *, *> {
-	const dontFall = true;
-	let direction = 1;
-	while (true) {
-		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
-		if (!enemy.canMoveHori(hDelta)) {
-			direction = -direction;
-		} else {
-			enemy.position.x += hDelta;
-		}
-		if (dontFall) {
-			let rect = enemy.getBoundingRect();
+// export function* ai(enemy: Enemy, engine: Engine): Generator<*, *, *> {
+// 	const dontFall = true;
+// 	let direction = 1;
+// 	while (true) {
+// 		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
+// 		if (!enemy.canMoveHori(hDelta)) {
+// 			direction = -direction;
+// 		} else {
+// 			enemy.position.x += hDelta;
+// 		}
+// 		if (dontFall) {
+// 			let rect = enemy.getBoundingRect();
 
-			let check = { y: rect.b + 1, x: rect.r + 1 };
-			if (direction == -1) {
-				check.x = rect.l - 1;
-			}
+// 			let check = { y: rect.b + 1, x: rect.r + 1 };
+// 			if (direction == -1) {
+// 				check.x = rect.l - 1;
+// 			}
 
-			if (!engine.grid.isPositionBlocked(check)) {
-				direction = -direction;
-			}
-		}
+// 			if (!engine.grid.isPositionBlocked(check)) {
+// 				direction = -direction;
+// 			}
+// 		}
 
-		enemy.gravity();
-		yield;
-	}
-}
+// 		enemy.gravity();
+// 		yield;
+// 	}
+// }
