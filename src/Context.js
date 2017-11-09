@@ -63,6 +63,7 @@ export default class Context {
 		this.context.strokeRect(x - o.x, y - o.y, w, h);
 	}
 	fill() {
+		// FLOWHACK
 		this.context.fill(...arguments);
 	}
 	fillText() {

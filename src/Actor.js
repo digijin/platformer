@@ -7,6 +7,7 @@ import config from "config";
 import Rect from "Rect";
 import type Engine from "Engine";
 import Explosion from "Explosion";
+import type Block from "Block";
 // let engine: Engine;
 
 export default class Actor extends GameObject {

@@ -8,6 +8,9 @@ import Point from "Point";
 
 import type Block from "Block";
 
+import { EnemyTypes } from "EnemyType";
+import type EnemyType from "EnemyType";
+
 import GameObject from "GameObject";
 export default class Spawner extends GameObject {
 	update() {
@@ -22,11 +25,16 @@ export default class Spawner extends GameObject {
 			Block
 		> = this.engine.grid.blocksFlattened().filter(b => b.type == "0"); //only empties;
 
+		let randomType: EnemyType =
+			EnemyTypes[Math.floor(Math.random() * EnemyTypes.length)];
 		if (emptyBlocks.length > 0) {
 			let block: Block =
 				emptyBlocks[Math.floor(emptyBlocks.length * Math.random())];
 			this.engine.register(
-				new Enemy({ position: new Point(block.center) })
+				new Enemy({
+					position: new Point(block.center),
+					type: randomType
+				})
 			);
 		} else {
 			throw new Error("no empty blocks");

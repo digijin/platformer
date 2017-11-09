@@ -54,7 +54,7 @@ export default class Engine {
 		// this.keyboard = this.input.keyboard;
 	}
 	init(container: HTMLElement) {
-		//FLOWHACK
+		// FLOWHACK
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
@@ -87,6 +87,7 @@ export default class Engine {
 
 	//add new objects to be tracked by engine
 	register = (obj: GameObject) => {
+		// FLOWHACK
 		obj.destroy = () => {
 			let i = this.objects.indexOf(obj);
 			if (i > -1) {

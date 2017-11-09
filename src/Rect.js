@@ -118,12 +118,12 @@ export default class Rect {
 		}
 	}
 	blockRect(): Rect {
-		return new Rect(
-			Math.floor(this.t / config.grid.height),
-			Math.ceil(this.r / config.grid.width),
-			Math.ceil(this.b / config.grid.width),
-			Math.floor(this.l / config.grid.height)
-		);
+		return new Rect({
+			t: Math.floor(this.t / config.grid.height),
+			r: Math.ceil(this.r / config.grid.width),
+			b: Math.ceil(this.b / config.grid.width),
+			l: Math.floor(this.l / config.grid.height)
+		});
 	}
 	width(): number {
 		return this.r - this.l;
@@ -143,12 +143,12 @@ export default class Rect {
 	}
 
 	add(rect: { t: number, r: number, b: number, l: number }): Rect {
-		return new Rect(
-			this.t + rect.t,
-			this.r + rect.r,
-			this.b + rect.b,
-			this.l + rect.l
-		);
+		return new Rect({
+			t: this.t + rect.t,
+			r: this.r + rect.r,
+			b: this.b + rect.b,
+			l: this.l + rect.l
+		});
 	}
 
 	// get units(): Array<Block> {
