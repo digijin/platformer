@@ -1,3 +1,5 @@
+// @flow
+
 import { extend, keys, assign } from "lodash";
 import ReactTestUtils from "react-dom/test-utils";
 import sizzle from "sizzle";
@@ -8,15 +10,11 @@ function sleep(ms) {
 
 let gap = 10;
 
-let mouseEvent = function(target, eventName, params) {
+let mouseEvent = function(eventName: string, params: Object) {
 	var event = document.createEvent("Event");
 	extend(event, params);
 	event.initEvent(eventName, true, true);
-	if (!target) {
-		debugger;
-		throw new Error("no target");
-	}
-	target.dispatchEvent(event); //was document
+	document.dispatchEvent(event); //was document
 };
 
 let clickSelector = function(selector: string): boolean {
