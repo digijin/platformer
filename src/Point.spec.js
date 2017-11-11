@@ -54,8 +54,8 @@ describe("Point", () => {
 	describe("getblock", () => {
 		it("shuold return xy ", () => {
 			let rounded = new Point({ x: 12, y: 23 }).getBlock();
-			expect(rounded.x).toBe(1);
-			expect(rounded.y).toBe(2);
+			expect(rounded.x).toBe(0);
+			expect(rounded.y).toBe(1);
 		});
 	});
 });
