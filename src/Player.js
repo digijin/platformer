@@ -247,21 +247,22 @@ export default class Player extends Actor {
 		let boundingRect = this.getBoundingRect();
 
 		//HORIZONTAL
-		if (engine.input.getKey(65)) {
-			this.h -= engine.deltaTime * 5;
-			if (this.h < -1) this.h = -1;
-		} else if (engine.input.getKey(68)) {
-			this.h += engine.deltaTime * 5;
-			if (this.h > 1) this.h = 1;
-		} else {
-			if (this.v == 0) {
-				this.h *= 1 - engine.deltaTime * 5;
-				//cut to zero eventually (for other animations)
-				if (Math.abs(this.h) < 0.1) {
-					this.h = 0;
-				}
-			}
-		}
+		// if (engine.input.getKey("left")) {
+		// 	this.h -= engine.deltaTime * 5;
+		// 	if (this.h < -1) this.h = -1;
+		// } else if (engine.input.getKey("right")) {
+		// 	this.h += engine.deltaTime * 5;
+		// 	if (this.h > 1) this.h = 1;
+		// } else {
+		// 	if (this.v == 0) {
+		// 		this.h *= 1 - engine.deltaTime * 5;
+		// 		//cut to zero eventually (for other animations)
+		// 		if (Math.abs(this.h) < 0.1) {
+		// 			this.h = 0;
+		// 		}
+		// 	}
+		// }
+		this.h = this.engine.input.getAxis("horizontal");
 
 		if (gp && engine.input.getLastActivityDevice() == "gamepad") {
 			this.h = gp.axes[0];
