@@ -9,7 +9,7 @@ import Actor from "Actor";
 
 import config from "config";
 
-import patrol from "AI/patrol";
+// import patrol from "AI/patrol";
 import rabbit from "AI/rabbit";
 import type EnemyType from "EnemyType";
 

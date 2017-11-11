@@ -14,6 +14,9 @@ module.exports = [
 			modules: ["node_modules", path.resolve(__dirname, "src")]
 		},
 		devtool: "inline-source-map",
+		devServer: {
+			contentBase: path.join(__dirname, "dist") // boolean | string | array, static file location
+		},
 		target: "web",
 		module: {
 			rules: [

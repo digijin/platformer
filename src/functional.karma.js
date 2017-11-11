@@ -46,8 +46,8 @@ describe("functional", () => {
 	describe("weapons check", () => {
 		it("should aim", () => {
 			let target = {
-				clientX: window.innerWidth / 2 + 100,
-				clientY: window.innerHeight / 2 - 100
+				clientX: window.innerWidth / 2 + 200,
+				clientY: window.innerHeight / 2 - 200
 			};
 			mouseUtil.mouseEvent("mousemove", target);
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
@@ -76,6 +76,54 @@ describe("functional", () => {
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 1000);
+		});
+	});
+	describe("run and gun", () => {
+		it("should start running", () => {
+			window.onkeydown({ keyCode: 68 });
+			expect(game.engine.input.getAxis("horizontal")).toBe(1);
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should start jumping", () => {
+			window.onkeydown({ keyCode: 32 });
+			expect(game.engine.input.getButton("jump")).toBe(1);
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 100);
+		});
+		it("should stop jumping", () => {
+			window.onkeyup({ keyCode: 32 });
+			expect(game.engine.input.getButton("jump")).toBe(0);
+		});
+
+		it("should aim", () => {
+			let target = {
+				clientX: window.innerWidth / 2 + 200,
+				clientY: window.innerHeight / 2 + 200
+			};
+			mouseUtil.mouseEvent("mousemove", target);
+			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
+		});
+		it("should begin firing", () => {
+			mouseUtil.mouseEvent("mousedown", { button: 2 });
+		});
+
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should end firing", () => {
+			mouseUtil.mouseEvent("mouseup", { button: 2 });
+		});
+		it("should begin firing", () => {
+			mouseUtil.mouseEvent("mousedown", { button: 0 });
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should end firing", () => {
+			mouseUtil.mouseEvent("mouseup", { button: 0 });
 		});
 	});
 });
