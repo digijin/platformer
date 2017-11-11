@@ -13,6 +13,7 @@ import UI from "UI";
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 
+import "./style.styl";
 // import MainMenu from 'MainMenu/Menu';
 
 export default class Game {
