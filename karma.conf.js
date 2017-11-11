@@ -1,61 +1,76 @@
 // Karma configuration
-
+var path = require("path");
 var webpackConf = require("./webpack.config.js");
-delete webpackConf.entry;
-webpackConf.module.loaders[0].loader =
-	"istanbul-instrumenter-loader!babel-loader"; //instrument
-webpackConf.plugins = [];
+delete webpackConf[0].entry;
+//inject instrumentation
+webpackConf[0].module.rules.push({
+	test: /\.js$|\.jsx$/,
+	use: {
+		loader: "istanbul-instrumenter-loader",
+		options: { esModules: true }
+	},
+	enforce: "post",
+	exclude: /node_modules|\.spec\.js$/
+});
 
 module.exports = function(config) {
 	config.set({
-		// base path that will be used to resolve all patterns (eg. files, exclude)
 		basePath: "",
-		frameworks: ["jasmine"], //
-
-		// list of files / patterns to load in the browser
+		frameworks: ["jasmine"],
 		files: [
-			// {pattern: 'spec/fixtures/*.html', watched: true, included: false, served: true},
-			// 'spec/fixtures/*.html',
 			"node_modules/babel-polyfill/dist/polyfill.js",
-			"src/**/*.karma.js"
+			{ pattern: "src/**/*karma.js", watched: false }
+			// { pattern: "src/**/*spec.js", watched: false }
 		],
-
-		// list of files to exclude
 		exclude: [],
-
-		// preprocess matching files before serving them to the browser
-		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			"**/*karma.js*": ["webpack", "sourcemap"]
+			"src/**/!(*.spec|*.karma).js": ["coverage"],
+			"**/*karma.js": ["webpack", "sourcemap"],
+			"**/*spec.js": ["webpack", "sourcemap"]
 		},
-
-		webpack: webpackConf,
-
-		// test results reporter to use
-		// possible values: 'dots', 'progress'
+		webpack: webpackConf[0],
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-		// reporters: ['coverage', 'progress', 'kjhtml'], // 'nyan',
-		reporters: ["spec", "coverage"],
+		// reporters: ['coverage', 'progress', 'kjhtml'], // 'nyan', 'dots', 'progress'
+		reporters: ["spec", "coverage-istanbul"],
 
 		specReporter: {
 			suppressSkipped: true,
 			showSpecTiming: true
 		},
-
-		coverageReporter: {
-			reporters: [
-				// {type: 'text'},
-				{
-					type: "lcov",
-					dir: "coverage",
+		coverageIstanbulReporter: {
+			reports: ["html", "text", "lcov"],
+			dir: path.join(__dirname, "coverage"),
+			// if using webpack and pre-loaders, work around webpack breaking the source path
+			fixWebpackSourcePaths: true,
+			// stop istanbul outputting messages like `File [${filename}] ignored, nothing could be mapped`
+			skipFilesWithNoCoverage: true,
+			// Most reporters accept additional config options. You can pass these through the `report-config` option
+			"report-config": {
+				// all options available at: https://github.com/istanbuljs/istanbul-reports/blob/590e6b0089f67b723a1fdf57bc7ccc080ff189d7/lib/html/index.js#L135-L137
+				html: {
+					// outputs the report in ./coverage/html
+					subdir: "html"
+				},
+				lcov: {
 					subdir: "lcov"
 				}
-				// {
-				// 	type: "html",
-				// 	dir: "coverage/html"
-				// }
-			]
+			}
 		},
+
+		// coverageReporter: {
+		// 	reporters: [
+		// 		{ type: "text" },
+		// 		{
+		// 			type: "lcov",
+		// 			dir: "coverage",
+		// 			subdir: "lcov"
+		// 		}
+		// 		// {
+		// 		// 	type: "html",
+		// 		// 	dir: "coverage/html"
+		// 		// }
+		// 	]
+		// },
 		// web server port
 		port: 9876,
 

@@ -1,6 +1,8 @@
 import Game from "Game";
 
 import mouseUtil from "test/util/mouse";
+// let Game = require("./Game");
+// let mouseUtil = require("./test/util/mouse");
 
 describe("functional", () => {
 	let container;
