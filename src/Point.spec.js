@@ -29,12 +29,33 @@ describe("Point", () => {
 		});
 	});
 	describe("easeTo", () => {
+		it("should error if no divisor", () => {
+			let from = new Point({ x: 0, y: 0 });
+			let to = new Point({ x: 2, y: 1 });
+			expect(() => {
+				from.easeTo(to);
+			}).toThrow();
+		});
 		it("should ease", () => {
 			let from = new Point({ x: 0, y: 0 });
 			let to = new Point({ x: 2, y: 1 });
 			let eased = from.easeTo(to, 2);
 			expect(eased.x).toBe(1);
 			expect(eased.y).toBe(0.5);
+		});
+	});
+	describe("rounded", () => {
+		it("shuold return xy rounded", () => {
+			let rounded = new Point({ x: 0.7, y: 2.3 }).rounded;
+			expect(rounded.x).toBe(1);
+			expect(rounded.y).toBe(2);
+		});
+	});
+	describe("getblock", () => {
+		it("shuold return xy ", () => {
+			let rounded = new Point({ x: 12, y: 23 }).getBlock();
+			expect(rounded.x).toBe(1);
+			expect(rounded.y).toBe(2);
 		});
 	});
 });
