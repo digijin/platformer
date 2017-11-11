@@ -10,6 +10,10 @@ export type EnemyTypeParams = {
 };
 
 export default class EnemyType {
+	walkSpeed: number;
+	jumpSpeed: number;
+	size: { w: number, h: number };
+	registration: { x: number, y: number };
 	constructor(params: EnemyTypeParams) {}
 }
 
