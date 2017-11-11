@@ -10,7 +10,7 @@ webpackConf[0].module.rules.push({
 		options: { esModules: true }
 	},
 	enforce: "post",
-	exclude: /node_modules|\.spec\.js$/
+	exclude: /node_modules|\.(spec|karma)\.js$/
 });
 
 module.exports = function(config) {
@@ -19,8 +19,8 @@ module.exports = function(config) {
 		frameworks: ["jasmine"],
 		files: [
 			"node_modules/babel-polyfill/dist/polyfill.js",
-			{ pattern: "src/**/*karma.js", watched: false }
-			// { pattern: "src/**/*spec.js", watched: false }
+			{ pattern: "src/**/*karma.js", watched: false },
+			{ pattern: "src/**/*spec.js", watched: false }
 		],
 		exclude: [],
 		preprocessors: {
