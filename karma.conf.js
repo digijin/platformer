@@ -2,7 +2,8 @@
 
 var webpackConf = require("./webpack.config.js");
 delete webpackConf.entry;
-// webpackConf.module.loaders[0].loader = 'isparta'; //instrument
+webpackConf.module.loaders[0].loader =
+	"istanbul-instrumenter-loader!babel-loader"; //instrument
 webpackConf.plugins = [];
 
 module.exports = function(config) {
@@ -46,12 +47,13 @@ module.exports = function(config) {
 				// {type: 'text'},
 				{
 					type: "lcov",
-					dir: "coverage/functional/"
-				},
-				{
-					type: "html",
-					dir: "coverage/html/"
+					dir: "coverage",
+					subdir: "lcov"
 				}
+				// {
+				// 	type: "html",
+				// 	dir: "coverage/html"
+				// }
 			]
 		},
 		// web server port

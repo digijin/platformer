@@ -31,6 +31,7 @@
 	"devDependencies": {
 		"babel-jest": "^18.0.0",
 		"babel-preset-es2015-native-generators": "^6.6.0",
+		"coveralls": "^3.0.0",
 		"karma-spec-reporter": "0.0.30",
 		"sizzle": "^2.3.3"
 	},
@@ -55,6 +56,7 @@
 		"html-loader": "^0.4.3",
 		"img-element-loader": "^1.0.0",
 		"isparta-loader": "^2.0.0",
+		"istanbul-instrumenter-loader": "^3.0.0",
 		"jasmine-core": "^2.3.0",
 		"jasmine-es6-generator": "^0.1.0",
 		"jest": "^18.1.0",
@@ -94,15 +96,25 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": ["js", "jsx"],
-		"moduleDirectories": ["node_modules", "src"],
-		"modulePaths": ["/src"],
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-				"<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"removed coverageReporters": ["json", "lcov"]
+		"removed coverageReporters": [
+			"json",
+			"lcov"
+		]
 	}
 }

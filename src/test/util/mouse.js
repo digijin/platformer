@@ -1,5 +1,5 @@
 import { extend, keys, assign } from "lodash";
-import ReactTestUtils from "react-addons-test-utils";
+import ReactTestUtils from "react-dom/test-utils";
 import sizzle from "sizzle";
 
 function sleep(ms) {
