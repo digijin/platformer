@@ -1,5 +1,7 @@
 import Game from "Game";
 
+import mouseUtil from "test/util/mouse";
+
 describe("functional", () => {
 	let container;
 	beforeAll(function() {
@@ -26,6 +28,15 @@ describe("functional", () => {
 		});
 		it("should have a ui div", () => {
 			expect(container.childNodes[1].id).toBe("ui");
+		});
+	});
+	describe("start game", () => {
+		it("should press play", () => {
+			expect(document.getElementById("play")).toBeDefined();
+			mouseUtil.clickSelector("#play");
+		});
+		it("shouldnt throw any errors in the first second", done => {
+			setTimeout(done, 1000);
 		});
 	});
 });

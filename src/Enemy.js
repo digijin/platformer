@@ -25,8 +25,10 @@ export default class Enemy extends Actor {
 		super();
 		this.tag("enemy");
 		this.walkSpeed = config.enemy.walkSpeed;
-		this.size = params.type.size;
-		this.registration = params.type.registration;
+		// this.size = params.type.size;
+		// this.registration = params.type.registration;
+		this.size = config.enemy.size;
+		this.registration = config.enemy.registration;
 
 		Object.assign(this, params);
 	}

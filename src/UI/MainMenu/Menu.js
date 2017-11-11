@@ -18,7 +18,9 @@ class MainMenu extends React.Component {
 						right mouse:secondary (missiles)<br />
 					</pre>
 				</div>
-				<button onClick={this.props.play}>Play</button>
+				<button id="play" onClick={this.props.play}>
+					Play
+				</button>
 			</div>
 		);
 	}
