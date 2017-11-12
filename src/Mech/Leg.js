@@ -5,6 +5,8 @@ import GameObject from "GameObject";
 import type Player from "Player";
 import Point from "Point";
 
+import cockpit from "cockpit.png";
+
 const branchLength = 25;
 const numBranches = 2;
 
@@ -76,10 +78,15 @@ export default class Leg extends GameObject {
 		this.ik(this.rearFootPos, facing);
 	}
 	head(pos: Point) {
-		this.engine.ctx.beginPath();
-		this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
-		this.engine.ctx.context.fillStyle = "#ababab";
-		this.engine.ctx.fill();
+		// this.engine.ctx.beginPath();
+		// this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
+		// this.engine.ctx.context.fillStyle = "#ababab";
+		// this.engine.ctx.fill();
+
+		this.engine.ctx.drawSprite(cockpit, pos, { w: 30, h: 15 }, 0, {
+			x: 0.5,
+			y: 0.5
+		});
 	}
 	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
