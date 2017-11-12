@@ -1,9 +1,15 @@
 // @flow
 import Game from "Game";
 
+import testGen from "jasmine-es6-generator";
 import mouseUtil from "test/util/mouse";
 // let Game = require("./Game");
 // let mouseUtil = require("./test/util/mouse");
+
+// const tg: (Generator<*,*,*>)=>null = testGen
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 describe("functional", () => {
 	let container;
@@ -56,9 +62,22 @@ describe("functional", () => {
 			mouseUtil.mouseEvent("mousedown", { button: 0 });
 			expect(game.engine.input.getButton("fire")).toBe(1);
 		});
-		it("should fire for a while", done => {
-			setTimeout(done, 1000);
-		});
+		it(
+			"should move cursor",
+			testGen(function*() {
+				for (let i = 0; i < 100; i++) {
+					let target = {
+						clientX: window.innerWidth / 2 + 200,
+						clientY: window.innerHeight / 2 - 200 + i * 2
+					};
+					mouseUtil.mouseEvent("mousemove", target);
+					expect(game.engine.input.mouse.position.y).toBe(
+						target.clientY
+					);
+					yield sleep(10);
+				}
+			})
+		);
 		it("should end firing", () => {
 			mouseUtil.mouseEvent("mouseup", { button: 0 });
 		});
