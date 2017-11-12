@@ -37,6 +37,44 @@ export default {
 		registration: { x: 0.5, y: 1 }
 	},
 	input: {
+		keyboardMapping: {
+			a: 65,
+			d: 68,
+			w: 87,
+			s: 83,
+			left: 37,
+			up: 38,
+			right: 39,
+			down: 40,
+			shift: 16,
+			enter: 13,
+			ctrl: 17,
+			escape: 27,
+			space: 32
+		},
+		axes: {
+			horizontal: [
+				{
+					type: "keyboard",
+					positive: "d",
+					negative: "a"
+				},
+				{
+					type: "keyboard",
+					positive: "right",
+					negative: "left"
+				},
+				{ type: "gamepad", axis: 0 }
+			],
+			vertical: [
+				{
+					type: "keyboard",
+					positive: "up",
+					negative: "down"
+				},
+				{ type: "gamepad", axis: 1 }
+			]
+		},
 		buttons: {
 			jump: [
 				{ type: "gamepad", button: 0 },

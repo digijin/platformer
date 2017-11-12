@@ -99,11 +99,11 @@ describe("functional", () => {
 	});
 	describe("run and gun", () => {
 		it("should start running", () => {
-			window.onkeydown({ keyCode: 39 }); //39
+			window.onkeydown({ keyCode: 68 }); //39
 			// expect(game.engine.input.getAxis("horizontal")).toBe(1);
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 500);
 		});
 		it("should start jumping", () => {
 			window.onkeydown({ keyCode: 32 });
@@ -119,7 +119,7 @@ describe("functional", () => {
 
 		it("should aim", () => {
 			let target = {
-				clientX: window.innerWidth / 2 + 200,
+				clientX: window.innerWidth / 2 - 200,
 				clientY: window.innerHeight / 2 + 200
 			};
 			mouseUtil.mouseEvent("mousemove", target);
