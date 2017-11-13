@@ -88,15 +88,22 @@ export default class Engine {
 	//add new objects to be tracked by engine
 	register = (obj: GameObject) => {
 		// FLOWHACK
-		obj.destroy = () => {
-			let i = this.objects.indexOf(obj);
-			if (i > -1) {
-				this.objects.splice(i, 1);
-			}
-		};
+		// obj.destroy = () => {
+		// 	let i = this.objects.indexOf(obj);
+		// 	if (i > -1) {
+		// 		this.objects.splice(i, 1);
+		// 	}
+		// };
 		obj.init(this);
 		this.objects.push(obj);
 	};
+
+	destroy(obj: GameObject) {
+		let i = this.objects.indexOf(obj);
+		if (i > -1) {
+			this.objects.splice(i, 1);
+		}
+	}
 
 	objectsTagged = (tag: string): Array<GameObject> => {
 		return this.objects.filter(o => {

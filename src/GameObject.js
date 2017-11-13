@@ -22,4 +22,7 @@ export default class GameObject {
 	hasTag = (tag: string) => {
 		return this.tags.indexOf(tag) > -1;
 	};
+	destroy() {
+		this.engine.destroy(this);
+	}
 }
