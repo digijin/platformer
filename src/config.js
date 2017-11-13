@@ -69,8 +69,8 @@ export default {
 			vertical: [
 				{
 					type: "keyboard",
-					positive: "up",
-					negative: "down"
+					positive: "s",
+					negative: "w"
 				},
 				{ type: "gamepad", axis: 1 }
 			]
@@ -91,6 +91,8 @@ export default {
 				{ type: "keyboard", key: "ctrl" },
 				{ type: "mouse", button: 0 }
 			],
+			editor_add: [{ type: "mouse", button: 0 }],
+			editor_remove: [{ type: "mouse", button: 2 }],
 			stand: [{ type: "gamepad", button: 5 }]
 		}
 	}

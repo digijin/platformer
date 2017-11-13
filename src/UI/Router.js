@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Menu from "./MainMenu/Menu";
+import EditorPanel from "./Editor/Panel";
 
 import type Engine from "Engine";
 
@@ -12,6 +13,8 @@ export class Router extends React.Component {
 	render() {
 		if (this.props.scene == "menu") {
 			return <Menu engine={this.props.engine} />;
+		} else if (this.props.scene == "editor") {
+			return <EditorPanel engine={this.props.engine} />;
 		} else {
 			return <div />;
 		}

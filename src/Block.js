@@ -18,6 +18,14 @@ export default class Block {
 	destroy() {
 		this.type = "0";
 	}
+	//for editor
+	add() {
+		this.type = "1";
+	}
+	//for editor
+	remove() {
+		this.type = "0";
+	}
 
 	get center(): Point {
 		return new Point({

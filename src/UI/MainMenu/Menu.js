@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Level from "Scene/Level";
+import Editor from "Scene/Editor";
 
 class MainMenu extends React.Component {
 	render() {
@@ -21,6 +22,9 @@ class MainMenu extends React.Component {
 				<button id="play" onClick={this.props.play}>
 					Play
 				</button>
+				<button id="editor" onClick={this.props.editor}>
+					Editor
+				</button>
 			</div>
 		);
 	}
@@ -34,6 +38,9 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 	return {
 		play: () => {
 			props.engine.startScene(new Level());
+		},
+		editor: () => {
+			props.engine.startScene(new Editor());
 		},
 		close: id => {
 			// dispatch({type:'CLOSE_CONTEXT_MENU'});
