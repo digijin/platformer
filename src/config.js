@@ -73,6 +73,11 @@ export default {
 					negative: "w"
 				},
 				{ type: "gamepad", axis: 1 }
+			],
+			wheel: [
+				{
+					type: "mouse"
+				}
 			]
 		},
 		buttons: {

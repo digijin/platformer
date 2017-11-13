@@ -7,9 +7,11 @@ import Rect from "Rect";
 
 export default class Watcher extends GameObject {
 	el: HTMLDivElement;
+	size: number;
 
 	constructor() {
 		super();
+		this.size = 10;
 	}
 	init(engine: Engine) {
 		super.init(engine);
@@ -18,10 +20,10 @@ export default class Watcher extends GameObject {
 		// engine.ui.container.appendChild(el);
 	}
 	update() {
-		let size = 10;
+		this.size += this.engine.input.getAxis("wheel") / 50;
 		let rect = Rect.fromPosSizeRego(
 			this.engine.mouse.point,
-			{ w: size, h: size },
+			{ w: this.size, h: this.size },
 			{ x: 0.5, y: 0.5 }
 		);
 		let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
@@ -39,12 +41,12 @@ export default class Watcher extends GameObject {
 		this.engine.view.offset.y +=
 			this.engine.input.getAxis("vertical") * this.engine.deltaTime * 200;
 
-		//render
+		//render cursor
 		this.engine.ctx.fillRect(
 			rect.tl().x,
 			rect.tl().y,
-			size,
-			size
+			this.size,
+			this.size
 			// x * config.grid.width,
 			// y * config.grid.height,
 			// config.grid.width,
