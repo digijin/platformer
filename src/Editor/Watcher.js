@@ -27,11 +27,14 @@ export default class Watcher extends GameObject {
 			{ x: 0.5, y: 0.5 }
 		);
 		let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
+		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		if (this.engine.input.getButton("editor_add")) {
-			block.add();
+			// block.add();
+			blocks.forEach(b => b.add());
 		}
 		if (this.engine.input.getButton("editor_remove")) {
-			block.remove();
+			// block.remove();
+			blocks.forEach(b => b.remove());
 		}
 		//scrolling
 		this.engine.view.offset.x +=
