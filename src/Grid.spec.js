@@ -12,7 +12,7 @@ describe("Grid", () => {
 		it("should modify blocks", () => {
 			let grid = new Grid();
 			grid.generate(1);
-			let filled = grid.blocksFlattened().filter(b => !b.isEmpty());
+			let filled = grid.getBlocksFlattened().filter(b => !b.isEmpty());
 			expect(filled.length).toBeGreaterThan(0);
 		});
 	});
@@ -105,6 +105,14 @@ describe("Grid", () => {
 				expect(blocks[8].position.x).toBe(3);
 				expect(blocks[8].position.y).toBe(3);
 			});
+		});
+	});
+	describe("save and load", () => {
+		it("should stringify", () => {
+			let grid = new Grid({ w: 2, h: 2 });
+			expect(JSON.stringify(grid.getBlocksFlattened())).toBe(
+				'[{"position":{"x":0,"y":0},"type":"0"},{"position":{"x":0,"y":1},"type":"0"},{"position":{"x":1,"y":0},"type":"0"},{"position":{"x":1,"y":1},"type":"0"}]'
+			);
 		});
 	});
 	describe("integration", () => {

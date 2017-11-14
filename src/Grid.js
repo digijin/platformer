@@ -85,7 +85,7 @@ export default class Grid extends GameObject {
 		return this.blockAtPosition(point);
 	}
 
-	blocksFlattened = (): Array<Block> => {
+	getBlocksFlattened = (): Array<Block> => {
 		return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
 			// return a.splice(0, 0, ...b);
 			return [].concat(a, b);
