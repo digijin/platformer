@@ -174,4 +174,19 @@ export default class Grid extends GameObject {
 	update = (engine: Engine) => {
 		this.tileRenderer.render();
 	};
+
+	save(): string {
+		return JSON.stringify(this.blocks);
+	}
+	load(str: string) {
+		let data = JSON.parse(str);
+		this.blocks = data.map(d => {
+			return d.map(block => {
+				return new Block({
+					position: new Point(block.position),
+					type: block.type
+				});
+			});
+		});
+	}
 }
