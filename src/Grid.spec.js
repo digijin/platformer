@@ -108,11 +108,35 @@ describe("Grid", () => {
 		});
 	});
 	describe("save and load", () => {
+		describe("load", () => {
+			it("should have load", () => {
+				let grid = new Grid({ w: 10, h: 10 });
+
+				expect(grid.load).toBeDefined();
+			});
+			it("should restore the original grid size", () => {
+				let gridA = new Grid({ w: 10, h: 10 });
+				let gridB = new Grid({ w: 5, h: 5 });
+				gridB.load(gridA.save());
+				expect(gridB.blocks.length).toBe(gridA.blocks.length);
+			});
+		});
 		it("should stringify", () => {
 			let grid = new Grid({ w: 2, h: 2 });
 			expect(JSON.stringify(grid.getBlocksFlattened())).toBe(
 				'[{"position":{"x":0,"y":0},"type":"0"},{"position":{"x":0,"y":1},"type":"0"},{"position":{"x":1,"y":0},"type":"0"},{"position":{"x":1,"y":1},"type":"0"}]'
 			);
+		});
+		it("should restore block settings", () => {
+			let gridA = new Grid({ w: 5, h: 5 });
+			let gridB = new Grid({ w: 5, h: 5 });
+			expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
+			gridA.getBlock({ x: 2, y: 2 }).add();
+			expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
+
+			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
+			gridB.load(gridA.save());
+			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
 		});
 	});
 	describe("integration", () => {
