@@ -27,8 +27,8 @@ describe("functional", () => {
 		document.body.removeChild(container);
 	});
 	describe("boot", () => {
-		it("shouldnt throw any errors in the first second", done => {
-			setTimeout(done, 1000);
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 100);
 		});
 		it("should have a canvas", () => {
 			expect(container.childNodes.length).toBe(2);
@@ -45,8 +45,8 @@ describe("functional", () => {
 			expect(document.getElementById("play")).toBeDefined();
 			mouseUtil.clickSelector("#play");
 		});
-		it("shouldnt throw any errors in the first second", done => {
-			setTimeout(done, 1000);
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 100);
 		});
 	});
 	describe("weapons check", () => {
@@ -82,19 +82,19 @@ describe("functional", () => {
 			mouseUtil.mouseEvent("mouseup", { button: 0 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should start firing misiles", () => {
 			mouseUtil.mouseEvent("mousedown", { button: 2 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should end firing misiles", () => {
 			mouseUtil.mouseEvent("mouseup", { button: 2 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 	});
 	describe("run and gun", () => {
@@ -130,7 +130,7 @@ describe("functional", () => {
 		});
 
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
 			mouseUtil.mouseEvent("mouseup", { button: 2 });
@@ -139,13 +139,13 @@ describe("functional", () => {
 			mouseUtil.mouseEvent("mousedown", { button: 0 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
 			mouseUtil.mouseEvent("mouseup", { button: 0 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 	});
 });

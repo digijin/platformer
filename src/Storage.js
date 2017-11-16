@@ -8,4 +8,13 @@ export default class Storage {
 			this.adapter = new BrowserAdaptor();
 		}
 	}
+	list(): Array<string> {
+		return this.adapter.list();
+	}
+	save(name: string, data: string) {
+		return this.adapter.save(name, data);
+	}
+	load(name: string): string {
+		return this.adapter.load(name);
+	}
 }

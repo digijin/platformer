@@ -7,7 +7,13 @@ describe("Storage", () => {
 	it("should choose right process", () => {
 		let storage = new Storage();
 		if (process.browser) {
+			expect(localStorage).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("BrowserAdapter");
 		}
+	});
+	it("should save and load", () => {
+		let storage = new Storage();
+		storage.save("test", "my data");
+		expect(storage.load("test")).toBe("my data");
 	});
 });
