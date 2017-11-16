@@ -13,9 +13,9 @@ export default class BrowserAdapter extends StorageAdapter {
 			});
 	}
 	save(name: string, data: string) {
-		return localStorage.setItem(name, data);
+		return localStorage.setItem(prefix + name, data);
 	}
 	load(name: string): string {
-		return localStorage.getItem(name);
+		return localStorage.getItem(prefix + name);
 	}
 }
