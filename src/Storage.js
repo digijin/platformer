@@ -8,7 +8,7 @@ export default class Storage {
 		if (process.browser) {
 			this.adapter = new BrowserAdapter();
 		} else {
-			this.adapter = new ElectronAdapter();
+			this.adapter = new ElectronAdapter("saves");
 		}
 	}
 	list(): Array<string> {
