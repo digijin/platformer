@@ -1,11 +1,14 @@
 import type StorageAdapter from "Storage/Adapter";
-import BrowserAdaptor from "Storage/Browser";
+import BrowserAdapter from "Storage/Browser";
+import ElectronAdapter from "Storage/Electron";
 
 export default class Storage {
 	adapter: StorageAdapter;
 	constructor() {
 		if (process.browser) {
-			this.adapter = new BrowserAdaptor();
+			this.adapter = new BrowserAdapter();
+		} else {
+			this.adapter = new ElectronAdapter();
 		}
 	}
 	list(): Array<string> {

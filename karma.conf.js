@@ -22,6 +22,7 @@ module.exports = function(config) {
 			{ pattern: "src/**/*karma.js", watched: false },
 			{ pattern: "src/**/*spec.js", watched: false }
 		],
+		browser: { fs: false },
 		exclude: [],
 		preprocessors: {
 			"src/**/!(*.spec|*.karma).js": ["coverage"],

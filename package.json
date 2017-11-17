@@ -17,7 +17,8 @@
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
 		"karma": "karma start",
-		"karma:ci": "karma start --browsers ChromeHeadless --single-run"
+		"karma:ci": "karma start --browsers ChromeHeadless --single-run",
+		"karma:headless": "karma start --browsers ChromeHeadless"
 	},
 	"repository": {
 		"type": "git",
