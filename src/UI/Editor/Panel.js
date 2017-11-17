@@ -13,6 +13,7 @@ class EditorPanel extends React.Component {
 	}
 	render() {
 		let saves = this.storage.list();
+		console.log("saves", saves);
 		return (
 			<div id="editor">
 				Editor mode<br />
@@ -20,15 +21,26 @@ class EditorPanel extends React.Component {
 				Right mouse to erase<br />
 				WASD to navigate
 				<div id="savepanel">
-					save games:
+					save games:<br />
+					<br />
 					{saves.map(s => {
-						return <div>{s.name}</div>;
+						return <div key={s + "save"}>{s}</div>;
 					})}
 					<input
 						type="text"
 						value={this.state.savename}
 						onChange={this.updateSavename}
 					/>
+					<button
+						onClick={() => {
+							this.storage.save(
+								this.state.savename,
+								this.props.engine.grid.save()
+							);
+						}}
+					>
+						save
+					</button>
 				</div>
 			</div>
 		);
