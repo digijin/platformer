@@ -10,7 +10,7 @@ describe("Storage", () => {
 			expect(localStorage).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("BrowserAdapter");
 		} else {
-			expect(require("fs")).toBeDefined();
+			// expect(require("fs")).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("ElectronAdapter");
 		}
 	});
