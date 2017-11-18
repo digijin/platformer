@@ -14,6 +14,13 @@ describe("Storage", () => {
 			expect(storage.adapter.constructor.name).toBe("ElectronAdapter");
 		}
 	});
+	it("load should not throw", () => {
+		let storage = new Storage();
+		storage.save("test", "my data");
+		expect(() => {
+			storage.load("test");
+		}).not.toThrow();
+	});
 	it("should save and load", () => {
 		let storage = new Storage();
 		storage.save("test", "my data");
