@@ -50,7 +50,6 @@ export default class Engine {
 		this.objects = [];
 		this.lastTime = new Date().getTime();
 		this.state = new State();
-		this.input = new Input(config.input);
 		// this.keyboard = this.input.keyboard;
 	}
 	init(container: HTMLElement) {
@@ -70,6 +69,10 @@ export default class Engine {
 		this.ctx = new Context(canvas.getContext("2d"));
 		this.resize();
 		window.addEventListener("resize", this.resize);
+
+		this.input = new Input(
+			Object.assign({}, config.input, { target: canvas })
+		);
 	}
 
 	resize = () => {

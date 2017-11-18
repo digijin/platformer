@@ -13,7 +13,6 @@ class EditorPanel extends React.Component {
 	}
 	render() {
 		let saves = this.storage.list();
-		console.log("saves", saves);
 		return (
 			<div id="editor">
 				Editor mode<br />
