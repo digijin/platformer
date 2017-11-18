@@ -22,10 +22,22 @@ class EditorPanel extends React.Component {
 				WASD to navigate
 				<div id="savepanel">
 					save games:<br />
-					<br />
-					{saves.map(s => {
-						return <div key={s + "save"}>{s}</div>;
-					})}
+					<div>
+						{saves.map(savename => {
+							return (
+								<button
+									key={savename + "loadbutton"}
+									onClick={() => {
+										this.props.engine.grid.load(
+											this.storage.load(savename)
+										);
+									}}
+								>
+									{savename}
+								</button>
+							);
+						})}
+					</div>
 					<input
 						type="text"
 						value={this.state.savename}
