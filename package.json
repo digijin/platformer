@@ -93,7 +93,7 @@
 		"style-loader": "^0.13.1",
 		"stylus": "^0.54.5",
 		"stylus-loader": "^2.4.0",
-		"unityinput": "^0.0.27",
+		"unityinput": "0.0.26",
 		"url-loader": "^0.5.5",
 		"webpack": "^3.8.1",
 		"webpack-dev-server": "^2.9.4",

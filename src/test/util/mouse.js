@@ -10,11 +10,16 @@ function sleep(ms) {
 
 let gap = 10;
 
-let mouseEvent = function(eventName: string, params: Object) {
+let mouseEvent = function(
+	eventName: string,
+	params: Object,
+	target = document
+) {
+	// let target = sizzle("canvas")[0];
 	var event = document.createEvent("Event");
 	extend(event, params);
 	event.initEvent(eventName, true, true);
-	document.dispatchEvent(event); //was document
+	target.dispatchEvent(event); //was document
 };
 
 let clickSelector = function(selector: string): boolean {
