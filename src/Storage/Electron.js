@@ -10,8 +10,8 @@ export default class ElectronAdapter extends StorageAdapter {
 		super();
 		//imported here so webpack doesnt spaz out when making web bundle
 		/* istanbul ignore next */
-		this.fs = require("fs");
-		this.path = require("path");
+		this.fs = eval('require("fs")');
+		this.path = eval('require("path")');
 		this.savedir = this.path.resolve(__dirname, dir);
 		if (!this.fs.existsSync(this.savedir)) {
 			this.fs.mkdirSync(this.savedir);
@@ -21,10 +21,10 @@ export default class ElectronAdapter extends StorageAdapter {
 		return this.fs.readdirSync(this.savedir);
 	}
 	saveFileName(name: string): string {
-		return this.path.resolve(this.savedir, name + ".sav");
+		return this.path.resolve(this.savedir, name);
 	}
 	save(name: string, data: string) {
-		return this.fs.writeFileSync(this.saveFileName(name), data);
+		return this.fs.writeFileSync(this.saveFileName(name + ".sav"), data);
 	}
 	load(name: string): string {
 		return this.fs.readFileSync(this.saveFileName(name)).toString();

@@ -54,6 +54,18 @@
 			"sourceMaps": true,
 			"diagnosticLogging": false,
 			"userDataDir": "${workspaceRoot}/.vscode/chrome"
+		},
+		{
+			"name": "Debug electron",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+			"windows": {
+				"runtimeExecutable":
+					"${workspaceRoot}/node_modules/.bin/electron.cmd"
+			},
+			"args": ["dist/index.html"]
 		}
 	]
 }

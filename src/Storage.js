@@ -5,7 +5,7 @@ import ElectronAdapter from "Storage/Electron";
 export default class Storage {
 	adapter: StorageAdapter;
 	constructor() {
-		if (process.browser) {
+		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			this.adapter = new BrowserAdapter();
 		} else {
 			this.adapter = new ElectronAdapter("saves");

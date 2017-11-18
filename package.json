@@ -2,7 +2,7 @@
 	"name": "platformer",
 	"version": "1.0.7",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/bundle.js",
 	"scripts": {
 		"clean": "rm -rf coverage dist",
 		"test": "jest",
@@ -10,7 +10,7 @@
 		"dev": "webpack-dev-server --hot --inline",
 		"build": "webpack",
 		"functional": "./node_modules/.bin/karma start",
-		"electron": "webpack --electron && electron dist/",
+		"electron": "webpack && electron dist/index.html",
 		"flow": "flow check",
 		"flow:suggest": "flow suggest src/Explosion.js",
 		"flow:watch": "flow-watch",
@@ -51,6 +51,7 @@
 		"babel-preset-stage-0": "^6.5.0",
 		"copy-webpack-plugin": "^0.2.0",
 		"css-loader": "^0.23.1",
+		"electron": "^1.7.9",
 		"file-loader": "^0.10.0",
 		"flow-bin": "^0.38.0",
 		"flow-watch": "^1.1.0",
@@ -100,25 +101,15 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": [
-			"js",
-			"jsx"
-		],
-		"moduleDirectories": [
-			"node_modules",
-			"src"
-		],
-		"modulePaths": [
-			"/src"
-		],
+		"moduleFileExtensions": ["js", "jsx"],
+		"moduleDirectories": ["node_modules", "src"],
+		"modulePaths": ["/src"],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+				"<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": [
-			"json",
-			"lcov"
-		]
+		"coverageReporters": ["json", "lcov"]
 	}
 }
