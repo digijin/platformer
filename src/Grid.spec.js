@@ -150,4 +150,15 @@ describe("Grid", () => {
 			expect(block.isEmpty()).toBe(true);
 		});
 	});
+	describe("caching tile renderer", () => {
+		it("tiles in rect", () => {
+			let grid = new Grid({ w: 10, h: 10 });
+			grid.tileWidth = 4;
+			grid.tileHeight = 4;
+			expect(
+				grid.tilesInRect(new Rect({ t: -10, r: 10, b: 10, l: -10 }))
+					.length
+			).toBe(4);
+		});
+	});
 });

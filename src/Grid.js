@@ -164,7 +164,7 @@ export default class Grid extends GameObject {
 		return new Block({ position: new Point({ x, y }), type: "1" });
 	}
 
-	tileRenderer: TileRenderer;
+	// tileRenderer: TileRenderer;
 	init(engine: Engine) {
 		super.init(engine);
 		engine.grid = this;
