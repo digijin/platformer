@@ -9,8 +9,9 @@ import cockpit from "Player/cockpit.png";
 import foot from "Player/foot.png";
 import upperleg from "Player/upperleg.png";
 import lowerleg from "Player/lowerleg.png";
+import gun from "Player/gun.png";
 
-const branchLength = 25;
+const branchLength = 30;
 const numBranches = 2;
 
 type Facing = 1 | -1;
@@ -28,7 +29,7 @@ export default class Leg extends GameObject {
 	constructor(params: { parent: Player }) {
 		super();
 		this.parent = params.parent;
-		this.offset = new Point({ x: 0, y: -40 });
+		this.offset = new Point({ x: 0, y: -50 });
 		this.stride = 0;
 		this.torsoOffset = new Point();
 		this.frontFootPos = new Point();
@@ -79,6 +80,25 @@ export default class Leg extends GameObject {
 		this.ik(this.frontFootPos, facing);
 		this.head(this.position, facing);
 		this.ik(this.rearFootPos, facing);
+
+		this.gun(this.position.add({ x: facing * 20, y: 20 }), facing);
+	}
+	gun(pos: Point, facing: Facing = FACING_LEFT) {
+		let dir = this.engine.mouse.point.subtract(pos).direction();
+		// if (facing < 0) {
+		// 	dir += Math.PI;
+		// }
+		this.engine.ctx.drawSprite(
+			gun,
+			pos,
+			{ w: 56, h: 21 },
+			dir,
+			{
+				x: 0.25,
+				y: 0.5
+			},
+			{ x: 1, y: facing }
+		);
 	}
 	head(pos: Point, facing: Facing = FACING_LEFT) {
 		// this.engine.ctx.beginPath();
