@@ -8,11 +8,14 @@ export default class Mouse {
 	point: Point;
 	engine: Engine;
 	constructor() {
-		this.engine = Engine.getInstance();
 		this.position = new Point({ x: 0, y: 0 });
+	}
+	init(engine: Engine): Mouse {
+		this.engine = engine;
 		document.addEventListener("mousemove", (e: MouseEvent): void => {
 			this.position = new Point({ x: e.clientX, y: e.clientY });
 		});
+		return this;
 	}
 	update() {
 		this.point = this.engine.view.offset.add(this.position);

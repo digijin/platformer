@@ -46,7 +46,6 @@ export default class Engine {
 
 		this.view = { offset: new Point({ x: 120, y: 0 }) };
 
-		this.mouse = new Mouse();
 		this.objects = [];
 		this.lastTime = new Date().getTime();
 		this.state = new State();
@@ -54,6 +53,7 @@ export default class Engine {
 	}
 	init(container: HTMLElement) {
 		// FLOWHACK
+		this.mouse = new Mouse().init(this);
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;
@@ -66,7 +66,7 @@ export default class Engine {
 		container.appendChild(uiDiv);
 		this.ui = new UI(uiDiv, this);
 
-		this.ctx = new Context(canvas.getContext("2d"));
+		this.ctx = new Context(canvas.getContext("2d")).init(this);
 		this.resize();
 		window.addEventListener("resize", this.resize);
 

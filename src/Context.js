@@ -24,6 +24,10 @@ export default class Context {
 		}
 		this.engine = Engine.getInstance();
 	}
+	init(engine: Engine): Context {
+		this.engine = engine;
+		return this;
+	}
 	screenRect(): Rect {
 		return new Rect({
 			t: 0,

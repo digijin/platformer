@@ -7,9 +7,6 @@ import config from "config";
 import Block from "Block";
 // import type {State} from 'Game/state'
 
-// import Engine from 'Engine';
-// let engine = Engine.getInstance();
-
 // export function screenToWorld(point:{x:number, y:number}, state:State): {x:number, y:number}{
 //   return {
 //     x: (point.x / state.view.state.scale) - state.view.state.offset.x,
