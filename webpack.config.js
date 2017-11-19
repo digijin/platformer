@@ -30,6 +30,10 @@ module.exports = [
 					exclude: /node_modules/
 					// exclude: [/\.spec\.js/, /\.karma\.js/, /node_modules/]
 				},
+				{
+					test: /\.txt$/,
+					loader: "raw-loader"
+				},
 				// {
 				// 	loader: "babel-loader",
 				// 	test: /\.spec\.js/
