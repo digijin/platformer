@@ -24,7 +24,8 @@ export default class Game {
 	constructor(container: HTMLElement) {
 		window.game = this;
 		// let engine:Engine = new Engine(container);
-		this.engine = Engine.getInstance();
+		this.engine = new Engine();
+		//Engine.getInstance();
 		this.engine.init(container);
 
 		// this.engine.startScene(new Level());

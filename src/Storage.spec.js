@@ -6,7 +6,7 @@ describe("Storage", () => {
 	});
 	it("should choose right process", () => {
 		let storage = new Storage();
-		if (process.browser) {
+		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			expect(localStorage).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("BrowserAdapter");
 		} else {

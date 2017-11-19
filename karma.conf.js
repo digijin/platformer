@@ -14,7 +14,6 @@ webpackConf[0].module.rules.push({
 });
 
 module.exports = function(config) {
-	console.log(config);
 	config.set({
 		basePath: "",
 		frameworks: ["jasmine"],

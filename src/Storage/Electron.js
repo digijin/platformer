@@ -24,7 +24,7 @@ export default class ElectronAdapter extends StorageAdapter {
 		return this.path.resolve(this.savedir, name);
 	}
 	save(name: string, data: string) {
-		return this.fs.writeFileSync(this.saveFileName(name + ".sav"), data);
+		return this.fs.writeFileSync(this.saveFileName(name), data);
 	}
 	load(name: string): string {
 		return this.fs.readFileSync(this.saveFileName(name)).toString();
