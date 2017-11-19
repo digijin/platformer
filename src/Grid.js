@@ -12,7 +12,6 @@ import Point from "Point";
 import dirtTile from "dirt_tile.png";
 
 import { Noise } from "noisejs";
-import TileRenderer from "Grid/TileRenderer";
 
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
@@ -169,10 +168,27 @@ export default class Grid extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 		engine.grid = this;
-		this.tileRenderer = new TileRenderer({ engine });
+		// this.tileRenderer = new TileRenderer({ engine });
 	}
 	update = (engine: Engine) => {
-		this.tileRenderer.render();
+		this.engine.ctx.context.fillStyle = "#000000";
+
+		//screenRect
+		let screenRect = this.engine.ctx.screenRect();
+		let blocks = this.engine.grid.getBlocksInRect(screenRect);
+		// engine.ctx.strokeStyle = '#000000'd
+		blocks.forEach((cell, y) => {
+			if (cell.type == "0") {
+			} else {
+				this.engine.ctx.drawSprite(
+					dirtTile,
+					cell.point,
+					{ w: config.grid.width, h: config.grid.height },
+					0,
+					{ x: 0, y: 0 }
+				);
+			}
+		});
 	};
 
 	save(): string {
