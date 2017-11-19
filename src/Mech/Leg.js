@@ -136,7 +136,7 @@ export default class Leg extends GameObject {
 		this.engine.ctx.drawSprite(
 			lowerleg,
 			joint,
-			{ w: 16, h: 43 },
+			{ w: 16, h: 33 },
 			lowerlegdirection,
 			{
 				x: 0.5,
