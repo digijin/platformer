@@ -12,6 +12,7 @@ export default class Bullet extends GameObject {
 	v: number; //momentum
 	time: number;
 	owner: Actor;
+	speed: number;
 	constructor(params: {
 		position: Point,
 		h: number,
@@ -20,6 +21,7 @@ export default class Bullet extends GameObject {
 		owner: Actor
 	}) {
 		super(params);
+		this.speed = 200;
 		Object.assign(this, params);
 		this.time = 1;
 	}
@@ -30,8 +32,8 @@ export default class Bullet extends GameObject {
 
 	update = (engine: Engine) => {
 		this.time -= engine.deltaTime;
-		this.position.x += this.h;
-		this.position.y += this.v;
+		this.position.x += this.h * engine.deltaTime * this.speed;
+		this.position.y += this.v * engine.deltaTime * this.speed;
 
 		// this.engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
 		this.engine.ctx.drawLine(

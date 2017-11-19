@@ -136,7 +136,7 @@ export default class Player extends Actor {
 						speed: 3 + Math.random() * 5,
 						position: this.position.subtract({
 							x: 10,
-							y: this.size.h
+							y: this.size.h + 20
 						}),
 						target: engine.mouse.point.add(
 							new Point({
@@ -158,7 +158,7 @@ export default class Player extends Actor {
 
 		////////////////////BULLET FIRING
 		if (engine.input.getButton("fire")) {
-			if (Math.random() < 0.5) {
+			if (Math.random() < 0.25) {
 				engine.register(
 					new Shell({
 						position: this.position.add({
@@ -172,10 +172,11 @@ export default class Player extends Actor {
 					})
 				);
 			}
-			let gunPoint = new Point({
-				x: this.position.x,
-				y: this.position.y - this.size.h / 2
-			});
+			// let gunPoint = new Point({
+			// 	x: this.position.x,
+			// 	y: this.position.y - this.size.h / 2
+			// });
+			let gunPoint = this.leg.gunBarrelPos;
 			let diff = engine.mouse.point.subtract(gunPoint);
 			let dir = Math.atan2(diff.y, diff.x);
 			dir += (Math.random() - 0.5) / 10; //spread

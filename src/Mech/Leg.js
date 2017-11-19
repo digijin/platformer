@@ -83,6 +83,7 @@ export default class Leg extends GameObject {
 
 		this.gun(this.position.add({ x: facing * 20, y: 20 }), facing);
 	}
+	gunBarrelPos: Point;
 	gun(pos: Point, facing: Facing = FACING_LEFT) {
 		let dir = this.engine.mouse.point.subtract(pos).direction();
 		// if (facing < 0) {
@@ -99,6 +100,7 @@ export default class Leg extends GameObject {
 			},
 			{ x: 1, y: facing }
 		);
+		this.gunBarrelPos = pos.move(dir, 40);
 	}
 	head(pos: Point, facing: Facing = FACING_LEFT) {
 		// this.engine.ctx.beginPath();
