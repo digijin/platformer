@@ -19,6 +19,7 @@
 		"karma": "karma start",
 		"karma:ci": "karma start --browsers ChromeHeadless --single-run",
 		"karma:headless": "karma start --browsers ChromeHeadless",
+		"karma:electron": "karma start --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876"
 	},
 	"repository": {

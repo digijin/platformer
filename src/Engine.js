@@ -157,5 +157,6 @@ export default class Engine {
 		cancelAnimationFrame(this.updateId);
 		this.container.removeChild(this.canvas);
 		this.container.removeChild(this.ui.container);
+		this.fpsmeter.destroy();
 	};
 }

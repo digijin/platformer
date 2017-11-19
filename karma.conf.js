@@ -14,6 +14,7 @@ webpackConf[0].module.rules.push({
 });
 
 module.exports = function(config) {
+	console.log(config);
 	config.set({
 		basePath: "",
 		frameworks: ["jasmine"],
@@ -25,7 +26,7 @@ module.exports = function(config) {
 		browser: { fs: false },
 		exclude: [],
 		preprocessors: {
-			"src/**/!(*.spec|*.karma).js": ["coverage"],
+			"src/**/!(*.spec|*.karma).js": ["electron", "coverage"],
 			"**/*karma.js": ["webpack", "sourcemap"],
 			"**/*spec.js": ["webpack", "sourcemap"]
 		},
@@ -56,6 +57,11 @@ module.exports = function(config) {
 					subdir: "lcov"
 				}
 			}
+		},
+		client: {
+			//use iframe if not electron
+			useIframe: config.browsers[0] !== "Electron"
+			// 	runInParent: true
 		},
 
 		// coverageReporter: {
