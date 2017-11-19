@@ -112,12 +112,14 @@ export default class Context {
 		position: Point = new Point({ x: 0, y: 0 }),
 		size: { w: number, h: number } = { w: 20, h: 20 },
 		rotation: number = 0,
-		registration: { x: number, y: number } = { x: 0.5, y: 0.5 }
+		registration: { x: number, y: number } = { x: 0.5, y: 0.5 },
+		scale: { x: number, y: number } = { x: 1, y: 1 }
 	) {
 		let im: HTMLImageElement = (image: any);
 		position = position.subtract(this.engine.view.offset);
 		this.context.translate(position.x, position.y);
 		this.context.rotate(rotation);
+		this.context.scale(scale.x, scale.y);
 		let imageParams = [im, 0, 0, im.width, im.height];
 		this.context.drawImage(
 			...imageParams,

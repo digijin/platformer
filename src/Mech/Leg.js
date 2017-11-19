@@ -77,19 +77,26 @@ export default class Leg extends GameObject {
 				: FACING_LEFT;
 		//and render it
 		this.ik(this.frontFootPos, facing);
-		this.head(this.position);
+		this.head(this.position, facing);
 		this.ik(this.rearFootPos, facing);
 	}
-	head(pos: Point) {
+	head(pos: Point, facing: Facing = FACING_LEFT) {
 		// this.engine.ctx.beginPath();
 		// this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
 		// this.engine.ctx.context.fillStyle = "#ababab";
 		// this.engine.ctx.fill();
 
-		this.engine.ctx.drawSprite(cockpit, pos, { w: 81, h: 43 }, 0, {
-			x: 0.5,
-			y: 0.5
-		});
+		this.engine.ctx.drawSprite(
+			cockpit,
+			pos,
+			{ w: 81, h: 43 },
+			0,
+			{
+				x: 0.5,
+				y: 0.5
+			},
+			{ x: facing, y: 1 }
+		);
 	}
 	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
