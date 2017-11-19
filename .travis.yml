@@ -3,17 +3,10 @@ node_js:
 - '8'
 addons:
   chrome: stable
-  apt:
-    packages:
-      - xvfb
-install:
-  - export DISPLAY=':99.0'
-  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  - npm i
 script:
 - yarn build
 - yarn test
-- xvfb-run yarn karma:electron
+- yarn karma:electron
 - yarn karma:ci
 - cat ./coverage/lcov.info | ./node_modules/dcoveralls/bin/coveralls.js
 deploy:
