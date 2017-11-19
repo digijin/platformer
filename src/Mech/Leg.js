@@ -136,7 +136,8 @@ export default class Leg extends GameObject {
 			{
 				x: 0.5,
 				y: 0.25
-			}
+			},
+			{ x: facing, y: 1 }
 		);
 		let lowerlegdirection =
 			endpoint.subtract(joint).direction() - Math.PI / 2;
@@ -148,7 +149,8 @@ export default class Leg extends GameObject {
 			{
 				x: 0.5,
 				y: 0.25
-			}
+			},
+			{ x: facing, y: 1 }
 		);
 
 		this.engine.ctx.drawSprite(foot, endpoint, { w: 25, h: 10 }, 0, {
