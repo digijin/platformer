@@ -6,7 +6,6 @@ addons:
 script:
 - yarn build
 - yarn test
-- yarn karma:electron
 - yarn karma:ci
 - cat ./coverage/lcov.info | ./node_modules/dcoveralls/bin/coveralls.js
 deploy:

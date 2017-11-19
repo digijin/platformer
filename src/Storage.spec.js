@@ -4,7 +4,7 @@ describe("Storage", () => {
 	let storage;
 	beforeAll(() => {
 		storage = new Storage();
-		storage.save("test", "my data");
+		storage.save("automated_test", "my data");
 	});
 	it("should be defined", () => {
 		expect(Storage).toBeDefined();
@@ -20,11 +20,11 @@ describe("Storage", () => {
 	});
 	it("load should not throw", () => {
 		expect(() => {
-			storage.load("test");
+			storage.load("automated_test");
 		}).not.toThrow();
 	});
 	it("should save and load", () => {
-		expect(storage.load("test")).toBe("my data");
+		expect(storage.load("automated_test")).toBe("my data");
 	});
 	if (navigator.userAgent.indexOf("Electron") > -1) {
 		describe("Electron", () => {
