@@ -374,7 +374,7 @@ export default class Player extends Actor {
 			engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
 		}
 
-		engine.ctx.fillRect(hand.position.x, hand.position.y, 10, 10);
+		engine.ctx.fillRect(hand.position.x, hand.position.y, 2, 2);
 
 		engine.ctx.context.fillStyle = "#000000";
 	}

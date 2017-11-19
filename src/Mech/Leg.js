@@ -7,6 +7,8 @@ import Point from "Point";
 
 import cockpit from "Player/cockpit.png";
 import foot from "Player/foot.png";
+import upperleg from "Player/upperleg.png";
+import lowerleg from "Player/lowerleg.png";
 
 const branchLength = 25;
 const numBranches = 2;
@@ -113,8 +115,34 @@ export default class Leg extends GameObject {
 		dir += Math.PI / 2;
 		let joint = midpoint.move(dir, b * facing);
 
-		this.engine.ctx.drawLine(this.position, joint, "#555555", 5);
-		this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
+		// this.engine.ctx.drawLine(this.position, joint, "#555555", 5);
+		// this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
+
+		// upperleg 20x40
+		let upperlegdirection =
+			joint.subtract(this.position).direction() - Math.PI / 2;
+		this.engine.ctx.drawSprite(
+			upperleg,
+			this.position,
+			{ w: 20, h: 40 },
+			upperlegdirection,
+			{
+				x: 0.5,
+				y: 0.25
+			}
+		);
+		let lowerlegdirection =
+			endpoint.subtract(joint).direction() - Math.PI / 2;
+		this.engine.ctx.drawSprite(
+			lowerleg,
+			joint,
+			{ w: 16, h: 43 },
+			lowerlegdirection,
+			{
+				x: 0.5,
+				y: 0.25
+			}
+		);
 
 		this.engine.ctx.drawSprite(foot, endpoint, { w: 25, h: 10 }, 0, {
 			x: 0.5,
