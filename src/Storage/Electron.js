@@ -12,7 +12,7 @@ export default class ElectronAdapter extends StorageAdapter {
 		/* istanbul ignore next */
 		this.fs = eval('require("fs")');
 		this.path = eval('require("path")');
-		this.savedir = this.path.resolve(__dirname, dir);
+		this.savedir = this.path.resolve(dir);
 		if (!this.fs.existsSync(this.savedir)) {
 			this.fs.mkdirSync(this.savedir);
 		}

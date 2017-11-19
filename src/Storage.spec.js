@@ -1,11 +1,15 @@
 import Storage from "Storage";
 
 describe("Storage", () => {
+	let storage;
+	beforeAll(() => {
+		storage = new Storage();
+		storage.save("test", "my data");
+	});
 	it("should be defined", () => {
 		expect(Storage).toBeDefined();
 	});
 	it("should choose right process", () => {
-		let storage = new Storage();
 		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			expect(localStorage).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("BrowserAdapter");
@@ -15,15 +19,18 @@ describe("Storage", () => {
 		}
 	});
 	it("load should not throw", () => {
-		let storage = new Storage();
-		storage.save("test", "my data");
 		expect(() => {
 			storage.load("test");
 		}).not.toThrow();
 	});
 	it("should save and load", () => {
-		let storage = new Storage();
-		storage.save("test", "my data");
 		expect(storage.load("test")).toBe("my data");
 	});
+	if (navigator.userAgent.indexOf("Electron") > -1) {
+		describe("Electron", () => {
+			it("should run electron tests", () => {
+				expect(storage.adapter.savedir).not.toBe("/");
+			});
+		});
+	}
 });

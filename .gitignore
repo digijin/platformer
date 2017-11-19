@@ -16,3 +16,4 @@ buildstats.*
 .vscode/chromium
 /yarn-error.log
 src/Storage/saves
+saves
