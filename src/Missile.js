@@ -93,7 +93,7 @@ export default class Missile extends Projectile {
 
 			//TODO REMOVE HARDCODING
 			if (Math.abs(dirDiff) < 0.5) {
-				this.speed += this.engine.deltaTime * 8;
+				this.speed += this.engine.deltaTime * 16;
 				this.direction += dirDiff / 3;
 			} else {
 				this.speed -= this.engine.deltaTime * 5;

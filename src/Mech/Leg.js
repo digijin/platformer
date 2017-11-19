@@ -102,7 +102,7 @@ export default class Leg extends GameObject {
 			},
 			{ x: 1, y: facing }
 		);
-		this.gunBarrelPos = pos.move(dir, 40);
+		this.gunBarrelPos = pos.move(dir, 20);
 	}
 	missileBarrelPos: Point;
 	head(pos: Point, facing: Facing = FACING_LEFT) {
