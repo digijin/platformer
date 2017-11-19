@@ -5,7 +5,8 @@ import GameObject from "GameObject";
 import type Player from "Player";
 import Point from "Point";
 
-import cockpit from "cockpit.png";
+import cockpit from "Player/cockpit.png";
+import foot from "Player/foot.png";
 
 const branchLength = 25;
 const numBranches = 2;
@@ -83,7 +84,7 @@ export default class Leg extends GameObject {
 		// this.engine.ctx.context.fillStyle = "#ababab";
 		// this.engine.ctx.fill();
 
-		this.engine.ctx.drawSprite(cockpit, pos, { w: 30, h: 15 }, 0, {
+		this.engine.ctx.drawSprite(cockpit, pos, { w: 81, h: 43 }, 0, {
 			x: 0.5,
 			y: 0.5
 		});
@@ -114,5 +115,10 @@ export default class Leg extends GameObject {
 
 		this.engine.ctx.drawLine(this.position, joint, "#555555", 5);
 		this.engine.ctx.drawLine(joint, endpoint, "#555555", 5);
+
+		this.engine.ctx.drawSprite(foot, endpoint, { w: 25, h: 10 }, 0, {
+			x: 0.5,
+			y: 1
+		});
 	}
 }

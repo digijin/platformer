@@ -33,19 +33,23 @@ export default class Bullet extends GameObject {
 		this.position.x += this.h;
 		this.position.y += this.v;
 
-		engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
+		// this.engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
+		this.engine.ctx.drawLine(
+			this.position,
+			this.position.add({ x: this.h, y: this.v })
+		);
 		//CHECK TIME
 		if (this.time < 0) {
 			this.destroy();
 		}
 
 		//CHECK GRID
-		let block = engine.grid.blockAtPosition({
+		let block = this.engine.grid.blockAtPosition({
 			x: this.position.x,
 			y: this.position.y
 		});
 		if (
-			engine.grid.isPositionBlocked({
+			this.engine.grid.isPositionBlocked({
 				x: this.position.x,
 				y: this.position.y
 			})
