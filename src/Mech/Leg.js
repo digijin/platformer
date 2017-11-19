@@ -26,6 +26,7 @@ export default class Leg extends GameObject {
 	torsoOffset: Point;
 	frontFootPos: Point;
 	rearFootPos: Point;
+	facing: Facing;
 	constructor(params: { parent: Player }) {
 		super();
 		this.parent = params.parent;
@@ -76,6 +77,7 @@ export default class Leg extends GameObject {
 			this.engine.input.mouse.position.x > this.engine.canvas.width / 2
 				? FACING_RIGHT
 				: FACING_LEFT;
+		this.facing = facing;
 		//and render it
 		this.ik(this.frontFootPos, facing);
 		this.head(this.position, facing);
@@ -102,11 +104,16 @@ export default class Leg extends GameObject {
 		);
 		this.gunBarrelPos = pos.move(dir, 40);
 	}
+	missileBarrelPos: Point;
 	head(pos: Point, facing: Facing = FACING_LEFT) {
 		// this.engine.ctx.beginPath();
 		// this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
 		// this.engine.ctx.context.fillStyle = "#ababab";
 		// this.engine.ctx.fill();
+		this.missileBarrelPos = this.position.subtract({
+			x: 16 * facing,
+			y: 16
+		});
 
 		this.engine.ctx.drawSprite(
 			cockpit,

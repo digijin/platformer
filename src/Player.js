@@ -132,12 +132,12 @@ export default class Player extends Actor {
 				engine.register(
 					new Missile({
 						owner: this,
-						direction: 1 - Math.PI / 2 + (Math.random() - 0.5),
+						direction:
+							-Math.PI / 2 +
+							(Math.random() - 0.5) +
+							this.leg.facing,
 						speed: 3 + Math.random() * 5,
-						position: this.position.subtract({
-							x: 10,
-							y: this.size.h + 20
-						}),
+						position: this.leg.missileBarrelPos,
 						target: engine.mouse.point.add(
 							new Point({
 								x: (Math.random() - 0.5) * 20,
