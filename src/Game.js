@@ -32,5 +32,7 @@ export default class Game {
 
 		this.engine.update(); //starts
 	}
-	destroy() {}
+	destroy() {
+		this.engine.kill();
+	}
 }

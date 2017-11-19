@@ -33,6 +33,7 @@ export default class Engine {
 	fpsmeter: Fpsmeter;
 	view: { offset: Point };
 	input: Input;
+	container: HTMLElement;
 	static getInstance(): Engine {
 		if (!instance) {
 			instance = new Engine();
@@ -52,6 +53,7 @@ export default class Engine {
 		// this.keyboard = this.input.keyboard;
 	}
 	init(container: HTMLElement) {
+		this.container = container;
 		// FLOWHACK
 		this.mouse = new Mouse().init(this);
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
@@ -153,5 +155,7 @@ export default class Engine {
 	updateId: number;
 	kill = () => {
 		cancelAnimationFrame(this.updateId);
+		this.container.removeChild(this.canvas);
+		this.container.removeChild(this.ui.container);
 	};
 }
