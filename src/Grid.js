@@ -198,6 +198,7 @@ export default class Grid extends GameObject {
 		// 	}
 		// });
 
+		let newTileCache = {};
 		this.tilesInRect(screenRect).forEach(tile => {
 			// let tile = { x: 5, y: 6 };
 			let tileImage = this.fetchTile(tile);
@@ -211,14 +212,16 @@ export default class Grid extends GameObject {
 				0,
 				{ x: 0, y: 0 }
 			);
+			newTileCache[this.tileKey(tile)] = tileImage;
 		});
+		this.tileCache = newTileCache;
 	};
 	tileCache: {};
 	fetchTile(tile: { x: number, y: number }) {
-		if (!this.tileCache[this.tileKey(tile)]) {
-			this.tileCache[this.tileKey(tile)] = this.renderTile(tile);
-		}
-		return this.tileCache[this.tileKey(tile)];
+		// if (!this.tileCache[this.tileKey(tile)]) {
+		// 	this.tileCache[this.tileKey(tile)] = this.renderTile(tile);
+		// }
+		return this.tileCache[this.tileKey(tile)] || this.renderTile(tile);
 	}
 	tileKey(tile: { x: number, y: number }): string {
 		return tile.x.toString() + "_" + tile.y.toString();
