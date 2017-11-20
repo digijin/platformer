@@ -189,6 +189,12 @@ export default class Grid extends GameObject {
 				);
 			}
 		});
+
+		this.engine.ctx.context.drawImage(
+			this.renderTile({ x: 5, y: 6 }),
+			0,
+			0
+		);
 	};
 
 	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {
@@ -207,6 +213,24 @@ export default class Grid extends GameObject {
 			}
 		}
 		return out;
+	}
+	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
+		let canvas = document.createElement("CANVAS");
+		let ctx = canvas.getContext("2d");
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let im = dirtTile;
+				let imageParams = [im, 0, 0, im.width, im.height];
+				ctx.drawImage(
+					...imageParams,
+					x * config.grid.width,
+					y * config.grid.height,
+					config.grid.width,
+					config.grid.height
+				);
+			}
+		}
+		return canvas;
 	}
 
 	save(): string {
