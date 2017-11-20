@@ -55,6 +55,7 @@ export default class Grid extends GameObject {
 
 	constructor(size: { w: number, h: number } = { w: 10, h: 10 }) {
 		super();
+		this.tileCache = [];
 		this.height = size.h;
 		this.width = size.w;
 		this.z = -10;
@@ -190,12 +191,29 @@ export default class Grid extends GameObject {
 			}
 		});
 
-		this.engine.ctx.context.drawImage(
-			this.renderTile({ x: 5, y: 6 }),
+		let tile = { x: 5, y: 6 };
+		let tileImage = this.fetchTile(tile);
+		this.engine.ctx.drawSprite(
+			tileImage,
+			new Point({
+				x: tile.x * tileImage.width,
+				y: tile.y * tileImage.height
+			}),
+			{ w: tileImage.width, h: tileImage.height },
 			0,
-			0
+			{ x: 0, y: 0 }
 		);
 	};
+	tileCache: Array<HTMLCanvasElement>;
+	fetchTile(tile: { x: number, y: number }) {
+		if (!this.tileCache[this.tileKey(tile)]) {
+			this.tileCache[this.tileKey(tile)] = this.renderTile(tile);
+		}
+		return this.tileCache[this.tileKey(tile)];
+	}
+	tileKey(tile: { x: number, y: number }): string {
+		return tile.x.toString() + "_" + tile.y.toString();
+	}
 
 	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {
 		let w = config.grid.width * config.grid.tile.width;
@@ -216,20 +234,31 @@ export default class Grid extends GameObject {
 	}
 	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
 		let canvas = document.createElement("CANVAS");
+		canvas.width = config.grid.tile.width * config.grid.width;
+		canvas.height = config.grid.tile.height * config.grid.height;
 		let ctx = canvas.getContext("2d");
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
-				let im = dirtTile;
-				let imageParams = [im, 0, 0, im.width, im.height];
-				ctx.drawImage(
-					...imageParams,
-					x * config.grid.width,
-					y * config.grid.height,
-					config.grid.width,
-					config.grid.height
-				);
+				let block = this.getBlock({
+					x: tile.x * config.grid.tile.width + x,
+					y: tile.y * config.grid.tile.height + y
+				});
+				if (block && !block.isEmpty()) {
+					let im = dirtTile;
+					let imageParams = [im, 0, 0, im.width, im.height];
+					ctx.drawImage(
+						...imageParams,
+						x * config.grid.width,
+						y * config.grid.height,
+						config.grid.width,
+						config.grid.height
+					);
+				}
 			}
 		}
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 1;
+		ctx.strokeRect(0, 0, canvas.width, canvas.height);
 		return canvas;
 	}
 
