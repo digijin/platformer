@@ -3,13 +3,19 @@
 import config from "config";
 import Point from "Point";
 import Rect from "Rect";
+import type Grid from "Grid";
 
 export default class Block {
 	position: Point;
 	type: string;
-	constructor(params: { position: Point, type: string }) {
+	grid: Grid;
+	constructor(params: { position: Point, type: string, grid: Grid }) {
 		this.position = params.position;
 		this.type = params.type;
+		this.grid = params.grid;
+	}
+	toString() {
+		return JSON.stringify({ position: this.position, type: this.type });
 	}
 
 	isEmpty(): boolean {

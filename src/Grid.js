@@ -46,7 +46,8 @@ export default class Grid extends GameObject {
 			return testdata.map(function(row, y) {
 				return new Block({
 					position: new Point({ x: x, y: y }),
-					type: row[x]
+					type: row[x],
+					grid: this
 				});
 			});
 		});
@@ -70,7 +71,8 @@ export default class Grid extends GameObject {
 						(j, y) =>
 							new Block({
 								position: new Point({ x, y }),
-								type: "0"
+								type: "0",
+								grid: this
 							})
 					)
 			);
@@ -263,7 +265,9 @@ export default class Grid extends GameObject {
 	}
 
 	save(): string {
-		return JSON.stringify(this.blocks);
+		return JSON.stringify(this.blocks, (name, val) => {
+			if (name !== "grid") return val;
+		});
 	}
 	load(str: string) {
 		let data = JSON.parse(str);
@@ -271,7 +275,8 @@ export default class Grid extends GameObject {
 			return d.map(block => {
 				return new Block({
 					position: new Point(block.position),
-					type: block.type
+					type: block.type,
+					grid: this
 				});
 			});
 		});
