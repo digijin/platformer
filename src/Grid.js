@@ -108,8 +108,8 @@ export default class Grid extends GameObject {
 	getBlocksInRect(rect: Rect): Array<Block> {
 		let firstCol = Math.ceil(rect.l / config.grid.width);
 		let lastCol = Math.floor(rect.r / config.grid.width);
-		let firstRow = Math.ceil(rect.t / config.grid.width);
-		let lastRow = Math.floor(rect.b / config.grid.width);
+		let firstRow = Math.ceil(rect.t / config.grid.height);
+		let lastRow = Math.floor(rect.b / config.grid.height);
 		let out = [];
 		if (lastCol < firstCol || lastRow < firstRow) {
 			//return early
@@ -129,8 +129,8 @@ export default class Grid extends GameObject {
 	getBlocksOverlappingRect(rect: Rect): Array<Block> {
 		let firstCol = Math.floor(rect.l / config.grid.width);
 		let lastCol = Math.ceil(rect.r / config.grid.width);
-		let firstRow = Math.floor(rect.t / config.grid.width);
-		let lastRow = Math.ceil(rect.b / config.grid.width);
+		let firstRow = Math.floor(rect.t / config.grid.height);
+		let lastRow = Math.ceil(rect.b / config.grid.height);
 		let out = [];
 		for (let x = firstCol; x < lastCol; x++) {
 			for (let y = firstRow; y < lastRow; y++) {
@@ -190,6 +190,24 @@ export default class Grid extends GameObject {
 			}
 		});
 	};
+
+	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {
+		let w = config.grid.width * config.grid.tile.width;
+		let h = config.grid.height * config.grid.tile.height;
+
+		let firstCol = Math.floor(rect.l / w);
+		let lastCol = Math.floor(rect.r / w);
+		let firstRow = Math.floor(rect.t / h);
+		let lastRow = Math.floor(rect.b / h);
+
+		let out = [];
+		for (let x = firstCol; x <= lastCol; x++) {
+			for (let y = firstRow; y <= lastRow; y++) {
+				out.push({ x, y });
+			}
+		}
+		return out;
+	}
 
 	save(): string {
 		return JSON.stringify(this.blocks);

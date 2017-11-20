@@ -6,7 +6,11 @@ export default {
 	},
 	grid: {
 		width: 20,
-		height: 20
+		height: 20,
+		tile: {
+			width: 4,
+			height: 4
+		}
 	},
 	player: {
 		size: {
