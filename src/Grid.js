@@ -56,7 +56,7 @@ export default class Grid extends GameObject {
 
 	constructor(size: { w: number, h: number } = { w: 10, h: 10 }) {
 		super();
-		this.tileCache = [];
+		this.tileCache = {};
 		this.height = size.h;
 		this.width = size.w;
 		this.z = -10;
@@ -147,7 +147,7 @@ export default class Grid extends GameObject {
 		return out;
 	}
 
-	blockAtPosition(pos: { x: number, y: number }): Block {
+	blockAtPosition(pos: { x: number, y: number }): Block | void {
 		let x = Math.floor(pos.x / config.grid.width);
 		let y = Math.floor(pos.y / config.grid.height);
 		//because y goes positive downwards, if an object is flat on the top
@@ -164,7 +164,12 @@ export default class Grid extends GameObject {
 				return block;
 			}
 		}
-		return new Block({ position: new Point({ x, y }), type: "1" });
+		//TODO: remove this dummy
+		return new Block({
+			position: new Point({ x, y }),
+			type: "1",
+			grid: this
+		});
 	}
 
 	// tileRenderer: TileRenderer;
@@ -206,7 +211,7 @@ export default class Grid extends GameObject {
 			{ x: 0, y: 0 }
 		);
 	};
-	tileCache: Array<HTMLCanvasElement>;
+	tileCache: {};
 	fetchTile(tile: { x: number, y: number }) {
 		if (!this.tileCache[this.tileKey(tile)]) {
 			this.tileCache[this.tileKey(tile)] = this.renderTile(tile);
@@ -215,6 +220,15 @@ export default class Grid extends GameObject {
 	}
 	tileKey(tile: { x: number, y: number }): string {
 		return tile.x.toString() + "_" + tile.y.toString();
+	}
+	bustCache(block: Block) {
+		this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
+	}
+	tileForBlock(block: Block): { x: number, y: number } {
+		return {
+			x: Math.floor(block.position.x / config.grid.tile.width),
+			y: Math.floor(block.position.y / config.grid.tile.height)
+		};
 	}
 
 	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {

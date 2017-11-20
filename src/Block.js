@@ -23,6 +23,7 @@ export default class Block {
 	}
 	destroy() {
 		this.type = "0";
+		this.grid.bustCache(this);
 	}
 	//for editor
 	add() {

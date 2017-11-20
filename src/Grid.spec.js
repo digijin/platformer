@@ -140,11 +140,17 @@ describe("Grid", () => {
 		});
 	});
 	describe("integration", () => {
+		it("should set itself on blocks", () => {
+			let grid = new Grid({ w: 10, h: 10 });
+			let block = grid.getBlock({ x: 0, y: 0 });
+			expect(block.grid).toBeDefined();
+		});
 		it("should let blocks destroy", () => {
 			let grid = new Grid({ w: 10, h: 10 });
-			let block = grid.getBlockAtPoint({ x: 0, y: 0 });
+			let block = grid.getBlock({ x: 0, y: 0 });
 			expect(block).toBeDefined();
 			expect(block.destroy).toBeDefined();
+			expect(block.grid).toBeDefined();
 			block.type = "1";
 			block.destroy();
 			expect(block.isEmpty()).toBe(true);
