@@ -183,33 +183,35 @@ export default class Grid extends GameObject {
 
 		//screenRect
 		let screenRect = this.engine.ctx.screenRect();
-		let blocks = this.engine.grid.getBlocksInRect(screenRect);
-		// engine.ctx.strokeStyle = '#000000'd
-		blocks.forEach((cell, y) => {
-			if (cell.type == "0") {
-			} else {
-				this.engine.ctx.drawSprite(
-					dirtTile,
-					cell.point,
-					{ w: config.grid.width, h: config.grid.height },
-					0,
-					{ x: 0, y: 0 }
-				);
-			}
-		});
+		// let blocks = this.engine.grid.getBlocksInRect(screenRect);
+		// // engine.ctx.strokeStyle = '#000000'd
+		// blocks.forEach((cell, y) => {
+		// 	if (cell.type == "0") {
+		// 	} else {
+		// 		this.engine.ctx.drawSprite(
+		// 			dirtTile,
+		// 			cell.point,
+		// 			{ w: config.grid.width, h: config.grid.height },
+		// 			0,
+		// 			{ x: 0, y: 0 }
+		// 		);
+		// 	}
+		// });
 
-		let tile = { x: 5, y: 6 };
-		let tileImage = this.fetchTile(tile);
-		this.engine.ctx.drawSprite(
-			tileImage,
-			new Point({
-				x: tile.x * tileImage.width,
-				y: tile.y * tileImage.height
-			}),
-			{ w: tileImage.width, h: tileImage.height },
-			0,
-			{ x: 0, y: 0 }
-		);
+		this.tilesInRect(screenRect).forEach(tile => {
+			// let tile = { x: 5, y: 6 };
+			let tileImage = this.fetchTile(tile);
+			this.engine.ctx.drawSprite(
+				tileImage,
+				new Point({
+					x: tile.x * tileImage.width,
+					y: tile.y * tileImage.height
+				}),
+				{ w: tileImage.width, h: tileImage.height },
+				0,
+				{ x: 0, y: 0 }
+			);
+		});
 	};
 	tileCache: {};
 	fetchTile(tile: { x: number, y: number }) {
