@@ -13,6 +13,7 @@ function sleep(ms) {
 
 describe("functional", () => {
 	let container;
+	let game;
 	beforeAll(function() {
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000;
 		container = document.createElement("div");
@@ -38,6 +39,18 @@ describe("functional", () => {
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
+		});
+	});
+	describe("add tiles", () => {
+		it("should add tiles under cursor", done => {
+			let pt = { x: 200, y: 200 };
+			mouseUtil.mouseEvent("mousemove", { clientX: pt.x, clientY: pt.y });
+			mouseUtil.mouseEvent("mousedown", { button: 0 });
+			setTimeout(() => {
+				expect(game.engine.grid.getBlockAtPoint(pt).isEmpty()).toBe(
+					false
+				);
+			}, 100);
 		});
 	});
 });
