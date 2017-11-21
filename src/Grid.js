@@ -280,6 +280,11 @@ export default class Grid extends GameObject {
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 1;
 		ctx.strokeRect(0, 0, canvas.width, canvas.height);
+		//watermark
+		ctx.font = "20px Verdana";
+		// Fill with gradient
+		ctx.fillStyle = "lightgrey";
+		ctx.fillText(tile.x + "," + tile.y, 8, 25);
 		return canvas;
 	}
 
