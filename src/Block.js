@@ -28,10 +28,12 @@ export default class Block {
 	//for editor
 	add() {
 		this.type = "1";
+		this.grid.bustCache(this);
 	}
 	//for editor
 	remove() {
 		this.type = "0";
+		this.grid.bustCache(this);
 	}
 
 	get center(): Point {

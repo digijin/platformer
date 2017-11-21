@@ -8,8 +8,8 @@ export default {
 		width: 20,
 		height: 20,
 		tile: {
-			width: 4,
-			height: 4
+			width: 8,
+			height: 8
 		}
 	},
 	player: {
