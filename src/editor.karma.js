@@ -42,14 +42,27 @@ describe("functional", () => {
 		});
 	});
 	describe("add tiles", () => {
+		let pt = { x: 200, y: 200 };
 		it("should add tiles under cursor", done => {
-			let pt = { x: 200, y: 200 };
 			mouseUtil.mouseEvent("mousemove", { clientX: pt.x, clientY: pt.y });
 			mouseUtil.mouseEvent("mousedown", { button: 0 });
 			setTimeout(() => {
 				expect(game.engine.grid.getBlockAtPoint(pt).isEmpty()).toBe(
+					true
+				);
+				mouseUtil.mouseEvent("mouseup", { button: 0 });
+				done();
+			}, 100);
+		});
+		it("should remove tiles under cursor", done => {
+			mouseUtil.mouseEvent("mousemove", { clientX: pt.x, clientY: pt.y });
+			mouseUtil.mouseEvent("mousedown", { button: 2 });
+			setTimeout(() => {
+				expect(game.engine.grid.getBlockAtPoint(pt).isEmpty()).toBe(
 					false
 				);
+				mouseUtil.mouseEvent("mouseup", { button: 2 });
+				done();
 			}, 100);
 		});
 	});
