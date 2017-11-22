@@ -11,7 +11,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-describe("functional", () => {
+describe("editor functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {
@@ -47,9 +47,10 @@ describe("functional", () => {
 			mouseUtil.mouseEvent("mousemove", { clientX: pt.x, clientY: pt.y });
 			mouseUtil.mouseEvent("mousedown", { button: 0 });
 			setTimeout(() => {
-				expect(game.engine.grid.getBlockAtPoint(pt).isEmpty()).toBe(
-					true
+				let block = game.engine.grid.getBlockAtPoint(
+					game.engine.mouse.point
 				);
+				expect(block.isEmpty()).toBe(false);
 				mouseUtil.mouseEvent("mouseup", { button: 0 });
 				done();
 			}, 100);
@@ -58,9 +59,10 @@ describe("functional", () => {
 			mouseUtil.mouseEvent("mousemove", { clientX: pt.x, clientY: pt.y });
 			mouseUtil.mouseEvent("mousedown", { button: 2 });
 			setTimeout(() => {
-				expect(game.engine.grid.getBlockAtPoint(pt).isEmpty()).toBe(
-					false
+				let block = game.engine.grid.getBlockAtPoint(
+					game.engine.mouse.point
 				);
+				expect(block.isEmpty()).toBe(true);
 				mouseUtil.mouseEvent("mouseup", { button: 2 });
 				done();
 			}, 100);

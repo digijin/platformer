@@ -19,8 +19,8 @@ module.exports = function(config) {
 		frameworks: ["jasmine"],
 		files: [
 			"node_modules/babel-polyfill/dist/polyfill.js",
-			{ pattern: "src/**/*karma.js", watched: false },
-			{ pattern: "src/**/*spec.js", watched: false }
+			{ pattern: "src/**/*spec.js", watched: false },
+			{ pattern: "src/**/*karma.js", watched: false }
 		],
 		browser: { fs: false },
 		exclude: [],
@@ -32,7 +32,7 @@ module.exports = function(config) {
 		webpack: webpackConf[0],
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 		// reporters: ['coverage', 'progress', 'kjhtml'], // 'nyan', 'dots', 'progress'
-		reporters: ["spec", "coverage-istanbul"],
+		reporters: ["coverage-istanbul"],
 
 		specReporter: {
 			suppressSkipped: true,
