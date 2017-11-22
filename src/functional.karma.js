@@ -55,11 +55,15 @@ describe("functional", () => {
 				clientX: window.innerWidth / 2 + 200,
 				clientY: window.innerHeight / 2 - 200
 			};
-			mouseUtil.mouseEvent("mousemove", target);
+			mouseUtil.mouseEvent("mousemove", target, game.engine.canvas);
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent("mousedown", { button: 0 });
+			mouseUtil.mouseEvent(
+				"mousedown",
+				{ button: 0 },
+				game.engine.canvas
+			);
 			expect(game.engine.input.getButton("fire")).toBe(1);
 		});
 		it(
@@ -70,7 +74,11 @@ describe("functional", () => {
 						clientX: window.innerWidth / 2 + 200,
 						clientY: window.innerHeight / 2 - 200 + i * 2
 					};
-					mouseUtil.mouseEvent("mousemove", target);
+					mouseUtil.mouseEvent(
+						"mousemove",
+						target,
+						game.engine.canvas
+					);
 					expect(game.engine.input.mouse.position.y).toBe(
 						target.clientY
 					);
@@ -122,7 +130,7 @@ describe("functional", () => {
 				clientX: window.innerWidth / 2 - 200,
 				clientY: window.innerHeight / 2 + 200
 			};
-			mouseUtil.mouseEvent("mousemove", target);
+			mouseUtil.mouseEvent("mousemove", target, game.engine.canvas);
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
 		});
 		it("should begin firing", () => {

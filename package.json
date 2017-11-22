@@ -18,8 +18,7 @@
 		"deploy": "npm version patch && git push && git push --tags",
 		"karma": "karma start --reporters nyan",
 		"karma:ci": "karma start --browsers ChromeHeadless --single-run",
-		"karma:headless":
-			"karma start --reporters nyan --browsers ChromeHeadless",
+		"karma:headless": "karma start --reporters nyan --browsers ChromeHeadless",
 		"karma:electron": "karma start --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876"
 	},
@@ -97,7 +96,7 @@
 		"style-loader": "^0.13.1",
 		"stylus": "^0.54.5",
 		"stylus-loader": "^2.4.0",
-		"unityinput": "0.0.26",
+		"unityinput": "^0.0.27",
 		"url-loader": "^0.5.5",
 		"webpack": "^3.8.1",
 		"webpack-dev-server": "^2.9.4",
@@ -107,15 +106,25 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": ["js", "jsx"],
-		"moduleDirectories": ["node_modules", "src"],
-		"modulePaths": ["/src"],
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-				"<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": ["json", "lcov"]
+		"coverageReporters": [
+			"json",
+			"lcov"
+		]
 	}
 }
