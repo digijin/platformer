@@ -37,6 +37,13 @@ export default class Leg extends GameObject {
 		this.rearFootPos = new Point();
 	}
 	update() {
+		let offsetTarget;
+		if (this.engine.input.getAxis("vertical") == 1) {
+			offsetTarget = new Point({ x: 0, y: -30 });
+		} else {
+			offsetTarget = new Point({ x: 0, y: -50 });
+		}
+		this.offset = this.offset.easeTo(offsetTarget, 5);
 		let torsoOffsetTarget = new Point();
 		//default standing targets
 		let frontFootPosTarget = new Point({ x: 10, y: 0 }).add(
