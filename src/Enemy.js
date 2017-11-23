@@ -61,7 +61,7 @@ export default class Enemy extends Actor {
 		} else {
 			//pickup distance
 			if (this.position.distanceTo(this.engine.player.position) < 100) {
-				this.startAgro();
+				this.startAgro(this.engine.player);
 			}
 		}
 

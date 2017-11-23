@@ -1,12 +1,15 @@
 import type Player from "Player";
 
-export default function* patrol(
+export default function* agro(
 	enemy: Enemy,
 	engine: Engine,
 	player: Player
 ): Generator<*, *, *> {
 	const dontFall = true;
 	let direction = 1;
+	if (player.position.x < enemy.position.x) {
+		direction = -1;
+	}
 	while (true) {
 		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
 		if (!enemy.canMoveHori(hDelta)) {
