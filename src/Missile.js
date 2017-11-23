@@ -67,7 +67,8 @@ export default class Missile extends Projectile {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
-					a.explode();
+					// a.explode();
+					a.damage(30 + Math.random() * 75);
 				}
 			}
 		});

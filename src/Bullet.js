@@ -64,7 +64,7 @@ export default class Bullet extends GameObject {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					// this.explode();
-					a.damage(1);
+					a.damage(5);
 				}
 			}
 		});
