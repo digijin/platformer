@@ -14,6 +14,7 @@ export default class EnemyType {
 	jumpSpeed: number;
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
+
 	constructor(params: EnemyTypeParams) {}
 }
 
@@ -22,7 +23,25 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		walkSpeed: 50,
 		jumpSpeed: 100,
 		size: { w: 50, h: 50 },
-		registration: { x: 0.5, y: 1 }
+		registration: { x: 0.5, y: 1 },
+		idle: "rabbit",
+		agro: "agro"
+	},
+	{
+		walkSpeed: 50,
+		jumpSpeed: 100,
+		size: { w: 20, h: 20 },
+		registration: { x: 0.5, y: 1 },
+		idle: "patrol",
+		agro: "agro"
+	},
+	{
+		walkSpeed: 50,
+		jumpSpeed: 100,
+		size: { w: 60, h: 60 },
+		registration: { x: 0.5, y: 1 },
+		idle: "bounce",
+		agro: "agro"
 	}
 ];
 

@@ -9,8 +9,10 @@ import Actor from "Actor";
 
 import config from "config";
 
-// import patrol from "AI/patrol";
+import bounce from "AI/bounce";
+import patrol from "AI/patrol";
 import rabbit from "AI/rabbit";
+import agro from "AI/agro";
 import type EnemyType from "EnemyType";
 
 export default class Enemy extends Actor {
@@ -21,6 +23,7 @@ export default class Enemy extends Actor {
 	v: number;
 	h: number;
 	type: EnemyType;
+	agro: Player | null;
 	constructor(params: { position: Point, type: EnemyType }) {
 		super();
 		this.tag("enemy");
@@ -46,19 +49,42 @@ export default class Enemy extends Actor {
 		) {
 			this.explode();
 		}
+
+		//check agro
+		if (this.agro) {
+			//falloff distance
+			if (this.position.distanceTo(this.agro.position) > 200) {
+				this.startIdle();
+			}
+		} else {
+			//pickup distance
+			if (this.position.distanceTo(this.engine.player.position) < 100) {
+				this.startAgro();
+			}
+		}
+
 		if (!this.action) {
-			this.action = rabbit(this, engine);
+			// switch(this.type.)
+			this.startIdle();
 		}
 		if (this.action.next().done) {
 			this.action = null;
 		}
-		engine.ctx.drawSprite(
+		this.engine.ctx.drawSprite(
 			mech,
 			this.position,
 			this.size,
 			0,
 			this.registration
 		);
+	}
+	startIdle() {
+		this.agro = null;
+		this.action = rabbit(this, this.engine);
+	}
+	startAgro(player: Player) {
+		this.agro = player;
+		this.action = agro(this, this.engine, player);
 	}
 }
 

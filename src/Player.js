@@ -87,6 +87,7 @@ export default class Player extends Actor {
 
 	init(engine: Engine) {
 		super.init(engine);
+		engine.player = this;
 		engine.register(this.leg);
 	}
 	update(engine: Engine) {
