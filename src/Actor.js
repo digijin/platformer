@@ -29,6 +29,12 @@ export default class Actor extends GameObject {
 		this.tag("actor");
 		// engine = Engine.getInstance();
 	}
+	damage(amount: number) {
+		this.hp -= amount;
+		if (this.hp <= 0) {
+			this.explode();
+		}
+	}
 
 	explode = () => {
 		this.destroy();
