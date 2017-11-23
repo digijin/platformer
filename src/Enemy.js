@@ -2,7 +2,7 @@
 
 import type Engine from "Engine";
 import type Point from "Point";
-
+import Rect from "Rect";
 import mech from "mech.png";
 
 import Actor from "Actor";
@@ -26,6 +26,8 @@ export default class Enemy extends Actor {
 	agro: Player | null;
 	constructor(params: { position: Point, type: EnemyType }) {
 		super();
+		this.hp = 100;
+		this.maxhp = 100;
 		this.tag("enemy");
 		this.walkSpeed = config.enemy.walkSpeed;
 		// this.size = params.type.size;
@@ -76,6 +78,28 @@ export default class Enemy extends Actor {
 			this.size,
 			0,
 			this.registration
+		);
+		// healthbar:d
+		let barRect = Rect.fromPosSizeRego(
+			this.position.add({ x: 0, y: -70 }),
+			{ w: 20, h: 5 },
+			{ x: 0.5, y: 0.5 }
+		);
+		this.engine.ctx.context.fillStyle = "black";
+		this.engine.ctx.fillRect(
+			barRect.tl().x,
+			barRect.tl().y,
+			barRect.width(),
+			barRect.height()
+		);
+		let border = 1;
+		this.engine.ctx.context.fillStyle = "red";
+
+		this.engine.ctx.fillRect(
+			barRect.tl().x,
+			barRect.tl().y + border,
+			barRect.width() * this.hp / this.maxhp,
+			barRect.height() - border * 2
 		);
 	}
 	startIdle() {
