@@ -7,10 +7,8 @@ export default function* agro(
 ): Generator<*, *, *> {
 	const dontFall = true;
 	let direction = 1;
-	if (player.position.x < enemy.position.x) {
-		direction = -1;
-	}
 	while (true) {
+		direction = player.position.x < enemy.position.x ? -1 : 1;
 		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
 		if (!enemy.canMoveHori(hDelta)) {
 			direction = -direction;
