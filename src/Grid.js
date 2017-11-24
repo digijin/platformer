@@ -83,7 +83,7 @@ export default class Grid extends GameObject {
 			return this.blocks[pos.x][pos.y];
 		}
 	}
-	getBlockAtPoint(point: { x: number, y: number }): Block {
+	getBlockAtPoint(point: { x: number, y: number }): Block | void {
 		return this.blockAtPosition(point);
 	}
 

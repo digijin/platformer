@@ -3,6 +3,7 @@ import config from "config";
 
 export type EnemyTypeParams = {
 	// hp: name,
+	name: string,
 	walkSpeed: number,
 	jumpSpeed: number,
 	size: { w: number, h: number },
@@ -10,6 +11,7 @@ export type EnemyTypeParams = {
 };
 
 export default class EnemyType {
+	name: string;
 	walkSpeed: number;
 	jumpSpeed: number;
 	size: { w: number, h: number };
@@ -22,6 +24,7 @@ export default class EnemyType {
 
 let enemyTypeConfig: Array<EnemyTypeParams> = [
 	{
+		name: "hopper",
 		walkSpeed: 50,
 		jumpSpeed: 100,
 		size: { w: 50, h: 50 },
@@ -30,19 +33,21 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		agro: "agro"
 	},
 	{
+		name: "lil bouncy",
 		walkSpeed: 50,
 		jumpSpeed: 100,
 		size: { w: 20, h: 20 },
 		registration: { x: 0.5, y: 1 },
-		idle: "patrol",
+		idle: "bounce",
 		agro: "agro"
 	},
 	{
+		name: "guard",
 		walkSpeed: 50,
 		jumpSpeed: 100,
 		size: { w: 60, h: 60 },
 		registration: { x: 0.5, y: 1 },
-		idle: "bounce",
+		idle: "patrol",
 		agro: "agro"
 	}
 ];

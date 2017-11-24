@@ -111,7 +111,19 @@ export default class Enemy extends Actor {
 	}
 	startIdle() {
 		this.agro = null;
-		this.action = rabbit(this, this.engine);
+		switch (this.type.idle) {
+			case "rabbit":
+				this.action = rabbit(this, this.engine);
+				break;
+			case "patrol":
+				this.action = patrol(this, this.engine);
+				break;
+			case "bounce":
+				this.action = bounce(this, this.engine);
+				break;
+			default:
+				throw new Error("no idle for Enemy");
+		}
 	}
 	startAgro(player: Player) {
 		this.agro = player;
