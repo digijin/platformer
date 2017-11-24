@@ -4,6 +4,7 @@ import type Engine from "Engine";
 import type Point from "Point";
 import type Actor from "Actor";
 import GameObject from "GameObject";
+import Explosion from "Explosion";
 export default class Bullet extends GameObject {
 	// x: number; //position
 	// y: number; //position
@@ -27,7 +28,24 @@ export default class Bullet extends GameObject {
 	}
 
 	explode() {
-		console.log("boop", arguments);
+		this.destroy();
+		// super.explode();
+
+		for (let i = 0; i < 1; i++) {
+			//we want red outlines to be on the outside
+			//pick a direction
+			let dir = Math.random() * Math.PI * 2;
+			let dist = Math.random() * 2;
+			let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
+			this.engine.register(
+				new Explosion({
+					position: this.position.add(offset),
+					rotation: dir,
+					delay: Math.random() / 8,
+					size: 10
+				})
+			);
+		}
 	}
 
 	update = (engine: Engine) => {
@@ -56,15 +74,15 @@ export default class Bullet extends GameObject {
 				y: this.position.y
 			})
 		) {
-			this.destroy();
+			this.explode();
 		}
 		//CHECK ENEMIES
 		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
-					// this.explode();
-					this.destroy();
+					this.explode();
+					// this.destroy();
 					a.damage(5);
 				}
 			}

@@ -180,7 +180,7 @@ export default class Player extends Actor {
 			let gunPoint = this.leg.gunBarrelPos;
 			let diff = engine.mouse.point.subtract(gunPoint);
 			let dir = Math.atan2(diff.y, diff.x);
-			dir += (Math.random() - 0.5) / 10; //spread
+			dir += (Math.random() - 0.5) / 4; //spread
 			engine.register(
 				new Bullet({
 					position: gunPoint,
