@@ -20,6 +20,7 @@
 		"karma:ci": "karma start --browsers ChromeHeadless --single-run",
 		"karma:headless":
 			"karma start --reporters nyan --browsers ChromeHeadless",
+		"karma:chrome": "karma start --reporters nyan --browsers Chrome",
 		"karma:electron":
 			"karma start --reporters nyan --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876"

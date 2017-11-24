@@ -1,4 +1,3 @@
-// @flow
 import Game from "Game";
 
 import testGen from "jasmine-es6-generator";

@@ -57,7 +57,6 @@ export default class Engine {
 	}
 	init(container: HTMLElement) {
 		this.container = container;
-		// FLOWHACK
 		this.mouse = new Mouse().init(this);
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -95,13 +94,6 @@ export default class Engine {
 
 	//add new objects to be tracked by engine
 	register = (obj: GameObject) => {
-		// FLOWHACK
-		// obj.destroy = () => {
-		// 	let i = this.objects.indexOf(obj);
-		// 	if (i > -1) {
-		// 		this.objects.splice(i, 1);
-		// 	}
-		// };
 		obj.init(this);
 		this.objects.push(obj);
 	};
