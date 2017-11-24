@@ -55,12 +55,12 @@ export default class Enemy extends Actor {
 		//check agro
 		if (this.agro) {
 			//falloff distance
-			if (this.position.distanceTo(this.agro.position) > 200) {
+			if (this.position.distanceTo(this.agro.position) > 1000) {
 				this.startIdle();
 			}
 		} else {
 			//pickup distance
-			if (this.position.distanceTo(this.engine.player.position) < 100) {
+			if (this.position.distanceTo(this.engine.player.position) < 300) {
 				this.startAgro(this.engine.player);
 			}
 		}

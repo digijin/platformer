@@ -11,7 +11,10 @@ export default function* agro(
 		direction = player.position.x < enemy.position.x ? -1 : 1;
 		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
 		if (!enemy.canMoveHori(hDelta)) {
-			direction = -direction;
+			if (enemy.v == 0) {
+				//jump
+				enemy.v = -4;
+			}
 		} else {
 			enemy.position.x += hDelta;
 		}
