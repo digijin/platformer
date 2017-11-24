@@ -15,7 +15,9 @@ export default class EnemyType {
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
 
-	constructor(params: EnemyTypeParams) {}
+	constructor(params: EnemyTypeParams) {
+		Object.assign(this, params);
+	}
 }
 
 let enemyTypeConfig: Array<EnemyTypeParams> = [

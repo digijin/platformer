@@ -28,5 +28,8 @@ describe("spawner", () => {
 		it("should have a type", () => {
 			expect(args.type).toBeDefined();
 		});
+		it("should have a type size", () => {
+			expect(args.type.size).toBeDefined();
+		});
 	});
 });
