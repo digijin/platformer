@@ -11,6 +11,7 @@ describe("grid jest", () => {
 		});
 		it("save snapshot", () => {
 			let grid = new Grid({ w: 10, h: 10 });
+			// FLOWHACK
 			expect(grid.save()).toMatchSnapshot();
 		});
 	});

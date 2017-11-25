@@ -58,7 +58,7 @@ export default class Engine {
 	init(container: HTMLElement) {
 		this.container = container;
 		this.mouse = new Mouse().init(this);
-		//FLOWHACK
+		// FLOWHACK
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.game.width;

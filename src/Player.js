@@ -1,4 +1,4 @@
-//@flow
+// @flow
 
 import Point from "Point";
 import Missile from "Missile";

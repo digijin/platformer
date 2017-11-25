@@ -1,3 +1,5 @@
+// @flow
+
 import Player from "Player";
 import Enemy from "Enemy";
 
@@ -7,13 +9,17 @@ import Grid from "Grid";
 
 import Spawner from "Spawner";
 
+import type Engine from "Engine";
+
 export default class Level extends Base {
-	start(engine) {
+	start(engine: Engine) {
 		super.start(engine);
 		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
 		grid.generate(1);
-		grid.load(require("levels/buildings.txt"));
+		// FLOWHACK
+		let gridData = require("levels/buildings.txt");
+		grid.load(gridData);
 		engine.register(grid);
 
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });

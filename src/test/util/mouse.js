@@ -13,12 +13,13 @@ let gap = 10;
 let mouseEvent = function(
 	eventName: string,
 	params: Object,
-	target = document
+	target: any = document
 ) {
 	// let target = sizzle("canvas")[0];
 	var event = document.createEvent("Event");
 	extend(event, params);
 	event.initEvent(eventName, true, true);
+	//FLOWHACK
 	target.dispatchEvent(event); //was document
 };
 
@@ -30,9 +31,9 @@ let clickSelector = function(selector: string): boolean {
 	}
 	return false;
 };
-let canvas;
+let canvas: HTMLCanvasElement;
 
-function setCanvas(c) {
+function setCanvas(c: HTMLCanvasElement) {
 	canvas = c;
 }
 
@@ -41,37 +42,37 @@ function clickCheckbox(selector: string) {
 	ReactTestUtils.Simulate.change(el, { target: el });
 }
 
-function canvasMouseMove(pos: { x: number, y: number }) {
-	mouseEvent(canvas, "mousemove", { button: 0, pageX: pos.x, pageY: pos.y });
-}
+// function canvasMouseMove(pos: { x: number, y: number }) {
+// 	mouseEvent(canvas, "mousemove", { button: 0, pageX: pos.x, pageY: pos.y });
+// }
 
-function canvasClick(pos: { x: number, y: number }, param) {
-	// debugger;
-	// mouseEvent(canvas, 'mousemove', {button:0, pageX:block.center.x, pageY:block.center.y});
+// function canvasClick(pos: { x: number, y: number }, param) {
+// 	// debugger;
+// 	// mouseEvent(canvas, 'mousemove', {button:0, pageX:block.center.x, pageY:block.center.y});
 
-	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
+// 	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
 
-	mouseEvent(canvas, "mousedown", params);
-	mouseEvent(canvas, "mouseup", params);
-}
-function canvasMouseDown(pos: { x: number, y: number }, param) {
-	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
-	mouseEvent(canvas, "mousedown", params);
-}
-function canvasMouseUp(pos: { x: number, y: number }, param) {
-	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
-	mouseEvent(canvas, "mouseup", params);
-}
+// 	mouseEvent(canvas, "mousedown", params);
+// 	mouseEvent(canvas, "mouseup", params);
+// }
+// function canvasMouseDown(pos: { x: number, y: number }, param) {
+// 	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
+// 	mouseEvent(canvas, "mousedown", params);
+// }
+// function canvasMouseUp(pos: { x: number, y: number }, param) {
+// 	let params = assign({ button: 0, pageX: pos.x, pageY: pos.y }, param);
+// 	mouseEvent(canvas, "mouseup", params);
+// }
 
 const mouse = {
 	mouseEvent,
 	clickSelector,
-	clickCheckbox,
-	canvasMouseMove,
-	canvasClick,
-	setCanvas,
-	canvasMouseDown,
-	canvasMouseUp
+	clickCheckbox
+	// canvasMouseMove,
+	// canvasClick,
+	// setCanvas,
+	// canvasMouseDown,
+	// canvasMouseUp
 };
 
 export default mouse;

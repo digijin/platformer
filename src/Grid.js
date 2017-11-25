@@ -105,7 +105,8 @@ export default class Grid extends GameObject {
 	}
 
 	isPositionBlocked(pos: { x: number, y: number }) {
-		return this.blockAtPosition(pos).type != "0";
+		let block = this.getBlockAtPoint(pos);
+		return block && block.type != "0";
 	}
 
 	getBlocksInRect(rect: Rect): Array<Block> {

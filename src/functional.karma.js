@@ -19,7 +19,7 @@ describe("functional", () => {
 		// 	"position:absolute; left: 0px; top: 0px; display:block; width: 100%; height: 100%; z-index:10000";
 		document.body.appendChild(container);
 		game = new Game(container);
-		mouseUtil.setCanvas(container.childNodes[0]);
+		// mouseUtil.setCanvas(container.childNodes[0]);
 	});
 	afterAll(function() {
 		game.destroy();

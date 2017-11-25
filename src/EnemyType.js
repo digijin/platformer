@@ -8,7 +8,9 @@ export type EnemyTypeParams = {
 	jumpSpeed: number,
 	hp: number,
 	size: { w: number, h: number },
-	registration: { x: number, y: number }
+	registration: { x: number, y: number },
+	idle: string,
+	agro: string
 };
 
 export default class EnemyType {
@@ -18,6 +20,8 @@ export default class EnemyType {
 	hp: number;
 	size: { w: number, h: number };
 	registration: { x: number, y: number };
+	idle: string;
+	agro: string;
 
 	constructor(params: EnemyTypeParams) {
 		Object.assign(this, params);
