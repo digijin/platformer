@@ -7,8 +7,8 @@ import Editor from "Scene/Editor";
 class MainMenu extends React.Component {
 	render() {
 		return (
-			<div>
-				<div className="title">Main Menu</div>
+			<div id="MainMenuUI">
+				<div className="title">PLATFORMER</div>
 				<div id="instructions">
 					<pre>
 						a:move left<br />

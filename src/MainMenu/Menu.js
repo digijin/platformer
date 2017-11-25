@@ -14,11 +14,18 @@ export default class MainMenu extends GameObject {
 		if (this.engine.input.getButton("jump")) {
 			this.engine.startScene(new Level());
 		}
-		this.engine.ctx.translate(1, -1);
-		this.engine.ctx.rotate(this.engine.deltaTime);
-		this.engine.ctx.fillText("game!", 0, 6);
+		// this.engine.ctx.translate(1, -1);
+		// this.engine.ctx.rotate(this.engine.deltaTime);
+		// this.engine.ctx.fillText("game!", 0, 6);
 
 		this.engine.ctx.resetTransform();
+		this.engine.ctx.context.fillStyle = "#222";
+		this.engine.ctx.context.fillRect(
+			0,
+			window.innerHeight / 2,
+			window.innerWidth,
+			window.innerHeight / 2
+		);
 		this.engine.ctx.drawSprite(
 			mechHero,
 			new Point({
