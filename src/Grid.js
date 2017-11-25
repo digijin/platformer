@@ -9,7 +9,7 @@ import config from "config";
 import Block from "Block";
 import Point from "Point";
 
-import dirtTile from "dirt_tile.png";
+// import dirtTile from "dirt_tile.png";
 
 import { Noise } from "noisejs";
 
@@ -265,7 +265,7 @@ export default class Grid extends GameObject {
 					y: tile.y * config.grid.tile.height + y
 				});
 				if (block && !block.isEmpty()) {
-					let im = dirtTile;
+					let im = block.getType().image;
 					let imageParams = [im, 0, 0, im.width, im.height];
 					ctx.drawImage(
 						...imageParams,
