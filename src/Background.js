@@ -9,6 +9,8 @@ let url = "url(" + skyline.src + ")";
 
 export default class Background extends GameObject {
 	el: HTMLDivElement;
+	top: HTMLDivElement;
+	bottom: HTMLDivElement;
 	constructor() {
 		super();
 	}
@@ -18,7 +20,15 @@ export default class Background extends GameObject {
 		this.el.id = "background";
 		engine.container.appendChild(this.el);
 
-		this.el.style.backgroundImage = url;
+		this.top = document.createElement("DIV");
+		this.top.className = "top";
+		this.el.appendChild(this.top);
+
+		this.bottom = document.createElement("DIV");
+		this.bottom.className = "bottom";
+		this.el.appendChild(this.bottom);
+
+		this.top.style.backgroundImage = url;
 	}
 	update() {
 		this.el.style.backgroundPositionX =
