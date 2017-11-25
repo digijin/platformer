@@ -46,10 +46,9 @@ export default class Missile extends Projectile {
 		this.remoteControl = true;
 
 		//CHECK GRID
-		let block = this.engine.grid.blockAtPosition(this.position);
-		if (!block.isEmpty()) {
+		let block = this.engine.grid.getBlockAtPoint(this.position);
+		if (block && !block.isEmpty()) {
 			this.explode();
-			// block.destroy();
 			let r = 15;
 			let rect = new Rect({
 				t: this.position.y - r,
@@ -60,10 +59,6 @@ export default class Missile extends Projectile {
 			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
-		// if (this.engine.grid.isPositionBlocked(this.position)) {
-		// 	this.explode();
-		// 	this.engine.grid.destroyBlockAtPosition(this.position);
-		// }
 		//CHECK ENEMIES
 		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {

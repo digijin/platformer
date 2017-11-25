@@ -12,17 +12,13 @@ export default class Block {
 	position: Point;
 	type: string;
 	grid: Grid;
-	hp: number | null;
+	hp: number;
 	constructor(params: { position: Point, type: string, grid: Grid }) {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
 
 		if (this.type !== "0") {
-			if (!this.getType()) {
-				console.log("ASd");
-				throw new Error("cant find type " + this.type);
-			}
 			this.hp = this.getType().hp;
 		}
 	}
@@ -30,7 +26,7 @@ export default class Block {
 		return JSON.stringify({ position: this.position, type: this.type });
 	}
 
-	getType(): BlockType | void {
+	getType(): BlockType {
 		return BlockTypeMap[this.type];
 	}
 
