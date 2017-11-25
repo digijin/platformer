@@ -18,6 +18,7 @@ export default class Missile extends Projectile {
 	speed: number;
 	z: number;
 	guided: boolean;
+	lazerTargeted: boolean;
 	position: Point;
 	explode() {
 		// this.destroy();
@@ -41,6 +42,8 @@ export default class Missile extends Projectile {
 	update = () => {
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
+
+		this.lazerTargeted = true;
 
 		//CHECK GRID
 		let block = this.engine.grid.blockAtPosition(this.position);
@@ -78,6 +81,9 @@ export default class Missile extends Projectile {
 
 		//aim at target
 		if (this.guided) {
+			if (this.lazerTargeted) {
+				this.target = this.engine.mouse.point;
+			}
 			let diff = this.target.subtract(this.position);
 			let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
 			if (dist < config.missile.guidedDist) {
