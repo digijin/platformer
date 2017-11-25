@@ -9,9 +9,13 @@ export default class Watcher extends GameObject {
 	el: HTMLDivElement;
 	size: number;
 
+	blockId: string;
+
 	constructor() {
 		super();
+		this.blockId = "1";
 		this.size = 10;
+		this.tag("editor-watcher");
 	}
 	init(engine: Engine) {
 		super.init(engine);
@@ -30,7 +34,7 @@ export default class Watcher extends GameObject {
 		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		if (this.engine.input.getButton("editor_add")) {
 			// block.add();
-			blocks.forEach(b => b.add());
+			blocks.forEach(b => b.add(this.blockId));
 		}
 		if (this.engine.input.getButton("editor_remove")) {
 			// block.remove();

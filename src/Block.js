@@ -33,8 +33,8 @@ export default class Block {
 		this.grid.bustCache(this);
 	}
 	//for editor
-	add() {
-		this.type = "1";
+	add(blockId: string) {
+		this.type = blockId;
 		this.grid.bustCache(this);
 	}
 	//for editor

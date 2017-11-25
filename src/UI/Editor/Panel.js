@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import Storage from "Storage";
 
+import { BlockTypes } from "BlockType";
+
 class EditorPanel extends React.Component {
 	storage: Storage;
 	savename: string;
@@ -12,6 +14,10 @@ class EditorPanel extends React.Component {
 		this.state = { savename: "" };
 	}
 	render() {
+		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		if (!watcher) {
+			throw new Error("no watcher");
+		}
 		let saves = this.storage.list();
 		return (
 			<div id="editor">
@@ -19,6 +25,20 @@ class EditorPanel extends React.Component {
 				Left mouse to draw<br />
 				Right mouse to erase<br />
 				WASD to navigate
+				<div id="blockSelector">
+					selected Block = {watcher.blockId}
+					{BlockTypes.map(b => (
+						<button
+							onClick={() => {
+								watcher.blockId = b.id;
+								this.forceUpdate();
+							}}
+							key={b.id}
+						>
+							{b.id}. {b.name}
+						</button>
+					))}
+				</div>
 				<div id="savepanel">
 					save games:<br />
 					<div>
