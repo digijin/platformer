@@ -11,6 +11,8 @@ export default class Background extends GameObject {
 	el: HTMLDivElement;
 	top: HTMLDivElement;
 	bottom: HTMLDivElement;
+	top2: HTMLDivElement;
+	bottom2: HTMLDivElement;
 	constructor() {
 		super();
 	}
@@ -21,17 +23,28 @@ export default class Background extends GameObject {
 		engine.container.appendChild(this.el);
 
 		this.top = document.createElement("DIV");
-		this.top.className = "top";
+		this.top.className = "top layer1";
 		this.el.appendChild(this.top);
 
 		this.bottom = document.createElement("DIV");
-		this.bottom.className = "bottom";
+		this.bottom.className = "bottom layer1";
 		this.el.appendChild(this.bottom);
 
+		this.top2 = document.createElement("DIV");
+		this.top2.className = "top layer2";
+		this.el.appendChild(this.top2);
+
+		this.bottom2 = document.createElement("DIV");
+		this.bottom2.className = "bottom layer2";
+		this.el.appendChild(this.bottom2);
+
 		this.top.style.backgroundImage = url;
+		this.top2.style.backgroundImage = url;
 	}
 	update() {
-		this.el.style.backgroundPositionX =
+		this.top.style.backgroundPositionX =
 			-this.engine.view.offset.x / 8 + "px";
+		this.top2.style.backgroundPositionX =
+			-this.engine.view.offset.x / 4 + "px";
 	}
 }
