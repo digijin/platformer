@@ -22,6 +22,10 @@ export default class Background extends GameObject {
 		this.el.id = "background";
 		engine.container.appendChild(this.el);
 
+		// let layer1 = document.createElement("DIV");
+		// layer1.className = "layer1"
+		// this.el.appendChild(this.top);
+
 		this.top = document.createElement("DIV");
 		this.top.className = "top layer1";
 		this.el.appendChild(this.top);
