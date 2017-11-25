@@ -27,8 +27,8 @@ export default class Enemy extends Actor {
 	agro: Player | null;
 	constructor(params: { position: Point, type: EnemyType }) {
 		super();
-		this.hp = 100;
-		this.maxhp = 100;
+		this.hp = params.type.hp;
+		this.maxhp = params.type.hp;
 		this.tag("enemy");
 		this.walkSpeed = config.enemy.walkSpeed;
 		this.size = params.type.size;
@@ -105,7 +105,7 @@ export default class Enemy extends Actor {
 		this.engine.ctx.fillRect(
 			barRect.tl().x,
 			barRect.tl().y + border,
-			barRect.width() * this.hp / this.maxhp,
+			barRect.width() * this.hp / this.type.hp,
 			barRect.height() - border * 2
 		);
 	}
