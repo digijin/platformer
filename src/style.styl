@@ -29,35 +29,37 @@ html, body{
     z-index: -10;
     .layer1{
         // opacity: 0.5;
-        background-size: 40% 20%;
         
         filter: contrast(20%) blur(2px);
+        width: 100%;
+        .top{
+            background-size: 40% 20%;
+            height: 270px;
+        }
+        .bottom {
+            top: 270px;
+        }
     }
     .layer2{
+        width: 100%;
         filter: contrast(50%);
+        
+        .top{
+            height: 350px;
+        }
+        .bottom {
+            top: 350px;
+        }
     }
     .top {
         position: absolute;
         background-position: bottom;
         background-repeat: repeat-x;
         width: 100%;
-        &.layer1{
-            height: 270px;
-        }
-        &.layer2{
-            height: 350px;
-        }
     }
     .bottom {
         position: absolute;
         width: 100%;
-        
-        &.layer1{
-            top: 270px;
-        }
-        &.layer2{
-            top: 350px;
-        }
         bottom: 0px;
         z-index: -10;
         background-color: black;
