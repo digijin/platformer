@@ -5,6 +5,9 @@ import Point from "Point";
 import Rect from "Rect";
 import type Grid from "Grid";
 
+import type BlockType from "BlockType";
+import { BlockTypeMap } from "BlockType";
+
 export default class Block {
 	position: Point;
 	type: string;
@@ -16,6 +19,10 @@ export default class Block {
 	}
 	toString() {
 		return JSON.stringify({ position: this.position, type: this.type });
+	}
+
+	getType(): BlockType | void {
+		return BlockTypeMap[this.type];
 	}
 
 	isEmpty(): boolean {
