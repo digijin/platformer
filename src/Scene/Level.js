@@ -6,6 +6,7 @@ import Enemy from "Enemy";
 import Point from "Point";
 import Base from "./Base";
 import Grid from "Grid";
+import Background from "Background";
 
 import Spawner from "Spawner";
 
@@ -21,6 +22,8 @@ export default class Level extends Base {
 		let gridData = require("levels/buildings.txt");
 		grid.load(gridData);
 		engine.register(grid);
+
+		engine.register(new Background());
 
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
 		engine.register(player);
