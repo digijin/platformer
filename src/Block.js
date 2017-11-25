@@ -17,7 +17,12 @@ export default class Block {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
+
 		if (this.type !== "0") {
+			if (!this.getType()) {
+				console.log("ASd");
+				throw new Error("cant find type " + this.type);
+			}
 			this.hp = this.getType().hp;
 		}
 	}

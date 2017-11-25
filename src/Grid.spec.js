@@ -131,11 +131,12 @@ describe("Grid", () => {
 			let gridA = new Grid({ w: 5, h: 5 });
 			let gridB = new Grid({ w: 5, h: 5 });
 			expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
-			gridA.getBlock({ x: 2, y: 2 }).add();
+			gridA.getBlock({ x: 2, y: 2 }).add("2");
 			expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
 
 			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
-			gridB.load(gridA.save());
+			let savedata = gridA.save();
+			gridB.load(savedata);
 			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
 		});
 	});
