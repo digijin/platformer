@@ -75,9 +75,10 @@ export default class Enemy extends Actor {
 		if (!this.action) {
 			// switch(this.type.)
 			this.startIdle();
-		}
-		if (this.action.next().done) {
-			this.action = null;
+		} else {
+			if (this.action.next().done) {
+				this.action = null;
+			}
 		}
 		this.engine.ctx.drawSprite(
 			mech,

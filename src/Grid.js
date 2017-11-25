@@ -184,20 +184,6 @@ export default class Grid extends GameObject {
 
 		//screenRect
 		let screenRect = this.engine.ctx.screenRect();
-		// let blocks = this.engine.grid.getBlocksInRect(screenRect);
-		// // engine.ctx.strokeStyle = '#000000'd
-		// blocks.forEach((cell, y) => {
-		// 	if (cell.type == "0") {
-		// 	} else {
-		// 		this.engine.ctx.drawSprite(
-		// 			dirtTile,
-		// 			cell.point,
-		// 			{ w: config.grid.width, h: config.grid.height },
-		// 			0,
-		// 			{ x: 0, y: 0 }
-		// 		);
-		// 	}
-		// });
 
 		let newTileCache = {};
 		this.tilesInRect(screenRect).forEach(tile => {
@@ -255,10 +241,11 @@ export default class Grid extends GameObject {
 		return out;
 	}
 	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
-		let canvas = document.createElement("CANVAS");
+		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.grid.tile.width * config.grid.width;
 		canvas.height = config.grid.tile.height * config.grid.height;
-		let ctx = canvas.getContext("2d");
+		// FLOWHACK
+		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
 				let block = this.getBlock({
@@ -267,9 +254,13 @@ export default class Grid extends GameObject {
 				});
 				if (block && !block.isEmpty()) {
 					let im = block.getType().image;
-					let imageParams = [im, 0, 0, im.width, im.height];
+					// let imageParams = [im, 0, 0, im.width, im.height];
 					ctx.drawImage(
-						...imageParams,
+						im,
+						0,
+						0,
+						im.width,
+						im.height,
 						x * config.grid.width,
 						y * config.grid.height,
 						config.grid.width,

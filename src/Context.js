@@ -108,7 +108,7 @@ export default class Context {
 		);
 	}
 	drawSprite = function(
-		image: string,
+		image: any,
 		position: Point = new Point({ x: 0, y: 0 }),
 		size: { w: number, h: number } = { w: 20, h: 20 },
 		rotation: number = 0,
