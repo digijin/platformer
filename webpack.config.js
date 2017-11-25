@@ -54,7 +54,7 @@ module.exports = [
 					loader: "style-loader!css-loader!stylus-loader"
 				},
 				{
-					test: /\.(ttf|eot|svg|TTF)$/,
+					test: /\.(ttf|otf|eot|svg|TTF)$/,
 					loader: "file-loader"
 				}
 			]

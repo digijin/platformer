@@ -8,7 +8,7 @@ class MainMenu extends React.Component {
 	render() {
 		return (
 			<div>
-				Main Menu
+				<div className="title">Main Menu</div>
 				<div id="instructions">
 					<pre>
 						a:move left<br />
