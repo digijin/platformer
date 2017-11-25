@@ -119,6 +119,10 @@ export default class Engine {
 		let nowTime = new Date().getTime();
 		let diff = nowTime - this.lastTime;
 		this.lastTime = nowTime;
+		if (diff > 1000) {
+			//window probably lost focus or switched tabs
+			diff = 1;
+		}
 		this.deltaTime = diff / 1000;
 		this.mouse.update();
 
