@@ -58,7 +58,7 @@ export default class Missile extends Projectile {
 				l: this.position.x - r
 			});
 			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
-			blocks.forEach(b => b.destroy());
+			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
 		// if (this.engine.grid.isPositionBlocked(this.position)) {
 		// 	this.explode();

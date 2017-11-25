@@ -9,7 +9,7 @@ export type BlockTypeParams = {
 	id: string,
 	image: any,
 	destructable: boolean,
-	hp?: number
+	hp: number
 };
 
 export default class BlockType {
@@ -17,7 +17,7 @@ export default class BlockType {
 	id: string;
 	destructable: boolean;
 	image: any;
-	hp: number | void;
+	hp: number;
 	constructor(params: BlockTypeParams) {
 		this.name = params.name;
 		this.id = params.id;
@@ -46,7 +46,8 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		name: "metal",
 		id: "3",
 		image: metalTile,
-		destructable: false
+		destructable: false,
+		hp: 0
 	}
 ];
 

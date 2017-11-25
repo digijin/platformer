@@ -3,17 +3,19 @@ var path = require("path");
 var webpackConf = require("./webpack.config.js");
 delete webpackConf[0].entry;
 //inject instrumentation
-webpackConf[0].module.rules.push({
-	test: /\.js$|\.jsx$/,
-	use: {
-		loader: "istanbul-instrumenter-loader",
-		options: { esModules: true }
-	},
-	enforce: "post",
-	exclude: /node_modules|\.(spec|karma)\.js$/
-});
 
 module.exports = function(config) {
+	if (config.reporters.indexOf("coverage-istanbul") > -1) {
+		webpackConf[0].module.rules.push({
+			test: /\.js$|\.jsx$/,
+			use: {
+				loader: "istanbul-instrumenter-loader",
+				options: { esModules: true }
+			},
+			enforce: "post",
+			exclude: /node_modules|\.(spec|karma)\.js$/
+		});
+	}
 	config.set({
 		basePath: "",
 		frameworks: ["jasmine"],

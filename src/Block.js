@@ -12,10 +12,14 @@ export default class Block {
 	position: Point;
 	type: string;
 	grid: Grid;
+	hp: number | null;
 	constructor(params: { position: Point, type: string, grid: Grid }) {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
+		if (this.type !== "0") {
+			this.hp = this.getType().hp;
+		}
 	}
 	toString() {
 		return JSON.stringify({ position: this.position, type: this.type });
@@ -27,6 +31,15 @@ export default class Block {
 
 	isEmpty(): boolean {
 		return this.type == "0";
+	}
+	damage(amount: number) {
+		let type = this.getType();
+		if (type && type.destructable) {
+			this.hp -= amount;
+			if (this.hp <= 0) {
+				this.destroy();
+			}
+		}
 	}
 	destroy() {
 		this.type = "0";
