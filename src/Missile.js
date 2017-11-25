@@ -49,7 +49,7 @@ export default class Missile extends Projectile {
 		let block = this.engine.grid.blockAtPosition(this.position);
 		if (!block.isEmpty()) {
 			this.explode();
-			block.destroy();
+			// block.destroy();
 			let r = 15;
 			let rect = new Rect({
 				t: this.position.y - r,
