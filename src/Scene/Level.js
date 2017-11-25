@@ -13,7 +13,7 @@ export default class Level extends Base {
 		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
 		grid.generate(1);
-		grid.load(require("levels/level1.txt"));
+		grid.load(require("levels/buildings.txt"));
 		engine.register(grid);
 
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
