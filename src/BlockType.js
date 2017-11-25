@@ -2,6 +2,7 @@
 import dirtTile from "Grid/dirt_tile.png";
 import brickTile from "Grid/brick_tile.png";
 import metalTile from "Grid/metal_tile.png";
+import woodTile from "Grid/wood_tile.png";
 
 export type BlockTypeParams = {
 	// hp: name,
@@ -48,6 +49,13 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: metalTile,
 		destructable: false,
 		hp: 0
+	},
+	{
+		name: "wood",
+		id: "4",
+		image: woodTile,
+		destructable: true,
+		hp: 10
 	}
 ];
 
@@ -57,6 +65,9 @@ export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
 
 export const BlockTypeMap: Object = BlockTypes.reduce(
 	(output: Object, type: BlockType) => {
+		if (output[type.id]) {
+			throw new Error("duplicate id for block type");
+		}
 		output[type.id] = type;
 		return output;
 	},
