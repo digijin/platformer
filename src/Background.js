@@ -59,4 +59,7 @@ export default class Background extends GameObject {
 		this.top2.style.height = 350 - this.engine.view.offset.y / 5 + "px";
 		this.bottom2.style.top = 350 - this.engine.view.offset.y / 5 + "px";
 	}
+	exit() {
+		this.engine.container.removeChild(this.el);
+	}
 }
