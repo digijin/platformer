@@ -10,7 +10,7 @@ describe("grid jest", () => {
 			expect(typeof grid.save()).toBe("string");
 		});
 		it("save snapshot", () => {
-			let grid = new Grid({ w: 10, h: 10 });
+			let grid = new Grid({ w: 2, h: 2 });
 			// FLOWHACK
 			expect(grid.save()).toMatchSnapshot();
 		});
