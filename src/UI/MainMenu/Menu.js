@@ -8,7 +8,11 @@ class MainMenu extends React.Component {
 	render() {
 		return (
 			<div id="MainMenuUI">
-				<div className="title">PLATFORMER</div>
+				<div className="title">
+					<div className="subsub">I don't have a good name</div>
+					<div className="sub">so for now it's called</div>
+					PLATFORMER
+				</div>
 				<div id="instructions">
 					<span className="key">wasd</span>:move and crouch<br />
 					<span className="key">e</span>:grapple arm left<br />
