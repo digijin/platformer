@@ -1,3 +1,4 @@
+// @flow
 import GameObject from "GameObject";
 
 import Level from "Scene/Level";
@@ -11,7 +12,8 @@ import explosion from "explosion.png";
 
 type Particle = {
 	time: number,
-	position: Point
+	position: Point,
+	rotation: number
 };
 
 export default class MainMenu extends GameObject {
@@ -42,7 +44,7 @@ export default class MainMenu extends GameObject {
 				time: 0,
 				rotation: x * Math.PI / 180 * 2,
 				position: new Point({
-					x: x,
+					x: x / 10,
 					y: 0
 				})
 			});
@@ -58,10 +60,10 @@ export default class MainMenu extends GameObject {
 			let ageipc = 100 - agepc; //age inverse pc
 			this.engine.ctx.context.filter =
 				"saturate(" +
-				Math.max((1 - age * 4) * 100, 0) +
-				"%) opacity(" +
-				ageipc * 2 +
-				"%)";
+				Math.max((1 - age * 3) * 100, 0) +
+				"%) brightness(" +
+				Math.max(age * 2, 1) +
+				")";
 			// "saturate(" +
 			// (age - 1) * 100 +
 			// "%) blur(" +
@@ -79,7 +81,8 @@ export default class MainMenu extends GameObject {
 					w: 40 * (1 - age) + 40,
 					h: 40 * (1 - age) + 40
 				},
-				part.rotation - Math.PI / 2
+				part.rotation - Math.PI / 2,
+				{ x: 0, y: 0.5 }
 			);
 			// this.engine.ctx.clearRect(
 			// 	0,
@@ -115,7 +118,13 @@ export default class MainMenu extends GameObject {
 		this.particleFX(
 			new Point({
 				x: window.innerWidth / 2 + 300,
-				y: window.innerHeight / 2 + 50
+				y: window.innerHeight / 2 + 100
+			})
+		);
+		this.particleFX(
+			new Point({
+				x: window.innerWidth / 2 - 200,
+				y: window.innerHeight / 2 + 100
 			})
 		);
 		this.ground();
