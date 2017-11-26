@@ -30,7 +30,9 @@ class EditorPanel extends React.Component {
 				Editor mode<br />
 				Left mouse to draw<br />
 				Right mouse to erase<br />
-				WASD to navigate
+				WASD to navigate<br />
+				Shift to speed up scrolling<br />
+				expand:
 				<button
 					onClick={() => {
 						this.props.engine.grid.addRowAbove();

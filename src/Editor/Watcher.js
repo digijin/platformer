@@ -41,12 +41,15 @@ export default class Watcher extends GameObject {
 			blocks.forEach(b => b.remove());
 		}
 		//scrolling
+		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
 		this.engine.view.offset.x +=
 			this.engine.input.getAxis("horizontal") *
 			this.engine.deltaTime *
-			200;
+			speed;
 		this.engine.view.offset.y +=
-			this.engine.input.getAxis("vertical") * this.engine.deltaTime * 200;
+			this.engine.input.getAxis("vertical") *
+			this.engine.deltaTime *
+			speed;
 
 		//render cursor
 		this.engine.ctx.fillRect(

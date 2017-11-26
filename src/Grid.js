@@ -299,27 +299,35 @@ export default class Grid extends GameObject {
 		});
 	}
 	addRowAbove() {
-		this.tileCache = {};
 		this.height++;
 		this.blocks.forEach(col => {
 			col.unshift(new Block(col[0]));
 		});
+		this.rebuildBlocks();
 	}
 	addRowBelow() {
-		this.tileCache = {};
 		this.height++;
 		this.blocks.forEach(col => {
 			col.push(new Block(col[col.length - 1]));
 		});
+		this.rebuildBlocks();
 	}
 	addColLeft() {
-		this.tileCache = {};
 		this.width++;
 		this.blocks.unshift(this.blocks[0].map(b => new Block(b)));
+		this.rebuildBlocks();
 	}
-	addColLeft() {
-		this.tileCache = {};
+	addColRight() {
 		this.width++;
-		this.blocks.unshift(this.blocks[0].map(b => new Block(b)));
+		this.blocks.push(
+			this.blocks[this.blocks.length - 1].map(b => new Block(b))
+		);
+		this.rebuildBlocks();
+	}
+	rebuildBlocks() {
+		this.tileCache = {};
+		this.blocks.forEach((col, x) =>
+			col.forEach((block, y) => (block.position = new Point({ x, y })))
+		);
 	}
 }
