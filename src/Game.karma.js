@@ -9,7 +9,7 @@ describe("Game", () => {
 	it("destroys", () => {
 		let div = document.createElement("DIV");
 		let game = new Game(div);
-		expect(div.childNodes.length).toBe(2);
+		expect(div.childNodes.length).toBe(3);
 		game.destroy();
 		expect(div.childNodes.length).toBe(0);
 	});

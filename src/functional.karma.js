@@ -30,7 +30,7 @@ describe("functional", () => {
 			setTimeout(done, 100);
 		});
 		it("should have a canvas", () => {
-			expect(container.childNodes.length).toBe(2);
+			expect(container.childNodes.length).toBeGreaterThan(1);
 			expect(container.childNodes[0].constructor.name).toBe(
 				"HTMLCanvasElement"
 			);

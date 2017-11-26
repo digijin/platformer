@@ -158,5 +158,10 @@ export default class Engine {
 		this.container.removeChild(this.canvas);
 		this.container.removeChild(this.ui.container);
 		this.fpsmeter.destroy();
+		this.objects.forEach(o => {
+			if (o.exit) {
+				o.exit();
+			}
+		});
 	};
 }
