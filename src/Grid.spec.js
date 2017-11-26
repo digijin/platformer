@@ -4,7 +4,7 @@ import Point from "Point";
 import Block from "Block";
 import Rect from "Rect";
 
-describe("Grid", () => {
+describe("Grid.spec.js", () => {
 	it("should be a class", () => {
 		new Grid();
 	});

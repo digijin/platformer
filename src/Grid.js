@@ -281,18 +281,25 @@ export default class Grid extends GameObject {
 	}
 
 	save(): string {
-		return JSON.stringify({ blocks: this.blocks }, (name, val) => {
-			if (name !== "grid") return val;
+		// return JSON.stringify({ blocks: this.blocks }, (name, val) => {
+		// 	if (name !== "grid") return val;
+		// });
+		return JSON.stringify({
+			blocks: this.blocks.map(col => {
+				return col.map(block => {
+					return { t: block.type };
+				});
+			})
 		});
 	}
 	load(str: string) {
 		this.tileCache = {};
 		let data = JSON.parse(str);
-		this.blocks = data.blocks.map(d => {
-			return d.map(block => {
+		this.blocks = data.blocks.map((d, x) => {
+			return d.map((block, y) => {
 				return new Block({
-					position: new Point(block.position),
-					type: block.type,
+					position: new Point({ x, y }),
+					type: block.t,
 					grid: this
 				});
 			});
