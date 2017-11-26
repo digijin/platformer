@@ -10,21 +10,18 @@ class MainMenu extends React.Component {
 			<div id="MainMenuUI">
 				<div className="title">PLATFORMER</div>
 				<div id="instructions">
-					<pre>
-						a:move left<br />
-						d:move right<br />
-						space:jump/booster<br />
-						e:grapple arm left<br />
-						mouse:primary (guns)<br />
-						right mouse:secondary (missiles)<br />
-					</pre>
+					<span className="key">wasd</span>:move and crouch<br />
+					<span className="key">e</span>:grapple arm left<br />
+					space:jump/booster<br />
+					mouse:primary (guns)<br />
+					right mouse:secondary (missiles)<br />
 				</div>
-				<button id="play" onClick={this.props.play}>
+				<a id="play" onClick={this.props.play}>
 					Play
-				</button>
-				<button id="editor" onClick={this.props.editor}>
+				</a>
+				<a id="editor" onClick={this.props.editor}>
 					Editor
-				</button>
+				</a>
 			</div>
 		);
 	}

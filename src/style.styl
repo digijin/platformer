@@ -4,6 +4,11 @@
     font-family: HeadingFont;
 }
 
+@font-face {
+    src: url('fonts/keyboard.otf');
+    font-family: KeyboardFont;
+}
+
 canvas {
     position: absolute;
     z-index: 10;
@@ -37,7 +42,8 @@ html, body {
             // display: inline-block;
             text-align: center;
 
-            button {
+            a {
+                background-color: white;
                 font-family: HeadingFont;
                 color: grey;
                 transition: color 0.5s;
@@ -45,11 +51,16 @@ html, body {
                 width: 100px;
                 padding: 10px;
                 margin: 10px;
+                display: inline-block;
                 box-shadow: 0 1px 2px #fff, 0 -1px 1px #666, inset 0 -1px 1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8);
             }
 
-            button:hover {
+            a:hover {
                 color: black;
+            }
+
+            a:active {
+                box-shadow: 0 1px 2px #000, 0 -1px 1px #333, inset 0 -1px 1px rgba(255, 255, 255, 0.5), inset 0 1px 1px rgba(0, 0, 0, 0.8);
             }
 
             .title {
@@ -63,8 +74,14 @@ html, body {
             }
 
             #instructions {
+                font-family: 'Roboto', sans-serif;
                 box-shadow: 0px 0px 5px white;
                 background-color: rgba(255, 255, 255, 0.3);
+
+                .key {
+                    font-family: KeyboardFont;
+                    font-size: 20px;
+                }
             }
         }
     }
