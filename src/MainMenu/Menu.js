@@ -9,6 +9,7 @@ import mechHero from "./mech_hero.png";
 
 import type Engine from "Engine";
 import explosion from "explosion.png";
+import skyline from "skyline.png";
 
 type Particle = {
 	time: number,
@@ -51,7 +52,7 @@ export default class MainMenu extends GameObject {
 		}
 		this.particles = this.particles.filter(part => {
 			part.time += this.engine.deltaTime;
-			let lifetime = 25;
+			let lifetime = 30;
 			if (part.time > lifetime) {
 				return false;
 			}
@@ -97,13 +98,37 @@ export default class MainMenu extends GameObject {
 	}
 	ground() {
 		this.engine.ctx.resetTransform();
-		this.engine.ctx.context.fillStyle = "#222";
+		this.engine.ctx.context.filter = "invert(10%)";
+		let center = new Point({
+			x: window.innerWidth / 2,
+			y: window.innerHeight / 2
+		});
+		this.engine.ctx.context.fillStyle = "#000";
 		this.engine.ctx.context.fillRect(
 			0,
-			window.innerHeight / 2,
+			center.y,
 			window.innerWidth,
-			window.innerHeight / 2
+			center.x
 		);
+		let pattern = this.engine.ctx.context.createPattern(
+			skyline,
+			"repeat-x"
+		);
+		this.engine.ctx.context.fillStyle = pattern;
+		this.engine.ctx.context.translate(-250, center.y - 173);
+		this.engine.ctx.fillRect(0, 0, window.innerWidth + 250, 174);
+		this.engine.ctx.resetTransform();
+		// this.engine.ctx.drawSprite(
+		// 	skyline,
+		// 	new Point({ x: -200, y: center.y }),
+		// 	{
+		// 		w: skyline.width,
+		// 		h: 150
+		// 	},
+		// 	0,
+		// 	{ x: 0, y: 1 }
+		// );
+		this.engine.ctx.context.filter = "none";
 	}
 	timePassed: number;
 	update() {
@@ -118,13 +143,13 @@ export default class MainMenu extends GameObject {
 		this.particleFX(
 			new Point({
 				x: window.innerWidth / 2 + 300,
-				y: window.innerHeight / 2 + 100
+				y: window.innerHeight / 2 + 60
 			})
 		);
 		this.particleFX(
 			new Point({
 				x: window.innerWidth / 2 - 200,
-				y: window.innerHeight / 2 + 100
+				y: window.innerHeight / 2 + 60
 			})
 		);
 		this.ground();
