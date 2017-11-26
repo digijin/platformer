@@ -36,11 +36,29 @@ html, body {
             // display: inline-block;
             text-align: center;
 
+            button {
+                font-family: HeadingFont;
+                color: grey;
+                transition: color 0.5s;
+                border-radius: 20px;
+                width: 100px;
+                padding: 10px;
+                margin: 10px;
+                box-shadow: 0 1px 2px #fff, 0 -1px 1px #666, inset 0 -1px 1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            }
+
+            button:hover {
+                color: black;
+            }
+
             .title {
+                position: fixed;
+                top: 120px;
+                width: 100%;
                 font-family: HeadingFont;
                 text-shadow: 0px 0px 5px black;
                 color: #93112f;
-                font-size: 64px;
+                font-size: 92px;
             }
 
             #instructions {
@@ -51,7 +69,7 @@ html, body {
     }
 }
 
-#editor {
+#editor-panel {
     border: 1px solid black;
     border-radius: 8px;
     padding: 8px;
@@ -65,7 +83,7 @@ html, body {
 
     .layer1 {
         // opacity: 0.5;
-        filter: contrast(20%) blur(2px);
+        filter: contrast(20%) blur(1px);
         width: 100%;
 
         .top {

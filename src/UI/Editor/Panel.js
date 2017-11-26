@@ -20,7 +20,7 @@ class EditorPanel extends React.Component {
 		}
 		let saves = this.storage.list();
 		return (
-			<div id="editor">
+			<div id="editor-panel">
 				Editor mode<br />
 				Left mouse to draw<br />
 				Right mouse to erase<br />
