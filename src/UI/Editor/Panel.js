@@ -4,10 +4,16 @@ import { connect } from "react-redux";
 import Storage from "Storage";
 
 import { BlockTypes } from "BlockType";
+import type Engine from "Engine";
+
+type Props = {
+	engine: Engine
+};
 
 class EditorPanel extends React.Component {
 	storage: Storage;
 	savename: string;
+	props: Props;
 	constructor() {
 		super();
 		this.storage = new Storage();
@@ -25,6 +31,34 @@ class EditorPanel extends React.Component {
 				Left mouse to draw<br />
 				Right mouse to erase<br />
 				WASD to navigate
+				<button
+					onClick={() => {
+						this.props.engine.grid.addRowAbove();
+					}}
+				>
+					addAbove
+				</button>
+				<button
+					onClick={() => {
+						this.props.engine.grid.addRowBelow();
+					}}
+				>
+					addBelow
+				</button>
+				<button
+					onClick={() => {
+						this.props.engine.grid.addColLeft();
+					}}
+				>
+					addLeft
+				</button>
+				<button
+					onClick={() => {
+						this.props.engine.grid.addColRight();
+					}}
+				>
+					addRight
+				</button>
 				<div id="blockSelector">
 					selected Block = {watcher.blockId}
 					{BlockTypes.map(b => (

@@ -269,13 +269,13 @@ export default class Grid extends GameObject {
 				}
 			}
 		}
-		ctx.strokeStyle = "rgba(255,255,255,0.1)";
+		ctx.strokeStyle = "rgba(0,0,0,0.1)";
 		ctx.lineWidth = 1;
 		ctx.strokeRect(0, 0, canvas.width, canvas.height);
 		//watermark
 		ctx.font = "20px Verdana";
 		// Fill with gradient
-		ctx.fillStyle = "rgba(255,255,255,0.1)";
+		ctx.fillStyle = "rgba(0,0,0,0.1)";
 		ctx.fillText(tile.x + "," + tile.y, 8, 25);
 		return canvas;
 	}
@@ -299,15 +299,27 @@ export default class Grid extends GameObject {
 		});
 	}
 	addRowAbove() {
+		this.tileCache = {};
 		this.height++;
 		this.blocks.forEach(col => {
 			col.unshift(new Block(col[0]));
 		});
 	}
 	addRowBelow() {
+		this.tileCache = {};
 		this.height++;
 		this.blocks.forEach(col => {
-			col.unshift(new Block(col[col.length - 1]));
+			col.push(new Block(col[col.length - 1]));
 		});
+	}
+	addColLeft() {
+		this.tileCache = {};
+		this.width++;
+		this.blocks.unshift(this.blocks[0].map(b => new Block(b)));
+	}
+	addColLeft() {
+		this.tileCache = {};
+		this.width++;
+		this.blocks.unshift(this.blocks[0].map(b => new Block(b)));
 	}
 }
