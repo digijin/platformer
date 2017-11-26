@@ -25,7 +25,7 @@ export default class UI {
 	render = () => {
 		ReactDOM.render(
 			<Provider store={this.store}>
-				<div id="container">
+				<div id="ui-container">
 					<Router engine={this.engine} />
 				</div>
 			</Provider>,
