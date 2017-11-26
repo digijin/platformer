@@ -172,4 +172,19 @@ describe("Grid", () => {
 			expect(tiles[3].y).toBe(0);
 		});
 	});
+
+	describe("addRow", () => {
+		it("should add above", () => {
+			let grid = new Grid({ w: 2, h: 2 });
+			grid.addRowAbove();
+			expect(grid.height).toBe(3);
+			expect(grid.blocks[0].length).toBe(3);
+		});
+		it("should add below", () => {
+			let grid = new Grid({ w: 2, h: 2 });
+			grid.addRowBelow();
+			expect(grid.height).toBe(3);
+			expect(grid.blocks[0].length).toBe(3);
+		});
+	});
 });

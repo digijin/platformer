@@ -269,13 +269,13 @@ export default class Grid extends GameObject {
 				}
 			}
 		}
-		ctx.strokeStyle = "black";
+		ctx.strokeStyle = "rgba(255,255,255,0.1)";
 		ctx.lineWidth = 1;
 		ctx.strokeRect(0, 0, canvas.width, canvas.height);
 		//watermark
 		ctx.font = "20px Verdana";
 		// Fill with gradient
-		ctx.fillStyle = "lightgrey";
+		ctx.fillStyle = "rgba(255,255,255,0.1)";
 		ctx.fillText(tile.x + "," + tile.y, 8, 25);
 		return canvas;
 	}
@@ -286,6 +286,7 @@ export default class Grid extends GameObject {
 		});
 	}
 	load(str: string) {
+		this.tileCache = {};
 		let data = JSON.parse(str);
 		this.blocks = data.map(d => {
 			return d.map(block => {
@@ -295,6 +296,18 @@ export default class Grid extends GameObject {
 					grid: this
 				});
 			});
+		});
+	}
+	addRowAbove() {
+		this.height++;
+		this.blocks.forEach(col => {
+			col.unshift(new Block(col[0]));
+		});
+	}
+	addRowBelow() {
+		this.height++;
+		this.blocks.forEach(col => {
+			col.unshift(new Block(col[col.length - 1]));
 		});
 	}
 }
