@@ -54,6 +54,8 @@ export default class Bullet extends GameObject {
 		this.position.y += this.v * engine.deltaTime * this.speed;
 
 		// this.engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
+		this.engine.ctx.context.filter =
+			"filter: drop-shadow(0px 0px 2px blue);";
 		this.engine.ctx.drawLine(
 			this.position,
 			this.position.add({ x: this.h, y: this.v })
