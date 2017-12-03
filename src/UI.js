@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 import Router from "UI/Router";
 import reducer from "UI/reducer";
@@ -25,9 +26,11 @@ export default class UI {
 	render = () => {
 		ReactDOM.render(
 			<Provider store={this.store}>
-				<div id="ui-container">
-					<Router engine={this.engine} />
-				</div>
+				<MuiThemeProvider>
+					<div id="ui-container">
+						<Router engine={this.engine} />
+					</div>
+				</MuiThemeProvider>
 			</Provider>,
 			this.container
 		);
