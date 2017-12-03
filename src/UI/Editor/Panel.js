@@ -7,7 +7,7 @@ import { BlockTypes } from "BlockType";
 import type Engine from "Engine";
 
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
-import FlatButton from "material-ui/FlatButton";
+import RaisedButton from "material-ui/RaisedButton";
 
 import avatar from "mech.png";
 
@@ -56,25 +56,25 @@ class EditorPanel extends React.Component {
 						showExpandableButton={true}
 					/>
 					<CardActions expandable={true}>
-						<FlatButton
+						<RaisedButton
 							label="addAbove"
 							onClick={() => {
 								this.props.engine.grid.addRowAbove();
 							}}
 						/>
-						<FlatButton
+						<RaisedButton
 							label="addBelow"
 							onClick={() => {
 								this.props.engine.grid.addRowBelow();
 							}}
 						/>
-						<FlatButton
+						<RaisedButton
 							label="addLeft"
 							onClick={() => {
 								this.props.engine.grid.addColLeft();
 							}}
 						/>
-						<FlatButton
+						<RaisedButton
 							label="addRight"
 							onClick={() => {
 								this.props.engine.grid.addColRight();
@@ -92,7 +92,7 @@ class EditorPanel extends React.Component {
 					/>
 					<CardText expandable={true}>
 						{BlockTypes.map(b => (
-							<FlatButton
+							<RaisedButton
 								label={b.id + "" + b.name}
 								onClick={() => {
 									watcher.blockId = b.id;
@@ -116,7 +116,7 @@ class EditorPanel extends React.Component {
 						<div>
 							{saves.map(savename => {
 								return (
-									<FlatButton
+									<RaisedButton
 										key={savename + "loadbutton"}
 										onClick={() => {
 											this.props.engine.grid.load(
@@ -125,7 +125,7 @@ class EditorPanel extends React.Component {
 										}}
 									>
 										{savename}
-									</FlatButton>
+									</RaisedButton>
 								);
 							})}
 						</div>
@@ -134,7 +134,7 @@ class EditorPanel extends React.Component {
 							value={this.state.savename}
 							onChange={this.updateSavename}
 						/>
-						<FlatButton
+						<RaisedButton
 							onClick={() => {
 								this.storage.save(
 									this.state.savename,
@@ -143,7 +143,7 @@ class EditorPanel extends React.Component {
 							}}
 						>
 							save
-						</FlatButton>
+						</RaisedButton>
 					</CardText>
 				</Card>
 			</div>
