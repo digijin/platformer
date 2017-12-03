@@ -46,16 +46,8 @@ class EditorPanel extends React.Component {
 						Right mouse to erase<br />
 						WASD to navigate<br />
 						Shift to speed up scrolling<br />
+						Click below to expand the map size:
 					</CardText>
-				</Card>
-				<Card>
-					<CardHeader
-						title="Expand"
-						subtitle="Make the map bigger in any dimension"
-						actAsExpander={true}
-						avatar={avatar.src}
-						showExpandableButton={true}
-					/>
 					<CardActions expandable={true}>
 						<RaisedButton
 							label="addAbove"
