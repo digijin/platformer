@@ -6,6 +6,11 @@ import Storage from "Storage";
 import { BlockTypes } from "BlockType";
 import type Engine from "Engine";
 
+import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
+
+import avatar from "mech.png";
+
 type Props = {
 	engine: Engine
 };
@@ -27,88 +32,120 @@ class EditorPanel extends React.Component {
 		let saves = this.storage.list();
 		return (
 			<div id="editor-panel">
-				Editor mode<br />
-				Left mouse to draw<br />
-				Right mouse to erase<br />
-				WASD to navigate<br />
-				Shift to speed up scrolling<br />
-				expand:
-				<button
-					onClick={() => {
-						this.props.engine.grid.addRowAbove();
-					}}
-				>
-					addAbove
-				</button>
-				<button
-					onClick={() => {
-						this.props.engine.grid.addRowBelow();
-					}}
-				>
-					addBelow
-				</button>
-				<button
-					onClick={() => {
-						this.props.engine.grid.addColLeft();
-					}}
-				>
-					addLeft
-				</button>
-				<button
-					onClick={() => {
-						this.props.engine.grid.addColRight();
-					}}
-				>
-					addRight
-				</button>
-				<div id="blockSelector">
-					selected Block = {watcher.blockId}
-					{BlockTypes.map(b => (
-						<button
-							onClick={() => {
-								watcher.blockId = b.id;
-								this.forceUpdate();
-							}}
-							key={b.id}
-						>
-							{b.id}. {b.name}
-						</button>
-					))}
-				</div>
-				<div id="savepanel">
-					save games:<br />
-					<div>
-						{saves.map(savename => {
-							return (
-								<button
-									key={savename + "loadbutton"}
-									onClick={() => {
-										this.props.engine.grid.load(
-											this.storage.load(savename)
-										);
-									}}
-								>
-									{savename}
-								</button>
-							);
-						})}
-					</div>
-					<input
-						type="text"
-						value={this.state.savename}
-						onChange={this.updateSavename}
+				<Card>
+					<CardHeader
+						title="Editor"
+						subtitle="expand for information"
+						actAsExpander={true}
+						avatar={avatar.src}
+						showExpandableButton={true}
 					/>
-					<button
-						onClick={() => {
-							this.storage.save(
-								this.state.savename,
-								this.props.engine.grid.save()
-							);
-						}}
-					>
-						save
-					</button>
-				</div>
+					<CardText expandable={true}>
+						Left mouse to draw<br />
+						Right mouse to erase<br />
+						WASD to navigate<br />
+						Shift to speed up scrolling<br />
+					</CardText>
+				</Card>
+				<Card>
+					<CardHeader
+						title="Expand"
+						subtitle="Make the map bigger in any dimension"
+						actAsExpander={true}
+						avatar={avatar.src}
+						showExpandableButton={true}
+					/>
+					<CardActions expandable={true}>
+						<FlatButton
+							label="addAbove"
+							onClick={() => {
+								this.props.engine.grid.addRowAbove();
+							}}
+						/>
+						<FlatButton
+							label="addBelow"
+							onClick={() => {
+								this.props.engine.grid.addRowBelow();
+							}}
+						/>
+						<FlatButton
+							label="addLeft"
+							onClick={() => {
+								this.props.engine.grid.addColLeft();
+							}}
+						/>
+						<FlatButton
+							label="addRight"
+							onClick={() => {
+								this.props.engine.grid.addColRight();
+							}}
+						/>
+					</CardActions>
+				</Card>
+				<Card id="blockSelector">
+					<CardHeader
+						title="Block Selector"
+						subtitle={"selected Block = " + watcher.blockId}
+						actAsExpander={true}
+						avatar={avatar.src}
+						showExpandableButton={true}
+					/>
+					<CardText expandable={true}>
+						{BlockTypes.map(b => (
+							<FlatButton
+								label={b.id + "" + b.name}
+								onClick={() => {
+									watcher.blockId = b.id;
+									this.forceUpdate();
+								}}
+								key={b.id}
+							/>
+						))}
+					</CardText>
+				</Card>
+				<Card id="savepanel">
+					<CardHeader
+						title="Save Panel"
+						subtitle="Save and load levels"
+						actAsExpander={true}
+						avatar={avatar.src}
+						showExpandableButton={true}
+					/>
+					<CardText expandable={true}>
+						save games:<br />
+						<div>
+							{saves.map(savename => {
+								return (
+									<FlatButton
+										key={savename + "loadbutton"}
+										onClick={() => {
+											this.props.engine.grid.load(
+												this.storage.load(savename)
+											);
+										}}
+									>
+										{savename}
+									</FlatButton>
+								);
+							})}
+						</div>
+						<input
+							type="text"
+							value={this.state.savename}
+							onChange={this.updateSavename}
+						/>
+						<FlatButton
+							onClick={() => {
+								this.storage.save(
+									this.state.savename,
+									this.props.engine.grid.save()
+								);
+							}}
+						>
+							save
+						</FlatButton>
+					</CardText>
+				</Card>
 			</div>
 		);
 	}
