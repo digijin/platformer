@@ -18,10 +18,12 @@ export default class ElectronAdapter extends StorageAdapter {
 		}
 	}
 	list(): Array<string> {
-		return this.fs.readdirSync(this.savedir);
+		return this.fs
+			.readdirSync(this.savedir)
+			.map(save => save.substr(0, save.length - 4));
 	}
 	saveFileName(name: string): string {
-		return this.path.resolve(this.savedir, name);
+		return this.path.resolve(this.savedir, name + ".txt");
 	}
 	save(name: string, data: string) {
 		return this.fs.writeFileSync(this.saveFileName(name), data);

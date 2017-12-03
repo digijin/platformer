@@ -5,6 +5,14 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Attach",
+			"type": "node",
+			"request": "attach",
+			"port": 5859,
+			"sourceMaps": false,
+			"outDir": null
+		},
+		{
 			"name": "Jest",
 			"type": "node",
 			"request": "launch",

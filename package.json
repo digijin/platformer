@@ -25,7 +25,8 @@
 		"karma:electron":
 			"karma start --reporters nyan --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876",
-		"electron:dev": "electron http://localhost:8080/"
+		"electron:dev": "electron http://localhost:8080/",
+		"electron:debug": "electron --inspect-brk=5859 http://localhost:8080/"
 	},
 	"repository": {
 		"type": "git",
