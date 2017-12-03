@@ -8,6 +8,7 @@ import type Engine from "Engine";
 
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import RaisedButton from "material-ui/RaisedButton";
+import TextField from "material-ui/TextField";
 
 import avatar from "mech.png";
 
@@ -90,7 +91,7 @@ class EditorPanel extends React.Component {
 						avatar={avatar.src}
 						showExpandableButton={true}
 					/>
-					<CardText expandable={true}>
+					<CardActions expandable={true}>
 						{BlockTypes.map(b => (
 							<RaisedButton
 								label={b.id + "" + b.name}
@@ -101,7 +102,7 @@ class EditorPanel extends React.Component {
 								key={b.id}
 							/>
 						))}
-					</CardText>
+					</CardActions>
 				</Card>
 				<Card id="savepanel">
 					<CardHeader
@@ -111,29 +112,31 @@ class EditorPanel extends React.Component {
 						avatar={avatar.src}
 						showExpandableButton={true}
 					/>
+					<CardActions expandable={true}>
+						{saves.map(savename => {
+							return (
+								<RaisedButton
+									key={savename + "loadbutton"}
+									onClick={() => {
+										this.props.engine.grid.load(
+											this.storage.load(savename)
+										);
+									}}
+								>
+									{savename}
+								</RaisedButton>
+							);
+						})}
+					</CardActions>
 					<CardText expandable={true}>
-						save games:<br />
-						<div>
-							{saves.map(savename => {
-								return (
-									<RaisedButton
-										key={savename + "loadbutton"}
-										onClick={() => {
-											this.props.engine.grid.load(
-												this.storage.load(savename)
-											);
-										}}
-									>
-										{savename}
-									</RaisedButton>
-								);
-							})}
-						</div>
-						<input
+						<TextField
+							hintText="Enter filename here"
+							floatingLabelText="Save Name"
 							type="text"
 							value={this.state.savename}
 							onChange={this.updateSavename}
 						/>
+						<br />
 						<RaisedButton
 							onClick={() => {
 								this.storage.save(
