@@ -8,7 +8,7 @@ export default class Storage {
 		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			this.adapter = new BrowserAdapter();
 		} else {
-			this.adapter = new ElectronAdapter("saves");
+			this.adapter = new ElectronAdapter("src/levels");
 		}
 	}
 	list(): Array<string> {
