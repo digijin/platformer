@@ -9,6 +9,7 @@ export default class TrailRenderer extends GameObject {
 	offset: Point;
 	constructor(params: { target: GameObject, offset: Point }) {
 		super(params);
+		this.history = [];
 		Object.assign(this, params);
 		this.calcPosition();
 	}
