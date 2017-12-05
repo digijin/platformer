@@ -29,11 +29,12 @@ export default class TrailRenderer extends GameObject {
 
 	render() {
 		for (let i = 1; i < this.history.length; i++) {
+			let pc = i / this.length;
 			this.engine.ctx.drawLine(
 				this.history[i - 1],
-				this.history[i - 1],
-				"red",
-				i
+				this.history[i],
+				"black",
+				1 + pc
 			);
 		}
 	}
