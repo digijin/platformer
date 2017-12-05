@@ -25,6 +25,11 @@ export default class RGBA {
 		}
 		Object.assign(this, params);
 	}
+	toString() {
+		return (
+			"rgba(" + this.r + "," + this.g + "," + this.b + "," + this.a + ")"
+		);
+	}
 	static fromStops(stops: Array<rgbaParams>, pc: number) {
 		let l = stops.length - 1;
 		let prevStop = Math.floor(pc * l);

@@ -8,6 +8,10 @@ describe("RGBA", () => {
 		expect(rgba.b).toBe(0.3);
 		expect(rgba.a).toBe(0.4);
 	});
+	it("should toString", () => {
+		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
+		expect(rgba.toString()).toBe("rgba(0.1,0.2,0.3,0.4)");
+	});
 	it("should throw if anything not between 0 and 1", () => {
 		expect(() => {
 			new RGBA({ r: 2, g: 0, b: 0, a: 0 });
