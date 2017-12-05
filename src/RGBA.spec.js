@@ -8,4 +8,23 @@ describe("RGBA", () => {
 		expect(rgba.b).toBe(0.3);
 		expect(rgba.a).toBe(0.4);
 	});
+	it("should throw if anything not between 0 and 1", () => {
+		expect(() => {
+			new RGBA({ r: 2, g: 0, b: 0, a: 0 });
+		}).toThrow();
+		expect(() => {
+			new RGBA({ r: 0, g: 2, b: 0, a: 0 });
+		}).toThrow();
+		expect(() => {
+			new RGBA({ r: 0, g: 0, b: 2, a: 0 });
+		}).toThrow();
+		expect(() => {
+			new RGBA({ r: 0, g: 0, b: 0, a: 2 });
+		}).toThrow();
+	});
+	describe("fromStops", () => {
+		it("should exist", () => {
+			expect(RGBA.fromStops).toBeDefined();
+		});
+	});
 });
