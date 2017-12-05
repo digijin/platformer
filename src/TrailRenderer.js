@@ -30,10 +30,19 @@ export default class TrailRenderer extends GameObject {
 	}
 
 	render() {
+		this.engine.ctx.context.lineCap = "round";
 		let stops = [
 			{ r: 1, g: 0, b: 0, a: 1 },
 			{ r: 1, g: 1, b: 0, a: 1 },
-			{ r: 0, g: 0, b: 0, a: 1 }
+			{ r: 0, g: 0, b: 0, a: 1 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 0.4 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 0.3 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 0.2 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 0.1 },
+			{ r: 0.3, g: 0.3, b: 0.3, a: 0 }
 		];
 		for (let i = 1; i < this.history.length; i++) {
 			let pc = i / this.length; //percent
@@ -46,5 +55,6 @@ export default class TrailRenderer extends GameObject {
 				5 + pc * 5
 			);
 		}
+		this.engine.ctx.context.lineCap = "butt";
 	}
 }
