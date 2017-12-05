@@ -28,6 +28,11 @@ export default class TrailRenderer extends GameObject {
 	}
 
 	render() {
+		let stops = [
+			{ r: 1, g: 0, b: 0, a: 1 },
+			{ r: 1, g: 1, b: 0, a: 1 },
+			{ r: 1, g: 0, b: 0, a: 1 }
+		];
 		for (let i = 1; i < this.history.length; i++) {
 			let pc = i / this.length; //percent
 			let ipc = 1 - pc; //inverse percent

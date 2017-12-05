@@ -17,3 +17,4 @@ buildstats.*
 /yarn-error.log
 src/Storage/saves
 saves
+**/automated_test*

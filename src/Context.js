@@ -19,7 +19,11 @@ export default class Context {
 			// FLOWHACK
 			this.context = {
 				//STUB FOR TESTING
-				clearRect: () => {}
+				clearRect: () => {},
+				beginPath: () => {},
+				moveTo: () => {},
+				lineTo: () => {},
+				stroke: () => {}
 			};
 		}
 		this.engine = Engine.getInstance();
