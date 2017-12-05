@@ -44,5 +44,46 @@ describe("RGBA", () => {
 				expect(rgba.b).toBe(0.5);
 			});
 		});
+		describe("R to G to B", () => {
+			// let rgba;
+			let stops = [
+				{ r: 1, g: 0, b: 0 },
+				{ r: 0, g: 1, b: 0 },
+				{ r: 0, g: 0, b: 1 }
+			];
+
+			// beforeAll(() => {
+			// });
+			it("stop 1", () => {
+				let rgba = RGBA.fromStops(stops, 0);
+				expect(rgba.r).toBe(1);
+				expect(rgba.g).toBe(0);
+				expect(rgba.b).toBe(0);
+			});
+			it("midpoint 1", () => {
+				let rgba = RGBA.fromStops(stops, 0.25);
+				expect(rgba.r).toBe(0.5);
+				expect(rgba.g).toBe(0.5);
+				expect(rgba.b).toBe(0);
+			});
+			it("stop 2", () => {
+				let rgba = RGBA.fromStops(stops, 0.5);
+				expect(rgba.r).toBe(0);
+				expect(rgba.g).toBe(1);
+				expect(rgba.b).toBe(0);
+			});
+			it("midpoint 2", () => {
+				let rgba = RGBA.fromStops(stops, 0.75);
+				expect(rgba.r).toBe(0);
+				expect(rgba.g).toBe(0.5);
+				expect(rgba.b).toBe(0.5);
+			});
+			it("stop 3", () => {
+				let rgba = RGBA.fromStops(stops, 1);
+				expect(rgba.r).toBe(0);
+				expect(rgba.g).toBe(0);
+				expect(rgba.b).toBe(1);
+			});
+		});
 	});
 });
