@@ -29,12 +29,13 @@ export default class TrailRenderer extends GameObject {
 
 	render() {
 		for (let i = 1; i < this.history.length; i++) {
-			let pc = i / this.length;
+			let pc = i / this.length; //percent
+			let ipc = 1 - pc; //inverse percent
 			this.engine.ctx.drawLine(
 				this.history[i - 1],
 				this.history[i],
-				"black",
-				1 + pc
+				"rgba(" + Math.floor(ipc * 255) + ",0, 0," + ipc + ")",
+				5 + pc * 5
 			);
 		}
 	}

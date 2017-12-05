@@ -123,7 +123,7 @@ export default class Missile extends Projectile {
 				}
 			}
 			if (this.speed < 1) this.speed = 1;
-			if (this.speed > 8) this.speed = 8;
+			if (this.speed > 12) this.speed = 12;
 
 			//dont spin it up too much
 			if (this.direction > Math.PI) this.direction -= Math.PI * 2;

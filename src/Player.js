@@ -137,7 +137,7 @@ export default class Player extends Actor {
 							-Math.PI / 2 +
 							(Math.random() - 0.5) +
 							this.leg.facing,
-						speed: 6 + Math.random() * 5,
+						speed: 10 + Math.random() * 5,
 						position: this.leg.missileBarrelPos,
 						target: engine.mouse.point.add(
 							new Point({
