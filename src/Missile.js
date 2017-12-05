@@ -14,15 +14,28 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import Projectile from "Projectile";
 
+import TrailRenderer from "TrailRenderer";
+
 export default class Missile extends Projectile {
 	speed: number;
 	z: number;
 	guided: boolean;
 	remoteControl: boolean;
 	position: Point;
+	trailRenderer: TrailRenderer;
+	init(engine: Engine) {
+		super.init(engine);
+		this.trailRenderer = new TrailRenderer({
+			target: this,
+			offset: new Point(),
+			length: 20
+		});
+		this.engine.register(this.trailRenderer);
+	}
 	explode() {
 		// this.destroy();
 		super.explode();
+		this.trailRenderer.destroy();
 
 		for (let i = 0; i < 10; i++) {
 			//we want red outlines to be on the outside
@@ -60,15 +73,18 @@ export default class Missile extends Projectile {
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
 		//CHECK ENEMIES
-		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
+		//USING EVERY SO I DONT EXPLODE MULTIPLE TIMES
+		this.engine.objectsTagged("actor").every((o: GameObject) => {
 			if (o !== this.owner) {
 				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
 					// a.explode();
 					a.damage(30 + Math.random() * 75);
+					return false;
 				}
 			}
+			return true; //keep looking in the every
 		});
 
 		//smoke trail

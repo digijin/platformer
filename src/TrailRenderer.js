@@ -7,7 +7,8 @@ export default class TrailRenderer extends GameObject {
 	history: Array<Point>;
 	target: GameObject;
 	offset: Point;
-	constructor(params: { target: GameObject, offset: Point }) {
+	length: number;
+	constructor(params: { target: GameObject, offset: Point, length: number }) {
 		super(params);
 		this.history = [];
 		Object.assign(this, params);
@@ -17,5 +18,23 @@ export default class TrailRenderer extends GameObject {
 		this.position = this.offset.add(this.target.position);
 	}
 
-	update() {}
+	update() {
+		this.calcPosition();
+		this.history.unshift(this.position);
+		if (this.history.length > this.length) {
+			this.history.pop();
+		}
+		this.render();
+	}
+
+	render() {
+		for (let i = 1; i < this.history.length; i++) {
+			this.engine.ctx.drawLine(
+				this.history[i - 1],
+				this.history[i - 1],
+				"red",
+				i
+			);
+		}
+	}
 }

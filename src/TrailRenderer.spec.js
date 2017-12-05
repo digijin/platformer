@@ -2,15 +2,22 @@ import TrailRenderer from "TrailRenderer";
 
 import Point from "Point";
 
+import Engine from "Engine";
+
 describe("TrailRenderer", () => {
-	let target, trailRenderer;
+	let target, trailRenderer, engine;
 	beforeEach(() => {
+		engine = Engine.mock();
 		target = { position: new Point({ x: 1, y: 2 }) };
 		trailRenderer = new TrailRenderer({
 			target: target,
 			offset: new Point(),
 			length: 10
 		});
+		engine.register(trailRenderer);
+	});
+	afterEach(() => {
+		engine.kill();
 	});
 	describe("constructor", () => {
 		it("should set its position to parent plus offset", () => {

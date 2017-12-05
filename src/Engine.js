@@ -43,6 +43,9 @@ export default class Engine {
 		}
 		return instance;
 	}
+	static mock(container: HTMLElement = document.createElement("DIV")) {
+		return new Engine().init(container);
+	}
 
 	//init
 	constructor() {
@@ -78,6 +81,7 @@ export default class Engine {
 		this.input = new Input(
 			Object.assign({}, config.input, { target: canvas })
 		);
+		return this;
 	}
 
 	resize = () => {

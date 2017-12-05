@@ -29,16 +29,20 @@ export default class Projectile extends GameObject {
 	explode() {
 		this.destroy();
 	}
-	detectHitActor() {
-		//CHECK ENEMIES
-		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
-			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
-				if (a.getBoundingRect().contains(this.position)) {
-					this.explode();
-					a.explode();
-				}
-			}
-		});
-	}
+	// TODO: use this
+	// detectHitActor() {
+	// 	//CHECK ENEMIES
+	// 	//USING EVERY SO I DONT EXPLODE MULTIPLE TIMES
+	// 	return !this.engine.objectsTagged("actor").every((o: GameObject) => {
+	// 		if (o !== this.owner) {
+	// 			let a: Actor = ((o: any): Actor); //RECAST
+	// 			if (a.getBoundingRect().contains(this.position)) {
+	// 				this.explode();
+	// 				a.explode();
+	// 				return false;
+	// 			}
+	// 		}
+	// 		return true; //keep looking in the every
+	// 	});
+	// }
 }
