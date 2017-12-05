@@ -26,5 +26,23 @@ describe("RGBA", () => {
 		it("should exist", () => {
 			expect(RGBA.fromStops).toBeDefined();
 		});
+		describe("halfway black and white", () => {
+			let rgba;
+			beforeAll(() => {
+				rgba = RGBA.fromStops(
+					[{ r: 0, g: 0, b: 0 }, { r: 1, g: 1, b: 1 }],
+					0.5
+				);
+			});
+			it("does r", () => {
+				expect(rgba.r).toBe(0.5);
+			});
+			it("does g", () => {
+				expect(rgba.g).toBe(0.5);
+			});
+			it("does b", () => {
+				expect(rgba.b).toBe(0.5);
+			});
+		});
 	});
 });
