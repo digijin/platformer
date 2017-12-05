@@ -10,7 +10,7 @@ describe("RGBA", () => {
 	});
 	it("should toString", () => {
 		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
-		expect(rgba.toString()).toBe("rgba(0.1,0.2,0.3,0.4)");
+		expect(rgba.toString()).toBe("rgba(26,51,77,0.4)");
 	});
 	it("should throw if anything not between 0 and 1", () => {
 		expect(() => {

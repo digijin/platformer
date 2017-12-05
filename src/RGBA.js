@@ -27,7 +27,15 @@ export default class RGBA {
 	}
 	toString() {
 		return (
-			"rgba(" + this.r + "," + this.g + "," + this.b + "," + this.a + ")"
+			"rgba(" +
+			Math.round(this.r * 255) +
+			"," +
+			Math.round(this.g * 255) +
+			"," +
+			Math.round(this.b * 255) +
+			"," +
+			this.a +
+			")"
 		);
 	}
 	static fromStops(stops: Array<rgbaParams>, pc: number) {
