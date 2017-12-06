@@ -11,12 +11,22 @@ import { BlockTypeMap } from "BlockType";
 export default class Block {
 	position: Point;
 	type: string;
+	backgroundType: string;
 	grid: Grid;
 	hp: number;
-	constructor(params: { position: Point, type: string, grid: Grid }) {
+	constructor(params: {
+		position: Point,
+		type: string,
+		grid: Grid,
+		backgroundType?: string
+	}) {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
+		if (!params.backgroundType) {
+			params.backgroundType = this.type;
+		}
+		this.backgroundType = params.backgroundType;
 
 		if (this.type !== "0") {
 			this.hp = this.getType().hp;
@@ -28,6 +38,10 @@ export default class Block {
 
 	getType(): BlockType {
 		return BlockTypeMap[this.type];
+	}
+
+	getBackgroundType(): BlockType {
+		return BlockTypeMap[this.backgroundType];
 	}
 
 	isEmpty(): boolean {

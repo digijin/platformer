@@ -252,20 +252,16 @@ export default class Grid extends GameObject {
 					x: tile.x * config.grid.tile.width + x,
 					y: tile.y * config.grid.tile.height + y
 				});
+				if (block && block.backgroundType !== "0") {
+					let im = block.getBackgroundType().image;
+					ctx.filter = "brightness(50%)";
+					this.drawTile(ctx, im, x, y);
+				}
 				if (block && !block.isEmpty()) {
 					let im = block.getType().image;
 					// let imageParams = [im, 0, 0, im.width, im.height];
-					ctx.drawImage(
-						im,
-						0,
-						0,
-						im.width,
-						im.height,
-						x * config.grid.width,
-						y * config.grid.height,
-						config.grid.width,
-						config.grid.height
-					);
+					ctx.filter = "brightness(100%)";
+					this.drawTile(ctx, im, x, y);
 				}
 			}
 		}
@@ -278,6 +274,20 @@ export default class Grid extends GameObject {
 		ctx.fillStyle = "rgba(0,0,0,0.1)";
 		ctx.fillText(tile.x + "," + tile.y, 8, 25);
 		return canvas;
+	}
+
+	drawTile(ctx, im, x, y) {
+		ctx.drawImage(
+			im,
+			0,
+			0,
+			im.width,
+			im.height,
+			x * config.grid.width,
+			y * config.grid.height,
+			config.grid.width,
+			config.grid.height
+		);
 	}
 
 	save(): string {
