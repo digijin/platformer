@@ -39,4 +39,21 @@ describe("TrailRenderer", () => {
 			expect(trailRenderer.history.length).toBe(10);
 		});
 	});
+	describe("die", () => {
+		it("should stop emmitting and eventually destroy", () => {
+			for (let i = 0; i < 10; i++) {
+				trailRenderer.update();
+			}
+			expect(trailRenderer.history.length).toBe(10);
+			trailRenderer.die();
+			trailRenderer.update();
+			expect(trailRenderer.history.length).toBe(9);
+
+			spyOn(trailRenderer, "destroy");
+			for (let i = 0; i < 10; i++) {
+				trailRenderer.update();
+			}
+			expect(trailRenderer.destroy).toHaveBeenCalled();
+		});
+	});
 });

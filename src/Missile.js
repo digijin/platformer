@@ -35,7 +35,7 @@ export default class Missile extends Projectile {
 	explode() {
 		// this.destroy();
 		super.explode();
-		this.trailRenderer.destroy();
+		this.trailRenderer.die();
 
 		for (let i = 0; i < 10; i++) {
 			//we want red outlines to be on the outside

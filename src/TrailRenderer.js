@@ -7,7 +7,7 @@ import RGBA from "RGBA";
 export default class TrailRenderer extends GameObject {
 	position: Point;
 	history: Array<Point>;
-	target: GameObject;
+	target: ?GameObject;
 	offset: Point;
 	length: number;
 	constructor(params: { target: GameObject, offset: Point, length: number }) {
@@ -21,16 +21,30 @@ export default class TrailRenderer extends GameObject {
 	}
 
 	update() {
-		this.calcPosition();
-		this.history.unshift(this.position);
-		if (this.history.length > this.length) {
+		if (this.target) {
+			this.calcPosition();
+			this.history.unshift(this.position);
+			if (this.history.length > this.length) {
+				this.history.pop();
+			}
+		} else {
+			//no target, die.
+
 			this.history.pop();
+			if (this.history.length == 0) {
+				this.destroy();
+			}
 		}
+
 		this.render();
+	}
+	die() {
+		this.target = null;
 	}
 
 	render() {
 		this.engine.ctx.context.lineCap = "round";
+		this.engine.ctx.context.setLineDash([4, 2]);
 		let stops = [
 			{ r: 1, g: 0, b: 0, a: 1 },
 			{ r: 1, g: 1, b: 0, a: 1 },
@@ -56,5 +70,6 @@ export default class TrailRenderer extends GameObject {
 			);
 		}
 		this.engine.ctx.context.lineCap = "butt";
+		this.engine.ctx.context.setLineDash([]);
 	}
 }
