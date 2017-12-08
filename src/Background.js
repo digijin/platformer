@@ -53,11 +53,13 @@ export default class Background extends GameObject {
 			-this.engine.view.offset.x / 8 + "px";
 		this.top2.style.backgroundPositionX =
 			-this.engine.view.offset.x / 4 + "px";
+		let p1 = window.innerHeight / 4;
+		let p2 = window.innerHeight / 2.5;
 
-		this.top.style.height = 250 - this.engine.view.offset.y / 4 + "px";
-		this.bottom.style.top = 250 - this.engine.view.offset.y / 4 + "px";
-		this.top2.style.height = 350 - this.engine.view.offset.y / 5 + "px";
-		this.bottom2.style.top = 350 - this.engine.view.offset.y / 5 + "px";
+		this.top.style.height = p1 - this.engine.view.offset.y / 4 + "px";
+		this.bottom.style.top = p1 - this.engine.view.offset.y / 4 + "px";
+		this.top2.style.height = p2 - this.engine.view.offset.y / 5 + "px";
+		this.bottom2.style.top = p2 - this.engine.view.offset.y / 5 + "px";
 	}
 	exit() {
 		this.engine.container.removeChild(this.el);
