@@ -85,7 +85,7 @@ export default class Bullet extends GameObject {
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
 					// this.destroy();
-					a.damage(5);
+					a.damage(2);
 				}
 			}
 		});
