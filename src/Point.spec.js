@@ -59,4 +59,20 @@ describe("Point", () => {
 			expect(rounded.y).toBe(1);
 		});
 	});
+	describe("percentTo", () => {
+		it("should return midpoint of two points", () => {
+			let point1 = new Point({ x: 1, y: 1 });
+			let point2 = new Point({ x: 5, y: 5 });
+			let mid = point1.percentTo(point2, 0.5);
+			expect(mid.x).toBe(3);
+			expect(mid.y).toBe(3);
+		});
+		it("should return quarter of two points", () => {
+			let point1 = new Point({ x: 1, y: 1 });
+			let point2 = new Point({ x: 5, y: 5 });
+			let mid = point1.percentTo(point2, 0.25);
+			expect(mid.x).toBe(2);
+			expect(mid.y).toBe(2);
+		});
+	});
 });

@@ -92,6 +92,14 @@ export default class Point {
 		});
 	}
 
+	percentTo(point: Point, percent: number): Point {
+		let inverse = 1 - percent;
+		return new Point({
+			x: this.x * inverse + point.x * percent,
+			y: this.y * inverse + point.y * percent
+		});
+	}
+
 	// get screen():{x:number, y:number}{
 	//   if(!state) throw new Error('Point state not registered')
 	//   return worldToScreen({x:this.x, y:this.y}, state);
