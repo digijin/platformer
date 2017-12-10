@@ -4,6 +4,8 @@ import GameObject from "GameObject";
 import Point from "Point";
 import MainMenu from "Scene/MainMenu";
 
+import type Engine from "Engine";
+
 let lettersConfig = [
 	{
 		color: "#00ff00",
@@ -69,11 +71,28 @@ const HOLDTIME = 0 * SPEED;
 const FADETIME = SPEED;
 export default class DigijinLogo extends GameObject {
 	time: number;
+	canvas: HTMLCanvasElement;
 	constructor() {
 		super();
 		// console.log(letters);
 		this.time = -10;
 	}
+
+	init(engine: Engine) {
+		super.init(engine);
+
+		let canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		engine.container.appendChild(canvas);
+		this.canvas = canvas;
+		this.ctx = canvas.getContext("2d");
+	}
+
+	exit() {
+		this.engine.container.removeChild(this.canvas);
+	}
+
 	update() {
 		this.time += this.engine.deltaTime * SPEED;
 		let size = 40;
@@ -83,7 +102,7 @@ export default class DigijinLogo extends GameObject {
 			x: (window.innerWidth - width) / 2,
 			y: (window.innerHeight - height) / 2
 		};
-		let ctx = this.engine.ctx.context;
+		let ctx = this.ctx;
 		if (this.time > RENDERTIME + HOLDTIME) {
 			// ctx.globalAlpha = (FADETIME - (this.time - RENDERTIME)) / FADETIME;
 			ctx.globalAlpha -= this.engine.deltaTime;
