@@ -1,8 +1,9 @@
+//@flow
 import GameObject from "GameObject";
 
 import Point from "Point";
 
-const letters = [
+let letters = [
 	{
 		color: "#00ff00",
 		points: [
@@ -46,8 +47,22 @@ const letters = [
 		points: [{ x: 11, y: 3 }, { x: 11, y: 1 }, { x: 7, y: 1 }]
 	}
 ];
+//add dists
+letters = letters.map(l => {
+	let dist = 0;
+	l.points = l.points.map(p => new Point(p));
+	for (let p = 1; p < l.points.length; p++) {
+		dist += l.points[p - 1].distanceTo(l.points[p]);
+	}
+	l.dist = dist;
+	return l;
+});
 
 export default class DigijinLogo extends GameObject {
+	constructor() {
+		super();
+		// console.log(letters);
+	}
 	update() {
 		let size = 40;
 		let width = size * 11;
@@ -55,8 +70,8 @@ export default class DigijinLogo extends GameObject {
 		letters.forEach(l => {
 			for (let p = 1; p < l.points.length; p++) {
 				this.engine.ctx.drawLine(
-					new Point(l.points[p - 1]).multiply(size).add(offset),
-					new Point(l.points[p]).multiply(size).add(offset),
+					l.points[p - 1].multiply(size).add(offset),
+					l.points[p].multiply(size).add(offset),
 					l.color,
 					3,
 					true
