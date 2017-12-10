@@ -86,6 +86,7 @@ class EditorPanel extends React.Component {
 					<CardActions expandable={true}>
 						{BlockTypes.map(b => (
 							<RaisedButton
+								primary={watcher.blockId == b.id}
 								label={b.id + "" + b.name}
 								onClick={() => {
 									watcher.blockId = b.id;

@@ -38,7 +38,7 @@ export default class Watcher extends GameObject {
 		}
 		if (this.engine.input.getButton("editor_remove")) {
 			// block.remove();
-			blocks.forEach(b => b.remove());
+			blocks.forEach(b => b.addBackground(this.blockId));
 		}
 		//scrolling
 		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;

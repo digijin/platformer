@@ -30,6 +30,14 @@ export default class BlockType {
 
 let blockTypeConfig: Array<BlockTypeParams> = [
 	{
+		name: "empty",
+		id: "0",
+		image: "",
+		destructable: false,
+		empty: true,
+		hp: 0
+	},
+	{
 		name: "dirt",
 		id: "1",
 		image: dirtTile,

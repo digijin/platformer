@@ -65,6 +65,10 @@ export default class Block {
 		this.type = blockId;
 		this.grid.bustCache(this);
 	}
+	addBackground(blockId: string) {
+		this.backgroundType = blockId;
+		this.grid.bustCache(this);
+	}
 	//for editor
 	remove() {
 		this.type = "0";

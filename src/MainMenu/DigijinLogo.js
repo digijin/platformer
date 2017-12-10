@@ -57,6 +57,7 @@ let letters: Array<{
 	let dist = 0;
 	l.points = l.points.map(p => new Point(p));
 	for (let p = 1; p < l.points.length; p++) {
+		//FLOWHACK
 		dist += l.points[p - 1].distanceTo(l.points[p]);
 	}
 	l.dist = dist;
@@ -64,7 +65,7 @@ let letters: Array<{
 });
 const SPEED = 8;
 const RENDERTIME = 12;
-const HOLDTIME = 2 * SPEED;
+const HOLDTIME = 0 * SPEED;
 const FADETIME = SPEED;
 export default class DigijinLogo extends GameObject {
 	time: number;
