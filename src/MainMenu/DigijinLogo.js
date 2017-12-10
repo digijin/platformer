@@ -62,17 +62,19 @@ let letters: Array<{
 	l.dist = dist;
 	return l;
 });
-const FADETIME = 8;
+const SPEED = 8;
+const RENDERTIME = 12;
+const HOLDTIME = 2 * SPEED;
+const FADETIME = SPEED;
 export default class DigijinLogo extends GameObject {
 	time: number;
 	constructor() {
 		super();
 		// console.log(letters);
-		this.time = 0;
+		this.time = -10;
 	}
 	update() {
-		let speed = 8;
-		this.time += this.engine.deltaTime * speed;
+		this.time += this.engine.deltaTime * SPEED;
 		let size = 40;
 		let width = size * 11;
 		let height = size * 5;
@@ -81,15 +83,16 @@ export default class DigijinLogo extends GameObject {
 			y: (window.innerHeight - height) / 2
 		};
 		let ctx = this.engine.ctx.context;
-		if (this.time > 12) {
-			ctx.globalAlpha = (FADETIME - (this.time - 12)) / FADETIME;
+		if (this.time > RENDERTIME + HOLDTIME) {
+			// ctx.globalAlpha = (FADETIME - (this.time - RENDERTIME)) / FADETIME;
+			ctx.globalAlpha -= this.engine.deltaTime;
 		}
 		this.renderLetters(ctx, size, offset);
 
-		if (this.time > 12 + FADETIME) {
+		if (this.time > RENDERTIME + HOLDTIME + FADETIME) {
 			document.body.style.backgroundColor = "lightblue";
 		}
-		if (this.time > 12 + FADETIME + speed) {
+		if (this.time > RENDERTIME + HOLDTIME + FADETIME + SPEED) {
 			//end
 			ctx.globalAlpha = 1;
 			this.engine.startScene(new MainMenu());
@@ -98,10 +101,16 @@ export default class DigijinLogo extends GameObject {
 	}
 
 	renderLetters(ctx, size, offset) {
+		ctx.save();
 		letters.forEach((l, index) => {
 			let progress = this.time - index;
 			ctx.strokeStyle = l.color;
 			ctx.lineWidth = 3;
+			// ctx.filter = "drop-shadow(0,0,4," + l.color + ")";
+			ctx.shadowColor = l.color;
+			ctx.shadowBlur = 20;
+			ctx.shadowOffsetX = 2;
+			ctx.shadowOffsetY = 2;
 			ctx.beginPath();
 			let from = l.points[0];
 			ctx.moveTo(
@@ -127,6 +136,10 @@ export default class DigijinLogo extends GameObject {
 				from = to;
 			}
 			ctx.stroke();
+
+			ctx.shadowColor = "none";
+			ctx.shadowBlur = 0;
 		});
+		ctx.restore();
 	}
 }

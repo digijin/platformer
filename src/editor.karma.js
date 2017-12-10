@@ -35,6 +35,9 @@ describe("editor functional", () => {
 		it("sohuld trigger logo-over", done => {
 			window.addEventListener("logo-over", done);
 		});
+		it("sohuld trigger menu-ready", done => {
+			window.addEventListener("menu-ready", done);
+		});
 	});
 	describe("start editor", () => {
 		it("should press editor", () => {

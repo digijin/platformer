@@ -11,9 +11,15 @@ import Point from "Point";
 export default class MainMenu extends Base {
 	start(engine: Engine) {
 		super.start(engine);
-		engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
+		setTimeout(() => {
+			engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
+			window.dispatchEvent(new Event("menu-ready"));
+		}, 2000);
 
-		engine.view.offset = new Point({ x: -500, y: -3000 });
+		engine.view.offset = new Point({
+			x: -window.innerWidth,
+			y: -window.innerHeight * 4
+		});
 
 		engine.register(new Menu());
 		engine.register(new Background());

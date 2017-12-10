@@ -40,8 +40,8 @@ describe("functional", () => {
 		});
 	});
 	describe("wait out splash", () => {
-		it("sohuld trigger logo-over", done => {
-			window.addEventListener("logo-over", done);
+		it("sohuld trigger menu-ready", done => {
+			window.addEventListener("menu-ready", done);
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
