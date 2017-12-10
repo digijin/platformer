@@ -10,7 +10,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-describe("editor functional", () => {
+describe("editor.karma functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {
@@ -90,7 +90,7 @@ describe("editor functional", () => {
 				done();
 			}, 100);
 		});
-		it("should remove tiles under cursor", done => {
+		it("should add background to tiles under cursor", done => {
 			mouseUtil.mouseEvent(
 				"mousemove",
 				{ clientX: pt.x, clientY: pt.y },
@@ -105,7 +105,7 @@ describe("editor functional", () => {
 				let block = game.engine.grid.getBlockAtPoint(
 					game.engine.mouse.point
 				);
-				expect(block.isEmpty()).toBe(true);
+				expect(block.backgroundType).not.toBe("0");
 				mouseUtil.mouseEvent(
 					"mouseup",
 					{ button: 2 },
