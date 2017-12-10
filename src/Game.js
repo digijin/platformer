@@ -12,6 +12,7 @@ import UI from "UI";
 
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
+import Logo from "Scene/Logo";
 
 // FLOWHACK
 import "./style.styl";
@@ -30,7 +31,7 @@ export default class Game {
 		this.engine.init(container);
 
 		// this.engine.startScene(new Level());
-		this.engine.startScene(new MainMenu());
+		this.engine.startScene(new Logo());
 
 		this.engine.update(); //starts
 	}

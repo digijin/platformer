@@ -252,17 +252,28 @@ export default class Grid extends GameObject {
 					x: tile.x * config.grid.tile.width + x,
 					y: tile.y * config.grid.tile.height + y
 				});
-				if (block && block.backgroundType !== "0") {
-					let im = block.getBackgroundType().image;
-					ctx.filter = "brightness(50%)";
-					this.drawTile(ctx, im, x, y);
+				if (block) {
+					if (!block.isEmpty()) {
+						let im = block.getType().image;
+						ctx.filter = "brightness(100%)";
+						this.drawTile(ctx, im, x, y);
+					} else if (block.backgroundType !== "0") {
+						let im = block.getBackgroundType().image;
+						ctx.filter = "brightness(50%)";
+						this.drawTile(ctx, im, x, y);
+					}
 				}
-				if (block && !block.isEmpty()) {
-					let im = block.getType().image;
-					// let imageParams = [im, 0, 0, im.width, im.height];
-					ctx.filter = "brightness(100%)";
-					this.drawTile(ctx, im, x, y);
-				}
+				// if (block && block.backgroundType !== "0") {
+				// 	let im = block.getBackgroundType().image;
+				// 	ctx.filter = "brightness(50%)";
+				// 	this.drawTile(ctx, im, x, y);
+				// }
+				// if (block && !block.isEmpty()) {
+				// 	let im = block.getType().image;
+				// 	// let imageParams = [im, 0, 0, im.width, im.height];
+				// 	ctx.filter = "brightness(100%)";
+				// 	this.drawTile(ctx, im, x, y);
+				// }
 			}
 		}
 		ctx.strokeStyle = "rgba(0,0,0,0.1)";
