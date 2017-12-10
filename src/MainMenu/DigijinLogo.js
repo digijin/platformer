@@ -167,12 +167,12 @@ export default class DigijinLogo extends GameObject {
 					);
 				} else if (progress > 0) {
 					let mid = from.percentTo(to, progress / dist);
-					if (Math.random() < 0.1) {
+					if (Math.random() < 0.2) {
 						let dir = to.subtract(from).direction();
 						this.engine.register(
 							new Spike({
 								position: mid,
-								direction: dir + Math.PI,
+								direction: dir + Math.PI / 2,
 								ctx: this.ctx,
 								color: l.color
 							})
