@@ -43,11 +43,24 @@ let lettersConfig = [
 	},
 	{
 		color: "#00b7ff",
-		points: [{ x: 11, y: 3 }, { x: 11, y: 1 }, { x: 7, y: 1 }]
+		points: [
+			// { x: 8, y: 4 },
+			// { x: 11, y: 4 },
+			{ x: 11, y: 3 },
+			{ x: 11, y: 1 },
+			{ x: 7, y: 1 }
+			// { x: 3, y: 1 }
+		]
 	},
 	{
 		color: "#00ff00",
-		points: [{ x: 0, y: 2 }, { x: 0, y: 4 }, { x: 3, y: 4 }]
+		points: [
+			// { x: 1, y: 1 },
+			// { x: 0, y: 1 },
+			{ x: 0, y: 2 },
+			{ x: 0, y: 4 },
+			{ x: 3, y: 4 }
+		]
 	}
 ];
 //add dists
@@ -68,7 +81,7 @@ let letters: Array<{
 const INITDELAY = 6;
 const SPEED = 4;
 const RENDERTIME = 12;
-const HOLDTIME = 2 * SPEED;
+const HOLDTIME = 4 * SPEED;
 const FADETIME = SPEED;
 const SPAWNCHANCE = 0.2;
 let size = 40;
