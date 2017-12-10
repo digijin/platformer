@@ -39,6 +39,12 @@ describe("functional", () => {
 			expect(container.childNodes[1].id).toBe("ui");
 		});
 	});
+	describe("wait out splash", () => {
+		it("sohuld trigger logo-over", done => {
+			window.addEventListener("logo-over", done);
+		});
+	});
+
 	describe("start game", () => {
 		it("should press play", () => {
 			expect(document.getElementById("play")).toBeDefined();

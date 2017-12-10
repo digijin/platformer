@@ -89,6 +89,7 @@ export default class DigijinLogo extends GameObject {
 			//end
 			ctx.globalAlpha = 1;
 			this.engine.startScene(new MainMenu());
+			window.dispatchEvent(new Event("logo-over"));
 		}
 	}
 

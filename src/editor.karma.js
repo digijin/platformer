@@ -31,6 +31,11 @@ describe("editor functional", () => {
 			setTimeout(done, 100);
 		});
 	});
+	describe("wait out splash", () => {
+		it("sohuld trigger logo-over", done => {
+			window.addEventListener("logo-over", done);
+		});
+	});
 	describe("start editor", () => {
 		it("should press editor", () => {
 			expect(document.getElementById("editor")).toBeDefined();
