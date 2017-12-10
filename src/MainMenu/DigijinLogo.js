@@ -67,11 +67,14 @@ let letters: Array<{
 });
 const SPEED = 8;
 const RENDERTIME = 12;
-const HOLDTIME = 0 * SPEED;
+const HOLDTIME = 4 * SPEED;
 const FADETIME = SPEED;
 export default class DigijinLogo extends GameObject {
 	time: number;
 	canvas: HTMLCanvasElement;
+	ctx: CanvasRenderingContext2D;
+	hiddenCanvas: HTMLCanvasElement;
+	hiddenCtx: CanvasRenderingContext2D;
 	constructor() {
 		super();
 		// console.log(letters);
@@ -81,12 +84,16 @@ export default class DigijinLogo extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 
-		let canvas: HTMLCanvasElement = document.createElement("canvas");
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		engine.container.appendChild(canvas);
-		this.canvas = canvas;
-		this.ctx = canvas.getContext("2d");
+		this.canvas = document.createElement("canvas");
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+		this.hiddenCanvas = document.createElement("canvas");
+		this.hiddenCanvas.width = window.innerWidth;
+		this.hiddenCanvas.height = window.innerHeight;
+		engine.container.appendChild(this.canvas);
+
+		this.ctx = this.canvas.getContext("2d");
+		this.hiddenCtx = this.hiddenCanvas.getContext("2d");
 	}
 
 	exit() {
@@ -102,12 +109,22 @@ export default class DigijinLogo extends GameObject {
 			x: (window.innerWidth - width) / 2,
 			y: (window.innerHeight - height) / 2
 		};
+		//fade out using hidden context
+		this.hiddenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.hiddenCtx.globalAlpha = 0.7;
+		this.hiddenCtx.drawImage(this.canvas, 0, 0);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		// this.ctx.globalAlpha = 0.5;
+		this.ctx.drawImage(this.hiddenCanvas, 0, 0);
+
 		let ctx = this.ctx;
+
 		if (this.time > RENDERTIME + HOLDTIME) {
 			// ctx.globalAlpha = (FADETIME - (this.time - RENDERTIME)) / FADETIME;
-			ctx.globalAlpha -= this.engine.deltaTime;
+			// ctx.globalAlpha -= this.engine.deltaTime;
+		} else {
+			this.renderLetters(ctx, size, offset);
 		}
-		this.renderLetters(ctx, size, offset);
 
 		if (this.time > RENDERTIME + HOLDTIME + FADETIME) {
 			document.body.style.backgroundColor = "lightblue";
@@ -137,8 +154,9 @@ export default class DigijinLogo extends GameObject {
 				from.multiply(size).add(offset).x,
 				from.multiply(size).add(offset).y
 			);
+			let to;
 			for (let p = 1; p < l.points.length; p++) {
-				let to = l.points[p];
+				to = l.points[p];
 				let dist = from.distanceTo(to);
 				if (progress > dist) {
 					ctx.lineTo(
@@ -151,11 +169,21 @@ export default class DigijinLogo extends GameObject {
 						mid.multiply(size).add(offset).x,
 						mid.multiply(size).add(offset).y
 					);
+					ctx.arc(
+						mid.multiply(size).add(offset).x,
+						mid.multiply(size).add(offset).y,
+						4,
+						0,
+						2 * Math.PI
+					);
 				}
 				progress -= dist;
 				from = to;
 			}
 			ctx.stroke();
+
+			// ctx.beginPath();
+			// ctx.stroke();
 
 			ctx.shadowColor = "none";
 			ctx.shadowBlur = 0;
