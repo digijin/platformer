@@ -67,7 +67,7 @@ let letters: Array<{
 });
 const SPEED = 8;
 const RENDERTIME = 12;
-const HOLDTIME = 4 * SPEED;
+const HOLDTIME = 1 * SPEED;
 const FADETIME = SPEED;
 let size = 40;
 let width = size * 11;
