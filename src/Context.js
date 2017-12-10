@@ -45,13 +45,16 @@ export default class Context {
 		from: Point,
 		to: Point,
 		style: string = "black",
-		width: number = 1
+		width: number = 1,
+		screen: boolean = false
 	) {
 		this.context.strokeStyle = style;
 		this.context.lineWidth = width;
 		let o = this.engine.view.offset;
-		from = from.subtract(o);
-		to = to.subtract(o);
+		if (!screen) {
+			from = from.subtract(o);
+			to = to.subtract(o);
+		}
 
 		this.context.beginPath();
 		this.context.moveTo(from.x, from.y);

@@ -28,6 +28,9 @@ export default class Point {
 	constructor(pos: { x: number, y: number } = { x: 0, y: 0 }): void {
 		this.x = pos.x;
 		this.y = pos.y;
+		if (arguments.length > 1) {
+			throw new Error("Point only takes one argument");
+		}
 	}
 
 	clone() {
