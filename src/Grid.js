@@ -308,7 +308,7 @@ export default class Grid extends GameObject {
 		return JSON.stringify({
 			blocks: this.blocks.map(col => {
 				return col.map(block => {
-					return { t: block.type };
+					return { t: block.type, b: block.backgroundType };
 				});
 			})
 		});
@@ -321,6 +321,7 @@ export default class Grid extends GameObject {
 				return new Block({
 					position: new Point({ x, y }),
 					type: block.t,
+					backgroundType: block.b,
 					grid: this
 				});
 			});
