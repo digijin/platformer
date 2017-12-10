@@ -65,10 +65,12 @@ let letters: Array<{
 	l.dist = dist;
 	return l;
 });
-const SPEED = 8;
+const INITDELAY = 6;
+const SPEED = 4;
 const RENDERTIME = 12;
-const HOLDTIME = 1 * SPEED;
+const HOLDTIME = 2 * SPEED;
 const FADETIME = SPEED;
+const SPAWNCHANCE = 0.2;
 let size = 40;
 let width = size * 11;
 let height = size * 5;
@@ -86,7 +88,7 @@ export default class DigijinLogo extends GameObject {
 	constructor() {
 		super();
 		// console.log(letters);
-		this.time = -10;
+		this.time = -INITDELAY;
 	}
 
 	init(engine: Engine) {
@@ -112,12 +114,21 @@ export default class DigijinLogo extends GameObject {
 		this.time += this.engine.deltaTime * SPEED;
 
 		//fade out using hidden context
-		this.hiddenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.hiddenCtx.globalAlpha = 0.9;
-		this.hiddenCtx.drawImage(this.canvas, 0, 0);
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		// this.ctx.globalAlpha = 0.5;
-		this.ctx.drawImage(this.hiddenCanvas, 0, 0);
+		this.hiddenContextFade();
+		// let imageData = this.ctx.getImageData(
+		// 	0,
+		// 	0,
+		// 	this.canvas.width,
+		// 	this.canvas.height
+		// );
+		// let data = imageData.data;
+		// for (let x = 0; x < this.canvas.width; x++) {
+		// 	for (let y = 0; y < this.canvas.height; y++) {
+		// 		let index = (y * this.canvas.width + x) * 4;
+		// 		data[index + 3] = data[index + 3] - 10;
+		// 	}
+		// }
+		// this.ctx.putImageData(imageData, 0, 0);
 
 		let ctx = this.ctx;
 
@@ -139,10 +150,19 @@ export default class DigijinLogo extends GameObject {
 		}
 	}
 
+	hiddenContextFade() {
+		this.hiddenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.hiddenCtx.globalAlpha = 0.8;
+		this.hiddenCtx.drawImage(this.canvas, 0, 0);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		// this.ctx.globalAlpha = 0.5;
+		this.ctx.drawImage(this.hiddenCanvas, 0, 0);
+	}
+
 	renderLetters(ctx, size, offset) {
 		ctx.save();
 		letters.forEach((l, index) => {
-			let progress = this.time - index;
+			let progress = this.time - index * 1.5;
 			ctx.strokeStyle = l.color;
 			ctx.lineWidth = 3;
 			// ctx.filter = "drop-shadow(0,0,4," + l.color + ")";
@@ -167,12 +187,13 @@ export default class DigijinLogo extends GameObject {
 					);
 				} else if (progress > 0) {
 					let mid = from.percentTo(to, progress / dist);
-					if (Math.random() < 0.2) {
+					if (Math.random() < SPAWNCHANCE) {
 						let dir = to.subtract(from).direction();
+						dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
 						this.engine.register(
 							new Spike({
 								position: mid,
-								direction: dir + Math.PI / 2,
+								direction: dir,
 								ctx: this.ctx,
 								color: l.color
 							})
@@ -222,10 +243,30 @@ class Spike extends GameObject {
 		this.color = params.color;
 	}
 	update() {
+		if (Math.random() < 0.1) {
+			let r = Math.random();
+			if (r < 0.3) {
+				this.direction += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
+			} else if (r < 0.6) {
+				this.engine.register(
+					new Spike({
+						position: this.position,
+						direction:
+							this.direction +
+							Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1),
+						ctx: this.ctx,
+						color: this.color
+					})
+				);
+			} else {
+				this.destroy();
+			}
+		}
+
 		let to = this.position.move(this.direction, this.engine.deltaTime * 10);
 
 		this.ctx.strokeStyle = this.color;
-		this.ctx.lineWidth = 4;
+		this.ctx.lineWidth = 1;
 		this.ctx.beginPath();
 
 		this.ctx.moveTo(

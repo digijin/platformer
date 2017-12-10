@@ -40,7 +40,10 @@ describe("functional", () => {
 		});
 	});
 	describe("wait out splash", () => {
-		it("sohuld trigger menu-ready", done => {
+		it("should trigger logo-over", done => {
+			window.addEventListener("logo-over", done);
+		});
+		it("should trigger menu-ready", done => {
 			window.addEventListener("menu-ready", done);
 		});
 		it("shouldnt throw any errors initializing", done => {

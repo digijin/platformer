@@ -17,7 +17,8 @@ export default class MainMenu extends Base {
 		}, 2000);
 
 		engine.view.offset = new Point({
-			x: -window.innerWidth,
+			// x: -window.innerWidth,
+			x: 0,
 			y: -window.innerHeight * 4
 		});
 
