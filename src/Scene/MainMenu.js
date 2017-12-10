@@ -11,7 +11,7 @@ export default class MainMenu extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 		engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
-		engine.register(new DigijinLogo());
+
 		engine.register(new Menu());
 		engine.register(new Background());
 	}

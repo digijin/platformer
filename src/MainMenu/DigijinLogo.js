@@ -2,8 +2,9 @@
 import GameObject from "GameObject";
 
 import Point from "Point";
+import MainMenu from "Scene/MainMenu";
 
-let letters = [
+let lettersConfig = [
 	{
 		color: "#00ff00",
 		points: [
@@ -39,16 +40,20 @@ let letters = [
 		]
 	},
 	{
-		color: "#00ff00",
-		points: [{ x: 0, y: 2 }, { x: 0, y: 4 }, { x: 3, y: 4 }]
-	},
-	{
 		color: "#00b7ff",
 		points: [{ x: 11, y: 3 }, { x: 11, y: 1 }, { x: 7, y: 1 }]
+	},
+	{
+		color: "#00ff00",
+		points: [{ x: 0, y: 2 }, { x: 0, y: 4 }, { x: 3, y: 4 }]
 	}
 ];
 //add dists
-letters = letters.map(l => {
+let letters: Array<{
+	color: string,
+	points: Array<Point>,
+	dist: number
+}> = lettersConfig.map(l => {
 	let dist = 0;
 	l.points = l.points.map(p => new Point(p));
 	for (let p = 1; p < l.points.length; p++) {
@@ -57,26 +62,62 @@ letters = letters.map(l => {
 	l.dist = dist;
 	return l;
 });
-
+const FADETIME = 8;
 export default class DigijinLogo extends GameObject {
+	time: number;
 	constructor() {
 		super();
 		// console.log(letters);
+		this.time = 0;
 	}
 	update() {
+		this.time += this.engine.deltaTime * 6;
 		let size = 40;
 		let width = size * 11;
 		let offset = { x: (window.innerWidth - width) / 2, y: 100 };
-		letters.forEach(l => {
+		let ctx = this.engine.ctx.context;
+		if (this.time > 12) {
+			ctx.globalAlpha = (FADETIME - (this.time - 12)) / FADETIME;
+		}
+		this.renderLetters(ctx, size, offset);
+
+		if (this.time > 12 + FADETIME) {
+			//end
+			ctx.globalAlpha = 1;
+			this.engine.startScene(new MainMenu());
+		}
+	}
+
+	renderLetters(ctx, size, offset) {
+		letters.forEach((l, index) => {
+			let progress = this.time - index;
+			ctx.strokeStyle = l.color;
+			ctx.lineWidth = 3;
+			ctx.beginPath();
+			let from = l.points[0];
+			ctx.moveTo(
+				from.multiply(size).add(offset).x,
+				from.multiply(size).add(offset).y
+			);
 			for (let p = 1; p < l.points.length; p++) {
-				this.engine.ctx.drawLine(
-					l.points[p - 1].multiply(size).add(offset),
-					l.points[p].multiply(size).add(offset),
-					l.color,
-					3,
-					true
-				);
+				let to = l.points[p];
+				let dist = from.distanceTo(to);
+				if (progress > dist) {
+					ctx.lineTo(
+						to.multiply(size).add(offset).x,
+						to.multiply(size).add(offset).y
+					);
+				} else if (progress > 0) {
+					let mid = from.percentTo(to, progress / dist);
+					ctx.lineTo(
+						mid.multiply(size).add(offset).x,
+						mid.multiply(size).add(offset).y
+					);
+				}
+				progress -= dist;
+				from = to;
 			}
+			ctx.stroke();
 		});
 	}
 }

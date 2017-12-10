@@ -51,8 +51,8 @@ export default class Context {
 	) {
 		this.context.strokeStyle = style;
 		this.context.lineWidth = width;
-		let o = this.engine.view.offset;
 		if (!screen) {
+			let o = this.engine.view.offset;
 			from = from.subtract(o);
 			to = to.subtract(o);
 		}
