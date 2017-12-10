@@ -69,6 +69,14 @@ const SPEED = 8;
 const RENDERTIME = 12;
 const HOLDTIME = 4 * SPEED;
 const FADETIME = SPEED;
+let size = 40;
+let width = size * 11;
+let height = size * 5;
+
+let offset = {
+	x: (window.innerWidth - width) / 2,
+	y: (window.innerHeight - height) / 2
+};
 export default class DigijinLogo extends GameObject {
 	time: number;
 	canvas: HTMLCanvasElement;
@@ -102,16 +110,10 @@ export default class DigijinLogo extends GameObject {
 
 	update() {
 		this.time += this.engine.deltaTime * SPEED;
-		let size = 40;
-		let width = size * 11;
-		let height = size * 5;
-		let offset = {
-			x: (window.innerWidth - width) / 2,
-			y: (window.innerHeight - height) / 2
-		};
+
 		//fade out using hidden context
 		this.hiddenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.hiddenCtx.globalAlpha = 0.7;
+		this.hiddenCtx.globalAlpha = 0.9;
 		this.hiddenCtx.drawImage(this.canvas, 0, 0);
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		// this.ctx.globalAlpha = 0.5;
@@ -165,6 +167,17 @@ export default class DigijinLogo extends GameObject {
 					);
 				} else if (progress > 0) {
 					let mid = from.percentTo(to, progress / dist);
+					if (Math.random() < 0.1) {
+						let dir = to.subtract(from).direction();
+						this.engine.register(
+							new Spike({
+								position: mid,
+								direction: dir + Math.PI,
+								ctx: this.ctx,
+								color: l.color
+							})
+						);
+					}
 					ctx.lineTo(
 						mid.multiply(size).add(offset).x,
 						mid.multiply(size).add(offset).y
@@ -189,5 +202,41 @@ export default class DigijinLogo extends GameObject {
 			ctx.shadowBlur = 0;
 		});
 		ctx.restore();
+	}
+}
+
+class Spike extends GameObject {
+	position: Point;
+	direction: number;
+	ctx: CanvasRenderingContext2D;
+	constructor(params: {
+		position: Point,
+		direction: number,
+		ctx: CanvasRenderingContext2D,
+		color: string
+	}) {
+		super();
+		this.position = params.position;
+		this.direction = params.direction;
+		this.ctx = params.ctx;
+		this.color = params.color;
+	}
+	update() {
+		let to = this.position.move(this.direction, this.engine.deltaTime * 10);
+
+		this.ctx.strokeStyle = this.color;
+		this.ctx.lineWidth = 4;
+		this.ctx.beginPath();
+
+		this.ctx.moveTo(
+			this.position.multiply(size).add(offset).x,
+			this.position.multiply(size).add(offset).y
+		);
+		this.ctx.lineTo(
+			to.multiply(size).add(offset).x,
+			to.multiply(size).add(offset).y
+		);
+		this.ctx.stroke();
+		this.position = to;
 	}
 }
