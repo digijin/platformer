@@ -71,7 +71,8 @@ export default class DigijinLogo extends GameObject {
 		this.time = 0;
 	}
 	update() {
-		this.time += this.engine.deltaTime * 8;
+		let speed = 8;
+		this.time += this.engine.deltaTime * speed;
 		let size = 40;
 		let width = size * 11;
 		let height = size * 5;
@@ -86,6 +87,9 @@ export default class DigijinLogo extends GameObject {
 		this.renderLetters(ctx, size, offset);
 
 		if (this.time > 12 + FADETIME) {
+			document.body.style.backgroundColor = "lightblue";
+		}
+		if (this.time > 12 + FADETIME + speed) {
 			//end
 			ctx.globalAlpha = 1;
 			this.engine.startScene(new MainMenu());

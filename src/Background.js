@@ -47,6 +47,7 @@ export default class Background extends GameObject {
 
 		this.top.style.backgroundImage = url;
 		this.top2.style.backgroundImage = url;
+		this.update();
 	}
 	update() {
 		this.top.style.backgroundPositionX =

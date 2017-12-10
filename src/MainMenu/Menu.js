@@ -26,7 +26,6 @@ export default class MainMenu extends GameObject {
 	}
 	init(engine: Engine) {
 		super.init(engine);
-		engine.view.offset = new Point({ x: 0, y: 0 });
 	}
 	spawnTimer: number;
 	particles: Array<Particle>;
@@ -102,7 +101,7 @@ export default class MainMenu extends GameObject {
 		let center = new Point({
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
-		}).subtract(this.engine.view.offset);
+		}).subtract(this.engine.view.offset.multiply(0.5));
 		//solid bg
 		this.engine.ctx.context.fillStyle = "#000";
 		this.engine.ctx.context.fillRect(
@@ -117,9 +116,9 @@ export default class MainMenu extends GameObject {
 			"repeat-x"
 		);
 		this.engine.ctx.context.fillStyle = pattern;
-		this.engine.ctx.context.translate(-250, center.y - 173);
-		this.engine.ctx.context.fillRect(0, 0, window.innerWidth + 250, 174);
-		// this.engine.ctx.strokeRect(0, 0, window.innerWidth + 250, 174);
+		this.engine.ctx.context.translate(center.x, center.y - 173);
+		this.engine.ctx.context.fillRect(-center.x, 0, window.innerWidth, 174);
+		// this.engine.ctx.context.strokeRect(0, 0, window.innerWidth + 250, 174);
 		this.engine.ctx.resetTransform();
 		// this.engine.ctx.drawSprite(
 		// 	skyline,
@@ -135,10 +134,14 @@ export default class MainMenu extends GameObject {
 	}
 	timePassed: number;
 	update() {
-		this.engine.view.offset = this.engine.view.offset.add({
-			x: 0,
-			y: -this.engine.deltaTime * 10
-		});
+		this.engine.view.offset = this.engine.view.offset.easeTo(
+			{
+				x: 0,
+				y: 0
+			},
+			30
+		);
+		// console.log(this.engine.view.offset.y);
 		if (this.engine.input.getButton("jump")) {
 			this.engine.startScene(new Level());
 		}
