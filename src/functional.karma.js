@@ -43,6 +43,9 @@ describe("functional", () => {
 		it("sohuld trigger logo-over", done => {
 			window.addEventListener("logo-over", done);
 		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 100);
+		});
 	});
 
 	describe("start game", () => {

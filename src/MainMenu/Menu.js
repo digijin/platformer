@@ -102,7 +102,8 @@ export default class MainMenu extends GameObject {
 		let center = new Point({
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
-		});
+		}).subtract(this.engine.view.offset);
+		//solid bg
 		this.engine.ctx.context.fillStyle = "#000";
 		this.engine.ctx.context.fillRect(
 			0,
@@ -110,13 +111,15 @@ export default class MainMenu extends GameObject {
 			window.innerWidth,
 			center.x
 		);
+		//patterned bg
 		let pattern = this.engine.ctx.context.createPattern(
 			skyline,
 			"repeat-x"
 		);
 		this.engine.ctx.context.fillStyle = pattern;
 		this.engine.ctx.context.translate(-250, center.y - 173);
-		this.engine.ctx.fillRect(0, 0, window.innerWidth + 250, 174);
+		this.engine.ctx.context.fillRect(0, 0, window.innerWidth + 250, 174);
+		// this.engine.ctx.strokeRect(0, 0, window.innerWidth + 250, 174);
 		this.engine.ctx.resetTransform();
 		// this.engine.ctx.drawSprite(
 		// 	skyline,
@@ -132,6 +135,10 @@ export default class MainMenu extends GameObject {
 	}
 	timePassed: number;
 	update() {
+		this.engine.view.offset = this.engine.view.offset.add({
+			x: 0,
+			y: -this.engine.deltaTime * 10
+		});
 		if (this.engine.input.getButton("jump")) {
 			this.engine.startScene(new Level());
 		}
@@ -162,7 +169,7 @@ export default class MainMenu extends GameObject {
 			new Point({
 				x: window.innerWidth / 2,
 				y: window.innerHeight / 2
-			}).add(this.engine.view.offset),
+			}),
 			{ w: 640, h: 480 },
 			0,
 			{ x: 0.5, y: 0.5 }
