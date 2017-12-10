@@ -23,7 +23,8 @@ export default class Context {
 				beginPath: () => {},
 				moveTo: () => {},
 				lineTo: () => {},
-				stroke: () => {}
+				stroke: () => {},
+				setLineDash: () => {}
 			};
 		}
 		this.engine = Engine.getInstance();
