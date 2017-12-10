@@ -71,10 +71,14 @@ export default class DigijinLogo extends GameObject {
 		this.time = 0;
 	}
 	update() {
-		this.time += this.engine.deltaTime * 6;
+		this.time += this.engine.deltaTime * 8;
 		let size = 40;
 		let width = size * 11;
-		let offset = { x: (window.innerWidth - width) / 2, y: 100 };
+		let height = size * 5;
+		let offset = {
+			x: (window.innerWidth - width) / 2,
+			y: (window.innerHeight - height) / 2
+		};
 		let ctx = this.engine.ctx.context;
 		if (this.time > 12) {
 			ctx.globalAlpha = (FADETIME - (this.time - 12)) / FADETIME;
