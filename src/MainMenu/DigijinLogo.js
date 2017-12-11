@@ -30,7 +30,10 @@ let lettersConfig = [
 		]
 	},
 	{ color: "#00ff00", points: [{ x: 6, y: 2 }, { x: 6, y: 3 }] },
-	{ color: "#00b7ff", points: [{ x: 7, y: 2 }, { x: 7, y: 4 }] },
+	{
+		color: "#00b7ff",
+		points: [{ x: 7, y: 2 }, { x: 7, y: 4 }]
+	},
 	{ color: "#00b7ff", points: [{ x: 8, y: 2 }, { x: 8, y: 3 }] },
 	{
 		color: "#00b7ff",
@@ -180,9 +183,9 @@ export default class DigijinLogo extends GameObject {
 			ctx.lineWidth = 3;
 			// ctx.filter = "drop-shadow(0,0,4," + l.color + ")";
 			ctx.shadowColor = l.color;
-			ctx.shadowBlur = 20;
-			ctx.shadowOffsetX = 2;
-			ctx.shadowOffsetY = 2;
+			ctx.shadowBlur = 10;
+			ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
 			ctx.beginPath();
 			let from = l.points[0];
 			ctx.moveTo(
