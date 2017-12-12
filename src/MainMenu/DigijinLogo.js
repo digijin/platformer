@@ -82,10 +82,10 @@ let letters: Array<{
 	return l;
 });
 const INITDELAY = 6;
-const SPEED = 4;
+const SPEED = 8;
 const RENDERTIME = 12;
-const HOLDTIME = 4 * SPEED;
-const FADETIME = SPEED;
+const HOLDTIME = 1 * SPEED;
+const FADETIME = SPEED / 2;
 const SPAWNCHANCE = 0.2;
 let size = 40;
 let width = size * 11;

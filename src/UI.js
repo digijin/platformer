@@ -4,8 +4,21 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { MuiThemeProvider } from "material-ui/styles";
 
+// import { purple, green, red } from "material-ui/styles/colors";
+import { cyan500 } from "material-ui/styles/colors";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+
+const theme = getMuiTheme({
+	// palette: {
+	// 	textColor: cyan500
+	// }
+	// card: {
+	// 	padding: 2
+	// }
+});
 import Router from "UI/Router";
 import reducer from "UI/reducer";
 
@@ -26,7 +39,7 @@ export default class UI {
 	render = () => {
 		ReactDOM.render(
 			<Provider store={this.store}>
-				<MuiThemeProvider>
+				<MuiThemeProvider theme={theme}>
 					<div id="ui-container">
 						<Router engine={this.engine} />
 					</div>

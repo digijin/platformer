@@ -16,6 +16,15 @@ type Props = {
 	engine: Engine
 };
 
+const styles = {
+	cardHeader: {
+		padding: "2px"
+	},
+	cardText: {
+		padding: "2px"
+	}
+};
+
 class EditorPanel extends React.Component {
 	storage: Storage;
 	savename: string;
@@ -40,8 +49,9 @@ class EditorPanel extends React.Component {
 						actAsExpander={true}
 						avatar={avatar.src}
 						showExpandableButton={true}
+						style={styles.cardHeader}
 					/>
-					<CardText expandable={true}>
+					<CardText style={styles.cardText} expandable={true}>
 						Left mouse to draw<br />
 						Right mouse to erase<br />
 						WASD to navigate<br />
@@ -82,6 +92,7 @@ class EditorPanel extends React.Component {
 						actAsExpander={true}
 						avatar={avatar.src}
 						showExpandableButton={true}
+						style={styles.cardHeader}
 					/>
 					<CardActions expandable={true}>
 						{BlockTypes.map(b => (
@@ -104,6 +115,7 @@ class EditorPanel extends React.Component {
 						actAsExpander={true}
 						avatar={avatar.src}
 						showExpandableButton={true}
+						style={styles.cardHeader}
 					/>
 					<CardActions expandable={true}>
 						{saves.map(savename => {
