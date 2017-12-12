@@ -9,6 +9,14 @@ import type Engine from "Engine";
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
+import Avatar from "material-ui/Avatar";
+import KeyboardArrowLeft from "material-ui/svg-icons/hardware/keyboard-arrow-left";
+import FontIcon from "material-ui/FontIcon";
+import List from "material-ui/List/List";
+import ListItem from "material-ui/List/ListItem";
+import IconButton from "material-ui/IconButton";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 import avatar from "mech.png";
 
@@ -57,6 +65,15 @@ class EditorPanel extends React.Component {
 						WASD to navigate<br />
 						Shift to speed up scrolling<br />
 						Click below to expand the map size:
+						<IconButton
+							tooltip="add column"
+							style={{
+								border: "1px solid black",
+								"border-radius": "8px"
+							}}
+						>
+							<KeyboardArrowLeft />
+						</IconButton>
 					</CardText>
 					<CardActions expandable={true}>
 						<RaisedButton

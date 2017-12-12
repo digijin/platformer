@@ -8,7 +8,12 @@ export default class Storage {
 		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			this.adapter = new BrowserAdapter();
 		} else {
-			this.adapter = new ElectronAdapter("src/levels");
+			try {
+				this.adapter = new ElectronAdapter("src/levels");
+			} catch (e) {
+				//fallback in electron web mode for testing
+				this.adapter = new BrowserAdapter();
+			}
 		}
 	}
 	list(): Array<string> {
