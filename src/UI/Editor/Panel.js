@@ -71,10 +71,15 @@ class EditorPanel extends React.Component {
 	constructor() {
 		super();
 		this.storage = new Storage();
-		this.state = { expanded: { main: false }, savename: "" };
+		this.state = {
+			expanded: { main: false, block: true, save: false },
+			savename: ""
+		};
 	}
-	handleExpandClick = () => {
-		this.setState({ expanded: { main: !this.state.expanded.main } });
+	handleExpandClick = target => {
+		let newstate = { expanded: {} };
+		newstate.expanded[target] = !this.state.expanded[target];
+		this.setState(newstate);
 	};
 
 	render() {
@@ -94,7 +99,9 @@ class EditorPanel extends React.Component {
 							className={classnames(classes.expand, {
 								[classes.expandOpen]: this.state.expanded.main
 							})}
-							onClick={this.handleExpandClick}
+							onClick={() => {
+								this.handleExpandClick("main");
+							}}
 							aria-expanded={this.state.expanded.main}
 							aria-label="Show more"
 						>
@@ -113,134 +120,185 @@ class EditorPanel extends React.Component {
 							Shift to speed up scrolling<br />
 							Click below to expand the map size:
 						</CardContent>
-					</Collapse>
-					<CardActions>
-						<Tooltip title="Add Row Above" placement="bottom">
-							<Button
-								raised
-								style={styles.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addRowAbove();
-								}}
-							>
-								<KeyboardArrowUp />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Row Below" placement="bottom">
-							<Button
-								raised
-								style={styles.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addRowBelow();
-								}}
-							>
-								<KeyboardArrowDown />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Column to Left" placement="bottom">
-							<Button
-								raised
-								style={styles.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addColLeft();
-								}}
-							>
-								<KeyboardArrowLeft />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Column to Right" placement="bottom">
-							<Button
-								raised
-								style={styles.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addColRight();
-								}}
-							>
-								<KeyboardArrowRight />
-							</Button>
-						</Tooltip>
-					</CardActions>
-				</Card>
-				<Card id="blockSelector">
-					<CardHeader
-						title="Block Selector"
-						// subtitle={"selected Block = " + watcher.blockId}
-						style={styles.cardHeader}
-					/>
-					<CardActions>
-						{BlockTypes.map(b => (
-							<Tooltip title={b.name} placement="bottom">
+						<CardActions>
+							<Tooltip title="Add Row Above" placement="bottom">
 								<Button
 									raised
 									style={styles.iconButton}
-									color={
-										watcher.blockId == b.id ? "primary" : ""
-									}
 									onClick={() => {
-										watcher.blockId = b.id;
-										this.forceUpdate();
+										this.props.engine.grid.addRowAbove();
 									}}
-									key={b.id}
 								>
-									<img
-										style={{
-											width: "32px",
-											height: "32px"
-										}}
-										src={b.image.src}
-									/>
+									<KeyboardArrowUp />
 								</Button>
 							</Tooltip>
-						))}
-					</CardActions>
-				</Card>
-				<Card id="savepanel">
-					<CardHeader
-						title="Save Panel"
-						subtitle="Save and load levels"
-						style={styles.cardHeader}
-					/>
-					<CardActions>
-						{saves.map(savename => {
-							return (
+							<Tooltip title="Add Row Below" placement="bottom">
 								<Button
 									raised
-									key={savename + "loadbutton"}
+									style={styles.iconButton}
 									onClick={() => {
-										this.props.engine.grid.load(
-											this.storage.load(savename)
+										this.props.engine.grid.addRowBelow();
+									}}
+								>
+									<KeyboardArrowDown />
+								</Button>
+							</Tooltip>
+							<Tooltip
+								title="Add Column to Left"
+								placement="bottom"
+							>
+								<Button
+									raised
+									style={styles.iconButton}
+									onClick={() => {
+										this.props.engine.grid.addColLeft();
+									}}
+								>
+									<KeyboardArrowLeft />
+								</Button>
+							</Tooltip>
+							<Tooltip
+								title="Add Column to Right"
+								placement="bottom"
+							>
+								<Button
+									raised
+									style={styles.iconButton}
+									onClick={() => {
+										this.props.engine.grid.addColRight();
+									}}
+								>
+									<KeyboardArrowRight />
+								</Button>
+							</Tooltip>
+						</CardActions>
+					</Collapse>
+				</Card>
+				<Card id="blockSelector">
+					<CardActions disableActionSpacing>
+						<CardHeader
+							title="Block Selector"
+							// subtitle={"selected Block = " + watcher.blockId}
+							style={styles.cardHeader}
+						/>
+						<div className={classes.flexGrow} />
+						<IconButton
+							className={classnames(classes.expand, {
+								[classes.expandOpen]: this.state.expanded.block
+							})}
+							onClick={() => {
+								this.handleExpandClick("block");
+							}}
+							aria-expanded={this.state.expanded.block}
+							aria-label="Show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+					<Collapse
+						in={this.state.expanded.block}
+						timeout="auto"
+						unmountOnExit
+					>
+						<CardActions>
+							{BlockTypes.map(b => (
+								<Tooltip title={b.name} placement="bottom">
+									<Button
+										raised
+										style={styles.iconButton}
+										color={
+											watcher.blockId == b.id
+												? "primary"
+												: ""
+										}
+										onClick={() => {
+											watcher.blockId = b.id;
+											this.forceUpdate();
+										}}
+										key={b.id}
+									>
+										<img
+											style={{
+												width: "32px",
+												height: "32px"
+											}}
+											src={b.image.src}
+										/>
+									</Button>
+								</Tooltip>
+							))}
+						</CardActions>
+					</Collapse>
+				</Card>
+
+				<Card id="savepanel">
+					<CardActions disableActionSpacing>
+						<CardHeader
+							title="Save Panel"
+							style={styles.cardHeader}
+						/>
+						<div className={classes.flexGrow} />
+						<IconButton
+							className={classnames(classes.expand, {
+								[classes.expandOpen]: this.state.expanded.save
+							})}
+							onClick={() => {
+								this.handleExpandClick("save");
+							}}
+							aria-expanded={this.state.expanded.save}
+							aria-label="Show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+
+					<Collapse
+						in={this.state.expanded.save}
+						timeout="auto"
+						unmountOnExit
+					>
+						<CardActions>
+							{saves.map(savename => {
+								return (
+									<Button
+										raised
+										key={savename + "loadbutton"}
+										onClick={() => {
+											this.props.engine.grid.load(
+												this.storage.load(savename)
+											);
+										}}
+									>
+										{savename}
+									</Button>
+								);
+							})}
+						</CardActions>
+						<CardContent>
+							<TextField
+								// hintText="Enter filename here"
+								// floatingLabelText="Save Name"
+								type="text"
+								value={this.state.savename}
+								onChange={this.updateSavename}
+							/>
+							<br />
+							<Tooltip title="Save" placement="bottom">
+								<Button
+									raised
+									style={styles.iconButton}
+									onClick={() => {
+										this.storage.save(
+											this.state.savename,
+											this.props.engine.grid.save()
 										);
 									}}
 								>
-									{savename}
+									<Save />
 								</Button>
-							);
-						})}
-					</CardActions>
-					<CardContent>
-						<TextField
-							// hintText="Enter filename here"
-							// floatingLabelText="Save Name"
-							type="text"
-							value={this.state.savename}
-							onChange={this.updateSavename}
-						/>
-						<br />
-						<Tooltip title="Save" placement="bottom">
-							<Button
-								raised
-								style={styles.iconButton}
-								onClick={() => {
-									this.storage.save(
-										this.state.savename,
-										this.props.engine.grid.save()
-									);
-								}}
-							>
-								<Save />
-							</Button>
-						</Tooltip>
-					</CardContent>
+							</Tooltip>
+						</CardContent>
+					</Collapse>
 				</Card>
 			</div>
 		);
