@@ -244,8 +244,14 @@ export default class Grid extends GameObject {
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.grid.tile.width * config.grid.width;
 		canvas.height = config.grid.tile.height * config.grid.height;
+
 		// FLOWHACK
 		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+		let offset = new Point({
+			x: canvas.width * tile.x,
+			y: canvas.height * tile.y
+		});
+		ctx.translate(offset.x, offset.y);
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
 				let block = this.getBlock({
@@ -256,11 +262,11 @@ export default class Grid extends GameObject {
 					if (!block.isEmpty()) {
 						let im = block.getType().image;
 						ctx.filter = "brightness(100%)";
-						this.drawTile(ctx, im, x, y);
+						this.drawTile(ctx, im, x, y, offset);
 					} else if (block.backgroundType !== "0") {
 						let im = block.getBackgroundType().image;
 						ctx.filter = "brightness(50%)";
-						this.drawTile(ctx, im, x, y);
+						this.drawTile(ctx, im, x, y, offset);
 					}
 				}
 				// if (block && block.backgroundType !== "0") {
@@ -287,18 +293,26 @@ export default class Grid extends GameObject {
 		return canvas;
 	}
 
-	drawTile(ctx, im, x, y) {
-		ctx.drawImage(
-			im,
-			0,
-			0,
-			im.width,
-			im.height,
-			x * config.grid.width,
-			y * config.grid.height,
+	drawTile(ctx, im, x, y, offset) {
+		let pattern = ctx.createPattern(im, "repeat");
+		ctx.fillStyle = pattern;
+		ctx.fillRect(
+			x * config.grid.width - offset.x,
+			y * config.grid.height - offset.y,
 			config.grid.width,
 			config.grid.height
 		);
+		// ctx.drawImage(
+		// 	im,
+		// 	0,
+		// 	0,
+		// 	im.width,
+		// 	im.height,
+		// 	x * config.grid.width,
+		// 	y * config.grid.height,
+		// 	config.grid.width,
+		// 	config.grid.height
+		// );
 	}
 
 	save(): string {

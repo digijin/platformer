@@ -46,7 +46,7 @@ module.exports = [
 					loader: "html-loader"
 				},
 				{
-					test: /\.png$/,
+					test: /\.(png|jpg)$/,
 					loader: "img-element-loader!url-loader"
 				},
 				{
