@@ -284,12 +284,12 @@ export default class Grid extends GameObject {
 		}
 		ctx.strokeStyle = "rgba(0,0,0,0.1)";
 		ctx.lineWidth = 1;
-		ctx.strokeRect(0, 0, canvas.width, canvas.height);
+		ctx.strokeRect(-offset.x, -offset.y, canvas.width, canvas.height);
 		//watermark
 		ctx.font = "20px Verdana";
 		// Fill with gradient
 		ctx.fillStyle = "rgba(0,0,0,0.1)";
-		ctx.fillText(tile.x + "," + tile.y, 8, 25);
+		ctx.fillText(tile.x + "," + tile.y, 8 - offset.x, 25 - offset.y);
 		return canvas;
 	}
 
