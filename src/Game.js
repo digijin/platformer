@@ -12,6 +12,7 @@ import UI from "UI";
 
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
+import Editor from "Scene/Editor";
 import Logo from "Scene/Logo";
 
 // FLOWHACK
@@ -30,8 +31,18 @@ export default class Game {
 		//Engine.getInstance();
 		this.engine.init(container);
 
+		let query = window.location.href.substr(
+			window.location.href.indexOf("?") + 1
+		);
+		switch (query) {
+			case "editor":
+				this.engine.startScene(new Editor());
+				break;
+			default:
+				this.engine.startScene(new Logo());
+		}
+
 		// this.engine.startScene(new Level());
-		this.engine.startScene(new Logo());
 
 		this.engine.update(); //starts
 	}
