@@ -59,33 +59,10 @@ export default class Missile extends Projectile {
 		this.remoteControl = true;
 
 		//CHECK GRID
-		let block = this.engine.grid.getBlockAtPoint(this.position);
-		if (block && !block.isEmpty()) {
-			this.explode();
-			let r = 15;
-			let rect = new Rect({
-				t: this.position.y - r,
-				r: this.position.x + r,
-				b: this.position.y + r,
-				l: this.position.x - r
-			});
-			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
-			blocks.forEach(b => b.damage(10 + Math.random() * 100));
-		}
+		this.checkGrid();
 		//CHECK ENEMIES
 		//USING EVERY SO I DONT EXPLODE MULTIPLE TIMES
-		this.engine.objectsTagged("actor").every((o: GameObject) => {
-			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
-				if (a.getBoundingRect().contains(this.position)) {
-					this.explode();
-					// a.explode();
-					a.damage(30 + Math.random() * 75);
-					return false;
-				}
-			}
-			return true; //keep looking in the every
-		});
+		this.checkActors();
 
 		//smoke trail
 		// this.engine.register(new Smoke({ position: this.position.clone() }));
@@ -138,4 +115,35 @@ export default class Missile extends Projectile {
 			{ x: 0.2, y: 0.5 }
 		);
 	};
+
+	checkActors() {
+		this.engine.objectsTagged("actor").every((o: GameObject) => {
+			if (o !== this.owner) {
+				let a: Actor = ((o: any): Actor => ); //RECAST
+				if (a.getBoundingRect().contains(this.position)) {
+					this.explode();
+					// a.explode();
+					a.damage(30 + Math.random() * 75);
+					return false;
+				}
+			}
+			return true;
+		});
+	}
+
+	checkGrid() {
+		let block = this.engine.grid.getBlockAtPoint(this.position);
+		if (block && !block.isEmpty()) {
+			this.explode();
+			let r = 15;
+			let rect = new Rect({
+				t: this.position.y - r,
+				r: this.position.x + r,
+				b: this.position.y + r,
+				l: this.position.x - r
+			});
+			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+			blocks.forEach(b => b.damage(10 + Math.random() * 100));
+		}
+	}
 }

@@ -18,7 +18,7 @@ let firing = false;
 let missile = {
 	firing: false,
 	maxEnergy: 800,
-	reloadTime: 0.025,
+	reloadTime: 0.05,
 	reload: 0,
 	regenSpeed: 10,
 	regenBaseSpeed: 150,
