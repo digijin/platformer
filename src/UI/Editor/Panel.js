@@ -8,6 +8,7 @@ import type Engine from "Engine";
 
 // import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 
+import MainMenu from "Scene/MainMenu";
 import { withStyles } from "material-ui/styles";
 
 import classnames from "classnames";
@@ -120,6 +121,20 @@ class EditorPanel extends React.Component {
 						unmountOnExit
 					>
 						<CardContent className={classes.content}>
+							<Tooltip title="exit to menu" placement="bottom">
+								<Button
+									raised
+									className={classes.iconButton}
+									onClick={() => {
+										this.props.engine.startScene(
+											new MainMenu()
+										);
+									}}
+								>
+									go back to menu<KeyboardArrowDown />
+								</Button>
+							</Tooltip>
+							<br />
 							Left mouse to draw<br />
 							Right mouse to erase<br />
 							WASD to navigate<br />
