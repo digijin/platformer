@@ -4,14 +4,11 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { MuiThemeProvider } from "material-ui/styles";
+import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 
 // import { purple, green, red } from "material-ui/styles/colors";
-import { cyan500 } from "material-ui/styles/colors";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
 
-const theme = getMuiTheme({
+const theme = createMuiTheme({
 	// palette: {
 	// 	textColor: cyan500
 	// }
