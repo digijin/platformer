@@ -32,21 +32,18 @@ type Props = {
 };
 
 const styles = {
-	cardHeader: {
-		padding: "4px"
-	},
-	cardText: {
-		padding: "8px"
-		// border: "1px solid grey"
-	},
-	iconButton: { minWidth: "36px", padding: "4px" }
+	// cardHeader: {
+	// 	padding: "4px"
+	// },
+	// cardText: {
+	// 	padding: "8px"
+	// 	// border: "1px solid grey"
+	// },
 };
 const stylesCalc = theme => ({
-	card: {
-		maxWidth: 400
-	},
-	media: {
-		height: 194
+	iconButton: { minWidth: "36px", padding: "4px" },
+	header: {
+		height: 40
 	},
 	expand: {
 		transform: "rotate(0deg)",
@@ -57,7 +54,6 @@ const stylesCalc = theme => ({
 	expandOpen: {
 		transform: "rotate(180deg)"
 	},
-	avatar: {},
 	flexGrow: {
 		flex: "1 1 auto"
 	}
@@ -92,8 +88,11 @@ class EditorPanel extends React.Component {
 		return (
 			<div id="editor-panel">
 				<Card>
-					<CardActions disableActionSpacing>
-						<CardHeader title="Editor" style={styles.cardHeader} />
+					<CardActions
+						className={classes.header}
+						disableActionSpacing
+					>
+						<CardHeader title="Editor" />
 						<div className={classes.flexGrow} />
 						<IconButton
 							className={classnames(classes.expand, {
@@ -113,18 +112,16 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardContent style={styles.cardText}>
+						<CardContent>
 							Left mouse to draw<br />
 							Right mouse to erase<br />
 							WASD to navigate<br />
 							Shift to speed up scrolling<br />
-							Click below to expand the map size:
-						</CardContent>
-						<CardActions>
+							Click below to expand the map size:<br />
 							<Tooltip title="Add Row Above" placement="bottom">
 								<Button
 									raised
-									style={styles.iconButton}
+									className={classes.iconButton}
 									onClick={() => {
 										this.props.engine.grid.addRowAbove();
 									}}
@@ -135,7 +132,7 @@ class EditorPanel extends React.Component {
 							<Tooltip title="Add Row Below" placement="bottom">
 								<Button
 									raised
-									style={styles.iconButton}
+									className={classes.iconButton}
 									onClick={() => {
 										this.props.engine.grid.addRowBelow();
 									}}
@@ -149,7 +146,7 @@ class EditorPanel extends React.Component {
 							>
 								<Button
 									raised
-									style={styles.iconButton}
+									className={classes.iconButton}
 									onClick={() => {
 										this.props.engine.grid.addColLeft();
 									}}
@@ -163,7 +160,7 @@ class EditorPanel extends React.Component {
 							>
 								<Button
 									raised
-									style={styles.iconButton}
+									className={classes.iconButton}
 									onClick={() => {
 										this.props.engine.grid.addColRight();
 									}}
@@ -171,15 +168,17 @@ class EditorPanel extends React.Component {
 									<KeyboardArrowRight />
 								</Button>
 							</Tooltip>
-						</CardActions>
+						</CardContent>
 					</Collapse>
 				</Card>
 				<Card id="blockSelector">
-					<CardActions disableActionSpacing>
+					<CardActions
+						className={classes.header}
+						disableActionSpacing
+					>
 						<CardHeader
 							title="Block Selector"
 							// subtitle={"selected Block = " + watcher.blockId}
-							style={styles.cardHeader}
 						/>
 						<div className={classes.flexGrow} />
 						<IconButton
@@ -200,12 +199,12 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardActions>
+						<CardContent>
 							{BlockTypes.map(b => (
 								<Tooltip title={b.name} placement="bottom">
 									<Button
 										raised
-										style={styles.iconButton}
+										className={classes.iconButton}
 										color={
 											watcher.blockId == b.id
 												? "primary"
@@ -227,16 +226,16 @@ class EditorPanel extends React.Component {
 									</Button>
 								</Tooltip>
 							))}
-						</CardActions>
+						</CardContent>
 					</Collapse>
 				</Card>
 
 				<Card id="savepanel">
-					<CardActions disableActionSpacing>
-						<CardHeader
-							title="Save Panel"
-							style={styles.cardHeader}
-						/>
+					<CardActions
+						className={classes.header}
+						disableActionSpacing
+					>
+						<CardHeader title="Save Panel" />
 						<div className={classes.flexGrow} />
 						<IconButton
 							className={classnames(classes.expand, {
@@ -286,7 +285,7 @@ class EditorPanel extends React.Component {
 							<Tooltip title="Save" placement="bottom">
 								<Button
 									raised
-									style={styles.iconButton}
+									className={classes.iconButton}
 									onClick={() => {
 										this.storage.save(
 											this.state.savename,
