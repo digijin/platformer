@@ -248,8 +248,8 @@ export default class Grid extends GameObject {
 		// FLOWHACK
 		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
 		let offset = new Point({
-			x: canvas.width * tile.x,
-			y: canvas.height * tile.y
+			x: -canvas.width * tile.x,
+			y: -canvas.height * tile.y
 		});
 		ctx.translate(offset.x, offset.y);
 		for (let x = 0; x < config.grid.tile.width; x++) {
