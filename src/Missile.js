@@ -23,6 +23,11 @@ export default class Missile extends Projectile {
 	remoteControl: boolean;
 	position: Point;
 	trailRenderer: TrailRenderer;
+
+	constructor(params: Object) {
+		super(params);
+		this.tag("missile");
+	}
 	init(engine: Engine) {
 		super.init(engine);
 		this.trailRenderer = new TrailRenderer({
@@ -119,7 +124,7 @@ export default class Missile extends Projectile {
 	checkActors() {
 		this.engine.objectsTagged("actor").every((o: GameObject) => {
 			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor => ); //RECAST
+				let a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
 					// a.explode();

@@ -1,3 +1,4 @@
+//@flow
 import Game from "Game";
 
 import testGen from "jasmine-es6-generator";
@@ -12,17 +13,23 @@ function sleep(ms) {
 
 describe("functional", () => {
 	let container;
+	let game;
 	beforeAll(function() {
+		// FLOWHACK
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 15 * 1000;
 		container = document.createElement("div");
 		// container.style =
 		// 	"position:absolute; left: 0px; top: 0px; display:block; width: 100%; height: 100%; z-index:10000";
+
+		// FLOWHACK
 		document.body.appendChild(container);
 		game = new Game(container);
 		// mouseUtil.setCanvas(container.childNodes[0]);
 	});
 	afterAll(function() {
 		game.destroy();
+
+		// FLOWHACK
 		document.body.removeChild(container);
 	});
 	describe("boot", () => {
@@ -97,20 +104,34 @@ describe("functional", () => {
 				}
 			})
 		);
+		it("should have bullets in the air", () => {
+			expect(game.engine.objectsTagged("bullet").length).toBeGreaterThan(
+				0
+			);
+		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 0 });
+			mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should start firing misiles", () => {
-			mouseUtil.mouseEvent("mousedown", { button: 2 });
+			mouseUtil.mouseEvent(
+				"mousedown",
+				{ button: 2 },
+				game.engine.canvas
+			);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
+		it("should have missiles in flight", () => {
+			expect(game.engine.objectsTagged("missile").length).toBeGreaterThan(
+				0
+			);
+		});
 		it("should end firing misiles", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 2 });
+			mouseUtil.mouseEvent("mouseup", { button: 2 }, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
@@ -145,23 +166,31 @@ describe("functional", () => {
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent("mousedown", { button: 2 });
+			mouseUtil.mouseEvent(
+				"mousedown",
+				{ button: 2 },
+				game.engine.canvas
+			);
 		});
 
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 2 });
+			mouseUtil.mouseEvent("mouseup", { button: 2 }, game.engine.canvas);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent("mousedown", { button: 0 });
+			mouseUtil.mouseEvent(
+				"mousedown",
+				{ button: 0 },
+				game.engine.canvas
+			);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 0 });
+			mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);

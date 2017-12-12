@@ -10,6 +10,8 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const DELAY = 500;
+
 describe("editor.karma functional", () => {
 	let container;
 	let game;
@@ -28,7 +30,7 @@ describe("editor.karma functional", () => {
 	});
 	describe("boot", () => {
 		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 100);
+			setTimeout(done, DELAY);
 		});
 	});
 	describe("wait out splash", () => {
@@ -45,7 +47,7 @@ describe("editor.karma functional", () => {
 			mouseUtil.clickSelector("#editor");
 		});
 		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 100);
+			setTimeout(done, DELAY);
 		});
 	});
 	describe("input", () => {
@@ -88,7 +90,7 @@ describe("editor.karma functional", () => {
 					game.engine.canvas
 				);
 				done();
-			}, 100);
+			}, DELAY);
 		});
 		it("should add background to tiles under cursor", done => {
 			mouseUtil.mouseEvent(
@@ -112,7 +114,7 @@ describe("editor.karma functional", () => {
 					game.engine.canvas
 				);
 				done();
-			}, 100);
+			}, DELAY);
 		});
 	});
 });

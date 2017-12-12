@@ -22,6 +22,7 @@ export default class Bullet extends GameObject {
 		owner: Actor
 	}) {
 		super(params);
+		this.tag("bullet");
 		this.speed = 200;
 		Object.assign(this, params);
 		this.time = 1;
