@@ -41,9 +41,16 @@ const styles = {
 	// },
 };
 const stylesCalc = theme => ({
+	card: {
+		maxWidth: 200,
+		fontFamily: "Roboto"
+	},
 	iconButton: { minWidth: "36px", padding: "4px" },
 	header: {
-		height: 40
+		height: 24
+	},
+	content: {
+		padding: 8
 	},
 	expand: {
 		transform: "rotate(0deg)",
@@ -87,12 +94,12 @@ class EditorPanel extends React.Component {
 		let saves = this.storage.list();
 		return (
 			<div id="editor-panel">
-				<Card>
+				<Card className={classes.card}>
 					<CardActions
 						className={classes.header}
 						disableActionSpacing
 					>
-						<CardHeader title="Editor" />
+						Editor
 						<div className={classes.flexGrow} />
 						<IconButton
 							className={classnames(classes.expand, {
@@ -112,7 +119,7 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardContent>
+						<CardContent className={classes.content}>
 							Left mouse to draw<br />
 							Right mouse to erase<br />
 							WASD to navigate<br />
@@ -171,15 +178,12 @@ class EditorPanel extends React.Component {
 						</CardContent>
 					</Collapse>
 				</Card>
-				<Card id="blockSelector">
+				<Card className={classes.card} id="blockSelector">
 					<CardActions
 						className={classes.header}
 						disableActionSpacing
 					>
-						<CardHeader
-							title="Block Selector"
-							// subtitle={"selected Block = " + watcher.blockId}
-						/>
+						Block Selector
 						<div className={classes.flexGrow} />
 						<IconButton
 							className={classnames(classes.expand, {
@@ -199,7 +203,7 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardContent>
+						<CardContent className={classes.content}>
 							{BlockTypes.map(b => (
 								<Tooltip title={b.name} placement="bottom">
 									<Button
@@ -230,12 +234,12 @@ class EditorPanel extends React.Component {
 					</Collapse>
 				</Card>
 
-				<Card id="savepanel">
+				<Card className={classes.card} id="savepanel">
 					<CardActions
 						className={classes.header}
 						disableActionSpacing
 					>
-						<CardHeader title="Save Panel" />
+						Save Panel
 						<div className={classes.flexGrow} />
 						<IconButton
 							className={classnames(classes.expand, {
@@ -256,7 +260,7 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardActions>
+						<CardActions className={classes.content}>
 							{saves.map(savename => {
 								return (
 									<Button
