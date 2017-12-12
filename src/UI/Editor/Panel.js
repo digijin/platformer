@@ -8,6 +8,11 @@ import type Engine from "Engine";
 
 // import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 
+import { withStyles } from "material-ui/styles";
+
+import classnames from "classnames";
+import Collapse from "material-ui/transitions/Collapse";
+import Typography from "material-ui/Typography";
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 import IconButton from "material-ui/IconButton";
 import Button from "material-ui/Button";
@@ -16,6 +21,7 @@ import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
 import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
+import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Save from "material-ui-icons/Save";
 import Tooltip from "material-ui/Tooltip";
 
@@ -35,17 +41,44 @@ const styles = {
 	},
 	iconButton: { minWidth: "36px", padding: "4px" }
 };
+const stylesCalc = theme => ({
+	card: {
+		maxWidth: 400
+	},
+	media: {
+		height: 194
+	},
+	expand: {
+		transform: "rotate(0deg)",
+		transition: theme.transitions.create("transform", {
+			duration: theme.transitions.duration.shortest
+		})
+	},
+	expandOpen: {
+		transform: "rotate(180deg)"
+	},
+	avatar: {},
+	flexGrow: {
+		flex: "1 1 auto"
+	}
+});
 
 class EditorPanel extends React.Component {
+	// state = { expanded: { main: false } };
 	storage: Storage;
 	savename: string;
 	props: Props;
 	constructor() {
 		super();
 		this.storage = new Storage();
-		this.state = { savename: "" };
+		this.state = { expanded: { main: false }, savename: "" };
 	}
+	handleExpandClick = () => {
+		this.setState({ expanded: { main: !this.state.expanded.main } });
+	};
+
 	render() {
+		const { classes } = this.props;
 		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
 		if (!watcher) {
 			throw new Error("no watcher");
@@ -54,22 +87,33 @@ class EditorPanel extends React.Component {
 		return (
 			<div id="editor-panel">
 				<Card>
-					<CardHeader
-						title="Editor"
-						subtitle="expand for information"
-						// actAsExpander={true}
-						// showExpandableButton={true}
-						style={styles.cardHeader}
-					/>
-					<CardContent style={styles.cardText}>
-						Left mouse to draw<br />
-						Right mouse to erase<br />
-						WASD to navigate<br />
-						Shift to speed up scrolling<br />
-						Click below to expand the map size:
-					</CardContent>
-				</Card>
-				<Card>
+					<CardActions disableActionSpacing>
+						<CardHeader title="Editor" style={styles.cardHeader} />
+						<div className={classes.flexGrow} />
+						<IconButton
+							className={classnames(classes.expand, {
+								[classes.expandOpen]: this.state.expanded.main
+							})}
+							onClick={this.handleExpandClick}
+							aria-expanded={this.state.expanded.main}
+							aria-label="Show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+					<Collapse
+						in={this.state.expanded.main}
+						timeout="auto"
+						unmountOnExit
+					>
+						<CardContent style={styles.cardText}>
+							Left mouse to draw<br />
+							Right mouse to erase<br />
+							WASD to navigate<br />
+							Shift to speed up scrolling<br />
+							Click below to expand the map size:
+						</CardContent>
+					</Collapse>
 					<CardActions>
 						<Tooltip title="Add Row Above" placement="bottom">
 							<Button
@@ -120,18 +164,18 @@ class EditorPanel extends React.Component {
 				<Card id="blockSelector">
 					<CardHeader
 						title="Block Selector"
-						subtitle={"selected Block = " + watcher.blockId}
-						actAsExpander={true}
-						showExpandableButton={true}
+						// subtitle={"selected Block = " + watcher.blockId}
 						style={styles.cardHeader}
 					/>
-					<CardActions expandable={true}>
+					<CardActions>
 						{BlockTypes.map(b => (
 							<Tooltip title={b.name} placement="bottom">
 								<Button
 									raised
 									style={styles.iconButton}
-									// primary={watcher.blockId == b.id}
+									color={
+										watcher.blockId == b.id ? "primary" : ""
+									}
 									onClick={() => {
 										watcher.blockId = b.id;
 										this.forceUpdate();
@@ -154,11 +198,9 @@ class EditorPanel extends React.Component {
 					<CardHeader
 						title="Save Panel"
 						subtitle="Save and load levels"
-						actAsExpander={true}
-						showExpandableButton={true}
 						style={styles.cardHeader}
 					/>
-					<CardActions expandable={true}>
+					<CardActions>
 						{saves.map(savename => {
 							return (
 								<Button
@@ -175,7 +217,7 @@ class EditorPanel extends React.Component {
 							);
 						})}
 					</CardActions>
-					<CardContent expandable={true}>
+					<CardContent>
 						<TextField
 							// hintText="Enter filename here"
 							// floatingLabelText="Save Name"
@@ -229,4 +271,6 @@ class EditorPanel extends React.Component {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(EditorPanel);
-export default EditorPanel;
+// export default EditorPanel;
+
+export default withStyles(stylesCalc)(EditorPanel);
