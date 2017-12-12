@@ -10,11 +10,7 @@ describe("Storage.spec.js", () => {
 		expect(Storage).toBeDefined();
 	});
 	it("should choose right process", () => {
-		if (
-			process.browser &&
-			navigator.userAgent.indexOf("Electron") == -1 &&
-			eval("require") == undefined
-		) {
+		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
 			expect(localStorage).toBeDefined();
 			expect(storage.adapter.constructor.name).toBe("BrowserAdapter");
 		} else {
