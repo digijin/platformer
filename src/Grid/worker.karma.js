@@ -1,18 +1,36 @@
 import { setTimeout } from "core-js/library/web/timers";
 
 fdescribe("webworker", () => {
+	let worker;
 	it("should be defined", () => {
 		expect(window.Worker).toBeDefined();
+		worker = new Worker("/base/src/Grid/worker.js");
 	});
-	let worker;
-	it("should load worker file and get a message", done => {
+	afterEach(() => {
+		worker.terminate();
+	});
+	it("should load worker file and get availability", done => {
 		worker = new Worker("/base/src/Grid/worker.js");
 		worker.onmessage = e => {
-			console.log("received message from worker", e.data);
+			expect(e.data).toBe("available");
 			done();
 		};
-		console.log("sending message to worker");
-		worker.postMessage({ action: "repeat", data: "abc123" });
+		worker.postMessage({ action: "availability" });
 	});
-	// it("should post a message", () => {});
+	it("should return a message", () => {
+		worker = new Worker("/base/src/Grid/worker.js");
+		worker.onmessage = e => {
+			expect(e.data).toBe("abc123");
+			done();
+		};
+		worker.postMessage({ repeat: "abc123" });
+	});
+	it("should return a fucking canvas", () => {
+		worker = new Worker("/base/src/Grid/worker.js");
+		worker.onmessage = e => {
+			expect(e.data).toBe("abc123");
+			done();
+		};
+		worker.postMessage({ repeat: document.createElement("canvas") });
+	});
 });

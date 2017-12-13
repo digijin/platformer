@@ -28,6 +28,7 @@ module.exports = function(config) {
 		browser: { fs: false },
 		exclude: [],
 		preprocessors: {
+			"src/Grid/worker.js": ["webpack", "sourcemap"],
 			"src/**/!(*.spec|*.karma|worker).js": ["electron", "coverage"],
 			"**/*karma.js": ["webpack", "sourcemap"],
 			"**/*spec.js": ["webpack", "sourcemap"]
