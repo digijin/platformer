@@ -34,7 +34,7 @@ export default class Missile extends Projectile {
 		this.trailRenderer = new TrailRenderer({
 			target: this,
 			offset: new Point(),
-			length: 50
+			length: 30
 		});
 		this.engine.register(this.trailRenderer);
 	}
