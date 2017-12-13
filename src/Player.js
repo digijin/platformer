@@ -84,6 +84,9 @@ export default class Player extends Actor {
 
 		this.leg = new Leg({ parent: this });
 	}
+	damage() {
+		//overrides parent, does nothing... invincible!
+	}
 
 	init(engine: Engine) {
 		super.init(engine);

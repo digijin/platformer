@@ -1,5 +1,7 @@
 import type Player from "Player";
-
+import Missile from "Missile";
+const CLOSEST_DISTANCE = 100;
+const FARTHEST_DISTANCE = 400;
 export default function* agro(
 	enemy: Enemy,
 	engine: Engine,
@@ -7,9 +9,33 @@ export default function* agro(
 ): Generator<*, *, *> {
 	const dontFall = true;
 	let direction = 1;
+	let firingCooldown = 0;
 	while (true) {
+		firingCooldown -= engine.deltaTime;
 		direction = player.position.x < enemy.position.x ? -1 : 1;
+		let distance = player.position.distanceTo(enemy.position);
 		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
+		if (distance < CLOSEST_DISTANCE) {
+			hDelta = -hDelta;
+		} else if (distance < FARTHEST_DISTANCE) {
+			hDelta = 0;
+			// FIRING RANGE
+			if (firingCooldown < 0) {
+				firingCooldown = 1;
+				engine.register(
+					new Missile({
+						owner: enemy,
+						direction: -Math.PI / 2,
+						speed: 10,
+						position: enemy.position.add({
+							x: 0,
+							y: -enemy.size.h
+						}),
+						target: player.position.clone()
+					})
+				);
+			}
+		}
 		if (!enemy.canMoveHori(hDelta)) {
 			if (enemy.v == 0) {
 				//jump

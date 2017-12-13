@@ -27,6 +27,7 @@ export default class Missile extends Projectile {
 	constructor(params: Object) {
 		super(params);
 		this.tag("missile");
+		this.maxhp = this.hp = 1000;
 	}
 	init(engine: Engine) {
 		super.init(engine);
@@ -61,7 +62,7 @@ export default class Missile extends Projectile {
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
 
-		this.remoteControl = true;
+		this.remoteControl = false;
 
 		//CHECK GRID
 		this.checkGrid();
