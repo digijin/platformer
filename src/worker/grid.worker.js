@@ -9,6 +9,9 @@ self.addEventListener(
 			case "repeat":
 				self.postMessage(data.data);
 				break;
+			case "renderTile":
+				break;
+
 			default:
 				self.postMessage({ error: "action required" });
 		}

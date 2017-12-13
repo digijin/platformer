@@ -87,6 +87,7 @@ const RENDERTIME = 12;
 const HOLDTIME = 1 * SPEED;
 const FADETIME = SPEED / 2;
 const SPAWNCHANCE = 0.2;
+const SPIKE_SPEED = 8;
 let size = 40;
 let width = size * 11;
 let height = size * 5;
@@ -279,7 +280,10 @@ class Spike extends GameObject {
 			}
 		}
 
-		let to = this.position.move(this.direction, this.engine.deltaTime * 10);
+		let to = this.position.move(
+			this.direction,
+			this.engine.deltaTime * SPIKE_SPEED
+		);
 
 		this.ctx.strokeStyle = this.color;
 		this.ctx.lineWidth = 1;
