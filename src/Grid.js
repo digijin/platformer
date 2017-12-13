@@ -261,7 +261,7 @@ export default class Grid extends GameObject {
 				if (block) {
 					if (!block.isEmpty()) {
 						let im = block.getType().image;
-						ctx.filter = "brightness(100%)";
+						ctx.filter = "none";
 						this.drawTile(ctx, im, x, y, offset);
 					} else if (block.backgroundType !== "0") {
 						let im = block.getBackgroundType().image;
