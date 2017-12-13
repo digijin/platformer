@@ -30,8 +30,8 @@ export default {
 	fpsmeter: {
 		graph: 1,
 		theme: "transparent",
-		heat: 1,
-		history: 50,
+		heat: 0,
+		history: 20,
 		left: "auto",
 		right: "5px"
 	},
