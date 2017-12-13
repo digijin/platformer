@@ -220,7 +220,11 @@ class EditorPanel extends React.Component {
 					>
 						<CardContent className={classes.content}>
 							{BlockTypes.map(b => (
-								<Tooltip title={b.name} placement="bottom">
+								<Tooltip
+									key={b.id}
+									title={b.name}
+									placement="bottom"
+								>
 									<Button
 										raised
 										className={classes.iconButton}
@@ -233,7 +237,6 @@ class EditorPanel extends React.Component {
 											watcher.blockId = b.id;
 											this.forceUpdate();
 										}}
-										key={b.id}
 									>
 										<img
 											style={{
