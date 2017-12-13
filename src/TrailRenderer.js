@@ -30,8 +30,9 @@ export default class TrailRenderer extends GameObject {
 		} else {
 			//no target, die.
 
+			this.history.unshift(null);
 			this.history.pop();
-			if (this.history.length == 0) {
+			if (this.history[this.history.length - 1] == null) {
 				this.destroy();
 			}
 		}
@@ -58,16 +59,18 @@ export default class TrailRenderer extends GameObject {
 			// { r: 0.3, g: 0.3, b: 0.3, a: 0.1 },
 			// { r: 0.3, g: 0.3, b: 0.3, a: 0 }
 		];
-		for (let i = 1; i < this.history.length; i++) {
+		for (let i = this.history.length - 1; i > 0; i--) {
 			let pc = i / this.length; //percent
 			let ipc = 1 - pc; //inverse percent
 			let rgba = RGBA.fromStops(stops, pc).toString();
-			this.engine.ctx.drawLine(
-				this.history[i - 1],
-				this.history[i],
-				rgba,
-				5 + pc * 5
-			);
+			if (this.history[i - 1] && this.history[i]) {
+				this.engine.ctx.drawLine(
+					this.history[i - 1],
+					this.history[i],
+					rgba,
+					1 + (1 - ipc * ipc * ipc) * 10
+				);
+			}
 		}
 		this.engine.ctx.context.lineCap = "butt";
 		this.engine.ctx.context.setLineDash([]);
