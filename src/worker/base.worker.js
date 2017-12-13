@@ -7,7 +7,7 @@ self.addEventListener(
 				self.postMessage("available");
 				break;
 			case "repeat":
-				self.postMessage("did you say " + data.data);
+				self.postMessage(data.data);
 				break;
 			default:
 				self.postMessage({ error: "action required" });
