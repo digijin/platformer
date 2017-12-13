@@ -47,7 +47,7 @@ describe("TrailRenderer", () => {
 			expect(trailRenderer.history.length).toBe(10);
 			trailRenderer.die();
 			trailRenderer.update();
-			expect(trailRenderer.history.length).toBe(9);
+			expect(trailRenderer.history[0]).toBe(null);
 
 			spyOn(trailRenderer, "destroy");
 			for (let i = 0; i < 10; i++) {
