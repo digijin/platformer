@@ -2,7 +2,7 @@ import { setTimeout } from "core-js/library/web/timers";
 
 const workerPath = "/base/src/worker/base.worker.js";
 
-fdescribe("worker.karma.js webworker basics", () => {
+describe("worker.karma.js webworker basics", () => {
 	let worker;
 	it("should be defined", () => {
 		expect(window.Worker).toBeDefined();
