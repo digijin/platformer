@@ -5,23 +5,14 @@ fdescribe("webworker", () => {
 		expect(window.Worker).toBeDefined();
 	});
 	let worker;
-	it("sohuld load worker file and get a message", done => {
+	it("should load worker file and get a message", done => {
 		worker = new Worker("/base/src/Grid/worker.js");
 		worker.onmessage = e => {
-			console.log("received message from worker");
+			console.log("received message from worker", e.data);
 			done();
 		};
-		worker.addEventListener(
-			"message",
-			function(e) {
-				console.log("Worker said: ", e.data);
-			},
-			false
-		);
-		setTimeout(() => {
-			console.log("sending message to worker");
-			worker.postMessage("abc123");
-		}, 1000);
+		console.log("sending message to worker");
+		worker.postMessage({ action: "repeat", data: "abc123" });
 	});
 	// it("should post a message", () => {});
 });
