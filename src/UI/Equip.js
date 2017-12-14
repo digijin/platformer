@@ -43,6 +43,10 @@ const styles = theme => ({
 		padding: "10px",
 		fontSize: "36px",
 		color: GREEN
+	},
+	button: {
+		backgroundColor: DARKGREEN,
+		color: GREEN
 	}
 });
 export class Equip extends React.Component {
@@ -55,6 +59,18 @@ export class Equip extends React.Component {
 		return (
 			<div className={classes.screen}>
 				<div className={classes.title}>Mech Equip Screen</div>
+				<Tooltip title="exit to menu" placement="bottom">
+					<Button
+						raised
+						className={classes.button}
+						onClick={() => {
+							this.props.engine.startScene(new MainMenu());
+						}}
+					>
+						go back to menu<KeyboardArrowDown />
+					</Button>
+				</Tooltip>
+				<hr />
 				<div
 					className={classes.svg}
 					dangerouslySetInnerHTML={{ __html: stripStyles(front) }}
@@ -63,17 +79,6 @@ export class Equip extends React.Component {
 					className={classes.svg}
 					dangerouslySetInnerHTML={{ __html: stripStyles(side) }}
 				/>
-				<Tooltip title="exit to menu" placement="bottom">
-					<Button
-						raised
-						className={classes.iconButton}
-						onClick={() => {
-							this.props.engine.startScene(new MainMenu());
-						}}
-					>
-						go back to menu<KeyboardArrowDown />
-					</Button>
-				</Tooltip>
 			</div>
 		);
 	}
