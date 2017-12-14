@@ -8,7 +8,7 @@ import side from "./side.svg";
 
 import type Engine from "Engine";
 
-// console.log(front);
+console.log(front);
 
 export default class Background extends GameObject {
 	init(engine: Engine) {
@@ -23,7 +23,7 @@ export default class Background extends GameObject {
 		engine.container.appendChild(div);
 
 		let img = document.createElement("img");
-		img.src = "data:image/svg+xml;utf8," + front;
+		img.src = front;
 		div.appendChild(img);
 	}
 	update() {

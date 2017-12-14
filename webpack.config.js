@@ -47,7 +47,7 @@ module.exports = [
 				},
 				{
 					test: /\.svg$/,
-					loader: "raw-loader"
+					loader: "url-loader"
 					// loader: "babel-loader!url-loader"
 				},
 				{
