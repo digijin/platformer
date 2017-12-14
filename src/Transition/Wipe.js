@@ -15,7 +15,7 @@ export default class Wipe extends Base {
 		this.el = document.createElement("DIV");
 		this.el.className = "transition";
 		this.el.style.height = "10px";
-		this.el.style.background = "pink";
+		this.el.style.background = "grey";
 		// engine.container.insertBefore(this.el, engine.container.firstChild);
 		engine.container.appendChild(this.el);
 		this.el.appendChild(hero);
@@ -26,7 +26,8 @@ export default class Wipe extends Base {
 	update() {
 		this.time += this.engine.deltaTime;
 		if (this.in) {
-			this.el.style.height = this.time / SECS * window.innerHeight + "px";
+			this.el.style.height =
+				this.time * this.time / SECS * window.innerHeight + "px";
 			if (this.time > SECS) {
 				this.in = false;
 				this.endLastScene();
