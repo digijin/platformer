@@ -14,14 +14,29 @@ let stripStyles = (str: string): string => {
 	return str.replace(regex, "");
 };
 
+const GREEN = "#00ff00";
+const DARKGREEN = "#16502d";
 const styles = theme => ({
 	svg: {
 		display: "inline-block",
 		border: "2px solid green",
 		borderRadius: "8px",
 		fill: "none",
-		stroke: "green",
+		stroke: GREEN,
 		strokeWidth: "1"
+	},
+	screen: {
+		textAlign: "center",
+		position: "fixed",
+		left: "0",
+		right: "0",
+		fontFamily: "Roboto"
+	},
+	title: {
+		fontFamily: "HeadingFont",
+		padding: "10px",
+		fontSize: "36px",
+		color: GREEN
 	}
 });
 export class Equip extends React.Component {
@@ -32,8 +47,8 @@ export class Equip extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div id="EquipScreen">
-				Things and stuff<br />Things and stuff<br />Things and stuff<br />
+			<div className={classes.screen}>
+				<div className={classes.title}>Mech Equip Screen</div>
 				<div
 					className={classes.svg}
 					dangerouslySetInnerHTML={{ __html: stripStyles(front) }}
