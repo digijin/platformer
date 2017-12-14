@@ -33,12 +33,12 @@ export default class Enemy extends Actor {
 		this.walkSpeed = config.enemy.walkSpeed;
 		this.size = params.type.size;
 		this.registration = params.type.registration;
-		// if (!this.size) {
-		// 	throw new Error("no size in enemy init");
-		// }
-		// if (!this.registration) {
-		// 	throw new Error("no rewgistration in enemy init");
-		// }
+		if (!this.size) {
+			throw new Error("no size in enemy init");
+		}
+		if (!this.registration) {
+			throw new Error("no rewgistration in enemy init");
+		}
 		// this.size = config.enemy.size;
 		// this.registration = config.enemy.registration;
 
