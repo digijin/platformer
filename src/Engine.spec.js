@@ -1,6 +1,17 @@
 import Engine from "Engine";
 
 import GameObject from "GameObject";
+import TransitionBase from "Transition/Base";
+
+let sceneMock = () => {
+	return {
+		start: () => {},
+		end: () => {}
+	};
+};
+let transitionMock = () => {
+	return new TransitionBase();
+};
 
 describe("Game/Engine", () => {
 	let engine;
@@ -34,4 +45,15 @@ describe("Game/Engine", () => {
 	// 	engine.kill();
 	// 	expect(engine.objects.length).toBe(0);
 	// });
+
+	describe("transitions", () => {
+		it("sohuld register transition", () => {
+			spyOn(engine, "register");
+			engine.startSceneTransition(sceneMock(), transitionMock());
+			expect(engine.register).toHaveBeenCalled();
+		});
+		it("should block other startscenes", () => {
+			engine.startSceneTransition(sceneMock(), transitionMock());
+		});
+	});
 });

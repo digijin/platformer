@@ -11,6 +11,7 @@ import Point from "Point";
 import config from "config";
 
 import type GameObject from "GameObject";
+import type Transition from "Transition/Base";
 
 import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
@@ -96,6 +97,18 @@ export default class Engine {
 		this.currentScene = scene;
 		this.currentScene.start(this);
 	}
+	startSceneTransition(scene: SceneBase, transition: Transition) {
+		// trnasition.on
+		transition.onEndLastScene(() => {
+			if (this.currentScene) this.currentScene.end();
+			this.objects.push(transition);
+		});
+		transition.onStartNextScene(() => {
+			this.currentScene = scene;
+			this.currentScene.start(this);
+		});
+		this.register(transition);
+	}
 
 	//add new objects to be tracked by engine
 	register = (obj: GameObject) => {
@@ -107,6 +120,8 @@ export default class Engine {
 		let i = this.objects.indexOf(obj);
 		if (i > -1) {
 			this.objects.splice(i, 1);
+		} else {
+			throw new Error("destroying non existant object");
 		}
 	}
 

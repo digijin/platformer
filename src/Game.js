@@ -39,6 +39,9 @@ export default class Game {
 			case "editor":
 				this.engine.startScene(new Editor());
 				break;
+			case "menu":
+				this.engine.startScene(new MainMenu());
+				break;
 			case "equip":
 				this.engine.startScene(new Equip());
 				break;
