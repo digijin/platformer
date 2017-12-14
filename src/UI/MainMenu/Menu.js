@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Level from "Scene/Level";
 import Editor from "Scene/Editor";
+import Equip from "Scene/Equip";
 
 class MainMenu extends React.Component {
 	render() {
@@ -26,6 +27,9 @@ class MainMenu extends React.Component {
 				<a id="editor" onClick={this.props.editor}>
 					Editor
 				</a>
+				<a id="equip" onClick={this.props.equip}>
+					Equip
+				</a>
 			</div>
 		);
 	}
@@ -42,6 +46,9 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 		},
 		editor: () => {
 			props.engine.startScene(new Editor());
+		},
+		equip: () => {
+			props.engine.startScene(new Equip());
 		},
 		close: id => {
 			// dispatch({type:'CLOSE_CONTEXT_MENU'});
