@@ -14,24 +14,24 @@ export default class Background extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 		let div = document.createElement("div");
-		// div.style.padding = 10;
-		// div.style.border = 1;
-		// div.style.borderStyle = "red";
-		// div.style.minWidth = 100;
-		// div.style.minHeight = 100;
-		div.style = "border: 1px solid black; padding 8px";
+		div.style =
+			"border: 20px solid purple; padding: 20px; text-align: center";
 		engine.container.appendChild(div);
 
-		let img = document.createElement("img");
-		img.src = front;
-		div.appendChild(img);
+		let imgFront = document.createElement("img");
+		imgFront.src = front;
+		div.appendChild(imgFront);
+		let imgSide = document.createElement("img");
+		imgSide.src = side;
+		imgSide.style = "fill:currentColor;color:red";
+		div.appendChild(imgSide);
 	}
 	update() {
-		this.engine.ctx.drawLine(
-			new Point({ x: 0, y: 0 }),
-			this.engine.mouse.position,
-			"black",
-			3
-		);
+		// this.engine.ctx.drawLine(
+		// 	new Point({ x: 0, y: 0 }),
+		// 	this.engine.mouse.position,
+		// 	"black",
+		// 	3
+		// );
 	}
 }

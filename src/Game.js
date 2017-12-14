@@ -13,6 +13,7 @@ import UI from "UI";
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 import Editor from "Scene/Editor";
+import Equip from "Scene/Equip";
 import Logo from "Scene/Logo";
 
 // FLOWHACK
@@ -37,6 +38,9 @@ export default class Game {
 		switch (query) {
 			case "editor":
 				this.engine.startScene(new Editor());
+				break;
+			case "equip":
+				this.engine.startScene(new Equip());
 				break;
 			default:
 				this.engine.startScene(new Logo());
