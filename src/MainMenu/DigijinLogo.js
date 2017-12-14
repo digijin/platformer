@@ -82,7 +82,7 @@ let letters: Array<{
 	return l;
 });
 const INITDELAY = 6;
-const SPEED = 8;
+const SPEED = 12;
 const RENDERTIME = 12;
 const HOLDTIME = 1 * SPEED;
 const FADETIME = SPEED / 2;

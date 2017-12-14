@@ -45,6 +45,11 @@ module.exports = [
 					test: /\.html$/,
 					loader: "html-loader"
 				},
+				// {
+				// 	test: /\.svg$/,
+				// 	loader: "raw-loader"
+				// 	// loader: "babel-loader!url-loader"
+				// },
 				{
 					test: /\.(png|jpg)$/,
 					loader: "img-element-loader!url-loader"
