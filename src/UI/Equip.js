@@ -2,6 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Menu from "./MainMenu/Menu";
 import EditorPanel from "./Editor/Panel";
+import MainMenu from "Scene/MainMenu";
+import Tooltip from "material-ui/Tooltip";
+import Button from "material-ui/Button";
+import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
 
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
@@ -23,7 +27,9 @@ const styles = theme => ({
 		borderRadius: "8px",
 		fill: "none",
 		stroke: GREEN,
-		strokeWidth: "1"
+		strokeWidth: "1",
+		padding: 10,
+		margin: 10
 	},
 	screen: {
 		textAlign: "center",
@@ -57,6 +63,17 @@ export class Equip extends React.Component {
 					className={classes.svg}
 					dangerouslySetInnerHTML={{ __html: stripStyles(side) }}
 				/>
+				<Tooltip title="exit to menu" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
+						onClick={() => {
+							this.props.engine.startScene(new MainMenu());
+						}}
+					>
+						go back to menu<KeyboardArrowDown />
+					</Button>
+				</Tooltip>
 			</div>
 		);
 	}
