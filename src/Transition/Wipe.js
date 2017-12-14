@@ -3,16 +3,22 @@
 import type Engine from "Engine";
 import Base from "./Base";
 
+import hero from "MainMenu/mech_hero.png";
+
+const SECS = 0.5;
+
 export default class Wipe extends Base {
 	el: HTMLDivElement;
 	in: boolean;
 	init(engine: Engine) {
 		super.init(engine);
 		this.el = document.createElement("DIV");
-		this.el.id = "transition";
+		this.el.className = "transition";
 		this.el.style.height = "10px";
-		this.el.style.background = "white";
-		engine.container.insertBefore(this.el, engine.container.firstChild);
+		this.el.style.background = "pink";
+		// engine.container.insertBefore(this.el, engine.container.firstChild);
+		engine.container.appendChild(this.el);
+		this.el.appendChild(hero);
 		this.time = 0;
 		this.in = true;
 	}
@@ -20,15 +26,16 @@ export default class Wipe extends Base {
 	update() {
 		this.time += this.engine.deltaTime;
 		if (this.in) {
-			this.el.style.height = this.time * window.innerHeight + "px";
-			if (this.time > 1) {
+			this.el.style.height = this.time / SECS * window.innerHeight + "px";
+			if (this.time > SECS) {
 				this.in = false;
 				this.endLastScene();
 				this.startNextScene();
 			}
 		} else {
-			this.el.style.height = (2 - this.time) * window.innerHeight + "px";
-			if (this.time > 2) {
+			this.el.style.height =
+				(2 - this.time / SECS) * window.innerHeight + "px";
+			if (this.time > SECS * 2) {
 				this.end();
 			}
 		}
