@@ -5,6 +5,9 @@ import EditorPanel from "./Editor/Panel";
 
 import type Engine from "Engine";
 
+import front from "Equip/front.svg";
+import side from "Equip/side.svg";
+
 export class Equip extends React.Component {
 	props: {
 		scene: string,
@@ -14,6 +17,8 @@ export class Equip extends React.Component {
 		return (
 			<div>
 				Things and stuff<br />Things and stuff<br />Things and stuff<br />
+				<div dangerouslySetInnerHTML={{ __html: front }} />
+				<div dangerouslySetInnerHTML={{ __html: side }} />
 			</div>
 		);
 	}
