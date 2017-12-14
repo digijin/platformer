@@ -45,11 +45,11 @@ module.exports = [
 					test: /\.html$/,
 					loader: "html-loader"
 				},
-				// {
-				// 	test: /\.svg$/,
-				// 	loader: "raw-loader"
-				// 	// loader: "babel-loader!url-loader"
-				// },
+				{
+					test: /\.svg$/,
+					loader: "raw-loader"
+					// loader: "babel-loader!url-loader"
+				},
 				{
 					test: /\.(png|jpg)$/,
 					loader: "img-element-loader!url-loader"
@@ -59,7 +59,7 @@ module.exports = [
 					loader: "style-loader!css-loader!stylus-loader"
 				},
 				{
-					test: /\.(ttf|otf|eot|svg|TTF)$/,
+					test: /\.(ttf|otf|eot|TTF)$/,
 					loader: "file-loader"
 				}
 			]
