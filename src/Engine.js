@@ -121,7 +121,11 @@ export default class Engine {
 		if (i > -1) {
 			this.objects.splice(i, 1);
 		} else {
-			throw new Error("destroying non existant object");
+			// throw new Error("destroying non existant object");
+			console.warn(
+				"destroying non existant object",
+				obj.constructor.name
+			);
 		}
 	}
 
