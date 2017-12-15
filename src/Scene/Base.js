@@ -10,6 +10,7 @@ export default class SceneBase {
 	}
 	end() {
 		//wipe engine
+		this.engine.ui.dispatch({ type: "END_SCENE" });
 		this.engine.objects.forEach(o => {
 			if (o.exit) {
 				o.exit();

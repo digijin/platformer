@@ -14,6 +14,10 @@ export default function reducer(
 	switch (action.type) {
 		case "START_SCENE":
 			state = { ...state, scene: action.scene };
+			break;
+		case "END_SCENE":
+			state = { ...state, scene: "none" };
+			break;
 	}
 
 	return state;
