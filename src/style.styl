@@ -33,11 +33,10 @@ canvas {
     &.doors {
         .door {
             border: 1px solid #333333;
-            height: 10px;
-            width: 10px;
+            width: 1px;
             height: 100%;
             background-color: grey;
-            transition: width 0.8s;
+            transition: width 0.4s;
             transition-timing-function: ease-in;
         }
 
@@ -65,6 +64,20 @@ html, body {
     overflow: hidden;
 }
 
+@keyframes delayOpacityIn {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 #ui {
     position: absolute;
     top: 0px;
@@ -85,6 +98,9 @@ html, body {
             margin: 50px auto;
             // display: inline-block;
             text-align: center;
+            // opacity: 0;
+            animation-name: delayOpacityIn;
+            animation-duration: 4s;
 
             a {
                 background-color: white;
