@@ -5,7 +5,8 @@ import Base from "./Base";
 
 import hero from "MainMenu/mech_hero.png";
 
-import mesh from "./steel-mesh.jpg";
+// import mesh from "./steel-mesh.jpg";
+import mesh from "./mesh.png";
 
 const SECS = 1;
 let url = "url(" + mesh.src + ")";
