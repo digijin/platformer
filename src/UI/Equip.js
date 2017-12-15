@@ -6,12 +6,20 @@ import MainMenu from "Scene/MainMenu";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
+import { FormGroup, FormControlLabel } from "material-ui/Form";
+
+import { FormControl, FormHelperText } from "material-ui/Form";
+import Input, { InputLabel } from "material-ui/Input";
+import config from "config";
+import Select from "material-ui/Select";
+import { MenuItem } from "material-ui/Menu";
 
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
 
 import front from "Equip/front.svg";
 import side from "Equip/side.svg";
+import Checkbox from "material-ui/Checkbox";
 
 let stripStyles = (str: string): string => {
 	let regex = /^\s+style="(\S*)/gm;
@@ -54,7 +62,12 @@ export class Equip extends React.Component {
 		scene: string,
 		engine: Engine
 	};
+
+	handleChange = name => event => {
+		this.setState({ [name]: event.target.checked });
+	};
 	render() {
+		//https://material-ui-next.com/demos/selection-controls/
 		const { classes } = this.props;
 		return (
 			<div className={classes.screen}>
@@ -79,6 +92,61 @@ export class Equip extends React.Component {
 					className={classes.svg}
 					dangerouslySetInnerHTML={{ __html: stripStyles(side) }}
 				/>
+				<div id="primary">
+					<div className={classes.title}>primary weapon</div>
+					<FormControl className={classes.formControl}>
+						<InputLabel htmlFor="damage-helper">
+							damage type
+						</InputLabel>
+						<Select
+							value={10}
+							input={<Input name="damage" id="damage-helper" />}
+						>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={10}>force</MenuItem>
+							<MenuItem value={20}>energy</MenuItem>
+							<MenuItem value={30}>fire</MenuItem>
+							<MenuItem value={30}>frost</MenuItem>
+						</Select>
+						<FormHelperText>
+							the type of damage to inflict
+						</FormHelperText>
+					</FormControl>
+					<br />
+					<FormControl className={classes.formControl}>
+						<InputLabel htmlFor="output-helper">
+							output type
+						</InputLabel>
+						<Select
+							value={10}
+							input={<Input name="output" id="output-helper" />}
+						>
+							<MenuItem value="">
+								<em>None</em>
+							</MenuItem>
+							<MenuItem value={10}>stream</MenuItem>
+							<MenuItem value={20}>burst</MenuItem>
+							<MenuItem value={30}>automatic</MenuItem>
+							<MenuItem value={30}>manual</MenuItem>
+						</Select>
+						<FormHelperText>output type</FormHelperText>
+					</FormControl>
+				</div>
+				<div id="secondary">
+					<div className={classes.title}>secondary missiles</div>
+					<FormGroup row>
+						<FormControlLabel
+							control={<Checkbox />}
+							label="remote control"
+						/>
+						<FormControlLabel
+							control={<Checkbox />}
+							label="heat seeking"
+						/>
+					</FormGroup>
+				</div>
 			</div>
 		);
 	}
