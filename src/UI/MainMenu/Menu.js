@@ -5,7 +5,7 @@ import Level from "Scene/Level";
 import Editor from "Scene/Editor";
 import Equip from "Scene/Equip";
 
-import Wipe from "Transition/Wipe";
+import Doors from "Transition/Doors";
 
 class MainMenu extends React.Component {
 	render() {
@@ -50,7 +50,7 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 			props.engine.startScene(new Editor());
 		},
 		equip: () => {
-			props.engine.startSceneTransition(new Equip(), new Wipe());
+			props.engine.startSceneTransition(new Equip(), new Doors());
 		},
 		close: id => {
 			// dispatch({type:'CLOSE_CONTEXT_MENU'});
