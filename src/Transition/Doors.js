@@ -5,7 +5,10 @@ import Base from "./Base";
 
 import hero from "MainMenu/mech_hero.png";
 
+import mesh from "./steel-mesh.jpg";
+
 const SECS = 1;
+let url = "url(" + mesh.src + ")";
 
 export default class Wipe extends Base {
 	el: HTMLDivElement;
@@ -18,10 +21,12 @@ export default class Wipe extends Base {
 		this.left.className = "left door";
 		this.right = document.createElement("DIV");
 		this.right.className = "right door";
-		this.el.appendChild(this.right);
-		this.el.appendChild(this.left);
-		// this.el.style.background = "grey"; // this.el.style.height = "10px";
-		// engine.container.insertBefore(this.el, engine.container.firstChild);
+		[this.right, this.left].forEach(door => {
+			let child = document.createElement("DIV");
+			child.style.backgroundImage = url;
+			door.appendChild(child);
+			this.el.appendChild(door);
+		});
 		this.engine.container.appendChild(this.el);
 		// this.el.appendChild(hero);
 		this.time = 0;
