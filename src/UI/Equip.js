@@ -13,7 +13,7 @@ import Input, { InputLabel } from "material-ui/Input";
 import config from "config";
 import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
-
+import classnames from "classnames";
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
 
@@ -56,6 +56,14 @@ const styles = theme => ({
 	button: {
 		backgroundColor: DARKGREEN,
 		color: GREEN
+	},
+	itemToggle: {
+		backgroundColor: "red",
+		width: "100px",
+		height: "100px"
+	},
+	table: {
+		display: "inline-block"
 	}
 });
 export class Equip extends React.Component {
@@ -85,14 +93,35 @@ export class Equip extends React.Component {
 					</Button>
 				</Tooltip>
 				<hr />
-				<div
-					className={classes.svg}
-					dangerouslySetInnerHTML={{ __html: stripStyles(front) }}
-				/>
-				<div
-					className={classes.svg}
-					dangerouslySetInnerHTML={{ __html: stripStyles(side) }}
-				/>
+				<table className={classnames(classes.table)}>
+					<tr>
+						<td>
+							<div className={classnames(classes.itemToggle)} />
+						</td>
+						<td>
+							<div
+								className={classnames(
+									classes.svg,
+									classes.front
+								)}
+								dangerouslySetInnerHTML={{
+									__html: stripStyles(front)
+								}}
+							/>
+						</td>
+						<td>
+							<div
+								className={classnames(
+									classes.svg,
+									classes.side
+								)}
+								dangerouslySetInnerHTML={{
+									__html: stripStyles(side)
+								}}
+							/>
+						</td>
+					</tr>
+				</table>
 				<div id="primary">
 					<div className={classes.title}>primary weapon</div>
 					<FormControl className={classes.formControl}>
