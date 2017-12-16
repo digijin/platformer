@@ -17,6 +17,7 @@ import { MenuItem } from "material-ui/Menu";
 import classnames from "classnames";
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
+import Doors from "Transition/Doors";
 
 import hazard from "assets/hazard.png";
 
@@ -78,6 +79,16 @@ const styles = theme => ({
 		borderRadius: "8px",
 		margin: "10px auto",
 		maxWidth: "800px"
+	},
+	launchButton: {
+		backgroundImage: "url(" + hazard.src + ")",
+		color: "red",
+		fontFamily: "HeadingFont",
+		fontSize: "36px",
+		width: "200px",
+		textShadow: "0.1em 0.1em 0.05em #000",
+		height: "80px",
+		borderRadius: "10px"
 	}
 });
 export class Equip extends React.Component {
@@ -220,9 +231,12 @@ export class Equip extends React.Component {
 					raised
 					className={classes.launchButton}
 					onClick={() => {
-						this.props.engine.startScene(new Level());
+						// this.props.engine.startScene(new Level());
+						this.props.engine.startSceneTransition(
+							new Level(),
+							new Doors()
+						);
 					}}
-					style={{ backgroundImage: "url(" + hazard.src + ")" }}
 				>
 					LAUNCH
 				</Button>
