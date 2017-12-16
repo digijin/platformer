@@ -44,7 +44,8 @@ const styles = theme => ({
 		position: "fixed",
 		left: "0",
 		right: "0",
-		fontFamily: "Roboto"
+		fontFamily: "Roboto",
+		color: GREEN
 	},
 	title: {
 		fontFamily: "HeadingFont",
@@ -128,8 +129,7 @@ export class Equip extends React.Component {
 							</MenuItem>
 							<MenuItem value={10}>stream</MenuItem>
 							<MenuItem value={20}>burst</MenuItem>
-							<MenuItem value={30}>automatic</MenuItem>
-							<MenuItem value={30}>manual</MenuItem>
+							<MenuItem value={30}>once</MenuItem>
 						</Select>
 						<FormHelperText>output type</FormHelperText>
 					</FormControl>
