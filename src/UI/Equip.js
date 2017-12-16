@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Menu from "./MainMenu/Menu";
 import EditorPanel from "./Editor/Panel";
 import MainMenu from "Scene/MainMenu";
+import Level from "Scene/Level";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
@@ -17,6 +18,8 @@ import classnames from "classnames";
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
 
+import hazard from "assets/hazard.png";
+
 import front from "Equip/front.svg";
 import side from "Equip/side.svg";
 import Checkbox from "material-ui/Checkbox";
@@ -25,7 +28,7 @@ let stripStyles = (str: string): string => {
 	let regex = /^\s+style="(\S*)/gm;
 	return str.replace(regex, "");
 };
-
+console.log(hazard.src);
 const GREEN = "#00ff00";
 const DARKGREEN = "#16502d";
 const styles = theme => ({
@@ -212,6 +215,17 @@ export class Equip extends React.Component {
 						</FormGroup>
 					</div>
 				</div>
+
+				<Button
+					raised
+					className={classes.launchButton}
+					onClick={() => {
+						this.props.engine.startScene(new Level());
+					}}
+					style={{ backgroundImage: "url(" + hazard.src + ")" }}
+				>
+					LAUNCH
+				</Button>
 			</div>
 		);
 	}
