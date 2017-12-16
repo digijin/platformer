@@ -96,9 +96,15 @@ export class Equip extends React.Component {
 		scene: string,
 		engine: Engine
 	};
+	state = {
+		item: "primary"
+	};
 
 	handleChange = name => event => {
 		this.setState({ [name]: event.target.checked });
+	};
+	selectItem = item => {
+		this.setState({ item: item });
 	};
 	render() {
 		//https://material-ui-next.com/demos/selection-controls/
@@ -119,56 +125,102 @@ export class Equip extends React.Component {
 				</Tooltip>
 				<hr className={classnames(classes.hr)} />
 				<table className={classnames(classes.table)}>
-					<tr>
-						<td>
-							<div className={classnames(classes.itemToggle)}>
-								primary weapon
-							</div>
-						</td>
-						<td rowSpan="2">
-							<div
-								className={classnames(
-									classes.svg,
-									classes.front
-								)}
-								dangerouslySetInnerHTML={{
-									__html: stripStyles(front)
-								}}
-							/>
-						</td>
-						<td rowSpan="2">
-							<div
-								className={classnames(
-									classes.svg,
-									classes.side
-								)}
-								dangerouslySetInnerHTML={{
-									__html: stripStyles(side)
-								}}
-							/>
-						</td>
-						<td>
-							<div className={classnames(classes.itemToggle)}>
-								secondary weapon
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div className={classnames(classes.itemToggle)}>
-								legs
-							</div>
-						</td>
-						<td>
-							<div className={classnames(classes.itemToggle)}>
-								body
-							</div>
-						</td>
-					</tr>
+					<tbody>
+						<tr>
+							<td>
+								<div
+									onClick={() => {
+										this.selectItem("primary");
+									}}
+									className={classnames(classes.itemToggle)}
+								>
+									primary weapon
+								</div>
+							</td>
+							<td rowSpan="2">
+								<div
+									className={classnames(
+										classes.svg,
+										classes.front
+									)}
+									dangerouslySetInnerHTML={{
+										__html: stripStyles(front)
+									}}
+								/>
+							</td>
+							<td rowSpan="2">
+								<div
+									className={classnames(
+										classes.svg,
+										classes.side
+									)}
+									dangerouslySetInnerHTML={{
+										__html: stripStyles(side)
+									}}
+								/>
+							</td>
+							<td>
+								<div
+									onClick={() => {
+										this.selectItem("secondary");
+									}}
+									className={classnames(classes.itemToggle)}
+								>
+									secondary weapon
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div
+									onClick={() => {
+										this.selectItem("legs");
+									}}
+									className={classnames(classes.itemToggle)}
+								>
+									legs
+								</div>
+							</td>
+							<td>
+								<div
+									onClick={() => {
+										this.selectItem("body");
+									}}
+									className={classnames(classes.itemToggle)}
+								>
+									body
+								</div>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 				<div className={classes.itemDetails}>
+					<div className={classes.title}>{this.state.item}</div>
+					{this.itemDetails()}
+				</div>
+
+				<Button
+					raised
+					className={classes.launchButton}
+					onClick={() => {
+						// this.props.engine.startScene(new Level());
+						this.props.engine.startSceneTransition(
+							new Level(),
+							new Doors()
+						);
+					}}
+				>
+					LAUNCH
+				</Button>
+			</div>
+		);
+	}
+	itemDetails = () => {
+		const { classes } = this.props;
+		switch (this.state.item) {
+			case "primary":
+				return (
 					<div id="primary">
-						<div className={classes.title}>primary weapon</div>
 						<FormControl className={classes.formControl}>
 							<InputLabel htmlFor="damage-helper">
 								damage type
@@ -212,8 +264,11 @@ export class Equip extends React.Component {
 							<FormHelperText>output type</FormHelperText>
 						</FormControl>
 					</div>
+				);
+				break;
+			case "secondary":
+				return (
 					<div id="secondary">
-						<div className={classes.title}>secondary missiles</div>
 						<FormGroup row>
 							<FormControlLabel
 								control={<Checkbox />}
@@ -225,24 +280,11 @@ export class Equip extends React.Component {
 							/>
 						</FormGroup>
 					</div>
-				</div>
-
-				<Button
-					raised
-					className={classes.launchButton}
-					onClick={() => {
-						// this.props.engine.startScene(new Level());
-						this.props.engine.startSceneTransition(
-							new Level(),
-							new Doors()
-						);
-					}}
-				>
-					LAUNCH
-				</Button>
-			</div>
-		);
-	}
+				);
+				break;
+		}
+		return <div>not implemented</div>;
+	};
 }
 
 // export default Equip;
