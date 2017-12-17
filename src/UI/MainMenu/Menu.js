@@ -7,7 +7,20 @@ import Equip from "Scene/Equip";
 
 import Doors from "Transition/Doors";
 
+import Load from "./Load";
+
 class MainMenu extends React.Component {
+	constructor() {
+		super();
+		this.state = { page: "main" };
+	}
+	// <div id="instructions">
+	// 	<span className="key">wasd</span>:move and crouch<br />
+	// 	<span className="key">e</span>:grapple arm left<br />
+	// 	space:jump/booster<br />
+	// 	mouse:primary (guns)<br />
+	// 	right mouse:secondary (missiles)<br />
+	// </div>
 	render() {
 		return (
 			<div id="MainMenuUI">
@@ -16,15 +29,11 @@ class MainMenu extends React.Component {
 					<div className="sub">so for now it's called</div>
 					PLATFORMER
 				</div>
-				<div id="instructions">
-					<span className="key">wasd</span>:move and crouch<br />
-					<span className="key">e</span>:grapple arm left<br />
-					space:jump/booster<br />
-					mouse:primary (guns)<br />
-					right mouse:secondary (missiles)<br />
-				</div>
 				<a id="play" onClick={this.props.play}>
 					Play
+				</a>
+				<a id="load" onClick={this.props.load}>
+					Load
 				</a>
 				<a id="editor" onClick={this.props.editor}>
 					Editor
@@ -32,6 +41,7 @@ class MainMenu extends React.Component {
 				<a id="equip" onClick={this.props.equip}>
 					Equip
 				</a>
+				<Load />
 			</div>
 		);
 	}

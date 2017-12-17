@@ -4,15 +4,15 @@ import ElectronAdapter from "Storage/Electron";
 
 export default class Storage {
 	adapter: StorageAdapter;
-	constructor() {
+	constructor(type: string = "src/levels") {
 		if (process.browser && navigator.userAgent.indexOf("Electron") == -1) {
-			this.adapter = new BrowserAdapter();
+			this.adapter = new BrowserAdapter(type);
 		} else {
 			try {
-				this.adapter = new ElectronAdapter("src/levels");
+				this.adapter = new ElectronAdapter(type);
 			} catch (e) {
 				//fallback in electron web mode for testing
-				this.adapter = new BrowserAdapter();
+				this.adapter = new BrowserAdapter(type);
 			}
 		}
 	}
