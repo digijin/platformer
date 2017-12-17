@@ -25,6 +25,11 @@ import front from "Equip/front.svg";
 import side from "Equip/side.svg";
 import Checkbox from "material-ui/Checkbox";
 
+import bulletIcon from "Equip/bullet.svg";
+import fireIcon from "Equip/fire.svg";
+import frostIcon from "Equip/frost.svg";
+import energyIcon from "Equip/energy.svg";
+
 let stripStyles = (str: string): string => {
 	let regex = /^\s+style="(\S*)/gm;
 	return str.replace(regex, "");
@@ -95,8 +100,9 @@ const styles = theme => ({
 		display: "inline-block",
 		border: "2px solid green",
 		borderRadius: "8px",
-		width: "100px",
-		height: "100px"
+		width: "128px",
+		height: "128px",
+		margin: "10px"
 	}
 });
 export class Equip extends React.Component {
@@ -229,69 +235,39 @@ export class Equip extends React.Component {
 			case "primary":
 				return (
 					<div id="primary">
-						<div className={classes.option}>Machinegun</div>
-						<div className={classes.option}>Ice Cannon</div>
-						<div className={classes.option}>Flamethrower</div>
-						<div className={classes.option}>Energy Blaster</div>
-						<br />
-						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor="damage-helper">
-								damage type
-							</InputLabel>
-							<Select
-								value={10}
-								input={
-									<Input name="damage" id="damage-helper" />
-								}
-							>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={10}>force</MenuItem>
-								<MenuItem value={20}>energy</MenuItem>
-								<MenuItem value={30}>fire</MenuItem>
-								<MenuItem value={30}>frost</MenuItem>
-							</Select>
-							<FormHelperText>
-								the type of damage to inflict
-							</FormHelperText>
-						</FormControl>
-						<br />
-						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor="output-helper">
-								output type
-							</InputLabel>
-							<Select
-								value={10}
-								input={
-									<Input name="output" id="output-helper" />
-								}
-							>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								<MenuItem value={10}>stream</MenuItem>
-								<MenuItem value={20}>burst</MenuItem>
-								<MenuItem value={30}>once</MenuItem>
-							</Select>
-							<FormHelperText>output type</FormHelperText>
-						</FormControl>
+						<div
+							className={classes.option}
+							dangerouslySetInnerHTML={{
+								__html: bulletIcon
+							}}
+						/>
+						<div
+							className={classes.option}
+							dangerouslySetInnerHTML={{
+								__html: fireIcon
+							}}
+						/>
+						<div
+							className={classes.option}
+							dangerouslySetInnerHTML={{
+								__html: frostIcon
+							}}
+						/>
+						<div
+							className={classes.option}
+							dangerouslySetInnerHTML={{
+								__html: energyIcon
+							}}
+						/>
 					</div>
 				);
 				break;
 			case "secondary":
 				return (
 					<div id="secondary">
-						<FormGroup row>
-							<FormControlLabel
-								control={<Checkbox />}
-								label="remote control"
-							/>
-							<FormControlLabel
-								control={<Checkbox />}
-								label="heat seeking"
-							/>
-						</FormGroup>
+						<div className={classes.option}>dumb fire</div>
+						<div className={classes.option}>heat seeking</div>
+						<div className={classes.option}>remote control</div>
 					</div>
 				);
 				break;
