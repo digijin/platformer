@@ -41,7 +41,7 @@ class MainMenu extends React.Component {
 				<a id="equip" onClick={this.props.equip}>
 					Equip
 				</a>
-				<Load />
+				<Load engine={this.props.engine} />
 			</div>
 		);
 	}

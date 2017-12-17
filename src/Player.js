@@ -4,12 +4,14 @@ export default class Player {
 	secondary: string;
 	legs: string;
 	body: string;
+	name: string;
 
-	constructor() {
+	constructor(params) {
 		this.primary = "machinegun";
 		this.secondary = "dumbfire";
 		this.legs = "standard";
 		this.body = "standard";
+		Object.assign(this, params);
 	}
 
 	static getCurrentPlayer() {
@@ -17,5 +19,11 @@ export default class Player {
 			this.currentPlayer = new Player();
 		}
 		return this.currentPlayer;
+	}
+	save(): string {
+		return JSON.stringify(this);
+	}
+	static load(data): string {
+		this.currentPlayer = new Player(JSON.parse(data));
 	}
 }

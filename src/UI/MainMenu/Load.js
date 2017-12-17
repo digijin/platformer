@@ -4,6 +4,8 @@ import Storage from "Storage";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 
+import Player from "Player";
+
 const styles = theme => ({
 	panel: {
 		borderRadius: "8px",
@@ -34,27 +36,38 @@ class Load extends React.Component {
 	};
 	render() {
 		const { classes } = this.props;
-		// console.log(this.storage.list());
+		// console.log("storage list", this.storage.list());
 
 		return (
 			<div className={classes.panel}>
 				<div className={classes.header}>Choose Character</div>
 				<div className={classes.saveList}>
-					{this.storage.list().map(s => {
-						<a key={s}>{s}</a>;
-					})}
+					{this.storage.list().map(s => (
+						<a
+							key={s}
+							onClick={() => {
+								Player.load(this.storage.load(s));
+								this.props.engine.currentPlayer = Player.getCurrentPlayer();
+							}}
+						>
+							{s}
+						</a>
+					))}
 				</div>
 				<TextField
 					label="Character Name"
 					placeholder="Enter your name"
 					className={classes.textField}
 					margin="normal"
-					value={this.savename}
+					value={this.state.savename}
 					onChange={this.changeSavename}
 				/>
 				<a
 					onClick={() => {
-						console.log(this.state.savename);
+						// console.log("making", this.state.savename);
+						let p = new Player({ name: this.state.savename });
+						this.storage.save(this.state.savename, p.save());
+						this.forceUpdate();
 					}}
 				>
 					add new
