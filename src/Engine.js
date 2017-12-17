@@ -10,6 +10,8 @@ import Point from "Point";
 
 import config from "config";
 
+import Player from "Player";
+
 import type GameObject from "GameObject";
 import type Transition from "Transition/Base";
 
@@ -24,6 +26,7 @@ export default class Engine {
 	ctx: Context;
 	lastTime: number;
 	mouse: Mouse;
+	currentPlayer: Player;
 	// keyboard: Input.Keyboard;
 	deltaTime: number;
 	state: State;
@@ -55,6 +58,7 @@ export default class Engine {
 		this.lastTime = new Date().getTime();
 		this.state = new State();
 		// this.keyboard = this.input.keyboard;
+		this.currentPlayer = Player.getCurrentPlayer(); //here for now...
 	}
 	init(container: HTMLElement) {
 		this.container = container;

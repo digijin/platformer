@@ -108,6 +108,14 @@ const styles = theme => ({
 		width: "128px",
 		height: "128px",
 		margin: "10px"
+	},
+	optionSelected: {
+		display: "inline-block",
+		border: "2px solid white",
+		borderRadius: "8px",
+		width: "128px",
+		height: "128px",
+		margin: "10px"
 	}
 });
 export class Equip extends React.Component {
@@ -257,25 +265,65 @@ export class Equip extends React.Component {
 				return (
 					<div id="primary">
 						<div
-							className={classes.option}
+							onClick={() => {
+								this.props.engine.currentPlayer.primary =
+									"machinegun";
+								this.forceUpdate();
+							}}
+							className={
+								this.props.engine.currentPlayer.primary ==
+								"machinegun"
+									? classes.optionSelected
+									: classes.option
+							}
 							dangerouslySetInnerHTML={{
 								__html: bulletIcon
 							}}
 						/>
 						<div
-							className={classes.option}
+							onClick={() => {
+								this.props.engine.currentPlayer.primary =
+									"flamethrower";
+								this.forceUpdate();
+							}}
+							className={
+								this.props.engine.currentPlayer.primary ==
+								"flamethrower"
+									? classes.optionSelected
+									: classes.option
+							}
 							dangerouslySetInnerHTML={{
 								__html: fireIcon
 							}}
 						/>
 						<div
-							className={classes.option}
+							onClick={() => {
+								this.props.engine.currentPlayer.primary =
+									"frostgun";
+								this.forceUpdate();
+							}}
+							className={
+								this.props.engine.currentPlayer.primary ==
+								"frostgun"
+									? classes.optionSelected
+									: classes.option
+							}
 							dangerouslySetInnerHTML={{
 								__html: frostIcon
 							}}
 						/>
 						<div
-							className={classes.option}
+							onClick={() => {
+								this.props.engine.currentPlayer.primary =
+									"energygun";
+								this.forceUpdate();
+							}}
+							className={
+								this.props.engine.currentPlayer.primary ==
+								"energygun"
+									? classes.optionSelected
+									: classes.option
+							}
 							dangerouslySetInnerHTML={{
 								__html: energyIcon
 							}}
