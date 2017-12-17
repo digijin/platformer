@@ -17,11 +17,11 @@ export default class Level extends Base {
 		super.start(engine);
 		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
-		grid.generate(1);
+		// grid.generate(1);
 		// FLOWHACK
 		let gridData = require("levels/level.txt");
-		grid.load(gridData);
 		engine.register(grid);
+		grid.load(gridData);
 
 		engine.register(new Background());
 

@@ -339,20 +339,18 @@ class EditorPanel extends React.Component {
 						<CardContent>
 							{saves.map(savename => {
 								return (
-									<div>
-										<Button
-											raised
-											key={savename + "loadbutton"}
-											onClick={() => {
-												this.props.engine.grid.load(
-													this.storage.load(savename)
-												);
-											}}
-										>
-											{savename}
-										</Button>
-										<br />
-									</div>
+									<Button
+										raised
+										key={savename + "loadbutton"}
+										onClick={() => {
+											this.props.engine.grid.load(
+												this.storage.load(savename)
+											);
+											this.forceUpdate();
+										}}
+									>
+										{savename}
+									</Button>
 								);
 							})}
 							<TextField
@@ -372,6 +370,7 @@ class EditorPanel extends React.Component {
 											this.state.savename,
 											this.props.engine.grid.save()
 										);
+										this.forceUpdate();
 									}}
 								>
 									<Save />

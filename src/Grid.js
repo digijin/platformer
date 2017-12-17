@@ -323,7 +323,10 @@ export default class Grid extends GameObject {
 		// return JSON.stringify({ blocks: this.blocks }, (name, val) => {
 		// 	if (name !== "grid") return val;
 		// });
-		let enemies = this.engine.objectsTagged("enemy");
+		let enemies = [];
+		if (this.engine) {
+			enemies = this.engine.objectsTagged("enemy");
+		}
 		// console.log(enemies);
 		return JSON.stringify({
 			enemies: enemies.map(e => {
@@ -337,8 +340,14 @@ export default class Grid extends GameObject {
 		});
 	}
 	load(str: string) {
+		//wipe enemies
+		if (this.engine) {
+			this.engine.objectsTagged("enemy").forEach(e => e.destroy());
+		}
+
 		this.tileCache = {};
 		let data = JSON.parse(str);
+
 		this.blocks = data.blocks.map((d, x) => {
 			return d.map((block, y) => {
 				return new Block({
@@ -351,10 +360,14 @@ export default class Grid extends GameObject {
 		});
 		if (data.enemies) {
 			data.enemies.forEach(e => {
+				let type = EnemyTypesMap[e.t];
+				if (!type) {
+					throw new Error("could not look up enemy", e.t);
+				}
 				this.engine.register(
 					new Enemy({
 						position: new Point(e.p),
-						type: EnemyTypesMap[e.t]
+						type: type
 					})
 				);
 			});
