@@ -78,7 +78,8 @@ const styles = theme => ({
 		border: "2px solid green",
 		borderRadius: "8px",
 		margin: "10px auto",
-		maxWidth: "800px"
+		maxWidth: "800px",
+		padding: "20px"
 	},
 	launchButton: {
 		backgroundImage: "url(" + hazard.src + ")",
@@ -89,6 +90,13 @@ const styles = theme => ({
 		textShadow: "0.1em 0.1em 0.05em #000",
 		height: "80px",
 		borderRadius: "10px"
+	},
+	option: {
+		display: "inline-block",
+		border: "2px solid green",
+		borderRadius: "8px",
+		width: "100px",
+		height: "100px"
 	}
 });
 export class Equip extends React.Component {
@@ -221,6 +229,11 @@ export class Equip extends React.Component {
 			case "primary":
 				return (
 					<div id="primary">
+						<div className={classes.option}>Machinegun</div>
+						<div className={classes.option}>Ice Cannon</div>
+						<div className={classes.option}>Flamethrower</div>
+						<div className={classes.option}>Energy Blaster</div>
+						<br />
 						<FormControl className={classes.formControl}>
 							<InputLabel htmlFor="damage-helper">
 								damage type
