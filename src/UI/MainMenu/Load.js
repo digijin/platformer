@@ -3,11 +3,14 @@ import React from "react";
 import Storage from "Storage";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
+import Equip from "Scene/Equip";
+import Doors from "Transition/Doors";
 
 import Player from "Player";
 
 const styles = theme => ({
 	panel: {
+		fontFamily: "roboto",
 		borderRadius: "8px",
 		backgroundColor: "white",
 		boxShadow: "0px 0px 8px white",
@@ -48,6 +51,10 @@ class Load extends React.Component {
 							onClick={() => {
 								Player.load(this.storage.load(s));
 								this.props.engine.currentPlayer = Player.getCurrentPlayer();
+								this.props.engine.startSceneTransition(
+									new Equip(),
+									new Doors()
+								);
 							}}
 						>
 							{s}
