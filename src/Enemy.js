@@ -46,6 +46,13 @@ export default class Enemy extends Actor {
 	}
 	action: ?Generator<*, *, *>;
 	update(engine: Engine) {
+		let player = this.engine.objectsTagged("player").pop();
+		if (!player) {
+			this.gravity();
+			this.render();
+			return;
+		} //do not movefor edit mode
+
 		//check if out of bounds
 		if (this.position.y > this.engine.grid.height * config.grid.height) {
 			this.explode();
@@ -67,7 +74,6 @@ export default class Enemy extends Actor {
 			}
 		} else {
 			//pickup distance
-			let player = this.engine.objectsTagged("player").pop();
 			if (this.position.distanceTo(player.position) < 300) {
 				this.startAgro(player);
 			}
@@ -81,6 +87,9 @@ export default class Enemy extends Actor {
 				this.action = null;
 			}
 		}
+		this.render();
+	}
+	render() {
 		this.engine.ctx.drawSprite(
 			mech,
 			this.position,

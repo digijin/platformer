@@ -26,6 +26,8 @@ import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Save from "material-ui-icons/Save";
 import Tooltip from "material-ui/Tooltip";
 
+import { EnemyTypes } from "EnemyType";
+
 import avatar from "mech.png";
 
 type Props = {
@@ -76,11 +78,13 @@ class EditorPanel extends React.Component {
 		super();
 		this.storage = new Storage();
 		this.state = {
-			expanded: { main: false, block: true, save: false },
+			expanded: { main: false, block: true, save: false, enemy: false },
 			savename: ""
 		};
 	}
 	handleExpandClick = target => {
+		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		watcher.mode = target;
 		let newstate = { expanded: {} };
 		newstate.expanded[target] = !this.state.expanded[target];
 		this.setState(newstate);
@@ -245,6 +249,60 @@ class EditorPanel extends React.Component {
 											}}
 											src={b.image.src}
 										/>
+									</Button>
+								</Tooltip>
+							))}
+						</CardContent>
+					</Collapse>
+				</Card>
+
+				<Card className={classes.card} id="enemySelector">
+					<CardActions
+						className={classes.header}
+						disableActionSpacing
+					>
+						Enemy Selector
+						<div className={classes.flexGrow} />
+						<IconButton
+							className={classnames(classes.expand, {
+								[classes.expandOpen]: this.state.expanded.enemy
+							})}
+							onClick={() => {
+								this.handleExpandClick("enemy");
+							}}
+							aria-expanded={this.state.expanded.enemy}
+							aria-label="Show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+					<Collapse
+						in={this.state.expanded.enemy}
+						timeout="auto"
+						unmountOnExit
+					>
+						<CardContent className={classes.content}>
+							{EnemyTypes.map(e => (
+								<Tooltip
+									key={e.id}
+									title={e.name}
+									placement="bottom"
+								>
+									<Button
+										raised
+										className={classes.iconButton}
+										color={
+											watcher.enemyId == e.id
+												? "primary"
+												: ""
+										}
+										onClick={() => {
+											watcher.enemyId = e.id;
+											watcher.enemyType = e;
+											this.forceUpdate();
+										}}
+									>
+										{e.name}
 									</Button>
 								</Tooltip>
 							))}

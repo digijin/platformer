@@ -30,6 +30,7 @@ export default class EnemyType {
 
 let enemyTypeConfig: Array<EnemyTypeParams> = [
 	{
+		id: "1",
 		name: "hopper",
 		walkSpeed: 50,
 		jumpSpeed: 100,
@@ -40,6 +41,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		agro: "agro"
 	},
 	{
+		id: "2",
 		name: "lil bouncy",
 		walkSpeed: 50,
 		jumpSpeed: 100,
@@ -50,6 +52,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		agro: "agro"
 	},
 	{
+		id: "3",
 		name: "guard",
 		walkSpeed: 50,
 		jumpSpeed: 100,

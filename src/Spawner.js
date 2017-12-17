@@ -13,11 +13,17 @@ import type EnemyType from "EnemyType";
 
 import GameObject from "GameObject";
 export default class Spawner extends GameObject {
-	update() {
-		if (this.engine.objectsTagged("enemy").length < maxEnemies) {
-			//space for more enemies;
+	init(engine) {
+		super.init(engine);
+		for (let i = 0; i < maxEnemies; i++) {
 			this.spawnEnemy();
 		}
+	}
+	update() {
+		// if (this.engine.objectsTagged("enemy").length < maxEnemies) {
+		// 	//space for more enemies;
+		// 	this.spawnEnemy();
+		// }
 	}
 
 	spawnEnemy() {

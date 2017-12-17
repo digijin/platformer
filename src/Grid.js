@@ -9,6 +9,8 @@ import config from "config";
 import Block from "Block";
 import Point from "Point";
 
+import Enemy from "Enemy";
+
 // import dirtTile from "dirt_tile.png";
 
 import { Noise } from "noisejs";

@@ -5,17 +5,25 @@ import type Engine from "Engine";
 
 import Rect from "Rect";
 
+import type EnemyType from "EnemyType";
+import Enemy from "Enemy";
+
 export default class Watcher extends GameObject {
 	el: HTMLDivElement;
 	size: number;
 
 	blockId: string;
+	enemyId: string;
+	enemyType: EnemyType;
+
+	mode: "block" | "enemy";
 
 	constructor() {
 		super();
 		this.blockId = "1";
 		this.size = 10;
 		this.tag("editor-watcher");
+		this.mode = "block";
 	}
 	init(engine: Engine) {
 		super.init(engine);
@@ -30,15 +38,31 @@ export default class Watcher extends GameObject {
 			{ w: this.size, h: this.size },
 			{ x: 0.5, y: 0.5 }
 		);
-		let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
-		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
-		if (this.engine.input.getButton("editor_add")) {
-			// block.add();
-			blocks.forEach(b => b.add(this.blockId));
-		}
-		if (this.engine.input.getButton("editor_remove")) {
-			// block.remove();
-			blocks.forEach(b => b.addBackground(this.blockId));
+		switch (this.mode) {
+			case "block":
+				let block = this.engine.grid.getBlockAtPoint(
+					this.engine.mouse.point
+				);
+				let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+				if (this.engine.input.getButton("editor_add")) {
+					// block.add();
+					blocks.forEach(b => b.add(this.blockId));
+				}
+				if (this.engine.input.getButton("editor_remove")) {
+					// block.remove();
+					blocks.forEach(b => b.addBackground(this.blockId));
+				}
+				break;
+			case "enemy":
+				if (this.engine.input.getMouseButtonUp("left")) {
+					this.engine.register(
+						new Enemy({
+							position: this.engine.mouse.point,
+							type: this.enemyType
+						})
+					);
+				}
+				break;
 		}
 		//scrolling
 		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
@@ -57,10 +81,6 @@ export default class Watcher extends GameObject {
 			rect.tl().y,
 			this.size,
 			this.size
-			// x * config.grid.width,
-			// y * config.grid.height,
-			// config.grid.width,
-			// config.grid.height
 		);
 	}
 	addListeners() {}
