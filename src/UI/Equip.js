@@ -34,7 +34,6 @@ let stripStyles = (str: string): string => {
 	let regex = /^\s+style="(\S*)/gm;
 	return str.replace(regex, "");
 };
-console.log(hazard.src);
 const GREEN = "#00ff00";
 const DARKGREEN = "#16502d";
 const styles = theme => ({

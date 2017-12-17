@@ -17,12 +17,9 @@ import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
-import type Player from "Player";
-
 import Fpsmeter from "fpsmeter";
 let instance;
 export default class Engine {
-	player: Player;
 	objects: Array<GameObject>;
 	ctx: Context;
 	lastTime: number;

@@ -6,7 +6,6 @@ import Point from "Point";
 
 import Grid from "Grid";
 import Engine from "Engine";
-import Player from "Player";
 import Context from "Context";
 import UI from "UI";
 

@@ -45,29 +45,6 @@ let hand = {
 	// firing: false,
 	state: HAND_STATE.ARMED
 };
-// let md = (e: MouseEvent): void => {
-// 	switch (e.button) {
-// 		case 0:
-// 			firing = true;
-// 			break;
-// 		case 2:
-// 			missile.firing = true;
-// 			break;
-// 	}
-// };
-// let mu = (e: MouseEvent): void => {
-// 	switch (e.button) {
-// 		case 0:
-// 			firing = false;
-// 			break;
-// 		case 2:
-// 			missile.firing = false;
-// 			break;
-// 	}
-// };
-
-// document.addEventListener("mousedown", md);
-// document.addEventListener("mouseup", mu);
 
 import Leg from "Mech/Leg";
 export default class Player extends Actor {
@@ -90,20 +67,20 @@ export default class Player extends Actor {
 
 	init(engine: Engine) {
 		super.init(engine);
-		engine.player = this;
 		engine.register(this.leg);
 	}
-	update(engine: Engine) {
+	update() {
 		//adjust camera
 		let viewTarget = this.position.subtract({
 			x: config.game.width / 2,
 			y: config.game.height / 2
 		});
-		engine.view.offset = engine.view.offset.easeTo(viewTarget, 5);
+		this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
 
-		let gp = engine.input.gamepad.getGamePad();
-		if (engine.input.getDevice() == "gamepad") {
-			engine.mouse.point = this.position
+		//GAMEPAD HACK
+		let gp = this.engine.input.gamepad.getGamePad();
+		if (this.engine.input.getDevice() == "gamepad") {
+			this.engine.mouse.point = this.position
 				.add({
 					x: 0,
 					y: -this.size.h / 2
@@ -123,17 +100,17 @@ export default class Player extends Actor {
 
 		/////////////////MISSILE MECHANICS
 		if (missile.reload > 0) {
-			missile.reload -= engine.deltaTime;
+			missile.reload -= this.engine.deltaTime;
 		} else {
 			if (
-				engine.input.getButton("special") &&
+				this.engine.input.getButton("special") &&
 				missile.energy >= missile.cost
 			) {
 				missile.reload = missile.reloadTime;
 				missile.energy -= missile.cost;
 				missile.regenSpeed = missile.regenBaseSpeed;
 				// missile = false;
-				engine.register(
+				this.engine.register(
 					new Missile({
 						owner: this,
 						direction:
@@ -142,7 +119,7 @@ export default class Player extends Actor {
 							this.leg.facing,
 						speed: 10 + Math.random() * 5,
 						position: this.leg.missileBarrelPos,
-						target: engine.mouse.point.add(
+						target: this.engine.mouse.point.add(
 							new Point({
 								x: (Math.random() - 0.5) * 20,
 								y: (Math.random() - 0.5) * 20
@@ -152,8 +129,8 @@ export default class Player extends Actor {
 				);
 			} else {
 				missile.regenSpeed +=
-					missile.regenSpeedIncrease * engine.deltaTime;
-				missile.energy += missile.regenSpeed * engine.deltaTime;
+					missile.regenSpeedIncrease * this.engine.deltaTime;
+				missile.energy += missile.regenSpeed * this.engine.deltaTime;
 				if (missile.energy > missile.maxEnergy) {
 					missile.energy = missile.maxEnergy;
 				}
@@ -161,9 +138,9 @@ export default class Player extends Actor {
 		}
 
 		////////////////////BULLET FIRING
-		if (engine.input.getButton("fire")) {
+		if (this.engine.input.getButton("fire")) {
 			if (Math.random() < 0.25) {
-				engine.register(
+				this.engine.register(
 					new Shell({
 						position: this.position.add({
 							x: 0,
@@ -176,21 +153,15 @@ export default class Player extends Actor {
 					})
 				);
 			}
-			// let gunPoint = new Point({
-			// 	x: this.position.x,
-			// 	y: this.position.y - this.size.h / 2
-			// });
 			let gunPoint = this.leg.gunBarrelPos;
-			let diff = engine.mouse.point.subtract(gunPoint);
+			let diff = this.engine.mouse.point.subtract(gunPoint);
 			let dir = Math.atan2(diff.y, diff.x);
 			dir += (Math.random() - 0.5) / 4; //spread
-			engine.register(
+			this.engine.register(
 				new Bullet({
 					position: gunPoint,
 					owner: this,
 					time: 8,
-					// h: 10+Math.random(),
-					// v: (Math.random()-0.5)/3
 					h: Math.cos(dir) * 10,
 					v: Math.sin(dir) * 10
 				})
@@ -202,11 +173,11 @@ export default class Player extends Actor {
 			hand.position = this.position.add(hand.offset);
 		}
 
-		if (engine.input.getKey(69)) {
+		if (this.engine.input.getKey(69)) {
 			//FIRE HAND
 			if (hand.state == HAND_STATE.ARMED) {
 				hand.state = HAND_STATE.FIRED;
-				let diff = engine.mouse.point.subtract(hand.position);
+				let diff = this.engine.mouse.point.subtract(hand.position);
 				let dir = Math.atan2(diff.y, diff.x);
 				hand.direction = dir;
 			}
@@ -217,11 +188,11 @@ export default class Player extends Actor {
 		}
 		if (hand.state == HAND_STATE.FIRED) {
 			hand.position.x +=
-				Math.cos(hand.direction) * engine.deltaTime * hand.speed;
+				Math.cos(hand.direction) * this.engine.deltaTime * hand.speed;
 			hand.position.y +=
-				Math.sin(hand.direction) * engine.deltaTime * hand.speed;
+				Math.sin(hand.direction) * this.engine.deltaTime * hand.speed;
 
-			if (engine.grid.isPositionBlocked(hand.position)) {
+			if (this.engine.grid.isPositionBlocked(hand.position)) {
 				// if(grid.blockAtPosition(hand.position).block !== "0"){
 				hand.state = HAND_STATE.GRIPPED;
 			}
@@ -230,7 +201,7 @@ export default class Player extends Actor {
 			let target = this.position.add(hand.offset);
 			let diff = target.subtract(hand.position);
 			let dist = hand.position.distanceTo(target);
-			let speed = engine.deltaTime * hand.speed;
+			let speed = this.engine.deltaTime * hand.speed;
 			if (speed > dist) {
 				hand.position = target;
 				hand.state = HAND_STATE.ARMED;
@@ -243,50 +214,28 @@ export default class Player extends Actor {
 
 		///////////////////////MOVEMENT
 
-		// let boundingRect = Rect.fromPosSizeRego(
-		// 	this.position,
-		// 	this.size,
-		// 	this.registration
-		// );
-
 		let boundingRect = this.getBoundingRect();
 
-		//HORIZONTAL
-		// if (engine.input.getKey("left")) {
-		// 	this.h -= engine.deltaTime * 5;
-		// 	if (this.h < -1) this.h = -1;
-		// } else if (engine.input.getKey("right")) {
-		// 	this.h += engine.deltaTime * 5;
-		// 	if (this.h > 1) this.h = 1;
-		// } else {
-		// 	if (this.v == 0) {
-		// 		this.h *= 1 - engine.deltaTime * 5;
-		// 		//cut to zero eventually (for other animations)
-		// 		if (Math.abs(this.h) < 0.1) {
-		// 			this.h = 0;
-		// 		}
-		// 	}
-		// }
 		this.h = this.engine.input.getAxis("horizontal");
 
-		if (gp && engine.input.getLastActivityDevice() == "gamepad") {
+		if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
 			this.h = gp.axes[0];
 		}
-		if (engine.input.getButton("stand")) {
+		if (this.engine.input.getButton("stand")) {
 			this.h = 0;
 		}
 
 		//check walls
-		let hDelta = this.h * engine.deltaTime * hSpeed;
+		let hDelta = this.h * this.engine.deltaTime * hSpeed;
 
 		//VERTICAL MOVEMENT
-		if (engine.input.getButton("jump")) {
+		if (this.engine.input.getButton("jump")) {
 			if (this.v == 0) {
 				this.v = -4; //jump
 			}
-			this.v -= engine.deltaTime * 4; //BOOSTERS
+			this.v -= this.engine.deltaTime * 4; //BOOSTERS
 
-			engine.register(
+			this.engine.register(
 				new Shell({
 					position: this.position.subtract({
 						x: 0,
@@ -299,7 +248,7 @@ export default class Player extends Actor {
 				})
 			);
 		} else {
-			this.v += engine.deltaTime * 10; //GRAVITY
+			this.v += this.engine.deltaTime * 10; //GRAVITY
 		}
 
 		if (hand.state == HAND_STATE.GRIPPED) {
@@ -307,8 +256,8 @@ export default class Player extends Actor {
 			let diff = this.position.add(hand.offset).subtract(hand.position);
 			let dir = Math.atan2(diff.y, diff.x);
 			this.h = -Math.cos(dir); //* deltaTime*hSpeed
-			this.v = -Math.sin(dir) * engine.deltaTime * hand.reelSpeed;
-			hDelta = this.h * engine.deltaTime * hand.reelSpeed;
+			this.v = -Math.sin(dir) * this.engine.deltaTime * hand.reelSpeed;
+			hDelta = this.h * this.engine.deltaTime * hand.reelSpeed;
 		}
 
 		if (!this.canMoveHori(hDelta)) {
@@ -342,9 +291,9 @@ export default class Player extends Actor {
 		// );
 
 		// UI MISSILE
-		engine.ctx.context.fillStyle = "#ff0000";
-		engine.ctx.context.strokeRect(10, 10, 20, 100);
-		engine.ctx.context.fillRect(
+		this.engine.ctx.context.fillStyle = "#ff0000";
+		this.engine.ctx.context.strokeRect(10, 10, 20, 100);
+		this.engine.ctx.context.fillRect(
 			10,
 			10,
 			20,
@@ -354,17 +303,17 @@ export default class Player extends Actor {
 		//HAND
 		// ctx.fillStyle = '#aaaaaa'
 		// let pos = hand.offset.add(this.position);
-		engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
+		this.engine.ctx.drawLine(this.position.add(hand.offset), hand.position);
 
 		//RETICULE CROSSHAIR
 		let mpt = this.engine.mouse.point;
-		engine.ctx.drawLine(
+		this.engine.ctx.drawLine(
 			mpt.add({ x: 10, y: 0 }),
 			mpt.add({ x: -10, y: 0 }),
 			"red",
 			1
 		);
-		engine.ctx.drawLine(
+		this.engine.ctx.drawLine(
 			mpt.add({ x: 0, y: 10 }),
 			mpt.add({ x: 0, y: -10 }),
 			"red",
@@ -373,14 +322,14 @@ export default class Player extends Actor {
 
 		if (config.debug.player.boundingBox) {
 			let bounding = this.getBoundingRect();
-			engine.ctx.drawLine(bounding.tl(), bounding.tr(), "yellow", 1);
-			engine.ctx.drawLine(bounding.bl(), bounding.br(), "yellow", 1);
-			engine.ctx.drawLine(bounding.tl(), bounding.bl(), "yellow", 1);
-			engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
+			this.engine.ctx.drawLine(bounding.tl(), bounding.tr(), "yellow", 1);
+			this.engine.ctx.drawLine(bounding.bl(), bounding.br(), "yellow", 1);
+			this.engine.ctx.drawLine(bounding.tl(), bounding.bl(), "yellow", 1);
+			this.engine.ctx.drawLine(bounding.tr(), bounding.br(), "yellow", 1);
 		}
 
-		engine.ctx.fillRect(hand.position.x, hand.position.y, 2, 2);
+		this.engine.ctx.fillRect(hand.position.x, hand.position.y, 2, 2);
 
-		engine.ctx.context.fillStyle = "#000000";
+		this.engine.ctx.context.fillStyle = "#000000";
 	}
 }
