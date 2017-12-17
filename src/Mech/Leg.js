@@ -2,7 +2,7 @@
 
 import GameObject from "GameObject";
 
-import type Player from "Player";
+import type Player from "Actor/Player";
 import Point from "Point";
 
 import cockpit from "Player/cockpit.png";

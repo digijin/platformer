@@ -8,7 +8,7 @@ import mech from "mech.png";
 import Actor from "Actor";
 
 import config from "config";
-import type Player from "Player";
+import type Player from "Actor/Player";
 
 import bounce from "AI/bounce";
 import patrol from "AI/patrol";

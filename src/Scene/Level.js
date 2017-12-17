@@ -1,6 +1,6 @@
 // @flow
 
-import Player from "Player";
+import Player from "Actor/Player";
 import Enemy from "Enemy";
 
 import Point from "Point";

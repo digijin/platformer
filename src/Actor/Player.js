@@ -4,7 +4,7 @@ import Point from "Point";
 import Missile from "Missile";
 import Bullet from "Bullet";
 import Shell from "Shell";
-import mech from "./mech.png";
+import mech from "../mech.png";
 
 import Actor from "Actor";
 
