@@ -28,7 +28,7 @@ export default class Level extends Base {
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
 		engine.register(player);
 		// engine.register(new Enemy({ position: new Point({ x: 250, y: 250 }) }));
-		engine.register(new Spawner());
+		// engine.register(new Spawner());
 
 		engine.ui.dispatch({ type: "START_SCENE", scene: "level" });
 	}

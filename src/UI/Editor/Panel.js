@@ -336,24 +336,25 @@ class EditorPanel extends React.Component {
 						timeout="auto"
 						unmountOnExit
 					>
-						<CardActions className={classes.content}>
+						<CardContent>
 							{saves.map(savename => {
 								return (
-									<Button
-										raised
-										key={savename + "loadbutton"}
-										onClick={() => {
-											this.props.engine.grid.load(
-												this.storage.load(savename)
-											);
-										}}
-									>
-										{savename}
-									</Button>
+									<div>
+										<Button
+											raised
+											key={savename + "loadbutton"}
+											onClick={() => {
+												this.props.engine.grid.load(
+													this.storage.load(savename)
+												);
+											}}
+										>
+											{savename}
+										</Button>
+										<br />
+									</div>
 								);
 							})}
-						</CardActions>
-						<CardContent>
 							<TextField
 								// hintText="Enter filename here"
 								// floatingLabelText="Save Name"

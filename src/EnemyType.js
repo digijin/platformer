@@ -67,3 +67,11 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 export const EnemyTypes: Array<EnemyType> = enemyTypeConfig.map(
 	c => new EnemyType(c)
 );
+
+export const EnemyTypesMap: { [id: string]: EnemyType } = EnemyTypes.reduce(
+	(out, next) => {
+		out[next.id] = next;
+		return out;
+	},
+	{}
+);

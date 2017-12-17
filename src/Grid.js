@@ -11,6 +11,8 @@ import Point from "Point";
 
 import Enemy from "Enemy";
 
+import { EnemyTypesMap } from "EnemyType";
+
 // import dirtTile from "dirt_tile.png";
 
 import { Noise } from "noisejs";
@@ -321,7 +323,12 @@ export default class Grid extends GameObject {
 		// return JSON.stringify({ blocks: this.blocks }, (name, val) => {
 		// 	if (name !== "grid") return val;
 		// });
+		let enemies = this.engine.objectsTagged("enemy");
+		// console.log(enemies);
 		return JSON.stringify({
+			enemies: enemies.map(e => {
+				return { t: e.type.id, p: e.position };
+			}),
 			blocks: this.blocks.map(col => {
 				return col.map(block => {
 					return { t: block.type, b: block.backgroundType };
@@ -342,6 +349,16 @@ export default class Grid extends GameObject {
 				});
 			});
 		});
+		if (data.enemies) {
+			data.enemies.forEach(e => {
+				this.engine.register(
+					new Enemy({
+						position: new Point(e.p),
+						type: EnemyTypesMap[e.t]
+					})
+				);
+			});
+		}
 	}
 	addRowAbove() {
 		this.height++;
