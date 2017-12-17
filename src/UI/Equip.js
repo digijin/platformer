@@ -71,6 +71,12 @@ const styles = theme => ({
 		width: "100px",
 		height: "100px"
 	},
+	itemToggleSelected: {
+		border: "2px solid white",
+		borderRadius: "8px",
+		width: "100px",
+		height: "100px"
+	},
 	table: {
 		display: "inline-block"
 	},
@@ -145,7 +151,11 @@ export class Equip extends React.Component {
 									onClick={() => {
 										this.selectItem("primary");
 									}}
-									className={classnames(classes.itemToggle)}
+									className={classnames(
+										this.state.item == "primary"
+											? classes.itemToggleSelected
+											: classes.itemToggle
+									)}
 								>
 									primary weapon
 								</div>
@@ -177,7 +187,11 @@ export class Equip extends React.Component {
 									onClick={() => {
 										this.selectItem("secondary");
 									}}
-									className={classnames(classes.itemToggle)}
+									className={classnames(
+										this.state.item == "secondary"
+											? classes.itemToggleSelected
+											: classes.itemToggle
+									)}
 								>
 									secondary weapon
 								</div>
@@ -189,7 +203,11 @@ export class Equip extends React.Component {
 									onClick={() => {
 										this.selectItem("legs");
 									}}
-									className={classnames(classes.itemToggle)}
+									className={classnames(
+										this.state.item == "legs"
+											? classes.itemToggleSelected
+											: classes.itemToggle
+									)}
 								>
 									legs
 								</div>
@@ -199,7 +217,11 @@ export class Equip extends React.Component {
 									onClick={() => {
 										this.selectItem("body");
 									}}
-									className={classnames(classes.itemToggle)}
+									className={classnames(
+										this.state.item == "body"
+											? classes.itemToggleSelected
+											: classes.itemToggle
+									)}
 								>
 									body
 								</div>
