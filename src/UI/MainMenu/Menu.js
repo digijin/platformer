@@ -22,6 +22,27 @@ class MainMenu extends React.Component {
 	// 	right mouse:secondary (missiles)<br />
 	// </div>
 	render() {
+		let content = (
+			<div>
+				<a id="play" onClick={this.props.play}>
+					Play
+				</a>
+				<a
+					id="load"
+					onClick={() => {
+						this.setState({ page: "load" });
+					}}
+				>
+					Load
+				</a>
+				<a id="editor" onClick={this.props.editor}>
+					Editor
+				</a>
+			</div>
+		);
+		if (this.state.page == "load") {
+			content = <Load engine={this.props.engine} />;
+		}
 		return (
 			<div id="MainMenuUI">
 				<div className="title">
@@ -29,19 +50,7 @@ class MainMenu extends React.Component {
 					<div className="sub">so for now it's called</div>
 					PLATFORMER
 				</div>
-				<a id="play" onClick={this.props.play}>
-					Play
-				</a>
-				<a id="load" onClick={this.props.load}>
-					Load
-				</a>
-				<a id="editor" onClick={this.props.editor}>
-					Editor
-				</a>
-				<a id="equip" onClick={this.props.equip}>
-					Equip
-				</a>
-				<Load engine={this.props.engine} />
+				{content}
 			</div>
 		);
 	}
