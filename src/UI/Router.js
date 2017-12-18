@@ -4,6 +4,8 @@ import Menu from "./MainMenu/Menu";
 import EditorPanel from "./Editor/Panel";
 import Equip from "./Equip";
 import Level from "./Level";
+import Briefing from "./Briefing";
+import Results from "./Results";
 
 import type Engine from "Engine";
 
@@ -21,6 +23,10 @@ export class Router extends React.Component {
 			return <Equip engine={this.props.engine} />;
 		} else if (this.props.scene == "level") {
 			return <Level engine={this.props.engine} />;
+		} else if (this.props.scene == "briefing") {
+			return <Briefing engine={this.props.engine} />;
+		} else if (this.props.scene == "results") {
+			return <Results engine={this.props.engine} />;
 		} else {
 			return <div />;
 		}
