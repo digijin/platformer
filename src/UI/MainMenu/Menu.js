@@ -24,18 +24,18 @@ class MainMenu extends React.Component {
 	render() {
 		let content = (
 			<div>
-				<a id="play" onClick={this.props.play}>
+				<a id="playButton" onClick={this.props.play}>
 					Play
 				</a>
 				<a
-					id="load"
+					id="loadButton"
 					onClick={() => {
 						this.setState({ page: "load" });
 					}}
 				>
 					Load
 				</a>
-				<a id="editor" onClick={this.props.editor}>
+				<a id="editorButton" onClick={this.props.editor}>
 					Editor
 				</a>
 			</div>

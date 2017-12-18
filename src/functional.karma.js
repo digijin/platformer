@@ -11,7 +11,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-describe("functional", () => {
+fdescribe("functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {
@@ -59,9 +59,13 @@ describe("functional", () => {
 	});
 
 	describe("start game", () => {
+		it("null should be undefined", () => {
+			expect(null).toBeDefined();
+		});
 		it("should press play", () => {
-			expect(document.getElementById("play")).toBeDefined();
-			mouseUtil.clickSelector("#play");
+			let playButton = document.getElementById("playButton");
+			expect(playButton).not.toBe(null);
+			mouseUtil.clickSelector("#playButton");
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
