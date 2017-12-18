@@ -244,6 +244,7 @@ export class Equip extends React.Component {
 
 				<Button
 					raised
+					id="launchButton"
 					className={classes.launchButton}
 					onClick={() => {
 						// this.props.engine.startScene(new Level());

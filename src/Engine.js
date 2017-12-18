@@ -112,6 +112,7 @@ export default class Engine {
 				this.currentScene.start(this);
 
 				this.transitioning = false;
+				window.dispatchEvent(new Event("transition-finished"));
 			});
 			this.register(transition);
 		}

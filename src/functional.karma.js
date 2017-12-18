@@ -3,6 +3,9 @@ import Game from "Game";
 
 import testGen from "jasmine-es6-generator";
 import mouseUtil from "test/util/mouse";
+
+import ReactTestUtils from "react-dom/test-utils";
+import sizzle from "sizzle";
 // let Game = require("./Game");
 // let mouseUtil = require("./test/util/mouse");
 
@@ -62,15 +65,68 @@ fdescribe("functional", () => {
 		it("null should be undefined", () => {
 			expect(null).toBeDefined();
 		});
-		it("should press play", () => {
-			let playButton = document.getElementById("playButton");
-			expect(playButton).not.toBe(null);
-			mouseUtil.clickSelector("#playButton");
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 2000);
+		});
+		it("should press load", () => {
+			let loadButton = document.getElementById("loadButton");
+			expect(loadButton).not.toBe(null);
+			mouseUtil.clickSelector("#loadButton");
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
 		});
+		it("should type in text box", () => {
+			let characterName = document.getElementById("characterName");
+			expect(characterName).not.toBe(null);
+			characterName.value = "test_profile";
+			ReactTestUtils.Simulate.change(characterName);
+		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 100);
+		});
+		it("sohuld click add", () => {
+			let newProfile = document.getElementById("newProfile");
+			expect(newProfile).not.toBe(null);
+			mouseUtil.clickSelector("#newProfile");
+		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 100);
+		});
+		it("should click the newly added profile", () => {
+			let profileButton = document.getElementById("profiletest_profile");
+			expect(profileButton).not.toBe(null);
+			mouseUtil.clickSelector("#profiletest_profile");
+		});
+		it("should trigger transition-finished", done => {
+			window.addEventListener("transition-finished", done);
+		});
 	});
+
+	describe("briefing screen", () => {
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 2000);
+		});
+		it("should click through to equip", () => {
+			let equipButton = document.getElementById("equipButton");
+			expect(equipButton).not.toBe(null);
+			mouseUtil.clickSelector("#equipButton");
+		});
+		it("should trigger transition-finished", done => {
+			window.addEventListener("transition-finished", done);
+		});
+	});
+	describe("equip screen", () => {
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 1000);
+		});
+		it("should click through to launch", () => {
+			let launchButton = document.getElementById("launchButton");
+			expect(launchButton).not.toBe(null);
+			mouseUtil.clickSelector("#launchButton");
+		});
+	});
+
 	describe("weapons check", () => {
 		it("should aim", () => {
 			let target = {

@@ -47,6 +47,7 @@ class Load extends React.Component {
 				<div className={classes.saveList}>
 					{this.storage.list().map(s => (
 						<a
+							id={"profile" + s}
 							key={s}
 							onClick={() => {
 								Player.load(this.storage.load(s));
@@ -64,12 +65,14 @@ class Load extends React.Component {
 				<TextField
 					label="Character Name"
 					placeholder="Enter your name"
+					id="characterName"
 					className={classes.textField}
 					margin="normal"
 					value={this.state.savename}
 					onChange={this.changeSavename}
 				/>
 				<a
+					id="newProfile"
 					onClick={() => {
 						// console.log("making", this.state.savename);
 						let p = new Player({ name: this.state.savename });

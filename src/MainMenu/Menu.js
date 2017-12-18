@@ -142,9 +142,9 @@ export default class MainMenu extends GameObject {
 			30
 		);
 		// console.log(this.engine.view.offset.y);
-		if (this.engine.input.getButton("jump")) {
-			this.engine.startScene(new Level());
-		}
+		// if (this.engine.input.getButton("jump")) {
+		// 	this.engine.startScene(new Level());
+		// }
 		// this.engine.ctx.translate(1, -1);
 		// this.engine.ctx.rotate(this.engine.deltaTime);
 		// this.engine.ctx.fillText("game!", 0, 6);
