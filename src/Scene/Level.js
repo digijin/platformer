@@ -10,6 +10,8 @@ import Background from "Background";
 
 import Spawner from "Spawner";
 
+import StoryTeller from "StoryTeller";
+
 import type Engine from "Engine";
 
 export default class Level extends Base {
@@ -24,11 +26,10 @@ export default class Level extends Base {
 		grid.load(gridData);
 
 		engine.register(new Background());
+		engine.register(new StoryTeller());
 
 		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
 		engine.register(player);
-		// engine.register(new Enemy({ position: new Point({ x: 250, y: 250 }) }));
-		// engine.register(new Spawner());
 
 		engine.ui.dispatch({ type: "START_SCENE", scene: "level" });
 	}

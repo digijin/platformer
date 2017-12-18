@@ -98,17 +98,23 @@ export default class Engine {
 		this.currentScene = scene;
 		this.currentScene.start(this);
 	}
+	transitioning: boolean;
 	startSceneTransition(scene: SceneBase, transition: Transition) {
 		// trnasition.on
-		transition.onEndLastScene(() => {
-			if (this.currentScene) this.currentScene.end();
-			this.objects.push(transition);
-		});
-		transition.onStartNextScene(() => {
-			this.currentScene = scene;
-			this.currentScene.start(this);
-		});
-		this.register(transition);
+		if (!this.transitioning) {
+			this.transitioning = true;
+			transition.onEndLastScene(() => {
+				if (this.currentScene) this.currentScene.end();
+				this.objects.push(transition);
+			});
+			transition.onStartNextScene(() => {
+				this.currentScene = scene;
+				this.currentScene.start(this);
+
+				this.transitioning = false;
+			});
+			this.register(transition);
+		}
 	}
 
 	//add new objects to be tracked by engine

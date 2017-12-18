@@ -54,7 +54,10 @@ export default class Enemy extends Actor {
 		} //do not movefor edit mode
 
 		//check if out of bounds
-		if (this.position.y > this.engine.grid.height * config.grid.height) {
+		if (
+			this.position.y >
+			this.engine.grid.height * config.grid.height * 2
+		) {
 			this.explode();
 		}
 		//if stuck
