@@ -3,7 +3,7 @@ import React from "react";
 import Storage from "Storage";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
-import Equip from "Scene/Equip";
+import Briefing from "Scene/Briefing";
 import Doors from "Transition/Doors";
 
 import Player from "Player";
@@ -52,7 +52,7 @@ class Load extends React.Component {
 								Player.load(this.storage.load(s));
 								this.props.engine.currentPlayer = Player.getCurrentPlayer();
 								this.props.engine.startSceneTransition(
-									new Equip(),
+									new Briefing(),
 									new Doors()
 								);
 							}}
