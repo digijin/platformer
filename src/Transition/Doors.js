@@ -33,10 +33,12 @@ export default class Wipe extends Base {
 		this.time = 0;
 		this.in = true;
 		// this.el.className = this.el.className + " closed";
+		this.frame = 0;
 	}
 	time: number;
 	update() {
-		if (this.time == 0) {
+		this.frame++;
+		if (this.frame == 2) {
 			this.right.className = "right door closed";
 			this.left.className = "left door closed";
 		}
