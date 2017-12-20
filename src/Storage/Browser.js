@@ -23,4 +23,7 @@ export default class BrowserAdapter extends StorageAdapter {
 	load(name: string): string {
 		return localStorage.getItem(this.prefix + name);
 	}
+	remove(name: string) {
+		return localStorage.removeItem(this.prefix + name);
+	}
 }

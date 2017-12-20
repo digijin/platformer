@@ -27,6 +27,10 @@ describe("Storage.spec.js", () => {
 	it("should save and load", () => {
 		expect(storage.load("automated_test")).toBe("my data");
 	});
+	it("should remove", () => {
+		storage.remove("automated_test");
+		expect(storage.load("automated_test")).toBe(null);
+	});
 	if (navigator.userAgent.indexOf("Electron") > -1) {
 		describe("Electron", () => {
 			it("should run electron tests", () => {

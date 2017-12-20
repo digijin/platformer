@@ -25,4 +25,7 @@ export default class Storage {
 	load(name: string): string {
 		return this.adapter.load(name);
 	}
+	remove(name: string) {
+		return this.adapter.remove(name);
+	}
 }
