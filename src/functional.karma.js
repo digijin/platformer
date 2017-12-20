@@ -14,7 +14,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-fdescribe("functional", () => {
+describe("functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {

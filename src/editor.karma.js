@@ -43,8 +43,8 @@ describe("editor.karma functional", () => {
 	});
 	describe("start editor", () => {
 		it("should press editor", () => {
-			expect(document.getElementById("editor")).toBeDefined();
-			mouseUtil.clickSelector("#editor");
+			expect(document.getElementById("editorButton")).not.toBe(null);
+			mouseUtil.clickSelector("#editorButton");
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, DELAY);
