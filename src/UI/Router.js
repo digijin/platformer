@@ -6,6 +6,7 @@ import Equip from "./Equip";
 import Level from "./Level";
 import Briefing from "./Briefing";
 import Results from "./Results";
+import Pause from "./Pause";
 
 import type Engine from "Engine";
 
@@ -27,6 +28,8 @@ export class Router extends React.Component {
 			return <Briefing engine={this.props.engine} />;
 		} else if (this.props.scene == "results") {
 			return <Results engine={this.props.engine} />;
+		} else if (this.props.scene == "pause") {
+			return <Pause engine={this.props.engine} />;
 		} else {
 			return <div />;
 		}

@@ -14,9 +14,12 @@ import StoryTeller from "StoryTeller";
 
 import type Engine from "Engine";
 
+import PauseMenu from "PauseMenu";
+
 export default class Level extends Base {
 	start(engine: Engine) {
 		super.start(engine);
+		engine.register(new PauseMenu());
 		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
 		// grid.generate(1);

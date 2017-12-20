@@ -38,6 +38,7 @@ export default class Engine {
 	view: { offset: Point };
 	input: Input;
 	container: HTMLElement;
+	paused: Boolean;
 	static getInstance(): Engine {
 		if (!instance) {
 			instance = new Engine();
@@ -51,7 +52,7 @@ export default class Engine {
 	//init
 	constructor() {
 		instance = this;
-
+		this.paused = false;
 		this.view = { offset: new Point({ x: 120, y: 0 }) };
 
 		this.objects = [];
@@ -156,25 +157,26 @@ export default class Engine {
 		}
 		this.deltaTime = diff / 1000;
 		this.mouse.update();
+		if (!this.paused) {
+			//clear canvas
+			this.ctx.clearRect(0, 0, config.game.width, config.game.height);
 
-		//clear canvas
-		this.ctx.clearRect(0, 0, config.game.width, config.game.height);
+			//sort objects on z
+			this.objects.sort((a, b) => {
+				let az = 0;
+				if (a && a.z) az = a.z;
+				let bz = 0;
+				if (b && b.z) bz = b.z;
+				return az - bz;
+			});
 
-		//sort objects on z
-		this.objects.sort((a, b) => {
-			let az = 0;
-			if (a && a.z) az = a.z;
-			let bz = 0;
-			if (b && b.z) bz = b.z;
-			return az - bz;
-		});
-
-		//update clone list of all object so I can delete from original
-		this.objects.slice(0).forEach(o => {
-			if (o) {
-				o.update(this);
-			}
-		});
+			//update clone list of all object so I can delete from original
+			this.objects.slice(0).forEach(o => {
+				if (o) {
+					o.update(this);
+				}
+			});
+		}
 
 		// this.objects = this.objects.filter(o => o);
 
