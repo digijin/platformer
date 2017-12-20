@@ -26,6 +26,11 @@ const styles = theme => ({
 	},
 	header: {
 		height: 24
+	},
+	delete: {
+		display: "inline-block",
+		color: "white",
+		textDecoration: "underline"
 	}
 });
 class Load extends React.Component {
@@ -46,20 +51,29 @@ class Load extends React.Component {
 				<div className={classes.header}>Choose Character</div>
 				<div className={classes.saveList}>
 					{this.storage.list().map(s => (
-						<a
-							id={"profile" + s}
-							key={s}
-							onClick={() => {
-								Player.load(this.storage.load(s));
-								this.props.engine.currentPlayer = Player.getCurrentPlayer();
-								this.props.engine.startSceneTransition(
-									new Briefing(),
-									new Doors()
-								);
-							}}
-						>
-							{s}
-						</a>
+						<div key={s}>
+							<a
+								id={"profile" + s}
+								onClick={() => {
+									Player.load(this.storage.load(s));
+									this.props.engine.currentPlayer = Player.getCurrentPlayer();
+									this.props.engine.startSceneTransition(
+										new Briefing(),
+										new Doors()
+									);
+								}}
+							>
+								{s}
+							</a>
+							<div
+								className={classes.delete}
+								onClick={() => {
+									console.log("yolo");
+								}}
+							>
+								delete
+							</div>
+						</div>
 					))}
 				</div>
 				<TextField
