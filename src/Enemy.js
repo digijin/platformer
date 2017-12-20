@@ -17,9 +17,6 @@ import agro from "AI/agro";
 import type EnemyType from "EnemyType";
 
 export default class Enemy extends Actor {
-	position: Point;
-	size: { w: number, h: number };
-	registration: { x: number, y: number };
 	walkSpeed: number;
 	v: number;
 	h: number;

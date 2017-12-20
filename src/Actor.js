@@ -1,5 +1,6 @@
 // @flow
 import GameObject from "GameObject";
+import Renderable from "Renderable";
 import Point from "Point";
 
 import config from "config";
@@ -10,12 +11,9 @@ import Explosion from "Explosion";
 import type Block from "Block";
 // let engine: Engine;
 
-export default class Actor extends GameObject {
-	position: Point;
+export default class Actor extends Renderable {
 	h: number;
 	v: number;
-	size: { w: number, h: number };
-	registration: { x: number, y: number };
 	z: number;
 	hp: number;
 	maxhp: number;
@@ -27,7 +25,6 @@ export default class Actor extends GameObject {
 		this.maxhp = 1;
 
 		this.tag("actor");
-		// engine = Engine.getInstance();
 	}
 	damage(amount: number) {
 		this.hp -= amount;
