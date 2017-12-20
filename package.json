@@ -16,7 +16,7 @@
 		"flow:watch": "flow-watch",
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
-		"karma": "karma start --reporters nyan,progress",
+		"karma": "karma start --reporters spec",
 		"karma:ci":
 			"karma start --reporters coverage-istanbul --browsers ChromeHeadless --single-run",
 		"karma:headless":

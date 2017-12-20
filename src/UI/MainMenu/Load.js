@@ -66,6 +66,7 @@ class Load extends React.Component {
 								{s}
 							</a>
 							<div
+								id={"deleteprofile" + s}
 								className={classes.delete}
 								onClick={() => {
 									// console.log("yolo");

@@ -256,4 +256,66 @@ describe("functional", () => {
 			setTimeout(done, 100);
 		});
 	});
+
+	describe("pause and exit to menu", () => {
+		it("should hit escape", () => {
+			window.onkeydown({ keyCode: 27 }); //39
+			window.onkeyup({ keyCode: 27 }); //39
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should be paused", () => {
+			expect(game.engine.paused).toBe(true);
+		});
+		it("should resume", () => {
+			let resumeButton = document.getElementById("resumeButton");
+			expect(resumeButton).not.toBe(null);
+			mouseUtil.clickSelector("#resumeButton");
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should not be paused", () => {
+			expect(game.engine.paused).toBe(false);
+		});
+		it("should hit escape", () => {
+			window.onkeydown({ keyCode: 27 });
+			window.onkeyup({ keyCode: 27 });
+		});
+		it("should be registered with input", () => {
+			expect(game.engine.input.getKeyDown("escape")).toBeTruthy();
+		});
+		it("should wait for a while", done => {
+			setTimeout(done, 1000);
+		});
+		it("should be paused for a second time", () => {
+			expect(game.engine.paused).toBe(true);
+		});
+		it("should click main menu", () => {
+			let mainMenuButton = document.getElementById("mainMenuButton");
+			expect(mainMenuButton).not.toBe(null);
+			mouseUtil.clickSelector("#mainMenuButton");
+		});
+	});
+	describe("cleanup", () => {
+		it("should wait for a while for main menu", done => {
+			setTimeout(done, 1000);
+		});
+		it("should press load", () => {
+			let loadButton = document.getElementById("loadButton");
+			expect(loadButton).not.toBe(null);
+			mouseUtil.clickSelector("#loadButton");
+		});
+		it("should wait for a while for load", done => {
+			setTimeout(done, 100);
+		});
+		it("should delte the profile it created", () => {
+			let deleteButton = document.getElementById(
+				"deleteprofiletest_profile"
+			);
+			expect(deleteButton).not.toBe(null);
+			mouseUtil.clickSelector("#deleteprofiletest_profile");
+		});
+	});
 });

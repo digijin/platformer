@@ -34,9 +34,11 @@ export class Pause extends React.Component {
 					<div className={classes.title}>GAME - PAUSED</div>
 					<hr />
 					<Button
+						id="mainMenuButton"
 						raised
 						className={classes.button}
 						onClick={() => {
+							this.props.engine.paused = false;
 							this.props.engine.startScene(new MainMenu());
 						}}
 					>
@@ -46,6 +48,7 @@ export class Pause extends React.Component {
 					<Button
 						raised
 						className={classes.button}
+						id="resumeButton"
 						onClick={() => {
 							this.props.engine.paused = false;
 							this.props.engine.ui.dispatch({
