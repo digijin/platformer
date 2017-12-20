@@ -68,7 +68,9 @@ class Load extends React.Component {
 							<div
 								className={classes.delete}
 								onClick={() => {
-									console.log("yolo");
+									// console.log("yolo");
+									this.storage.remove(s);
+									this.forceUpdate();
 								}}
 							>
 								delete
