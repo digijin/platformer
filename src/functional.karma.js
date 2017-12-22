@@ -14,6 +14,12 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function clickId(id) {
+	let button = document.getElementById(id);
+	expect(button).not.toBe(null);
+	mouseUtil.clickSelector("#" + id);
+}
+
 describe("functional", () => {
 	let container;
 	let game;
@@ -86,17 +92,13 @@ describe("functional", () => {
 			setTimeout(done, 100);
 		});
 		it("sohuld click add", () => {
-			let newProfile = document.getElementById("newProfile");
-			expect(newProfile).not.toBe(null);
-			mouseUtil.clickSelector("#newProfile");
+			clickId("newProfile");
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
 		});
 		it("should click the newly added profile", () => {
-			let profileButton = document.getElementById("profiletest_profile");
-			expect(profileButton).not.toBe(null);
-			mouseUtil.clickSelector("#profiletest_profile");
+			clickId("profiletest_profile");
 		});
 		it("should trigger transition-finished", done => {
 			window.addEventListener("transition-finished", done);
@@ -108,9 +110,7 @@ describe("functional", () => {
 			setTimeout(done, 2000);
 		});
 		it("should click through to equip", () => {
-			let equipButton = document.getElementById("equipButton");
-			expect(equipButton).not.toBe(null);
-			mouseUtil.clickSelector("#equipButton");
+			clickId("equipButton");
 		});
 		it("should trigger transition-finished", done => {
 			window.addEventListener("transition-finished", done);
@@ -121,9 +121,7 @@ describe("functional", () => {
 			setTimeout(done, 1000);
 		});
 		it("should click through to launch", () => {
-			let launchButton = document.getElementById("launchButton");
-			expect(launchButton).not.toBe(null);
-			mouseUtil.clickSelector("#launchButton");
+			clickId("launchButton");
 		});
 	});
 
@@ -269,9 +267,7 @@ describe("functional", () => {
 			expect(game.engine.paused).toBe(true);
 		});
 		it("should resume", () => {
-			let resumeButton = document.getElementById("resumeButton");
-			expect(resumeButton).not.toBe(null);
-			mouseUtil.clickSelector("#resumeButton");
+			clickId("resumeButton");
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 1000);
@@ -293,9 +289,7 @@ describe("functional", () => {
 			expect(game.engine.paused).toBe(true);
 		});
 		it("should click main menu", () => {
-			let mainMenuButton = document.getElementById("mainMenuButton");
-			expect(mainMenuButton).not.toBe(null);
-			mouseUtil.clickSelector("#mainMenuButton");
+			clickId("mainMenuButton");
 		});
 	});
 	describe("cleanup", () => {
@@ -303,19 +297,13 @@ describe("functional", () => {
 			setTimeout(done, 1000);
 		});
 		it("should press load", () => {
-			let loadButton = document.getElementById("loadButton");
-			expect(loadButton).not.toBe(null);
-			mouseUtil.clickSelector("#loadButton");
+			clickId("loadButton");
 		});
 		it("should wait for a while for load", done => {
 			setTimeout(done, 100);
 		});
 		it("should delte the profile it created", () => {
-			let deleteButton = document.getElementById(
-				"deleteprofiletest_profile"
-			);
-			expect(deleteButton).not.toBe(null);
-			mouseUtil.clickSelector("#deleteprofiletest_profile");
+			clickId("deleteprofiletest_profile");
 		});
 	});
 });
