@@ -153,92 +153,7 @@ export class Equip extends React.Component {
 					</Button>
 				</Tooltip>
 				<hr className={classnames(classes.hr)} />
-				<table className={classnames(classes.table)}>
-					<tbody>
-						<tr>
-							<td>
-								<div
-									onClick={() => {
-										this.selectItem("primary");
-									}}
-									className={classnames(
-										this.state.item == "primary"
-											? classes.itemToggleSelected
-											: classes.itemToggle
-									)}
-								>
-									primary weapon
-								</div>
-							</td>
-							<td rowSpan="2">
-								<div
-									className={classnames(
-										classes.svg,
-										classes.front
-									)}
-									dangerouslySetInnerHTML={{
-										__html: stripStyles(front)
-									}}
-								/>
-							</td>
-							<td rowSpan="2">
-								<div
-									className={classnames(
-										classes.svg,
-										classes.side
-									)}
-									dangerouslySetInnerHTML={{
-										__html: stripStyles(side)
-									}}
-								/>
-							</td>
-							<td>
-								<div
-									onClick={() => {
-										this.selectItem("secondary");
-									}}
-									className={classnames(
-										this.state.item == "secondary"
-											? classes.itemToggleSelected
-											: classes.itemToggle
-									)}
-								>
-									secondary weapon
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div
-									onClick={() => {
-										this.selectItem("legs");
-									}}
-									className={classnames(
-										this.state.item == "legs"
-											? classes.itemToggleSelected
-											: classes.itemToggle
-									)}
-								>
-									legs
-								</div>
-							</td>
-							<td>
-								<div
-									onClick={() => {
-										this.selectItem("body");
-									}}
-									className={classnames(
-										this.state.item == "body"
-											? classes.itemToggleSelected
-											: classes.itemToggle
-									)}
-								>
-									body
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				{this.equipTable()}
 				<div className={classes.itemDetails}>
 					<div className={classes.title}>{this.state.item}</div>
 					{this.itemDetails()}
@@ -259,6 +174,97 @@ export class Equip extends React.Component {
 					LAUNCH
 				</Button>
 			</div>
+		);
+	}
+	equipTable() {
+		const { classes } = this.props;
+		return (
+			<table className={classnames(classes.table)}>
+				<tbody>
+					<tr>
+						<td>
+							<div
+								onClick={() => {
+									this.selectItem("primary");
+								}}
+								className={classnames(
+									this.state.item == "primary"
+										? classes.itemToggleSelected
+										: classes.itemToggle
+								)}
+							>
+								primary weapon
+							</div>
+						</td>
+						<td rowSpan="2">
+							<div
+								className={classnames(
+									classes.svg,
+									classes.front
+								)}
+								dangerouslySetInnerHTML={{
+									__html: stripStyles(front)
+								}}
+							/>
+						</td>
+						<td rowSpan="2">
+							<div
+								className={classnames(
+									classes.svg,
+									classes.side
+								)}
+								dangerouslySetInnerHTML={{
+									__html: stripStyles(side)
+								}}
+							/>
+						</td>
+						<td>
+							<div
+								onClick={() => {
+									this.selectItem("secondary");
+								}}
+								className={classnames(
+									this.state.item == "secondary"
+										? classes.itemToggleSelected
+										: classes.itemToggle
+								)}
+							>
+								secondary weapon
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div
+								onClick={() => {
+									this.selectItem("legs");
+								}}
+								className={classnames(
+									this.state.item == "legs"
+										? classes.itemToggleSelected
+										: classes.itemToggle
+								)}
+							>
+								legs
+							</div>
+						</td>
+						<td>
+							<div
+								onClick={() => {
+									this.selectItem("body");
+								}}
+								className={classnames(
+									this.state.item == "body"
+										? classes.itemToggleSelected
+										: classes.itemToggle
+								)}
+							>
+								body
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		);
 	}
 	itemDetails = () => {

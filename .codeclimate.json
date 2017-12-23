@@ -21,5 +21,6 @@
 				"threshold": 30
 			}
 		}
-	}
+	},
+	"exclude-patterns": ["**/*.spec.js", "**/*.karma.js"]
 }
