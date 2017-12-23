@@ -31,6 +31,8 @@ import { EnemyTypes } from "EnemyType";
 
 import avatar from "mech.png";
 
+import Main from "./Main";
+
 type Props = {
 	engine: Engine
 };
@@ -100,104 +102,7 @@ class EditorPanel extends React.Component {
 		let saves = this.storage.list();
 		return (
 			<div id="editor-panel">
-				<Card className={classes.card}>
-					<CardActions
-						className={classes.header}
-						disableActionSpacing
-					>
-						Editor
-						<div className={classes.flexGrow} />
-						<IconButton
-							className={classnames(classes.expand, {
-								[classes.expandOpen]: this.state.expanded.main
-							})}
-							onClick={() => {
-								this.handleExpandClick("main");
-							}}
-							aria-expanded={this.state.expanded.main}
-							aria-label="Show more"
-						>
-							<ExpandMoreIcon />
-						</IconButton>
-					</CardActions>
-					<Collapse
-						in={this.state.expanded.main}
-						timeout="auto"
-						unmountOnExit
-					>
-						<CardContent className={classes.content}>
-							<Tooltip title="exit to menu" placement="bottom">
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.props.engine.startScene(
-											new MainMenu()
-										);
-									}}
-								>
-									go back to menu<KeyboardArrowDown />
-								</Button>
-							</Tooltip>
-							<br />
-							Left mouse to draw<br />
-							Right mouse to erase<br />
-							WASD to navigate<br />
-							Shift to speed up scrolling<br />
-							Click below to expand the map size:<br />
-							<Tooltip title="Add Row Above" placement="bottom">
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.props.engine.grid.addRowAbove();
-									}}
-								>
-									<KeyboardArrowUp />
-								</Button>
-							</Tooltip>
-							<Tooltip title="Add Row Below" placement="bottom">
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.props.engine.grid.addRowBelow();
-									}}
-								>
-									<KeyboardArrowDown />
-								</Button>
-							</Tooltip>
-							<Tooltip
-								title="Add Column to Left"
-								placement="bottom"
-							>
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.props.engine.grid.addColLeft();
-									}}
-								>
-									<KeyboardArrowLeft />
-								</Button>
-							</Tooltip>
-							<Tooltip
-								title="Add Column to Right"
-								placement="bottom"
-							>
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.props.engine.grid.addColRight();
-									}}
-								>
-									<KeyboardArrowRight />
-								</Button>
-							</Tooltip>
-						</CardContent>
-					</Collapse>
-				</Card>
+				<Main classes={classes} />
 				<Card className={classes.card} id="blockSelector">
 					<CardActions
 						className={classes.header}
