@@ -17,19 +17,19 @@ export class Router extends React.Component {
 	};
 	render() {
 		if (this.props.scene == "menu") {
-			return <Menu engine={this.props.engine} />;
+			return <Menu />;
 		} else if (this.props.scene == "editor") {
-			return <EditorPanel engine={this.props.engine} />;
+			return <EditorPanel />;
 		} else if (this.props.scene == "equip") {
 			return <Equip />;
 		} else if (this.props.scene == "level") {
-			return <Level engine={this.props.engine} />;
+			return <Level />;
 		} else if (this.props.scene == "briefing") {
-			return <Briefing engine={this.props.engine} />;
+			return <Briefing />;
 		} else if (this.props.scene == "results") {
-			return <Results engine={this.props.engine} />;
+			return <Results />;
 		} else if (this.props.scene == "pause") {
-			return <Pause engine={this.props.engine} />;
+			return <Pause />;
 		} else {
 			return <div />;
 		}

@@ -3,6 +3,7 @@ import React from "react";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import MainMenu from "Scene/MainMenu";
+import engineConnect from "React/engineConnect";
 const styles = theme => ({
 	container: {
 		position: "fixed",
@@ -64,4 +65,4 @@ export class Pause extends React.Component {
 		);
 	}
 }
-export default withStyles(styles)(Pause);
+export default engineConnect(withStyles(styles)(Pause));

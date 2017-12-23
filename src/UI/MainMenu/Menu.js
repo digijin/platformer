@@ -7,6 +7,7 @@ import Equip from "Scene/Equip";
 
 import Doors from "Transition/Doors";
 
+import engineConnect from "React/engineConnect";
 import Load from "./Load";
 
 class MainMenu extends React.Component {
@@ -77,4 +78,6 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);
+export default engineConnect(
+	connect(mapStateToProps, mapDispatchToProps)(MainMenu)
+);

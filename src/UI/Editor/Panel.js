@@ -25,6 +25,7 @@ import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Save from "material-ui-icons/Save";
 import Tooltip from "material-ui/Tooltip";
+import engineConnect from "React/engineConnect";
 
 import { EnemyTypes } from "EnemyType";
 
@@ -410,4 +411,4 @@ class EditorPanel extends React.Component {
 // export default connect(mapStateToProps, mapDispatchToProps)(EditorPanel);
 // export default EditorPanel;
 
-export default withStyles(stylesCalc)(EditorPanel);
+export default engineConnect(withStyles(stylesCalc)(EditorPanel));

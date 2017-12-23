@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
 import { withStyles } from "material-ui/styles";
+import engineConnect from "React/engineConnect";
 const styles = theme => ({
 	objectives: {
 		margin: "10px 40px",
@@ -36,4 +37,4 @@ export class Level extends React.Component {
 		);
 	}
 }
-export default withStyles(styles)(Level);
+export default engineConnect(withStyles(styles)(Level));

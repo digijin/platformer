@@ -5,6 +5,7 @@ import MainMenu from "Scene/MainMenu";
 import Equip from "Scene/Equip";
 import { withStyles } from "material-ui/styles";
 import Doors from "Transition/Doors";
+import engineConnect from "React/engineConnect";
 
 import classnames from "classnames";
 const styles = theme => ({
@@ -100,4 +101,4 @@ export class Briefing extends React.Component {
 		);
 	}
 }
-export default withStyles(styles)(Briefing);
+export default engineConnect(withStyles(styles)(Briefing));

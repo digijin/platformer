@@ -3,6 +3,7 @@ import React from "react";
 import Button from "material-ui/Button";
 import MainMenu from "Scene/MainMenu";
 import { withStyles } from "material-ui/styles";
+import engineConnect from "React/engineConnect";
 const styles = theme => ({
 	panel: { backgroundColor: "white" }
 });
@@ -25,4 +26,4 @@ export class Results extends React.Component {
 		);
 	}
 }
-export default withStyles(styles)(Results);
+export default engineConnect(withStyles(styles)(Results));
