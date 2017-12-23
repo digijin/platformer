@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 
+import EngineProvider from "React/EngineProvider";
+
 // import { purple, green, red } from "material-ui/styles/colors";
 
 const theme = createMuiTheme({
@@ -36,11 +38,13 @@ export default class UI {
 	render = () => {
 		ReactDOM.render(
 			<Provider store={this.store}>
-				<MuiThemeProvider theme={theme}>
-					<div id="ui-container">
-						<Router engine={this.engine} />
-					</div>
-				</MuiThemeProvider>
+				<EngineProvider engine={this.engine}>
+					<MuiThemeProvider theme={theme}>
+						<div id="ui-container">
+							<Router engine={this.engine} />
+						</div>
+					</MuiThemeProvider>
+				</EngineProvider>
 			</Provider>,
 			this.container
 		);
