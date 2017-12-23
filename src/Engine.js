@@ -182,8 +182,8 @@ export default class Engine {
 
 		//wait for next frame
 		this.updateId = requestAnimationFrame(this.update);
-		this.fpsmeter.tick();
 		this.input.endTick();
+		this.fpsmeter.tick();
 	};
 	updateId: number;
 	kill = () => {

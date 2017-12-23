@@ -33,7 +33,8 @@ export default {
 		heat: 0,
 		history: 20,
 		left: "auto",
-		right: "5px"
+		right: "5px",
+		show: "ms"
 	},
 	enemy: {
 		walkSpeed: 50,
