@@ -21,7 +21,7 @@ export class Router extends React.Component {
 		} else if (this.props.scene == "editor") {
 			return <EditorPanel engine={this.props.engine} />;
 		} else if (this.props.scene == "equip") {
-			return <Equip engine={this.props.engine} />;
+			return <Equip />;
 		} else if (this.props.scene == "level") {
 			return <Level engine={this.props.engine} />;
 		} else if (this.props.scene == "briefing") {

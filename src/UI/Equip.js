@@ -30,6 +30,8 @@ import fireIcon from "Equip/fire.svg";
 import frostIcon from "Equip/frost.svg";
 import energyIcon from "Equip/energy.svg";
 
+import engineConnect from "React/engineConnect";
+
 let stripStyles = (str: string): string => {
 	let regex = /^\s+style="(\S*)/gm;
 	return str.replace(regex, "");
@@ -347,4 +349,4 @@ export class Equip extends React.Component {
 }
 
 // export default Equip;
-export default withStyles(styles)(Equip);
+export default engineConnect(withStyles(styles)(Equip));
