@@ -33,6 +33,7 @@ import avatar from "mech.png";
 
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";
+import EnemySelector from "./EnemySelector";
 
 type Props = {
 	engine: Engine
@@ -103,62 +104,9 @@ class EditorPanel extends React.Component {
 		let saves = this.storage.list();
 		return (
 			<div id="editor-panel">
-				<Main classes={classes} />
+				<Main watcher={watcher} classes={classes} />
 				<BlockSelector watcher={watcher} classes={classes} />
-
-				<Card className={classes.card} id="enemySelector">
-					<CardActions
-						className={classes.header}
-						disableActionSpacing
-					>
-						Enemy Selector
-						<div className={classes.flexGrow} />
-						<IconButton
-							className={classnames(classes.expand, {
-								[classes.expandOpen]: this.state.expanded.enemy
-							})}
-							onClick={() => {
-								this.handleExpandClick("enemy");
-							}}
-							aria-expanded={this.state.expanded.enemy}
-							aria-label="Show more"
-						>
-							<ExpandMoreIcon />
-						</IconButton>
-					</CardActions>
-					<Collapse
-						in={this.state.expanded.enemy}
-						timeout="auto"
-						unmountOnExit
-					>
-						<CardContent className={classes.content}>
-							{EnemyTypes.map(e => (
-								<Tooltip
-									key={e.id}
-									title={e.name}
-									placement="bottom"
-								>
-									<Button
-										raised
-										className={classes.iconButton}
-										color={
-											watcher.enemyId == e.id
-												? "primary"
-												: ""
-										}
-										onClick={() => {
-											watcher.enemyId = e.id;
-											watcher.enemyType = e;
-											this.forceUpdate();
-										}}
-									>
-										{e.name}
-									</Button>
-								</Tooltip>
-							))}
-						</CardContent>
-					</Collapse>
-				</Card>
+				<EnemySelector watcher={watcher} classes={classes} />
 
 				<Card className={classes.card} id="savepanel">
 					<CardActions
