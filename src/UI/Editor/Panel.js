@@ -34,6 +34,7 @@ import avatar from "mech.png";
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";
 import EnemySelector from "./EnemySelector";
+import SavePanel from "./SavePanel";
 
 type Props = {
 	engine: Engine
@@ -81,7 +82,6 @@ class EditorPanel extends React.Component {
 	props: Props;
 	constructor() {
 		super();
-		this.storage = new Storage();
 		this.state = {
 			expanded: { main: false, block: true, save: false, enemy: false },
 			savename: ""
@@ -101,82 +101,12 @@ class EditorPanel extends React.Component {
 		if (!watcher) {
 			throw new Error("no watcher");
 		}
-		let saves = this.storage.list();
 		return (
 			<div id="editor-panel">
 				<Main watcher={watcher} classes={classes} />
 				<BlockSelector watcher={watcher} classes={classes} />
 				<EnemySelector watcher={watcher} classes={classes} />
-
-				<Card className={classes.card} id="savepanel">
-					<CardActions
-						className={classes.header}
-						disableActionSpacing
-					>
-						Save Panel
-						<div className={classes.flexGrow} />
-						<IconButton
-							className={classnames(classes.expand, {
-								[classes.expandOpen]: this.state.expanded.save
-							})}
-							onClick={() => {
-								this.handleExpandClick("save");
-							}}
-							aria-expanded={this.state.expanded.save}
-							aria-label="Show more"
-						>
-							<ExpandMoreIcon />
-						</IconButton>
-					</CardActions>
-
-					<Collapse
-						in={this.state.expanded.save}
-						timeout="auto"
-						unmountOnExit
-					>
-						<CardContent>
-							{saves.map(savename => {
-								return (
-									<Button
-										raised
-										key={savename + "loadbutton"}
-										onClick={() => {
-											this.props.engine.grid.load(
-												this.storage.load(savename)
-											);
-											this.forceUpdate();
-										}}
-									>
-										{savename}
-									</Button>
-								);
-							})}
-							<TextField
-								// hintText="Enter filename here"
-								// floatingLabelText="Save Name"
-								type="text"
-								value={this.state.savename}
-								onChange={this.updateSavename}
-							/>
-							<br />
-							<Tooltip title="Save" placement="bottom">
-								<Button
-									raised
-									className={classes.iconButton}
-									onClick={() => {
-										this.storage.save(
-											this.state.savename,
-											this.props.engine.grid.save()
-										);
-										this.forceUpdate();
-									}}
-								>
-									<Save />
-								</Button>
-							</Tooltip>
-						</CardContent>
-					</Collapse>
-				</Card>
+				<SavePanel watcher={watcher} classes={classes} />
 			</div>
 		);
 	}
