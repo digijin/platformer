@@ -12,9 +12,9 @@ export default function* agro(
 	let firingCooldown = 0;
 	while (true) {
 		firingCooldown -= engine.deltaTime;
-		direction = player.position.x < enemy.position.x ? -1 : 1;
+		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
 		let distance = player.position.distanceTo(enemy.position);
-		let hDelta = engine.deltaTime * enemy.walkSpeed * direction;
+		let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 		if (distance < CLOSEST_DISTANCE) {
 			hDelta = -hDelta;
 		} else if (distance < FARTHEST_DISTANCE) {
@@ -48,12 +48,12 @@ export default function* agro(
 			let rect = enemy.getBoundingRect();
 
 			let check = { y: rect.b + 1, x: rect.r + 1 };
-			if (direction == -1) {
+			if (enemy.direction == -1) {
 				check.x = rect.l - 1;
 			}
 
 			if (!engine.grid.isPositionBlocked(check)) {
-				direction = -direction;
+				enemy.direction = -enemy.direction;
 			}
 		}
 
