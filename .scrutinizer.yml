@@ -2,4 +2,4 @@ checks:
     javascript: true
 filter:
   excluded_paths:
-      - *.spec.js
+      - "*.spec.js"
