@@ -2,7 +2,7 @@
 
 import Point from "Point";
 import Missile from "Missile";
-import Bullet from "Bullet";
+import Bullet from "GameObject/Bullet";
 import Shell from "Shell";
 import mech from "assets/mech.png";
 
