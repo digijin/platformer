@@ -22,5 +22,5 @@
 			}
 		}
 	},
-	"exclude-patterns": ["**/*.spec.js", "**/*.karma.js"]
+	"exclude_patterns": ["**/*.spec.js", "**/*.karma.js"]
 }
