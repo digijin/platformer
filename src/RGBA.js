@@ -11,18 +11,22 @@ export default class RGBA {
 		if (!params.a) {
 			params.a = 1;
 		}
-		if (
-			params.r < 0 ||
-			params.r > 1 ||
-			params.g < 0 ||
-			params.g > 1 ||
-			params.b < 0 ||
-			params.b > 1 ||
-			params.a < 0 ||
-			params.a > 1
-		) {
-			throw new Error("RGBA expects values to be 0<=value<=1");
-		}
+		["r", "g", "b", "a"].forEach(a => {
+			if (params[a] < 0 || params[a] > 1) {
+				throw new Error("RGBA expects values to be 0<=value<=1");
+			}
+		});
+		// if (params.r < 0 || params.r > 1) {
+		// }
+		// if (params.g < 0 || params.g > 1) {
+		// 	throw new Error("RGBA expects values to be 0<=value<=1");
+		// }
+		// if (params.b < 0 || params.b > 1) {
+		// 	throw new Error("RGBA expects values to be 0<=value<=1");
+		// }
+		// if (params.a < 0 || params.a > 1) {
+		// 	throw new Error("RGBA expects values to be 0<=value<=1");
+		// }
 		Object.assign(this, params);
 	}
 	toString() {
