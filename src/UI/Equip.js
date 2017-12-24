@@ -120,6 +120,27 @@ const styles = theme => ({
 		margin: "10px"
 	}
 });
+
+class EquipItemToggle extends React.Component {
+	render() {
+		const { classes } = this.props;
+		return (
+			<div
+				onClick={() => {
+					this.selectItem(this.props.type);
+				}}
+				className={classnames(
+					this.props.selected == this.props.type
+						? classes.itemToggleSelected
+						: classes.itemToggle
+				)}
+			>
+				{this.props.title}
+			</div>
+		);
+	}
+}
+
 export class Equip extends React.Component {
 	props: {
 		scene: string,
@@ -183,18 +204,12 @@ export class Equip extends React.Component {
 				<tbody>
 					<tr>
 						<td>
-							<div
-								onClick={() => {
-									this.selectItem("primary");
-								}}
-								className={classnames(
-									this.state.item == "primary"
-										? classes.itemToggleSelected
-										: classes.itemToggle
-								)}
-							>
-								primary weapon
-							</div>
+							<EquipItemToggle
+								type="primary"
+								selected={this.state.item}
+								classes={classes}
+								title="primary weapon"
+							/>
 						</td>
 						<td rowSpan="2">
 							<div
@@ -219,48 +234,30 @@ export class Equip extends React.Component {
 							/>
 						</td>
 						<td>
-							<div
-								onClick={() => {
-									this.selectItem("secondary");
-								}}
-								className={classnames(
-									this.state.item == "secondary"
-										? classes.itemToggleSelected
-										: classes.itemToggle
-								)}
-							>
-								secondary weapon
-							</div>
+							<EquipItemToggle
+								type="secondary"
+								selected={this.state.item}
+								classes={classes}
+								title="secondary weapon"
+							/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div
-								onClick={() => {
-									this.selectItem("legs");
-								}}
-								className={classnames(
-									this.state.item == "legs"
-										? classes.itemToggleSelected
-										: classes.itemToggle
-								)}
-							>
-								legs
-							</div>
+							<EquipItemToggle
+								type="legs"
+								selected={this.state.item}
+								classes={classes}
+								title="legs"
+							/>
 						</td>
 						<td>
-							<div
-								onClick={() => {
-									this.selectItem("body");
-								}}
-								className={classnames(
-									this.state.item == "body"
-										? classes.itemToggleSelected
-										: classes.itemToggle
-								)}
-							>
-								body
-							</div>
+							<EquipItemToggle
+								type="body"
+								selected={this.state.item}
+								classes={classes}
+								title="body"
+							/>
 						</td>
 					</tr>
 				</tbody>
