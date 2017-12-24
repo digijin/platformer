@@ -118,11 +118,21 @@ export default class Grid extends GameObject {
 		let lastCol = Math.floor(rect.r / config.grid.width);
 		let firstRow = Math.ceil(rect.t / config.grid.height);
 		let lastRow = Math.floor(rect.b / config.grid.height);
-		let out = [];
+
 		if (lastCol < firstCol || lastRow < firstRow) {
 			//return early
-			return out;
+			return [];
 		}
+		return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
+		// return out.filter(b => b !== undefined);
+	}
+	getBlockRect(
+		firstCol: number,
+		lastCol: number,
+		firstRow: number,
+		lastRow: number
+	) {
+		let out = [];
 		for (let x = firstCol; x < lastCol; x++) {
 			for (let y = firstRow; y < lastRow; y++) {
 				let b = this.getBlock({ x, y });
@@ -132,24 +142,14 @@ export default class Grid extends GameObject {
 			}
 		}
 		return out;
-		// return out.filter(b => b !== undefined);
 	}
+
 	getBlocksOverlappingRect(rect: Rect): Array<Block> {
 		let firstCol = Math.floor(rect.l / config.grid.width);
 		let lastCol = Math.ceil(rect.r / config.grid.width);
 		let firstRow = Math.floor(rect.t / config.grid.height);
 		let lastRow = Math.ceil(rect.b / config.grid.height);
-		let out = [];
-		for (let x = firstCol; x < lastCol; x++) {
-			for (let y = firstRow; y < lastRow; y++) {
-				let b = this.getBlock({ x, y });
-				if (b !== undefined) {
-					out.push(b);
-				}
-			}
-		}
-
-		return out;
+		return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
 	}
 
 	blockAtPosition(pos: { x: number, y: number }): Block | void {
