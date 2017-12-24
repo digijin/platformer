@@ -8,7 +8,7 @@ import Point from "Point";
 import mechHero from "./mech_hero.png";
 
 import type Engine from "Engine";
-import explosion from "explosion.png";
+import explosion from "assets/explosion.png";
 import skyline from "skyline.png";
 
 type Particle = {

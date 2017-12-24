@@ -1,5 +1,5 @@
 //@flow
-import explosion from "./explosion.png";
+import explosion from "./assets/explosion.png";
 
 import Point from "Point";
 
