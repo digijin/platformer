@@ -29,7 +29,7 @@ import engineConnect from "React/engineConnect";
 
 import { EnemyTypes } from "EnemyType";
 
-import avatar from "mech.png";
+import avatar from "assets/mech.png";
 
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";

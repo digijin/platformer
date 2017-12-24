@@ -9,7 +9,7 @@ import mechHero from "./mech_hero.png";
 
 import type Engine from "Engine";
 import explosion from "assets/explosion.png";
-import skyline from "skyline.png";
+import skyline from "assets/skyline.png";
 
 type Particle = {
 	time: number,

@@ -1,6 +1,6 @@
 //@flow
 
-import missile from "./missile.png";
+import missile from "assets/missile.png";
 import Smoke from "Smoke";
 import Explosion from "Explosion";
 import Point from "Point";

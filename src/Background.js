@@ -1,7 +1,7 @@
 import GameObject from "GameObject";
 import type Engine from "Engine";
 
-import skyline from "skyline.png";
+import skyline from "assets/skyline.png";
 
 // console.log(skyline.src);
 

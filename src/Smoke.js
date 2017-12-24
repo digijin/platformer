@@ -3,7 +3,7 @@
 import Point from "Point";
 import type Engine from "Engine";
 
-import smoke from "./smoke.png";
+import smoke from "assets/smoke.png";
 
 import GameObject from "GameObject";
 

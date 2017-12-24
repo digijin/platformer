@@ -3,7 +3,7 @@
 import type Engine from "Engine";
 import type Point from "Point";
 import Rect from "Rect";
-import mech from "mech.png";
+import mech from "assets/mech.png";
 
 import Actor from "Actor";
 
