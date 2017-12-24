@@ -9,6 +9,8 @@ export default function player(state, action) {
 		case "SPEND_MONEY":
 			state.money -= action.cost;
 			break;
+		default:
+			return state;
 	}
 	return state;
 }
