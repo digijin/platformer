@@ -5,8 +5,8 @@ import Point from "Point";
 import Rect from "Rect";
 import type Grid from "Grid";
 
-import type BlockType from "BlockType";
-import { BlockTypeMap } from "BlockType";
+import type BlockType from "Grid/Block/Type";
+import { BlockTypeMap } from "Grid/Block/Type";
 
 export default class Block {
 	position: Point;

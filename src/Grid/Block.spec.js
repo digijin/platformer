@@ -1,6 +1,6 @@
-import Block from "Block";
+import Block from "Grid/Block";
 import Point from "Point";
-describe("Block", () => {
+describe("Grid/Block", () => {
 	it("should stringify", () => {
 		let block = new Block({
 			position: new Point({ x: 1, y: 2 }),

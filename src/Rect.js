@@ -5,7 +5,7 @@ import config from "config";
 
 import Point from "Point";
 
-import Block from "Block";
+import Block from "Grid/Block";
 
 export type RenderParams = {
 	x: number,

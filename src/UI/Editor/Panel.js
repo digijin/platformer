@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Storage from "Storage";
 
-import { BlockTypes } from "BlockType";
+import { BlockTypes } from "Grid/Block/Type";
 import type Engine from "Engine";
 
 // import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";

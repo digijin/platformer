@@ -6,7 +6,7 @@ import Enemy from "Actor/Enemy";
 
 import Point from "Point";
 
-import type Block from "Block";
+import type Block from "Grid/Block";
 
 import { EnemyTypes } from "EnemyType";
 import type EnemyType from "EnemyType";

@@ -6,7 +6,7 @@ import GameObject from "GameObject";
 
 import config from "config";
 
-import Block from "Block";
+import Block from "Grid/Block";
 import Point from "Point";
 
 import Enemy from "Actor/Enemy";

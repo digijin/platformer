@@ -4,7 +4,7 @@ eases use of the points system
 points stored in ingame coordinates
 */
 import config from "config";
-import Block from "Block";
+import Block from "Grid/Block";
 // import type {State} from 'Game/state'
 
 // export function screenToWorld(point:{x:number, y:number}, state:State): {x:number, y:number}{
