@@ -14,7 +14,7 @@ import bounce from "AI/bounce";
 import patrol from "AI/patrol";
 import rabbit from "AI/rabbit";
 import agro from "AI/agro";
-import type EnemyType from "EnemyType";
+import type EnemyType from "Actor/Enemy/Type";
 
 export default class Enemy extends Actor {
 	walkSpeed: number;

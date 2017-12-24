@@ -11,7 +11,7 @@ import Point from "Point";
 
 import Enemy from "Actor/Enemy";
 
-import { EnemyTypesMap } from "EnemyType";
+import { EnemyTypesMap } from "Actor/Enemy/Type";
 
 // import dirtTile from "dirt_tile.png";
 

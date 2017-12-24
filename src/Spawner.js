@@ -8,8 +8,8 @@ import Point from "Point";
 
 import type Block from "Grid/Block";
 
-import { EnemyTypes } from "EnemyType";
-import type EnemyType from "EnemyType";
+import { EnemyTypes } from "Actor/Enemy/Type";
+import type EnemyType from "Actor/Enemy/Type";
 
 import GameObject from "GameObject";
 export default class Spawner extends GameObject {
