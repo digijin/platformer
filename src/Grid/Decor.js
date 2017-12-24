@@ -5,8 +5,8 @@ import Point from "Point";
 import Rect from "Rect";
 import type Grid from "Grid";
 
-import type DecorType from "DecorType";
-import { DecorTypeMap } from "DecorType";
+import type DecorType from "Grid/Decor/Type";
+import { DecorTypeMap } from "Grid/Decor/Type";
 
 export default class Decor {
 	position: Point; //grid position
