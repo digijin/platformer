@@ -1,13 +1,13 @@
 // @flow
 import GameObject from "GameObject";
-import Renderable from "Renderable";
+import Renderable from "GameObject/Renderable";
 import Point from "Point";
 
 import config from "config";
 
 import Rect from "Rect";
 import type Engine from "Engine";
-import Explosion from "Explosion";
+import Explosion from "GameObject/Explosion";
 import type Block from "Grid/Block";
 // let engine: Engine;
 

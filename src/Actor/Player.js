@@ -1,9 +1,9 @@
 // @flow
 
 import Point from "Point";
-import Missile from "Missile";
+import Missile from "GameObject/Missile";
 import Bullet from "GameObject/Bullet";
-import Shell from "Shell";
+import Shell from "GameObject/Shell";
 import mech from "assets/mech.png";
 
 import Actor from "Actor";

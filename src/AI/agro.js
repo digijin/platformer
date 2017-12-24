@@ -1,5 +1,5 @@
 import type Player from "Actor/Player";
-import Missile from "Missile";
+import Missile from "GameObject/Missile";
 const CLOSEST_DISTANCE = 100;
 const FARTHEST_DISTANCE = 400;
 export default function* agro(

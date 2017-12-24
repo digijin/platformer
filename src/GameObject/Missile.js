@@ -1,8 +1,8 @@
 //@flow
 
 import missile from "assets/missile.png";
-import Smoke from "Smoke";
-import Explosion from "Explosion";
+import Smoke from "GameObject/Smoke";
+import Explosion from "GameObject/Explosion";
 import Point from "Point";
 import Rect from "Rect";
 import type Actor from "Actor";
@@ -12,7 +12,7 @@ import config from "config";
 import type Engine from "Engine";
 
 import GameObject from "GameObject";
-import Projectile from "Projectile";
+import Projectile from "GameObject/Projectile";
 
 import TrailRenderer from "TrailRenderer";
 

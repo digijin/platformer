@@ -1,4 +1,4 @@
-import Spawner from "Spawner";
+import Spawner from "./Spawner";
 
 import Engine from "Engine";
 import Grid from "Grid";

@@ -8,9 +8,9 @@ import Base from "./Base";
 import Grid from "Grid";
 import Background from "GameObject/Background";
 
-import Spawner from "Spawner";
+import Spawner from "GameObject/Spawner";
 
-import StoryTeller from "StoryTeller";
+import StoryTeller from "GameObject/StoryTeller";
 
 import type Engine from "Engine";
 

@@ -4,7 +4,7 @@ import type Engine from "Engine";
 import type Point from "Point";
 import type Actor from "Actor";
 import GameObject from "GameObject";
-import Explosion from "Explosion";
+import Explosion from "GameObject/Explosion";
 export default class Bullet extends GameObject {
 	// x: number; //position
 	// y: number; //position
