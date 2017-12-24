@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 
 import Menu from "MainMenu/Menu";
-import Background from "Background";
+import Background from "GameObject/Background";
 
 import DigijinLogo from "MainMenu/DigijinLogo";
 import Point from "Point";

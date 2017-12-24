@@ -6,7 +6,7 @@ import Enemy from "Actor/Enemy";
 import Point from "Point";
 import Base from "./Base";
 import Grid from "Grid";
-import Background from "Background";
+import Background from "GameObject/Background";
 
 import Spawner from "Spawner";
 
