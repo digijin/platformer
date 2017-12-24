@@ -4,67 +4,54 @@ import brickTile from "Grid/brick_tile.png";
 import metalTile from "Grid/metal_tile.png";
 import woodTile from "Grid/wood_tile.png";
 
-export type BlockTypeParams = {
+export type DecorTypeParams = {
 	// hp: name,
 	name: string,
 	id: string,
 	image: any,
 	destructable: boolean,
+	height: number,
+	width: number,
 	hp: number
 };
 
-export default class BlockType {
+export default class DecorType {
 	name: string;
 	id: string;
 	destructable: boolean;
 	image: any;
+	height: number;
+	width: number;
 	hp: number;
-	constructor(params: BlockTypeParams) {
+	constructor(params: DecorTypeParams) {
 		this.name = params.name;
 		this.id = params.id;
 		this.destructable = params.destructable;
 		this.hp = params.hp;
 		this.image = params.image;
+		this.height = params.height;
+		this.width = params.width;
 	}
 }
 
-let blockTypeConfig: Array<BlockTypeParams> = [
+let blockTypeConfig: Array<DecorTypeParams> = [
 	{
-		name: "dirt",
+		name: "door",
 		id: "1",
-		image: dirtTile,
-		destructable: true,
-		hp: 100
-	},
-	{
-		name: "brick",
-		id: "2",
-		image: brickTile,
-		destructable: true,
-		hp: 400
-	},
-	{
-		name: "metal",
-		id: "3",
-		image: metalTile,
-		destructable: false,
-		hp: 0
-	},
-	{
-		name: "wood",
-		id: "4",
+		width: 1,
+		height: 3,
 		image: woodTile,
 		destructable: true,
 		hp: 10
 	}
 ];
 
-export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
-	c => new BlockType(c)
+export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
+	c => new DecorType(c)
 );
 
-export const BlockTypeMap: Object = BlockTypes.reduce(
-	(output: Object, type: BlockType) => {
+export const DecorTypeMap: Object = DecorTypes.reduce(
+	(output: Object, type: DecorType) => {
 		if (output[type.id]) {
 			throw new Error("duplicate id for block type");
 		}

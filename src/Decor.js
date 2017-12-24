@@ -5,11 +5,11 @@ import Point from "Point";
 import Rect from "Rect";
 import type Grid from "Grid";
 
-import type BlockType from "BlockType";
-import { BlockTypeMap } from "BlockType";
+import type DecorType from "DecorType";
+import { DecorTypeMap } from "DecorType";
 
-export default class Block {
-	position: Point;
+export default class Decor {
+	position: Point; //grid position
 	type: string;
 	grid: Grid;
 	hp: number;
@@ -22,12 +22,9 @@ export default class Block {
 			this.hp = this.getType().hp;
 		}
 	}
-	toString() {
-		return JSON.stringify({ position: this.position, type: this.type });
-	}
 
-	getType(): BlockType {
-		return BlockTypeMap[this.type];
+	getType(): DecorType {
+		return DecorTypeMap[this.type];
 	}
 
 	isEmpty(): boolean {
@@ -69,30 +66,14 @@ export default class Block {
 			y: this.position.y * config.grid.height
 		});
 	}
-	is(block: Block): boolean {
-		return (
-			block.position.x === this.position.x &&
-			block.position.y === this.position.y
-		);
-	}
 
 	get rect(): Rect {
+		let type = this.getType();
 		return new Rect({
 			t: this.position.y * config.grid.height,
-			r: (this.position.x + 1) * config.grid.width,
-			b: (this.position.y + 1) * config.grid.height,
+			r: (this.position.x + type.width) * config.grid.width,
+			b: (this.position.y + type.height) * config.grid.height,
 			l: this.position.x * config.grid.width
 		});
 	}
-
-	// get key():string{
-	//   return makeKey(this.x, this.y);
-	// }
-
-	// static fromPoint(point: Point) {
-	// 	return new Block({
-	// 		x: Math.floor(point.x / config.grid.width),
-	// 		y: Math.floor(point.y / config.grid.height)
-	// 	});
-	// }
 }
