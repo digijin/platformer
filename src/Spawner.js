@@ -2,7 +2,7 @@
 
 const maxEnemies = 40;
 
-import Enemy from "Enemy";
+import Enemy from "Actor/Enemy";
 
 import Point from "Point";
 

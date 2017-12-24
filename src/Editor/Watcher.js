@@ -6,7 +6,7 @@ import type Engine from "Engine";
 import Rect from "Rect";
 
 import type EnemyType from "EnemyType";
-import Enemy from "Enemy";
+import Enemy from "Actor/Enemy";
 
 export default class Watcher extends GameObject {
 	el: HTMLDivElement;

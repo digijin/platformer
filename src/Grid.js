@@ -9,7 +9,7 @@ import config from "config";
 import Block from "Block";
 import Point from "Point";
 
-import Enemy from "Enemy";
+import Enemy from "Actor/Enemy";
 
 import { EnemyTypesMap } from "EnemyType";
 

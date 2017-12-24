@@ -2,7 +2,7 @@
 
 import jump from "./jump";
 
-import type Enemy from "Enemy";
+import type Enemy from "Actor/Enemy";
 import type Engine from "Engine";
 
 export default function* rabbit(
