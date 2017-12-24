@@ -38,6 +38,14 @@ export default class Rect {
 			b: t + size.h
 		});
 	}
+	static fromPoints(pt1, pt2) {
+		return new Rect({
+			l: Math.min(pt1.x, pt2.x),
+			r: Math.max(pt1.x, pt2.x),
+			t: Math.min(pt1.y, pt2.y),
+			b: Math.max(pt1.y, pt2.y)
+		});
+	}
 	overlaps(rect: Rect): boolean {
 		let outsideH = this.b <= rect.t || rect.b <= this.t;
 		let outsideV = this.r <= rect.l || rect.r <= this.l;
@@ -74,17 +82,12 @@ export default class Rect {
 		});
 	}
 	/**
-	 * Recommended usage to use {t,r,b,l} but can 
+	 * Recommended usage to use {t,r,b,l} but can
 	 * be spread or inferred from points
-	 * @param {*} params 
+	 * @param {*} params
 	 */
 	constructor(params: { t: number, r: number, b: number, l: number }) {
-		if (arguments.length === 4) {
-			this.t = arguments[0];
-			this.r = arguments[1];
-			this.b = arguments[2];
-			this.l = arguments[3];
-		} else if (arguments.length === 1) {
+		if (arguments.length === 1) {
 			let a = arguments[0];
 			if (a.t !== undefined) {
 				extend(this, a);
@@ -98,23 +101,10 @@ export default class Rect {
 					"Rect constructor given garbage. " + arguments.toString()
 				);
 			}
-		} else if (arguments.length === 2) {
-			let p1 = arguments[0];
-			let p2 = arguments[1];
-			if (p1.x < p2.x) {
-				this.l = p1.x;
-				this.r = p2.x;
-			} else {
-				this.l = p2.x;
-				this.r = p1.x;
-			}
-			if (p1.y < p2.y) {
-				this.t = p1.y;
-				this.b = p2.y;
-			} else {
-				this.t = p2.y;
-				this.b = p1.y;
-			}
+		} else {
+			throw new Error(
+				"Rect only takes a single argument, multiple args passed"
+			);
 		}
 	}
 	blockRect(): Rect {
