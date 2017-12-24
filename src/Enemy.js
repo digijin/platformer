@@ -55,10 +55,10 @@ export default class Enemy extends Actor {
 		//check if out of bounds
 		this.unstuck();
 		//check agro
-		this.checkAgro(player);
+		// this.checkAgro(player);
 		if (!this.action) {
 			// switch(this.type.)
-			this.startIdle();
+			this.newAction();
 		} else {
 			if (this.action.next().done) {
 				this.action = null;
@@ -66,19 +66,38 @@ export default class Enemy extends Actor {
 		}
 		this.render();
 	}
-	checkAgro(player) {
+	newAction() {
+		let player = this.engine.objectsTagged("player").pop();
 		if (this.agro) {
 			//falloff distance
 			if (this.position.distanceTo(this.agro.position) > 1000) {
 				this.startIdle();
+			} else {
+				this.startAgro();
 			}
 		} else {
 			//pickup distance
 			if (this.position.distanceTo(player.position) < 300) {
 				this.startAgro(player);
+			} else {
+				this.startIdle(player);
 			}
 		}
 	}
+
+	// checkAgro(player) {
+	// 	if (this.agro) {
+	// 		//falloff distance
+	// 		if (this.position.distanceTo(this.agro.position) > 1000) {
+	// 			this.startIdle();
+	// 		}
+	// 	} else {
+	// 		//pickup distance
+	// 		if (this.position.distanceTo(player.position) < 300) {
+	// 			this.startAgro(player);
+	// 		}
+	// 	}
+	// }
 
 	unstuck() {
 		if (
