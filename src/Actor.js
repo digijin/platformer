@@ -61,7 +61,13 @@ export default class Actor extends Renderable {
 	gravity = () => {
 		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
 		if (!this.canMoveVert(this.v)) {
-			this.v = 0;
+			if (this.v < 0) {
+				//heading upwards
+				this.v = 0.1;
+			} else {
+				//landed
+				this.v = 0;
+			}
 		}
 		this.position.y += this.v;
 	};
