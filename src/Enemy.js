@@ -22,6 +22,8 @@ export default class Enemy extends Actor {
 	h: number;
 	type: EnemyType;
 	agro: Player | null;
+
+	direction: number;
 	constructor(params: { position: Point, type: EnemyType }) {
 		super();
 		this.hp = params.type.hp;
@@ -30,6 +32,7 @@ export default class Enemy extends Actor {
 		this.walkSpeed = config.enemy.walkSpeed;
 		this.size = params.type.size;
 		this.registration = params.type.registration;
+		this.direction = 1;
 		if (!this.size) {
 			throw new Error("no size in enemy init");
 		}
@@ -49,8 +52,35 @@ export default class Enemy extends Actor {
 			this.render();
 			return;
 		} //do not movefor edit mode
-
 		//check if out of bounds
+		this.unstuck();
+		//check agro
+		this.checkAgro(player);
+		if (!this.action) {
+			// switch(this.type.)
+			this.startIdle();
+		} else {
+			if (this.action.next().done) {
+				this.action = null;
+			}
+		}
+		this.render();
+	}
+	checkAgro(player) {
+		if (this.agro) {
+			//falloff distance
+			if (this.position.distanceTo(this.agro.position) > 1000) {
+				this.startIdle();
+			}
+		} else {
+			//pickup distance
+			if (this.position.distanceTo(player.position) < 300) {
+				this.startAgro(player);
+			}
+		}
+	}
+
+	unstuck() {
 		if (
 			this.position.y >
 			this.engine.grid.height * config.grid.height * 2
@@ -65,30 +95,8 @@ export default class Enemy extends Actor {
 		) {
 			this.explode();
 		}
-
-		//check agro
-		if (this.agro) {
-			//falloff distance
-			if (this.position.distanceTo(this.agro.position) > 1000) {
-				this.startIdle();
-			}
-		} else {
-			//pickup distance
-			if (this.position.distanceTo(player.position) < 300) {
-				this.startAgro(player);
-			}
-		}
-
-		if (!this.action) {
-			// switch(this.type.)
-			this.startIdle();
-		} else {
-			if (this.action.next().done) {
-				this.action = null;
-			}
-		}
-		this.render();
 	}
+
 	render() {
 		this.engine.ctx.drawSprite(
 			mech,
