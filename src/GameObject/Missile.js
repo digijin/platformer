@@ -14,7 +14,7 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import Projectile from "GameObject/Projectile";
 
-import TrailRenderer from "TrailRenderer";
+import TrailRenderer from "GameObject/TrailRenderer";
 
 export default class Missile extends Projectile {
 	speed: number;

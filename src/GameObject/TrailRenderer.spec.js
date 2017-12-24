@@ -1,4 +1,4 @@
-import TrailRenderer from "TrailRenderer";
+import TrailRenderer from "./TrailRenderer";
 
 import Point from "Point";
 
