@@ -33,6 +33,7 @@ import avatar from "assets/mech.png";
 
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";
+import DecorSelector from "./DecorSelector";
 import EnemySelector from "./EnemySelector";
 import SavePanel from "./SavePanel";
 
@@ -105,6 +106,7 @@ class EditorPanel extends React.Component {
 			<div id="editor-panel">
 				<Main watcher={watcher} classes={classes} />
 				<BlockSelector watcher={watcher} classes={classes} />
+				<DecorSelector watcher={watcher} classes={classes} />
 				<EnemySelector watcher={watcher} classes={classes} />
 				<SavePanel watcher={watcher} classes={classes} />
 			</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import engineConnect from "React/engineConnect";
 
-import { BlockTypes } from "Grid/Block/Type";
+import { DecorTypes } from "Grid/Decor/Type";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
@@ -14,7 +14,7 @@ import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
-class BlockSelector extends React.Component {
+class DecorSelector extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -31,16 +31,16 @@ class BlockSelector extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<Card className={classes.card} id="blockSelector">
+			<Card className={classes.card} id="decorSelector">
 				<CardActions className={classes.header} disableActionSpacing>
-					Block Selector
+					Decor Selector
 					<div className={classes.flexGrow} />
 					<IconButton
 						className={classnames(classes.expand, {
 							[classes.expandOpen]: this.state.expanded
 						})}
 						onClick={() => {
-							this.handleExpandClick("block");
+							this.handleExpandClick("decor");
 						}}
 						aria-expanded={this.state.expanded}
 						aria-label="Show more"
@@ -50,7 +50,7 @@ class BlockSelector extends React.Component {
 				</CardActions>
 				<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
 					<CardContent className={classes.content}>
-						{BlockTypes.map(b => (
+						{DecorTypes.map(b => (
 							<Tooltip
 								key={b.id}
 								title={b.name}
@@ -60,12 +60,12 @@ class BlockSelector extends React.Component {
 									raised
 									className={classes.iconButton}
 									color={
-										this.props.watcher.blockId == b.id
+										this.props.watcher.decorId == b.id
 											? "primary"
 											: "default"
 									}
 									onClick={() => {
-										this.props.watcher.blockId = b.id;
+										this.props.watcher.decorId = b.id;
 										this.forceUpdate();
 									}}
 								>
@@ -86,4 +86,4 @@ class BlockSelector extends React.Component {
 	}
 }
 
-export default engineConnect(BlockSelector);
+export default engineConnect(DecorSelector);
