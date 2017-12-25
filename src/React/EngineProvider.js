@@ -1,4 +1,6 @@
-import React, { Component, PropTypes, Children } from "react";
+import React, { Component, Children } from "react";
+import PropTypes from "prop-types";
+
 class EngineProvider extends Component {
 	static propTypes = {
 		engine: PropTypes.object.isRequired

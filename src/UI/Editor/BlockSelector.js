@@ -62,7 +62,7 @@ class Main extends React.Component {
 									color={
 										this.props.watcher.blockId == b.id
 											? "primary"
-											: ""
+											: "default"
 									}
 									onClick={() => {
 										this.props.watcher.blockId = b.id;
