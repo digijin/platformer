@@ -162,10 +162,14 @@ describe("Grid.spec.js", () => {
 			gridA.getBlock({ x: 2, y: 2 }).add("2");
 			expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
 
+			gridA.addDecor(new Point(), "1");
+			expect(gridA.getDecor(new Point()).type).toBe("1");
+
 			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
 			let savedata = gridA.save();
 			gridB.load(savedata);
 			expect(gridB.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
+			expect(gridB.getDecor(new Point()).type).toBe("1");
 		});
 	});
 	describe("integration", () => {

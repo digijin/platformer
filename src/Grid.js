@@ -374,6 +374,9 @@ export default class Grid extends GameObject {
 			enemies: enemies.map(e => {
 				return { t: e.type.id, p: e.position };
 			}),
+			decor: this.decor.map(d => {
+				return { t: d.type, p: d.position };
+			}),
 			blocks: this.blocks.map(col => {
 				return col.map(block => {
 					return { t: block.type, b: block.backgroundType };
@@ -389,7 +392,15 @@ export default class Grid extends GameObject {
 
 		this.tileCache = {};
 		let data = JSON.parse(str);
-
+		if (data.decor) {
+			this.decor = data.decor.map(decor => {
+				return new Decor({
+					position: new Point(decor.p),
+					type: decor.t,
+					grid: this
+				});
+			});
+		}
 		this.blocks = data.blocks.map((d, x) => {
 			return d.map((block, y) => {
 				return new Block({
