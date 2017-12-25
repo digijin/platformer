@@ -40,6 +40,10 @@ export default class Point {
 		});
 	}
 
+	is(point: Point): boolean {
+		return point.x === this.x && point.y === this.y;
+	}
+
 	add(diff: { x: number, y: number }): Point {
 		return new Point({
 			x: this.x + diff.x,

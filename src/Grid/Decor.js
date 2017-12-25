@@ -18,9 +18,9 @@ export default class Decor {
 		this.type = params.type;
 		this.grid = params.grid;
 
-		if (this.type !== "0") {
-			this.hp = this.getType().hp;
-		}
+		// if (this.type !== "0") {
+		// 	this.hp = this.getType().hp;
+		// }
 	}
 
 	getType(): DecorType {

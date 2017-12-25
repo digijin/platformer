@@ -20,8 +20,29 @@ export default class Grid extends GameObject {
 
 	z: number;
 
-	addDecor(position: Point, type: DecorType) {}
-	removeDecor(position: Point) {}
+	addDecor(position: Point, type: string) {
+		let decor = this.getDecor(position);
+		if (decor) {
+			this.removeDecor(position);
+		}
+		this.decor.push(
+			new Decor({
+				position,
+				type,
+				grid: this
+			})
+		);
+	}
+	getDecor(position: Point) {
+		return this.decor.find(d => {
+			return d.position.is(position);
+		});
+	}
+	removeDecor(position: Point) {
+		this.decor = this.decor.filter(d => {
+			return !d.position.is(position);
+		});
+	}
 
 	generate(seed: number) {
 		let noise = new Noise(seed);
