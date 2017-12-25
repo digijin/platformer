@@ -14,7 +14,7 @@ import StoryTeller from "GameObject/StoryTeller";
 
 import type Engine from "Engine";
 
-import PauseMenu from "PauseMenu";
+import PauseMenu from "GameObject/PauseMenu";
 
 export default class Level extends Base {
 	start(engine: Engine) {
