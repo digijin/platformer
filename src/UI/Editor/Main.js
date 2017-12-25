@@ -66,6 +66,7 @@ class Main extends React.Component {
 							</Button>
 						</Tooltip>
 						<br />
+						drawmode (click|paint|rect)<br />
 						Left mouse to draw<br />
 						Right mouse to erase<br />
 						WASD to navigate<br />
