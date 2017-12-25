@@ -204,11 +204,33 @@ export default class Grid extends GameObject {
 		// this.tileRenderer = new TileRenderer({ engine });
 	}
 	update = (engine: Engine) => {
-		this.engine.ctx.context.fillStyle = "#000000";
-
+		this.renderTiles();
+		this.renderDecor();
+	};
+	tileCache: {};
+	renderDecor() {
+		this.decor.forEach((decor: Decor) => {
+			let type = decor.getType();
+			this.engine.ctx.context.fillStyle = type.pattern;
+			this.engine.ctx.context.strokeStyle = "grey";
+			//"#ff0000";
+			this.engine.ctx.fillRect(
+				decor.position.x * config.grid.width,
+				decor.position.y * config.grid.height,
+				config.grid.width * type.width,
+				config.grid.height * type.height
+			);
+			this.engine.ctx.strokeRect(
+				decor.position.x * config.grid.width,
+				decor.position.y * config.grid.height,
+				config.grid.width * type.width,
+				config.grid.height * type.height
+			);
+		});
+	}
+	renderTiles() {
 		//screenRect
 		let screenRect = this.engine.ctx.screenRect();
-
 		let newTileCache = {};
 		this.tilesInRect(screenRect).forEach(tile => {
 			// let tile = { x: 5, y: 6 };
@@ -226,8 +248,8 @@ export default class Grid extends GameObject {
 			newTileCache[this.tileKey(tile)] = tileImage;
 		});
 		this.tileCache = newTileCache;
-	};
-	tileCache: {};
+	}
+
 	fetchTile(tile: { x: number, y: number }) {
 		// if (!this.tileCache[this.tileKey(tile)]) {
 		// 	this.tileCache[this.tileKey(tile)] = this.renderTile(tile);

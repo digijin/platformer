@@ -31,6 +31,9 @@ export default class DecorType {
 		this.image = params.image;
 		this.height = params.height;
 		this.width = params.width;
+
+		let context = document.createElement("canvas").getContext("2d");
+		this.pattern = context.createPattern(this.image, "repeat");
 	}
 }
 
