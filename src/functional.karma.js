@@ -63,16 +63,34 @@ describe("functional", () => {
 			window.addEventListener("menu-ready", done);
 		});
 		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 100);
+			setTimeout(done, 2000);
+		});
+	});
+
+	describe("editor", () => {
+		it("should open editor", () => {
+			clickId("editorButton");
+		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 1000);
+		});
+		it("should expand main section", () => {
+			clickId("editorMainExpand");
+		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 1000);
+		});
+		it("should quit back to main menu", () => {
+			clickId("mainMenuButton");
+		});
+		it("shouldnt throw any errors initializing", done => {
+			setTimeout(done, 2000);
 		});
 	});
 
 	describe("start game", () => {
 		it("null should be undefined", () => {
 			expect(null).toBeDefined();
-		});
-		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 2000);
 		});
 		it("should press load", () => {
 			let loadButton = document.getElementById("loadButton");

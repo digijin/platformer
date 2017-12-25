@@ -11,6 +11,7 @@ import IconButton from "material-ui/IconButton";
 import classnames from "classnames";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
+import MainMenu from "Scene/MainMenu";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class Main extends React.Component {
@@ -35,6 +36,7 @@ class Main extends React.Component {
 					Editor
 					<div className={classes.flexGrow} />
 					<IconButton
+						id="editorMainExpand"
 						className={classnames(classes.expand, {
 							[classes.expandOpen]: this.state.expanded
 						})}
@@ -51,6 +53,7 @@ class Main extends React.Component {
 					<CardContent className={classes.content}>
 						<Tooltip title="exit to menu" placement="bottom">
 							<Button
+								id="mainMenuButton"
 								raised
 								className={classes.iconButton}
 								onClick={() => {
