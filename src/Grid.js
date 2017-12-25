@@ -11,6 +11,7 @@ import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
 import Decor from "Grid/Decor";
+import type DecorType from "Grid/Decor/Type";
 
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
@@ -18,6 +19,9 @@ export default class Grid extends GameObject {
 	decor: Array<Decor>;
 
 	z: number;
+
+	addDecor(position: Point, type: DecorType) {}
+	removeDecor(position: Point) {}
 
 	generate(seed: number) {
 		let noise = new Noise(seed);
@@ -54,6 +58,7 @@ export default class Grid extends GameObject {
 		this.tileCache = {};
 		this.height = size.h;
 		this.width = size.w;
+		this.decor = [];
 		this.z = -10;
 		//make empty grid
 		this.makeEmptyGrid(size);

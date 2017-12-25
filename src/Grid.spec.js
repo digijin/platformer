@@ -4,9 +4,37 @@ import Point from "Utility/Point";
 import Block from "Grid/Block";
 import Rect from "Utility/Rect";
 
+import { DecorTypes } from "Grid/Decor/Type";
+
 describe("Grid.spec.js", () => {
 	it("should be a class", () => {
 		new Grid();
+	});
+	describe("decor", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid();
+		});
+		it("decor", () => {
+			expect(grid.decor.length).toBe(0);
+		});
+		it("addDecor", () => {
+			grid.addDecor(new Point(), DecorTypes[0]);
+			expect(grid.decor.length).toBe(1);
+		});
+		it("getDecor", () => {
+			let type = DecorTypes[0];
+			let point = new Point();
+			grid.addDecor(point, type);
+			let decor = grid.getDecor(point);
+			expect(decor.constructor.name).toBe("Decor");
+		});
+		it("removeDecor", () => {
+			grid.addDecor(new Point(), DecorTypes[0]);
+			expect(grid.decor.length).toBe(1);
+			grid.removeDecor(new Point());
+			expect(grid.decor.length).toBe(0);
+		});
 	});
 	describe("generate", () => {
 		it("should modify blocks", () => {
