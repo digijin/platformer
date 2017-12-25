@@ -1,24 +1,21 @@
 //@flow
 
-import type Engine from "Engine";
-import Rect from "Utility/Rect";
-import GameObject from "GameObject";
-
-import config from "config";
-
-import Block from "Grid/Block";
-import Point from "Utility/Point";
-
-import Enemy from "Actor/Enemy";
-
 import { EnemyTypesMap } from "Actor/Enemy/Type";
-
-// import dirtTile from "dirt_tile.png";
-
 import { Noise } from "noisejs";
+import Block from "Grid/Block";
+import config from "config";
+import Enemy from "Actor/Enemy";
+import GameObject from "GameObject";
+import Point from "Utility/Point";
+import Rect from "Utility/Rect";
+import type Engine from "Engine";
+
+import Decor from "Grid/Decor";
 
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
+
+	decor: Array<Decor>;
 
 	z: number;
 
@@ -40,12 +37,6 @@ export default class Grid extends GameObject {
 
 	fromTestStrings(strings: Array<string>): Grid {
 		let testdata = strings.map(a => a.split(""));
-		//flip it
-		// this.grid = testdata[0].map(function(col, x) {
-		// 	return testdata.map(function(row, y) {
-		// 		return row[x];
-		// 	});
-		// });
 		this.blocks = testdata[0].map(function(col, x) {
 			return testdata.map(function(row, y) {
 				return new Block({
@@ -65,7 +56,10 @@ export default class Grid extends GameObject {
 		this.width = size.w;
 		this.z = -10;
 		//make empty grid
-		// Array(3).fill(0).map(x => Array(2).fill(0).map(v => "abc"))
+		this.makeEmptyGrid(size);
+		//new Block({ position: { x, y }, type: "0" })
+	}
+	makeEmptyGrid(size) {
 		this.blocks = Array(size.w)
 			.fill(0)
 			.map((i, x) =>
@@ -80,8 +74,8 @@ export default class Grid extends GameObject {
 							})
 					)
 			);
-		//new Block({ position: { x, y }, type: "0" })
 	}
+
 	getBlock(pos: { x: number, y: number }): Block | void {
 		if (this.blocks[pos.x]) {
 			return this.blocks[pos.x][pos.y];
