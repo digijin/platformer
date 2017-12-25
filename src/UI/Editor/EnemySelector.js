@@ -62,7 +62,7 @@ class Main extends React.Component {
 									color={
 										this.props.watcher.enemyId == e.id
 											? "primary"
-											: ""
+											: "default"
 									}
 									onClick={() => {
 										this.props.watcher.enemyId = e.id;

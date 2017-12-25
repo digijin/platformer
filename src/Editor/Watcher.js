@@ -14,6 +14,7 @@ export default class Watcher extends GameObject {
 
 	blockId: string;
 	enemyId: string;
+	decorId: string;
 	enemyType: EnemyType;
 
 	mode: "block" | "enemy";
@@ -38,12 +39,10 @@ export default class Watcher extends GameObject {
 			{ w: this.size, h: this.size },
 			{ x: 0.5, y: 0.5 }
 		);
+		let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
+		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		switch (this.mode) {
 			case "block":
-				let block = this.engine.grid.getBlockAtPoint(
-					this.engine.mouse.point
-				);
-				let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 				if (this.engine.input.getButton("editor_add")) {
 					// block.add();
 					blocks.forEach(b => b.add(this.blockId));
@@ -51,6 +50,20 @@ export default class Watcher extends GameObject {
 				if (this.engine.input.getButton("editor_remove")) {
 					// block.remove();
 					blocks.forEach(b => b.addBackground(this.blockId));
+				}
+				break;
+			case "decor":
+				if (this.engine.input.getButton("editor_add")) {
+					// block.add();
+					blocks.forEach(b =>
+						this.engine.grid.addDecor(b.position, this.decorId)
+					);
+				}
+				if (this.engine.input.getButton("editor_remove")) {
+					// block.remove();
+					blocks.forEach(b =>
+						this.engine.grid.removeDecor(b.position)
+					);
 				}
 				break;
 			case "enemy":
