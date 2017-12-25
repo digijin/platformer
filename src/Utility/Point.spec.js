@@ -1,8 +1,8 @@
-import Point from "Point";
+import Point from "./Point";
 
 import config from "config";
 
-describe("Point", () => {
+describe("Utility/Point", () => {
 	beforeEach(() => {});
 
 	describe("distanceTo", () => {

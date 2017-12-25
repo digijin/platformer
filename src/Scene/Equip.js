@@ -1,6 +1,6 @@
 import Enemy from "Actor/Enemy";
 
-import Point from "Point";
+import Point from "Utility/Point";
 import Base from "./Base";
 import Grid from "Grid";
 

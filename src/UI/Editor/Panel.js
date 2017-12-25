@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Storage from "Storage";
+import Storage from "Utility/Storage";
 
 import { BlockTypes } from "Grid/Block/Type";
 import type Engine from "Engine";

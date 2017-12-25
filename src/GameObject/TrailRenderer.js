@@ -1,8 +1,8 @@
 //@flow
 
-import Point from "Point";
+import Point from "Utility/Point";
 import GameObject from "GameObject";
-import RGBA from "RGBA";
+import RGBA from "Utility/RGBA";
 
 export default class TrailRenderer extends GameObject {
 	position: Point;

@@ -1,5 +1,5 @@
 import Actor from "Actor";
-import Point from "Point";
+import Point from "Utility/Point";
 import Grid from "Grid";
 import config from "config";
 describe("Actor", () => {

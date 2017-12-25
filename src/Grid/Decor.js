@@ -1,8 +1,8 @@
 //@flow
 
 import config from "config";
-import Point from "Point";
-import Rect from "Rect";
+import Point from "Utility/Point";
+import Rect from "Utility/Rect";
 import type Grid from "Grid";
 
 import type DecorType from "Grid/Decor/Type";

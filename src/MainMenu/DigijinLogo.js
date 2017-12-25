@@ -1,7 +1,7 @@
 //@flow
 import GameObject from "GameObject";
 
-import Point from "Point";
+import Point from "Utility/Point";
 import MainMenu from "Scene/MainMenu";
 
 import type Engine from "Engine";

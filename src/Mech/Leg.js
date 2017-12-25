@@ -3,7 +3,7 @@
 import GameObject from "GameObject";
 
 import type Player from "Actor/Player";
-import Point from "Point";
+import Point from "Utility/Point";
 
 import cockpit from "Player/cockpit.png";
 import foot from "Player/foot.png";

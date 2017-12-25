@@ -1,6 +1,6 @@
-import type StorageAdapter from "Storage/Adapter";
-import BrowserAdapter from "Storage/Browser";
-import ElectronAdapter from "Storage/Electron";
+import type StorageAdapter from "./Storage/Adapter";
+import BrowserAdapter from "./Storage/Browser";
+import ElectronAdapter from "./Storage/Electron";
 
 export default class Storage {
 	adapter: StorageAdapter;

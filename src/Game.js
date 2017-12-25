@@ -1,6 +1,6 @@
 // @flow
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 // let debugTextDiv;
 

@@ -1,8 +1,8 @@
 import Grid from "Grid";
 import config from "config";
-import Point from "Point";
+import Point from "Utility/Point";
 import Block from "Grid/Block";
-import Rect from "Rect";
+import Rect from "Utility/Rect";
 
 describe("Grid.spec.js", () => {
 	it("should be a class", () => {

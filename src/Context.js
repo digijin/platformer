@@ -3,8 +3,8 @@
 /** Wrapper for canvas.getContext('2d') */
 
 import Engine from "Engine";
-import Point from "Point";
-import Rect from "Rect";
+import Point from "Utility/Point";
+import Rect from "Utility/Rect";
 
 export default class Context {
 	engine: Engine;

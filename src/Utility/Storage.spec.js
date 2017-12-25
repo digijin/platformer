@@ -1,4 +1,4 @@
-import Storage from "Storage";
+import Storage from "Utility/Storage";
 
 describe("Storage.spec.js", () => {
 	let storage;

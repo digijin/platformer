@@ -1,6 +1,6 @@
 // @flow
 import GameObject from "GameObject";
-import Point from "Point";
+import Point from "Utility/Point";
 
 export default class Renderable extends GameObject {
 	position: Point;

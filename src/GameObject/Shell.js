@@ -1,6 +1,6 @@
 //@flow
 
-import Point from "Point";
+import Point from "Utility/Point";
 import type Engine from "Engine";
 
 import GameObject from "GameObject";

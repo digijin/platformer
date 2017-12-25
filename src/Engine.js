@@ -6,7 +6,7 @@ import Context from "Context";
 
 import Input from "unityinput";
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 import config from "config";
 

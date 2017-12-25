@@ -3,7 +3,7 @@ import GameObject from "GameObject";
 
 import type Engine from "Engine";
 
-import Rect from "Rect";
+import Rect from "Utility/Rect";
 
 import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";

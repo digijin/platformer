@@ -1,8 +1,8 @@
 //@flow
 
 import type Engine from "Engine";
-import type Point from "Point";
-import Rect from "Rect";
+import type Point from "Utility/Point";
+import Rect from "Utility/Rect";
 import mech from "assets/mech.png";
 
 import Actor from "Actor";

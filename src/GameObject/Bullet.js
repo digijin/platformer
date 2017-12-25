@@ -1,7 +1,7 @@
 //@flow
 
 import type Engine from "Engine";
-import type Point from "Point";
+import type Point from "Utility/Point";
 import type Actor from "Actor";
 import GameObject from "GameObject";
 import Explosion from "GameObject/Explosion";

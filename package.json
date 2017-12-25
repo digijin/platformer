@@ -17,13 +17,10 @@
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
 		"karma": "karma start --reporters spec",
-		"karma:ci":
-			"karma start --reporters coverage-istanbul --browsers ChromeHeadless --single-run",
-		"karma:headless":
-			"karma start --reporters nyan --browsers ChromeHeadless",
+		"karma:ci": "karma start --reporters coverage-istanbul --browsers ChromeHeadless --single-run",
+		"karma:headless": "karma start --reporters nyan --browsers ChromeHeadless",
 		"karma:chrome": "karma start --reporters nyan --browsers Chrome",
-		"karma:electron":
-			"karma start --reporters nyan --browsers Electron --single-run",
+		"karma:electron": "karma start --reporters nyan --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876",
 		"electron:dev": "electron http://localhost:8080/",
 		"electron:debug": "electron --inspect-brk=5859 http://localhost:8080/"
@@ -107,7 +104,7 @@
 		"stylus": "^0.54.5",
 		"stylus-loader": "^2.4.0",
 		"svg-url-loader": "^2.3.0",
-		"unityinput": "^0.0.27",
+		"unityinput": "^0.0.29",
 		"url-loader": "^0.5.5",
 		"webpack": "^3.8.1",
 		"webpack-dev-server": "^2.9.4",
@@ -117,15 +114,25 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": ["js", "jsx"],
-		"moduleDirectories": ["node_modules", "src"],
-		"modulePaths": ["/src"],
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-				"<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": ["json", "lcov"]
+		"coverageReporters": [
+			"json",
+			"lcov"
+		]
 	}
 }

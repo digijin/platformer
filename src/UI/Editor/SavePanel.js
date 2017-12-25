@@ -1,6 +1,6 @@
 import React from "react";
 import engineConnect from "React/engineConnect";
-import Storage from "Storage";
+import Storage from "Utility/Storage";
 
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";

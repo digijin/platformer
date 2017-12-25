@@ -3,7 +3,7 @@
 import { extend } from "lodash";
 import config from "config";
 
-import Point from "Point";
+import Point from "./Point";
 
 import Block from "Grid/Block";
 

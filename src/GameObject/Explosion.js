@@ -1,7 +1,7 @@
 //@flow
 import explosion from "assets/explosion.png";
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 import type Engine from "Engine";
 

@@ -1,6 +1,6 @@
 import TrailRenderer from "./TrailRenderer";
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 import Engine from "Engine";
 

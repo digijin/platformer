@@ -6,7 +6,7 @@ import Menu from "MainMenu/Menu";
 import Background from "GameObject/Background";
 
 import DigijinLogo from "MainMenu/DigijinLogo";
-import Point from "Point";
+import Point from "Utility/Point";
 
 export default class MainMenu extends Base {
 	start(engine: Engine) {

@@ -1,6 +1,6 @@
 // @flow
 
-import Point from "Point";
+import Point from "Utility/Point";
 import Missile from "GameObject/Missile";
 import Bullet from "GameObject/Bullet";
 import Shell from "GameObject/Shell";
@@ -11,7 +11,7 @@ import Actor from "Actor";
 import config from "config";
 let hSpeed = config.player.speed;
 
-import Rect from "Rect";
+import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
 let firing = false;

@@ -3,7 +3,7 @@ import GameObject from "GameObject";
 
 import Level from "Scene/Level";
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 import mechHero from "./mech_hero.png";
 

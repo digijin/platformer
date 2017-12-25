@@ -1,7 +1,7 @@
-import Rect from "Rect";
-import Point from "Point";
+import Rect from "./Rect";
+import Point from "./Point";
 
-describe("Rect", () => {
+describe("Utility/Rect", () => {
 	describe("fromPosSizeRego", () => {
 		it("should work", () => {
 			let pos = { x: 100, y: 200 };

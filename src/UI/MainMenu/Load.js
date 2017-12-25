@@ -1,6 +1,6 @@
 import React from "react";
 
-import Storage from "Storage";
+import Storage from "Utility/Storage";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Briefing from "Scene/Briefing";

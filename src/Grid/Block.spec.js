@@ -1,5 +1,5 @@
 import Block from "Grid/Block";
-import Point from "Point";
+import Point from "Utility/Point";
 describe("Grid/Block", () => {
 	it("should stringify", () => {
 		let block = new Block({

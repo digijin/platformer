@@ -3,8 +3,8 @@
 import missile from "assets/missile.png";
 import Smoke from "GameObject/Smoke";
 import Explosion from "GameObject/Explosion";
-import Point from "Point";
-import Rect from "Rect";
+import Point from "Utility/Point";
+import Rect from "Utility/Rect";
 import type Actor from "Actor";
 
 import config from "config";

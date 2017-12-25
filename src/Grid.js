@@ -1,13 +1,13 @@
 //@flow
 
 import type Engine from "Engine";
-import Rect from "Rect";
+import Rect from "Utility/Rect";
 import GameObject from "GameObject";
 
 import config from "config";
 
 import Block from "Grid/Block";
-import Point from "Point";
+import Point from "Utility/Point";
 
 import Enemy from "Actor/Enemy";
 

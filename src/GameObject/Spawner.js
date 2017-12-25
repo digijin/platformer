@@ -4,7 +4,7 @@ const maxEnemies = 40;
 
 import Enemy from "Actor/Enemy";
 
-import Point from "Point";
+import Point from "Utility/Point";
 
 import type Block from "Grid/Block";
 
