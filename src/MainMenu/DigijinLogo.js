@@ -198,34 +198,17 @@ export default class DigijinLogo extends GameObject {
 				to = l.points[p];
 				let dist = from.distanceTo(to);
 				if (progress > dist) {
-					ctx.lineTo(
-						to.multiply(size).add(offset).x,
-						to.multiply(size).add(offset).y
-					);
+					this.drawLine(ctx, to, size, offset);
 				} else if (progress > 0) {
-					let mid = from.percentTo(to, progress / dist);
-					if (Math.random() < SPAWNCHANCE) {
-						let dir = to.subtract(from).direction();
-						dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
-						this.engine.register(
-							new Spike({
-								position: mid,
-								direction: dir,
-								ctx: this.ctx,
-								color: l.color
-							})
-						);
-					}
-					ctx.lineTo(
-						mid.multiply(size).add(offset).x,
-						mid.multiply(size).add(offset).y
-					);
-					ctx.arc(
-						mid.multiply(size).add(offset).x,
-						mid.multiply(size).add(offset).y,
-						4,
-						0,
-						2 * Math.PI
+					this.drawPartialLine(
+						from,
+						to,
+						progress,
+						dist,
+						l,
+						ctx,
+						size,
+						offset
 					);
 				}
 				progress -= dist;
@@ -240,6 +223,40 @@ export default class DigijinLogo extends GameObject {
 			ctx.shadowBlur = 0;
 		});
 		ctx.restore();
+	}
+
+	drawLine(ctx, to, size, offset) {
+		ctx.lineTo(
+			to.multiply(size).add(offset).x,
+			to.multiply(size).add(offset).y
+		);
+	}
+
+	drawPartialLine(from, to, progress, dist, l, ctx, size, offset) {
+		let mid = from.percentTo(to, progress / dist);
+		if (Math.random() < SPAWNCHANCE) {
+			let dir = to.subtract(from).direction();
+			dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
+			this.engine.register(
+				new Spike({
+					position: mid,
+					direction: dir,
+					ctx: this.ctx,
+					color: l.color
+				})
+			);
+		}
+		ctx.lineTo(
+			mid.multiply(size).add(offset).x,
+			mid.multiply(size).add(offset).y
+		);
+		ctx.arc(
+			mid.multiply(size).add(offset).x,
+			mid.multiply(size).add(offset).y,
+			4,
+			0,
+			2 * Math.PI
+		);
 	}
 }
 
