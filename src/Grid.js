@@ -212,7 +212,7 @@ export default class Grid extends GameObject {
 		this.decor.forEach((decor: Decor) => {
 			let type = decor.getType();
 			this.engine.ctx.context.fillStyle = type.pattern;
-			this.engine.ctx.context.strokeStyle = "grey";
+			// this.engine.ctx.context.strokeStyle = "grey";
 			//"#ff0000";
 			this.engine.ctx.fillRect(
 				decor.position.x * config.grid.width,
