@@ -17,7 +17,7 @@ describe("Utility/Line", () => {
 			let ptb = new Point({ x: 3, y: 4 });
 
 			let line = new Line({ a: pta, b: ptb });
-			expect(line.length).toBe(5);
+			expect(line.length()).toBe(5);
 		});
 	});
 	describe("direction", () => {
@@ -26,7 +26,7 @@ describe("Utility/Line", () => {
 			let ptb = new Point({ x: 3, y: 3 });
 
 			let line = new Line({ a: pta, b: ptb });
-			expect(line.direction()).toBe(Math.PI / 4);
+			expect(line.direction()).toBe(-3 * Math.PI / 4);
 		});
 	});
 	describe("percent", () => {

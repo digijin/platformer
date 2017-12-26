@@ -74,6 +74,10 @@ export default class Point {
 	direction(): number {
 		return Math.atan2(this.y, this.x);
 	}
+	directionTo(point: Point): number {
+		let diff = this.subtract(point);
+		return Math.atan2(diff.y, diff.x);
+	}
 
 	/** Moves point along a direction in radians */
 	move(direction: number, distance: number): Point {

@@ -12,9 +12,15 @@ export default class Line {
 		this.a = params.a;
 		this.b = params.b;
 	}
-	length(): number {}
-	direction(): number {}
+	length(): number {
+		return this.a.distanceTo(this.b);
+	}
+	direction(): number {
+		return this.a.directionTo(this.b);
+	}
 
-	percent(pc: number): Point {}
+	percent(pc: number): Point {
+		return this.a.percentTo(this.b, pc);
+	}
 	intersectsRect(rect: Rect): Boolean {}
 }
