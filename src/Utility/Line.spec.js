@@ -73,4 +73,11 @@ describe("Utility/Line", () => {
 			expect(line.intersectsRect(rect)).toBe(true);
 		});
 	});
+	describe("pixels", () => {
+		let pta = new Point({ x: 0, y: 0 });
+		let ptb = new Point({ x: 3, y: 2 });
+		let line = new Line({ a: pta, b: ptb });
+		let pixels = line.pixels();
+		expect(pixels.length).toBe(3);
+	});
 });

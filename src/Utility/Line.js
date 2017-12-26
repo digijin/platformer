@@ -22,6 +22,29 @@ export default class Line {
 	percent(pc: number): Point {
 		return this.a.percentTo(this.b, pc);
 	}
+	//Bresenham's line algorithm
+	pixels(): Array<{ x: number, y: number }> {
+		let out = [];
+		let delta = this.b.subtract(this.a);
+		let deltaErr = Math.abs(delta.y / delta.x);
+		let err = 0;
+		let y = this.a.y;
+		for (
+			let x = this.a.x;
+			x !== this.b.x;
+			x = this.b.x > this.a.x ? x + 1 : x - 1
+		) {
+			out.push({ x, y });
+			err += deltaErr;
+			while (err >= 0.5) {
+				console.log("beep");
+				y += delta.y > 0 ? 1 : -1;
+				err -= 1;
+			}
+		}
+
+		return out;
+	}
 	//Liang-Barsky algorithm
 	//https://gist.github.com/ChickenProp/3194723
 	intersectsRect(rect: Rect): boolean {
@@ -59,7 +82,7 @@ export default class Line {
 		let collision = {};
 		collision.x = x + u1 * vx;
 		collision.y = y + u1 * vy;
-		console.log(collision);
+		// console.log(collision);
 
 		return true;
 	}
