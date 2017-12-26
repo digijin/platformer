@@ -23,6 +23,7 @@ export default class DecorType {
 	height: number;
 	width: number;
 	hp: number;
+	pattern: CanvasPattern;
 	constructor(params: DecorTypeParams) {
 		this.name = params.name;
 		this.id = params.id;

@@ -22,12 +22,23 @@ export default class BlockType {
 	destructable: boolean;
 	image: any;
 	hp: number;
+	pattern: CanvasPattern;
 	constructor(params: BlockTypeParams) {
 		this.name = params.name;
 		this.id = params.id;
 		this.destructable = params.destructable;
 		this.hp = params.hp;
 		this.image = params.image;
+
+		if (this.image) {
+			this.image.onload = () => {
+				let context = document.createElement("canvas").getContext("2d");
+				if (context) {
+					this.pattern = context.createPattern(this.image, "repeat");
+					// console.log("made pattern", context, this.pattern);
+				}
+			};
+		}
 	}
 }
 
