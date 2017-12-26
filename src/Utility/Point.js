@@ -33,6 +33,10 @@ export default class Point {
 		}
 	}
 
+	dot(point) {
+		return this.x * point.x + this.y * point.y;
+	}
+
 	clone() {
 		return new Point({
 			x: this.x,

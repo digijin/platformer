@@ -12,6 +12,9 @@ export default class Line {
 		this.a = params.a;
 		this.b = params.b;
 	}
+	length(): number {}
+	direction(): number {}
+
 	percent(pc: number): Point {}
 	intersectsRect(rect: Rect): Boolean {}
 }
