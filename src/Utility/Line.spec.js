@@ -1,5 +1,6 @@
 import Point from "./Point";
 import Line from "./Line";
+import Rect from "./Rect";
 
 describe("Utility/Line", () => {
 	describe("constructor", () => {
@@ -37,6 +38,39 @@ describe("Utility/Line", () => {
 			let mid = line.percent(0.5);
 			expect(mid.x).toBe(1);
 			expect(mid.y).toBe(2);
+		});
+	});
+
+	describe("intersectsRect", () => {
+		it("misses", () => {
+			// +012345
+			// 0a  ***
+			// 1   * *
+			// 2   ***
+			// 3
+			// 4  b
+			// 5
+
+			let pta = new Point({ x: 0, y: 0 });
+			let ptb = new Point({ x: 2, y: 4 });
+			let line = new Line({ a: pta, b: ptb });
+			let rect = new Rect({ t: 0, r: 5, b: 2, l: 3 });
+			expect(line.intersectsRect(rect)).toBe(false);
+		});
+		it("hits", () => {
+			// +012345
+			// 0a ***
+			// 1  * *
+			// 2  ***
+			// 3    b
+			// 4
+			// 5
+
+			let pta = new Point({ x: 0, y: 0 });
+			let ptb = new Point({ x: 4, y: 3 });
+			let line = new Line({ a: pta, b: ptb });
+			let rect = new Rect({ t: 0, r: 4, b: 2, l: 2 });
+			expect(line.intersectsRect(rect)).toBe(true);
 		});
 	});
 });
