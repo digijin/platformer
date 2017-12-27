@@ -80,7 +80,7 @@ describe("Utility/Line", () => {
 			let line = new Line({ a: pta, b: ptb });
 			let pixels = line.pixels();
 			// console.log(pixels);
-			expect(pixels.length).toBe(3);
+			expect(pixels.length).toBe(7);
 		});
 		it("handles floating points", () => {
 			let pta = new Point({ x: 10, y: 10 });
@@ -91,7 +91,7 @@ describe("Utility/Line", () => {
 			let line = new Line({ a: pta, b: ptb });
 			let pixels = line.pixels();
 			// console.log(pixels);
-			expect(pixels.length).toBe(20);
+			expect(pixels.length).toBe(38);
 		});
 	});
 });

@@ -225,11 +225,11 @@ export default class Grid extends GameObject {
 			a: new Point({ x: 10, y: 10 }),
 			b: this.engine.mouse.point.multiply(1 / config.grid.width)
 		});
-		// let pixels = line.pixels();
-		// pixels.forEach(p => {
-		// 	this.highlightBlock(this.getBlock(p));
-		// });
-		console.log(line);
+		let pixels = line.pixels();
+		pixels.forEach(p => {
+			this.highlightBlock(this.getBlock(p));
+		});
+		// console.log(line);
 	};
 	tileCache: {};
 	renderDecor() {

@@ -29,22 +29,29 @@ export default class Line {
 	pixels(): Array<{ x: number, y: number }> {
 		let out = [];
 		// let delta = this.b.subtract(this.a);
-		let a = this.a.rounded;
-		let b = this.b.rounded;
+		let a = this.a.floor();
+		let b = this.b.floor();
 		let delta = {
 			x: b.x - a.x,
 			y: b.y - a.y
 		};
 		let deltaErr = Math.abs(delta.y / delta.x);
+		if (deltaErr == Infinity) {
+			deltaErr = Math.abs(a.y - b.y);
+		}
 		let err = 0;
 		let y = a.y;
 
 		let escapeFor = 0;
 
-		for (let x = a.x; x !== b.x; x = b.x > a.x ? x + 1 : x - 1) {
+		let escapeAfter = true;
+		for (let x = a.x; escapeAfter; x = b.x > a.x ? x + 1 : x - 1) {
+			if (x == b.x) {
+				escapeAfter = false;
+			}
 			escapeFor++;
 			if (escapeFor > 1000) {
-				throw new Error("escape for loop");
+				throw new Error("escape pixel for loop");
 			}
 			out.push({ x, y });
 			err += deltaErr;
@@ -52,10 +59,14 @@ export default class Line {
 			let escapeWhile = 0;
 			while (err >= 0.5) {
 				escapeWhile++;
-				if (escapeWhile > 1000) {
-					throw new Error("escape while loop");
+				if (escapeWhile > 100) {
+					throw new Error("escape pixel while loop");
 				}
+				// if (escapeWhile > 100 || a.x == b.x) {
+				// 	console.log(y, delta.y, x, err);
+				// }
 				y += delta.y > 0 ? 1 : -1;
+				out.push({ x, y });
 				err -= 1;
 			}
 		}
