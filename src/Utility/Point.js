@@ -129,4 +129,22 @@ export default class Point {
 			y: Math.round(this.y)
 		});
 	}
+	round(): Point {
+		return new Point({
+			x: Math.round(this.x),
+			y: Math.round(this.y)
+		});
+	}
+	floor(): Point {
+		return new Point({
+			x: Math.floor(this.x),
+			y: Math.floor(this.y)
+		});
+	}
+	ceil(): Point {
+		return new Point({
+			x: Math.ceil(this.x),
+			y: Math.ceil(this.y)
+		});
+	}
 }
