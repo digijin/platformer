@@ -37,7 +37,6 @@ export default class Line {
 			out.push({ x, y });
 			err += deltaErr;
 			while (err >= 0.5) {
-				console.log("beep");
 				y += delta.y > 0 ? 1 : -1;
 				err -= 1;
 			}

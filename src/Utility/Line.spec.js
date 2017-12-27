@@ -74,10 +74,13 @@ describe("Utility/Line", () => {
 		});
 	});
 	describe("pixels", () => {
-		let pta = new Point({ x: 0, y: 0 });
-		let ptb = new Point({ x: 3, y: 2 });
-		let line = new Line({ a: pta, b: ptb });
-		let pixels = line.pixels();
-		expect(pixels.length).toBe(3);
+		it("returns an array of points", () => {
+			let pta = new Point({ x: 0, y: 0 });
+			let ptb = new Point({ x: 3, y: 2 });
+			let line = new Line({ a: pta, b: ptb });
+			let pixels = line.pixels();
+			console.log(pixels);
+			expect(pixels.length).toBe(3);
+		});
 	});
 });
