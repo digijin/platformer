@@ -9,6 +9,9 @@ export default class Line {
 	b: Point;
 
 	constructor(params: { a: Point, b: Point }) {
+		if (arguments.length !== 1) {
+			throw new Error("wrong arguments length passed to Line");
+		}
 		this.a = params.a;
 		this.b = params.b;
 	}
@@ -25,18 +28,33 @@ export default class Line {
 	//Bresenham's line algorithm
 	pixels(): Array<{ x: number, y: number }> {
 		let out = [];
-		let delta = this.b.subtract(this.a);
+		// let delta = this.b.subtract(this.a);
+		let a = this.a.rounded;
+		let b = this.b.rounded;
+		let delta = {
+			x: b.x - a.x,
+			y: b.y - a.y
+		};
 		let deltaErr = Math.abs(delta.y / delta.x);
 		let err = 0;
-		let y = this.a.y;
-		for (
-			let x = this.a.x;
-			x !== this.b.x;
-			x = this.b.x > this.a.x ? x + 1 : x - 1
-		) {
+		let y = a.y;
+
+		let escapeFor = 0;
+
+		for (let x = a.x; x !== b.x; x = b.x > a.x ? x + 1 : x - 1) {
+			escapeFor++;
+			if (escapeFor > 1000) {
+				throw new Error("escape for loop");
+			}
 			out.push({ x, y });
 			err += deltaErr;
+
+			let escapeWhile = 0;
 			while (err >= 0.5) {
+				escapeWhile++;
+				if (escapeWhile > 1000) {
+					throw new Error("escape while loop");
+				}
 				y += delta.y > 0 ? 1 : -1;
 				err -= 1;
 			}

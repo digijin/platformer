@@ -79,8 +79,19 @@ describe("Utility/Line", () => {
 			let ptb = new Point({ x: 3, y: 2 });
 			let line = new Line({ a: pta, b: ptb });
 			let pixels = line.pixels();
-			console.log(pixels);
+			// console.log(pixels);
 			expect(pixels.length).toBe(3);
+		});
+		it("handles floating points", () => {
+			let pta = new Point({ x: 10, y: 10 });
+			let ptb = new Point({
+				x: 29.900000000000002,
+				y: 27.650000000000002
+			});
+			let line = new Line({ a: pta, b: ptb });
+			let pixels = line.pixels();
+			// console.log(pixels);
+			expect(pixels.length).toBe(20);
 		});
 	});
 });

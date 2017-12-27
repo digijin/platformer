@@ -8,6 +8,7 @@ import Enemy from "Actor/Enemy";
 import GameObject from "GameObject";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";
+import Line from "Utility/Line";
 import type Engine from "Engine";
 
 import Decor from "Grid/Decor";
@@ -19,6 +20,19 @@ export default class Grid extends GameObject {
 	decor: Array<Decor>;
 
 	z: number;
+
+	highlightBlock(block: Block) {
+		if (block) {
+			let rect = block.rect;
+			this.engine.ctx.context.strokeStyle = "purple";
+			this.engine.ctx.strokeRect(
+				rect.l,
+				rect.t,
+				rect.r - rect.l,
+				rect.b - rect.t
+			);
+		}
+	}
 
 	addDecor(position: Point, type: string) {
 		let decor = this.getDecor(position);
@@ -206,6 +220,16 @@ export default class Grid extends GameObject {
 	update = (engine: Engine) => {
 		this.renderTiles();
 		this.renderDecor();
+		// this.highlightBlock(this.getBlock({ x: 10, y: 10 }));
+		let line = new Line({
+			a: new Point({ x: 10, y: 10 }),
+			b: this.engine.mouse.point.multiply(1 / config.grid.width)
+		});
+		// let pixels = line.pixels();
+		// pixels.forEach(p => {
+		// 	this.highlightBlock(this.getBlock(p));
+		// });
+		console.log(line);
 	};
 	tileCache: {};
 	renderDecor() {
