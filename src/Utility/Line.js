@@ -21,6 +21,12 @@ export default class Line {
 	direction(): number {
 		return this.a.directionTo(this.b);
 	}
+	multiply(num: number): Line {
+		return new Line({
+			a: this.a.multiply(num),
+			b: this.b.multiply(num)
+		});
+	}
 
 	percent(pc: number): Point {
 		return this.a.percentTo(this.b, pc);

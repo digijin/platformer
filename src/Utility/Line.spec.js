@@ -94,4 +94,31 @@ describe("Utility/Line", () => {
 			expect(pixels.length).toBe(38);
 		});
 	});
+	describe("multiply", () => {
+		describe("shuld multiply", () => {
+			let pta, ptb, line;
+			beforeEach(() => {
+				pta = new Point({ x: 1, y: 2 });
+				ptb = new Point({ x: 3, y: 4 });
+				line = new Line({ a: pta, b: ptb });
+				line = line.multiply(2);
+			});
+			describe("a", () => {
+				it(" x", () => {
+					expect(line.a.x).toBe(2);
+				});
+				it(" y", () => {
+					expect(line.a.y).toBe(4);
+				});
+			});
+			describe("b", () => {
+				it(" x", () => {
+					expect(line.b.x).toBe(6);
+				});
+				it(" y", () => {
+					expect(line.b.y).toBe(8);
+				});
+			});
+		});
+	});
 });
