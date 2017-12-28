@@ -73,14 +73,37 @@ describe("Utility/Line", () => {
 			expect(line.intersectsRect(rect)).toBe(true);
 		});
 	});
-	describe("pixels", () => {
+	describe("digijinPixels", () => {
+		let testcases = [
+			// { a: [1, 1], b: [2, 3], p: [[1, 1], [1, 2]] },
+			{
+				a: [1.5, 1.5],
+				b: [4.5, 1.5],
+				p: [[1, 1], [2, 1], [3, 1], [4, 1]]
+			}
+		];
+		testcases.forEach((tc, i) => {
+			it("should test case " + i, () => {
+				let pta = new Point({ x: tc.a[0], y: tc.a[1] });
+				let ptb = new Point({ x: tc.b[0], y: tc.b[1] });
+				let line = new Line({ a: pta, b: ptb });
+				let pixels = line.digijinPixels();
+				expect(pixels.length).toBe(tc.p.length);
+				tc.p.forEach((p, j) => {
+					expect(pixels[j].x).toBe(p[0]);
+					expect(pixels[j].y).toBe(p[1]);
+				});
+			});
+		});
+	});
+	describe("bresenham", () => {
 		it("returns an array of points", () => {
 			let pta = new Point({ x: 0, y: 0 });
 			let ptb = new Point({ x: 3, y: 2 });
 			let line = new Line({ a: pta, b: ptb });
-			let pixels = line.pixels();
+			let bresenham = line.bresenham();
 			// console.log(pixels);
-			expect(pixels.length).toBe(7);
+			expect(bresenham.length).toBe(7);
 		});
 		it("handles floating points", () => {
 			let pta = new Point({ x: 10, y: 10 });
@@ -89,9 +112,9 @@ describe("Utility/Line", () => {
 				y: 27.650000000000002
 			});
 			let line = new Line({ a: pta, b: ptb });
-			let pixels = line.pixels();
+			let bresenham = line.bresenham();
 			// console.log(pixels);
-			expect(pixels.length).toBe(38);
+			expect(bresenham.length).toBe(38);
 		});
 	});
 	describe("multiply", () => {

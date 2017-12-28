@@ -31,8 +31,39 @@ export default class Line {
 	percent(pc: number): Point {
 		return this.a.percentTo(this.b, pc);
 	}
+	pixels() {
+		return this.bresenham();
+	}
+	//my line algorithm
+	digijinPixels(): Array<{ x: number, y: number }> {
+		let src = this.a.floor();
+		let dest = this.b.floor();
+		let out = [];
+		//eliminate vertical first
+		if (src.x == dest.x) {
+			let a = src.y;
+			let b = dest.y;
+			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
+				// console.log(a);
+				out.push({ x: src.x, y: a });
+			}
+			return out;
+		}
+		if (src.y == dest.y) {
+			let a = src.x;
+			let b = dest.x;
+			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
+				// console.log(a);
+				out.push({ x: a, y: src.y });
+			}
+			return out;
+		}
+
+		return out;
+	}
+
 	//Bresenham's line algorithm
-	pixels(): Array<{ x: number, y: number }> {
+	bresenham(): Array<{ x: number, y: number }> {
 		let out = [];
 		// let delta = this.b.subtract(this.a);
 		let a = this.a.floor();
