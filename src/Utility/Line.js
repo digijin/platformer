@@ -39,12 +39,13 @@ export default class Line {
 		let src = this.a.floor();
 		let dest = this.b.floor();
 		let out = [];
+		let diff = this.b.subtract(this.a);
+		//return early use cases
 		//eliminate vertical first
 		if (src.x == dest.x) {
 			let a = src.y;
 			let b = dest.y;
 			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
-				// console.log(a);
 				out.push({ x: src.x, y: a });
 			}
 			return out;
@@ -53,13 +54,30 @@ export default class Line {
 			let a = src.x;
 			let b = dest.x;
 			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
-				// console.log(a);
 				out.push({ x: a, y: src.y });
 			}
 			return out;
 		}
+		//cant have a division by zero error on diff.y
+		//cus we've already checked if it's zero above
+		//y = mx+b
+		//y-mx = b
+		// let m = diff.y / diff.x;
+		// let b = diff.y - m * diff.x;
+		let { m, b } = this.calcMB();
+		// console.log(this.a, this.b, m, b);
+		// console.log(this.a.y, m, this.a.x, b);
 
 		return out;
+	}
+	//y = Mx + B
+	calcMB() {
+		// let diff = this.a.subtract(this.b);
+		// let m = diff.y / diff.x;
+		// let b = diff.y - m * diff.x;
+		let m = (this.a.y - this.b.y) / (this.a.x - this.b.x);
+		let b = this.a.y - m * this.a.x;
+		return { m, b };
 	}
 
 	//Bresenham's line algorithm

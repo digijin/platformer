@@ -74,6 +74,23 @@ describe("Utility/Line", () => {
 		});
 	});
 	describe("digijinPixels", () => {
+		describe("calcMB", () => {
+			it("should calc mb", () => {
+				//http://www.purplemath.com/modules/strtlneq.htm
+				let line = new Line({
+					a: new Point({ x: -2, y: 4 }),
+					b: new Point({ x: 1, y: 2 })
+				});
+				let accuracy = 100;
+				let { m, b } = line.calcMB();
+				expect(Math.floor(m * accuracy)).toBe(
+					Math.floor(-2 / 3 * accuracy)
+				);
+				expect(Math.floor(b * accuracy)).toBe(
+					Math.floor(8 / 3 * accuracy)
+				);
+			});
+		});
 		let testcases = [
 			// { a: [1, 1], b: [2, 3], p: [[1, 1], [1, 2]] },
 			{
