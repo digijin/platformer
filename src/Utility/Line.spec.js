@@ -94,25 +94,25 @@ describe("Utility/Line", () => {
 		let testcases = [
 			// { a: [1, 1], b: [2, 3], p: [[1, 1], [1, 2]] },
 			{
-				//horizontal
+				t: "horizontal",
 				a: [1.5, 1.5],
 				b: [4.5, 1.5],
 				p: [[1, 1], [2, 1], [3, 1], [4, 1]]
 			},
 			{
-				//vertical
+				t: "vertical",
 				a: [1.5, 1.5],
 				b: [1.5, 4.5],
 				p: [[1, 1], [1, 2], [1, 3], [1, 4]]
 			},
 			{
-				//slanted
+				t: "slanted",
 				a: [1.5, 1.5],
 				b: [2.5, 3.5],
 				p: [[1, 1], [1, 2], [2, 2], [2, 3]]
 			},
 			{
-				//diagonal
+				t: "diagonal",
 
 				a: [1.5, 1.5],
 				b: [3.5, 3.5],
@@ -120,7 +120,7 @@ describe("Utility/Line", () => {
 			}
 		];
 		testcases.forEach((tc, i) => {
-			it("should test case " + i, () => {
+			it("should test case " + tc.t, () => {
 				let pta = new Point({ x: tc.a[0], y: tc.a[1] });
 				let ptb = new Point({ x: tc.b[0], y: tc.b[1] });
 				let line = new Line({ a: pta, b: ptb });

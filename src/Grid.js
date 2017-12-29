@@ -222,7 +222,7 @@ export default class Grid extends GameObject {
 		this.renderDecor();
 		// this.highlightBlock(this.getBlock({ x: 10, y: 10 }));
 		let line = new Line({
-			a: new Point({ x: 10, y: 10 }),
+			a: new Point({ x: 10.5, y: 10.5 }),
 			b: this.engine.mouse.point.multiply(1 / config.grid.width)
 		});
 		this.highlightLine(line);

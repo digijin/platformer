@@ -32,7 +32,7 @@ export default class Line {
 		return this.a.percentTo(this.b, pc);
 	}
 	pixels() {
-		return this.bresenham();
+		return this.digijinPixels();
 	}
 	//my line algorithm
 	digijinPixels(): Array<{ x: number, y: number }> {
@@ -163,7 +163,12 @@ export default class Line {
 	}
 	//Liang-Barsky algorithm
 	//https://gist.github.com/ChickenProp/3194723
-	intersectsRect(rect: Rect): boolean {
+	intersectsRect(rect: {
+		t: number,
+		r: number,
+		b: number,
+		l: number
+	}): boolean {
 		let x = this.a.x;
 		let y = this.a.y;
 		let vx = this.b.x - this.a.x;
