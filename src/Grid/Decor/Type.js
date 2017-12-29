@@ -51,6 +51,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		height: 3,
 		image: woodTile,
 		destructable: true,
+		obstacle: true,
 		hp: 10
 	}
 ];
