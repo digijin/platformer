@@ -64,7 +64,40 @@ export default class Line {
 		//y-mx = b
 		// let m = diff.y / diff.x;
 		// let b = diff.y - m * diff.x;
-		let { m, b } = this.calcMB();
+
+		let hdir = src.x < dest.x ? 1 : -1;
+		let vdir = src.y < dest.y ? 1 : -1;
+		// let { m, b } = this.calcMB();
+		let next = src;
+
+		//START LOOP
+		while (next !== null) {
+			let curr = next;
+			out.push(next);
+			next = null;
+			//check sides
+			let neighbour = { x: curr.x + hdir, y: curr.y };
+			let rect = {
+				t: neighbour.y,
+				l: neighbour.x,
+				b: neighbour.y + 1,
+				r: neighbour.x + 1
+			};
+			if (this.intersectsRect(rect)) {
+				next = neighbour;
+			} else {
+				neighbour = { x: curr.x, y: curr.y + vdir };
+				rect = {
+					t: neighbour.y,
+					l: neighbour.x,
+					b: neighbour.y + 1,
+					r: neighbour.x + 1
+				};
+				if (this.intersectsRect(rect)) {
+					next = neighbour;
+				}
+			}
+		}
 		// console.log(this.a, this.b, m, b);
 		// console.log(this.a.y, m, this.a.x, b);
 
