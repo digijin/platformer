@@ -55,7 +55,7 @@ describe("Utility/Line", () => {
 			let ptb = new Point({ x: 2, y: 4 });
 			let line = new Line({ a: pta, b: ptb });
 			let rect = new Rect({ t: 0, r: 5, b: 2, l: 3 });
-			expect(line.intersectsRect(rect)).toBe(false);
+			expect(line.intersectsRect(rect).result).toBe(false);
 		});
 		it("hits", () => {
 			// +012345
@@ -70,7 +70,7 @@ describe("Utility/Line", () => {
 			let ptb = new Point({ x: 4, y: 3 });
 			let line = new Line({ a: pta, b: ptb });
 			let rect = new Rect({ t: 0, r: 4, b: 2, l: 2 });
-			expect(line.intersectsRect(rect)).toBe(true);
+			expect(line.intersectsRect(rect).result).toBe(true);
 		});
 	});
 	describe("digijinPixels", () => {

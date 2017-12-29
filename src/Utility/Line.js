@@ -4,6 +4,8 @@
 import Point from "./Point";
 import Rect from "./Rect";
 
+import config from "config";
+
 export default class Line {
 	a: Point;
 	b: Point;
@@ -31,6 +33,10 @@ export default class Line {
 	percent(pc: number): Point {
 		return this.a.percentTo(this.b, pc);
 	}
+	//returns all blocks the line travels through
+	blockPixels() {
+		return this.multiply(1 / config.grid.width).pixels();
+	}
 	pixels() {
 		return this.digijinPixels();
 	}
@@ -40,6 +46,8 @@ export default class Line {
 		let dest = this.b.floor();
 		let out = [];
 		let diff = this.b.subtract(this.a);
+		let hdir = src.x < dest.x ? 1 : -1;
+		let vdir = src.y < dest.y ? 1 : -1;
 		//return early use cases
 		//eliminate vertical first
 		if (src.x == dest.x) {
@@ -65,11 +73,9 @@ export default class Line {
 		// let m = diff.y / diff.x;
 		// let b = diff.y - m * diff.x;
 
-		let hdir = src.x < dest.x ? 1 : -1;
-		let vdir = src.y < dest.y ? 1 : -1;
 		// let { m, b } = this.calcMB();
-		let next = src;
 
+		let next = src;
 		//START LOOP
 		while (next !== null) {
 			let curr = next;
@@ -83,7 +89,7 @@ export default class Line {
 				b: neighbour.y + 1,
 				r: neighbour.x + 1
 			};
-			if (this.intersectsRect(rect)) {
+			if (this.intersectsRect(rect).result) {
 				next = neighbour;
 			} else {
 				neighbour = { x: curr.x, y: curr.y + vdir };
@@ -93,7 +99,7 @@ export default class Line {
 					b: neighbour.y + 1,
 					r: neighbour.x + 1
 				};
-				if (this.intersectsRect(rect)) {
+				if (this.intersectsRect(rect).result) {
 					next = neighbour;
 				}
 			}
@@ -168,7 +174,7 @@ export default class Line {
 		r: number,
 		b: number,
 		l: number
-	}): boolean {
+	}): { result: boolean, collision?: { x: number, y: number } } {
 		let x = this.a.x;
 		let y = this.a.y;
 		let vx = this.b.x - this.a.x;
@@ -186,7 +192,7 @@ export default class Line {
 		for (let i = 0; i <= 4; i++) {
 			if (p[i] == 0) {
 				if (q[i] < 0) {
-					return false;
+					return { result: false };
 				}
 			} else {
 				var t = q[i] / p[i];
@@ -198,13 +204,13 @@ export default class Line {
 			}
 		}
 
-		if (u1 > u2 || u1 > 1 || u1 < 0) return false;
+		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
 
 		let collision = {};
 		collision.x = x + u1 * vx;
 		collision.y = y + u1 * vy;
 		// console.log(collision);
 
-		return true;
+		return { result: true, collision: collision };
 	}
 }

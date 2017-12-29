@@ -220,15 +220,16 @@ export default class Grid extends GameObject {
 	update = (engine: Engine) => {
 		this.renderTiles();
 		this.renderDecor();
-		// this.highlightBlock(this.getBlock({ x: 10, y: 10 }));
+	};
+	tileCache: {};
+	renderDebugBlockPixelLine() {
 		let line = new Line({
 			a: new Point({ x: 10.5, y: 10.5 }),
 			b: this.engine.mouse.point.multiply(1 / config.grid.width)
 		});
 		this.highlightLine(line);
-		// console.log(line);
-	};
-	tileCache: {};
+	}
+
 	highlightLine(line) {
 		let pixels = line.pixels();
 		pixels.forEach(p => {
