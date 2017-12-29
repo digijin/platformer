@@ -80,6 +80,7 @@ export default class Bullet extends GameObject {
 				if (hitTest.result) {
 					this.position.x = hitTest.collision.x;
 					this.position.y = hitTest.collision.y;
+					block.damage(1);
 					return false;
 				}
 			}
