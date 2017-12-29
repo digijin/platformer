@@ -7,6 +7,11 @@ import grassTile from "Grid/grass.jpg";
 import stoneTile from "Grid/stone.jpg";
 import tilesTile from "Grid/tiles.jpg";
 
+import brick2 from "Grid/brick2.png";
+import brick3 from "Grid/brick3.png";
+import moon from "Grid/moon.jpg";
+import volcanic from "Grid/volcanic.jpg";
+
 export type BlockTypeParams = {
 	// hp: name,
 	name: string,
@@ -97,6 +102,34 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		name: "tiles",
 		id: "7",
 		image: tilesTile,
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "brick2",
+		id: "8",
+		image: brick2,
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "brick3",
+		id: "9",
+		image: brick3,
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "moon",
+		id: "10",
+		image: moon,
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "volcanic",
+		id: "11",
+		image: volcanic,
 		destructable: true,
 		hp: 100
 	}

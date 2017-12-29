@@ -220,6 +220,7 @@ export default class Grid extends GameObject {
 	update = (engine: Engine) => {
 		this.renderTiles();
 		this.renderDecor();
+		// this.renderDebugBlockPixelLine();
 	};
 	tileCache: {};
 	renderDebugBlockPixelLine() {
