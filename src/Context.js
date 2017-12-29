@@ -82,8 +82,15 @@ export default class Context {
 		this.context.fillText(...arguments);
 	}
 	fillRect(x: number, y: number, w: number, h: number) {
-		let o = this.engine.view.offset;
-		this.context.fillRect(x - o.x, y - o.y, w, h);
+		this.context.save();
+		this.context.translate(
+			-this.engine.view.offset.x,
+			-this.engine.view.offset.y
+		);
+
+		this.context.fillRect(x, y, w, h);
+
+		this.context.restore();
 	}
 	translate() {
 		this.context.translate(...arguments);
