@@ -342,11 +342,11 @@ export default class Grid extends GameObject {
 				});
 				if (block) {
 					if (!block.isEmpty()) {
-						let im = block.getType().image;
+						let im = block.getType().pattern;
 						ctx.filter = "none";
 						this.drawTile(ctx, im, x, y, offset);
 					} else if (block.backgroundType !== "0") {
-						let im = block.getBackgroundType().image;
+						let im = block.getBackgroundType().pattern;
 						ctx.filter = "brightness(50%)";
 						this.drawTile(ctx, im, x, y, offset);
 					}
@@ -376,8 +376,8 @@ export default class Grid extends GameObject {
 	}
 
 	drawTile(ctx, im, x, y, offset) {
-		let pattern = ctx.createPattern(im, "repeat");
-		ctx.fillStyle = pattern;
+		// let pattern = ctx.createPattern(im, "repeat");
+		ctx.fillStyle = im;
 		ctx.fillRect(
 			x * config.grid.width - offset.x,
 			y * config.grid.height - offset.y,
