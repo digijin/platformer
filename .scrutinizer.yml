@@ -3,3 +3,4 @@ checks:
 filter:
   excluded_paths:
       - "*.spec.js"
+      - "*.karma.js"
