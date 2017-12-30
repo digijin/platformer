@@ -4,6 +4,8 @@ import brickTile from "Grid/brick_tile.png";
 import metalTile from "Grid/metal_tile.png";
 import woodTile from "Grid/wood_tile.png";
 
+import windowDecor from "Grid/window.png";
+
 export type DecorTypeParams = {
 	// hp: name,
 	name: string,
@@ -53,6 +55,16 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: true,
 		obstacle: true,
 		hp: 10
+	},
+	{
+		name: "window",
+		id: "2",
+		width: 2,
+		height: 3,
+		image: windowDecor,
+		destructable: false,
+		obstacle: false,
+		hp: 1
 	}
 ];
 
