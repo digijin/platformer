@@ -17,9 +17,10 @@ export default {
 			w: 40,
 			h: 50
 		},
-		speed: 250
+		legspeed: 20,
+		speed: 350
 	},
-	gravity: 10,
+	gravity: 20,
 	debug: {
 		fpsmeter: true,
 		player: {

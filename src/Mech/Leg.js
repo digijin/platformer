@@ -10,6 +10,7 @@ import foot from "Player/foot.png";
 import upperleg from "Player/upperleg.png";
 import lowerleg from "Player/lowerleg.png";
 import gun from "Player/gun.png";
+import config from "config";
 
 const branchLength = 30;
 const numBranches = 2;

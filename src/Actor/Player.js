@@ -173,7 +173,7 @@ export default class Player extends Actor {
 				})
 			);
 		} else {
-			this.v += this.engine.deltaTime * 10; //GRAVITY
+			this.v += this.engine.deltaTime * config.gravity; //GRAVITY
 		}
 		if (hand.state == HAND_STATE.GRIPPED) {
 			//REEL IN
