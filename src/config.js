@@ -6,7 +6,7 @@ export default {
 	},
 	grid: {
 		width: 20,
-		height: 20,
+		// height: 20,
 		tile: {
 			width: 8,
 			height: 8

@@ -86,10 +86,7 @@ export default class Enemy extends Actor {
 	}
 
 	unstuck() {
-		if (
-			this.position.y >
-			this.engine.grid.height * config.grid.height * 2
-		) {
+		if (this.position.y > this.engine.grid.width * config.grid.width * 2) {
 			this.explode();
 		}
 		//if stuck

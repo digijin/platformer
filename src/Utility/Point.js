@@ -90,7 +90,7 @@ export default class Point {
 	getBlock(): { x: number, y: number } {
 		return {
 			x: Math.floor(this.x / config.grid.width),
-			y: Math.floor(this.y / config.grid.height)
+			y: Math.floor(this.y / config.grid.width)
 		};
 	}
 

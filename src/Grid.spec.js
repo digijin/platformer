@@ -71,7 +71,6 @@ describe("Grid.spec.js", () => {
 	describe("getBlockAtPoint", () => {
 		it("should get using config", () => {
 			config.grid.width = 10;
-			config.grid.height = 10;
 			let grid = new Grid({ w: 5, h: 5 });
 			let block = grid.getBlockAtPoint({ x: 15, y: 15 });
 			expect(block.position.x).toBe(1);
@@ -87,7 +86,6 @@ describe("Grid.spec.js", () => {
 
 			beforeEach(() => {
 				config.grid.width = 10;
-				config.grid.height = 10;
 
 				grid = new Grid({ w: 10, h: 10 });
 				rect = new Rect({ t: 15, r: 45, b: 45, l: 15 });
@@ -114,7 +112,6 @@ describe("Grid.spec.js", () => {
 
 			beforeEach(() => {
 				config.grid.width = 10;
-				config.grid.height = 10;
 
 				grid = new Grid({ w: 10, h: 10 });
 				rect = new Rect({ t: 15, r: 35, b: 35, l: 15 });

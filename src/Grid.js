@@ -133,7 +133,7 @@ export default class Grid extends GameObject {
 	};
 	destroyBlockAtPosition(pos: { x: number, y: number }) {
 		let x = Math.floor(pos.x / config.grid.width);
-		let y = Math.floor(pos.y / config.grid.height);
+		let y = Math.floor(pos.y / config.grid.width);
 		if (this.blocks[x]) {
 			if (this.blocks[x][y]) {
 				// this.grid[x][y] = "0";
@@ -150,8 +150,8 @@ export default class Grid extends GameObject {
 	getBlocksInRect(rect: Rect): Array<Block> {
 		let firstCol = Math.ceil(rect.l / config.grid.width);
 		let lastCol = Math.floor(rect.r / config.grid.width);
-		let firstRow = Math.ceil(rect.t / config.grid.height);
-		let lastRow = Math.floor(rect.b / config.grid.height);
+		let firstRow = Math.ceil(rect.t / config.grid.width);
+		let lastRow = Math.floor(rect.b / config.grid.width);
 
 		if (lastCol < firstCol || lastRow < firstRow) {
 			//return early
@@ -181,18 +181,18 @@ export default class Grid extends GameObject {
 	getBlocksOverlappingRect(rect: Rect): Array<Block> {
 		let firstCol = Math.floor(rect.l / config.grid.width);
 		let lastCol = Math.ceil(rect.r / config.grid.width);
-		let firstRow = Math.floor(rect.t / config.grid.height);
-		let lastRow = Math.ceil(rect.b / config.grid.height);
+		let firstRow = Math.floor(rect.t / config.grid.width);
+		let lastRow = Math.ceil(rect.b / config.grid.width);
 		return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
 	}
 
 	blockAtPosition(pos: { x: number, y: number }): Block | void {
 		let x = Math.floor(pos.x / config.grid.width);
-		let y = Math.floor(pos.y / config.grid.height);
+		let y = Math.floor(pos.y / config.grid.width);
 		//because y goes positive downwards, if an object is flat on the top
 		//of a tile it will register as th e tile below
-		// console.log(pos.y, config.grid.height);
-		if (pos.y % config.grid.height == 0) {
+		// console.log(pos.y, config.grid.width);
+		if (pos.y % config.grid.width == 0) {
 			y -= 1;
 		}
 
@@ -252,15 +252,15 @@ export default class Grid extends GameObject {
 			//"#ff0000";
 			this.engine.ctx.fillRect(
 				decor.position.x * config.grid.width,
-				decor.position.y * config.grid.height,
+				decor.position.y * config.grid.width,
 				config.grid.width * type.width,
-				config.grid.height * type.height
+				config.grid.width * type.height
 			);
 			this.engine.ctx.strokeRect(
 				decor.position.x * config.grid.width,
-				decor.position.y * config.grid.height,
+				decor.position.y * config.grid.width,
 				config.grid.width * type.width,
-				config.grid.height * type.height
+				config.grid.width * type.height
 			);
 		});
 	}
@@ -307,7 +307,7 @@ export default class Grid extends GameObject {
 
 	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {
 		let w = config.grid.width * config.grid.tile.width;
-		let h = config.grid.height * config.grid.tile.height;
+		let h = config.grid.width * config.grid.tile.height;
 
 		let firstCol = Math.floor(rect.l / w);
 		let lastCol = Math.floor(rect.r / w);
@@ -325,7 +325,7 @@ export default class Grid extends GameObject {
 	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.grid.tile.width * config.grid.width;
-		canvas.height = config.grid.tile.height * config.grid.height;
+		canvas.height = config.grid.tile.height * config.grid.width;
 
 		// FLOWHACK
 		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
@@ -380,9 +380,9 @@ export default class Grid extends GameObject {
 		ctx.fillStyle = im;
 		ctx.fillRect(
 			x * config.grid.width - offset.x,
-			y * config.grid.height - offset.y,
+			y * config.grid.width - offset.y,
 			config.grid.width,
-			config.grid.height
+			config.grid.width
 		);
 		// ctx.drawImage(
 		// 	im,
@@ -391,9 +391,9 @@ export default class Grid extends GameObject {
 		// 	im.width,
 		// 	im.height,
 		// 	x * config.grid.width,
-		// 	y * config.grid.height,
+		// 	y * config.grid.width,
 		// 	config.grid.width,
-		// 	config.grid.height
+		// 	config.grid.width
 		// );
 	}
 

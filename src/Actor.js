@@ -130,7 +130,7 @@ export default class Actor extends Renderable {
 			}
 		}
 		if (step) {
-			return this.canMoveVert(-config.grid.height);
+			return this.canMoveVert(-config.grid.width);
 		}
 		return false;
 	};

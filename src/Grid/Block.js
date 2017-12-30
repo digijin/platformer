@@ -78,13 +78,13 @@ export default class Block {
 	get center(): Point {
 		return new Point({
 			x: (this.position.x + 0.5) * config.grid.width,
-			y: (this.position.y + 0.5) * config.grid.height
+			y: (this.position.y + 0.5) * config.grid.width
 		});
 	}
 	get point(): Point {
 		return new Point({
 			x: this.position.x * config.grid.width,
-			y: this.position.y * config.grid.height
+			y: this.position.y * config.grid.width
 		});
 	}
 	is(block: Block): boolean {
@@ -96,9 +96,9 @@ export default class Block {
 
 	get rect(): Rect {
 		return new Rect({
-			t: this.position.y * config.grid.height,
+			t: this.position.y * config.grid.width,
 			r: (this.position.x + 1) * config.grid.width,
-			b: (this.position.y + 1) * config.grid.height,
+			b: (this.position.y + 1) * config.grid.width,
 			l: this.position.x * config.grid.width
 		});
 	}
@@ -110,7 +110,7 @@ export default class Block {
 	// static fromPoint(point: Point) {
 	// 	return new Block({
 	// 		x: Math.floor(point.x / config.grid.width),
-	// 		y: Math.floor(point.y / config.grid.height)
+	// 		y: Math.floor(point.y / config.grid.width)
 	// 	});
 	// }
 }

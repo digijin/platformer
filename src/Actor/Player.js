@@ -186,7 +186,7 @@ export default class Player extends Actor {
 		if (!this.canMoveHori(hDelta)) {
 			if (this.canStep(hDelta)) {
 				//step up and keep going
-				this.position.y -= config.grid.height;
+				this.position.y -= config.grid.width;
 			} else {
 				this.h = 0;
 				hDelta = 0;

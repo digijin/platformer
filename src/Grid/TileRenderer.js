@@ -21,7 +21,7 @@ export default class TileRenderer {
 				this.engine.ctx.drawSprite(
 					dirtTile,
 					cell.point,
-					{ w: config.grid.width, h: config.grid.height },
+					{ w: config.grid.width, h: config.grid.width },
 					0,
 					{ x: 0, y: 0 }
 				);

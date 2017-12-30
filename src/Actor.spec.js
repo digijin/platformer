@@ -7,7 +7,6 @@ describe("Actor", () => {
 	let grid: Grid;
 	beforeEach(() => {
 		config.grid.width = 10;
-		config.grid.height = 10;
 		actor = new Actor();
 		actor.position = new Point({ x: 20, y: 40 });
 		actor.size = { w: 20, h: 20 };

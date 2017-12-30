@@ -58,22 +58,22 @@ export default class Decor {
 	get center(): Point {
 		return new Point({
 			x: (this.position.x + 0.5) * config.grid.width,
-			y: (this.position.y + 0.5) * config.grid.height
+			y: (this.position.y + 0.5) * config.grid.width
 		});
 	}
 	get point(): Point {
 		return new Point({
 			x: this.position.x * config.grid.width,
-			y: this.position.y * config.grid.height
+			y: this.position.y * config.grid.width
 		});
 	}
 
 	get rect(): Rect {
 		let type = this.getType();
 		return new Rect({
-			t: this.position.y * config.grid.height,
+			t: this.position.y * config.grid.width,
 			r: (this.position.x + type.width) * config.grid.width,
-			b: (this.position.y + type.height) * config.grid.height,
+			b: (this.position.y + type.height) * config.grid.width,
 			l: this.position.x * config.grid.width
 		});
 	}
