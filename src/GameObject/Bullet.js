@@ -104,13 +104,17 @@ export default class Bullet extends GameObject {
 			this.explode();
 		}
 
-		this.engine.ctx.context.filter =
-			"filter: drop-shadow(0px 0px 2px blue);";
+		// this.engine.ctx.context.filter =
+		// 	"filter: drop-shadow(0px 0px 2px white);";
+		this.engine.ctx.context.save();
+		this.engine.ctx.context.shadowColor = "red";
+		this.engine.ctx.context.shadowBlur = 30;
 		this.engine.ctx.drawLine(
 			old,
 			this.position
 			// this.position.add({ x: this.h, y: this.v })
 		);
+		this.engine.ctx.context.restore();
 		// let block = this.engine.grid.blockAtPosition({
 		// 	x: this.position.x,
 		// 	y: this.position.y
