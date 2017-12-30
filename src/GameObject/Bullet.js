@@ -65,6 +65,21 @@ export default class Bullet extends GameObject {
 		if (this.time < 0) {
 			this.destroy();
 		}
+		//check decor
+		let missDecor = this.engine.grid.decor.every(d => {
+			let hitTest = trajectory.intersectsRect(d.rect);
+			if (hitTest.result) {
+				this.position.x = hitTest.collision.x;
+				this.position.y = hitTest.collision.y;
+				d.damage(1);
+				return false;
+			} else {
+				return true;
+			}
+		});
+		if (!missDecor) {
+			this.explode();
+		}
 
 		//CHECK GRID
 		let blocks = trajectory.blockPixels();

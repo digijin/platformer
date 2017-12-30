@@ -18,9 +18,9 @@ export default class Decor {
 		this.type = params.type;
 		this.grid = params.grid;
 
-		// if (this.type !== "0") {
-		// 	this.hp = this.getType().hp;
-		// }
+		if (this.type !== "0") {
+			this.hp = this.getType().hp;
+		}
 	}
 
 	getType(): DecorType {
@@ -40,7 +40,8 @@ export default class Decor {
 		}
 	}
 	destroy() {
-		this.type = "0";
+		// this.type = "0";
+		this.grid.removeDecor(this.position);
 		this.grid.bustCache(this);
 	}
 	//for editor
