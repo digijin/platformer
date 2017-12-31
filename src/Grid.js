@@ -250,7 +250,7 @@ export default class Grid extends GameObject {
 			this.engine.ctx.context.fillStyle = type.pattern;
 			// this.engine.ctx.context.strokeStyle = "grey";
 			//"#ff0000";
-			this.engine.ctx.fillRect(
+			this.engine.ctx.fillRectRelative(
 				decor.position.x * config.grid.width,
 				decor.position.y * config.grid.width,
 				config.grid.width * type.width,

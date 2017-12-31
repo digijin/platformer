@@ -27,10 +27,10 @@ export default class Watcher extends GameObject {
 	constructor() {
 		super();
 		this.blockId = "1";
-		this.decorId = "1";
+		this.decorId = "4";
 		this.size = 10;
 		this.tag("editor-watcher");
-		this.mode = "block";
+		this.mode = "decor";
 		this.drawMode = "paint";
 	}
 	init(engine: Engine) {

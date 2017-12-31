@@ -92,6 +92,17 @@ export default class Context {
 
 		this.context.restore();
 	}
+	fillRectRelative(x: number, y: number, w: number, h: number) {
+		this.context.save();
+		this.context.translate(
+			-this.engine.view.offset.x + x,
+			-this.engine.view.offset.y + y
+		);
+
+		this.context.fillRect(0, 0, w, h);
+
+		this.context.restore();
+	}
 	translate() {
 		this.context.translate(...arguments);
 	}
