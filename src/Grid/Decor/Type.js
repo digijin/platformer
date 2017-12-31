@@ -34,6 +34,7 @@ export default class DecorType {
 		this.image = params.image;
 		this.height = params.height;
 		this.width = params.width;
+		this.mode = params.mode;
 
 		this.image.onload = () => {
 			let context = document.createElement("canvas").getContext("2d");
@@ -115,6 +116,17 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		hp: 1
+	},
+	{
+		name: "light",
+		id: "8",
+		width: 3,
+		height: 2,
+		image: require("./light3x2.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1,
+		mode: "soft-light"
 	}
 ];
 

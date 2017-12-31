@@ -245,9 +245,17 @@ export default class Grid extends GameObject {
 	}
 
 	renderDecor() {
+		this.engine.ctx.context.save();
 		this.decor.forEach((decor: Decor) => {
 			let type = decor.getType();
 			this.engine.ctx.context.fillStyle = type.pattern;
+
+			if (type.mode) {
+				this.engine.ctx.context.globalCompositeOperation = type.mode;
+			} else {
+				this.engine.ctx.context.globalCompositeOperation =
+					"source-over";
+			}
 			// this.engine.ctx.context.strokeStyle = "grey";
 			//"#ff0000";
 			this.engine.ctx.fillRectRelative(
@@ -263,6 +271,7 @@ export default class Grid extends GameObject {
 			// 	config.grid.width * type.height
 			// );
 		});
+		this.engine.ctx.context.restore();
 	}
 	renderTiles() {
 		//screenRect
