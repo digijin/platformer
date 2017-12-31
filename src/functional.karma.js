@@ -19,13 +19,18 @@ function clickId(id) {
 	expect(button).not.toBe(null);
 	mouseUtil.clickSelector("#" + id);
 }
+function clickClass(id) {
+	let button = document.getElementsByClassName(id)[0];
+	expect(button).not.toBe(null);
+	mouseUtil.clickSelector("." + id);
+}
 
-describe("functional", () => {
+fdescribe("functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {
 		// FLOWHACK
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = 15 * 1000;
+		jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000;
 		container = document.createElement("div");
 		// container.style =
 		// 	"position:absolute; left: 0px; top: 0px; display:block; width: 100%; height: 100%; z-index:10000";
@@ -75,7 +80,7 @@ describe("functional", () => {
 			setTimeout(done, 1000);
 		});
 		it("should expand main section", () => {
-			clickId("editorMainExpand");
+			clickClass("editorTab-menu");
 		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 1000);

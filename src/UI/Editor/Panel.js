@@ -159,7 +159,13 @@ class EditorPanel extends React.Component {
 						textColor="primary"
 					>
 						{this.tabs.map(t => {
-							return <Tab key={t} label={t} />;
+							return (
+								<Tab
+									className={"editorTab-" + t}
+									key={t}
+									label={t}
+								/>
+							);
 						})}
 					</Tabs>
 				</AppBar>
