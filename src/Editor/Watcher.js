@@ -34,6 +34,7 @@ export default class Watcher extends GameObject {
 		// let el = document.createElement("DIV");
 		// el.innerHTML = "I'm a div";
 		// engine.ui.container.appendChild(el);
+		this.lastMouse = this.engine.mouse.position;
 	}
 	update() {
 		this.size += this.engine.input.getAxis("wheel") / 50;
@@ -99,6 +100,12 @@ export default class Watcher extends GameObject {
 			this.engine.deltaTime *
 			speed;
 
+		if (this.engine.input.getButton("editor_drag")) {
+			this.engine.view.offset = this.engine.view.offset.subtract(
+				this.engine.mouse.position.subtract(this.lastMouse)
+			);
+		}
+
 		//render cursor
 		this.engine.ctx.fillRect(
 			rect.tl().x,
@@ -106,6 +113,8 @@ export default class Watcher extends GameObject {
 			this.size,
 			this.size
 		);
+
+		this.lastMouse = this.engine.mouse.position;
 	}
 	drawEnemy(blocks, action) {
 		// if (this.engine.input.getButton("editor_add")) {

@@ -106,6 +106,7 @@ export default {
 			editor_remove: [{ type: "mouse", button: 2 }],
 			editor_speed: [{ type: "keyboard", key: "shift" }],
 			editor_modifier: [{ type: "keyboard", key: "ctrl" }],
+			editor_drag: [{ type: "mouse", button: 1 }],
 			pause: [{ type: "keyboard", key: "escape" }],
 			stand: [{ type: "gamepad", button: 5 }]
 		}
