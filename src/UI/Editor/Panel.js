@@ -6,6 +6,9 @@ import Storage from "Utility/Storage";
 import { BlockTypes } from "Grid/Block/Type";
 import type Engine from "Engine";
 
+import AppBar from "material-ui/AppBar";
+import Tabs, { Tab } from "material-ui/Tabs";
+
 // import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 
 import MainMenu from "Scene/MainMenu";
@@ -51,6 +54,12 @@ const styles = {
 	// },
 };
 const stylesCalc = theme => ({
+	root: {
+		// flexGrow: 1,
+		// width: "100%",
+		// marginTop: theme.spacing.unit * 3,
+		// backgroundColor: theme.palette.background.paper
+	},
 	card: {
 		maxWidth: 200,
 		fontFamily: "Roboto"
@@ -85,9 +94,12 @@ class EditorPanel extends React.Component {
 		super();
 		this.state = {
 			expanded: { main: false, block: true, save: false, enemy: false },
-			savename: ""
+			savename: "",
+			tab: 0
 		};
+		this.tabs = ["menu", "block", "decor", "enemy", "save"];
 	}
+	tabs: Array<string>;
 	handleExpandClick = target => {
 		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
 		watcher.mode = target;
@@ -95,20 +107,55 @@ class EditorPanel extends React.Component {
 		newstate.expanded[target] = !this.state.expanded[target];
 		this.setState(newstate);
 	};
+	handleTabChange = (event, value) => {
+		this.setState({ tab: value });
+		this.watcher.mode = this.tabs[value];
+	};
+	componentWillMount() {
+		this.watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		if (!this.watcher) {
+			throw new Error("no watcher");
+		}
+	}
 
 	render() {
 		const { classes } = this.props;
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		let watcher = this.watcher;
+		//this.props.engine.objectsTagged("editor-watcher")[0];
 		if (!watcher) {
 			throw new Error("no watcher");
 		}
 		return (
-			<div id="editor-panel">
-				<Main watcher={watcher} classes={classes} />
-				<BlockSelector watcher={watcher} classes={classes} />
-				<DecorSelector watcher={watcher} classes={classes} />
-				<EnemySelector watcher={watcher} classes={classes} />
-				<SavePanel watcher={watcher} classes={classes} />
+			<div id="editor-panel" className={classes.root}>
+				<AppBar position="static" color="default">
+					<Tabs
+						value={this.state.tab}
+						onChange={this.handleTabChange}
+						indicatorColor="primary"
+						textColor="primary"
+						scrollable
+						scrollButtons="auto"
+					>
+						{this.tabs.map(t => {
+							return <Tab key={t} label={t} />;
+						})}
+					</Tabs>
+				</AppBar>
+				{this.state.tab === 0 && (
+					<Main watcher={watcher} classes={classes} />
+				)}
+				{this.state.tab === 1 && (
+					<BlockSelector watcher={watcher} classes={classes} />
+				)}
+				{this.state.tab === 2 && (
+					<DecorSelector watcher={watcher} classes={classes} />
+				)}
+				{this.state.tab === 3 && (
+					<EnemySelector watcher={watcher} classes={classes} />
+				)}
+				{this.state.tab === 4 && (
+					<SavePanel watcher={watcher} classes={classes} />
+				)}
 			</div>
 		);
 	}

@@ -190,8 +190,8 @@ export default class Grid extends GameObject {
 		let x = Math.floor(pos.x / config.grid.width);
 		let y = Math.floor(pos.y / config.grid.width);
 		//because y goes positive downwards, if an object is flat on the top
-		//of a tile it will register as th e tile below
-		// console.log(pos.y, config.grid.width);
+		//of a tile it will register as th e dtile below
+		// console.log(pos.y, config.graid.waidth);
 		if (pos.y % config.grid.width == 0) {
 			y -= 1;
 		}
