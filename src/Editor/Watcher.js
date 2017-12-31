@@ -46,38 +46,13 @@ export default class Watcher extends GameObject {
 		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		switch (this.mode) {
 			case "block":
-				if (this.engine.input.getButton("editor_add")) {
-					// block.add();
-					blocks.forEach(b => b.add(this.blockId));
-				}
-				if (this.engine.input.getButton("editor_remove")) {
-					// block.remove();
-					blocks.forEach(b => b.addBackground(this.blockId));
-				}
+				this.drawBlocks(blocks);
 				break;
 			case "decor":
-				if (this.engine.input.getButton("editor_add")) {
-					// block.add();
-					blocks.forEach(b =>
-						this.engine.grid.addDecor(b.position, this.decorId)
-					);
-				}
-				if (this.engine.input.getButton("editor_remove")) {
-					// block.remove();
-					blocks.forEach(b =>
-						this.engine.grid.removeDecor(b.position)
-					);
-				}
+				this.drawDecor(blocks);
 				break;
 			case "enemy":
-				if (this.engine.input.getMouseButtonUp("left")) {
-					this.engine.register(
-						new Enemy({
-							position: this.engine.mouse.point,
-							type: this.enemyType
-						})
-					);
-				}
+				this.drawEnemy(blocks);
 				break;
 		}
 		//scrolling
@@ -99,6 +74,45 @@ export default class Watcher extends GameObject {
 			this.size
 		);
 	}
+	drawEnemy(blocks) {
+		if (this.engine.input.getButton("editor_add")) {
+			blocks.forEach(b => {
+				this.engine.register(
+					new Enemy({
+						position: b.center,
+						type: this.enemyType
+					})
+				);
+			});
+		}
+		// if (this.engine.input.getMouseButtonUp("left")) {
+		// }
+	}
+
+	drawDecor(blocks) {
+		if (this.engine.input.getButton("editor_add")) {
+			// block.add();
+			blocks.forEach(b =>
+				this.engine.grid.addDecor(b.position, this.decorId)
+			);
+		}
+		if (this.engine.input.getButton("editor_remove")) {
+			// block.remove();
+			blocks.forEach(b => this.engine.grid.removeDecor(b.position));
+		}
+	}
+
+	drawBlocks(blocks) {
+		if (this.engine.input.getButton("editor_add")) {
+			// block.add();
+			blocks.forEach(b => b.add(this.blockId));
+		}
+		if (this.engine.input.getButton("editor_remove")) {
+			// block.remove();
+			blocks.forEach(b => b.addBackground(this.blockId));
+		}
+	}
+
 	addListeners() {}
 	removeListeners() {}
 }
