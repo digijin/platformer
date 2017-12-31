@@ -2,7 +2,7 @@ import Point from "./Point";
 
 import config from "config";
 
-describe("Utility/Point", () => {
+describe("Utility/Point.spec.js", () => {
 	beforeEach(() => {});
 
 	describe("distanceTo", () => {
@@ -54,7 +54,7 @@ describe("Utility/Point", () => {
 	describe("getblock", () => {
 		it("shuold return xy ", () => {
 			// set config grid size
-			let rounded = new Point({ x: 12, y: 23 }).getBlock();
+			let rounded = new Point({ x: 12, y: 43 }).getBlock();
 			expect(rounded.x).toBe(0);
 			expect(rounded.y).toBe(1);
 		});
