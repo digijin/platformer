@@ -129,7 +129,7 @@ class EditorPanel extends React.Component {
 	};
 	handleDrawModeChange = (event, value) => {
 		this.setState({ drawMode: value });
-		this.watcher.mode = this.tabs[value];
+		this.watcher.drawMode = this.drawModes[value];
 	};
 	componentWillMount() {
 		this.watcher = this.props.engine.objectsTagged("editor-watcher")[0];

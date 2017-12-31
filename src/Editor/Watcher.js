@@ -42,18 +42,51 @@ export default class Watcher extends GameObject {
 			{ w: this.size, h: this.size },
 			{ x: 0.5, y: 0.5 }
 		);
-		let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
-		let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
-		switch (this.mode) {
-			case "block":
-				this.drawBlocks(blocks);
+		let blocks = [];
+		// let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
+		// let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+		let action = "";
+		switch (this.drawMode) {
+			case "point":
+				blocks = [
+					this.engine.grid.getBlockAtPoint(this.engine.mouse.point)
+				];
+
+				if (this.engine.input.getButtonUp("editor_add")) {
+					action = "add";
+				} else if (this.engine.input.getButtonUp("editor_remove")) {
+					action = "remove";
+				} else {
+					blocks = [];
+				}
 				break;
-			case "decor":
-				this.drawDecor(blocks);
+			case "paint":
+				blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+
+				if (this.engine.input.getButton("editor_add")) {
+					action = "add";
+				} else if (this.engine.input.getButton("editor_remove")) {
+					// block.remove();
+					action = "remove";
+				} else {
+					blocks = [];
+				}
 				break;
-			case "enemy":
-				this.drawEnemy(blocks);
+			case "dragrect":
 				break;
+		}
+		if (action) {
+			switch (this.mode) {
+				case "block":
+					this.drawBlocks(blocks, action);
+					break;
+				case "decor":
+					this.drawDecor(blocks, action);
+					break;
+				case "enemy":
+					this.drawEnemy(blocks, action);
+					break;
+			}
 		}
 		//scrolling
 		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
@@ -74,8 +107,9 @@ export default class Watcher extends GameObject {
 			this.size
 		);
 	}
-	drawEnemy(blocks) {
-		if (this.engine.input.getButton("editor_add")) {
+	drawEnemy(blocks, action) {
+		// if (this.engine.input.getButton("editor_add")) {
+		if (action == "add") {
 			blocks.forEach(b => {
 				this.engine.register(
 					new Enemy({
@@ -85,31 +119,50 @@ export default class Watcher extends GameObject {
 				);
 			});
 		}
+		if (action == "remove") {
+			let enemies = this.engine.objectsTagged("enemy");
+			blocks.forEach(b => {
+				enemies.forEach(e => {
+					if (e.position.insideRect(b.rect)) {
+						e.destroy();
+					}
+				});
+			});
+		}
+		// }
 		// if (this.engine.input.getMouseButtonUp("left")) {
 		// }
 	}
 
-	drawDecor(blocks) {
-		if (this.engine.input.getButton("editor_add")) {
+	drawDecor(blocks, action) {
+		if (action == "add") {
 			// block.add();
 			blocks.forEach(b =>
 				this.engine.grid.addDecor(b.position, this.decorId)
 			);
 		}
-		if (this.engine.input.getButton("editor_remove")) {
+		if (action == "remove") {
 			// block.remove();
 			blocks.forEach(b => this.engine.grid.removeDecor(b.position));
 		}
 	}
 
-	drawBlocks(blocks) {
-		if (this.engine.input.getButton("editor_add")) {
+	drawBlocks(blocks, action) {
+		if (action == "add") {
 			// block.add();
-			blocks.forEach(b => b.add(this.blockId));
+			if (this.engine.input.getButton("editor_modifier")) {
+				blocks.forEach(b => b.addBackground(this.blockId));
+			} else {
+				blocks.forEach(b => b.add(this.blockId));
+			}
 		}
-		if (this.engine.input.getButton("editor_remove")) {
+		if (action == "remove") {
 			// block.remove();
-			blocks.forEach(b => b.addBackground(this.blockId));
+			if (this.engine.input.getButton("editor_modifier")) {
+				blocks.forEach(b => b.addBackground("0"));
+			} else {
+				blocks.forEach(b => b.add("0"));
+			}
 		}
 	}
 

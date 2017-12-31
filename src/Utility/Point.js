@@ -112,6 +112,15 @@ export default class Point {
 		});
 	}
 
+	insideRect(rect: Rect): boolean {
+		return (
+			this.x <= rect.r &&
+			this.x >= rect.l &&
+			this.y >= rect.t &&
+			this.y <= rect.b
+		);
+	}
+
 	// get screen():{x:number, y:number}{
 	//   if(!state) throw new Error('Point state not registered')
 	//   return worldToScreen({x:this.x, y:this.y}, state);
