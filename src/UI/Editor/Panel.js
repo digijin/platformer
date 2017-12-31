@@ -64,6 +64,9 @@ const stylesCalc = theme => ({
 		marginLeft: theme.spacing.unit * 3,
 		backgroundColor: theme.palette.background.paper
 	},
+	tab: {
+		minWidth: "40px"
+	},
 	drawModeSelect: {
 		backgroundColor: "#cef8ff"
 	},
@@ -78,7 +81,12 @@ const stylesCalc = theme => ({
 	// 	maxWidth: 200,
 	// 	fontFamily: "Roboto"
 	// },
-	iconButton: { minWidth: "36px", padding: "4px" }
+	iconButton: { minWidth: "36px", padding: "4px" },
+	labelContainer: {
+		// border: "1px solid red",
+		paddingLeft: "12px",
+		paddingRight: "12px"
+	}
 	// header: {
 	// 	height: 24
 	// },
@@ -161,7 +169,13 @@ class EditorPanel extends React.Component {
 						{this.tabs.map(t => {
 							return (
 								<Tab
-									className={"editorTab-" + t}
+									classes={{
+										labelContainer: classes.labelContainer
+									}}
+									className={
+										(classnames("editorTab-" + t),
+										classes.tab)
+									}
 									key={t}
 									label={t}
 								/>
