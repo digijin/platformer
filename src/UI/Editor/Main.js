@@ -31,94 +31,71 @@ class Main extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<Card className={classes.card}>
-				<CardActions className={classes.header} disableActionSpacing>
-					Editor
-					<div className={classes.flexGrow} />
-					<IconButton
-						id="editorMainExpand"
-						className={classnames(classes.expand, {
-							[classes.expandOpen]: this.state.expanded
-						})}
+			<CardContent className={classes.content}>
+				<Tooltip title="exit to menu" placement="bottom">
+					<Button
+						id="mainMenuButton"
+						raised
+						className={classes.iconButton}
 						onClick={() => {
-							this.handleExpandClick("main");
+							this.props.engine.startScene(new MainMenu());
 						}}
-						aria-expanded={this.state.expanded}
-						aria-label="Show more"
 					>
-						<ExpandMoreIcon />
-					</IconButton>
-				</CardActions>
-				<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-					<CardContent className={classes.content}>
-						<Tooltip title="exit to menu" placement="bottom">
-							<Button
-								id="mainMenuButton"
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.props.engine.startScene(
-										new MainMenu()
-									);
-								}}
-							>
-								go back to menu<KeyboardArrowDown />
-							</Button>
-						</Tooltip>
-						<br />
-						drawmode (click|paint|rect)<br />
-						Left mouse to draw<br />
-						Right mouse to erase<br />
-						WASD to navigate<br />
-						Shift to speed up scrolling<br />
-						Click below to expand the map size:<br />
-						<Tooltip title="Add Row Above" placement="bottom">
-							<Button
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addRowAbove();
-								}}
-							>
-								<KeyboardArrowUp />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Row Below" placement="bottom">
-							<Button
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addRowBelow();
-								}}
-							>
-								<KeyboardArrowDown />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Column to Left" placement="bottom">
-							<Button
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addColLeft();
-								}}
-							>
-								<KeyboardArrowLeft />
-							</Button>
-						</Tooltip>
-						<Tooltip title="Add Column to Right" placement="bottom">
-							<Button
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.props.engine.grid.addColRight();
-								}}
-							>
-								<KeyboardArrowRight />
-							</Button>
-						</Tooltip>
-					</CardContent>
-				</Collapse>
-			</Card>
+						go back to menu<KeyboardArrowDown />
+					</Button>
+				</Tooltip>
+				<br />
+				drawmode (click|paint|rect)<br />
+				Left mouse to draw<br />
+				Right mouse to erase<br />
+				WASD to navigate<br />
+				Shift to speed up scrolling<br />
+				Click below to expand the map size:<br />
+				<Tooltip title="Add Row Above" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
+						onClick={() => {
+							this.props.engine.grid.addRowAbove();
+						}}
+					>
+						<KeyboardArrowUp />
+					</Button>
+				</Tooltip>
+				<Tooltip title="Add Row Below" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
+						onClick={() => {
+							this.props.engine.grid.addRowBelow();
+						}}
+					>
+						<KeyboardArrowDown />
+					</Button>
+				</Tooltip>
+				<Tooltip title="Add Column to Left" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
+						onClick={() => {
+							this.props.engine.grid.addColLeft();
+						}}
+					>
+						<KeyboardArrowLeft />
+					</Button>
+				</Tooltip>
+				<Tooltip title="Add Column to Right" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
+						onClick={() => {
+							this.props.engine.grid.addColRight();
+						}}
+					>
+						<KeyboardArrowRight />
+					</Button>
+				</Tooltip>
+			</CardContent>
 		);
 	}
 }

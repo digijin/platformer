@@ -14,6 +14,8 @@ export default class Editor extends Base {
 		grid.generate(1);
 		engine.register(grid);
 
+		document.body.style.backgroundColor = "#87efff";
+
 		let watcher = new EditorWatcher();
 		engine.register(watcher);
 

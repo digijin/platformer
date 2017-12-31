@@ -35,68 +35,47 @@ class Main extends React.Component {
 		const { classes } = this.props;
 		let saves = this.storage.list();
 		return (
-			<Card className={classes.card} id="savepanel">
-				<CardActions className={classes.header} disableActionSpacing>
-					Save Panel
-					<div className={classes.flexGrow} />
-					<IconButton
-						className={classnames(classes.expand, {
-							[classes.expandOpen]: this.state.expanded
-						})}
+			<CardContent>
+				{saves.map(savename => {
+					return (
+						<Button
+							raised
+							key={savename + "loadbutton"}
+							onClick={() => {
+								this.props.engine.grid.load(
+									this.storage.load(savename)
+								);
+								this.forceUpdate();
+							}}
+						>
+							{savename}
+						</Button>
+					);
+				})}
+				<TextField
+					// hintText="Enter filename here"
+					// floatingLabelText="Save Name"
+					type="text"
+					value={this.state.savename}
+					onChange={this.updateSavename}
+				/>
+				<br />
+				<Tooltip title="Save" placement="bottom">
+					<Button
+						raised
+						className={classes.iconButton}
 						onClick={() => {
-							this.handleExpandClick("save");
-						}}
-						aria-expanded={this.state.expanded}
-						aria-label="Show more"
-					>
-						<ExpandMoreIcon />
-					</IconButton>
-				</CardActions>
-
-				<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-					<CardContent>
-						{saves.map(savename => {
-							return (
-								<Button
-									raised
-									key={savename + "loadbutton"}
-									onClick={() => {
-										this.props.engine.grid.load(
-											this.storage.load(savename)
-										);
-										this.forceUpdate();
-									}}
-								>
-									{savename}
-								</Button>
+							this.storage.save(
+								this.state.savename,
+								this.props.engine.grid.save()
 							);
-						})}
-						<TextField
-							// hintText="Enter filename here"
-							// floatingLabelText="Save Name"
-							type="text"
-							value={this.state.savename}
-							onChange={this.updateSavename}
-						/>
-						<br />
-						<Tooltip title="Save" placement="bottom">
-							<Button
-								raised
-								className={classes.iconButton}
-								onClick={() => {
-									this.storage.save(
-										this.state.savename,
-										this.props.engine.grid.save()
-									);
-									this.forceUpdate();
-								}}
-							>
-								<Save />
-							</Button>
-						</Tooltip>
-					</CardContent>
-				</Collapse>
-			</Card>
+							this.forceUpdate();
+						}}
+					>
+						<Save />
+					</Button>
+				</Tooltip>
+			</CardContent>
 		);
 	}
 }

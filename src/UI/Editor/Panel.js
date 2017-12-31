@@ -55,34 +55,35 @@ const styles = {
 };
 const stylesCalc = theme => ({
 	root: {
-		// flexGrow: 1,
-		// width: "100%",
-		// marginTop: theme.spacing.unit * 3,
-		// backgroundColor: theme.palette.background.paper
+		flexGrow: 1,
+		width: "360px",
+		marginTop: theme.spacing.unit * 3,
+		marginLeft: theme.spacing.unit * 3,
+		backgroundColor: theme.palette.background.paper
 	},
-	card: {
-		maxWidth: 200,
-		fontFamily: "Roboto"
-	},
-	iconButton: { minWidth: "36px", padding: "4px" },
-	header: {
-		height: 24
-	},
-	content: {
-		padding: 8
-	},
-	expand: {
-		transform: "rotate(0deg)",
-		transition: theme.transitions.create("transform", {
-			duration: theme.transitions.duration.shortest
-		})
-	},
-	expandOpen: {
-		transform: "rotate(180deg)"
-	},
-	flexGrow: {
-		flex: "1 1 auto"
-	}
+	// card: {
+	// 	maxWidth: 200,
+	// 	fontFamily: "Roboto"
+	// },
+	iconButton: { minWidth: "36px", padding: "4px" }
+	// header: {
+	// 	height: 24
+	// },
+	// content: {
+	// 	padding: 8
+	// },
+	// expand: {
+	// 	transform: "rotate(0deg)",
+	// 	transition: theme.transitions.create("transform", {
+	// 		duration: theme.transitions.duration.shortest
+	// 	})
+	// },
+	// expandOpen: {
+	// 	transform: "rotate(180deg)"
+	// },
+	// flexGrow: {
+	// 	flex: "1 1 auto"
+	// }
 });
 
 class EditorPanel extends React.Component {
@@ -133,8 +134,6 @@ class EditorPanel extends React.Component {
 						onChange={this.handleTabChange}
 						indicatorColor="primary"
 						textColor="primary"
-						scrollable
-						scrollButtons="auto"
 					>
 						{this.tabs.map(t => {
 							return <Tab key={t} label={t} />;
