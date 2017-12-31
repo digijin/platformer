@@ -14,6 +14,7 @@ import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
 import TextField from "material-ui/TextField";
 import Save from "material-ui-icons/Save";
+import Divider from "material-ui/Divider";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class Main extends React.Component {
@@ -21,7 +22,8 @@ class Main extends React.Component {
 		super();
 		this.storage = new Storage();
 		this.state = {
-			expanded: false
+			expanded: false,
+			savename: ""
 		};
 	}
 	handleExpandClick = target => {
@@ -36,22 +38,26 @@ class Main extends React.Component {
 		let saves = this.storage.list();
 		return (
 			<CardContent>
-				{saves.map(savename => {
-					return (
-						<Button
-							raised
-							key={savename + "loadbutton"}
-							onClick={() => {
-								this.props.engine.grid.load(
-									this.storage.load(savename)
-								);
-								this.forceUpdate();
-							}}
-						>
-							{savename}
-						</Button>
-					);
-				})}
+				<div className={classes.loadPanel}>
+					Load Game:
+					{saves.map(savename => {
+						return (
+							<Button
+								raised
+								key={savename + "loadbutton"}
+								onClick={() => {
+									this.props.engine.grid.load(
+										this.storage.load(savename)
+									);
+									this.forceUpdate();
+								}}
+							>
+								{savename}
+							</Button>
+						);
+					})}
+				</div>
+				<Divider light />
 				<TextField
 					// hintText="Enter filename here"
 					// floatingLabelText="Save Name"
@@ -78,6 +84,11 @@ class Main extends React.Component {
 			</CardContent>
 		);
 	}
+	updateSavename = (e: Event) => {
+		console.log(e);
+		// this.savename = e.target.value;
+		this.setState({ savename: e.target.value });
+	};
 }
 
 export default engineConnect(Main);
