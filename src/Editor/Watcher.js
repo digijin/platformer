@@ -4,9 +4,11 @@ import GameObject from "GameObject";
 import type Engine from "Engine";
 
 import Rect from "Utility/Rect";
+import Point from "Utility/Point";
 
 import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";
+import { log } from "util";
 
 export default class Watcher extends GameObject {
 	el: HTMLDivElement;
@@ -16,6 +18,8 @@ export default class Watcher extends GameObject {
 	enemyId: string;
 	decorId: string;
 	enemyType: EnemyType;
+
+	rectStart: Point | void;
 
 	mode: "block" | "enemy";
 	drawMode: "point" | "paint" | "dragrect";
@@ -74,6 +78,31 @@ export default class Watcher extends GameObject {
 				}
 				break;
 			case "dragrect":
+				if (this.rectStart) {
+					let dragrect = new Rect.fromPoints(
+						this.rectStart,
+						this.engine.mouse.point
+					);
+					blocks = this.engine.grid.getBlocksOverlappingRect(
+						dragrect
+					);
+				}
+				if (
+					this.engine.input.getButtonDown("editor_add") ||
+					this.engine.input.getButtonDown("editor_remove")
+				) {
+					this.rectStart = this.engine.mouse.point.clone();
+				}
+				if (this.engine.input.getButtonUp("editor_add")) {
+					action = "add";
+					this.rectStart = undefined;
+				} else if (this.engine.input.getButtonUp("editor_remove")) {
+					// block.remove();
+					action = "remove";
+					this.rectStart = undefined;
+				} else {
+					blocks = [];
+				}
 				break;
 		}
 		if (action) {
