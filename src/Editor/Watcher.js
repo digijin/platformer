@@ -62,7 +62,7 @@ export default class Watcher extends GameObject {
 				} else if (this.engine.input.getButtonUp("editor_remove")) {
 					action = "remove";
 				} else {
-					blocks = [];
+					// blocks = [];
 				}
 				break;
 			case "paint":
@@ -74,7 +74,7 @@ export default class Watcher extends GameObject {
 					// block.remove();
 					action = "remove";
 				} else {
-					blocks = [];
+					// blocks = [];
 				}
 				break;
 			case "dragrect":
@@ -101,7 +101,7 @@ export default class Watcher extends GameObject {
 					action = "remove";
 					this.rectStart = undefined;
 				} else {
-					blocks = [];
+					// blocks = [];
 				}
 				break;
 		}
@@ -117,6 +117,10 @@ export default class Watcher extends GameObject {
 					this.drawEnemy(blocks, action);
 					break;
 			}
+		} else {
+			blocks.forEach(b => {
+				this.engine.grid.highlightBlock(b);
+			});
 		}
 		//scrolling
 		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;

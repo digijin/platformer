@@ -24,7 +24,7 @@ export default class Grid extends GameObject {
 	highlightBlock(block: Block) {
 		if (block) {
 			let rect = block.rect;
-			this.engine.ctx.context.strokeStyle = "purple";
+			this.engine.ctx.context.strokeStyle = "#888";
 			this.engine.ctx.strokeRect(
 				rect.l,
 				rect.t,
