@@ -26,6 +26,9 @@ import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
 import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
 import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+import PaintIcon from "material-ui-icons/Brush";
+import PointIcon from "material-ui-icons/GpsFixed";
+import DragRectIcon from "material-ui-icons/Texture";
 import Save from "material-ui-icons/Save";
 import Tooltip from "material-ui/Tooltip";
 import engineConnect from "React/engineConnect";
@@ -60,6 +63,16 @@ const stylesCalc = theme => ({
 		marginTop: theme.spacing.unit * 3,
 		marginLeft: theme.spacing.unit * 3,
 		backgroundColor: theme.palette.background.paper
+	},
+	drawModeSelect: {
+		backgroundColor: "#cef8ff"
+	},
+	drawModeTab: {
+		minWidth: "32px",
+		height: "32px"
+	},
+	drawModeTabs: {
+		minHeight: "32px"
 	},
 	// card: {
 	// 	maxWidth: 200,
@@ -96,9 +109,11 @@ class EditorPanel extends React.Component {
 		this.state = {
 			expanded: { main: false, block: true, save: false, enemy: false },
 			savename: "",
-			tab: 0
+			tab: 0,
+			drawMode: 0
 		};
 		this.tabs = ["menu", "block", "decor", "enemy", "save"];
+		this.drawModes = ["point", "paint", "dragrect"];
 	}
 	tabs: Array<string>;
 	handleExpandClick = target => {
@@ -112,11 +127,19 @@ class EditorPanel extends React.Component {
 		this.setState({ tab: value });
 		this.watcher.mode = this.tabs[value];
 	};
+	handleDrawModeChange = (event, value) => {
+		this.setState({ drawMode: value });
+		this.watcher.mode = this.tabs[value];
+	};
 	componentWillMount() {
 		this.watcher = this.props.engine.objectsTagged("editor-watcher")[0];
 		if (!this.watcher) {
 			throw new Error("no watcher");
 		}
+		this.setState({
+			drawMode: this.drawModes.indexOf(this.watcher.drawMode),
+			tab: this.tabs.indexOf(this.watcher.mode)
+		});
 	}
 
 	render() {
@@ -155,6 +178,29 @@ class EditorPanel extends React.Component {
 				{this.state.tab === 4 && (
 					<SavePanel watcher={watcher} classes={classes} />
 				)}
+				<div className={classes.drawModeSelect}>
+					<Tabs
+						className={classes.drawModeTabs}
+						value={this.state.drawMode}
+						onChange={this.handleDrawModeChange}
+						indicatorColor="primary"
+						textColor="primary"
+					>
+						<Tab
+							className={classes.drawModeTab}
+							icon={<PointIcon />}
+						/>
+
+						<Tab
+							className={classes.drawModeTab}
+							icon={<PaintIcon />}
+						/>
+						<Tab
+							className={classes.drawModeTab}
+							icon={<DragRectIcon />}
+						/>
+					</Tabs>
+				</div>
 			</div>
 		);
 	}

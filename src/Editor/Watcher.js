@@ -18,13 +18,16 @@ export default class Watcher extends GameObject {
 	enemyType: EnemyType;
 
 	mode: "block" | "enemy";
+	drawMode: "point" | "paint" | "dragrect";
 
 	constructor() {
 		super();
 		this.blockId = "1";
+		this.decorId = "1";
 		this.size = 10;
 		this.tag("editor-watcher");
 		this.mode = "block";
+		this.drawMode = "paint";
 	}
 	init(engine: Engine) {
 		super.init(engine);
