@@ -65,6 +65,56 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		hp: 1
+	},
+	{
+		name: "cabinet",
+		id: "3",
+		width: 1,
+		height: 3,
+		image: require("./cabinet1x3.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
+	},
+	{
+		name: "copier",
+		id: "4",
+		width: 3,
+		height: 3,
+		image: require("./copier3x3.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
+	},
+	{
+		name: "desk",
+		id: "5",
+		width: 3,
+		height: 3,
+		image: require("./desk4x3.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
+	},
+	{
+		name: "plant",
+		id: "6",
+		width: 1,
+		height: 3,
+		image: require("./plant1x3.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
+	},
+	{
+		name: "waterfountain",
+		id: "7",
+		width: 1,
+		height: 3,
+		image: require("./waterfountain1x4.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
 	}
 ];
 

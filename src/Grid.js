@@ -256,12 +256,12 @@ export default class Grid extends GameObject {
 				config.grid.width * type.width,
 				config.grid.width * type.height
 			);
-			this.engine.ctx.strokeRect(
-				decor.position.x * config.grid.width,
-				decor.position.y * config.grid.width,
-				config.grid.width * type.width,
-				config.grid.width * type.height
-			);
+			// this.engine.ctx.strokeRect(
+			// 	decor.position.x * config.grid.width,
+			// 	decor.position.y * config.grid.width,
+			// 	config.grid.width * type.width,
+			// 	config.grid.width * type.height
+			// );
 		});
 	}
 	renderTiles() {
