@@ -1,10 +1,10 @@
 //@flow
-import dirtTile from "Grid/dirt_tile.png";
-import brickTile from "Grid/brick_tile.png";
-import metalTile from "Grid/metal_tile.png";
-import woodTile from "Grid/wood_tile.png";
+// import dirtTile from "Grid/dirt_tile.png";
+// import brickTile from "Grid/brick_tile.png";
+// import metalTile from "Grid/metal_tile.png";
+// import woodTile from "Grid/wood_tile.png";
 
-import windowDecor from "Grid/window.png";
+// import windowDecor from "Grid/window.png";
 
 export type DecorTypeParams = {
 	// hp: name,
@@ -63,7 +63,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		id: "2",
 		width: 2,
 		height: 3,
-		image: windowDecor,
+		image: require("./window.png"),
 		destructable: false,
 		obstacle: false,
 		hp: 1

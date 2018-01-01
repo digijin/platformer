@@ -1,16 +1,16 @@
 //@flow
-import dirtTile from "Grid/dirt.jpg";
-import brickTile from "Grid/brick_tile.png";
-import metalTile from "Grid/metal_tile.png";
-import woodTile from "Grid/wood_tile.png";
-import grassTile from "Grid/grass.jpg";
-import stoneTile from "Grid/stone.jpg";
-import tilesTile from "Grid/tiles.jpg";
+// import dirt from "Grid/dirt.jpg";
+// import brick_tile from "Grid/brick_tile.png";
+// import metal_tile from "Grid/metal_tile.png";
+// import wood_tile from "Grid/wood_tile.png";
+// import grass from "Grid/grass.jpg";
+// import stone from "Grid/stone.jpg";
+// import tiles from "Grid/tiles.jpg";
 
-import brick2 from "Grid/brick2.png";
-import brick3 from "Grid/brick3.png";
-import moon from "Grid/moon.jpg";
-import volcanic from "Grid/volcanic.jpg";
+// import brick2 from "Grid/brick2.png";
+// import brick3 from "Grid/brick3.png";
+// import moon from "Grid/moon.jpg";
+// import volcanic from "Grid/volcanic.jpg";
 
 export type BlockTypeParams = {
 	// hp: name,
@@ -59,77 +59,77 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "dirt",
 		id: "1",
-		image: dirtTile,
+		image: require("./dirt.jpg"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "brick",
 		id: "2",
-		image: brickTile,
+		image: require("./brick_tile.png"),
 		destructable: true,
 		hp: 400
 	},
 	{
 		name: "metal",
 		id: "3",
-		image: metalTile,
+		image: require("./metal_tile.png"),
 		destructable: false,
 		hp: 0
 	},
 	{
 		name: "wood",
 		id: "4",
-		image: woodTile,
+		image: require("./wood_tile.png"),
 		destructable: true,
 		hp: 10
 	},
 	{
 		name: "grass",
 		id: "5",
-		image: grassTile,
+		image: require("./grass.jpg"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "stone",
 		id: "6",
-		image: stoneTile,
+		image: require("./stone.jpg"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "tiles",
 		id: "7",
-		image: tilesTile,
+		image: require("./tiles.jpg"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "brick2",
 		id: "8",
-		image: brick2,
+		image: require("./brick2.png"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "brick3",
 		id: "9",
-		image: brick3,
+		image: require("./brick3.png"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "moon",
 		id: "10",
-		image: moon,
+		image: require("./moon.jpg"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "volcanic",
 		id: "11",
-		image: volcanic,
+		image: require("./volcanic.jpg"),
 		destructable: true,
 		hp: 100
 	},
@@ -151,6 +151,20 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		name: "window3x3",
 		id: "14",
 		image: require("./window3x3.png"),
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "grate",
+		id: "15",
+		image: require("./grate.png"),
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "concrete",
+		id: "16",
+		image: require("./concrete.png"),
 		destructable: true,
 		hp: 100
 	}

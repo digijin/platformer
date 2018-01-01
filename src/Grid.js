@@ -350,13 +350,14 @@ export default class Grid extends GameObject {
 					y: tile.y * config.grid.tile.height + y
 				});
 				if (block) {
+					if (block.backgroundType !== "0") {
+						let im = block.getBackgroundType().pattern;
+						ctx.filter = "brightness(50%)";
+						this.drawTile(ctx, im, x, y, offset);
+					}
 					if (!block.isEmpty()) {
 						let im = block.getType().pattern;
 						ctx.filter = "none";
-						this.drawTile(ctx, im, x, y, offset);
-					} else if (block.backgroundType !== "0") {
-						let im = block.getBackgroundType().pattern;
-						ctx.filter = "brightness(50%)";
 						this.drawTile(ctx, im, x, y, offset);
 					}
 				}
