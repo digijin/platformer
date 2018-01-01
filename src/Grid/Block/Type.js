@@ -37,8 +37,18 @@ export default class BlockType {
 
 		if (this.image) {
 			this.image.onload = () => {
-				let context = document.createElement("canvas").getContext("2d");
+				let canvas = document.createElement("canvas");
+				canvas.width = this.image.width;
+				canvas.height = this.image.height;
+				let context = canvas.getContext("2d");
 				if (context) {
+					context.drawImage(this.image, 0, 0);
+					this.imageData = context.getImageData(
+						0,
+						0,
+						canvas.width,
+						canvas.height
+					);
 					this.pattern = context.createPattern(this.image, "repeat");
 					// console.log("made pattern", context, this.pattern);
 				}

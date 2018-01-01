@@ -19,7 +19,11 @@ class Runner extends GameObject {
 		this.gap -= this.engine.deltaTime;
 		if (this.gap < 0) {
 			this.gap = 5;
-			console.log("running");
+			console.log(
+				"running tiles",
+				this.grid.blocks.length / config.grid.tile.width,
+				this.grid.blocks[0].length / config.grid.tile.width
+			);
 			let rect = new Rect({
 				t: 0,
 				l: 0,
@@ -46,6 +50,14 @@ export default class Benchmark extends Base {
 		engine.register(grid);
 		grid.load(gridData);
 		console.log("beginning grid benchmark");
+
+		let start = performance.now();
+		for (let i = 0; i < 100; i++) {
+			let canvas: HTMLCanvasElement = document.createElement("canvas");
+			canvas.width = config.grid.tile.width * config.grid.width;
+			canvas.height = config.grid.tile.height * config.grid.width;
+		}
+		console.log("b100canvas", performance.now() - start);
 
 		// let time;
 		// let scores = [];

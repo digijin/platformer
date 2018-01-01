@@ -219,6 +219,7 @@ export default class Grid extends GameObject {
 	}
 	update = (engine: Engine) => {
 		let screenRect = this.engine.ctx.screenRect();
+		// console.log("wut");
 		this.renderTiles(screenRect);
 		this.renderDecor();
 		// this.renderDebugBlockPixelLine();
@@ -352,14 +353,14 @@ export default class Grid extends GameObject {
 				});
 				if (block) {
 					if (block.backgroundType !== "0") {
-						let im = block.getBackgroundType().pattern;
+						let type = block.getBackgroundType();
 						ctx.filter = "brightness(50%)";
-						this.drawTile(ctx, im, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset);
 					}
 					if (!block.isEmpty()) {
-						let im = block.getType().pattern;
+						let type = block.getType();
 						ctx.filter = "none";
-						this.drawTile(ctx, im, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset);
 					}
 				}
 				// if (block && block.backgroundType !== "0") {
@@ -386,15 +387,27 @@ export default class Grid extends GameObject {
 		return canvas;
 	}
 
-	drawTile(ctx, im, x, y, offset) {
+	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset) {
 		// let pattern = ctx.createPattern(im, "repeat");
-		ctx.fillStyle = im;
+		// let image
+
+		ctx.fillStyle = type.pattern;
+		// ctx.beginPath();
+		// ctx.rect(
+		// 	x * config.grid.width - offset.x,
+		// 	y * config.grid.width - offset.y,
+		// 	config.grid.width,
+		// 	config.grid.width
+		// );
+		// ctx.fill();
+		// ctx.closePath();
 		ctx.fillRect(
 			x * config.grid.width - offset.x,
 			y * config.grid.width - offset.y,
 			config.grid.width,
 			config.grid.width
 		);
+
 		// ctx.drawImage(
 		// 	im,
 		// 	0,

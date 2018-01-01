@@ -147,8 +147,12 @@ export default class Context {
 			position = position.subtract(this.engine.view.offset);
 		}
 		this.context.translate(position.x, position.y);
-		this.context.rotate(rotation);
-		this.context.scale(scale.x, scale.y);
+		if (rotation !== 0) {
+			this.context.rotate(rotation);
+		}
+		if (scale.x !== 1 || scale.y !== 1) {
+			this.context.scale(scale.x, scale.y);
+		}
 		let imageParams = [im, 0, 0, im.width, im.height];
 		this.context.drawImage(
 			...imageParams,
