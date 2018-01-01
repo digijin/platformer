@@ -218,7 +218,8 @@ export default class Grid extends GameObject {
 		// this.tileRenderer = new TileRenderer({ engine });
 	}
 	update = (engine: Engine) => {
-		this.renderTiles();
+		let screenRect = this.engine.ctx.screenRect();
+		this.renderTiles(screenRect);
 		this.renderDecor();
 		// this.renderDebugBlockPixelLine();
 	};
@@ -273,9 +274,9 @@ export default class Grid extends GameObject {
 		});
 		this.engine.ctx.context.restore();
 	}
-	renderTiles() {
+	renderTiles(screenRect) {
 		//screenRect
-		let screenRect = this.engine.ctx.screenRect();
+
 		let newTileCache = {};
 		this.tilesInRect(screenRect).forEach(tile => {
 			// let tile = { x: 5, y: 6 };
