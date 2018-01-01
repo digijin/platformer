@@ -146,6 +146,13 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./servicestation_cover.png"),
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "window3x3",
+		id: "14",
+		image: require("./window3x3.png"),
+		destructable: true,
+		hp: 100
 	}
 ];
 
