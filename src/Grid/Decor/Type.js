@@ -215,6 +215,17 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "poster",
 		hp: 1
+	},
+	{
+		name: "dumpster",
+		id: "16",
+		width: 5,
+		height: 3,
+		image: require("./dumpster.png"),
+		destructable: false,
+		obstacle: false,
+		category: "general",
+		hp: 1
 	}
 ];
 
