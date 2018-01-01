@@ -40,7 +40,7 @@ export default class DecorType {
 		this.image.onload = () => {
 			let context = document.createElement("canvas").getContext("2d");
 			if (context) {
-				this.pattern = context.createPattern(this.image, "repeat");
+				this.pattern = context.createPattern(this.image, "no-repeat");
 				// console.log("made pattern", context, this.pattern);
 			}
 		};
@@ -53,7 +53,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		id: "1",
 		width: 1,
 		height: 3,
-		image: woodTile,
+		image: require("./door1x3.png"),
 		destructable: true,
 		obstacle: true,
 		hp: 10
