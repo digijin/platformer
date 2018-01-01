@@ -30,33 +30,51 @@ class DecorSelector extends React.Component {
 	};
 	render() {
 		const { classes } = this.props;
+		let decor = {};
+		DecorTypes.forEach(dt => {
+			if (!decor[dt.category]) {
+				decor[dt.category] = [];
+			}
+			decor[dt.category].push(dt);
+		});
 		return (
 			<CardContent className={classes.content}>
-				{DecorTypes.map(b => (
-					<Tooltip key={b.id} title={b.name} placement="bottom">
-						<Button
-							raised
-							className={classes.iconButton}
-							color={
-								this.props.watcher.decorId == b.id
-									? "primary"
-									: "default"
-							}
-							onClick={() => {
-								this.props.watcher.decorId = b.id;
-								this.forceUpdate();
-							}}
-						>
-							<img
-								style={{
-									width: "32px",
-									height: "32px"
-								}}
-								src={b.image.src}
-							/>
-						</Button>
-					</Tooltip>
-				))}
+				{Object.keys(decor).map(k => {
+					return (
+						<div>
+							<div>{k}</div>
+							{decor[k].map(b => (
+								<Tooltip
+									key={b.id}
+									title={b.name}
+									placement="bottom"
+								>
+									<Button
+										raised
+										className={classes.iconButton}
+										color={
+											this.props.watcher.decorId == b.id
+												? "primary"
+												: "default"
+										}
+										onClick={() => {
+											this.props.watcher.decorId = b.id;
+											this.forceUpdate();
+										}}
+									>
+										<img
+											style={{
+												width: "32px",
+												height: "32px"
+											}}
+											src={b.image.src}
+										/>
+									</Button>
+								</Tooltip>
+							))}
+						</div>
+					);
+				})}
 			</CardContent>
 		);
 	}
