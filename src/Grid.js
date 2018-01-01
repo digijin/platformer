@@ -345,6 +345,13 @@ export default class Grid extends GameObject {
 			y: -canvas.height * tile.y
 		});
 		ctx.translate(offset.x, offset.y);
+		let imageData = ctx.getImageData(
+			0,
+			0,
+			ctx.canvas.width,
+			ctx.canvas.height
+		);
+
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
 				let block = this.getBlock({
@@ -355,12 +362,12 @@ export default class Grid extends GameObject {
 					if (block.backgroundType !== "0") {
 						let type = block.getBackgroundType();
 						ctx.filter = "brightness(50%)";
-						this.drawTile(ctx, type, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset, imageData);
 					}
 					if (!block.isEmpty()) {
 						let type = block.getType();
 						ctx.filter = "none";
-						this.drawTile(ctx, type, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset, imageData);
 					}
 				}
 				// if (block && block.backgroundType !== "0") {
@@ -376,6 +383,7 @@ export default class Grid extends GameObject {
 				// }
 			}
 		}
+		ctx.putImageData(imageData, 0, 0);
 		ctx.strokeStyle = "rgba(0,0,0,0.1)";
 		ctx.lineWidth = 1;
 		ctx.strokeRect(-offset.x, -offset.y, canvas.width, canvas.height);
@@ -387,38 +395,41 @@ export default class Grid extends GameObject {
 		return canvas;
 	}
 
-	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset) {
+	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset, imageData) {
 		// let pattern = ctx.createPattern(im, "repeat");
 		// let image
 
-		ctx.fillStyle = type.pattern;
-		// ctx.beginPath();
-		// ctx.rect(
+		// ctx.fillStyle = type.pattern;
+		// ctx.fillRect(
 		// 	x * config.grid.width - offset.x,
 		// 	y * config.grid.width - offset.y,
 		// 	config.grid.width,
 		// 	config.grid.width
 		// );
-		// ctx.fill();
-		// ctx.closePath();
-		ctx.fillRect(
-			x * config.grid.width - offset.x,
-			y * config.grid.width - offset.y,
-			config.grid.width,
-			config.grid.width
-		);
 
-		// ctx.drawImage(
-		// 	im,
+		// let imageData = ctx.getImageData(
 		// 	0,
 		// 	0,
-		// 	im.width,
-		// 	im.height,
-		// 	x * config.grid.width,
-		// 	y * config.grid.width,
-		// 	config.grid.width,
-		// 	config.grid.width
+		// 	ctx.canvas.width,
+		// 	ctx.canvas.height
 		// );
+		let srcData = type.imageData.data;
+		let destData = imageData.data;
+		for (let dx = 0; dx < config.grid.width; dx++) {
+			for (let dy = 0; dy < config.grid.width; dy++) {
+				let srcloc = (dy * type.image.width + dx) * 4;
+				let destloc =
+					((dy + y * config.grid.width) * ctx.canvas.width +
+						dx +
+						x * config.grid.width) *
+					4;
+				destData[destloc] = srcData[srcloc];
+				destData[destloc + 1] = srcData[srcloc + 1];
+				destData[destloc + 2] = srcData[srcloc + 2];
+				destData[destloc + 3] = srcData[srcloc + 3];
+			}
+		}
+		// ctx.putImageData(imageData, 0, 0);
 	}
 
 	save(): string {
