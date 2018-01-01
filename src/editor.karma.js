@@ -92,31 +92,31 @@ describe("editor.karma functional", () => {
 				done();
 			}, DELAY);
 		});
-		it("should remove tiles under cursor", done => {
-			mouseUtil.mouseEvent(
-				"mousemove",
-				{ clientX: pt.x, clientY: pt.y },
-				game.canvas
-			);
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 2 },
-				game.engine.canvas
-			);
-			setTimeout(() => {
-				let block = game.engine.grid.getBlockAtPoint(
-					game.engine.mouse.point
-				);
+		// it("should remove tiles under cursor", done => {
+		// 	mouseUtil.mouseEvent(
+		// 		"mousemove",
+		// 		{ clientX: pt.x, clientY: pt.y },
+		// 		game.canvas
+		// 	);
+		// 	mouseUtil.mouseEvent(
+		// 		"mousedown",
+		// 		{ button: 2 },
+		// 		game.engine.canvas
+		// 	);
+		// 	setTimeout(() => {
+		// 		let block = game.engine.grid.getBlockAtPoint(
+		// 			game.engine.mouse.point
+		// 		);
 
-				expect(block.isEmpty()).toBe(true);
-				// expect(block.backgroundType).not.toBe("0");
-				mouseUtil.mouseEvent(
-					"mouseup",
-					{ button: 2 },
-					game.engine.canvas
-				);
-				done();
-			}, DELAY);
-		});
+		// 		expect(block.isEmpty()).toBe(true);
+		// 		// expect(block.backgroundType).not.toBe("0");
+		// 		mouseUtil.mouseEvent(
+		// 			"mouseup",
+		// 			{ button: 2 },
+		// 			game.engine.canvas
+		// 		);
+		// 		done();
+		// 	}, DELAY);
+		// });
 	});
 });
