@@ -35,6 +35,7 @@ export default class DecorType {
 		this.height = params.height;
 		this.width = params.width;
 		this.mode = params.mode;
+		this.obstacle = params.obstacle;
 
 		this.image.onload = () => {
 			let context = document.createElement("canvas").getContext("2d");
@@ -111,7 +112,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		name: "waterfountain",
 		id: "7",
 		width: 1,
-		height: 3,
+		height: 4,
 		image: require("./waterfountain1x4.png"),
 		destructable: false,
 		obstacle: false,

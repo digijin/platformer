@@ -67,6 +67,9 @@ export default class Bullet extends GameObject {
 		}
 		//check decor
 		let missDecor = this.engine.grid.decor.every(d => {
+			if (d.getType().obstacle == false) {
+				return true;
+			}
 			let hitTest = trajectory.intersectsRect(d.rect);
 			if (hitTest.result) {
 				this.position.x = hitTest.collision.x;
