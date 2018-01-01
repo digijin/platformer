@@ -10,6 +10,10 @@ import sizzle from "sizzle";
 // let mouseUtil = require("./test/util/mouse");
 
 // const tg: (Generator<*,*,*>)=>null = testGen
+
+var failFast = require("jasmine-fail-fast");
+jasmine.getEnv().addReporter(failFast.init());
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
