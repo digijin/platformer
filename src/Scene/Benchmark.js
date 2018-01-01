@@ -13,21 +13,27 @@ class Runner extends GameObject {
 		super();
 		this.grid = grid;
 		this.scores = [];
+		this.gap = 1;
 	}
 	update() {
-		let rect = new Rect({
-			t: 0,
-			l: 0,
-			r: this.grid.blocks.length * config.grid.width,
-			b: this.grid.blocks[0].length * config.grid.width
-		});
-		let start = new Date().getTime();
-		this.grid.tileCache = {};
-		this.grid.renderTiles(rect);
-		let time = new Date().getTime() - start;
-		this.scores.push(time);
-		let avg = this.scores.reduce((a, b) => a + b) / this.scores.length;
-		console.log("took", time, "average", Math.round(avg));
+		this.gap -= this.engine.deltaTime;
+		if (this.gap < 0) {
+			this.gap = 5;
+			console.log("running");
+			let rect = new Rect({
+				t: 0,
+				l: 0,
+				r: this.grid.blocks.length * config.grid.width,
+				b: this.grid.blocks[0].length * config.grid.width
+			});
+			let start = new Date().getTime();
+			this.grid.tileCache = {};
+			this.grid.renderTiles(rect);
+			let time = new Date().getTime() - start;
+			this.scores.push(time);
+			let avg = this.scores.reduce((a, b) => a + b) / this.scores.length;
+			console.log("took", time, "average", Math.round(avg));
+		}
 	}
 }
 

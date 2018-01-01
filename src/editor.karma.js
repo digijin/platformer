@@ -92,7 +92,7 @@ describe("editor.karma functional", () => {
 				done();
 			}, DELAY);
 		});
-		it("should add background to tiles under cursor", done => {
+		it("should remove tiles under cursor", done => {
 			mouseUtil.mouseEvent(
 				"mousemove",
 				{ clientX: pt.x, clientY: pt.y },
@@ -107,7 +107,9 @@ describe("editor.karma functional", () => {
 				let block = game.engine.grid.getBlockAtPoint(
 					game.engine.mouse.point
 				);
-				expect(block.backgroundType).not.toBe("0");
+
+				expect(block.isEmpty()).toBe(true);
+				// expect(block.backgroundType).not.toBe("0");
 				mouseUtil.mouseEvent(
 					"mouseup",
 					{ button: 2 },
