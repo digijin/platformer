@@ -167,6 +167,13 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./concrete.png"),
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "chainlink",
+		id: "17",
+		image: require("./chainlink.png"),
+		destructable: true,
+		hp: 100
 	}
 ];
 

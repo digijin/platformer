@@ -26,6 +26,7 @@ export default class DecorType {
 	width: number;
 	hp: number;
 	pattern: CanvasPattern;
+	category: string;
 	constructor(params: DecorTypeParams) {
 		this.name = params.name;
 		this.id = params.id;
@@ -36,6 +37,7 @@ export default class DecorType {
 		this.width = params.width;
 		this.mode = params.mode;
 		this.obstacle = params.obstacle;
+		this.category = params.category;
 
 		this.image.onload = () => {
 			let context = document.createElement("canvas").getContext("2d");
@@ -56,6 +58,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./door1x3.png"),
 		destructable: true,
 		obstacle: true,
+		category: "general",
 		hp: 10
 	},
 	{
@@ -66,6 +69,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./window.png"),
 		destructable: false,
 		obstacle: false,
+		category: "general",
 		hp: 1
 	},
 	{
@@ -76,6 +80,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./cabinet1x3.png"),
 		destructable: false,
 		obstacle: false,
+		category: "office",
 		hp: 1
 	},
 	{
@@ -86,6 +91,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./copier3x3.png"),
 		destructable: false,
 		obstacle: false,
+		category: "office",
 		hp: 1
 	},
 	{
@@ -96,6 +102,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./desk4x3.png"),
 		destructable: false,
 		obstacle: false,
+		category: "office",
 		hp: 1
 	},
 	{
@@ -106,6 +113,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./plant1x3.png"),
 		destructable: false,
 		obstacle: false,
+		category: "office",
 		hp: 1
 	},
 	{
@@ -116,6 +124,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./waterfountain1x4.png"),
 		destructable: false,
 		obstacle: false,
+		category: "office",
 		hp: 1
 	},
 	{
@@ -126,6 +135,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./light3x2.png"),
 		destructable: false,
 		obstacle: false,
+		category: "light",
 		hp: 1,
 		mode: "soft-light"
 	},
@@ -137,6 +147,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./fuelsign2x4.png"),
 		destructable: false,
 		obstacle: false,
+		category: "servo",
 		hp: 1
 	},
 	{
@@ -147,6 +158,62 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		image: require("./petrolbowser2x4.png"),
 		destructable: false,
 		obstacle: false,
+		category: "servo",
+		hp: 1
+	},
+	{
+		name: "poster1",
+		id: "11",
+		width: 2,
+		height: 3,
+		image: require("./poster/poster1.png"),
+		destructable: false,
+		obstacle: false,
+		category: "poster",
+		hp: 1
+	},
+	{
+		name: "poster2",
+		id: "12",
+		width: 2,
+		height: 3,
+		image: require("./poster/poster2.png"),
+		destructable: false,
+		obstacle: false,
+		category: "poster",
+		hp: 1
+	},
+	{
+		name: "poster3",
+		id: "13",
+		width: 2,
+		height: 3,
+		image: require("./poster/poster3.png"),
+		destructable: false,
+		obstacle: false,
+		category: "poster",
+		hp: 1
+	},
+	{
+		name: "poster4",
+		id: "14",
+		width: 2,
+		height: 3,
+		image: require("./poster/poster4.png"),
+		destructable: false,
+		obstacle: false,
+		category: "poster",
+		hp: 1
+	},
+	{
+		name: "poster5",
+		id: "15",
+		width: 2,
+		height: 3,
+		image: require("./poster/poster5.png"),
+		destructable: false,
+		obstacle: false,
+		category: "poster",
 		hp: 1
 	}
 ];
