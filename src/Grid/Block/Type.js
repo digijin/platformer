@@ -132,6 +132,20 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: volcanic,
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "pillar",
+		id: "12",
+		image: require("./pillar.png"),
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "servicestation_cover",
+		id: "13",
+		image: require("./servicestation_cover.png"),
+		destructable: true,
+		hp: 100
 	}
 ];
 

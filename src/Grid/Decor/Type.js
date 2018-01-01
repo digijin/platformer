@@ -128,6 +128,26 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		hp: 1,
 		mode: "soft-light"
+	},
+	{
+		name: "fuelsign",
+		id: "9",
+		width: 4,
+		height: 2,
+		image: require("./fuelsign2x4.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
+	},
+	{
+		name: "petrolbowser",
+		id: "10",
+		width: 2,
+		height: 4,
+		image: require("./petrolbowser2x4.png"),
+		destructable: false,
+		obstacle: false,
+		hp: 1
 	}
 ];
 
