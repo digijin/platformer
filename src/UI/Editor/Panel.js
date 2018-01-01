@@ -172,10 +172,10 @@ class EditorPanel extends React.Component {
 									classes={{
 										labelContainer: classes.labelContainer
 									}}
-									className={
-										(classnames("editorTab-" + t),
-										classes.tab)
-									}
+									className={classnames(
+										"editorTab-" + t,
+										classes.tab
+									)}
 									key={t}
 									label={t}
 								/>

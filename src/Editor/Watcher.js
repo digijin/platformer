@@ -21,7 +21,7 @@ export default class Watcher extends GameObject {
 
 	rectStart: Point | void;
 
-	mode: "block" | "enemy";
+	mode: "block" | "enemy" | "decor";
 	drawMode: "point" | "paint" | "dragrect";
 
 	constructor() {
@@ -30,7 +30,7 @@ export default class Watcher extends GameObject {
 		this.decorId = "4";
 		this.size = 10;
 		this.tag("editor-watcher");
-		this.mode = "decor";
+		this.mode = "block";
 		this.drawMode = "paint";
 	}
 	init(engine: Engine) {
