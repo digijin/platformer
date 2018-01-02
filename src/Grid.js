@@ -415,16 +415,17 @@ export default class Grid extends GameObject {
 		// );
 		let srcData = type.imageData.data;
 		let destData = imageData.data;
-		for (let dx = 0; dx < config.grid.width; dx++) {
-			for (let dy = 0; dy < config.grid.width; dy++) {
+		let w = config.grid.width;
+		for (let dx = 0; dx < w; dx++) {
+			for (let dy = 0; dy < w; dy++) {
 				//FOR EACH PIXEL
 				let dest = {
-					x: dx + x * config.grid.width,
-					y: dy + y * config.grid.width
+					x: dx + x * w,
+					y: dy + y * w
 				};
 				let src = {
-					x: dest.x % type.image.width,
-					y: dest.y % type.image.height
+					x: dest.x, // % type.image.width,
+					y: dest.y // % type.image.height
 				};
 				let srcloc = (src.y * type.image.width + src.x) * 4;
 				let destloc = (dest.y * ctx.canvas.width + dest.x) * 4;
