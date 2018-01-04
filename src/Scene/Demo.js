@@ -87,6 +87,7 @@ class Runner extends GameObject {
 		// 	x: -canvas.width * tile.x,
 		// 	y: -canvas.height * tile.y
 		// });
+		const tilePixelWidth = config.grid.tile.width * config.grid.width;
 
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
@@ -94,12 +95,21 @@ class Runner extends GameObject {
 					x: tile.x * config.grid.tile.width + x,
 					y: tile.y * config.grid.tile.height + y
 				});
-				this.tileSprites[x][y].visible = false;
+				let tileSprite = this.tileSprites[x][y];
+				tileSprite.visible = false;
 				if (block) {
 					if (!block.isEmpty()) {
 						let type = block.getType();
-						this.tileSprites[x][y].visible = true;
-						this.tileSprites[x][y].texture = type.texture;
+						tileSprite.visible = true;
+						tileSprite.texture = type.texture;
+						tileSprite.tilePosition.x = -(
+							tilePixelWidth * tile.x +
+							config.grid.width * x
+						);
+						tileSprite.tilePosition.y = -(
+							tilePixelWidth * tile.y +
+							config.grid.width * y
+						);
 					}
 				}
 			}
