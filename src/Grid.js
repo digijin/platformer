@@ -11,6 +11,8 @@ import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
+import PIXI from "pixi.js";
+
 import Decor from "Grid/Decor";
 import type DecorType from "Grid/Decor/Type";
 
