@@ -44,12 +44,13 @@ export default class Grid extends GameObject {
 		// this.stage.addChild(this.sprite);
 
 		// this.engine.container.appendChild(this.canvas);
-		this.makeTileSprites();
+		this.backgroundTileSprites = this.makeTileSprites();
+		this.tileSprites = this.makeTileSprites();
 	}
 	makeTileSprites() {
-		this.tileSprites = [];
+		let tileSprites = [];
 		for (let x = 0; x < config.grid.tile.width; x++) {
-			this.tileSprites.push([]);
+			tileSprites.push([]);
 			for (let y = 0; y < config.grid.tile.height; y++) {
 				let sprite = new PIXI.extras.TilingSprite(
 					this.texture,
@@ -61,9 +62,10 @@ export default class Grid extends GameObject {
 				// sprite.width = config.grid.width;
 				// sprite.height = config.grid.width;
 				this.stage.addChild(sprite);
-				this.tileSprites[x].push(sprite);
+				tileSprites[x].push(sprite);
 			}
 		}
+		return tileSprites;
 	}
 	renderTilePixi(tile: { x: number, y: number }): HTMLCanvasElement {
 		//SET IT UP
@@ -80,7 +82,9 @@ export default class Grid extends GameObject {
 					y: tile.y * config.grid.tile.height + y
 				});
 				let tileSprite = this.tileSprites[x][y];
+				let backgroundTileSprite = this.backgroundTileSprites[x][y];
 				tileSprite.visible = false;
+				backgroundTileSprite.visible = false;
 				if (block) {
 					if (!block.isEmpty()) {
 						let type = block.getType();
@@ -91,6 +95,19 @@ export default class Grid extends GameObject {
 							config.grid.width * x
 						);
 						tileSprite.tilePosition.y = -(
+							tilePixelWidth * tile.y +
+							config.grid.width * y
+						);
+					}
+					if (!block.isBackgroundEmpty()) {
+						let btype = block.getBackgroundType();
+						backgroundTileSprite.visible = true;
+						backgroundTileSprite.texture = btype.texture;
+						backgroundTileSprite.tilePosition.x = -(
+							tilePixelWidth * tile.x +
+							config.grid.width * x
+						);
+						backgroundTileSprite.tilePosition.y = -(
 							tilePixelWidth * tile.y +
 							config.grid.width * y
 						);

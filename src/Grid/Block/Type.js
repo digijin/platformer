@@ -171,7 +171,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		id: "14",
 		image: require("./window3x3.png"),
 		destructable: true,
-		hp: 100
+		hp: 1
 	},
 	{
 		name: "grate",
