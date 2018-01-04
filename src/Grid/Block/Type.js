@@ -12,6 +12,8 @@
 // import moon from "Grid/moon.jpg";
 // import volcanic from "Grid/volcanic.jpg";
 
+import * as PIXI from "pixi.js";
+
 export type BlockTypeParams = {
 	// hp: name,
 	name: string,
@@ -40,6 +42,13 @@ export default class BlockType {
 				let canvas = document.createElement("canvas");
 				canvas.width = this.image.width;
 				canvas.height = this.image.height;
+
+				this.texture = new PIXI.Texture(
+					new PIXI.BaseTexture(this.image)
+				);
+				this.textureId = "BlockType" + this.id;
+				PIXI.Texture.addToCache(this.texture, this.textureId);
+
 				let context = canvas.getContext("2d");
 				if (context) {
 					context.drawImage(this.image, 0, 0);
