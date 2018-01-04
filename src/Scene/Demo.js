@@ -16,7 +16,7 @@ class Runner extends GameObject {
 			view: this.canvas
 		});
 		this.texture = new PIXI.Texture(
-			new PIXI.BaseTexture(require("Grid/Block/metal_tile.png"))
+			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
 		);
 
 		// this.sprite = new PIXI.Sprite(texture);
@@ -25,7 +25,9 @@ class Runner extends GameObject {
 		this.stage.addChild(this.sprite);
 	}
 	update() {
-		this.sprite.x += this.engine.deltaTime;
+		this.sprite.position = this.engine.mouse.position;
+		this.sprite.tilePosition.x = -this.engine.mouse.position.x;
+		this.sprite.tilePosition.y = -this.engine.mouse.position.y;
 		this.renderer.render(this.stage);
 	}
 }
