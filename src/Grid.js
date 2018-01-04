@@ -11,7 +11,7 @@ import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
-import PIXI from "pixi.js";
+import * as PIXI from "pixi.js";
 
 import Decor from "Grid/Decor";
 import type DecorType from "Grid/Decor/Type";
@@ -22,6 +22,92 @@ export default class Grid extends GameObject {
 	decor: Array<Decor>;
 
 	z: number;
+
+	pixiInit() {
+		this.pixicanvas = document.createElement("canvas");
+
+		this.renderer = PIXI.autoDetectRenderer(
+			config.grid.tile.width * config.grid.width,
+			config.grid.tile.width * config.grid.width,
+			{
+				view: this.pixicanvas,
+				transparent: true
+			}
+		);
+		this.texture = new PIXI.Texture(
+			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
+		);
+
+		// this.sprite = new PIXI.Sprite(texture);
+		// this.sprite = new PIXI.extras.TilingSprite(this.texture);
+		this.stage = new PIXI.Container();
+		// this.stage.addChild(this.sprite);
+
+		// this.engine.container.appendChild(this.canvas);
+		this.makeTileSprites();
+	}
+	makeTileSprites() {
+		this.tileSprites = [];
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			this.tileSprites.push([]);
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let sprite = new PIXI.extras.TilingSprite(
+					this.texture,
+					config.grid.width,
+					config.grid.width
+				);
+				sprite.position.x = x * config.grid.width;
+				sprite.position.y = y * config.grid.width;
+				// sprite.width = config.grid.width;
+				// sprite.height = config.grid.width;
+				this.stage.addChild(sprite);
+				this.tileSprites[x].push(sprite);
+			}
+		}
+	}
+	renderTilePixi(tile: { x: number, y: number }): HTMLCanvasElement {
+		//SET IT UP
+		// let offset = new Point({
+		// 	x: -canvas.width * tile.x,
+		// 	y: -canvas.height * tile.y
+		// });
+		const tilePixelWidth = config.grid.tile.width * config.grid.width;
+
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let block = this.getBlock({
+					x: tile.x * config.grid.tile.width + x,
+					y: tile.y * config.grid.tile.height + y
+				});
+				let tileSprite = this.tileSprites[x][y];
+				tileSprite.visible = false;
+				if (block) {
+					if (!block.isEmpty()) {
+						let type = block.getType();
+						tileSprite.visible = true;
+						tileSprite.texture = type.texture;
+						tileSprite.tilePosition.x = -(
+							tilePixelWidth * tile.x +
+							config.grid.width * x
+						);
+						tileSprite.tilePosition.y = -(
+							tilePixelWidth * tile.y +
+							config.grid.width * y
+						);
+					}
+				}
+			}
+		}
+
+		//PUMP IT OUT
+		let canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.width = config.grid.tile.width * config.grid.width;
+		canvas.height = config.grid.tile.height * config.grid.width;
+		this.renderer.render(this.stage);
+		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+		ctx.drawImage(this.pixicanvas, 0, 0);
+		return canvas;
+	}
 
 	highlightBlock(block: Block) {
 		if (block) {
@@ -100,6 +186,7 @@ export default class Grid extends GameObject {
 		//make empty grid
 		this.makeEmptyGrid(size);
 		//new Block({ position: { x, y }, type: "0" })
+		this.pixiInit();
 	}
 	makeEmptyGrid(size) {
 		this.blocks = Array(size.w)
@@ -336,6 +423,9 @@ export default class Grid extends GameObject {
 		return out;
 	}
 	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
+		return this.renderTilePixi(tile);
+	}
+	renderTileCanvas(tile: { x: number, y: number }): HTMLCanvasElement {
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.grid.tile.width * config.grid.width;
 		canvas.height = config.grid.tile.height * config.grid.width;

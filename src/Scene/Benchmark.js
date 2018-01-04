@@ -24,6 +24,19 @@ class Runner extends GameObject {
 				this.grid.blocks.length / config.grid.tile.width,
 				this.grid.blocks[0].length / config.grid.tile.width
 			);
+			console.log(
+				this.grid.blocks.length * config.grid.width +
+					"x" +
+					this.grid.blocks[0].length * config.grid.width,
+				"pixels"
+			);
+			console.log(
+				"rendered",
+				this.grid.blocks.length *
+					config.grid.width *
+					(this.grid.blocks[0].length * config.grid.width) +
+					"px"
+			);
 			let rect = new Rect({
 				t: 0,
 				l: 0,
@@ -36,7 +49,15 @@ class Runner extends GameObject {
 			let time = new Date().getTime() - start;
 			this.scores.push(time);
 			let avg = this.scores.reduce((a, b) => a + b) / this.scores.length;
-			console.log("took", time, "average", Math.round(avg));
+			console.log(
+				"took",
+				time,
+				"average",
+				Math.round(avg),
+				"over",
+				this.scores.length,
+				"runs"
+			);
 		}
 	}
 }
@@ -49,15 +70,15 @@ export default class Benchmark extends Base {
 		engine.register(new Runner(grid));
 		engine.register(grid);
 		grid.load(gridData);
-		console.log("beginning grid benchmark");
+		// console.log("beginning grid benchmark");
 
-		let start = performance.now();
-		for (let i = 0; i < 100; i++) {
-			let canvas: HTMLCanvasElement = document.createElement("canvas");
-			canvas.width = config.grid.tile.width * config.grid.width;
-			canvas.height = config.grid.tile.height * config.grid.width;
-		}
-		console.log("b100canvas", performance.now() - start);
+		// let start = performance.now();
+		// for (let i = 0; i < 100; i++) {
+		// 	let canvas: HTMLCanvasElement = document.createElement("canvas");
+		// 	canvas.width = config.grid.tile.width * config.grid.width;
+		// 	canvas.height = config.grid.tile.height * config.grid.width;
+		// }
+		// console.log("b100canvas", performance.now() - start);
 
 		// let time;
 		// let scores = [];
