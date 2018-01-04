@@ -5,6 +5,7 @@ import * as PIXI from "pixi.js";
 
 import config from "config";
 import GameObject from "GameObject";
+import Grid from "Grid";
 
 class Runner extends GameObject {
 	init(engine) {
@@ -24,6 +25,11 @@ class Runner extends GameObject {
 		this.sprite = new PIXI.extras.TilingSprite(texture);
 		this.stage = new PIXI.Container();
 		this.stage.addChild(this.sprite);
+
+		this.grid = new Grid();
+		let data = JSON.parse(require("levels/level.txt"));
+		delete data.enemies;
+		this.grid.load(JSON.stringify(data));
 	}
 	update() {
 		if (this.engine.input.getButton("fire")) {
@@ -37,6 +43,7 @@ class Runner extends GameObject {
 		this.sprite.tilePosition.y = -this.engine.mouse.position.y;
 		this.renderer.render(this.stage);
 	}
+	renderTile() {}
 }
 
 export default class Demo extends Base {
