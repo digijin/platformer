@@ -22,9 +22,9 @@ class Runner extends GameObject {
 		);
 
 		// this.sprite = new PIXI.Sprite(texture);
-		this.sprite = new PIXI.extras.TilingSprite(this.texture);
+		// this.sprite = new PIXI.extras.TilingSprite(this.texture);
 		this.stage = new PIXI.Container();
-		this.stage.addChild(this.sprite);
+		// this.stage.addChild(this.sprite);
 
 		this.grid = new Grid();
 		let data = JSON.parse(require("levels/level.txt"));
