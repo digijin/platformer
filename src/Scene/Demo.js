@@ -3,6 +3,7 @@ import type Engine from "Engine";
 
 import * as PIXI from "pixi.js";
 
+import config from "config";
 import GameObject from "GameObject";
 
 class Runner extends GameObject {
@@ -15,16 +16,22 @@ class Runner extends GameObject {
 		this.renderer = PIXI.autoDetectRenderer(500, 500, {
 			view: this.canvas
 		});
-		this.texture = new PIXI.Texture(
+		let texture = new PIXI.Texture(
 			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
 		);
 
 		// this.sprite = new PIXI.Sprite(texture);
-		this.sprite = new PIXI.extras.TilingSprite(this.texture);
+		this.sprite = new PIXI.extras.TilingSprite(texture);
 		this.stage = new PIXI.Container();
 		this.stage.addChild(this.sprite);
 	}
 	update() {
+		if (this.engine.input.getButton("fire")) {
+			let texture = new PIXI.Texture(
+				new PIXI.BaseTexture(require("Grid/Block/brick2.png"))
+			);
+			this.sprite.texture = texture;
+		}
 		this.sprite.position = this.engine.mouse.position;
 		this.sprite.tilePosition.x = -this.engine.mouse.position.x;
 		this.sprite.tilePosition.y = -this.engine.mouse.position.y;
