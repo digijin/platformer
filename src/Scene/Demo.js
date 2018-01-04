@@ -12,17 +12,16 @@ class Runner extends GameObject {
 		super.init(engine);
 
 		this.canvas = document.createElement("canvas");
-		this.engine.container.appendChild(this.canvas);
 
 		this.renderer = PIXI.autoDetectRenderer(500, 500, {
 			view: this.canvas
 		});
-		let texture = new PIXI.Texture(
+		this.texture = new PIXI.Texture(
 			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
 		);
 
 		// this.sprite = new PIXI.Sprite(texture);
-		this.sprite = new PIXI.extras.TilingSprite(texture);
+		this.sprite = new PIXI.extras.TilingSprite(this.texture);
 		this.stage = new PIXI.Container();
 		this.stage.addChild(this.sprite);
 
@@ -30,20 +29,65 @@ class Runner extends GameObject {
 		let data = JSON.parse(require("levels/level.txt"));
 		delete data.enemies;
 		this.grid.load(JSON.stringify(data));
+
+		// this.engine.container.appendChild(this.canvas);
+		this.makeTileSprites();
+		this.engine.container.appendChild(this.renderTile({ x: 0, y: 0 }));
 	}
-	update() {
-		if (this.engine.input.getButton("fire")) {
-			let texture = new PIXI.Texture(
-				new PIXI.BaseTexture(require("Grid/Block/brick2.png"))
-			);
-			this.sprite.texture = texture;
+	makeTileSprites() {
+		this.tileSprites = [];
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			this.tileSprites.push([]);
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let sprite = new PIXI.extras.TilingSprite(this.texture);
+				sprite.position.x = x * config.grid.width;
+				sprite.position.y = y * config.grid.width;
+				sprite.width = config.grid.width;
+				sprite.height = config.grid.width;
+				this.stage.addChild(sprite);
+				this.tileSprites[x].push(sprite);
+			}
 		}
-		this.sprite.position = this.engine.mouse.position;
-		this.sprite.tilePosition.x = -this.engine.mouse.position.x;
-		this.sprite.tilePosition.y = -this.engine.mouse.position.y;
-		this.renderer.render(this.stage);
 	}
-	renderTile() {}
+	// update() {
+	// 	if (this.engine.input.getButton("editor_add")) {
+	// 		let texture = new PIXI.Texture(
+	// 			new PIXI.BaseTexture(require("Grid/Block/brick2.png"))
+	// 		);
+	// 		this.sprite.texture = texture;
+	// 	}
+	// 	this.sprite.position = this.engine.mouse.position;
+	// 	this.sprite.tilePosition.x = -this.engine.mouse.position.x;
+	// 	this.sprite.tilePosition.y = -this.engine.mouse.position.y;
+	// 	this.renderer.render(this.stage);
+	// }
+	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
+		//SET IT UP
+
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let block = this.grid.getBlock({
+					x: tile.x * config.grid.tile.width + x,
+					y: tile.y * config.grid.tile.height + y
+				});
+				if (block) {
+					if (!block.isEmpty()) {
+						let type = block.getType();
+						this.tileSprites[x][y].texture = type.texture;
+					}
+				}
+			}
+		}
+
+		//PUMP IT OUT
+		let canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.width = config.grid.tile.width * config.grid.width;
+		canvas.height = config.grid.tile.height * config.grid.width;
+		this.renderer.render(this.stage);
+		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+		ctx.drawImage(this.canvas, 0, 0);
+		return canvas;
+	}
 }
 
 export default class Demo extends Base {
