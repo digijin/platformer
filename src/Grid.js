@@ -426,8 +426,8 @@ export default class Grid extends GameObject {
 					y: dy + y * w
 				};
 				let src = {
-					x: dest.x, // % type.image.width,
-					y: dest.y // % type.image.height
+					x: dest.x % type.image.width,
+					y: dest.y % type.image.height
 				};
 				let srcloc = (src.y * type.image.width + src.x) * 4;
 				let destloc = (dest.y * ctx.canvas.width + dest.x) * 4;
