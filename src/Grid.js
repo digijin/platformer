@@ -100,6 +100,7 @@ export default class Grid extends GameObject {
 						);
 					}
 					if (!block.isBackgroundEmpty()) {
+						backgroundTileSprite.tint = 0x444444;
 						let btype = block.getBackgroundType();
 						backgroundTileSprite.visible = true;
 						backgroundTileSprite.texture = btype.texture;
