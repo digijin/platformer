@@ -67,6 +67,7 @@ export default class Engine {
 		// FLOWHACK
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.id = "engineCanvas";
 		canvas.width = config.game.width;
 		canvas.height = config.game.height;
 		container.appendChild(canvas);

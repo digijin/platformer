@@ -17,6 +17,7 @@ import Logo from "Scene/Logo";
 import Briefing from "Scene/Briefing";
 import Results from "Scene/Results";
 import Benchmark from "Scene/Benchmark";
+import Demo from "Scene/Demo";
 
 // FLOWHACK
 import "./style.styl";
@@ -58,6 +59,9 @@ export default class Game {
 				break;
 			case "benchmark":
 				this.engine.startScene(new Benchmark());
+				break;
+			case "demo":
+				this.engine.startScene(new Demo());
 				break;
 			default:
 				this.engine.startScene(new Logo());

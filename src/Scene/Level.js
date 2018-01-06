@@ -31,7 +31,7 @@ export default class Level extends Base {
 		engine.register(new Background());
 		engine.register(new StoryTeller());
 
-		let player = new Player({ position: new Point({ x: 50, y: 100 }) });
+		let player = new Player({ position: new Point({ x: 450, y: 100 }) });
 		engine.register(player);
 
 		engine.ui.dispatch({ type: "START_SCENE", scene: "level" });

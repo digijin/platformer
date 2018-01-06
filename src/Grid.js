@@ -11,6 +11,8 @@ import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
+import * as PIXI from "pixi.js";
+
 import Decor from "Grid/Decor";
 import type DecorType from "Grid/Decor/Type";
 
@@ -20,6 +22,110 @@ export default class Grid extends GameObject {
 	decor: Array<Decor>;
 
 	z: number;
+
+	pixiInit() {
+		this.pixicanvas = document.createElement("canvas");
+
+		this.renderer = PIXI.autoDetectRenderer(
+			config.grid.tile.width * config.grid.width,
+			config.grid.tile.width * config.grid.width,
+			{
+				view: this.pixicanvas,
+				transparent: true
+			}
+		);
+		this.texture = new PIXI.Texture(
+			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
+		);
+
+		// this.sprite = new PIXI.Sprite(texture);
+		// this.sprite = new PIXI.extras.TilingSprite(this.texture);
+		this.stage = new PIXI.Container();
+		// this.stage.addChild(this.sprite);
+
+		// this.engine.container.appendChild(this.canvas);
+		this.backgroundTileSprites = this.makeTileSprites();
+		this.tileSprites = this.makeTileSprites();
+	}
+	makeTileSprites() {
+		let tileSprites = [];
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			tileSprites.push([]);
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let sprite = new PIXI.extras.TilingSprite(
+					this.texture,
+					config.grid.width,
+					config.grid.width
+				);
+				sprite.position.x = x * config.grid.width;
+				sprite.position.y = y * config.grid.width;
+				// sprite.width = config.grid.width;
+				// sprite.height = config.grid.width;
+				this.stage.addChild(sprite);
+				tileSprites[x].push(sprite);
+			}
+		}
+		return tileSprites;
+	}
+	renderTilePixi(tile: { x: number, y: number }): HTMLCanvasElement {
+		//SET IT UP
+		// let offset = new Point({
+		// 	x: -canvas.width * tile.x,
+		// 	y: -canvas.height * tile.y
+		// });
+		const tilePixelWidth = config.grid.tile.width * config.grid.width;
+
+		for (let x = 0; x < config.grid.tile.width; x++) {
+			for (let y = 0; y < config.grid.tile.height; y++) {
+				let block = this.getBlock({
+					x: tile.x * config.grid.tile.width + x,
+					y: tile.y * config.grid.tile.height + y
+				});
+				let tileSprite = this.tileSprites[x][y];
+				let backgroundTileSprite = this.backgroundTileSprites[x][y];
+				tileSprite.visible = false;
+				backgroundTileSprite.visible = false;
+				if (block) {
+					if (!block.isEmpty()) {
+						let type = block.getType();
+						tileSprite.visible = true;
+						tileSprite.texture = type.texture;
+						tileSprite.tilePosition.x = -(
+							tilePixelWidth * tile.x +
+							config.grid.width * x
+						);
+						tileSprite.tilePosition.y = -(
+							tilePixelWidth * tile.y +
+							config.grid.width * y
+						);
+					}
+					if (!block.isBackgroundEmpty()) {
+						backgroundTileSprite.tint = 0x444444;
+						let btype = block.getBackgroundType();
+						backgroundTileSprite.visible = true;
+						backgroundTileSprite.texture = btype.texture;
+						backgroundTileSprite.tilePosition.x = -(
+							tilePixelWidth * tile.x +
+							config.grid.width * x
+						);
+						backgroundTileSprite.tilePosition.y = -(
+							tilePixelWidth * tile.y +
+							config.grid.width * y
+						);
+					}
+				}
+			}
+		}
+
+		//PUMP IT OUT
+		let canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.width = config.grid.tile.width * config.grid.width;
+		canvas.height = config.grid.tile.height * config.grid.width;
+		this.renderer.render(this.stage);
+		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+		ctx.drawImage(this.pixicanvas, 0, 0);
+		return canvas;
+	}
 
 	highlightBlock(block: Block) {
 		if (block) {
@@ -98,6 +204,7 @@ export default class Grid extends GameObject {
 		//make empty grid
 		this.makeEmptyGrid(size);
 		//new Block({ position: { x, y }, type: "0" })
+		this.pixiInit();
 	}
 	makeEmptyGrid(size) {
 		this.blocks = Array(size.w)
@@ -334,6 +441,9 @@ export default class Grid extends GameObject {
 		return out;
 	}
 	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
+		return this.renderTilePixi(tile);
+	}
+	renderTileCanvas(tile: { x: number, y: number }): HTMLCanvasElement {
 		let canvas: HTMLCanvasElement = document.createElement("canvas");
 		canvas.width = config.grid.tile.width * config.grid.width;
 		canvas.height = config.grid.tile.height * config.grid.width;
@@ -345,6 +455,13 @@ export default class Grid extends GameObject {
 			y: -canvas.height * tile.y
 		});
 		ctx.translate(offset.x, offset.y);
+		let imageData = ctx.getImageData(
+			0,
+			0,
+			ctx.canvas.width,
+			ctx.canvas.height
+		);
+
 		for (let x = 0; x < config.grid.tile.width; x++) {
 			for (let y = 0; y < config.grid.tile.height; y++) {
 				let block = this.getBlock({
@@ -355,12 +472,12 @@ export default class Grid extends GameObject {
 					if (block.backgroundType !== "0") {
 						let type = block.getBackgroundType();
 						ctx.filter = "brightness(50%)";
-						this.drawTile(ctx, type, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset, imageData);
 					}
 					if (!block.isEmpty()) {
 						let type = block.getType();
 						ctx.filter = "none";
-						this.drawTile(ctx, type, x, y, offset);
+						this.drawTile(ctx, type, x, y, offset, imageData);
 					}
 				}
 				// if (block && block.backgroundType !== "0") {
@@ -376,6 +493,7 @@ export default class Grid extends GameObject {
 				// }
 			}
 		}
+		ctx.putImageData(imageData, 0, 0);
 		ctx.strokeStyle = "rgba(0,0,0,0.1)";
 		ctx.lineWidth = 1;
 		ctx.strokeRect(-offset.x, -offset.y, canvas.width, canvas.height);
@@ -387,38 +505,47 @@ export default class Grid extends GameObject {
 		return canvas;
 	}
 
-	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset) {
+	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset, imageData) {
 		// let pattern = ctx.createPattern(im, "repeat");
 		// let image
 
-		ctx.fillStyle = type.pattern;
-		// ctx.beginPath();
-		// ctx.rect(
+		// ctx.fillStyle = type.pattern;
+		// ctx.fillRect(
 		// 	x * config.grid.width - offset.x,
 		// 	y * config.grid.width - offset.y,
 		// 	config.grid.width,
 		// 	config.grid.width
 		// );
-		// ctx.fill();
-		// ctx.closePath();
-		ctx.fillRect(
-			x * config.grid.width - offset.x,
-			y * config.grid.width - offset.y,
-			config.grid.width,
-			config.grid.width
-		);
 
-		// ctx.drawImage(
-		// 	im,
+		// let imageData = ctx.getImageData(
 		// 	0,
 		// 	0,
-		// 	im.width,
-		// 	im.height,
-		// 	x * config.grid.width,
-		// 	y * config.grid.width,
-		// 	config.grid.width,
-		// 	config.grid.width
+		// 	ctx.canvas.width,
+		// 	ctx.canvas.height
 		// );
+		let srcData = type.imageData.data;
+		let destData = imageData.data;
+		let w = config.grid.width;
+		for (let dx = 0; dx < w; dx++) {
+			for (let dy = 0; dy < w; dy++) {
+				//FOR EACH PIXEL
+				let dest = {
+					x: dx + x * w,
+					y: dy + y * w
+				};
+				let src = {
+					x: dest.x % type.image.width,
+					y: dest.y % type.image.height
+				};
+				let srcloc = (src.y * type.image.width + src.x) * 4;
+				let destloc = (dest.y * ctx.canvas.width + dest.x) * 4;
+				destData[destloc] = srcData[srcloc];
+				destData[destloc + 1] = srcData[srcloc + 1];
+				destData[destloc + 2] = srcData[srcloc + 2];
+				destData[destloc + 3] = srcData[srcloc + 3];
+			}
+		}
+		// ctx.putImageData(imageData, 0, 0);
 	}
 
 	save(): string {

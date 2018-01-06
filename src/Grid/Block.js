@@ -47,6 +47,10 @@ export default class Block {
 	isEmpty(): boolean {
 		return this.type == "0";
 	}
+
+	isBackgroundEmpty(): boolean {
+		return this.backgroundType == "0";
+	}
 	damage(amount: number) {
 		let type = this.getType();
 		if (type && type.destructable) {
