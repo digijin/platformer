@@ -34,6 +34,7 @@ export default class Engine {
 	ui: UI;
 	grid: Grid;
 	canvas: HTMLCanvasElement;
+	pixicanvas: HTMLCanvasElement;
 	fpsmeter: Fpsmeter;
 	view: { offset: Point };
 	input: Input;

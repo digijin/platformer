@@ -40,10 +40,7 @@ export default class Grid extends GameObject {
 				transparent: true
 			}
 		);
-		this.spritePool = new Pool(
-			PIXI.extras.TilingSprite,
-			PIXI.Texture.WHITE
-		);
+		this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
 		this.spritePool.onCreate = spr => {
 			this.stage.addChild(spr);
 		};
@@ -65,8 +62,8 @@ export default class Grid extends GameObject {
 			sprite.position.y =
 				block.position.y * config.grid.width -
 				this.engine.view.offset.y;
-			sprite.tilePosition.x = -block.position.x * config.grid.width;
-			sprite.tilePosition.y = -block.position.y * config.grid.width;
+			// sprite.tilePosition.x = -block.position.x * config.grid.width;
+			// sprite.tilePosition.y = -block.position.y * config.grid.width;
 			// sprite.tilePosition.y = this.engine.view.offset.y;
 			sprite.width = config.grid.width;
 			sprite.height = config.grid.width;
