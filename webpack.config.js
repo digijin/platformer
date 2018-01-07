@@ -61,6 +61,13 @@ module.exports = [
 				{
 					test: /\.(ttf|otf|eot|TTF)$/,
 					loader: "file-loader"
+				},
+				{
+					test: /sprites\.(png|json)/,
+					loader: "file-loader",
+					options: {
+						name: "[name].[ext]"
+					}
 				}
 			]
 		},

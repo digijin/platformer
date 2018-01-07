@@ -14,6 +14,9 @@
 
 import * as PIXI from "pixi.js";
 
+require("./sprites.json");
+require("./sprites.png");
+
 export type BlockTypeParams = {
 	// hp: name,
 	name: string,
