@@ -78,7 +78,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "dirt",
 		id: "1",
-		image: require("./dirt.jpg"),
+		image: require("./dirt.png"),
 		destructable: true,
 		hp: 100
 	},
@@ -106,21 +106,21 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "grass",
 		id: "5",
-		image: require("./grass.jpg"),
+		image: require("./grass.png"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "stone",
 		id: "6",
-		image: require("./stone.jpg"),
+		image: require("./stone.png"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "tiles",
 		id: "7",
-		image: require("./tiles.jpg"),
+		image: require("./tiles.png"),
 		destructable: true,
 		hp: 100
 	},
@@ -141,14 +141,14 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "moon",
 		id: "10",
-		image: require("./moon.jpg"),
+		image: require("./moon.png"),
 		destructable: true,
 		hp: 100
 	},
 	{
 		name: "volcanic",
 		id: "11",
-		image: require("./volcanic.jpg"),
+		image: require("./volcanic.png"),
 		destructable: true,
 		hp: 100
 	},
