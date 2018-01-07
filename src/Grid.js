@@ -16,6 +16,8 @@ import * as PIXI from "pixi.js";
 import Decor from "Grid/Decor";
 import type DecorType from "Grid/Decor/Type";
 
+import Pool from "Utility/Pool";
+
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
 
@@ -23,108 +25,79 @@ export default class Grid extends GameObject {
 
 	z: number;
 
-	pixiInit() {
-		this.pixicanvas = document.createElement("canvas");
+	spritePool: Pool;
 
+	pixiInit() {
+		this.stage = new PIXI.Container();
 		this.renderer = PIXI.autoDetectRenderer(
-			config.grid.tile.width * config.grid.width,
-			config.grid.tile.width * config.grid.width,
+			window.innerWidth,
+			window.innerHeight,
 			{
-				view: this.pixicanvas,
+				view: this.engine.pixicanvas,
 				transparent: true
 			}
 		);
-		this.texture = new PIXI.Texture(
-			new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
+		this.spritePool = new Pool(
+			PIXI.extras.TilingSprite,
+			PIXI.Texture.WHITE
 		);
-
-		// this.sprite = new PIXI.Sprite(texture);
-		// this.sprite = new PIXI.extras.TilingSprite(this.texture);
-		this.stage = new PIXI.Container();
-		// this.stage.addChild(this.sprite);
-
-		// this.engine.container.appendChild(this.canvas);
-		this.backgroundTileSprites = this.makeTileSprites();
-		this.tileSprites = this.makeTileSprites();
+		this.spritePool.onCreate = spr => {
+			this.stage.addChild(spr);
+		};
+		this.spritePool.onRemove = spr => {
+			this.stage.removeChild(spr);
+		};
 	}
-	makeTileSprites() {
-		let tileSprites = [];
-		for (let x = 0; x < config.grid.tile.width; x++) {
-			tileSprites.push([]);
-			for (let y = 0; y < config.grid.tile.height; y++) {
-				let sprite = new PIXI.extras.TilingSprite(
-					this.texture,
-					config.grid.width,
-					config.grid.width
-				);
-				sprite.position.x = x * config.grid.width;
-				sprite.position.y = y * config.grid.width;
-				// sprite.width = config.grid.width;
-				// sprite.height = config.grid.width;
-				this.stage.addChild(sprite);
-				tileSprites[x].push(sprite);
-			}
-		}
-		return tileSprites;
-	}
-	renderTilePixi(tile: { x: number, y: number }): HTMLCanvasElement {
-		//SET IT UP
-		// let offset = new Point({
-		// 	x: -canvas.width * tile.x,
-		// 	y: -canvas.height * tile.y
-		// });
-		const tilePixelWidth = config.grid.tile.width * config.grid.width;
-
-		for (let x = 0; x < config.grid.tile.width; x++) {
-			for (let y = 0; y < config.grid.tile.height; y++) {
-				let block = this.getBlock({
-					x: tile.x * config.grid.tile.width + x,
-					y: tile.y * config.grid.tile.height + y
-				});
-				let tileSprite = this.tileSprites[x][y];
-				let backgroundTileSprite = this.backgroundTileSprites[x][y];
-				tileSprite.visible = false;
-				backgroundTileSprite.visible = false;
-				if (block) {
-					if (!block.isEmpty()) {
-						let type = block.getType();
-						tileSprite.visible = true;
-						tileSprite.texture = type.texture;
-						tileSprite.tilePosition.x = -(
-							tilePixelWidth * tile.x +
-							config.grid.width * x
-						);
-						tileSprite.tilePosition.y = -(
-							tilePixelWidth * tile.y +
-							config.grid.width * y
-						);
-					}
-					if (!block.isBackgroundEmpty()) {
-						backgroundTileSprite.tint = 0x444444;
-						let btype = block.getBackgroundType();
-						backgroundTileSprite.visible = true;
-						backgroundTileSprite.texture = btype.texture;
-						backgroundTileSprite.tilePosition.x = -(
-							tilePixelWidth * tile.x +
-							config.grid.width * x
-						);
-						backgroundTileSprite.tilePosition.y = -(
-							tilePixelWidth * tile.y +
-							config.grid.width * y
-						);
-					}
+	renderBlocksPixi(screenRect) {
+		// screenRect = new Rect({ t: 0, r: 200, b: 200, l: 0 });
+		this.spritePool.reset();
+		this.spritePool.pool.forEach(spr => {
+			spr.visible = false;
+		});
+		this.getBlocksInRect(screenRect).forEach(block => {
+			let sprite = this.spritePool.get();
+			sprite.position.x =
+				block.position.x * config.grid.width -
+				this.engine.view.offset.x;
+			sprite.position.y =
+				block.position.y * config.grid.width -
+				this.engine.view.offset.y;
+			sprite.tilePosition.x = -block.position.x * config.grid.width;
+			sprite.tilePosition.y = -block.position.y * config.grid.width;
+			// sprite.tilePosition.y = this.engine.view.offset.y;
+			sprite.width = config.grid.width;
+			sprite.height = config.grid.width;
+			if (block) {
+				if (!block.isEmpty()) {
+					let type = block.getType();
+					sprite.visible = true;
+					sprite.texture = type.texture;
+					// sprite.tilePosition.x = -(
+					// 	tilePixelWidth * tile.x +
+					// 	config.grid.width * x
+					// );
+					// sprite.tilePosition.y = -(
+					// 	tilePixelWidth * tile.y +
+					// 	config.grid.width * y
+					// );
 				}
+				// if (!block.isBackgroundEmpty()) {
+				// 	backgroundTileSprite.tint = 0x444444;
+				// 	let btype = block.getBackgroundType();
+				// 	backgroundTileSprite.visible = true;
+				// 	backgroundTileSprite.texture = btype.texture;
+				// 	// backgroundTileSprite.tilePosition.x = -(
+				// 	// 	tilePixelWidth * tile.x +
+				// 	// 	config.grid.width * x
+				// 	// );
+				// 	// backgroundTileSprite.tilePosition.y = -(
+				// 	// 	tilePixelWidth * tile.y +
+				// 	// 	config.grid.width * y
+				// 	// );
+				// }
 			}
-		}
-
-		//PUMP IT OUT
-		let canvas: HTMLCanvasElement = document.createElement("canvas");
-		canvas.width = config.grid.tile.width * config.grid.width;
-		canvas.height = config.grid.tile.height * config.grid.width;
+		});
 		this.renderer.render(this.stage);
-		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
-		ctx.drawImage(this.pixicanvas, 0, 0);
-		return canvas;
 	}
 
 	highlightBlock(block: Block) {
@@ -204,7 +177,6 @@ export default class Grid extends GameObject {
 		//make empty grid
 		this.makeEmptyGrid(size);
 		//new Block({ position: { x, y }, type: "0" })
-		this.pixiInit();
 	}
 	makeEmptyGrid(size) {
 		this.blocks = Array(size.w)
@@ -322,12 +294,12 @@ export default class Grid extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 		engine.grid = this;
+		this.pixiInit();
 		// this.tileRenderer = new TileRenderer({ engine });
 	}
 	update = (engine: Engine) => {
 		let screenRect = this.engine.ctx.screenRect();
-		// console.log("wut");
-		this.renderTiles(screenRect);
+		this.renderBlocksPixi(screenRect);
 		this.renderDecor();
 		// this.renderDebugBlockPixelLine();
 	};
@@ -382,170 +354,10 @@ export default class Grid extends GameObject {
 		});
 		this.engine.ctx.context.restore();
 	}
-	renderTiles(screenRect) {
-		//screenRect
 
-		let newTileCache = {};
-		this.tilesInRect(screenRect).forEach(tile => {
-			// let tile = { x: 5, y: 6 };
-			let tileImage = this.fetchTile(tile);
-			this.engine.ctx.drawSprite(
-				tileImage,
-				new Point({
-					x: tile.x * tileImage.width,
-					y: tile.y * tileImage.height
-				}),
-				{ w: tileImage.width, h: tileImage.height },
-				0,
-				{ x: 0, y: 0 }
-			);
-			newTileCache[this.tileKey(tile)] = tileImage;
-		});
-		this.tileCache = newTileCache;
-	}
-
-	fetchTile(tile: { x: number, y: number }) {
-		// if (!this.tileCache[this.tileKey(tile)]) {
-		// 	this.tileCache[this.tileKey(tile)] = this.renderTile(tile);
-		// }
-		return this.tileCache[this.tileKey(tile)] || this.renderTile(tile);
-	}
-	tileKey(tile: { x: number, y: number }): string {
-		return tile.x.toString() + "_" + tile.y.toString();
-	}
 	bustCache(block: Block) {
-		this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
-	}
-	tileForBlock(block: Block): { x: number, y: number } {
-		return {
-			x: Math.floor(block.position.x / config.grid.tile.width),
-			y: Math.floor(block.position.y / config.grid.tile.height)
-		};
-	}
-
-	tilesInRect(rect: Rect): Array<{ x: number, y: number }> {
-		let w = config.grid.width * config.grid.tile.width;
-		let h = config.grid.width * config.grid.tile.height;
-
-		let firstCol = Math.floor(rect.l / w);
-		let lastCol = Math.floor(rect.r / w);
-		let firstRow = Math.floor(rect.t / h);
-		let lastRow = Math.floor(rect.b / h);
-
-		let out = [];
-		for (let x = firstCol; x <= lastCol; x++) {
-			for (let y = firstRow; y <= lastRow; y++) {
-				out.push({ x, y });
-			}
-		}
-		return out;
-	}
-	renderTile(tile: { x: number, y: number }): HTMLCanvasElement {
-		return this.renderTilePixi(tile);
-	}
-	renderTileCanvas(tile: { x: number, y: number }): HTMLCanvasElement {
-		let canvas: HTMLCanvasElement = document.createElement("canvas");
-		canvas.width = config.grid.tile.width * config.grid.width;
-		canvas.height = config.grid.tile.height * config.grid.width;
-
-		// FLOWHACK
-		let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
-		let offset = new Point({
-			x: -canvas.width * tile.x,
-			y: -canvas.height * tile.y
-		});
-		ctx.translate(offset.x, offset.y);
-		let imageData = ctx.getImageData(
-			0,
-			0,
-			ctx.canvas.width,
-			ctx.canvas.height
-		);
-
-		for (let x = 0; x < config.grid.tile.width; x++) {
-			for (let y = 0; y < config.grid.tile.height; y++) {
-				let block = this.getBlock({
-					x: tile.x * config.grid.tile.width + x,
-					y: tile.y * config.grid.tile.height + y
-				});
-				if (block) {
-					if (block.backgroundType !== "0") {
-						let type = block.getBackgroundType();
-						ctx.filter = "brightness(50%)";
-						this.drawTile(ctx, type, x, y, offset, imageData);
-					}
-					if (!block.isEmpty()) {
-						let type = block.getType();
-						ctx.filter = "none";
-						this.drawTile(ctx, type, x, y, offset, imageData);
-					}
-				}
-				// if (block && block.backgroundType !== "0") {
-				// 	let im = block.getBackgroundType().image;
-				// 	ctx.filter = "brightness(50%)";
-				// 	this.drawTile(ctx, im, x, y);
-				// }
-				// if (block && !block.isEmpty()) {
-				// 	let im = block.getType().image;
-				// 	// let imageParams = [im, 0, 0, im.width, im.height];
-				// 	ctx.filter = "brightness(100%)";
-				// 	this.drawTile(ctx, im, x, y);
-				// }
-			}
-		}
-		ctx.putImageData(imageData, 0, 0);
-		ctx.strokeStyle = "rgba(0,0,0,0.1)";
-		ctx.lineWidth = 1;
-		ctx.strokeRect(-offset.x, -offset.y, canvas.width, canvas.height);
-		//watermark
-		ctx.font = "20px Verdana";
-		// Fill with gradient
-		ctx.fillStyle = "rgba(0,0,0,0.1)";
-		ctx.fillText(tile.x + "," + tile.y, 8 - offset.x, 25 - offset.y);
-		return canvas;
-	}
-
-	drawTile(ctx: CanvasRenderingContext2D, type, x, y, offset, imageData) {
-		// let pattern = ctx.createPattern(im, "repeat");
-		// let image
-
-		// ctx.fillStyle = type.pattern;
-		// ctx.fillRect(
-		// 	x * config.grid.width - offset.x,
-		// 	y * config.grid.width - offset.y,
-		// 	config.grid.width,
-		// 	config.grid.width
-		// );
-
-		// let imageData = ctx.getImageData(
-		// 	0,
-		// 	0,
-		// 	ctx.canvas.width,
-		// 	ctx.canvas.height
-		// );
-		let srcData = type.imageData.data;
-		let destData = imageData.data;
-		let w = config.grid.width;
-		for (let dx = 0; dx < w; dx++) {
-			for (let dy = 0; dy < w; dy++) {
-				//FOR EACH PIXEL
-				let dest = {
-					x: dx + x * w,
-					y: dy + y * w
-				};
-				let src = {
-					x: dest.x % type.image.width,
-					y: dest.y % type.image.height
-				};
-				let srcloc = (src.y * type.image.width + src.x) * 4;
-				let destloc = (dest.y * ctx.canvas.width + dest.x) * 4;
-				destData[destloc] = srcData[srcloc];
-				destData[destloc + 1] = srcData[srcloc + 1];
-				destData[destloc + 2] = srcData[srcloc + 2];
-				destData[destloc + 3] = srcData[srcloc + 3];
-			}
-		}
-		// ctx.putImageData(imageData, 0, 0);
+		// do nothing
+		//this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
 	}
 
 	save(): string {

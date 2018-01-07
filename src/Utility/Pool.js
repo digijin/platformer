@@ -1,3 +1,4 @@
+// @flow
 /**
  * this is a per frame sprite pool
  * start of each from you reset the pool,
@@ -8,6 +9,7 @@ export default class Pool {
 	type;
 	pool: Array<{}>;
 	index: number;
+	onCreate: () => {} | void;
 	constructor(type) {
 		this.type = type;
 		this.index = 0;
@@ -20,6 +22,9 @@ export default class Pool {
 	get() {
 		if (this.index >= this.pool.length) {
 			let instance = this.create();
+			if (this.onCreate) {
+				this.onCreate(instance);
+			}
 			this.pool.push(instance);
 		}
 		return this.pool[this.index++];

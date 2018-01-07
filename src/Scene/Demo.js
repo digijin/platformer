@@ -34,21 +34,22 @@ class Runner extends GameObject {
 		// this.engine.container.appendChild(this.canvas);
 		this.makeTileSprites();
 
-		this.engine.container.appendChild(this.renderTile({ x: 0, y: 0 }));
-		this.engine.container.appendChild(this.grid.renderTile({ x: 0, y: 0 }));
-		this.engine.container.appendChild(this.renderTile({ x: 0, y: 4 }));
-		this.engine.container.appendChild(this.grid.renderTile({ x: 0, y: 4 }));
-		let start = performance.now();
-		for (let x = 0; x < 100; x++) {
-			this.renderTile({ x: 0, y: 0 });
-		}
-		console.log(performance.now() - start);
+		// this.engine.container.appendChild(this.renderTile({ x: 0, y: 0 }));
+		// this.engine.container.appendChild(this.grid.renderTile({ x: 0, y: 0 }));
+		// this.engine.container.appendChild(this.renderTile({ x: 0, y: 4 }));
+		// this.engine.container.appendChild(this.grid.renderTile({ x: 0, y: 4 }));
 
-		start = performance.now();
-		for (let x = 0; x < 100; x++) {
-			this.grid.renderTile({ x: 0, y: 0 });
-		}
-		console.log(performance.now() - start);
+		// let start = performance.now();
+		// for (let x = 0; x < 100; x++) {
+		// 	this.renderTile({ x: 0, y: 0 });
+		// }
+		// console.log(performance.now() - start);
+
+		// start = performance.now();
+		// for (let x = 0; x < 100; x++) {
+		// 	this.grid.renderTile({ x: 0, y: 0 });
+		// }
+		// console.log(performance.now() - start);
 	}
 	makeTileSprites() {
 		this.tileSprites = [];
@@ -134,6 +135,6 @@ export default class Demo extends Base {
 		this.doStuff();
 	}
 	doStuff() {
-		this.engine.register(new Runner());
+		// this.engine.register(new Runner());
 	}
 }
