@@ -12,15 +12,20 @@ export default class Pool {
 		this.type = type;
 		this.index = 0;
 		this.pool = [];
+		this.args = [...arguments];
 	}
 	reset() {
 		this.index = 0;
 	}
 	get() {
 		if (this.index >= this.pool.length) {
-			let instance = new this.type();
+			let instance = this.create();
 			this.pool.push(instance);
 		}
 		return this.pool[this.index++];
+	}
+
+	create() {
+		return new this.type(this.args[1]);
 	}
 }

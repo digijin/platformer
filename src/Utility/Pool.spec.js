@@ -2,8 +2,8 @@ import Pool from "./Pool";
 
 class Thing {
 	name: string;
-	constructor() {
-		this.name = "thingy";
+	constructor(name) {
+		this.name = name || "thingy";
 	}
 }
 
@@ -23,5 +23,9 @@ describe("Utility/Pool.spec.js", () => {
 		pool.reset();
 		expect(pool.get().name).toBe("first");
 		expect(pool.get().name).toBe("second");
+	});
+	it("should pass args into constructor", () => {
+		let pool = new Pool(Thing, "Bob");
+		expect(pool.get().name).toBe("Bob");
 	});
 });
