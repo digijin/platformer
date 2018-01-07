@@ -2,6 +2,11 @@ import Actor from "Actor";
 import Point from "Utility/Point";
 import Grid from "Grid";
 import config from "config";
+
+if (jest) {
+	jest.mock("pixi.js");
+}
+
 describe("Actor", () => {
 	let actor: Actor;
 	let grid: Grid;
