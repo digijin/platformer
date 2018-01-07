@@ -45,10 +45,11 @@ class Runner extends GameObject {
 			});
 			let start = new Date().getTime();
 			this.grid.tileCache = {};
-			this.grid.renderTiles(rect);
+			this.grid.renderBlocksPixi(rect);
 			let time = new Date().getTime() - start;
 			this.scores.push(time);
 			let avg = this.scores.reduce((a, b) => a + b) / this.scores.length;
+			console.log(this.grid.spritePool.pool.length, "objects");
 			console.log(
 				"took",
 				time,

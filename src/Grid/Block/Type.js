@@ -75,7 +75,10 @@ export default class BlockType {
 		}
 	}
 	init() {
-		this.texture = PIXI.loader.resources["blocks"].textures[this.textureId];
+		if (PIXI.loader.resources["blocks"].textures) {
+			this.texture =
+				PIXI.loader.resources["blocks"].textures[this.textureId];
+		}
 	}
 }
 

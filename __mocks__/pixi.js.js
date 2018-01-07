@@ -18,7 +18,18 @@ let prox = new Proxy(
 );
 
 const pixi = {
-	skipHello: () => {},
+	utils: {
+		skipHello: () => {}
+	},
+	loader: {
+		add: () => {},
+		load: () => {},
+		resources: {
+			blocks: {
+				textures: []
+			}
+		}
+	},
 	autoDetectRenderer: () => {},
 	BaseTexture: Klass,
 	Texture: Klass,
