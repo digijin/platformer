@@ -43,6 +43,9 @@ export default class Grid extends GameObject {
 		this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
 		this.spritePool.onCreate = spr => {
 			this.stage.addChild(spr);
+
+			spr.width = config.grid.width;
+			spr.height = config.grid.width;
 		};
 		this.spritePool.onRemove = spr => {
 			this.stage.removeChild(spr);
@@ -55,47 +58,35 @@ export default class Grid extends GameObject {
 			spr.visible = false;
 		});
 		this.getBlocksInRect(screenRect).forEach(block => {
-			let sprite = this.spritePool.get();
-			sprite.position.x =
-				block.position.x * config.grid.width -
-				this.engine.view.offset.x;
-			sprite.position.y =
-				block.position.y * config.grid.width -
-				this.engine.view.offset.y;
-			// sprite.tilePosition.x = -block.position.x * config.grid.width;
-			// sprite.tilePosition.y = -block.position.y * config.grid.width;
-			// sprite.tilePosition.y = this.engine.view.offset.y;
-			sprite.width = config.grid.width;
-			sprite.height = config.grid.width;
+			let pos = {
+				x:
+					block.position.x * config.grid.width -
+					this.engine.view.offset.x,
+
+				y:
+					block.position.y * config.grid.width -
+					this.engine.view.offset.y
+			};
+
 			if (block) {
+				if (!block.isBackgroundEmpty()) {
+					let btype = block.getBackgroundType();
+					let backgroundSprite = this.spritePool.get();
+					backgroundSprite.position.x = pos.x;
+					backgroundSprite.position.y = pos.y;
+					backgroundSprite.tint = 0x444444;
+					backgroundSprite.visible = true;
+					backgroundSprite.texture = btype.texture;
+				}
 				if (!block.isEmpty()) {
 					let type = block.getType();
+					let sprite = this.spritePool.get();
+					sprite.position.x = pos.x;
+					sprite.position.y = pos.y;
+					sprite.tint = 0xffffff;
 					sprite.visible = true;
 					sprite.texture = type.texture;
-
-					// sprite.tilePosition.x = -(
-					// 	tilePixelWidth * tile.x +
-					// 	config.grid.width * x
-					// );
-					// sprite.tilePosition.y = -(
-					// 	tilePixelWidth * tile.y +
-					// 	config.grid.width * y
-					// );
 				}
-				// if (!block.isBackgroundEmpty()) {
-				// 	backgroundTileSprite.tint = 0x444444;
-				// 	let btype = block.getBackgroundType();
-				// 	backgroundTileSprite.visible = true;
-				// 	backgroundTileSprite.texture = btype.texture;
-				// 	// backgroundTileSprite.tilePosition.x = -(
-				// 	// 	tilePixelWidth * tile.x +
-				// 	// 	config.grid.width * x
-				// 	// );
-				// 	// backgroundTileSprite.tilePosition.y = -(
-				// 	// 	tilePixelWidth * tile.y +
-				// 	// 	config.grid.width * y
-				// 	// );
-				// }
 			}
 		});
 		this.renderer.render(this.stage);
