@@ -199,6 +199,7 @@ export default class Engine {
 	kill = () => {
 		cancelAnimationFrame(this.updateId);
 		this.container.removeChild(this.canvas);
+		this.container.removeChild(this.pixicanvas);
 		this.container.removeChild(this.ui.container);
 		this.fpsmeter.destroy();
 		this.objects.forEach(o => {

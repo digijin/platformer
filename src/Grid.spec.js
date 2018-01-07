@@ -186,21 +186,6 @@ describe("Grid.spec.js", () => {
 			expect(block.isEmpty()).toBe(true);
 		});
 	});
-	describe("caching tile renderer", () => {
-		it("tiles in rect", () => {
-			let grid = new Grid({ w: 10, h: 10 });
-			config.grid.tile.width = 4;
-			config.grid.tile.height = 4;
-			let tiles = grid.tilesInRect(
-				new Rect({ t: -10, r: 10, b: 10, l: -10 })
-			);
-			expect(tiles.length).toBe(4);
-			expect(tiles[0].x).toBe(-1);
-			expect(tiles[0].y).toBe(-1);
-			expect(tiles[3].x).toBe(0);
-			expect(tiles[3].y).toBe(0);
-		});
-	});
 
 	describe("addRow", () => {
 		it("should add above", () => {

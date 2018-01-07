@@ -61,7 +61,7 @@ describe("functional.karma.js", () => {
 			);
 		});
 		it("should have a ui div", () => {
-			expect(container.childNodes[1].id).toBe("ui");
+			expect(container.childNodes[2].id).toBe("ui");
 		});
 	});
 	describe("wait out splash", () => {
