@@ -19,6 +19,9 @@ import Results from "Scene/Results";
 import Benchmark from "Scene/Benchmark";
 import Demo from "Scene/Demo";
 
+import * as PIXI from "pixi.js";
+PIXI.utils.skipHello();
+
 // FLOWHACK
 import "./style.styl";
 // import MainMenu from 'MainMenu/Menu';

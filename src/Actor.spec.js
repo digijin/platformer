@@ -3,7 +3,7 @@ import Point from "Utility/Point";
 import Grid from "Grid";
 import config from "config";
 
-if (jest) {
+if (window.jest) {
 	jest.mock("pixi.js");
 }
 
