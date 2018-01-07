@@ -57,15 +57,17 @@ export default class Grid extends GameObject {
 		this.spritePool.pool.forEach(spr => {
 			spr.visible = false;
 		});
-		this.getBlocksInRect(screenRect).forEach(block => {
+		this.getBlocksOverlappingRect(screenRect).forEach(block => {
 			let pos = {
-				x:
+				x: Math.floor(
 					block.position.x * config.grid.width -
-					this.engine.view.offset.x,
+						this.engine.view.offset.x
+				),
 
-				y:
+				y: Math.floor(
 					block.position.y * config.grid.width -
-					this.engine.view.offset.y
+						this.engine.view.offset.y
+				)
 			};
 
 			if (block) {
