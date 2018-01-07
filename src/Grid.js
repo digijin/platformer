@@ -11,6 +11,8 @@ import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
+import { BlockTypes } from "Grid/Block/Type";
+
 import * as PIXI from "pixi.js";
 
 import Decor from "Grid/Decor";
@@ -29,6 +31,7 @@ export default class Grid extends GameObject {
 
 	pixiInit() {
 		this.stage = new PIXI.Container();
+		this.stage.interactiveChildren = false;
 		this.renderer = PIXI.autoDetectRenderer(
 			window.innerWidth,
 			window.innerHeight,
@@ -72,6 +75,7 @@ export default class Grid extends GameObject {
 					let type = block.getType();
 					sprite.visible = true;
 					sprite.texture = type.texture;
+
 					// sprite.tilePosition.x = -(
 					// 	tilePixelWidth * tile.x +
 					// 	config.grid.width * x
@@ -294,6 +298,7 @@ export default class Grid extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 		engine.grid = this;
+		BlockTypes.forEach(bt => bt.init());
 		this.pixiInit();
 		// this.tileRenderer = new TileRenderer({ engine });
 	}

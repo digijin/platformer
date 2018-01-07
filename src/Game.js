@@ -33,6 +33,10 @@ export default class Game {
 	engine: Engine;
 	constructor(container: HTMLElement) {
 		window.game = this;
+		PIXI.loader.load(this.init);
+		// this.init();
+	}
+	init = () => {
 		// let engine:Engine = new Engine(container);
 		this.engine = new Engine();
 		//Engine.getInstance();
@@ -73,7 +77,7 @@ export default class Game {
 		// this.engine.startScene(new Level());
 
 		this.engine.update(); //starts
-	}
+	};
 	destroy() {
 		this.engine.kill();
 	}
