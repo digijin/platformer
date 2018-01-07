@@ -73,6 +73,13 @@ export default class Engine {
 		container.appendChild(canvas);
 		this.canvas = canvas;
 
+		let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
+		pixicanvas.id = "pixiCanvas";
+		pixicanvas.width = config.game.width;
+		pixicanvas.height = config.game.height;
+		container.appendChild(pixicanvas);
+		this.pixicanvas = pixicanvas;
+
 		let uiDiv: HTMLDivElement = document.createElement("div");
 		uiDiv.id = "ui";
 		container.appendChild(uiDiv);
@@ -91,6 +98,8 @@ export default class Engine {
 	resize = () => {
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
+		this.pixicanvas.width = window.innerWidth;
+		this.pixicanvas.height = window.innerHeight;
 		config.game.width = this.canvas.width;
 		config.game.height = this.canvas.height;
 	};
