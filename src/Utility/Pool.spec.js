@@ -1,19 +1,27 @@
 import Pool from "./Pool";
 
+class Thing {
+	name: string;
+	constructor() {
+		this.name = "thingy";
+	}
+}
+
 describe("Utility/Pool.spec.js", () => {
 	it("should take and return the same type", () => {
-		let pool = new Pool(String);
+		let pool = new Pool(Thing);
 		let str = pool.get();
-		expect(str).toBe("");
+		expect(str.name).toBe("thingy");
 	});
 	it("should return objects in right order afer reset", () => {
-		let pool = new Pool(String);
+		let pool = new Pool(Thing);
 		let str = pool.get();
-		str += "first";
+
+		str.name = "first";
 		str = pool.get();
-		str += "second";
+		str.name = "second";
 		pool.reset();
-		expect(pool.get()).toBe("first");
-		expect(pool.get()).toBe("second");
+		expect(pool.get().name).toBe("first");
+		expect(pool.get().name).toBe("second");
 	});
 });

@@ -18,7 +18,7 @@ export default class Pool {
 	}
 	get() {
 		if (this.index >= this.pool.length) {
-			let instance = new type();
+			let instance = new this.type();
 			this.pool.push(instance);
 		}
 		return this.pool[this.index++];
