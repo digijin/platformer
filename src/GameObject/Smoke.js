@@ -46,7 +46,7 @@ export default class Smoke extends GameObject {
 		let h = 20;
 		h *= this.time;
 		w *= this.time;
-		engine.ctx.drawSprite(smoke, this.position, { w, h }, this.rotation);
+		// engine.ctx.drawSprite(smoke, this.position, { w, h }, this.rotation);
 
 		if (this.time < 0) {
 			this.destroy();
