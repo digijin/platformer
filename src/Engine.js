@@ -81,6 +81,15 @@ export default class Engine {
 		container.appendChild(pixicanvas);
 		this.pixicanvas = pixicanvas;
 
+		this.renderer = PIXI.autoDetectRenderer(
+			window.innerWidth,
+			window.innerHeight,
+			{
+				view: this.pixicanvas,
+				transparent: true
+			}
+		);
+
 		let uiDiv: HTMLDivElement = document.createElement("div");
 		uiDiv.id = "ui";
 		container.appendChild(uiDiv);

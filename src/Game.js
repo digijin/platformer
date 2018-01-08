@@ -19,6 +19,9 @@ import Results from "Scene/Results";
 import Benchmark from "Scene/Benchmark";
 import Demo from "Scene/Demo";
 
+//textures
+import { BlockTypes } from "Grid/Block/Type";
+
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
 
@@ -32,12 +35,15 @@ export default class Game {
 	shells: Array<Object>;
 	engine: Engine;
 	constructor(container: HTMLElement) {
-		this.container = container
+		this.container = container;
 		window.game = this;
 		PIXI.loader.load(this.init);
 		// this.init();
 	}
 	init = () => {
+		//init textures that were just loaded
+		BlockTypes.forEach(bt => bt.init());
+
 		// let engine:Engine = new Engine(container);
 		this.engine = new Engine();
 		//Engine.getInstance();

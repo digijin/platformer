@@ -22,24 +22,37 @@ import Pool from "Utility/Pool";
 
 export default class Grid extends GameObject {
 	blocks: Array<Array<Block>>;
-
 	decor: Array<Decor>;
-
 	z: number;
-
 	spritePool: Pool;
+
+	constructor(size: { w: number, h: number } = { w: 10, h: 10 }) {
+		super();
+		this.tileCache = {};
+		this.height = size.h;
+		this.width = size.w;
+		this.decor = [];
+		this.z = -10;
+		//make empty grid
+		this.makeEmptyGrid(size);
+	}
+
+	init(engine: Engine) {
+		super.init(engine);
+		engine.grid = this;
+		this.pixiInit();
+	}
+
+	update = (engine: Engine) => {
+		let screenRect = this.engine.ctx.screenRect();
+		this.renderBlocksPixi(screenRect);
+		this.renderDecor();
+		// this.renderDebugBlockPixelLine();
+	};
 
 	pixiInit() {
 		this.stage = new PIXI.Container();
 		this.stage.interactiveChildren = false;
-		this.renderer = PIXI.autoDetectRenderer(
-			window.innerWidth,
-			window.innerHeight,
-			{
-				view: this.engine.pixicanvas,
-				transparent: true
-			}
-		);
 		this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
 		this.spritePool.onCreate = spr => {
 			this.stage.addChild(spr);
@@ -51,6 +64,7 @@ export default class Grid extends GameObject {
 			this.stage.removeChild(spr);
 		};
 	}
+	exit() {}
 	renderBlocksPixi(screenRect) {
 		// screenRect = new Rect({ t: 0, r: 200, b: 200, l: 0 });
 		this.spritePool.reset();
@@ -91,7 +105,7 @@ export default class Grid extends GameObject {
 				}
 			}
 		});
-		this.renderer.render(this.stage);
+		this.engine.renderer.render(this.stage);
 	}
 
 	highlightBlock(block: Block) {
@@ -161,17 +175,6 @@ export default class Grid extends GameObject {
 		return this;
 	}
 
-	constructor(size: { w: number, h: number } = { w: 10, h: 10 }) {
-		super();
-		this.tileCache = {};
-		this.height = size.h;
-		this.width = size.w;
-		this.decor = [];
-		this.z = -10;
-		//make empty grid
-		this.makeEmptyGrid(size);
-		//new Block({ position: { x, y }, type: "0" })
-	}
 	makeEmptyGrid(size) {
 		this.blocks = Array(size.w)
 			.fill(0)
@@ -284,20 +287,6 @@ export default class Grid extends GameObject {
 		});
 	}
 
-	// tileRenderer: TileRenderer;
-	init(engine: Engine) {
-		super.init(engine);
-		engine.grid = this;
-		BlockTypes.forEach(bt => bt.init());
-		this.pixiInit();
-		// this.tileRenderer = new TileRenderer({ engine });
-	}
-	update = (engine: Engine) => {
-		let screenRect = this.engine.ctx.screenRect();
-		this.renderBlocksPixi(screenRect);
-		this.renderDecor();
-		// this.renderDebugBlockPixelLine();
-	};
 	tileCache: {};
 	renderDebugBlockPixelLine() {
 		let line = new Line({
