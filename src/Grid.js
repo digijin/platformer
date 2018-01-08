@@ -340,36 +340,6 @@ export default class Grid extends GameObject {
 		);
 	}
 
-	renderDecor() {
-		this.engine.ctx.context.save();
-		this.decor.forEach((decor: Decor) => {
-			let type = decor.getType();
-			this.engine.ctx.context.fillStyle = type.pattern;
-
-			if (type.mode) {
-				this.engine.ctx.context.globalCompositeOperation = type.mode;
-			} else {
-				this.engine.ctx.context.globalCompositeOperation =
-					"source-over";
-			}
-			// this.engine.ctx.context.strokeStyle = "grey";
-			//"#ff0000";
-			this.engine.ctx.fillRectRelative(
-				decor.position.x * config.grid.width,
-				decor.position.y * config.grid.width,
-				config.grid.width * type.width,
-				config.grid.width * type.height
-			);
-			// this.engine.ctx.strokeRect(
-			// 	decor.position.x * config.grid.width,
-			// 	decor.position.y * config.grid.width,
-			// 	config.grid.width * type.width,
-			// 	config.grid.width * type.height
-			// );
-		});
-		this.engine.ctx.context.restore();
-	}
-
 	bustCache(block: Block) {
 		// do nothing
 		//this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
