@@ -133,13 +133,7 @@ export default class Grid extends GameObject {
 
 	initDecor() {
 		this.decor.forEach(decor => {
-			console.log("adding decor");
-			let type = decor.getType();
-			let sprite = new PIXI.Sprite(type.texture);
-			sprite.position.x = decor.position.x * config.grid.width;
-			sprite.position.y = decor.position.y * config.grid.width;
-			this.decorStage.addChild(sprite);
-			decor.sprite = sprite; //store for deletion later
+			this.addDecorSprite(decor);
 		});
 	}
 
@@ -148,13 +142,21 @@ export default class Grid extends GameObject {
 		if (decor) {
 			this.removeDecor(position);
 		}
-		this.decor.push(
-			new Decor({
-				position,
-				type,
-				grid: this
-			})
-		);
+		decor = new Decor({
+			position,
+			type,
+			grid: this
+		});
+		this.decor.push(decor);
+		this.addDecorSprite(decor);
+	}
+	addDecorSprite(decor) {
+		let type = decor.getType();
+		let sprite = new PIXI.Sprite(type.texture);
+		sprite.position.x = decor.position.x * config.grid.width;
+		sprite.position.y = decor.position.y * config.grid.width;
+		this.decorStage.addChild(sprite);
+		decor.sprite = sprite; //store for deletion later
 	}
 	getDecor(position: Point) {
 		return this.decor.find(d => {
@@ -163,8 +165,15 @@ export default class Grid extends GameObject {
 	}
 	removeDecor(position: Point) {
 		this.decor = this.decor.filter(d => {
-			return !d.position.is(position);
+			let isDecor = d.position.is(position);
+			if (isDecor) {
+				this.removeDecorSprite(d);
+			}
+			return !isDecor;
 		});
+	}
+	removeDecorSprite(decor) {
+		this.decorStage.removeChild(decor.sprite);
 	}
 
 	generate(seed: number) {
@@ -398,12 +407,13 @@ export default class Grid extends GameObject {
 		this.tileCache = {};
 		let data = JSON.parse(str);
 		if (data.decor) {
-			this.decor = data.decor.map(decor => {
-				return new Decor({
-					position: new Point(decor.p),
-					type: decor.t,
-					grid: this
-				});
+			data.decor.forEach(decor => {
+				// return new Decor({
+				// 	position: new Point(decor.p),
+				// 	type: decor.t,
+				// 	grid: this
+				// });
+				this.addDecor(new Point(decor.p), decor.t);
 			});
 		}
 		this.blocks = data.blocks.map((d, x) => {
@@ -431,7 +441,7 @@ export default class Grid extends GameObject {
 			});
 		}
 
-		this.initDecor();
+		// this.initDecor();
 	}
 	addRowAbove() {
 		this.height++;
