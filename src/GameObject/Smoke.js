@@ -20,6 +20,7 @@ export default class Smoke extends GameObject {
 	init(engine) {
 		super.init(engine);
 		this.texture = new PIXI.Texture(new PIXI.BaseTexture(smoke));
+		// this.texture = PIXI.Texture.WHITE;
 		this.sprite = new PIXI.Sprite(this.texture);
 		this.sprite.anchor = { x: 0.5, y: 0.5 };
 		this.engine.stage.addChild(this.sprite);
@@ -29,8 +30,7 @@ export default class Smoke extends GameObject {
 		// this.sprite.rotation = this.rotation;
 		this.sprite.position.x = this.position.x - this.engine.view.offset.x;
 		this.sprite.position.y = this.position.y - this.engine.view.offset.y;
-		this.sprite.width = this.sprite.height =
-			this.size * Math.cos((1 - this.time) * Math.PI / 2);
+		this.sprite.width = this.sprite.height = this.time * 20;
 	}
 	destroy() {
 		this.engine.stage.removeChild(this.sprite);
@@ -38,6 +38,7 @@ export default class Smoke extends GameObject {
 	}
 
 	update = (engine: Engine) => {
+		this.positionSprite();
 		this.time -= engine.deltaTime;
 
 		// ctx.fillRect(this.position.x, this.position.y, 4, 4);

@@ -71,7 +71,7 @@ export default class Missile extends Projectile {
 		this.checkActors();
 
 		//smoke trail
-		// this.engine.register(new Smoke({ position: this.position.clone() }));
+		this.engine.register(new Smoke({ position: this.position.clone() }));
 
 		//aim at target
 		if (this.guided) {

@@ -23,7 +23,7 @@ export default class TrailRenderer extends GameObject {
 	}
 
 	update() {
-		this.engine.register(new Smoke({ position: this.position }));
+		// this.engine.register(new Smoke({ position: this.position }));
 		if (this.target) {
 			this.calcPosition();
 			this.history.unshift(this.position);
