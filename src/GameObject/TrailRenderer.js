@@ -4,6 +4,8 @@ import Point from "Utility/Point";
 import GameObject from "GameObject";
 import RGBA from "Utility/RGBA";
 
+import Smoke from "GameObject/Smoke";
+
 export default class TrailRenderer extends GameObject {
 	position: Point;
 	history: Array<Point>;
@@ -21,6 +23,7 @@ export default class TrailRenderer extends GameObject {
 	}
 
 	update() {
+		this.engine.register(new Smoke({ position: this.position }));
 		if (this.target) {
 			this.calcPosition();
 			this.history.unshift(this.position);

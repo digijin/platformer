@@ -25,10 +25,6 @@ export default class Smoke extends GameObject {
 		let h = 20;
 		h *= this.time;
 		w *= this.time;
-		// ctx.translate(this.position.x, this.position.y);
-		// ctx.rotate(this.rotation)
-		// ctx.drawImage(smoke, 0, 0, smoke.width, smoke.height, -w/2, -h/2, w, h);
-		// ctx.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
 		engine.ctx.drawSprite(smoke, this.position, { w, h }, this.rotation);
 
 		if (this.time < 0) {
