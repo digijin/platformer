@@ -41,31 +41,38 @@ export default class Grid extends GameObject {
 		super.init(engine);
 		engine.grid = this;
 		this.pixiInit();
-		this.engine.stage.addChild(this.stage);
+
+		this.engine.stage.addChild(this.blockStage);
+		this.engine.stage.addChild(this.decorStage);
 	}
 	exit() {
-		this.engine.stage.removeChild(this.stage);
+		this.engine.stage.removeChild(this.blockStage);
+		this.engine.stage.removeChild(this.decorStage);
 	}
 
 	update = (engine: Engine) => {
 		let screenRect = this.engine.ctx.screenRect();
 		this.renderBlocksPixi(screenRect);
-		this.renderDecor();
+		// this.renderDecor();
+		this.decorStage.position.x = -this.engine.view.offset.x;
+		this.decorStage.position.y = -this.engine.view.offset.y;
 		// this.renderDebugBlockPixelLine();
 	};
 
 	pixiInit() {
-		this.stage = new PIXI.Container();
-		this.stage.interactiveChildren = false;
+		this.blockStage = new PIXI.Container();
+		this.blockStage.interactiveChildren = false;
+		this.decorStage = new PIXI.Container();
+		this.decorStage.interactiveChildren = false;
 		this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
 		this.spritePool.onCreate = spr => {
-			this.stage.addChild(spr);
+			this.blockStage.addChild(spr);
 
 			spr.width = config.grid.width;
 			spr.height = config.grid.width;
 		};
 		this.spritePool.onRemove = spr => {
-			this.stage.removeChild(spr);
+			this.blockStage.removeChild(spr);
 		};
 	}
 	renderBlocksPixi(screenRect) {
@@ -122,6 +129,18 @@ export default class Grid extends GameObject {
 				rect.b - rect.t
 			);
 		}
+	}
+
+	initDecor() {
+		this.decor.forEach(decor => {
+			console.log("adding decor");
+			let type = decor.getType();
+			let sprite = new PIXI.Sprite(type.texture);
+			sprite.position.x = decor.position.x * config.grid.width;
+			sprite.position.y = decor.position.y * config.grid.width;
+			this.decorStage.addChild(sprite);
+			decor.sprite = sprite; //store for deletion later
+		});
 	}
 
 	addDecor(position: Point, type: string) {
@@ -411,6 +430,8 @@ export default class Grid extends GameObject {
 				);
 			});
 		}
+
+		this.initDecor();
 	}
 	addRowAbove() {
 		this.height++;
