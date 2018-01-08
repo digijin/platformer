@@ -41,6 +41,10 @@ export default class Grid extends GameObject {
 		super.init(engine);
 		engine.grid = this;
 		this.pixiInit();
+		this.engine.stage.addChild(this.stage);
+	}
+	exit() {
+		this.engine.stage.removeChild(this.stage);
 	}
 
 	update = (engine: Engine) => {
@@ -64,7 +68,6 @@ export default class Grid extends GameObject {
 			this.stage.removeChild(spr);
 		};
 	}
-	exit() {}
 	renderBlocksPixi(screenRect) {
 		// screenRect = new Rect({ t: 0, r: 200, b: 200, l: 0 });
 		this.spritePool.reset();
@@ -105,7 +108,7 @@ export default class Grid extends GameObject {
 				}
 			}
 		});
-		this.engine.renderer.render(this.stage);
+		// this.engine.renderer.render(this.stage);
 	}
 
 	highlightBlock(block: Block) {

@@ -81,6 +81,7 @@ export default class Engine {
 		container.appendChild(pixicanvas);
 		this.pixicanvas = pixicanvas;
 
+		this.stage = new PIXI.Container();
 		this.renderer = PIXI.autoDetectRenderer(
 			window.innerWidth,
 			window.innerHeight,
@@ -199,6 +200,7 @@ export default class Engine {
 		}
 
 		// this.objects = this.objects.filter(o => o);
+		this.renderer.render(this.stage);
 
 		//wait for next frame
 		this.updateId = requestAnimationFrame(this.update);
