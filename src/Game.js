@@ -32,6 +32,7 @@ export default class Game {
 	shells: Array<Object>;
 	engine: Engine;
 	constructor(container: HTMLElement) {
+		this.container = container
 		window.game = this;
 		PIXI.loader.load(this.init);
 		// this.init();
@@ -40,7 +41,7 @@ export default class Game {
 		// let engine:Engine = new Engine(container);
 		this.engine = new Engine();
 		//Engine.getInstance();
-		this.engine.init(container);
+		this.engine.init(this.container);
 
 		let query = window.location.href.substr(
 			window.location.href.indexOf("?") + 1
