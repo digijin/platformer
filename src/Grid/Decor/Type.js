@@ -6,6 +6,14 @@
 
 // import windowDecor from "Grid/window.png";
 
+import * as PIXI from "pixi.js";
+PIXI.utils.skipHello();
+
+require("./decorsprites.json");
+require("./decorsprites.png");
+
+PIXI.loader.add("decor", "decorsprites.json");
+
 export type DecorTypeParams = {
 	// hp: name,
 	name: string,
@@ -25,6 +33,7 @@ export default class DecorType {
 	height: number;
 	width: number;
 	hp: number;
+	textureId: string;
 	pattern: CanvasPattern;
 	category: string;
 	constructor(params: DecorTypeParams) {
@@ -38,6 +47,9 @@ export default class DecorType {
 		this.mode = params.mode;
 		this.obstacle = params.obstacle;
 		this.category = params.category;
+		this.textureId = params.textureId;
+
+		this.texture = PIXI.Texture.WHITE;
 
 		this.image.onload = () => {
 			let context = document.createElement("canvas").getContext("2d");
@@ -46,6 +58,12 @@ export default class DecorType {
 				// console.log("made pattern", context, this.pattern);
 			}
 		};
+	}
+	init() {
+		if (PIXI.loader.resources["decor"].textures) {
+			this.texture =
+				PIXI.loader.resources["decor"].textures[this.textureId];
+		}
 	}
 }
 
@@ -56,6 +74,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 1,
 		height: 3,
 		image: require("./door1x3.png"),
+		textureId: "door1x3.png",
 		destructable: true,
 		obstacle: true,
 		category: "general",
@@ -67,6 +86,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./window.png"),
+		textureId: "window.png",
 		destructable: false,
 		obstacle: false,
 		category: "general",
@@ -78,6 +98,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 1,
 		height: 3,
 		image: require("./cabinet1x3.png"),
+		textureId: "cabinet1x3.png",
 		destructable: false,
 		obstacle: false,
 		category: "office",
@@ -89,6 +110,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 3,
 		height: 3,
 		image: require("./copier3x3.png"),
+		textureId: "copier3x3.png",
 		destructable: false,
 		obstacle: false,
 		category: "office",
@@ -100,6 +122,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 3,
 		height: 3,
 		image: require("./desk4x3.png"),
+		textureId: "desk4x3.png",
 		destructable: false,
 		obstacle: false,
 		category: "office",
@@ -111,6 +134,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 1,
 		height: 3,
 		image: require("./plant1x3.png"),
+		textureId: "plant1x3.png",
 		destructable: false,
 		obstacle: false,
 		category: "office",
@@ -122,6 +146,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 1,
 		height: 4,
 		image: require("./waterfountain1x4.png"),
+		textureId: "waterfountain1x4.png",
 		destructable: false,
 		obstacle: false,
 		category: "office",
@@ -133,6 +158,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 3,
 		height: 2,
 		image: require("./light3x2.png"),
+		textureId: "light3x2.png",
 		destructable: false,
 		obstacle: false,
 		category: "light",
@@ -145,6 +171,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 4,
 		height: 2,
 		image: require("./fuelsign2x4.png"),
+		textureId: "fuelsign2x4.png",
 		destructable: false,
 		obstacle: false,
 		category: "servo",
@@ -156,6 +183,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 4,
 		image: require("./petrolbowser2x4.png"),
+		textureId: "petrolbowser2x4.png",
 		destructable: false,
 		obstacle: false,
 		category: "servo",
@@ -167,6 +195,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./poster/poster1.png"),
+		textureId: "poster/poster1.png",
 		destructable: false,
 		obstacle: false,
 		category: "poster",
@@ -178,6 +207,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./poster/poster2.png"),
+		textureId: "poster/poster2.png",
 		destructable: false,
 		obstacle: false,
 		category: "poster",
@@ -189,6 +219,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./poster/poster3.png"),
+		textureId: "poster/poster3.png",
 		destructable: false,
 		obstacle: false,
 		category: "poster",
@@ -200,6 +231,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./poster/poster4.png"),
+		textureId: "poster/poster4.png",
 		destructable: false,
 		obstacle: false,
 		category: "poster",
@@ -211,6 +243,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 2,
 		height: 3,
 		image: require("./poster/poster5.png"),
+		textureId: "poster/poster5.png",
 		destructable: false,
 		obstacle: false,
 		category: "poster",
@@ -222,6 +255,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		width: 5,
 		height: 3,
 		image: require("./dumpster.png"),
+		textureId: "dumpster.png",
 		destructable: false,
 		obstacle: false,
 		category: "general",

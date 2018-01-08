@@ -21,6 +21,7 @@ import Demo from "Scene/Demo";
 
 //textures
 import { BlockTypes } from "Grid/Block/Type";
+import { DecorTypes } from "Grid/Decor/Type";
 
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
@@ -42,7 +43,8 @@ export default class Game {
 	}
 	init = () => {
 		//init textures that were just loaded
-		BlockTypes.forEach(bt => bt.init());
+		BlockTypes.forEach(t => t.init());
+		DecorTypes.forEach(t => t.init());
 
 		// let engine:Engine = new Engine(container);
 		this.engine = new Engine();
