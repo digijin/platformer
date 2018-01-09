@@ -19,15 +19,14 @@ import Projectile from "GameObject/Projectile";
 import TrailRenderer from "GameObject/TrailRenderer";
 
 export default class Missile extends Projectile {
-	speed: number;
-	z: number;
 	guided: boolean;
 	remoteControl: boolean;
-	position: Point;
 	// trailRenderer: TrailRenderer;
 
 	constructor(params: Object) {
 		super(params);
+		// this.speed = 1;
+		this.guided = true;
 		this.tag("missile");
 		this.maxhp = this.hp = 1000;
 	}

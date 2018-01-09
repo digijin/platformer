@@ -7,7 +7,10 @@ import type Block from "Grid/Block";
 import Line from "Utility/Line";
 import GameObject from "GameObject";
 import Explosion from "GameObject/Explosion";
-export default class Bullet extends GameObject {
+
+import Projectile from "GameObject/Projectile";
+
+export default class Bullet extends Projectile {
 	// x: number; //position
 	// y: number; //position
 	position: Point;
@@ -16,6 +19,7 @@ export default class Bullet extends GameObject {
 	time: number;
 	owner: Actor;
 	speed: number;
+	trajectory: Line;
 	constructor(params: {
 		position: Point,
 		h: number,
@@ -51,63 +55,22 @@ export default class Bullet extends GameObject {
 		}
 	}
 
-	update = (engine: Engine) => {
-		this.time -= engine.deltaTime;
+	update = () => {
+		this.time -= this.engine.deltaTime;
 
 		let old = this.position.clone();
-		this.position.x += this.h * engine.deltaTime * this.speed;
-		this.position.y += this.v * engine.deltaTime * this.speed;
-		let trajectory = new Line({ a: old, b: this.position });
+		this.move();
 
-		// this.engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
 		//CHECK TIME
 		if (this.time < 0) {
 			this.destroy();
 		}
 		//check decor
-		let missDecor = this.engine.grid.decor.every(d => {
-			if (d.getType().obstacle == false) {
-				return true;
-			}
-			let hitTest = trajectory.intersectsRect(d.rect);
-			if (hitTest.result) {
-				this.position.x = hitTest.collision.x;
-				this.position.y = hitTest.collision.y;
-				d.damage(1);
-				return false;
-			} else {
-				return true;
-			}
-		});
-		if (!missDecor) {
-			this.explode();
-		}
+		this.checkDecor();
 
 		//CHECK GRID
-		let blocks = trajectory.blockPixels();
-		let empty = blocks.every(b => {
-			let block = this.engine.grid.getBlock(b);
-			if (!block) {
-				return false;
-			}
-			if (block.isEmpty()) {
-				return true;
-			} else {
-				let hitTest = trajectory.intersectsRect(block.rect);
-				if (hitTest.result) {
-					this.position.x = hitTest.collision.x;
-					this.position.y = hitTest.collision.y;
-					block.damage(1);
-					return false;
-				}
-			}
-		});
-		if (!empty) {
-			this.explode();
-		}
+		this.checkGrid();
 
-		// this.engine.ctx.context.filter =
-		// 	"filter: drop-shadow(0px 0px 2px white);";
 		this.engine.ctx.context.save();
 		this.engine.ctx.context.shadowColor = "red";
 		this.engine.ctx.context.shadowBlur = 30;
@@ -117,28 +80,7 @@ export default class Bullet extends GameObject {
 			// this.position.add({ x: this.h, y: this.v })
 		);
 		this.engine.ctx.context.restore();
-		// let block = this.engine.grid.blockAtPosition({
-		// 	x: this.position.x,
-		// 	y: this.position.y
-		// });
-		// if (
-		// 	this.engine.grid.isPositionBlocked({
-		// 		x: this.position.x,
-		// 		y: this.position.y
-		// 	})
-		// ) {
-		// 	this.explode();
-		// }
 		//CHECK ENEMIES
-		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
-			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
-				if (a.getBoundingRect().contains(this.position)) {
-					this.explode();
-					// this.destroy();
-					a.damage(2);
-				}
-			}
-		});
+		this.checkEnemy();
 	};
 }
