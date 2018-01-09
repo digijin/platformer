@@ -13,7 +13,7 @@ let transitionMock = () => {
 	return new TransitionBase();
 };
 
-describe("Game/Engine", () => {
+describe("Game/Engine.spec.js", () => {
 	let engine;
 	beforeEach(() => {
 		engine = new Engine();

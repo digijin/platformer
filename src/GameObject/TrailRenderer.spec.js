@@ -4,7 +4,7 @@ import Point from "Utility/Point";
 
 import Engine from "Engine";
 
-describe("TrailRenderer", () => {
+xdescribe("TrailRenderer", () => {
 	let target, trailRenderer, engine;
 	beforeEach(() => {
 		engine = Engine.mock();

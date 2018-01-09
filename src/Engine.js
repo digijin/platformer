@@ -19,6 +19,8 @@ import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
+import PIXI from "pixi.js";
+
 import Fpsmeter from "fpsmeter";
 let instance;
 export default class Engine {
