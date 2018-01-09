@@ -59,11 +59,15 @@ export default class Missile extends Projectile {
 			);
 		}
 	}
-	update = () => {
+	move() {
+		//override
 		let old = this.position.clone();
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
-		let trajectory = new Line({ a: old, b: this.position });
+		this.trajectory = new Line({ a: old, b: this.position });
+	}
+	update = () => {
+		this.move();
 
 		this.remoteControl = false;
 
@@ -75,7 +79,9 @@ export default class Missile extends Projectile {
 
 		//smoke trail
 		this.engine.register(new Smoke({ position: this.position.clone() }));
-		this.engine.register(new Smoke({ position: trajectory.percent(0.5) }));
+		this.engine.register(
+			new Smoke({ position: this.trajectory.percent(0.5) })
+		);
 
 		//aim at target
 		if (this.guided) {
