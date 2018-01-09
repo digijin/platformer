@@ -6,6 +6,7 @@ import type Engine from "Engine";
 import smoke from "assets/smoke.png";
 
 import GameObject from "GameObject";
+import RGBA from "Utility/RGBA";
 
 export default class Smoke extends GameObject {
 	position: Point;
@@ -24,13 +25,25 @@ export default class Smoke extends GameObject {
 		this.sprite = new PIXI.Sprite(this.texture);
 		this.sprite.anchor = { x: 0.5, y: 0.5 };
 		this.engine.stage.addChild(this.sprite);
+
+		this.h = Math.random() - 0.5;
+		this.v = Math.random() - 0.5;
 		this.positionSprite();
 	}
 	positionSprite() {
-		// this.sprite.rotation = this.rotation;
+		this.position.x += this.engine.deltaTime * this.h;
+		this.position.y += this.engine.deltaTime * this.v;
+		this.sprite.rotation = this.rotation;
 		this.sprite.position.x = this.position.x - this.engine.view.offset.x;
 		this.sprite.position.y = this.position.y - this.engine.view.offset.y;
-		this.sprite.width = this.sprite.height = this.time * 20;
+		this.sprite.width = this.sprite.height = 10 + this.time * 10;
+		this.sprite.alpha = this.time;
+		this.sprite.tint = new RGBA({
+			r: 1,
+			g: 1,
+			b: 1 - this.time,
+			a: 1
+		}).toNumber();
 	}
 	destroy() {
 		this.engine.stage.removeChild(this.sprite);

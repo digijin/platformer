@@ -7,6 +7,8 @@ import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import type Actor from "Actor";
 
+import Line from "Utility/Line";
+
 import config from "config";
 
 import type Engine from "Engine";
@@ -22,7 +24,7 @@ export default class Missile extends Projectile {
 	guided: boolean;
 	remoteControl: boolean;
 	position: Point;
-	trailRenderer: TrailRenderer;
+	// trailRenderer: TrailRenderer;
 
 	constructor(params: Object) {
 		super(params);
@@ -31,17 +33,17 @@ export default class Missile extends Projectile {
 	}
 	init(engine: Engine) {
 		super.init(engine);
-		this.trailRenderer = new TrailRenderer({
-			target: this,
-			offset: new Point(),
-			length: 30
-		});
-		this.engine.register(this.trailRenderer);
+		// this.trailRenderer = new TrailRenderer({
+		// 	target: this,
+		// 	offset: new Point(),
+		// 	length: 30
+		// });
+		// this.engine.register(this.trailRenderer);
 	}
 	explode() {
 		// this.destroy();
 		super.explode();
-		this.trailRenderer.die();
+		// this.trailRenderer.die();
 
 		for (let i = 0; i < 10; i++) {
 			//we want red outlines to be on the outside
@@ -59,8 +61,10 @@ export default class Missile extends Projectile {
 		}
 	}
 	update = () => {
+		let old = this.position.clone();
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
+		let trajectory = new Line({ a: old, b: this.position });
 
 		this.remoteControl = false;
 
@@ -72,6 +76,7 @@ export default class Missile extends Projectile {
 
 		//smoke trail
 		this.engine.register(new Smoke({ position: this.position.clone() }));
+		this.engine.register(new Smoke({ position: trajectory.percent(0.5) }));
 
 		//aim at target
 		if (this.guided) {

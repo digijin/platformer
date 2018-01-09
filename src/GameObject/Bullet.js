@@ -57,7 +57,6 @@ export default class Bullet extends GameObject {
 		let old = this.position.clone();
 		this.position.x += this.h * engine.deltaTime * this.speed;
 		this.position.y += this.v * engine.deltaTime * this.speed;
-
 		let trajectory = new Line({ a: old, b: this.position });
 
 		// this.engine.ctx.fillRect(this.position.x, this.position.y, 4, 4);
