@@ -81,6 +81,15 @@ export default class Bullet extends Projectile {
 		);
 		this.engine.ctx.context.restore();
 		//CHECK ENEMIES
-		this.checkEnemy();
+		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
+			if (o !== this.owner) {
+				let a: Actor = ((o: any): Actor); //RECAST
+				if (a.getBoundingRect().contains(this.position)) {
+					this.explode();
+					// this.destroy();
+					a.damage(2);
+				}
+			}
+		});
 	};
 }
