@@ -151,12 +151,14 @@ export default class Grid extends GameObject {
 		this.addDecorSprite(decor);
 	}
 	addDecorSprite(decor) {
-		let type = decor.getType();
-		let sprite = new PIXI.Sprite(type.texture);
-		sprite.position.x = decor.position.x * config.grid.width;
-		sprite.position.y = decor.position.y * config.grid.width;
-		this.decorStage.addChild(sprite);
-		decor.sprite = sprite; //store for deletion later
+		if (this.decorStage) {
+			let type = decor.getType();
+			let sprite = new PIXI.Sprite(type.texture);
+			sprite.position.x = decor.position.x * config.grid.width;
+			sprite.position.y = decor.position.y * config.grid.width;
+			this.decorStage.addChild(sprite);
+			decor.sprite = sprite; //store for deletion later
+		}
 	}
 	getDecor(position: Point) {
 		return this.decor.find(d => {
@@ -173,7 +175,9 @@ export default class Grid extends GameObject {
 		});
 	}
 	removeDecorSprite(decor) {
-		this.decorStage.removeChild(decor.sprite);
+		if (this.decorStage) {
+			this.decorStage.removeChild(decor.sprite);
+		}
 	}
 
 	generate(seed: number) {
