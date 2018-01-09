@@ -16,17 +16,6 @@ export default class RGBA {
 				throw new Error("RGBA expects values to be 0<=value<=1");
 			}
 		});
-		// if (params.r < 0 || params.r > 1) {
-		// }
-		// if (params.g < 0 || params.g > 1) {
-		// 	throw new Error("RGBA expects values to be 0<=value<=1");
-		// }
-		// if (params.b < 0 || params.b > 1) {
-		// 	throw new Error("RGBA expects values to be 0<=value<=1");
-		// }
-		// if (params.a < 0 || params.a > 1) {
-		// 	throw new Error("RGBA expects values to be 0<=value<=1");
-		// }
 		Object.assign(this, params);
 	}
 	toString() {
@@ -40,6 +29,13 @@ export default class RGBA {
 			"," +
 			this.a +
 			")"
+		);
+	}
+	toNumber() {
+		return (
+			(Math.floor(this.r * 255) << 16) +
+			(Math.floor(this.g * 255) << 8) +
+			Math.floor(this.b * 255)
 		);
 	}
 	static fromStops(stops: Array<rgbaParams>, pc: number) {

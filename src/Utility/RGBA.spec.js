@@ -12,6 +12,10 @@ describe("Utility/RGBA", () => {
 		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
 		expect(rgba.toString()).toBe("rgba(26,51,77,0.4)");
 	});
+	it("should toNumber", () => {
+		let rgba = new RGBA({ r: 0, g: 1, b: 0, a: 1 });
+		expect(rgba.toNumber()).toBe(0x00ff00);
+	});
 	it("should throw if anything not between 0 and 1", () => {
 		expect(() => {
 			new RGBA({ r: 2, g: 0, b: 0, a: 0 });
