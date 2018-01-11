@@ -10,6 +10,8 @@ addons:
   chrome: stable
 script:
 - yarn build
+- apt-get install imagemagick
+- node genSpriteSheets
 - yarn test
 - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
 - yarn karma:ci
