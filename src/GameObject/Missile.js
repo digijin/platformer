@@ -3,6 +3,7 @@
 import missile from "assets/missile.png";
 import Smoke from "GameObject/Smoke";
 import Explosion from "GameObject/Explosion";
+import ExplosionAnimation from "GameObject/ExplosionAnimation";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import type Actor from "Actor";
@@ -44,20 +45,28 @@ export default class Missile extends Projectile {
 		super.explode();
 		// this.trailRenderer.die();
 
-		for (let i = 0; i < 10; i++) {
-			//we want red outlines to be on the outside
-			//pick a direction
-			let dir = Math.random() * Math.PI * 2;
-			let dist = Math.random() * 20;
-			let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
-			this.engine.register(
-				new Explosion({
-					position: this.position.add(offset),
-					rotation: dir,
-					delay: Math.random() / 8
-				})
-			);
-		}
+		this.engine.register(
+			new ExplosionAnimation({
+				position: this.position,
+				rotation: 0,
+				delay: 0
+			})
+		);
+
+		// for (let i = 0; i < 10; i++) {
+		// 	//we want red outlines to be on the outside
+		// 	//pick a direction
+		// 	let dir = Math.random() * Math.PI * 2;
+		// 	let dist = Math.random() * 20;
+		// 	let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
+		// 	this.engine.register(
+		// 		new Explosion({
+		// 			position: this.position.add(offset),
+		// 			rotation: dir,
+		// 			delay: Math.random() / 8
+		// 		})
+		// 	);
+		// }
 	}
 	move() {
 		//override

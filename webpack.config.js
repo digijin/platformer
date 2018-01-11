@@ -17,6 +17,9 @@ module.exports = [
 		resolve: {
 			modules: ["node_modules", path.resolve(__dirname, "src")]
 		},
+		devServer: {
+			contentBase: path.resolve("dist")
+		},
 		devtool: "inline-source-map",
 		target: "web",
 		module: {
