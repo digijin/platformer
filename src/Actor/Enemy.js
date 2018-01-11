@@ -101,7 +101,7 @@ export default class Enemy extends Actor {
 
 	render() {
 		this.engine.ctx.drawSprite(
-			mech,
+			this.type.image,
 			this.position,
 			this.size,
 			0,

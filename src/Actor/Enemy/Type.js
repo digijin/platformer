@@ -1,5 +1,7 @@
 //@flow
 import config from "config";
+import mech from "assets/mech.png";
+import heli from "assets/heli.png";
 
 export type EnemyTypeParams = {
 	// hp: name,
@@ -22,6 +24,7 @@ export default class EnemyType {
 	registration: { x: number, y: number };
 	idle: string;
 	agro: string;
+	image: any;
 
 	constructor(params: EnemyTypeParams) {
 		Object.assign(this, params);
@@ -38,7 +41,8 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		size: { w: 50, h: 50 },
 		registration: { x: 0.5, y: 1 },
 		idle: "rabbit",
-		agro: "agro"
+		agro: "agro",
+		image: mech
 	},
 	{
 		id: "2",
@@ -49,7 +53,8 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		size: { w: 20, h: 20 },
 		registration: { x: 0.5, y: 1 },
 		idle: "bounce",
-		agro: "agro"
+		agro: "agro",
+		image: mech
 	},
 	{
 		id: "3",
@@ -60,7 +65,20 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		size: { w: 60, h: 60 },
 		registration: { x: 0.5, y: 1 },
 		idle: "patrol",
-		agro: "agro"
+		agro: "agro",
+		image: mech
+	},
+	{
+		id: "4",
+		name: "heli",
+		walkSpeed: 50,
+		jumpSpeed: 100,
+		hp: 100,
+		size: { w: 60, h: 60 },
+		registration: { x: 0.5, y: 1 },
+		idle: "patrol",
+		agro: "agro",
+		image: heli
 	}
 ];
 
