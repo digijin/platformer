@@ -10,10 +10,10 @@ import Actor from "Actor";
 import config from "config";
 import type Player from "Actor/Player";
 
-import bounce from "AI/bounce";
-import patrol from "AI/patrol";
-import rabbit from "AI/rabbit";
-import agro from "AI/agro";
+import bounce from "AI/idle/bounce";
+import patrol from "AI/idle/patrol";
+import rabbit from "AI/idle/rabbit";
+import agro from "AI/agro/agro";
 import type EnemyType from "Actor/Enemy/Type";
 
 export default class Enemy extends Actor {
@@ -48,7 +48,7 @@ export default class Enemy extends Actor {
 	update(engine: Engine) {
 		let player = this.engine.objectsTagged("player").pop();
 		if (!player) {
-			this.gravity();
+			// this.gravity();
 			this.render();
 			return;
 		} //do not movefor edit mode

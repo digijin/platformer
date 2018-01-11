@@ -1,6 +1,6 @@
 //@flow
 
-import jump from "./jump";
+import jump from "../actions/jump";
 
 import type Enemy from "Actor/Enemy";
 import type Engine from "Engine";

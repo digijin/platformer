@@ -74,7 +74,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		walkSpeed: 50,
 		jumpSpeed: 100,
 		hp: 100,
-		size: { w: 60, h: 60 },
+		size: { w: 124, h: 36 },
 		registration: { x: 0.5, y: 1 },
 		idle: "patrol",
 		agro: "agro",

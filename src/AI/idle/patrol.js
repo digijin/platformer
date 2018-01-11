@@ -1,4 +1,4 @@
-import walk from "./walk";
+import walk from "../actions/walk";
 
 export default function* patrol(
 	enemy: Enemy,
