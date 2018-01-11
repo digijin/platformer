@@ -13,6 +13,7 @@ import type Player from "Actor/Player";
 import bounce from "AI/idle/bounce";
 import patrol from "AI/idle/patrol";
 import rabbit from "AI/idle/rabbit";
+import hover from "AI/idle/hover";
 import agro from "AI/agro/agro";
 import type EnemyType from "Actor/Enemy/Type";
 
@@ -141,6 +142,9 @@ export default class Enemy extends Actor {
 				break;
 			case "bounce":
 				this.action = bounce(this, this.engine);
+				break;
+			case "hover":
+				this.action = hover(this, this.engine);
 				break;
 			default:
 				throw new Error("no idle for Enemy");

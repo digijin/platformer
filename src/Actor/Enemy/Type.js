@@ -76,7 +76,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		hp: 100,
 		size: { w: 124, h: 36 },
 		registration: { x: 0.5, y: 1 },
-		idle: "patrol",
+		idle: "hover",
 		agro: "agro",
 		image: heli
 	}
