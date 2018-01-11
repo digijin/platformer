@@ -77,7 +77,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		size: { w: 124, h: 36 },
 		registration: { x: 0.5, y: 1 },
 		idle: "hover",
-		agro: "agro",
+		agro: "heligun",
 		image: heli
 	}
 ];

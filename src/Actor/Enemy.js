@@ -15,6 +15,7 @@ import patrol from "AI/idle/patrol";
 import rabbit from "AI/idle/rabbit";
 import hover from "AI/idle/hover";
 import agro from "AI/agro/agro";
+import heligun from "AI/agro/heligun";
 import type EnemyType from "Actor/Enemy/Type";
 
 export default class Enemy extends Actor {
@@ -152,6 +153,16 @@ export default class Enemy extends Actor {
 	}
 	startAgro(player: Player) {
 		this.agro = player;
-		this.action = agro(this, this.engine, player);
+
+		switch (this.type.agro) {
+			case "agro":
+				this.action = agro(this, this.engine, player);
+				break;
+			case "heligun":
+				this.action = heligun(this, this.engine, player);
+				break;
+			default:
+				throw new Error("no agro for Enemy");
+		}
 	}
 }
