@@ -22,7 +22,7 @@ export default class Explosion extends GameObject {
 			);
 		}
 		this.movie = new PIXI.extras.MovieClip(frames);
-		this.time = 4;
+		this.time = NUM_FRAMES / 60;
 		this.movie.animationSpeed = 1;
 		this.movie.anchor = { x: 0.5, y: 0.5 };
 		Object.assign(this, params);
@@ -48,7 +48,7 @@ export default class Explosion extends GameObject {
 		}
 	}
 	destroy() {
-		this.engine.stage.removeChild(this.sprite);
+		this.engine.stage.removeChild(this.movie);
 		super.destroy();
 	}
 }
