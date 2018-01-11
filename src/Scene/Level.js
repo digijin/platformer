@@ -18,7 +18,7 @@ import PauseMenu from "GameObject/PauseMenu";
 export default class Level extends Base {
 	start(engine: Engine) {
 		super.start(engine);
-		engine.register(new Skyline());
+		// engine.register(new Skyline());
 		engine.register(new PauseMenu());
 		let grid = new Grid({ w: 200, h: 50 });
 		// grid.makeTest();
@@ -29,7 +29,7 @@ export default class Level extends Base {
 		grid.load(gridData);
 
 		document.body.style.backgroundColor = "#ddaaee";
-		// engine.register(new Background());
+		engine.register(new Background());
 		engine.register(new StoryTeller());
 
 		let player = new Player({ position: new Point({ x: 450, y: 100 }) });

@@ -76,7 +76,8 @@ export default class Bullet extends Projectile {
 		this.engine.ctx.context.shadowBlur = 30;
 		this.engine.ctx.drawLine(
 			old,
-			this.position
+			this.position,
+			"yellow"
 			// this.position.add({ x: this.h, y: this.v })
 		);
 		this.engine.ctx.context.restore();
