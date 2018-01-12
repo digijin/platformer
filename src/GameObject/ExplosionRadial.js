@@ -27,8 +27,8 @@ export default class ExplosionRadial extends AnimateOnce {
 	}
 	update() {
 		super.update();
-		if (this.time < 1) {
-			this.movie.alpha = this.time;
+		if (this.time < 0.5) {
+			this.movie.alpha = this.time * 2;
 		}
 	}
 }
