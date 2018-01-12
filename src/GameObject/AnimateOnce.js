@@ -13,7 +13,9 @@ export default class AnimateOnce extends GameObject {
 	}) {
 		super();
 		// this.numFrames = params.numFrames;
+		//defaults
 		this.once = true;
+		this.speed = 1;
 		Object.assign(this, params);
 
 		let frames = [];
