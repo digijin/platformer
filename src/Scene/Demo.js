@@ -3,58 +3,36 @@ import type Engine from "Engine";
 
 import * as PIXI from "pixi.js";
 
+import Point from "Utility/Point";
 import config from "config";
 import GameObject from "GameObject";
 import Grid from "Grid";
 import { BlockTypes } from "Grid/Block/Type";
 
+import FireRadialTransition from "GameObject/FireRadialTransition";
+import ExplosionAnimation from "GameObject/ExplosionAnimation";
+
 class Runner extends GameObject {
 	init(engine) {
 		super.init(engine);
-		BlockTypes.forEach(bt => bt.init());
 
-		// this.canvas = document.createElement("canvas");
-
-		this.renderer = PIXI.autoDetectRenderer(
-			window.innerWidth,
-			window.innerHeight,
-			{
-				view: this.engine.pixicanvas,
-				transparent: true
-			}
-		);
-		// this.texture = new PIXI.Texture(
-		// 	new PIXI.BaseTexture(require("Grid/Block/brick3.png"))
+		// this.engine.register(
+		// 	new FireRadialTransition({
+		// 		once: false,
+		// 		position: this.engine.mouse.position
+		// 	})
 		// );
-		this.textures = PIXI.loader.resources["blocks"].textures;
 
-		// this.sprite = new PIXI.Sprite(texture);
-		// this.sprite = new PIXI.extras.TilingSprite(this.texture);
-		this.stage = new PIXI.Container();
-		// this.stage.addChild(this.sprite);
-		this.sprites = [];
-		for (let x = 0; x < 20; x++) {
-			for (let y = 0; y < 20; y++) {
-				let sprite = new PIXI.Sprite(this.textures["brick_tile.png"]);
-				this.stage.addChild(sprite);
-				sprite.position.x = x * 32;
-				sprite.position.y = y * 32;
-				this.sprites.push(sprite);
-			}
-		}
+		this.engine.register(
+			new FireRadialTransition({
+				once: false,
+				position: new Point({ x: 300, y: 300 }),
+				rotation: 0,
+				delay: 0
+			})
+		);
 	}
-	update() {
-		// let d = {
-		// 	x: Math.random() - 0.5,
-		// 	y: Math.random() - 0.5
-		// };
-		let d = this.engine.mouse.delta;
-		this.sprites.forEach(s => {
-			s.position.x += d.x;
-			s.position.y += d.y;
-		});
-		this.renderer.render(this.stage);
-	}
+	update() {}
 }
 
 export default class Demo extends Base {

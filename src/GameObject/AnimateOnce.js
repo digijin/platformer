@@ -13,6 +13,7 @@ export default class AnimateOnce extends GameObject {
 	}) {
 		super();
 		// this.numFrames = params.numFrames;
+		this.once = true;
 		Object.assign(this, params);
 
 		let frames = [];
@@ -35,6 +36,7 @@ export default class AnimateOnce extends GameObject {
 		super.init(engine);
 		this.movie.play();
 		this.engine.stage.addChild(this.movie);
+		console.log("adding", this.movie, "to", this.engine.stage);
 		// this.movie.position = this.position;
 		this.positionSprite();
 	}
@@ -46,11 +48,12 @@ export default class AnimateOnce extends GameObject {
 	update() {
 		this.positionSprite();
 		this.time -= this.engine.deltaTime;
-		if (this.time < 0) {
+		if (this.once && this.time < 0) {
 			this.destroy();
 		}
 	}
 	destroy() {
+		console.log("cleanup ");
 		this.engine.stage.removeChild(this.movie);
 		super.destroy();
 	}

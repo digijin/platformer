@@ -9,6 +9,7 @@ import AnimateOnce from "./AnimateOnce";
 
 export default class FireRadialTransition extends AnimateOnce {
 	constructor(params) {
+		console.log("FireRadialTransition");
 		super(
 			Object.assign(
 				{
