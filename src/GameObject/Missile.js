@@ -4,6 +4,7 @@ import missile from "assets/missile.png";
 import Smoke from "GameObject/Smoke";
 import Explosion from "GameObject/Explosion";
 import ExplosionAnimation from "GameObject/ExplosionAnimation";
+import ExplosionRadial from "GameObject/ExplosionRadial";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import type Actor from "Actor";
@@ -46,7 +47,7 @@ export default class Missile extends Projectile {
 		// this.trailRenderer.die();
 
 		this.engine.register(
-			new ExplosionAnimation({
+			new ExplosionRadial({
 				position: this.position,
 				rotation: 0,
 				delay: 0
