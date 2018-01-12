@@ -23,22 +23,31 @@ class Runner extends GameObject {
 		// 	})
 		// );
 
-		this.engine.register(
-			new FireRadialTransition({
-				once: false,
-				position: new Point({ x: 300, y: 300 }),
-				rotation: 0,
-				delay: 0
-			})
-		);
+		this.obj = new FireRadialTransition({
+			// once: false,
+			position: new Point({ x: window.innerWidth, y: 0 }),
+			rotation: 0,
+			delay: 0,
+			speed: 0.5
+		});
+
+		this.obj.movie.width = window.innerWidth;
+		this.obj.movie.height = window.innerWidth;
+		this.obj.movie.animationSpeed = 0.5;
+
+		this.engine.register(this.obj);
 	}
-	update() {}
+	update() {
+		// this.obj.movie.position = this.engine.mouse.position;
+		this.obj.movie.position.x = window.innerWidth / 2;
+		this.obj.movie.position.y = window.innerHeight / 2;
+	}
 }
 
 export default class Demo extends Base {
 	start(engine: Engine) {
 		super.start(engine);
-		document.body.style.backgroundColor = "yellow";
+		document.body.style.backgroundColor = "blue";
 		engine.ui.dispatch({ type: "START_SCENE", scene: "demo" });
 		this.doStuff();
 	}

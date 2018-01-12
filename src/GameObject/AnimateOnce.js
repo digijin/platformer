@@ -27,8 +27,8 @@ export default class AnimateOnce extends GameObject {
 			);
 		}
 		this.movie = new PIXI.extras.AnimatedSprite(frames);
-		this.time = this.numFrames / 60;
-		this.movie.animationSpeed = 1;
+		this.time = this.numFrames / (60 * this.speed);
+		this.movie.animationSpeed = this.speed;
 		this.movie.anchor = { x: 0.5, y: 0.5 };
 	}
 
