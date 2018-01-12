@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 
-PIXI.loader.add("explosion", "spritesheet.json");
+PIXI.loader.add("explosion", "explosion.json");
+PIXI.loader.add("explosion1", "explosion1.json");
 import GameObject from "GameObject";
 
 import Point from "Utility/Point";
@@ -19,11 +20,11 @@ export default class Explosion extends AnimateOnce {
 				// 	pad: 4
 				// },
 				{
-					numFrames: 106,
-					resource: "explosion",
-					prefix: "explosion",
+					numFrames: 48,
+					resource: "explosion1",
+					prefix: "Explosion_",
 					suffix: ".png",
-					pad: 4
+					pad: 3
 				},
 				params
 			)
