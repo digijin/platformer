@@ -76,7 +76,8 @@ module.exports = [
 		},
 		plugins: [
 			new CopyWebpackPlugin([
-				{ from: path.resolve(__dirname, "html") } // to: output.path
+				{ from: path.resolve(__dirname, "html") }, // to: output.path
+				{ from: path.resolve(__dirname, "assets") }
 			])
 		]
 	}
