@@ -16,12 +16,19 @@ export default class ExplosionRadial extends AnimateOnce {
 					resource: "ExplosionRadial",
 					prefix: "Explosion 004 Radial_",
 					suffix: ".png",
-					pad: 5
+					pad: 5,
+					speed: 0.5
 				},
 				params
 			)
 		);
 		this.movie.rotation = Math.random() * Math.PI;
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
+	}
+	update() {
+		super.update();
+		if (this.time < 1) {
+			this.movie.alpha = this.time;
+		}
 	}
 }
