@@ -5,14 +5,14 @@ import GameObject from "GameObject";
 
 import Point from "Utility/Point";
 
-const NUM_FRAMES = 106;
-
 export default class Explosion extends GameObject {
 	position: Point;
 	constructor(params: Object) {
 		super();
+		this.numFrames = 106;
+
 		let frames = [];
-		for (let i = 0; i < NUM_FRAMES; i++) {
+		for (let i = 0; i < this.numFrames; i++) {
 			let framenum = i.toString().padStart(4, "0");
 			frames.push(
 				PIXI.loader.resources["explosion"].textures[
@@ -21,8 +21,8 @@ export default class Explosion extends GameObject {
 				// PIXI.Texture.fromFrame("explosion" + framenum + ".png")
 			);
 		}
-		this.movie = new PIXI.extras.MovieClip(frames);
-		this.time = NUM_FRAMES / 60;
+		this.movie = new PIXI.extras.AnimatedSprite(frames);
+		this.time = this.numFrames / 60;
 		this.movie.animationSpeed = 1;
 		this.movie.anchor = { x: 0.5, y: 0.5 };
 		Object.assign(this, params);
