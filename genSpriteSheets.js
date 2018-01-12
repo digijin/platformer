@@ -1,12 +1,18 @@
+var fs = require("fs");
 var spritesheet = require("spritesheet-js");
 
-spritesheet(
-	"src/assets/explosion/*.png",
-	{ format: "pixi.js", path: "dist", trim: true },
-	function(err) {
-		// console.log(err);
-		if (err) throw err;
+fs.readdirSync("src/assets/animation").forEach(dir => {
+	// console.log(dir);
+	var options = {
+		format: "pixi.js",
+		path: "dist",
+		trim: true,
+		name: dir
+	};
 
-		console.log("spritesheet successfully generated");
-	}
-);
+	spritesheet("src/assets/animation/" + dir + "/*.png", options, function(
+		err
+	) {
+		if (err) throw err;
+	});
+});

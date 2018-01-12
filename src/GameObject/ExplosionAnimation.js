@@ -11,6 +11,13 @@ export default class Explosion extends AnimateOnce {
 	constructor(params) {
 		super(
 			Object.assign(
+				// {
+				// 	numFrames: 106,
+				// 	resource: "explosion",
+				// 	prefix: "explosion",
+				// 	suffix: ".png",
+				// 	pad: 4
+				// },
 				{
 					numFrames: 106,
 					resource: "explosion",
