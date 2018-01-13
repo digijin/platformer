@@ -23,6 +23,6 @@ export default class MainMenu extends Base {
 		engine.register(new BackgroundBuildings());
 		engine.register(new Menu());
 
-		document.body.style.backgroundColor = "lightblue";
+		document.body.style.backgroundColor = "#223337";
 	}
 }

@@ -11,7 +11,14 @@ let url = "url(" + skyline.src + ")";
 import RGBA from "Utility/RGBA";
 import * as PIXI from "pixi.js";
 
-const NUM_BUILDINGS = 100;
+import ExplosionUp1 from "GameObject/ExplosionUp1";
+import ExplosionUp2 from "GameObject/ExplosionUp2";
+import ExplosionUp3 from "GameObject/ExplosionUp3";
+import ExplosionUp4 from "GameObject/ExplosionUp4";
+import ExplosionUp5 from "GameObject/ExplosionUp5";
+import ExplosionUp6 from "GameObject/ExplosionUp6";
+
+const NUM_BUILDINGS = 10;
 const PAN_SPEED = 100;
 
 export default class Background extends GameObject {
@@ -36,9 +43,6 @@ export default class Background extends GameObject {
 			building.z = Math.random();
 			this.buildings.push(building);
 		}
-		this.stage.children.sort((a, b) => {
-			return a.z - b.z;
-		});
 	}
 	makeBuilding() {
 		let texture = new PIXI.Texture(
@@ -50,7 +54,8 @@ export default class Background extends GameObject {
 						g: 0.5 + Math.random() * 0.5,
 						b: 0.5 + Math.random() * 0.5
 					}).toHex(),
-					width: 30 + Math.floor(Math.random() * 20)
+					width: 30 + Math.floor(Math.random() * 20),
+					sideWidth: 1 + Math.floor(Math.random() * 20)
 				}).canvas
 			)
 		);
@@ -61,14 +66,38 @@ export default class Background extends GameObject {
 	}
 
 	update() {
+		this.stage.children.sort((a, b) => {
+			a = a.z || 0;
+			b = b.z || 0;
+			return a - b;
+		});
 		this.stage.position.y = window.innerHeight / 2;
-		this.buildings.forEach(b => {
+		this.stage.children.forEach(b => {
 			b.x +=
 				(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
 			if (b.x > window.innerWidth) {
 				b.x -= window.innerWidth;
 			}
 		});
+		if (Math.random() > 0.9) {
+			this.spawnExplosion();
+		}
+	}
+	spawnExplosion() {
+		let types = [
+			ExplosionUp1,
+			ExplosionUp2,
+			ExplosionUp3,
+			ExplosionUp4,
+			ExplosionUp5,
+			ExplosionUp6
+		];
+		let type = types[Math.floor(types.length * Math.random())];
+		let exp = new type();
+		exp.parent = this.stage;
+		exp.position.x = window.innerWidth * Math.random();
+		exp.z = Math.random();
+		this.engine.register(exp);
 	}
 	exit() {
 		this.engine.stage.removeChild(this.stage);

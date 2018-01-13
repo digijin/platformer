@@ -46,22 +46,22 @@ export default class MainMenu extends GameObject {
 		this.hero.position.x = window.innerWidth / 2;
 		this.hero.position.y = window.innerHeight / 2;
 
-		if (Math.random() > 0.97) {
-			let types = [
-				ExplosionUp1,
-				ExplosionUp2,
-				ExplosionUp3,
-				ExplosionUp4,
-				ExplosionUp5,
-				ExplosionUp6
-			];
-			let type = types[Math.floor(types.length * Math.random())];
-			let exp = new type();
-			exp.parent = this.explosionLayer;
-			exp.position.x = Math.random() * window.innerWidth;
-			exp.position.y = window.innerHeight / 2 - Math.random() * 100;
-			this.engine.register(exp);
-		}
+		// if (Math.random() > 0.97) {
+		// 	let types = [
+		// 		ExplosionUp1,
+		// 		ExplosionUp2,
+		// 		ExplosionUp3,
+		// 		ExplosionUp4,
+		// 		ExplosionUp5,
+		// 		ExplosionUp6
+		// 	];
+		// 	let type = types[Math.floor(types.length * Math.random())];
+		// 	let exp = new type();
+		// 	exp.parent = this.explosionLayer;
+		// 	exp.position.x = Math.random() * window.innerWidth;
+		// 	exp.position.y = window.innerHeight / 2 - Math.random() * 100;
+		// 	this.engine.register(exp);
+		// }
 	}
 	exit() {
 		this.engine.stage.removeChild(this.hero);
