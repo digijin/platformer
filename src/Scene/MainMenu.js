@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 
 import Menu from "MainMenu/Menu";
-import Background from "GameObject/Background";
+import BackgroundBuildings from "GameObject/BackgroundBuildings";
 
 import Point from "Utility/Point";
 
@@ -22,7 +22,7 @@ export default class MainMenu extends Base {
 		});
 
 		engine.register(new Menu());
-		engine.register(new Background());
+		engine.register(new BackgroundBuildings());
 
 		document.body.style.backgroundColor = "lightblue";
 	}

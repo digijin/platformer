@@ -25,12 +25,14 @@ export default class Background extends GameObject {
 		super.init(engine);
 
 		this.engine.stage.addChild(this.stage);
+		this.stage.position.y = window.innerHeight / 2;
 		// this.el.appendChild(new Building().canvas);
 
 		let texture = new PIXI.Texture(
 			new PIXI.BaseTexture(new Building().canvas)
 		);
 		let sprite = new PIXI.Sprite(texture);
+		sprite.anchor = { x: 0.5, y: 1 };
 		this.stage.addChild(sprite);
 
 		this.el = document.createElement("DIV");
@@ -71,7 +73,6 @@ export default class Background extends GameObject {
 			-this.engine.view.offset.x / 4 + "px";
 		let p1 = window.innerHeight / 4;
 		let p2 = window.innerHeight / 2.5;
-
 		this.top.style.height = p1 - this.engine.view.offset.y / 4 + "px";
 		this.bottom.style.top = p1 - this.engine.view.offset.y / 4 + "px";
 		this.top2.style.height = p2 - this.engine.view.offset.y / 5 + "px";
