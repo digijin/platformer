@@ -32,12 +32,11 @@ export default class Background extends GameObject {
 		this.stage = new PIXI.Container();
 
 		this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
-		// this.bg.z = 0;
+		this.bg.z = 0;
 		this.bg.tint = 0;
 	}
 	init(engine: Engine) {
 		super.init(engine);
-		// this.stage.addChild(this.bg);
 
 		this.engine.stage.addChild(this.stage);
 		// this.el.appendChild(new Building().canvas);
@@ -48,6 +47,7 @@ export default class Background extends GameObject {
 			building.z = Math.random();
 			this.buildings.push(building);
 		}
+		this.stage.addChild(this.bg);
 	}
 	makeBuilding() {
 		let texture = new PIXI.Texture(
@@ -67,8 +67,9 @@ export default class Background extends GameObject {
 		});
 		this.stage.position.y = window.innerHeight / 2;
 		this.stage.children.forEach(b => {
-			if (!b.z) {
-				throw new Error("yolo");
+			if (b.z == undefined) {
+				// debugger;
+				throw new Error("yolo no z on child ");
 			}
 
 			b.position.x +=
@@ -80,6 +81,9 @@ export default class Background extends GameObject {
 		if (Math.random() > 0.9) {
 			this.spawnExplosion();
 		}
+		this.bg.x = 0;
+		this.bg.width = window.innerWidth;
+		this.bg.height = window.innerHeight / 2;
 	}
 	spawnExplosion() {
 		let types = [
