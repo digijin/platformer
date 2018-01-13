@@ -5,7 +5,6 @@ import type Engine from "Engine";
 import Menu from "MainMenu/Menu";
 import Background from "GameObject/Background";
 
-import DigijinLogo from "MainMenu/DigijinLogo";
 import Point from "Utility/Point";
 
 export default class MainMenu extends Base {
@@ -19,7 +18,7 @@ export default class MainMenu extends Base {
 		engine.view.offset = new Point({
 			// x: -window.innerWidth,
 			x: 0,
-			y: -window.innerHeight * 4
+			y: 0 //-window.innerHeight * 4
 		});
 
 		engine.register(new Menu());
