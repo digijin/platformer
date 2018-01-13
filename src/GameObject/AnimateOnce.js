@@ -53,7 +53,7 @@ export default class AnimateOnce extends GameObject {
 		this.movie.position.y = this.position.y - this.engine.view.offset.y;
 	}
 	update() {
-		// this.positionSprite();
+		this.positionSprite();
 		this.time -= this.engine.deltaTime;
 		if (this.once && this.time < 0) {
 			this.destroy();

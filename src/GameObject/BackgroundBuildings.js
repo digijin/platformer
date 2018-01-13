@@ -106,10 +106,12 @@ export default class Background extends GameObject {
 		});
 		exp.position.x = window.innerWidth * Math.random();
 		exp.movie.z = Math.random();
+		// exp.positionSprite();
 		exp.movie.anchor = { x: 0.5, y: 0.9 };
 		// exp.speed = 0.2;
 		this.sort();
 		this.engine.register(exp);
+		exp.positionSprite = () => {};
 	}
 	exit() {
 		this.engine.stage.removeChild(this.stage);
