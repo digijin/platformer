@@ -32,12 +32,14 @@ export default class MainMenu extends GameObject {
 		// this.particles = [];
 		// this.spawnTimer = 0;
 		// this.timePassed = 0;
+		this.explosionLayer = new PIXI.Container();
 		this.heroText = new PIXI.Texture(new PIXI.BaseTexture(mechHero));
 		this.hero = new PIXI.Sprite(this.heroText);
 		this.hero.anchor = { x: 0.5, y: 0.5 };
 	}
 	init(engine: Engine) {
 		super.init(engine);
+		this.engine.stage.addChild(this.explosionLayer);
 		this.engine.stage.addChild(this.hero);
 	}
 	update() {
@@ -55,6 +57,7 @@ export default class MainMenu extends GameObject {
 			];
 			let type = types[Math.floor(types.length * Math.random())];
 			let exp = new type();
+			exp.parent = this.explosionLayer;
 			exp.position.x = Math.random() * window.innerWidth;
 			exp.position.y = window.innerHeight / 2 - Math.random() * 100;
 			this.engine.register(exp);
@@ -62,6 +65,7 @@ export default class MainMenu extends GameObject {
 	}
 	exit() {
 		this.engine.stage.removeChild(this.hero);
+		this.engine.stage.removeChild(this.explosionLayer);
 	}
 	// spawnTimer: number;
 	// particles: Array<Particle>;
