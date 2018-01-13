@@ -18,7 +18,7 @@ import ExplosionUp4 from "GameObject/ExplosionUp4";
 import ExplosionUp5 from "GameObject/ExplosionUp5";
 import ExplosionUp6 from "GameObject/ExplosionUp6";
 
-const NUM_BUILDINGS = 10;
+const NUM_BUILDINGS = 100;
 const PAN_SPEED = 100;
 
 export default class Background extends GameObject {
@@ -73,10 +73,14 @@ export default class Background extends GameObject {
 		});
 		this.stage.position.y = window.innerHeight / 2;
 		this.stage.children.forEach(b => {
-			b.x +=
+			if (!b.z) {
+				throw new Error("yolo");
+			}
+
+			b.position.x +=
 				(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
-			if (b.x > window.innerWidth) {
-				b.x -= window.innerWidth;
+			if (b.position.x > window.innerWidth) {
+				b.position.x -= window.innerWidth;
 			}
 		});
 		if (Math.random() > 0.9) {
@@ -93,10 +97,14 @@ export default class Background extends GameObject {
 			ExplosionUp6
 		];
 		let type = types[Math.floor(types.length * Math.random())];
-		let exp = new type();
-		exp.parent = this.stage;
+		let exp = new type({
+			parent: this.stage,
+			speed: 0.2
+		});
 		exp.position.x = window.innerWidth * Math.random();
-		exp.z = Math.random();
+		exp.movie.z = Math.random();
+		exp.movie.anchor = { x: 0.5, y: 0.9 };
+		// exp.speed = 0.2;
 		this.engine.register(exp);
 	}
 	exit() {
