@@ -32,8 +32,8 @@ export default class Background extends GameObject {
 		this.stage = new PIXI.Container();
 
 		this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
-		this.bg.z = 0;
-		this.bg.tint = 0;
+		this.bg.z = 1;
+		this.bg.tint = 0x171819;
 	}
 	init(engine: Engine) {
 		super.init(engine);
