@@ -9,6 +9,8 @@ import Building from "Background/Building";
 
 let url = "url(" + skyline.src + ")";
 
+import * as PIXI from "pixi.js";
+
 export default class Background extends GameObject {
 	el: HTMLDivElement;
 	top: HTMLDivElement;
@@ -17,14 +19,23 @@ export default class Background extends GameObject {
 	bottom2: HTMLDivElement;
 	constructor() {
 		super();
+		this.stage = new PIXI.Container();
 	}
 	init(engine: Engine) {
 		super.init(engine);
+
+		this.engine.stage.addChild(this.stage);
+		// this.el.appendChild(new Building().canvas);
+
+		let texture = new PIXI.Texture(
+			new PIXI.BaseTexture(new Building().canvas)
+		);
+		let sprite = new PIXI.Sprite(texture);
+		this.stage.addChild(sprite);
+
 		this.el = document.createElement("DIV");
 		this.el.id = "background";
 		engine.container.appendChild(this.el);
-
-		this.el.appendChild(new Building().canvas);
 
 		let layer1 = document.createElement("DIV");
 		layer1.className = "layer layer1";
@@ -67,6 +78,7 @@ export default class Background extends GameObject {
 		this.bottom2.style.top = p2 - this.engine.view.offset.y / 5 + "px";
 	}
 	exit() {
+		this.engine.stage.removeChild(this.stage);
 		this.engine.container.removeChild(this.el);
 	}
 }

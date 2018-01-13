@@ -58,6 +58,9 @@ export default class Building {
 						let lit = RGBA.fromString(this.windowLitColor);
 						let pc = Math.random();
 
+						this.context.shadowColor = this.windowLitColor;
+						this.context.shadowBlur = 1;
+
 						this.context.fillStyle = unlit
 							.percentTo(lit, pc)
 							.toHex();
