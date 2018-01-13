@@ -20,6 +20,7 @@ import ExplosionUp6 from "GameObject/ExplosionUp6";
 
 const NUM_BUILDINGS = 100;
 const PAN_SPEED = 100;
+const OVERLAP = 50;
 
 export default class Background extends GameObject {
 	el: HTMLDivElement;
@@ -74,8 +75,8 @@ export default class Background extends GameObject {
 
 			b.position.x +=
 				(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
-			if (b.position.x > window.innerWidth) {
-				b.position.x -= window.innerWidth;
+			if (b.position.x > window.innerWidth + OVERLAP) {
+				b.position.x -= window.innerWidth + OVERLAP * 2;
 			}
 		});
 		if (Math.random() > 0.9) {
