@@ -53,13 +53,14 @@ export default class Building {
 					x += this.windowMargin + this.windowWidth
 				) {
 					this.context.fillStyle = this.windowColor;
+					this.context.shadowBlur = 0;
 					if (litFloor) {
 						let unlit = RGBA.fromString(this.windowColor);
 						let lit = RGBA.fromString(this.windowLitColor);
 						let pc = Math.random();
 
 						this.context.shadowColor = this.windowLitColor;
-						this.context.shadowBlur = 1;
+						this.context.shadowBlur = pc * 3;
 
 						this.context.fillStyle = unlit
 							.percentTo(lit, pc)
@@ -67,6 +68,14 @@ export default class Building {
 					}
 					this.context.fillRect(
 						x,
+						y * this.floorHeight,
+						this.windowWidth,
+						this.windowHeight
+					);
+					//and on side
+					let ratio = this.sideWidth / this.width;
+					this.context.fillRect(
+						this.width + x * ratio,
 						y * this.floorHeight,
 						this.windowWidth,
 						this.windowHeight
