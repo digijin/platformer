@@ -87,17 +87,18 @@ export default class Building {
 
 	static random() {
 		return new Building({
-			floors: 20 + Math.floor(Math.random() * 40),
 			windowLitColor: new RGBA({
 				r: 1,
 				g: 0.5 + Math.random() * 0.5,
 				b: 0.5 + Math.random() * 0.5
 			}).toHex(),
 			width: 10 + Math.floor(Math.random() * 40),
-			sideWidth: 10 + Math.floor(Math.random() * 40),
+			floors: 20 + Math.floor(Math.random() * 40),
 			floorHeight: 4 + Math.floor(Math.random() * 4),
-			windowHeight: 1 + Math.floor(Math.random() * 4),
-			windowWidth: 1 + Math.floor(Math.random() * 4)
+			windowHeight: 1 + Math.floor(Math.random() * 5),
+			windowWidth: 1 + Math.floor(Math.random() * 4),
+			windowMargin: Math.floor(Math.random() * 2),
+			sideWidth: 10 + Math.floor(Math.random() * 40)
 		});
 	}
 }

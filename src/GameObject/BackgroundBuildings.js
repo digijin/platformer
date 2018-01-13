@@ -61,11 +61,7 @@ export default class Background extends GameObject {
 	}
 
 	update() {
-		this.stage.children.sort((a, b) => {
-			a = a.z || 0;
-			b = b.z || 0;
-			return a - b;
-		});
+		this.sort();
 		this.stage.position.y = window.innerHeight / 2;
 		this.stage.children.forEach(b => {
 			if (b.z == undefined) {
@@ -86,6 +82,14 @@ export default class Background extends GameObject {
 		this.bg.width = window.innerWidth;
 		this.bg.height = window.innerHeight / 2;
 	}
+	sort() {
+		this.stage.children.sort((a, b) => {
+			a = a.z || 0;
+			b = b.z || 0;
+			return a - b;
+		});
+	}
+
 	spawnExplosion() {
 		let types = [
 			ExplosionUp1,
@@ -104,6 +108,7 @@ export default class Background extends GameObject {
 		exp.movie.z = Math.random();
 		exp.movie.anchor = { x: 0.5, y: 0.9 };
 		// exp.speed = 0.2;
+		this.sort();
 		this.engine.register(exp);
 	}
 	exit() {
