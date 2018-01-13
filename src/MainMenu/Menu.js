@@ -11,8 +11,13 @@ import type Engine from "Engine";
 import explosion from "assets/explosion.png";
 import skyline from "assets/skyline.png";
 
-import ExplosionRadial from "GameObject/ExplosionRadial";
+// import ExplosionRadial from "GameObject/ExplosionRadial";
 import ExplosionUp1 from "GameObject/ExplosionUp1";
+import ExplosionUp2 from "GameObject/ExplosionUp2";
+import ExplosionUp3 from "GameObject/ExplosionUp3";
+import ExplosionUp4 from "GameObject/ExplosionUp4";
+import ExplosionUp5 from "GameObject/ExplosionUp5";
+import ExplosionUp6 from "GameObject/ExplosionUp6";
 import * as PIXI from "pixi.js";
 
 type Particle = {
@@ -39,10 +44,19 @@ export default class MainMenu extends GameObject {
 		this.hero.position.x = window.innerWidth / 2;
 		this.hero.position.y = window.innerHeight / 2;
 
-		if (Math.random() > 0.95) {
-			let exp = new ExplosionUp1();
+		if (Math.random() > 0.97) {
+			let types = [
+				ExplosionUp1,
+				ExplosionUp2,
+				ExplosionUp3,
+				ExplosionUp4,
+				ExplosionUp5,
+				ExplosionUp6
+			];
+			let type = types[Math.floor(types.length * Math.random())];
+			let exp = new type();
 			exp.position.x = Math.random() * window.innerWidth;
-			exp.position.y = Math.random() * window.innerHeight;
+			exp.position.y = window.innerHeight / 2 - Math.random() * 100;
 			this.engine.register(exp);
 		}
 	}
