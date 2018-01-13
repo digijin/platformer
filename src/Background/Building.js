@@ -1,5 +1,7 @@
 // @flow
 
+import RGBA from "Utility/RGBA";
+
 let defaults = {
 	frontColor: "#172125",
 	sideColor: "#2b353b",
@@ -52,7 +54,13 @@ export default class Building {
 				) {
 					this.context.fillStyle = this.windowColor;
 					if (litFloor) {
-						this.context.fillStyle = this.windowLitColor;
+						let unlit = RGBA.fromString(this.windowColor);
+						let lit = RGBA.fromString(this.windowLitColor);
+						let pc = Math.random();
+
+						this.context.fillStyle = unlit
+							.percentTo(lit, pc)
+							.toHex();
 					}
 					this.context.fillRect(
 						x,

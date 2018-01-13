@@ -13,7 +13,7 @@ export default class MainMenu extends Base {
 		setTimeout(() => {
 			engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
 			window.dispatchEvent(new Event("menu-ready"));
-		}, 1000);
+		}, 300);
 
 		engine.view.offset = new Point({
 			// x: -window.innerWidth,

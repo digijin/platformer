@@ -5,6 +5,8 @@ import skyline from "assets/skyline.png";
 
 // console.log(skyline.src);
 
+import Building from "Background/Building";
+
 let url = "url(" + skyline.src + ")";
 
 export default class Background extends GameObject {
@@ -21,6 +23,8 @@ export default class Background extends GameObject {
 		this.el = document.createElement("DIV");
 		this.el.id = "background";
 		engine.container.appendChild(this.el);
+
+		this.el.appendChild(new Building().canvas);
 
 		let layer1 = document.createElement("DIV");
 		layer1.className = "layer layer1";
