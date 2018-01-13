@@ -1,0 +1,177 @@
+{
+	"meta": {
+		"image": "ExplosionImpactRadial1.png",
+		"size": {"w":789,"h":635},
+		"scale": "1"
+	},
+	"frames": {
+		"Explosion 011 Impact Radial_00012.png":
+		{
+			"frame": {"x":170,"y":0,"w":168,"h":168},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":16,"y":16,"w":168,"h":168},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00013.png":
+		{
+			"frame": {"x":0,"y":0,"w":170,"h":170},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":15,"y":15,"w":170,"h":170},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00011.png":
+		{
+			"frame": {"x":0,"y":170,"w":166,"h":166},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":17,"y":17,"w":166,"h":166},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00010.png":
+		{
+			"frame": {"x":166,"y":170,"w":162,"h":162},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":19,"y":19,"w":162,"h":162},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00009.png":
+		{
+			"frame": {"x":338,"y":0,"w":158,"h":158},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":21,"y":21,"w":158,"h":158},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00005.png":
+		{
+			"frame": {"x":338,"y":158,"w":155,"h":155},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":23,"y":22,"w":155,"h":155},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00008.png":
+		{
+			"frame": {"x":0,"y":336,"w":152,"h":152},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":24,"y":24,"w":152,"h":152},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00020.png":
+		{
+			"frame": {"x":152,"y":336,"w":151,"h":150},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":28,"y":25,"w":151,"h":150},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00019.png":
+		{
+			"frame": {"x":303,"y":336,"w":151,"h":149},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":28,"y":25,"w":151,"h":149},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00018.png":
+		{
+			"frame": {"x":496,"y":0,"w":151,"h":148},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":29,"y":26,"w":151,"h":148},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00000.png":
+		{
+			"frame": {"x":647,"y":496,"w":41,"h":42},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":80,"y":80,"w":41,"h":42},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00016.png":
+		{
+			"frame": {"x":496,"y":296,"w":148,"h":147},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":30,"y":27,"w":148,"h":147},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00015.png":
+		{
+			"frame": {"x":0,"y":488,"w":148,"h":147},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":30,"y":27,"w":148,"h":147},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00014.png":
+		{
+			"frame": {"x":148,"y":488,"w":146,"h":147},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":31,"y":27,"w":146,"h":147},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00007.png":
+		{
+			"frame": {"x":294,"y":488,"w":146,"h":146},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":27,"y":27,"w":146,"h":146},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00004.png":
+		{
+			"frame": {"x":440,"y":488,"w":142,"h":142},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":29,"y":29,"w":142,"h":142},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00006.png":
+		{
+			"frame": {"x":647,"y":0,"w":142,"h":139},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":31,"y":30,"w":142,"h":139},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00003.png":
+		{
+			"frame": {"x":647,"y":139,"w":131,"h":129},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":37,"y":35,"w":131,"h":129},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00002.png":
+		{
+			"frame": {"x":647,"y":268,"w":114,"h":121},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":48,"y":42,"w":114,"h":121},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00001.png":
+		{
+			"frame": {"x":647,"y":389,"w":103,"h":107},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":54,"y":48,"w":103,"h":107},
+			"sourceSize": {"w":200,"h":200}
+		},
+		"Explosion 011 Impact Radial_00017.png":
+		{
+			"frame": {"x":496,"y":148,"w":149,"h":148},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":30,"y":26,"w":149,"h":148},
+			"sourceSize": {"w":200,"h":200}
+		}
+	}
+}

@@ -12,6 +12,7 @@ import explosion from "assets/explosion.png";
 import skyline from "assets/skyline.png";
 
 import ExplosionRadial from "GameObject/ExplosionRadial";
+import ExplosionUp1 from "GameObject/ExplosionUp1";
 import * as PIXI from "pixi.js";
 
 type Particle = {
@@ -39,7 +40,7 @@ export default class MainMenu extends GameObject {
 		this.hero.position.y = window.innerHeight / 2;
 
 		if (Math.random() > 0.95) {
-			let exp = new ExplosionRadial();
+			let exp = new ExplosionUp1();
 			exp.position.x = Math.random() * window.innerWidth;
 			exp.position.y = Math.random() * window.innerHeight;
 			this.engine.register(exp);

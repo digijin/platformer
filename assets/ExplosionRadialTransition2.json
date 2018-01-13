@@ -1,0 +1,225 @@
+{
+	"meta": {
+		"image": "ExplosionRadialTransition2.png",
+		"size": {"w":800,"h":773},
+		"scale": "1"
+	},
+	"frames": {
+		"Explosion 002 Radial Transition_00026.png":
+		{
+			"frame": {"x":200,"y":0,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00013.png":
+		{
+			"frame": {"x":0,"y":0,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00025.png":
+		{
+			"frame": {"x":0,"y":113,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00024.png":
+		{
+			"frame": {"x":200,"y":113,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00023.png":
+		{
+			"frame": {"x":0,"y":226,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00005.png":
+		{
+			"frame": {"x":200,"y":226,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00006.png":
+		{
+			"frame": {"x":400,"y":0,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00007.png":
+		{
+			"frame": {"x":400,"y":113,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00008.png":
+		{
+			"frame": {"x":400,"y":226,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00009.png":
+		{
+			"frame": {"x":0,"y":339,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00010.png":
+		{
+			"frame": {"x":200,"y":339,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00011.png":
+		{
+			"frame": {"x":400,"y":339,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00012.png":
+		{
+			"frame": {"x":0,"y":452,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00000.png":
+		{
+			"frame": {"x":201,"y":678,"w":60,"h":59},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":73,"y":28,"w":60,"h":59},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00014.png":
+		{
+			"frame": {"x":400,"y":452,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00015.png":
+		{
+			"frame": {"x":600,"y":0,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00016.png":
+		{
+			"frame": {"x":600,"y":113,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00017.png":
+		{
+			"frame": {"x":600,"y":226,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00018.png":
+		{
+			"frame": {"x":600,"y":339,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00019.png":
+		{
+			"frame": {"x":600,"y":452,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00020.png":
+		{
+			"frame": {"x":0,"y":565,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00021.png":
+		{
+			"frame": {"x":200,"y":565,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00004.png":
+		{
+			"frame": {"x":400,"y":565,"w":186,"h":113},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":7,"y":0,"w":186,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00003.png":
+		{
+			"frame": {"x":586,"y":565,"w":163,"h":113},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":22,"y":0,"w":163,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00002.png":
+		{
+			"frame": {"x":0,"y":678,"w":110,"h":95},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":47,"y":15,"w":110,"h":95},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00001.png":
+		{
+			"frame": {"x":110,"y":678,"w":91,"h":80},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":56,"y":21,"w":91,"h":80},
+			"sourceSize": {"w":200,"h":113}
+		},
+		"Explosion 002 Radial Transition_00022.png":
+		{
+			"frame": {"x":200,"y":452,"w":200,"h":113},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":200,"h":113},
+			"sourceSize": {"w":200,"h":113}
+		}
+	}
+}
