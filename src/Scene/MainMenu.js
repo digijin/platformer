@@ -16,13 +16,12 @@ export default class MainMenu extends Base {
 		}, 300);
 
 		engine.view.offset = new Point({
-			// x: -window.innerWidth,
 			x: 0,
-			y: 0 //-window.innerHeight * 4
+			y: 0
 		});
 
-		engine.register(new Menu());
 		engine.register(new BackgroundBuildings());
+		engine.register(new Menu());
 
 		document.body.style.backgroundColor = "lightblue";
 	}
