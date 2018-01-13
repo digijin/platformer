@@ -30,9 +30,14 @@ export default class Background extends GameObject {
 	constructor() {
 		super();
 		this.stage = new PIXI.Container();
+
+		this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+		// this.bg.z = 0;
+		this.bg.tint = 0;
 	}
 	init(engine: Engine) {
 		super.init(engine);
+		// this.stage.addChild(this.bg);
 
 		this.engine.stage.addChild(this.stage);
 		// this.el.appendChild(new Building().canvas);
@@ -46,18 +51,7 @@ export default class Background extends GameObject {
 	}
 	makeBuilding() {
 		let texture = new PIXI.Texture(
-			new PIXI.BaseTexture(
-				new Building({
-					floors: 20 + Math.floor(Math.random() * 40),
-					windowLitColor: new RGBA({
-						r: 1,
-						g: 0.5 + Math.random() * 0.5,
-						b: 0.5 + Math.random() * 0.5
-					}).toHex(),
-					width: 30 + Math.floor(Math.random() * 20),
-					sideWidth: 1 + Math.floor(Math.random() * 20)
-				}).canvas
-			)
+			new PIXI.BaseTexture(Building.random().canvas)
 		);
 		let sprite = new PIXI.Sprite(texture);
 		sprite.anchor = { x: 0.5, y: 1 };
