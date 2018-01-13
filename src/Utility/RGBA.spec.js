@@ -16,6 +16,11 @@ describe("Utility/RGBA", () => {
 			expect(rgba.g).toBe(2 / 255);
 			expect(rgba.b).toBe(3 / 255);
 		});
+		it("back to hex", () => {
+			let hex = "#badb01";
+			let rgba = RGBA.fromString(hex);
+			expect(rgba.toHex()).toBe(hex);
+		});
 	});
 
 	describe("percent to", () => {

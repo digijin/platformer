@@ -37,6 +37,9 @@ export default class RGBA {
 			a: this.a * inverse + rgba.a * percent
 		});
 	}
+	toHex() {
+		return "#" + this.toNumber().toString(16);
+	}
 	toString() {
 		return (
 			"rgba(" +
