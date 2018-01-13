@@ -17,6 +17,33 @@ describe("Utility/RGBA", () => {
 			expect(rgba.b).toBe(3 / 255);
 		});
 	});
+
+	describe("percent to", () => {
+		describe("mid", () => {
+			let mid;
+			let rgba1;
+			let rgba2;
+			beforeEach(() => {
+				rgba1 = new RGBA({ r: 1, g: 1, b: 1, a: 1 });
+				rgba2 = new RGBA({ r: 0, g: 0, b: 0, a: 0 });
+				mid = rgba1.percentTo(rgba2, 0.5);
+			});
+			it("r value", () => {
+				expect(mid.r).toBe(0.5);
+			});
+			it("g value", () => {
+				expect(mid.g).toBe(0.5);
+			});
+			it("b value", () => {
+				expect(mid.b).toBe(0.5);
+			});
+			it("alpha value", () => {
+				expect(rgba1.a).toBe(1);
+				expect(rgba2.a).toBe(0);
+				expect(mid.a).toBe(0.5);
+			});
+		});
+	});
 	it("should toString", () => {
 		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
 		expect(rgba.toString()).toBe("rgba(26,51,77,0.4)");

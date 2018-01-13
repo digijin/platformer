@@ -8,7 +8,7 @@ export default class RGBA {
 	b: number;
 	a: number;
 	constructor(params: rgbaParams) {
-		if (!params.a) {
+		if (!params.a && params.a !== 0) {
 			params.a = 1;
 		}
 		["r", "g", "b", "a"].forEach(a => {
@@ -25,6 +25,16 @@ export default class RGBA {
 			g: parseInt(str.substr(2, 2), 16) / 255,
 			b: parseInt(str.substr(4, 2), 16) / 255,
 			a: 1
+		});
+	}
+
+	percentTo(rgba: RGBA, percent: number): Point {
+		let inverse = 1 - percent;
+		return new RGBA({
+			r: this.r * inverse + rgba.r * percent,
+			g: this.g * inverse + rgba.g * percent,
+			b: this.b * inverse + rgba.b * percent,
+			a: this.a * inverse + rgba.a * percent
 		});
 	}
 	toString() {
