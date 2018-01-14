@@ -54,13 +54,13 @@ export default class Building {
 				) {
 					this.context.fillStyle = this.windowColor;
 					this.context.shadowBlur = 0;
-					if (litFloor) {
+					if (litFloor && Math.random() < 0.2) {
 						let unlit = RGBA.fromString(this.windowColor);
 						let lit = RGBA.fromString(this.windowLitColor);
 						let pc = Math.random();
 
 						this.context.shadowColor = this.windowLitColor;
-						this.context.shadowBlur = pc * 3;
+						this.context.shadowBlur = pc * 5;
 
 						this.context.fillStyle = unlit
 							.percentTo(lit, pc)
@@ -98,7 +98,7 @@ export default class Building {
 			windowHeight: 1 + Math.floor(Math.random() * 5),
 			windowWidth: 1 + Math.floor(Math.random() * 4),
 			windowMargin: Math.floor(Math.random() * 2),
-			sideWidth: 10 + Math.floor(Math.random() * 40)
+			sideWidth: 10 + Math.floor(Math.random() * 20)
 		});
 	}
 }

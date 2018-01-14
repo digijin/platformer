@@ -18,7 +18,7 @@ import ExplosionUp4 from "GameObject/ExplosionUp4";
 import ExplosionUp5 from "GameObject/ExplosionUp5";
 import ExplosionUp6 from "GameObject/ExplosionUp6";
 
-const NUM_BUILDINGS = 100;
+const NUM_BUILDINGS = 150;
 const PAN_SPEED = 100;
 const OVERLAP = 50;
 
