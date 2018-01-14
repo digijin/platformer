@@ -6,7 +6,7 @@ import Enemy from "Actor/Enemy";
 import Point from "Utility/Point";
 import Base from "./Base";
 import Grid from "Grid";
-import Background from "GameObject/Background";
+import Background from "GameObject/BackgroundBuildings";
 import Skyline from "GameObject/Skyline";
 
 import StoryTeller from "GameObject/StoryTeller";
@@ -29,7 +29,9 @@ export default class Level extends Base {
 		grid.load(gridData);
 
 		document.body.style.backgroundColor = "#ddaaee";
-		engine.register(new Background());
+		let bg = new Background();
+		bg.spawnExplosion = () => {};
+		engine.register(bg);
 		engine.register(new StoryTeller());
 
 		let player = new Player({ position: new Point({ x: 450, y: 100 }) });

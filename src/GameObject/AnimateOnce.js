@@ -59,6 +59,9 @@ export default class AnimateOnce extends GameObject {
 			this.destroy();
 		}
 	}
+	exit() {
+		this.parent.removeChild(this.movie);
+	}
 	destroy() {
 		// console.log("cleanup ");
 		this.parent.removeChild(this.movie);

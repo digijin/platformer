@@ -39,7 +39,7 @@ export default class Background extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 
-		this.engine.stage.addChild(this.stage);
+		this.engine.backgroundStage.addChild(this.stage);
 		// this.el.appendChild(new Building().canvas);
 		this.buildings = [];
 		for (let i = 0; i < NUM_BUILDINGS; i++) {
@@ -76,10 +76,13 @@ export default class Background extends GameObject {
 			// }
 
 			b.position.x =
-				(b.offset + this.engine.view.offset.x * b.z) %
+				(b.offset - this.engine.view.offset.x * b.z * 0.1) %
 				window.innerWidth;
+			if (b.position.x < 0) {
+				b.position.x += window.innerWidth;
+			}
 		});
-		if (Math.random() > 0.9) {
+		if (Math.random() > 0.95) {
 			this.spawnExplosion();
 		}
 		this.sort();

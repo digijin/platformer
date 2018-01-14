@@ -86,6 +86,8 @@ export default class Engine {
 		this.stageContainer = new PIXI.Container();
 		this.stage = new PIXI.Container();
 		this.transitionStage = new PIXI.Container();
+		this.backgroundStage = new PIXI.Container();
+		this.stageContainer.addChild(this.backgroundStage);
 		this.stageContainer.addChild(this.stage);
 		this.stageContainer.addChild(this.transitionStage);
 		this.renderer = PIXI.autoDetectRenderer(
