@@ -19,15 +19,22 @@ export default class SmokeExplosionUpTransition extends Base {
 	init(engine: Engine) {
 		super.init(engine);
 		// this.engine.container.appendChild(this.el);
-		this.engine.register(new SmokeExplosionUpTransitionAnimation());
+		this.transition = new SmokeExplosionUpTransitionAnimation();
+		this.engine.register(this.transition);
 		this.time = 0;
+		this.swapped = false;
 	}
 	time: number;
 	update() {
 		this.time += this.engine.deltaTime;
-		if (this.time > SECS * 2) {
+
+		if (!this.swapped && this.transition.movie.currentFrame >= 35) {
+			this.swapped = true;
 			this.endLastScene();
 			this.startNextScene();
+		}
+
+		if (this.time > SECS * 2) {
 			this.end();
 		}
 	}

@@ -29,21 +29,27 @@ export default class SmokeExplosionUpTransition extends AnimateOnce {
 		// this.movie.rotation = Math.random() * Math.PI;
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 	}
+
+	init(engine) {
+		this.parent = engine.transitionStage;
+		super.init(engine);
+	}
 	update() {
 		super.update();
 
 		this.movie.anchor = { x: 0, y: 0 };
 		this.movie.width = window.innerWidth;
 		this.movie.height = window.innerHeight;
+		this.movie.position = { x: 0, y: 0 };
 		// if (this.time < 0.5) {
 		// 	this.movie.alpha = this.time * 2;
 		// }
 	}
 	exit() {
-		console.log("exited");
+		// console.log("exited");
 	}
 	destroy() {
-		console.log("destroy");
+		// console.log("destroy");
 		super.destroy();
 	}
 }
