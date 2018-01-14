@@ -25,15 +25,15 @@ module.exports = function(config) {
 			{ pattern: "src/**/*karma.js", watched: false },
 			{ pattern: "src/worker/*worker.js", watched: true },
 			{
-				pattern: "dist/*.*",
+				pattern: "dist/assets/*.*",
 				watched: false,
 				included: false,
 				served: true
 			}
 		],
-		// proxies: {
-		// 	"/": "/base/dist/"
-		// },
+		proxies: {
+			"/assets/": "/base/dist/assets/"
+		},
 		// urlRoot: "/karma/",
 		browser: { fs: false },
 		exclude: [],
