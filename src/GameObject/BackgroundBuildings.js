@@ -61,7 +61,6 @@ export default class Background extends GameObject {
 	}
 
 	update() {
-		this.sort();
 		this.stage.position.y = window.innerHeight / 2;
 		this.stage.children.forEach(b => {
 			if (b.z == undefined) {
@@ -78,6 +77,7 @@ export default class Background extends GameObject {
 		if (Math.random() > 0.9) {
 			this.spawnExplosion();
 		}
+		this.sort();
 		this.bg.x = 0;
 		this.bg.width = window.innerWidth;
 		this.bg.height = window.innerHeight / 2;
@@ -111,7 +111,7 @@ export default class Background extends GameObject {
 		// exp.speed = 0.2;
 		this.engine.register(exp);
 		exp.positionSprite = () => {};
-		this.sort();
+		// this.sort();
 	}
 	exit() {
 		this.engine.stage.removeChild(this.stage);
