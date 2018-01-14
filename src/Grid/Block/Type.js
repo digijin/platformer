@@ -18,7 +18,7 @@ PIXI.utils.skipHello();
 require("./sprites.json");
 require("./sprites.png");
 
-PIXI.loader.add("blocks", "sprites.json");
+PIXI.loader.add("blocks", "/assets/sprites.json");
 
 export type BlockTypeParams = {
 	// hp: name,

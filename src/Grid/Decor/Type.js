@@ -12,7 +12,7 @@ PIXI.utils.skipHello();
 require("./decorsprites.json");
 require("./decorsprites.png");
 
-PIXI.loader.add("decor", "decorsprites.json");
+PIXI.loader.add("decor", "/assets/decorsprites.json");
 
 export type DecorTypeParams = {
 	// hp: name,

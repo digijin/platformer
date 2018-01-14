@@ -10,7 +10,6 @@ import Grid from "Grid";
 import { BlockTypes } from "Grid/Block/Type";
 
 import FireRadialTransition from "GameObject/FireRadialTransition";
-import ExplosionAnimation from "GameObject/ExplosionAnimation";
 
 class Runner extends GameObject {
 	init(engine) {

@@ -3,7 +3,6 @@
 import missile from "assets/missile.png";
 import Smoke from "GameObject/Smoke";
 import Explosion from "GameObject/Explosion";
-import ExplosionAnimation from "GameObject/ExplosionAnimation";
 import ExplosionRadial from "GameObject/ExplosionRadial";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";

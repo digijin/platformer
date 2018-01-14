@@ -2,7 +2,7 @@ import * as PIXI from "pixi.js";
 
 PIXI.loader.add(
 	"SmokeExplosionUpTransition",
-	"SmokeExplosionUpTransition.json"
+	"/assets/SmokeExplosionUpTransition.json"
 );
 import GameObject from "GameObject";
 

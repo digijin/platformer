@@ -5,7 +5,7 @@ fs.readdirSync("src/assets/animation").forEach(dir => {
 	// console.log(dir);
 	var options = {
 		format: "pixi.js",
-		path: "dist",
+		path: "dist/assets",
 		trim: true,
 		name: dir
 	};

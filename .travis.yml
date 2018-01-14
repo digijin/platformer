@@ -10,7 +10,7 @@ addons:
   chrome: stable
 script:
 - yarn build
-- node genSpriteSheets
+- yarn build:sprites
 - ls dist
 - yarn test
 - sudo chmod 4755 /opt/google/chrome/chrome-sandbox

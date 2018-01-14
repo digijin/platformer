@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 
-PIXI.loader.add("FireRadialTransition", "FireRadialTransition.json");
+PIXI.loader.add("FireRadialTransition", "/assets/FireRadialTransition.json");
 import GameObject from "GameObject";
 
 import Point from "Utility/Point";

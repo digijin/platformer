@@ -69,7 +69,7 @@ module.exports = [
 					test: /sprites\.(png|json)/,
 					loader: "file-loader",
 					options: {
-						name: "[name].[ext]"
+						name: "assets/[name].[ext]"
 					}
 				}
 			]
@@ -77,7 +77,7 @@ module.exports = [
 		plugins: [
 			new CopyWebpackPlugin([
 				{ from: path.resolve(__dirname, "html") }, // to: output.path
-				{ from: path.resolve(__dirname, "assets") }
+				{ from: path.resolve(__dirname, "assets"), to: "assets" }
 			])
 		]
 	}
