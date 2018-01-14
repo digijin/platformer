@@ -109,9 +109,9 @@ export default class Background extends GameObject {
 		// exp.positionSprite();
 		exp.movie.anchor = { x: 0.5, y: 0.9 };
 		// exp.speed = 0.2;
-		this.sort();
 		this.engine.register(exp);
 		exp.positionSprite = () => {};
+		this.sort();
 	}
 	exit() {
 		this.engine.stage.removeChild(this.stage);
