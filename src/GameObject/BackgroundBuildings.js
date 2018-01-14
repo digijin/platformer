@@ -76,7 +76,7 @@ export default class Background extends GameObject {
 			// }
 
 			b.position.x =
-				(b.offset - this.engine.view.offset.x * b.z * 0.1) %
+				(b.offset - this.engine.view.offset.x * (1 + b.z) * 0.1) %
 				window.innerWidth;
 			if (b.position.x < 0) {
 				b.position.x += window.innerWidth;
@@ -123,6 +123,6 @@ export default class Background extends GameObject {
 		// this.sort();
 	}
 	exit() {
-		this.engine.stage.removeChild(this.stage);
+		this.engine.backgroundStage.removeChild(this.stage);
 	}
 }
