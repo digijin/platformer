@@ -14,6 +14,10 @@ require("./decorsprites.png");
 
 PIXI.loader.add("decor", "/assets/decorsprites.json");
 
+import WindowDecor from "./Window";
+
+import Abstract from "./Abstract";
+
 export type DecorTypeParams = {
 	// hp: name,
 	name: string,
@@ -25,53 +29,55 @@ export type DecorTypeParams = {
 	hp: number
 };
 
-export default class DecorType {
-	name: string;
-	id: string;
-	destructable: boolean;
-	image: any;
-	height: number;
-	width: number;
-	hp: number;
-	textureId: string;
-	pattern: CanvasPattern;
-	category: string;
-	constructor(params: DecorTypeParams) {
-		this.name = params.name;
-		this.id = params.id;
-		this.destructable = params.destructable;
-		this.hp = params.hp;
-		this.image = params.image;
-		this.height = params.height;
-		this.width = params.width;
-		this.mode = params.mode;
-		this.obstacle = params.obstacle;
-		this.category = params.category;
-		this.textureId = params.textureId;
+let DecorType = Abstract;
+export default DecorType;
+// export default class DecorType {
+// 	name: string;
+// 	id: string;
+// 	destructable: boolean;
+// 	image: any;
+// 	height: number;
+// 	width: number;
+// 	hp: number;
+// 	textureId: string;
+// 	pattern: CanvasPattern;
+// 	category: string;
+// 	constructor(params: DecorTypeParams) {
+// 		this.name = params.name;
+// 		this.id = params.id;
+// 		this.destructable = params.destructable;
+// 		this.hp = params.hp;
+// 		this.image = params.image;
+// 		this.height = params.height;
+// 		this.width = params.width;
+// 		this.mode = params.mode;
+// 		this.obstacle = params.obstacle;
+// 		this.category = params.category;
+// 		this.textureId = params.textureId;
 
-		this.texture = PIXI.Texture.WHITE;
+// 		this.texture = PIXI.Texture.WHITE;
 
-		this.image.onload = () => {
-			let context = document.createElement("canvas").getContext("2d");
-			if (context) {
-				this.pattern = context.createPattern(this.image, "no-repeat");
-				// console.log("made pattern", context, this.pattern);
-			}
-		};
-	}
-	init() {
-		if (PIXI.loader.resources["decor"].textures) {
-			this.texture =
-				PIXI.loader.resources["decor"].textures[this.textureId];
-		}
-	}
-	getTexture() {
-		return this.texture;
-	}
-	getSprite() {
-		return new PIXI.Sprite(this.getTexture());
-	}
-}
+// 		this.image.onload = () => {
+// 			let context = document.createElement("canvas").getContext("2d");
+// 			if (context) {
+// 				this.pattern = context.createPattern(this.image, "no-repeat");
+// 				// console.log("made pattern", context, this.pattern);
+// 			}
+// 		};
+// 	}
+// 	init() {
+// 		if (PIXI.loader.resources["decor"].textures) {
+// 			this.texture =
+// 				PIXI.loader.resources["decor"].textures[this.textureId];
+// 		}
+// 	}
+// 	getTexture() {
+// 		return this.texture;
+// 	}
+// 	getSprite() {
+// 		return new PIXI.Sprite(this.getTexture());
+// 	}
+// }
 
 let blockTypeConfig: Array<DecorTypeParams> = [
 	{
@@ -273,6 +279,7 @@ export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
 	c => new DecorType(c)
 );
 //add custom decor
+DecorTypes.push(new WindowDecor());
 
 export const DecorTypeMap: Object = DecorTypes.reduce(
 	(output: Object, type: DecorType) => {
