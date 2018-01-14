@@ -23,8 +23,18 @@ module.exports = function(config) {
 			"node_modules/babel-polyfill/dist/polyfill.js",
 			{ pattern: "src/**/*spec.js", watched: false },
 			{ pattern: "src/**/*karma.js", watched: false },
-			{ pattern: "src/worker/*worker.js", watched: true }
+			{ pattern: "src/worker/*worker.js", watched: true },
+			{
+				pattern: "dist/*.*",
+				watched: false,
+				included: false,
+				served: true
+			}
 		],
+		// proxies: {
+		// 	"/": "/base/dist/"
+		// },
+		// urlRoot: "/karma/",
 		browser: { fs: false },
 		exclude: [],
 		preprocessors: {

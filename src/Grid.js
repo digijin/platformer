@@ -154,6 +154,9 @@ export default class Grid extends GameObject {
 		if (this.decorStage) {
 			let type = decor.getType();
 			let sprite = new PIXI.Sprite(type.texture);
+			if (type.mode) {
+				sprite.blendMode = type.mode;
+			}
 			sprite.position.x = decor.position.x * config.grid.width;
 			sprite.position.y = decor.position.y * config.grid.width;
 			this.decorStage.addChild(sprite);

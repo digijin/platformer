@@ -52,7 +52,10 @@ describe("functional.karma.js", () => {
 	});
 	describe("boot", () => {
 		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 100);
+			setTimeout(done, 2000);
+		});
+		it("should be inited", () => {
+			expect(game.inited).toBe(true);
 		});
 		it("should have a canvas", () => {
 			expect(container.childNodes.length).toBeGreaterThan(1);

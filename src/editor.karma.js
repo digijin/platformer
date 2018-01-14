@@ -12,7 +12,7 @@ function sleep(ms) {
 
 const DELAY = 500;
 
-describe("editor.karma functional", () => {
+xdescribe("editor.karma functional", () => {
 	let container;
 	let game;
 	beforeAll(function() {
