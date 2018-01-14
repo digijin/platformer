@@ -6,6 +6,7 @@ import Editor from "Scene/Editor";
 import Equip from "Scene/Equip";
 
 import Doors from "Transition/Doors";
+import SmokeExplosionUpTransition from "Transition/SmokeExplosionUpTransition";
 
 import engineConnect from "React/engineConnect";
 import Load from "./Load";
@@ -64,7 +65,11 @@ function mapStateToProps(state: Object, props: Object): Object {
 function mapDispatchToProps(dispatch: Function, props: Object): Object {
 	return {
 		play: () => {
-			props.engine.startScene(new Level());
+			// props.engine.startScene(new Level());
+			props.engine.startSceneTransition(
+				new Level(),
+				new SmokeExplosionUpTransition()
+			);
 		},
 		editor: () => {
 			props.engine.startScene(new Editor());

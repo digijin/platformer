@@ -23,6 +23,8 @@ export default class ExplosionRadial extends AnimateOnce {
 			)
 		);
 		this.movie.rotation = Math.random() * Math.PI;
+		this.movie.width = this.movie.height = 100;
+
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 	}
 	update() {
