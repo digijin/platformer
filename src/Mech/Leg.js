@@ -12,6 +12,8 @@ import lowerleg from "Player/lowerleg.png";
 import gun from "Player/gun.png";
 import config from "config";
 
+import * as PIXI from "pixi.js";
+
 const branchLength = 30;
 const numBranches = 2;
 
@@ -36,6 +38,51 @@ export default class Leg extends GameObject {
 		this.torsoOffset = new Point();
 		this.frontFootPos = new Point();
 		this.rearFootPos = new Point();
+	}
+	init(engine) {
+		super.init(engine);
+
+		let cockpitTex = new PIXI.Texture(new PIXI.BaseTexture(cockpit));
+		let footTex = new PIXI.Texture(new PIXI.BaseTexture(foot));
+		let upperlegTex = new PIXI.Texture(new PIXI.BaseTexture(upperleg));
+		let lowerlegTex = new PIXI.Texture(new PIXI.BaseTexture(lowerleg));
+		let gunTex = new PIXI.Texture(new PIXI.BaseTexture(gun));
+
+		this.cockpit = new PIXI.Sprite(cockpitTex);
+		this.cockpit.anchor = { x: 0.5, y: 0.5 };
+		this.foot = new PIXI.Sprite(footTex);
+		this.upperleg = new PIXI.Sprite(upperlegTex);
+		this.lowerleg = new PIXI.Sprite(lowerlegTex);
+		this.gun = new PIXI.Sprite(gunTex);
+		this.rearfoot = new PIXI.Sprite(footTex);
+		this.rearupperleg = new PIXI.Sprite(upperlegTex);
+		this.rearlowerleg = new PIXI.Sprite(lowerlegTex);
+		[
+			this.cockpit,
+			this.foot,
+			this.upperleg,
+			this.lowerleg,
+			this.gun,
+			this.rearfoot,
+			this.rearupperleg,
+			this.rearlowerleg
+		].forEach(spr => {
+			this.engine.stage.addChild(spr);
+		});
+	}
+	exit() {
+		[
+			this.cockpit,
+			this.foot,
+			this.upperleg,
+			this.lowerleg,
+			this.gun,
+			this.rearfoot,
+			this.rearupperleg,
+			this.rearlowerleg
+		].forEach(spr => {
+			this.engine.stage.removeChild(spr);
+		});
 	}
 	update() {
 		let offsetTarget;
@@ -91,49 +138,30 @@ export default class Leg extends GameObject {
 		this.head(this.position, facing);
 		this.ik(this.rearFootPos, facing);
 
-		this.gun(this.position.add({ x: facing * 20, y: 20 }), facing);
+		this.gunPosition(this.position.add({ x: facing * 20, y: 20 }), facing);
 	}
 	gunBarrelPos: Point;
-	gun(pos: Point, facing: Facing = FACING_LEFT) {
+	gunPosition(pos: Point, facing: Facing = FACING_LEFT) {
 		let dir = this.engine.mouse.point.subtract(pos).direction();
 		// if (facing < 0) {
 		// 	dir += Math.PI;
 		// }
-		this.engine.ctx.drawSprite(
-			gun,
-			pos,
-			{ w: 56, h: 21 },
-			dir,
-			{
-				x: 0.25,
-				y: 0.5
-			},
-			{ x: 1, y: facing }
-		);
+		this.gun.position = pos.subtract(this.engine.view.offset);
+		this.gun.rotation = dir;
+		this.gun.scale.y = facing;
+		this.gun.anchor = { x: 0.25, y: 0.5 };
+
 		this.gunBarrelPos = pos.move(dir, 20);
 	}
 	missileBarrelPos: Point;
 	head(pos: Point, facing: Facing = FACING_LEFT) {
-		// this.engine.ctx.beginPath();
-		// this.engine.ctx.arc(pos.x, pos.y, 10, 0, 2 * Math.PI, false);
-		// this.engine.ctx.context.fillStyle = "#ababab";
-		// this.engine.ctx.fill();
 		this.missileBarrelPos = this.position.subtract({
 			x: 16 * facing,
 			y: 16
 		});
 
-		this.engine.ctx.drawSprite(
-			cockpit,
-			pos,
-			{ w: 81, h: 43 },
-			0,
-			{
-				x: 0.5,
-				y: 0.5
-			},
-			{ x: facing, y: 1 }
-		);
+		this.cockpit.position = pos.subtract(this.engine.view.offset);
+		this.cockpit.scale.x = facing;
 	}
 	ik(target: Point, facing: Facing = FACING_LEFT) {
 		let floor = this.parent.position.y;
