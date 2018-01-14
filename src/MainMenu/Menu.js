@@ -46,6 +46,8 @@ export default class MainMenu extends GameObject {
 		this.hero.position.x = window.innerWidth / 2;
 		this.hero.position.y = window.innerHeight / 2;
 
+		this.engine.view.offset.x += 100 * this.engine.deltaTime;
+
 		// if (Math.random() > 0.97) {
 		// 	let types = [
 		// 		ExplosionUp1,

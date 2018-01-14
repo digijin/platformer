@@ -45,6 +45,7 @@ export default class Background extends GameObject {
 		for (let i = 0; i < NUM_BUILDINGS; i++) {
 			let building = this.makeBuilding();
 			building.x = Math.random() * window.innerWidth;
+			building.offset = building.x;
 			building.z = Math.random();
 			this.buildings.push(building);
 		}
@@ -68,11 +69,15 @@ export default class Background extends GameObject {
 				throw new Error("yolo no z on child ");
 			}
 
-			b.position.x +=
-				(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
-			if (b.position.x > window.innerWidth + OVERLAP) {
-				b.position.x -= window.innerWidth + OVERLAP * 2;
-			}
+			// b.position.x +=
+			// 	(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
+			// if (b.position.x > window.innerWidth + OVERLAP) {
+			// 	b.position.x -= window.innerWidth + OVERLAP * 2;
+			// }
+
+			b.position.x =
+				(b.offset + this.engine.view.offset.x * b.z) %
+				window.innerWidth;
 		});
 		if (Math.random() > 0.9) {
 			this.spawnExplosion();
@@ -105,6 +110,7 @@ export default class Background extends GameObject {
 			speed: 0.2
 		});
 		exp.position.x = window.innerWidth * Math.random();
+		exp.movie.offset = exp.position.x;
 		exp.movie.z = Math.random();
 		// exp.positionSprite();
 		exp.movie.anchor = { x: 0.5, y: 0.9 };
