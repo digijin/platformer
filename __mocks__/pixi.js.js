@@ -37,7 +37,8 @@ const pixi = {
 	BaseTexture: Klass,
 	extras: {
 		TilingSprite: Klass
-	}
+	},
+	BLEND_MODES: {}
 };
 
 module.exports = pixi;
