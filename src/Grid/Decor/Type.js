@@ -65,6 +65,9 @@ export default class DecorType {
 				PIXI.loader.resources["decor"].textures[this.textureId];
 		}
 	}
+	getTexture() {
+		return this.texture;
+	}
 }
 
 let blockTypeConfig: Array<DecorTypeParams> = [
@@ -266,6 +269,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
 	c => new DecorType(c)
 );
+//add custom decor
 
 export const DecorTypeMap: Object = DecorTypes.reduce(
 	(output: Object, type: DecorType) => {

@@ -20,6 +20,7 @@ export default class Decor {
 
 		if (this.type !== "0") {
 			this.hp = this.getType().hp;
+			this.texture = this.getType().getTexture();
 		}
 	}
 
