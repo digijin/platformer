@@ -18,6 +18,8 @@ import agro from "AI/agro/agro";
 import heligun from "AI/agro/heligun";
 import type EnemyType from "Actor/Enemy/Type";
 
+import * as PIXI from "pixi.js";
+
 export default class Enemy extends Actor {
 	walkSpeed: number;
 	v: number;
@@ -46,8 +48,27 @@ export default class Enemy extends Actor {
 
 		Object.assign(this, params);
 	}
+	init(engine) {
+		super.init(engine);
+		let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
+		this.sprite = new PIXI.Sprite(texture);
+		this.sprite.anchor = this.registration;
+		this.sprite.width = this.size.w;
+		this.sprite.height = this.size.h;
+		this.engine.stage.addChild(this.sprite);
+	}
+	exit() {
+		this.engine.stage.removeChild(this.sprite);
+	}
+	destroy() {
+		this.exit();
+		super.destroy();
+	}
 	action: ?Generator<*, *, *>;
 	update(engine: Engine) {
+		this.sprite.position = this.position
+			// .add({ x: 10, y: 10 })
+			.subtract(this.engine.view.offset);
 		let player = this.engine.objectsTagged("player").pop();
 		if (!player) {
 			// this.gravity();
@@ -102,13 +123,13 @@ export default class Enemy extends Actor {
 	}
 
 	render() {
-		this.engine.ctx.drawSprite(
-			this.type.image,
-			this.position,
-			this.size,
-			0,
-			this.registration
-		);
+		// this.engine.ctx.drawSprite(
+		// 	this.type.image,
+		// 	this.position,
+		// 	this.size,
+		// 	0,
+		// 	this.registration
+		// );
 		// healthbar:d
 		let barRect = Rect.fromPosSizeRego(
 			this.position.add({ x: 0, y: -70 }),
