@@ -73,13 +73,13 @@ export default class Leg extends GameObject {
 	exit() {
 		[
 			this.cockpit,
-			this.foot,
 			this.upperleg,
 			this.lowerleg,
+			this.foot,
 			this.gun,
-			this.rearfoot,
 			this.rearupperleg,
-			this.rearlowerleg
+			this.rearlowerleg,
+			this.rearfoot
 		].forEach(spr => {
 			this.engine.stage.removeChild(spr);
 		});
@@ -134,9 +134,17 @@ export default class Leg extends GameObject {
 				: FACING_LEFT;
 		this.facing = facing;
 		//and render it
-		this.ik(this.frontFootPos, facing);
+		this.ik(this.frontFootPos, facing, {
+			upper: this.upperleg,
+			lower: this.lowerleg,
+			foot: this.foot
+		});
 		this.head(this.position, facing);
-		this.ik(this.rearFootPos, facing);
+		this.ik(this.rearFootPos, facing, {
+			upper: this.rearupperleg,
+			lower: this.rearlowerleg,
+			foot: this.rearfoot
+		});
 
 		this.gunPosition(this.position.add({ x: facing * 20, y: 20 }), facing);
 	}
@@ -163,7 +171,11 @@ export default class Leg extends GameObject {
 		this.cockpit.position = pos.subtract(this.engine.view.offset);
 		this.cockpit.scale.x = facing;
 	}
-	ik(target: Point, facing: Facing = FACING_LEFT) {
+	ik(
+		target: Point,
+		facing: Facing = FACING_LEFT,
+		sprites: { upper: any, lower: any, foot: any }
+	) {
 		let floor = this.parent.position.y;
 		// this.engine.ctx.drawLine(this.position, target, "#ffff00");
 		let dist = this.position.distanceTo(target);
@@ -193,34 +205,47 @@ export default class Leg extends GameObject {
 		// upperleg 20x40
 		let upperlegdirection =
 			joint.subtract(this.position).direction() - Math.PI / 2;
-		this.engine.ctx.drawSprite(
-			upperleg,
-			this.position,
-			{ w: 20, h: 40 },
-			upperlegdirection,
-			{
-				x: 0.5,
-				y: 0.25
-			},
-			{ x: facing, y: 1 }
+
+		sprites.upper.position = this.position.subtract(
+			this.engine.view.offset
 		);
+		sprites.upper.anchor = {
+			x: 0.5,
+			y: 0.25
+		};
+		sprites.upper.scale.x = facing;
+		sprites.upper.rotation = upperlegdirection;
+
 		let lowerlegdirection =
 			endpoint.subtract(joint).direction() - Math.PI / 2;
-		this.engine.ctx.drawSprite(
-			lowerleg,
-			joint,
-			{ w: 16, h: 33 },
-			lowerlegdirection,
-			{
-				x: 0.5,
-				y: 0.25
-			},
-			{ x: facing, y: 1 }
-		);
 
-		this.engine.ctx.drawSprite(foot, endpoint, { w: 25, h: 10 }, 0, {
+		sprites.lower.position = joint.subtract(this.engine.view.offset);
+		sprites.lower.anchor = {
+			x: 0.5,
+			y: 0.25
+		};
+		sprites.lower.scale.x = facing;
+		sprites.lower.rotation = lowerlegdirection;
+		// this.engine.ctx.drawSprite(
+		// 	lowerleg,
+		// 	joint,
+		// 	{ w: 16, h: 33 },
+		// 	lowerlegdirection,
+		// 	{
+		// 		x: 0.5,
+		// 		y: 0.25
+		// 	},
+		// 	{ x: facing, y: 1 }
+		// );
+
+		// this.engine.ctx.drawSprite(foot, endpoint, { w: 25, h: 10 }, 0, {
+		// 	x: 0.5,
+		// 	y: 1
+		// });
+		sprites.foot.position = endpoint.subtract(this.engine.view.offset);
+		sprites.foot.anchor = {
 			x: 0.5,
 			y: 1
-		});
+		};
 	}
 }
