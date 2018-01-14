@@ -163,7 +163,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "light",
 		hp: 1,
-		mode: "soft-light"
+		mode: PIXI.BLEND_MODES.ADD
 	},
 	{
 		name: "fuelsign",
