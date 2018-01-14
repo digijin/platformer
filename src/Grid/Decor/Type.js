@@ -68,6 +68,9 @@ export default class DecorType {
 	getTexture() {
 		return this.texture;
 	}
+	getSprite() {
+		return new PIXI.Sprite(this.getTexture());
+	}
 }
 
 let blockTypeConfig: Array<DecorTypeParams> = [
