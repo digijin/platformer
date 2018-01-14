@@ -66,6 +66,7 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 	return {
 		play: () => {
 			// props.engine.startScene(new Level());
+			dispatch({ type: "END_SCENE" });
 			props.engine.startSceneTransition(
 				new Level(),
 				new SmokeExplosionUpTransition()
