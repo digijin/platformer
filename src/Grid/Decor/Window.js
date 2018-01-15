@@ -35,6 +35,15 @@ export default class WindowDecor extends Abstract {
 	}
 	getSprite() {
 		let image = new PIXI.Container();
+		options.forEach(layer => {
+			let option = layer[Math.floor(layer.length * Math.random())];
+			if (option) {
+				let sprite = new PIXI.Sprite(
+					new PIXI.Texture(new PIXI.BaseTexture(option))
+				);
+				image.addChild(sprite);
+			}
+		});
 
 		return image;
 	}
