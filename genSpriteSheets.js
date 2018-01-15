@@ -29,3 +29,16 @@ spritesheet(
 		if (err) throw err;
 	}
 );
+
+spritesheet(
+	"src/Grid/Decor/images/*.png",
+	{
+		format: "pixi.js",
+		path: "src/Grid/Decor",
+		trim: true,
+		name: "decorsprites"
+	},
+	function(err) {
+		if (err) throw err;
+	}
+);
