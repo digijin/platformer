@@ -16,3 +16,16 @@ fs.readdirSync("src/assets/animation").forEach(dir => {
 		if (err) throw err;
 	});
 });
+
+spritesheet(
+	"src/Grid/Block/images/*.png",
+	{
+		format: "pixi.js",
+		path: "src/Grid/Block",
+		trim: true,
+		name: "sprites"
+	},
+	function(err) {
+		if (err) throw err;
+	}
+);
