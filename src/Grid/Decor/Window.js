@@ -45,6 +45,8 @@ export default class WindowDecor extends Abstract {
 			}
 		});
 
+		image.cacheAsBitmap = true;
+
 		return image;
 	}
 }

@@ -94,7 +94,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "dirt",
 		id: "1",
-		image: require("./dirt.png"),
+		image: require("./images/dirt.png"),
 		textureId: "dirt.png",
 		destructable: true,
 		hp: 100
@@ -102,7 +102,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "brick",
 		id: "2",
-		image: require("./brick_tile.png"),
+		image: require("./images/brick_tile.png"),
 		textureId: "brick_tile.png",
 		destructable: true,
 		hp: 400
@@ -110,7 +110,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "metal",
 		id: "3",
-		image: require("./metal_tile.png"),
+		image: require("./images/metal_tile.png"),
 		textureId: "metal_tile.png",
 		destructable: false,
 		hp: 0
@@ -118,7 +118,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "wood",
 		id: "4",
-		image: require("./wood_tile.png"),
+		image: require("./images/wood_tile.png"),
 		textureId: "wood_tile.png",
 		destructable: true,
 		hp: 10
@@ -126,7 +126,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "grass",
 		id: "5",
-		image: require("./grass.png"),
+		image: require("./images/grass.png"),
 		textureId: "grass.png",
 		destructable: true,
 		hp: 100
@@ -134,7 +134,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "stone",
 		id: "6",
-		image: require("./stone.png"),
+		image: require("./images/stone.png"),
 		textureId: "stone.png",
 		destructable: true,
 		hp: 100
@@ -142,7 +142,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "tiles",
 		id: "7",
-		image: require("./tiles.png"),
+		image: require("./images/tiles.png"),
 		textureId: "tiles.png",
 		destructable: true,
 		hp: 100
@@ -150,7 +150,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "brick2",
 		id: "8",
-		image: require("./brick2.png"),
+		image: require("./images/brick2.png"),
 		textureId: "brick2.png",
 		destructable: true,
 		hp: 100
@@ -158,7 +158,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "brick3",
 		id: "9",
-		image: require("./brick3.png"),
+		image: require("./images/brick3.png"),
 		textureId: "brick3.png",
 		destructable: true,
 		hp: 100
@@ -166,7 +166,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "moon",
 		id: "10",
-		image: require("./moon.png"),
+		image: require("./images/moon.png"),
 		textureId: "moon.png",
 		destructable: true,
 		hp: 100
@@ -174,7 +174,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "volcanic",
 		id: "11",
-		image: require("./volcanic.png"),
+		image: require("./images/volcanic.png"),
 		textureId: "volcanic.png",
 		destructable: true,
 		hp: 100
@@ -182,7 +182,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "pillar",
 		id: "12",
-		image: require("./pillar.png"),
+		image: require("./images/pillar.png"),
 		textureId: "pillar.png",
 		destructable: true,
 		hp: 100
@@ -190,7 +190,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "servicestation_cover",
 		id: "13",
-		image: require("./servicestation_cover.png"),
+		image: require("./images/servicestation_cover.png"),
 		textureId: "servicestation_cover.png",
 		destructable: true,
 		hp: 100
@@ -198,7 +198,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "window3x3",
 		id: "14",
-		image: require("./window3x3.png"),
+		image: require("./images/window3x3.png"),
 		textureId: "window3x3.png",
 		destructable: true,
 		hp: 1
@@ -206,7 +206,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "grate",
 		id: "15",
-		image: require("./grate.png"),
+		image: require("./images/grate.png"),
 		textureId: "grate.png",
 		destructable: true,
 		hp: 100
@@ -214,7 +214,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "concrete",
 		id: "16",
-		image: require("./concrete.png"),
+		image: require("./images/concrete.png"),
 		textureId: "concrete.png",
 		destructable: true,
 		hp: 100
@@ -222,7 +222,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "chainlink",
 		id: "17",
-		image: require("./chainlink.png"),
+		image: require("./images/chainlink.png"),
 		textureId: "chainlink.png",
 		destructable: true,
 		hp: 100
