@@ -121,6 +121,7 @@ export default class Engine {
 		this.pixicanvas.height = window.innerHeight;
 		config.game.width = this.canvas.width;
 		config.game.height = this.canvas.height;
+		this.renderer.resize(this.pixicanvas.width, this.pixicanvas.height);
 	};
 
 	startScene(scene: SceneBase) {
