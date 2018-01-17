@@ -29,6 +29,7 @@ export default class Watcher extends GameObject {
 		super();
 		this.blockId = "1";
 		this.decorId = "4";
+		this.tint = "#FFFFFF";
 		this.size = 10;
 		this.tag("editor-watcher");
 		this.mode = "block";

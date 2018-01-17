@@ -43,7 +43,7 @@ class TintSelector extends React.Component {
 			<CardContent className={classes.content}>
 				tint colour:
 				<ColorPicker
-					defaultValue="#ffffff"
+					defaultValue={this.props.watcher.tint}
 					onChange={color => {
 						this.props.watcher.tint = color;
 					}}
