@@ -322,6 +322,18 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "shadow",
 		hp: 1
+	},
+	{
+		name: "streetlight",
+		id: "25",
+		width: 5,
+		height: 5,
+		image: require("./images/streetlight.png"),
+		textureId: "streetlight.png",
+		destructable: false,
+		obstacle: false,
+		category: "light",
+		hp: 1
 	}
 ];
 
