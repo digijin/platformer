@@ -234,6 +234,54 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		textureId: "flat.png",
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "awning",
+		id: "19",
+		image: require("./images/awning.png"),
+		textureId: "awning.png",
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "block",
+		id: "20",
+		image: require("./images/bevelledBlock.png"),
+		textureId: "bevelledBlock.png",
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "tiles",
+		id: "21",
+		image: require("./images/squaretiles.png"),
+		textureId: "squaretiles.png",
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "storepanel1",
+		id: "22",
+		image: require("./images/storepanel1.png"),
+		textureId: "storepanel1.png",
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "storepanel2",
+		id: "23",
+		image: require("./images/storepanel2.png"),
+		textureId: "storepanel2.png",
+		destructable: true,
+		hp: 100
+	},
+	{
+		name: "storepanel3",
+		id: "24",
+		image: require("./images/storepanel3.png"),
+		textureId: "storepanel3.png",
+		destructable: true,
+		hp: 100
 	}
 ];
 
