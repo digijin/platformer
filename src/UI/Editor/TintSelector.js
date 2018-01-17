@@ -13,6 +13,8 @@ import classnames from "classnames";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import Collapse from "material-ui/transitions/Collapse";
 
+import ColorPicker from "material-ui-color-picker";
+
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class TintSelector extends React.Component {
 	constructor() {
@@ -38,7 +40,15 @@ class TintSelector extends React.Component {
 			decor[dt.category].push(dt);
 		});
 		return (
-			<CardContent className={classes.content}>tint options</CardContent>
+			<CardContent className={classes.content}>
+				tint colour:
+				<ColorPicker
+					defaultValue="#ffffff"
+					onChange={color => {
+						this.props.watcher.tint = color;
+					}}
+				/>
+			</CardContent>
 		);
 	}
 }

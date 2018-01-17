@@ -5,6 +5,7 @@ import type Engine from "Engine";
 
 import Rect from "Utility/Rect";
 import Point from "Utility/Point";
+import RGBA from "Utility/RGBA";
 
 import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";
@@ -21,7 +22,7 @@ export default class Watcher extends GameObject {
 
 	rectStart: Point | void;
 
-	mode: "block" | "enemy" | "decor";
+	mode: "block" | "enemy" | "decor" | "tint";
 	drawMode: "point" | "paint" | "dragrect";
 
 	constructor() {
@@ -116,6 +117,9 @@ export default class Watcher extends GameObject {
 				case "enemy":
 					this.drawEnemy(blocks, action);
 					break;
+				case "tint":
+					this.drawTint(blocks, action);
+					break;
 			}
 		} else {
 			blocks.forEach(b => {
@@ -205,6 +209,21 @@ export default class Watcher extends GameObject {
 			} else {
 				blocks.forEach(b => b.add("0"));
 			}
+		}
+	}
+
+	drawTint(blocks, action) {
+		let tint = RGBA.fromString(this.tint).toNumber();
+		if (action == "add") {
+			// block.add();
+			blocks.forEach(b => {
+				b.tint = tint;
+			});
+		}
+		if (action == "remove") {
+			blocks.forEach(b => {
+				b.tint = 0xffffff;
+			});
 		}
 	}
 
