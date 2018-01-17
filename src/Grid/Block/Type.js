@@ -282,6 +282,14 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		textureId: "storepanel3.png",
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "struts",
+		id: "25",
+		image: require("./images/struts.png"),
+		textureId: "struts.png",
+		destructable: true,
+		hp: 100
 	}
 ];
 
