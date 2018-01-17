@@ -40,6 +40,7 @@ import avatar from "assets/mech.png";
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";
 import DecorSelector from "./DecorSelector";
+import TintSelector from "./TintSelector";
 import EnemySelector from "./EnemySelector";
 import SavePanel from "./SavePanel";
 
@@ -120,7 +121,7 @@ class EditorPanel extends React.Component {
 			tab: 0,
 			drawMode: 0
 		};
-		this.tabs = ["menu", "block", "decor", "enemy", "save"];
+		this.tabs = ["menu", "block", "decor", "tint", "enemy", "save"];
 		this.drawModes = ["point", "paint", "dragrect"];
 	}
 	tabs: Array<string>;
@@ -193,9 +194,12 @@ class EditorPanel extends React.Component {
 					<DecorSelector watcher={watcher} classes={classes} />
 				)}
 				{this.state.tab === 3 && (
-					<EnemySelector watcher={watcher} classes={classes} />
+					<TintSelector watcher={watcher} classes={classes} />
 				)}
 				{this.state.tab === 4 && (
+					<EnemySelector watcher={watcher} classes={classes} />
+				)}
+				{this.state.tab === 5 && (
 					<SavePanel watcher={watcher} classes={classes} />
 				)}
 				<div className={classes.drawModeSelect}>
