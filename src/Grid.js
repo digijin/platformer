@@ -109,7 +109,8 @@ export default class Grid extends GameObject {
 					let sprite = this.spritePool.get();
 					sprite.position.x = pos.x;
 					sprite.position.y = pos.y;
-					sprite.tint = 0xffffff;
+					// sprite.tint = 0xffffff;
+					sprite.tint = block.tint;
 					sprite.visible = true;
 					sprite.texture = type.texture;
 				}
@@ -370,7 +371,11 @@ export default class Grid extends GameObject {
 			}),
 			blocks: this.blocks.map(col => {
 				return col.map(block => {
-					return { t: block.type, b: block.backgroundType };
+					return {
+						t: block.type,
+						b: block.backgroundType,
+						i: block.tint
+					};
 				});
 			})
 		});
@@ -399,6 +404,7 @@ export default class Grid extends GameObject {
 					position: new Point({ x, y }),
 					type: block.t,
 					backgroundType: block.b,
+					tint: block.i,
 					grid: this
 				});
 			});

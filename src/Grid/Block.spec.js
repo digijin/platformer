@@ -11,6 +11,8 @@ describe("Grid/Block", () => {
 			JSON.stringify(block, (name, val) => {
 				if (name !== "grid") return val;
 			})
-		).toBe('{"position":{"x":1,"y":2},"type":"0","backgroundType":"0"}');
+		).toBe(
+			'{"position":{"x":1,"y":2},"type":"0","tint":16777215,"backgroundType":"0"}'
+		);
 	});
 });

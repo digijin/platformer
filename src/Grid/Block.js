@@ -13,16 +13,22 @@ export default class Block {
 	type: string;
 	backgroundType: string;
 	grid: Grid;
+	tint: number;
 	hp: number;
 	constructor(params: {
 		position: Point,
 		type: string,
 		grid: Grid,
+		tint: number,
 		backgroundType?: string
 	}) {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
+		this.tint = params.tint;
+		if (typeof this.tint !== "number") {
+			this.tint = 0xffffff;
+		}
 		if (!params.backgroundType) {
 			params.backgroundType = this.type;
 		}
