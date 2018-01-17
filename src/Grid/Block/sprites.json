@@ -21,7 +21,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":96,"h":96},
 			"sourceSize": {"w":96,"h":96}
 		},
-		"metal_tile.png":
+		"grate.png":
 		{
 			"frame": {"x":96,"y":64,"w":32,"h":32},
 			"rotated": false,
@@ -61,7 +61,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"grass.png":
+		"flat.png":
 		{
 			"frame": {"x":128,"y":0,"w":32,"h":32},
 			"rotated": false,
@@ -69,7 +69,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"grate.png":
+		"grass.png":
 		{
 			"frame": {"x":128,"y":32,"w":32,"h":32},
 			"rotated": false,
@@ -79,13 +79,13 @@
 		},
 		"wood_tile.png":
 		{
-			"frame": {"x":160,"y":32,"w":32,"h":32},
+			"frame": {"x":160,"y":64,"w":32,"h":32},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"moon.png":
+		"metal_tile.png":
 		{
 			"frame": {"x":128,"y":96,"w":32,"h":32},
 			"rotated": false,
@@ -93,7 +93,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"pillar.png":
+		"moon.png":
 		{
 			"frame": {"x":0,"y":128,"w":32,"h":32},
 			"rotated": false,
@@ -101,7 +101,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"brick2.png":
+		"pillar.png":
 		{
 			"frame": {"x":32,"y":128,"w":32,"h":32},
 			"rotated": false,
@@ -109,7 +109,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"stone.png":
+		"brick2.png":
 		{
 			"frame": {"x":64,"y":128,"w":32,"h":32},
 			"rotated": false,
@@ -117,7 +117,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"tiles.png":
+		"stone.png":
 		{
 			"frame": {"x":96,"y":128,"w":32,"h":32},
 			"rotated": false,
@@ -125,7 +125,7 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"volcanic.png":
+		"tiles.png":
 		{
 			"frame": {"x":128,"y":128,"w":32,"h":32},
 			"rotated": false,
@@ -133,9 +133,17 @@
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 			"sourceSize": {"w":32,"h":32}
 		},
-		"brick_tile.png":
+		"volcanic.png":
 		{
 			"frame": {"x":160,"y":0,"w":32,"h":32},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+			"sourceSize": {"w":32,"h":32}
+		},
+		"brick_tile.png":
+		{
+			"frame": {"x":160,"y":32,"w":32,"h":32},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},

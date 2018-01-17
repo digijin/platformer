@@ -226,6 +226,14 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		textureId: "chainlink.png",
 		destructable: true,
 		hp: 100
+	},
+	{
+		name: "flat",
+		id: "18",
+		image: require("./images/flat.png"),
+		textureId: "flat.png",
+		destructable: true,
+		hp: 100
 	}
 ];
 
