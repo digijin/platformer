@@ -131,6 +131,19 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		mode: PIXI.BLEND_MODES.ADD
 	},
 	{
+		name: "toplit",
+		id: "18",
+		width: 1,
+		height: 1,
+		image: require("./images/toplit1x1.png"),
+		textureId: "toplit1x1.png",
+		destructable: false,
+		obstacle: false,
+		category: "light",
+		hp: 1,
+		mode: PIXI.BLEND_MODES.ADD
+	},
+	{
 		name: "fuelsign",
 		id: "9",
 		width: 4,
@@ -229,10 +242,22 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 	{
 		name: "door",
 		id: "17",
-		width: 5,
+		width: 2,
 		height: 3,
 		image: require("./images/door2_1x3.png"),
 		textureId: "door2_1x3.png",
+		destructable: false,
+		obstacle: false,
+		category: "general",
+		hp: 1
+	},
+	{
+		name: "door",
+		id: "19",
+		width: 2,
+		height: 3,
+		image: require("./images/door2_2x3.png"),
+		textureId: "door2_2x3.png",
 		destructable: false,
 		obstacle: false,
 		category: "general",

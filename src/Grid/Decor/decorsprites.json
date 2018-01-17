@@ -1,7 +1,7 @@
 {
 	"meta": {
 		"image": "decorsprites.png",
-		"size": {"w":383,"h":304},
+		"size": {"w":447,"h":304},
 		"scale": "1"
 	},
 	"frames": {
@@ -53,21 +53,21 @@
 			"spriteSourceSize": {"x":0,"y":14,"w":96,"h":82},
 			"sourceSize": {"w":96,"h":96}
 		},
-		"light3x2.png":
+		"window.png":
 		{
-			"frame": {"x":64,"y":145,"w":89,"h":50},
+			"frame": {"x":319,"y":0,"w":64,"h":96},
 			"rotated": false,
-			"trimmed": true,
-			"spriteSourceSize": {"x":5,"y":0,"w":89,"h":50},
-			"sourceSize": {"w":96,"h":64}
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":64,"h":96},
+			"sourceSize": {"w":64,"h":96}
 		},
-		"cabinet1x3.png":
+		"toplit1x1.png":
 		{
-			"frame": {"x":319,"y":96,"w":26,"h":96},
+			"frame": {"x":415,"y":91,"w":32,"h":13},
 			"rotated": false,
 			"trimmed": true,
-			"spriteSourceSize": {"x":2,"y":0,"w":26,"h":96},
-			"sourceSize": {"w":32,"h":96}
+			"spriteSourceSize": {"x":0,"y":0,"w":32,"h":13},
+			"sourceSize": {"w":32,"h":32}
 		},
 		"door1x3.png":
 		{
@@ -85,21 +85,37 @@
 			"spriteSourceSize": {"x":0,"y":4,"w":32,"h":92},
 			"sourceSize": {"w":32,"h":96}
 		},
+		"door2_2x3.png":
+		{
+			"frame": {"x":383,"y":0,"w":64,"h":91},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":0,"y":5,"w":64,"h":91},
+			"sourceSize": {"w":64,"h":96}
+		},
 		"door2_1x3.png":
 		{
-			"frame": {"x":351,"y":192,"w":32,"h":91},
+			"frame": {"x":383,"y":91,"w":32,"h":91},
 			"rotated": false,
 			"trimmed": true,
 			"spriteSourceSize": {"x":0,"y":5,"w":32,"h":91},
 			"sourceSize": {"w":32,"h":96}
 		},
-		"window.png":
+		"light3x2.png":
 		{
-			"frame": {"x":319,"y":0,"w":64,"h":96},
+			"frame": {"x":64,"y":145,"w":89,"h":50},
 			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {"x":0,"y":0,"w":64,"h":96},
-			"sourceSize": {"w":64,"h":96}
+			"trimmed": true,
+			"spriteSourceSize": {"x":5,"y":0,"w":89,"h":50},
+			"sourceSize": {"w":96,"h":64}
+		},
+		"cabinet1x3.png":
+		{
+			"frame": {"x":319,"y":96,"w":26,"h":96},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":2,"y":0,"w":26,"h":96},
+			"sourceSize": {"w":32,"h":96}
 		}
 	}
 }
