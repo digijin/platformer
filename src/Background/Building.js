@@ -73,7 +73,22 @@ export default class Building {
 						this.windowHeight
 					);
 					//and on side
+
+					if (litFloor && Math.random() < 0.2) {
+						let unlit = RGBA.fromString(this.windowColor);
+						let lit = RGBA.fromString(this.windowLitColor);
+						let pc = Math.random();
+
+						this.context.shadowColor = this.windowLitColor;
+						this.context.shadowBlur = pc * 5;
+
+						this.context.fillStyle = unlit
+							.percentTo(lit, pc)
+							.toHex();
+					}
+
 					let ratio = this.sideWidth / this.width;
+
 					this.context.fillRect(
 						this.width + x * ratio,
 						y * this.floorHeight,
