@@ -443,6 +443,10 @@ export default class Grid extends GameObject {
 	addColLeft() {
 		this.width++;
 		this.blocks.unshift(this.blocks[0].map(b => new Block(b)));
+		this.decor.forEach(d => {
+			d.position.x++;
+			d.sprite.position.x += config.grid.width;
+		});
 		this.rebuildBlocks();
 	}
 	addColRight() {

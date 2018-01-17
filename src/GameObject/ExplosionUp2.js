@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 
-PIXI.loader.add("ExplosionUp2", "/assets/ExplosionUp2.json");
+PIXI.loader.add("ExplosionUp2", "assets/ExplosionUp2.json");
 import GameObject from "GameObject";
 
 import Point from "Utility/Point";

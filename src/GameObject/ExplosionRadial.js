@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 
-PIXI.loader.add("ExplosionRadial", "/assets/ExplosionRadial.json");
+PIXI.loader.add("ExplosionRadial", "assets/ExplosionRadial.json");
 import GameObject from "GameObject";
 
 import Point from "Utility/Point";
