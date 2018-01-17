@@ -310,6 +310,18 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "shadow",
 		hp: 1
+	},
+	{
+		name: "shadow",
+		id: "24",
+		width: 1,
+		height: 1,
+		image: require("./images/storeshopwindow.png"),
+		textureId: "storeshopwindow.png",
+		destructable: false,
+		obstacle: false,
+		category: "shadow",
+		hp: 1
 	}
 ];
 
