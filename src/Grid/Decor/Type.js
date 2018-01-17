@@ -262,6 +262,18 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "general",
 		hp: 1
+	},
+	{
+		name: "storefront",
+		id: "20",
+		width: 7,
+		height: 4,
+		image: require("./images/storefront.png"),
+		textureId: "storefront.png",
+		destructable: false,
+		obstacle: false,
+		category: "general",
+		hp: 1
 	}
 ];
 
