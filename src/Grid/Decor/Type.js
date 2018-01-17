@@ -274,6 +274,42 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "general",
 		hp: 1
+	},
+	{
+		name: "shadow",
+		id: "21",
+		width: 1,
+		height: 1,
+		image: require("./images/topshadow.png"),
+		textureId: "topshadow.png",
+		destructable: false,
+		obstacle: false,
+		category: "shadow",
+		hp: 1
+	},
+	{
+		name: "shadow",
+		id: "22",
+		width: 1,
+		height: 1,
+		image: require("./images/cornershadow.png"),
+		textureId: "cornershadow.png",
+		destructable: false,
+		obstacle: false,
+		category: "shadow",
+		hp: 1
+	},
+	{
+		name: "shadow",
+		id: "23",
+		width: 1,
+		height: 1,
+		image: require("./images/sideshadow.png"),
+		textureId: "sideshadow.png",
+		destructable: false,
+		obstacle: false,
+		category: "shadow",
+		hp: 1
 	}
 ];
 
