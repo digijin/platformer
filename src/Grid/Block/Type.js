@@ -15,8 +15,8 @@
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
 
-require("./sprites.json");
-require("./sprites.png");
+// require("./sprites.json");
+// require("./sprites.png");
 
 PIXI.loader.add("blocks", "/assets/sprites.json");
 

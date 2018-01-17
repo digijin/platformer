@@ -9,8 +9,8 @@
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
 
-require("./decorsprites.json");
-require("./decorsprites.png");
+// require("./decorsprites.json");
+// require("./decorsprites.png");
 
 PIXI.loader.add("decor", "/assets/decorsprites.json");
 

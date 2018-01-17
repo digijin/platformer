@@ -21,7 +21,7 @@ spritesheet(
 	"src/Grid/Block/images/*.png",
 	{
 		format: "pixi.js",
-		path: "src/Grid/Block",
+		path: "dist/assets",
 		trim: true,
 		name: "sprites"
 	},
@@ -34,7 +34,7 @@ spritesheet(
 	"src/Grid/Decor/images/*.png",
 	{
 		format: "pixi.js",
-		path: "src/Grid/Decor",
+		path: "dist/assets",
 		trim: true,
 		name: "decorsprites"
 	},
