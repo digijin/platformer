@@ -18,8 +18,6 @@ PIXI.utils.skipHello();
 // require("./sprites.json");
 // require("./sprites.png");
 
-PIXI.loader.add("blocks", "assets/sprites.json");
-
 export type BlockTypeParams = {
 	// hp: name,
 	name: string,
@@ -298,6 +296,7 @@ export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
 );
 
 //look for any stray types
+// export function findStrays() {
 Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
 	console.log("check", key);
 	//if every blocktype doesnt match that key
@@ -307,8 +306,10 @@ Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
 		})
 	) {
 		//pop in a new block type
+		console.log("pippedy poppedy into the hippedy hoppity");
 	}
 });
+// }
 
 export const BlockTypeMap: Object = BlockTypes.reduce(
 	(output: Object, type: BlockType) => {
