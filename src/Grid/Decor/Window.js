@@ -16,7 +16,6 @@ let options = [
 	[frame],
 	[detail0, null]
 ];
-console.log(Abstract);
 export default class WindowDecor extends Abstract {
 	constructor() {
 		// super();

@@ -298,7 +298,7 @@ export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
 //look for any stray types
 // export function findStrays() {
 Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
-	console.log("check", key);
+	// console.log("check", key);
 	//if every blocktype doesnt match that key
 	if (
 		BlockTypes.every(bt => {
@@ -306,7 +306,8 @@ Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
 		})
 	) {
 		//pop in a new block type
-		console.log("pippedy poppedy into the hippedy hoppity");
+		// console.log("pippedy poppedy into the hippedy hoppity");
+		console.log(key, "hasnt been done thing");
 	}
 });
 // }

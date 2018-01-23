@@ -15,9 +15,9 @@ PIXI.loader.add("blocks", "assets/sprites.json");
 
 window.onload = () => {
 	//load more shit
-	console.log("window loaded");
+	// console.log("window loaded");
 	PIXI.loader.load(() => {
-		console.log("pixi loaded n shit");
+		// console.log("pixi loaded n shit");
 		// load pixi assets before we even parse Game
 		// so that any references to pixi can be referenced as they are parsed
 		// and not have init checks and shit everywhere
