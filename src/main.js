@@ -12,6 +12,7 @@ import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
 
 PIXI.loader.add("blocks", "assets/sprites.json");
+PIXI.loader.add("decor", "assets/decorsprites.json");
 
 window.onload = () => {
 	//load more shit

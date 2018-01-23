@@ -12,8 +12,6 @@ PIXI.utils.skipHello();
 // require("./decorsprites.json");
 // require("./decorsprites.png");
 
-PIXI.loader.add("decor", "assets/decorsprites.json");
-
 import WindowDecor from "./Window";
 
 import Abstract from "./Abstract";
