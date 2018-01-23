@@ -297,6 +297,19 @@ export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
 	c => new BlockType(c)
 );
 
+//look for any stray types
+Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
+	console.log("check", key);
+	//if every blocktype doesnt match that key
+	if (
+		BlockTypes.every(bt => {
+			return bt.textureId !== key;
+		})
+	) {
+		//pop in a new block type
+	}
+});
+
 export const BlockTypeMap: Object = BlockTypes.reduce(
 	(output: Object, type: BlockType) => {
 		if (output[type.id]) {
