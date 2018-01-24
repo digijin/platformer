@@ -7,9 +7,11 @@ import Rect from "Utility/Rect";
 import Point from "Utility/Point";
 import RGBA from "Utility/RGBA";
 
+import type Block from 'Grid/Block'
+
 import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";
-import { log } from "util";
+import {log} from "util";
 
 export default class Watcher extends GameObject {
 	el: HTMLDivElement;
@@ -35,7 +37,7 @@ export default class Watcher extends GameObject {
 		this.mode = "block";
 		this.drawMode = "paint";
 	}
-	init(engine: Engine) {
+	init(engine : Engine) {
 		super.init(engine);
 		// let el = document.createElement("DIV");
 		// el.innerHTML = "I'm a div";
@@ -44,20 +46,20 @@ export default class Watcher extends GameObject {
 	}
 	update() {
 		this.size += this.engine.input.getAxis("wheel") / 50;
-		let rect = Rect.fromPosSizeRego(
-			this.engine.mouse.point,
-			{ w: this.size, h: this.size },
-			{ x: 0.5, y: 0.5 }
-		);
+		let rect = Rect.fromPosSizeRego(this.engine.mouse.point, {
+			w: this.size,
+			h: this.size
+		}, {
+			x: 0.5,
+			y: 0.5
+		});
 		let blocks = [];
 		// let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
 		// let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		let action = "";
 		switch (this.drawMode) {
 			case "point":
-				blocks = [
-					this.engine.grid.getBlockAtPoint(this.engine.mouse.point)
-				];
+				blocks = [this.engine.grid.getBlockAtPoint(this.engine.mouse.point)];
 
 				if (this.engine.input.getButtonUp("editor_add")) {
 					action = "add";
@@ -81,18 +83,10 @@ export default class Watcher extends GameObject {
 				break;
 			case "dragrect":
 				if (this.rectStart) {
-					let dragrect = new Rect.fromPoints(
-						this.rectStart,
-						this.engine.mouse.point
-					);
-					blocks = this.engine.grid.getBlocksOverlappingRect(
-						dragrect
-					);
+					let dragrect = new Rect.fromPoints(this.rectStart, this.engine.mouse.point);
+					blocks = this.engine.grid.getBlocksOverlappingRect(dragrect);
 				}
-				if (
-					this.engine.input.getButtonDown("editor_add") ||
-					this.engine.input.getButtonDown("editor_remove")
-				) {
+				if (this.engine.input.getButtonDown("editor_add") || this.engine.input.getButtonDown("editor_remove")) {
 					this.rectStart = this.engine.mouse.point.clone();
 				}
 				if (this.engine.input.getButtonUp("editor_add")) {
@@ -128,42 +122,25 @@ export default class Watcher extends GameObject {
 			});
 		}
 		//scrolling
-		let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
-		this.engine.view.offset.x +=
-			this.engine.input.getAxis("horizontal") *
-			this.engine.deltaTime *
-			speed;
-		this.engine.view.offset.y +=
-			this.engine.input.getAxis("vertical") *
-			this.engine.deltaTime *
-			speed;
+		let speed = this.engine.input.getButton("editor_speed")
+			? 500
+			: 200;
+		this.engine.view.offset.x += this.engine.input.getAxis("horizontal") * this.engine.deltaTime * speed;
+		this.engine.view.offset.y += this.engine.input.getAxis("vertical") * this.engine.deltaTime * speed;
 
 		if (this.engine.input.getButton("editor_drag")) {
-			this.engine.view.offset = this.engine.view.offset.subtract(
-				this.engine.mouse.position.subtract(this.lastMouse)
-			);
+			this.engine.view.offset = this.engine.view.offset.subtract(this.engine.mouse.position.subtract(this.lastMouse));
 		}
 
 		//render cursor
-		this.engine.ctx.fillRect(
-			rect.tl().x,
-			rect.tl().y,
-			this.size,
-			this.size
-		);
+		this.engine.ctx.fillRect(rect.tl().x, rect.tl().y, this.size, this.size);
 
 		this.lastMouse = this.engine.mouse.position;
 	}
-	drawEnemy(blocks, action) {
-		// if (this.engine.input.getButton("editor_add")) {
+	drawEnemy(blocks : Array<Block>, action : string) { // if (this.engine.input.getButton("editor_add")) {
 		if (action == "add") {
 			blocks.forEach(b => {
-				this.engine.register(
-					new Enemy({
-						position: b.center,
-						type: this.enemyType
-					})
-				);
+				this.engine.register(new Enemy({position: b.center, type: this.enemyType}));
 			});
 		}
 		if (action == "remove") {
@@ -181,12 +158,10 @@ export default class Watcher extends GameObject {
 		// }
 	}
 
-	drawDecor(blocks, action) {
+	drawDecor(blocks : Array<Block>, action : string) {
 		if (action == "add") {
 			// block.add();
-			blocks.forEach(b =>
-				this.engine.grid.addDecor(b.position, this.decorId)
-			);
+			blocks.forEach(b => this.engine.grid.addDecor(b.position, this.decorId));
 		}
 		if (action == "remove") {
 			// block.remove();
@@ -194,7 +169,7 @@ export default class Watcher extends GameObject {
 		}
 	}
 
-	drawBlocks(blocks, action) {
+	drawBlocks(blocks : Array<Block>, action : string) {
 		if (action == "add") {
 			// block.add();
 			if (this.engine.input.getButton("editor_modifier")) {
@@ -213,7 +188,7 @@ export default class Watcher extends GameObject {
 		}
 	}
 
-	drawTint(blocks, action) {
+	drawTint(blocks : Array<Block>, action : string) {
 		let tint = RGBA.fromString(this.tint).toNumber();
 		if (action == "add") {
 			// block.add();

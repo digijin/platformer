@@ -17,63 +17,30 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import Projectile from "GameObject/Projectile";
 
-import TrailRenderer from "GameObject/TrailRenderer";
-
 export default class Missile extends Projectile {
 	guided: boolean;
 	remoteControl: boolean;
-	// trailRenderer: TrailRenderer;
-
-	constructor(params: Object) {
+	trajectory: Line constructor(params : Object) {
 		super(params);
 		// this.speed = 1;
 		this.guided = true;
 		this.tag("missile");
 		this.maxhp = this.hp = 1000;
 	}
-	init(engine: Engine) {
+	init(engine : Engine) {
 		super.init(engine);
-		// this.trailRenderer = new TrailRenderer({
-		// 	target: this,
-		// 	offset: new Point(),
-		// 	length: 30
-		// });
-		// this.engine.register(this.trailRenderer);
 	}
 	explode() {
-		// this.destroy();
 		super.explode();
-		// this.trailRenderer.die();
 
-		this.engine.register(
-			new ExplosionRadial({
-				position: this.position,
-				rotation: 0,
-				delay: 0
-			})
-		);
+		this.engine.register(new ExplosionRadial({position: this.position, rotation: 0, delay: 0}));
 
-		// for (let i = 0; i < 10; i++) {
-		// 	//we want red outlines to be on the outside
-		// 	//pick a direction
-		// 	let dir = Math.random() * Math.PI * 2;
-		// 	let dist = Math.random() * 20;
-		// 	let offset = { x: Math.cos(dir) * dist, y: Math.sin(dir) * dist };
-		// 	this.engine.register(
-		// 		new Explosion({
-		// 			position: this.position.add(offset),
-		// 			rotation: dir,
-		// 			delay: Math.random() / 8
-		// 		})
-		// 	);
-		// }
 	}
 	move() {
-		//override
 		let old = this.position.clone();
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
-		this.trajectory = new Line({ a: old, b: this.position });
+		this.trajectory = new Line({a: old, b: this.position});
 	}
 	update = () => {
 		this.move();
@@ -87,10 +54,8 @@ export default class Missile extends Projectile {
 		this.checkActors();
 
 		//smoke trail
-		this.engine.register(new Smoke({ position: this.position.clone() }));
-		this.engine.register(
-			new Smoke({ position: this.trajectory.percent(0.5) })
-		);
+		this.engine.register(new Smoke({position: this.position.clone()}));
+		this.engine.register(new Smoke({position: this.trajectory.percent(0.5)}));
 
 		//aim at target
 		if (this.guided) {
@@ -105,9 +70,11 @@ export default class Missile extends Projectile {
 			let newdir = Math.atan2(diff.y, diff.x);
 
 			let dirDiff = this.direction - newdir;
-			if (dirDiff > Math.PI) newdir += 2 * Math.PI;
-			if (dirDiff < -Math.PI) newdir -= 2 * Math.PI;
-
+			if (dirDiff > Math.PI) 
+				newdir += 2 * Math.PI;
+			if (dirDiff < -Math.PI) 
+				newdir -= 2 * Math.PI;
+			
 			//recalculate now we have removed cyclic variance
 			dirDiff = newdir - this.direction;
 
@@ -124,27 +91,31 @@ export default class Missile extends Projectile {
 					this.direction -= this.engine.deltaTime * Math.PI * 2;
 				}
 			}
-			if (this.speed < 1) this.speed = 1;
-			if (this.speed > 12) this.speed = 12;
-
+			if (this.speed < 1) 
+				this.speed = 1;
+			if (this.speed > 12) 
+				this.speed = 12;
+			
 			//dont spin it up too much
-			if (this.direction > Math.PI) this.direction -= Math.PI * 2;
-			if (this.direction < -Math.PI) this.direction += Math.PI * 2;
-		}
-
-		this.engine.ctx.drawSprite(
-			missile,
-			this.position,
-			{ w: 20, h: 10 },
-			this.direction,
-			{ x: 0.2, y: 0.5 }
-		);
+			if (this.direction > Math.PI) 
+				this.direction -= Math.PI * 2;
+			if (this.direction < -Math.PI) 
+				this.direction += Math.PI * 2;
+			}
+		
+		this.engine.ctx.drawSprite(missile, this.position, {
+			w: 20,
+			h: 10
+		}, this.direction, {
+			x: 0.2,
+			y: 0.5
+		});
 	};
 
 	checkActors() {
-		this.engine.objectsTagged("actor").every((o: GameObject) => {
+		this.engine.objectsTagged("actor").every((o : GameObject) => {
 			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
+				let a: Actor = ((o : any) : Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
 					// a.explode();

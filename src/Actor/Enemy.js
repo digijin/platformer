@@ -29,8 +29,7 @@ export default class Enemy extends Actor {
 	h: number;
 	type: EnemyType;
 	agro: Player | null;
-
-	direction: number;
+	saprite: PIXI.Sprite direction: number;
 	constructor(params : {
 		position: Point,
 		type: EnemyType

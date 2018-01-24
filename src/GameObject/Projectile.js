@@ -13,8 +13,8 @@ export default class Projectile extends GameObject {
 	owner: Actor;
 	speed: number;
 	guided: boolean;
-
-	constructor(params: {
+	h: number,
+	v: number constructor(params : {
 		position: Point,
 		direction: number,
 		target: Point,
@@ -32,15 +32,15 @@ export default class Projectile extends GameObject {
 		let old = this.position.clone();
 		this.position.x += this.h * this.engine.deltaTime * this.speed;
 		this.position.y += this.v * this.engine.deltaTime * this.speed;
-		this.trajectory = new Line({ a: old, b: this.position });
+		this.trajectory = new Line({a: old, b: this.position});
 	}
 	// checkEnemy() {
 	// 	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 	// 		if (o !== this.owner) {
-	// 			let a: Actor = ((o: any): Actor); //RECAST
+	// 			let a: Actor = ((o: any): Actor); RECAST
 	// 			if (a.getBoundingRect().contains(this.position)) {
 	// 				this.explode();
-	// 				// this.destroy();
+	// 			  this.destroy();
 	// 				a.damage(2);
 	// 			}
 	// 		}

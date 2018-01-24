@@ -8,17 +8,23 @@ import smoke from "assets/smoke.png";
 import GameObject from "GameObject";
 import RGBA from "Utility/RGBA";
 
+import * as PIXI from 'pixi.js'
+
 export default class Smoke extends GameObject {
 	position: Point;
 	time: number; //life
 	rotation: number; //radians
+	texture: PIXI.Texture;
+	sprite: PIXI.Sprite;
+	h: number;
+	v: number;
 	constructor(params : Object) {
 		super();
 		Object.assign(this, params);
 		this.time = 1;
 		this.rotation = Math.random() * Math.PI * 2;
 	}
-	init(engine) {
+	init(engine : Engine) {
 		super.init(engine);
 		this.texture = new PIXI.Texture(new PIXI.BaseTexture(smoke));
 		// this.texture = PIXI.Texture.WHITE;
