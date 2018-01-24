@@ -12,7 +12,7 @@ export default class Smoke extends GameObject {
 	position: Point;
 	time: number; //life
 	rotation: number; //radians
-	constructor(params: Object) {
+	constructor(params : Object) {
 		super();
 		Object.assign(this, params);
 		this.time = 1;
@@ -23,7 +23,10 @@ export default class Smoke extends GameObject {
 		this.texture = new PIXI.Texture(new PIXI.BaseTexture(smoke));
 		// this.texture = PIXI.Texture.WHITE;
 		this.sprite = new PIXI.Sprite(this.texture);
-		this.sprite.anchor = { x: 0.5, y: 0.5 };
+		this.sprite.anchor = {
+			x: 0.5,
+			y: 0.5
+		};
 		this.engine.stage.addChild(this.sprite);
 
 		this.h = Math.random() - 0.5;
@@ -50,16 +53,14 @@ export default class Smoke extends GameObject {
 		super.destroy();
 	}
 
-	update = (engine: Engine) => {
+	update = (engine : Engine) => {
 		this.positionSprite();
 		this.time -= engine.deltaTime;
 
-		// ctx.fillRect(this.position.x, this.position.y, 4, 4);
 		let w = 20;
 		let h = 20;
 		h *= this.time;
 		w *= this.time;
-		// engine.ctx.drawSprite(smoke, this.position, { w, h }, this.rotation);
 
 		if (this.time < 0) {
 			this.destroy();
