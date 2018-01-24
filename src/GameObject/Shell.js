@@ -18,7 +18,8 @@ export default class Shell extends GameObject {
 		this.color = "#000000";
 		Object.assign(this, params);
 	}
-	graph: PIXI.Graphics init(engine : Engine) {
+	graph: PIXI.Graphics;
+	init(engine : Engine) {
 		super.init(engine);
 		this.graph = new PIXI.Graphics()
 		this.engine.stage.addChild(this.graph)

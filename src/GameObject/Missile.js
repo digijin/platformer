@@ -20,7 +20,8 @@ import Projectile from "GameObject/Projectile";
 export default class Missile extends Projectile {
 	guided: boolean;
 	remoteControl: boolean;
-	trajectory: Line constructor(params : Object) {
+	trajectory: Line;
+	constructor(params : Object) {
 		super(params);
 		// this.speed = 1;
 		this.guided = true;

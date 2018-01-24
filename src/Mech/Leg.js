@@ -33,7 +33,15 @@ export default class Leg extends GameObject {
 	rearFootPos: Point;
 	facing: Facing;
 
-	cockpit: PIXI.Sprite upperleg: PIXI.Sprite lowerleg: PIXI.Sprite foot: PIXI.Sprite gun: PIXI.Sprite rearupperleg: PIXI.Sprite rearlowerleg: PIXI.Sprite rearfoot: PIXI.Sprite constructor(params : {
+	cockpit: PIXI.Sprite;
+	upperleg: PIXI.Sprite;
+	lowerleg: PIXI.Sprite;
+	foot: PIXI.Sprite;
+	gun: PIXI.Sprite;
+	rearupperleg: PIXI.Sprite;
+	rearlowerleg: PIXI.Sprite;
+	rearfoot: PIXI.Sprite;
+	constructor(params : {
 		parent: Player
 	}) {
 		super();

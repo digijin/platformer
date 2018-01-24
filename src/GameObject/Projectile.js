@@ -13,8 +13,9 @@ export default class Projectile extends GameObject {
 	owner: Actor;
 	speed: number;
 	guided: boolean;
-	h: number,
-	v: number constructor(params : {
+	h: number;
+	v: number;
+	constructor(params : {
 		position: Point,
 		direction: number,
 		target: Point,
