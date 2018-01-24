@@ -341,6 +341,35 @@ export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
 //add custom decor
 DecorTypes.push(new WindowDecor());
 
+if (PIXI.loader.resources["decor"]) {
+	// export function findStrays() {
+	Object.keys(PIXI.loader.resources["decor"].textures).filter(key => {
+		// console.log("check", key);
+		//if every blocktype doesnt match that key
+		if (
+			DecorTypes.every(dt => {
+				return dt.textureId !== key;
+			})
+		) {
+			DecorTypes.push(
+				new DecorType({
+					name: key,
+					id: key,
+					width: 1,
+					height: 1,
+					image: require("../Block/images/error.png"),
+					textureId: key,
+					destructable: false,
+					obstacle: false,
+					category: "stray",
+					hp: 1
+				})
+			);
+		}
+	});
+	// }
+}
+
 export const DecorTypeMap: Object = DecorTypes.reduce(
 	(output: Object, type: DecorType) => {
 		if (output[type.id]) {

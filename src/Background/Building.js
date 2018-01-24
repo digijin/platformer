@@ -97,6 +97,15 @@ export default class Building {
 					);
 				}
 			}
+
+			//faded overlay
+			let gradient = this.context.createLinearGradient(0, 0, 0, height);
+			gradient.addColorStop(0, "rgba(0,0,0,0)");
+			gradient.addColorStop(1, "rgba(23,24,25,1)");
+			this.context.shadowBlur = 0;
+			this.context.fillStyle = gradient;
+			// this.context.fillRect(0, 0, this.width, this.height);
+			this.context.fillRect(0, 0, this.sideWidth + this.width, height);
 		}
 	}
 
