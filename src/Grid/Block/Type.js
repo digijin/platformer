@@ -296,31 +296,34 @@ export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
 );
 
 //look for any stray types
-// export function findStrays() {
-Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
-	// console.log("check", key);
-	//if every blocktype doesnt match that key
-	if (
-		BlockTypes.every(bt => {
-			return bt.textureId !== key;
-		})
-	) {
-		BlockTypes.push(
-			new BlockType({
-				name: key,
-				id: key,
-				image: require("./images/error.png"),
-				textureId: key,
-				destructable: false,
-				hp: 100
+//doesnt exist in tests.
+if (PIXI.loader.resources["blocks"]) {
+	// export function findStrays() {
+	Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
+		// console.log("check", key);
+		//if every blocktype doesnt match that key
+		if (
+			BlockTypes.every(bt => {
+				return bt.textureId !== key;
 			})
-		);
-		//pop in a new block type
-		// console.log("pippedy poppedy into the hippedy hoppity");
-		// console.log(key, "hasnt been done thing");
-	}
-});
-// }
+		) {
+			BlockTypes.push(
+				new BlockType({
+					name: key,
+					id: key,
+					image: require("./images/error.png"),
+					textureId: key,
+					destructable: false,
+					hp: 100
+				})
+			);
+			//pop in a new block type
+			// console.log("pippedy poppedy into the hippedy hoppity");
+			// console.log(key, "hasnt been done thing");
+		}
+	});
+	// }
+}
 
 export const BlockTypeMap: Object = BlockTypes.reduce(
 	(output: Object, type: BlockType) => {
