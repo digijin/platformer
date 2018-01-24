@@ -37,7 +37,8 @@ export default class EnemyType {
 	idle: string;
 	agro: string;
 	image: any;
-	id: string constructor(params : EnemyTypeParams) {
+	id: string;
+	constructor(params : EnemyTypeParams) {
 		Object.assign(this, params);
 	}
 }
