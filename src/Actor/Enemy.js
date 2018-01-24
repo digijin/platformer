@@ -31,7 +31,10 @@ export default class Enemy extends Actor {
 	agro: Player | null;
 
 	direction: number;
-	constructor(params: { position: Point, type: EnemyType }) {
+	constructor(params : {
+		position: Point,
+		type: EnemyType
+	}) {
 		super();
 		this.hp = params.type.hp;
 		this.maxhp = params.type.hp;
@@ -51,6 +54,7 @@ export default class Enemy extends Actor {
 
 		Object.assign(this, params);
 	}
+	graph: PIXI.Graphics;
 	init(engine) {
 		super.init(engine);
 		let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
@@ -59,18 +63,24 @@ export default class Enemy extends Actor {
 		this.sprite.width = this.size.w;
 		this.sprite.height = this.size.h;
 		this.engine.stage.addChild(this.sprite);
+
+		this.graph = new PIXI.Graphics()
+		this.engine.stage.addChild(this.graph)
 	}
 	exit() {
 		this.engine.stage.removeChild(this.sprite);
+		this.engine.stage.removeChild(this.graph)
 	}
 	destroy() {
 		this.exit();
 		super.destroy();
 	}
-	action: ?Generator<*, *, *>;
-	update(engine: Engine) {
+	action:
+		?Generator < *, *, * >;
+	update(engine
+	: Engine) {
 		this.sprite.position = this.position
-			// .add({ x: 10, y: 10 })
+		// .add({ x: 10, y: 10 })
 			.subtract(this.engine.view.offset);
 		let player = this.engine.objectsTagged("player").pop();
 		if (!player) {
@@ -96,9 +106,7 @@ export default class Enemy extends Actor {
 		let player = this.engine.objectsTagged("player").pop();
 		if (this.agro) {
 			//falloff distance
-			if (
-				this.position.distanceTo(this.agro.position) > DEAGRO_DISTANCE
-			) {
+			if (this.position.distanceTo(this.agro.position) > DEAGRO_DISTANCE) {
 				this.startIdle();
 			} else {
 				this.startAgro();
@@ -118,45 +126,17 @@ export default class Enemy extends Actor {
 			this.explode();
 		}
 		//if stuck
-		if (
-			this.engine.grid
-				.getBlocksOverlappingRect(this.getBoundingRect())
-				.filter(block => !block.isEmpty()).length > 0
-		) {
+		if (this.engine.grid.getBlocksOverlappingRect(this.getBoundingRect()).filter(block => !block.isEmpty()).length > 0) {
 			this.explode();
 		}
 	}
 
 	render() {
-		// this.engine.ctx.drawSprite(
-		// 	this.type.image,
-		// 	this.position,
-		// 	this.size,
-		// 	0,
-		// 	this.registration
-		// );
-		// healthbar:d
-		let barRect = Rect.fromPosSizeRego(
-			this.position.add({ x: 0, y: -70 }),
-			{ w: 20, h: 5 },
-			{ x: 0.5, y: 0.5 }
-		);
-		this.engine.ctx.context.fillStyle = "black";
-		this.engine.ctx.fillRect(
-			barRect.tl().x,
-			barRect.tl().y,
-			barRect.width(),
-			barRect.height()
-		);
-		let border = 1;
-		this.engine.ctx.context.fillStyle = "red";
 
-		this.engine.ctx.fillRect(
-			barRect.tl().x,
-			barRect.tl().y + border,
-			barRect.width() * this.hp / this.type.hp,
-			barRect.height() - border * 2
-		);
+		this.graph.clear();
+		this.graph.position.set(this.position.x - this.engine.view.offset.x, this.position.y - this.engine.view.offset.y);
+		this.graph.lineStyle(5, 0xffffff).moveTo(0, 0).lineTo(20, 0)
+		this.graph.lineStyle(3, 0x00ff00).moveTo(0, 0).lineTo(20 * this.hp / this.type.hp, 0)
 	}
 	startIdle() {
 		this.agro = null;
@@ -177,7 +157,8 @@ export default class Enemy extends Actor {
 				throw new Error("no idle for Enemy");
 		}
 	}
-	startAgro(player: Player) {
+	startAgro(player
+	: Player) {
 		this.agro = player;
 
 		switch (this.type.agro) {

@@ -22,7 +22,6 @@ export default class Bullet extends Projectile {
   owner: Actor;
   speed: number;
   trajectory: Line;
-  graph: PIXI.Graphics
   constructor(params: {
     position: Point,
     h: number,
@@ -37,6 +36,7 @@ export default class Bullet extends Projectile {
     this.time = 1;
   }
 
+  graph: PIXI.Graphics
   init(engine: Engine) {
     super.init(engine);
     this.graph = new PIXI.Graphics()
