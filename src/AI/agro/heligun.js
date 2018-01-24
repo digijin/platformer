@@ -26,10 +26,10 @@ export default function* agro(
     //check below
     // engine.grid.blocksOverlappingRect();
     let rect = new Rect({
-      t: this.position.y,
-      b: this.position.y + 100,
-      l: this.position.x - 100,
-      r: this.position.x + 100
+      t: enemy.position.y,
+      b: enemy.position.y + 100,
+      l: enemy.position.x - 100,
+      r: enemy.position.x + 100
     })
     let blocks = engine.grid.getBlocksOverlappingRect(rect)
 
