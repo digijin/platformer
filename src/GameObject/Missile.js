@@ -26,7 +26,6 @@ export default class Missile extends Projectile {
 		// this.speed = 1;
 		this.guided = true;
 		this.tag("missile");
-		this.maxhp = this.hp = 1000;
 	}
 	init(engine : Engine) {
 		super.init(engine);

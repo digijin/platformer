@@ -5,7 +5,6 @@ import type Engine from "Engine";
  * Base class for anything registered by the engine
  */
 export default class GameObject {
-	destroy: () => {};
 
 	tags: Array<string>;
 	engine: Engine;

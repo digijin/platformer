@@ -8,6 +8,8 @@ import type Grid from "Grid";
 import type BlockType from "Grid/Block/Type";
 import {BlockTypeMap} from "Grid/Block/Type";
 
+import * as PIXI from 'pixi.js'
+
 export default class Block {
 	position: Point;
 	type: string;
@@ -15,12 +17,12 @@ export default class Block {
 	grid: Grid;
 	tint: number;
 	hp: number;
+	sprite: PIXI.Sprite;
 	constructor(params : {
 		position: Point,
 		type: string,
 		grid: Grid,
-		tint:
-			?number,
+		tint: any,
 		backgroundType?: string
 	}) {
 		this.position = params.position;

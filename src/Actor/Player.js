@@ -121,7 +121,7 @@ export default class Player extends Actor {
 		this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
 	}
 
-	updateMovement(gp) {
+	updateMovement(gp : boolean) {
 		let boundingRect = this.getBoundingRect();
 		this.h = this.engine.input.getAxis("horizontal");
 		if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {

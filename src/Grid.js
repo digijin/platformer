@@ -332,10 +332,13 @@ export default class Grid extends GameObject {
 		this.highlightLine(line);
 	}
 
-	highlightLine(line) {
+	highlightLine(line : Line) {
 		let pixels = line.pixels();
 		pixels.forEach(p => {
-			this.highlightBlock(this.getBlock(p));
+			let block = this.getBlock(p)
+			if (block) {
+				this.highlightBlock(block);
+			}
 		});
 		this.engine.ctx.drawLine(line.a.multiply(config.grid.width), line.b.multiply(config.grid.width), "red", 2);
 	}

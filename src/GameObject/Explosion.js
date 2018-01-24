@@ -15,6 +15,7 @@ export default class Explosion extends GameObject {
 	delay: number;
 	size: number;
 	rotation: number;
+	sprite: PIXI.Sprite;
 	constructor(params : Object) {
 		super();
 		//defaults
@@ -24,7 +25,7 @@ export default class Explosion extends GameObject {
 
 		Object.assign(this, params);
 	}
-	init(engine) {
+	init(engine : Engine) {
 		super.init(engine);
 		this.texture = new PIXI.Texture(new PIXI.BaseTexture(explosion));
 		this.sprite = new PIXI.Sprite(this.texture);

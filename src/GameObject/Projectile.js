@@ -13,6 +13,7 @@ export default class Projectile extends GameObject {
 	owner: Actor;
 	speed: number;
 	guided: boolean;
+	trajectory: Line;
 	h: number;
 	v: number;
 	constructor(params : {
@@ -59,7 +60,7 @@ export default class Projectile extends GameObject {
 				return true;
 			} else {
 				let hitTest = this.trajectory.intersectsRect(block.rect);
-				if (hitTest.result) {
+				if (hitTest.result && hitTest.collision) {
 					this.position.x = hitTest.collision.x;
 					this.position.y = hitTest.collision.y;
 					block.damage(1);
@@ -78,7 +79,7 @@ export default class Projectile extends GameObject {
 				return true;
 			}
 			let hitTest = this.trajectory.intersectsRect(d.rect);
-			if (hitTest.result) {
+			if (hitTest.result && hitTest.collision) {
 				this.position.x = hitTest.collision.x;
 				this.position.y = hitTest.collision.y;
 				d.damage(1);

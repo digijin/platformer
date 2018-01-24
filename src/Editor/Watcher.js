@@ -21,7 +21,8 @@ export default class Watcher extends GameObject {
 	enemyId: string;
 	decorId: string;
 	enemyType: EnemyType;
-
+	tint: string;
+	lastMouse: Point;
 	rectStart: Point | void;
 
 	mode: "block" | "enemy" | "decor" | "tint";
@@ -53,7 +54,7 @@ export default class Watcher extends GameObject {
 			x: 0.5,
 			y: 0.5
 		});
-		let blocks = [];
+		let blocks: Array<Block> = [];
 		// let block = this.engine.grid.getBlockAtPoint(this.engine.mouse.point);
 		// let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 		let action = "";

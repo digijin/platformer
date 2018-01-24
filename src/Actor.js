@@ -26,7 +26,7 @@ export default class Actor extends Renderable {
 
 		this.tag("actor");
 	}
-	damage(amount: number) {
+	damage(amount : number) {
 		this.hp -= amount;
 		if (this.hp <= 0) {
 			this.explode();
@@ -48,13 +48,11 @@ export default class Actor extends Renderable {
 			let diff = point.subtract(center);
 			let dir = Math.atan2(diff.y, diff.x);
 
-			this.engine.register(
-				new Explosion({
-					position: point,
-					rotation: dir,
-					delay: Math.random() / 8
-				})
-			);
+			this.engine.register(new Explosion({
+				position: point,
+				rotation: dir,
+				delay: Math.random() / 8
+			}));
 		}
 	};
 
@@ -72,24 +70,20 @@ export default class Actor extends Renderable {
 		this.position.y += this.v;
 	};
 	getBoundingRect = (): Rect => {
-		return Rect.fromPosSizeRego(
-			this.position,
-			this.size,
-			this.registration
-		);
+		return Rect.fromPosSizeRego(this.position, this.size, this.registration);
 	};
-	canMoveHori = (amount: number): boolean => {
+	canMoveHori = (amount : number): boolean => {
 		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({ x: amount, y: 0 });
+		let targetRect = boundingRect.move({x: amount, y: 0});
 		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		let obstacles = blocks.filter(block => {
 			return !block.isEmpty();
 		});
 		return obstacles.length == 0;
 	};
-	canMoveVert = (amount: number): boolean => {
+	canMoveVert = (amount : number): boolean => {
 		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({ x: 0, y: amount });
+		let targetRect = boundingRect.move({x: 0, y: amount});
 		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		let obstacles = blocks.filter(block => {
 			return !block.isEmpty();
@@ -97,15 +91,16 @@ export default class Actor extends Renderable {
 		return obstacles.length == 0;
 	};
 	//whether actor can step up
-	canStep = (amount: number): boolean => {
+	canStep = (amount : number): boolean => {
 		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({ x: amount, y: 0 });
+		let targetRect = boundingRect.move({x: amount, y: 0});
 		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		let obstacles = blocks.filter(block => {
 			return !block.isEmpty();
 		});
 		//if only one block is an obstacle, and it is in lower corner
-		let step: Block;
+		let step:
+			?Block;
 		if (obstacles.length == 1) {
 			if (amount > 0) {
 				//moving right
@@ -113,7 +108,9 @@ export default class Actor extends Renderable {
 					step = blocks[blocks.length - 1];
 				}
 			} else {
-				let bl = blocks.reduce((a: Block, b: Block) => {
+				let bl = blocks.reduce((a
+				: Block, b
+				: Block) => {
 					if (a.position.x < b.position.x) {
 						//more left
 						return a;

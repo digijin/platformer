@@ -29,8 +29,9 @@ export default class Enemy extends Actor {
 	h: number;
 	type: EnemyType;
 	agro: Player | null;
-	saprite: PIXI.Sprite;
+
 	direction: number;
+	sprite: PIXI.Sprite;
 	constructor(params : {
 		position: Point,
 		type: EnemyType
@@ -55,7 +56,7 @@ export default class Enemy extends Actor {
 		Object.assign(this, params);
 	}
 	graph: PIXI.Graphics;
-	init(engine) {
+	init(engine : Engine) {
 		super.init(engine);
 		let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
 		this.sprite = new PIXI.Sprite(texture);
@@ -109,7 +110,7 @@ export default class Enemy extends Actor {
 			if (this.position.distanceTo(this.agro.position) > DEAGRO_DISTANCE) {
 				this.startIdle();
 			} else {
-				this.startAgro();
+				this.startAgro(player);
 			}
 		} else {
 			//pickup distance

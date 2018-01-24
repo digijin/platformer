@@ -64,9 +64,7 @@ describe("functional.karma.js", () => {
 		});
 		it("should have a canvas", () => {
 			expect(container.childNodes.length).toBeGreaterThan(1);
-			expect(container.childNodes[0].constructor.name).toBe(
-				"HTMLCanvasElement"
-			);
+			expect(container.childNodes[0].constructor.name).toBe("HTMLCanvasElement");
 		});
 		it("should have a ui div", () => {
 			expect(container.childNodes[2].id).toBe("ui");
@@ -120,6 +118,7 @@ describe("functional.karma.js", () => {
 		it("should type in text box", () => {
 			let characterName = document.getElementById("characterName");
 			expect(characterName).not.toBe(null);
+			// FLOWHACK
 			characterName.value = "test_profile";
 			ReactTestUtils.Simulate.change(characterName);
 		});
@@ -170,61 +169,48 @@ describe("functional.karma.js", () => {
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 0 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", {
+				button: 0
+			}, game.engine.canvas);
 			expect(game.engine.input.getButton("fire")).toBe(1);
 		});
-		it(
-			"should move cursor",
-			testGen(function*() {
-				for (let i = 0; i < 100; i++) {
-					let target = {
-						clientX: window.innerWidth / 2 + 200,
-						clientY: window.innerHeight / 2 - 200 + i * 2
-					};
-					mouseUtil.mouseEvent(
-						"mousemove",
-						target,
-						game.engine.canvas
-					);
-					expect(game.engine.input.mouse.position.y).toBe(
-						target.clientY
-					);
-					yield sleep(10);
-				}
-			})
-		);
+		it("should move cursor", testGen(function* () {
+			for (let i = 0; i < 100; i++) {
+				let target = {
+					clientX: window.innerWidth / 2 + 200,
+					clientY: window.innerHeight / 2 - 200 + i * 2
+				};
+				mouseUtil.mouseEvent("mousemove", target, game.engine.canvas);
+				expect(game.engine.input.mouse.position.y).toBe(target.clientY);
+				yield sleep(10);
+			}
+		}));
 		it("should have bullets in the air", () => {
-			expect(game.engine.objectsTagged("bullet").length).toBeGreaterThan(
-				0
-			);
+			expect(game.engine.objectsTagged("bullet").length).toBeGreaterThan(0);
 		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
+			mouseUtil.mouseEvent("mouseup", {
+				button: 0
+			}, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should start firing misiles", () => {
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 2 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", {
+				button: 2
+			}, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should have missiles in flight", () => {
-			expect(game.engine.objectsTagged("missile").length).toBeGreaterThan(
-				0
-			);
+			expect(game.engine.objectsTagged("missile").length).toBeGreaterThan(0);
 		});
 		it("should end firing misiles", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 2 }, game.engine.canvas);
+			mouseUtil.mouseEvent("mouseup", {
+				button: 2
+			}, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
@@ -232,21 +218,21 @@ describe("functional.karma.js", () => {
 	});
 	describe("run and gun", () => {
 		it("should start running", () => {
-			window.onkeydown({ keyCode: 68 }); //39
+			window.onkeydown({keyCode: 68}); //39
 			// expect(game.engine.input.getAxis("horizontal")).toBe(1);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 500);
 		});
 		it("should start jumping", () => {
-			window.onkeydown({ keyCode: 32 });
+			window.onkeydown({keyCode: 32});
 			expect(game.engine.input.getButton("jump")).toBe(1);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should stop jumping", () => {
-			window.onkeyup({ keyCode: 32 });
+			window.onkeyup({keyCode: 32});
 			expect(game.engine.input.getButton("jump")).toBe(0);
 		});
 
@@ -259,31 +245,31 @@ describe("functional.karma.js", () => {
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 2 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", {
+				button: 2
+			}, game.engine.canvas);
 		});
 
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 2 }, game.engine.canvas);
+			mouseUtil.mouseEvent("mouseup", {
+				button: 2
+			}, game.engine.canvas);
 		});
 		it("should begin firing", () => {
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 0 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", {
+				button: 0
+			}, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
 		});
 		it("should end firing", () => {
-			mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
+			mouseUtil.mouseEvent("mouseup", {
+				button: 0
+			}, game.engine.canvas);
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 100);
@@ -292,8 +278,8 @@ describe("functional.karma.js", () => {
 
 	describe("pause and exit to menu", () => {
 		it("should hit escape", () => {
-			window.onkeydown({ keyCode: 27 }); //39
-			window.onkeyup({ keyCode: 27 }); //39
+			window.onkeydown({keyCode: 27}); //39
+			window.onkeyup({keyCode: 27}); //39
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 1000);
@@ -311,11 +297,11 @@ describe("functional.karma.js", () => {
 			expect(game.engine.paused).toBe(false);
 		});
 		it("should hit escape", () => {
-			window.onkeydown({ keyCode: 27 });
+			window.onkeydown({keyCode: 27});
 		});
 		it("should be registered with input", () => {
 			expect(game.engine.input.getKeyDown("escape")).toBeTruthy();
-			window.onkeyup({ keyCode: 27 });
+			window.onkeyup({keyCode: 27});
 		});
 		it("should wait for a while", done => {
 			setTimeout(done, 1000);
