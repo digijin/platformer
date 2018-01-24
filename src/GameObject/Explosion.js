@@ -44,8 +44,12 @@ export default class Explosion extends GameObject {
 		this.sprite.width = this.sprite.height = this.size * Math.cos((1 - this.time) * Math.PI / 2);
 	}
 	destroy() {
-		this.engine.stage.removeChild(this.sprite);
 		super.destroy();
+		this.exit();
+	}
+	exit() {
+		this.engine.stage.removeChild(this.sprite);
+
 	}
 	update(engine : Engine) {
 		this.positionSprite();

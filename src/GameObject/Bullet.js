@@ -46,7 +46,11 @@ export default class Bullet extends Projectile {
 	}
 	destroy() {
 		super.destroy();
+		this.exit();
+	}
+	exit() {
 		this.engine.stage.removeChild(this.graph)
+
 	}
 
 	explode() {
