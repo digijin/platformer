@@ -1,4 +1,7 @@
+// @flow
+
 import type Player from "Actor/Player";
+import type Engine from "Engine";
 import Missile from "GameObject/Missile";
 const CLOSEST_DISTANCE = 300;
 const FARTHEST_DISTANCE = 350;
@@ -17,6 +20,9 @@ export default function* agro(
 		let distance = player.position.distanceTo(enemy.position);
 		let direction = enemy.position.directionTo(player.position);
 		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
+
+		//check below
+
 		if (distance < CLOSEST_DISTANCE) {
 			//BACK UP
 			enemy.h += Math.cos(direction) * engine.deltaTime * ACCELERATION;

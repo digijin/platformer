@@ -114,7 +114,8 @@ export default class Building {
 			windowLitColor: new RGBA({
 				r: 1,
 				g: 0.5 + Math.random() * 0.5,
-				b: 0.5 + Math.random() * 0.5
+				b: 0.5 + Math.random() * 0.5,
+				a: 1
 			}).toHex(),
 			width: 10 + Math.floor(Math.random() * 40),
 			floors: 20 + Math.floor(Math.random() * 40),

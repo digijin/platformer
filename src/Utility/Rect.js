@@ -34,7 +34,7 @@ export default class Rect {
 			b: t + size.h
 		});
 	}
-	static fromPoints(pt1, pt2) {
+	static fromPoints(pt1: { x: number, y: number }, pt2:{ x: number, y: number }) {
 		return new Rect({
 			l: Math.min(pt1.x, pt2.x),
 			r: Math.max(pt1.x, pt2.x),
