@@ -54,8 +54,12 @@ export default class Smoke extends GameObject {
 			a: 1
 		}).toNumber();
 	}
-	destroy() {
+	exit() {
+
 		this.engine.stage.removeChild(this.sprite);
+	}
+	destroy() {
+		this.exit();
 		super.destroy();
 	}
 
