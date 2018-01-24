@@ -10,7 +10,7 @@ export default class Pool {
   pool: Array < {} > ;
   index: number;
   args: Array < any > ;
-  onCreate: () => {} | void;
+  onCreate: (instance:any) => {} | void;
   constructor(type: any) {
     this.type = type;
     this.index = 0;

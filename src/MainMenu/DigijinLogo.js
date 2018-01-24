@@ -1,4 +1,3 @@
-//@flow
 import GameObject from "GameObject";
 
 import Point from "Utility/Point";
@@ -319,14 +318,14 @@ export default class DigijinLogo extends GameObject {
     ctx.restore();
   }
 
-  drawLine(ctx, to, size, offset) {
+  drawLine(ctx: CanvasRenderingContext2D, to, size, offset) {
     ctx.lineTo(
       to.multiply(size).add(offset).x,
       to.multiply(size).add(offset).y
     );
   }
 
-  drawPartialLine(from, to, progress, dist, l, ctx, size, offset) {
+  drawPartialLine(from, to, progress, dist, l, ctx: CanvasRenderingContext2D, size, offset) {
     let mid = from.percentTo(to, progress / dist);
     if (Math.random() < SPAWNCHANCE) {
       let dir = to.subtract(from).direction();

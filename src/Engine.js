@@ -45,6 +45,9 @@ export default class Engine {
   container: HTMLElement;
   paused: Boolean;
   stage: PIXI.Container
+  stageContainer:PIXI.Container
+  transitionStage:PIXI.Container
+  backgroundStage:PIXI.Container
   static getInstance(): Engine {
     if (!instance) {
       instance = new Engine();

@@ -6,76 +6,85 @@ import Rect from "Utility/Rect";
 import type Grid from "Grid";
 
 import type DecorType from "Grid/Decor/Type";
-import { DecorTypeMap } from "Grid/Decor/Type";
+import {
+  DecorTypeMap
+} from "Grid/Decor/Type";
+
+import * as PIXI from 'pixi.js'
 
 export default class Decor {
-	position: Point; //grid position
-	type: string;
-	grid: Grid;
-	hp: number;
-	constructor(params: { position: Point, type: string, grid: Grid }) {
-		this.position = params.position;
-		this.type = params.type;
-		this.grid = params.grid;
+  position: Point; //grid position
+  type: string;
+  grid: Grid;
+  hp: number;
+  texture: PIXI.Texture
+  constructor(params: {
+    position: Point,
+    type: string,
+    grid: Grid
+  }) {
+    this.position = params.position;
+    this.type = params.type;
+    this.grid = params.grid;
 
-		if (this.type !== "0") {
-			this.hp = this.getType().hp;
-			this.texture = this.getType().getTexture();
-		}
-	}
+    if (this.type !== "0") {
+      this.hp = this.getType().hp;
+      this.texture = this.getType().getTexture();
+    }
+  }
 
-	getType(): DecorType {
-		return DecorTypeMap[this.type];
-	}
+  getType(): DecorType {
+    return DecorTypeMap[this.type];
+  }
 
-	isEmpty(): boolean {
-		return this.type == "0";
-	}
-	damage(amount: number) {
-		let type = this.getType();
-		if (type && type.destructable) {
-			this.hp -= amount;
-			if (this.hp <= 0) {
-				this.destroy();
-			}
-		}
-	}
-	destroy() {
-		// this.type = "0";
-		this.grid.removeDecor(this.position);
-		this.grid.bustCache(this);
-	}
-	//for editor
-	add(blockId: string) {
-		this.type = blockId;
-		this.grid.bustCache(this);
-	}
-	//for editor
-	remove() {
-		this.type = "0";
-		this.grid.bustCache(this);
-	}
+  isEmpty(): boolean {
+    return this.type == "0";
+  }
+  damage(amount: number) {
+    let type = this.getType();
+    if (type && type.destructable) {
+      this.hp -= amount;
+      if (this.hp <= 0) {
+        this.destroy();
+      }
+    }
+  }
+  destroy() {
+    // this.type = "0";
+    this.grid.removeDecor(this.position);
+    this.grid.bustCache(this);
+  }
+  //for editor
+  add(blockId: string) {
+    this.type = blockId;
+    this.grid.bustCache(this);
+  }
+  //for editor
+  remove() {
+    this.type = "0";
+    this.grid.bustCache(this);
+  }
 
-	get center(): Point {
-		return new Point({
-			x: (this.position.x + 0.5) * config.grid.width,
-			y: (this.position.y + 0.5) * config.grid.width
-		});
-	}
-	get point(): Point {
-		return new Point({
-			x: this.position.x * config.grid.width,
-			y: this.position.y * config.grid.width
-		});
-	}
+  get center(): Point {
+    return new Point({
+      x: (this.position.x + 0.5) * config.grid.width,
+      y: (this.position.y + 0.5) * config.grid.width
+    });
+  }
+  get point(): Point {
+    return new Point({
+      x: this.position.x * config.grid.width,
+      y: this.position.y * config.grid.width
+    });
+  }
 
-	get rect(): Rect {
-		let type = this.getType();
-		return new Rect({
-			t: this.position.y * config.grid.width,
-			r: (this.position.x + type.width) * config.grid.width,
-			b: (this.position.y + type.height) * config.grid.width,
-			l: this.position.x * config.grid.width
-		});
-	}
+  get rect(): Rect {
+    let type = this.getType();
+    return new Rect({
+      t: this.position.y * config.grid.width,
+      r: (this.position.x + type.width) * config.grid.width,
+      b: (this.position.y + type.height) * config.grid.width,
+      l: this.position.x * config.grid.width
+    });
+  }
 }

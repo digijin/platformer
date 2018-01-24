@@ -11,6 +11,8 @@ import sizzle from "sizzle";
 
 // const tg: (Generator<*,*,*>)=>null = testGen
 
+import * as PIXI from 'pixi.js'
+
 var failFast = require("jasmine-fail-fast");
 jasmine.getEnv().addReporter(failFast.init());
 
