@@ -30,6 +30,17 @@ export default function* agro(enemy : Enemy, engine : Engine, player : Player): 
 			r: enemy.position.x + 100
 		})
 		let blocks = engine.grid.getBlocksOverlappingRect(rect)
+		let empty = blocks.every(block => {
+			{
+				return block.isEmpty();
+			}
+		})
+		if (!empty) {
+			// enemy.sprite.tint = 0xff0000
+			enemy.v -= engine.deltaTime * ACCELERATION * 2
+		} else {
+			// enemy.sprite.tint = 0xffffff
+		}
 
 		if (distance < CLOSEST_DISTANCE) {
 			//BACK UP
