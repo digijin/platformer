@@ -14,6 +14,9 @@ import sizzle from "sizzle";
 var failFast = require("jasmine-fail-fast");
 jasmine.getEnv().addReporter(failFast.init());
 
+PIXI.loader.add("blocks", "assets/sprites.json");
+PIXI.loader.add("decor", "assets/decorsprites.json");
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
