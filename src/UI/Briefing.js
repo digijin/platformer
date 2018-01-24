@@ -46,10 +46,10 @@ const styles = theme => ({
 		border: "1px solid grey"
 	}
 });
-export class Briefing extends React.Component {
+export class Briefing extends React.Component < {} > {
 
 	props: any;
-	state: {};
+	state: any;
 	render() {
 		const {classes} = this.props;
 		return (<div className={classes.container}>

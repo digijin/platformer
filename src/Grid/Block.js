@@ -22,13 +22,14 @@ export default class Block {
 		position: Point,
 		type: string,
 		grid: Grid,
-		tint: any,
+		// tint?: any,
 		backgroundType?: string
 	}) {
 		this.position = params.position;
 		this.type = params.type;
 		this.grid = params.grid;
-		if (params.tint != null) {
+		if (params.tint) {
+			// FLOWHACK
 			this.tint = params.tint;
 		}
 		if (typeof this.tint !== "number") {

@@ -27,6 +27,8 @@ export default class Bullet extends Projectile {
 		h: number,
 		v: number,
 		time: number,
+		direction: number,
+		target: Point,
 		owner: Actor
 	}) {
 		super(params);

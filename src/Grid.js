@@ -358,7 +358,8 @@ export default class Grid extends GameObject {
 		}
 		// console.log(enemies);
 		return JSON.stringify({
-			enemies: enemies.map(e => {
+			// FLOWHACK
+			enemies: enemies.map((e : Enemy) => {
 				return {t: e.type.id, p: e.position};
 			}),
 			decor: this.decor.map(d => {

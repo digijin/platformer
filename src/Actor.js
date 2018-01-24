@@ -17,12 +17,13 @@ export default class Actor extends Renderable {
 	z: number;
 	hp: number;
 	maxhp: number;
-	constructor() {
+	constructor(params : {}) {
 		super();
 		this.v = 0;
 		this.h = 0;
 		this.hp = 1;
 		this.maxhp = 1;
+		Object.assign(this, params)
 
 		this.tag("actor");
 	}

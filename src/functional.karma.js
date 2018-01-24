@@ -14,6 +14,7 @@ import sizzle from "sizzle";
 import * as PIXI from 'pixi.js'
 
 var failFast = require("jasmine-fail-fast");
+// FLOWHACK
 jasmine.getEnv().addReporter(failFast.init());
 
 PIXI.loader.add("blocks", "assets/sprites.json");
@@ -67,6 +68,7 @@ describe("functional.karma.js", () => {
 			expect(container.childNodes[0].constructor.name).toBe("HTMLCanvasElement");
 		});
 		it("should have a ui div", () => {
+			// FLOWHACK
 			expect(container.childNodes[2].id).toBe("ui");
 		});
 	});

@@ -16,6 +16,7 @@ export default class Explosion extends GameObject {
 	size: number;
 	rotation: number;
 	sprite: PIXI.Sprite;
+	texture: PIXI.Texture;
 	constructor(params : Object) {
 		super();
 		//defaults

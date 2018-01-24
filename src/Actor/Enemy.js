@@ -36,7 +36,7 @@ export default class Enemy extends Actor {
 		position: Point,
 		type: EnemyType
 	}) {
-		super();
+		super(params);
 		this.hp = params.type.hp;
 		this.maxhp = params.type.hp;
 		this.tag("enemy");
@@ -117,7 +117,7 @@ export default class Enemy extends Actor {
 			if (this.position.distanceTo(player.position) < AGRO_DISTANCE) {
 				this.startAgro(player);
 			} else {
-				this.startIdle(player);
+				this.startIdle();
 			}
 		}
 	}
