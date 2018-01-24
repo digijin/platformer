@@ -20,6 +20,9 @@ import type EnemyType from "Actor/Enemy/Type";
 
 import * as PIXI from "pixi.js";
 
+const AGRO_DISTANCE = 500;
+const DEAGRO_DISTANCE = 1000;
+
 export default class Enemy extends Actor {
 	walkSpeed: number;
 	v: number;
@@ -93,14 +96,16 @@ export default class Enemy extends Actor {
 		let player = this.engine.objectsTagged("player").pop();
 		if (this.agro) {
 			//falloff distance
-			if (this.position.distanceTo(this.agro.position) > 1000) {
+			if (
+				this.position.distanceTo(this.agro.position) > DEAGRO_DISTANCE
+			) {
 				this.startIdle();
 			} else {
 				this.startAgro();
 			}
 		} else {
 			//pickup distance
-			if (this.position.distanceTo(player.position) < 300) {
+			if (this.position.distanceTo(player.position) < AGRO_DISTANCE) {
 				this.startAgro(player);
 			} else {
 				this.startIdle(player);
