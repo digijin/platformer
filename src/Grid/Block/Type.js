@@ -305,9 +305,19 @@ Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
 			return bt.textureId !== key;
 		})
 	) {
+		BlockTypes.push(
+			new BlockType({
+				name: key,
+				id: key,
+				image: require("./images/error.png"),
+				textureId: key,
+				destructable: false,
+				hp: 100
+			})
+		);
 		//pop in a new block type
 		// console.log("pippedy poppedy into the hippedy hoppity");
-		console.log(key, "hasnt been done thing");
+		// console.log(key, "hasnt been done thing");
 	}
 });
 // }
