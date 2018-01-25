@@ -87,8 +87,10 @@ export default function* agro(enemy : Enemy, engine : Engine, player : Player): 
 		}
 
 		//CLAMP
-		enemy.h = Math.min(Math.max(enemy.h, -MAXSPEED), MAXSPEED)
-		enemy.v = Math.min(Math.max(enemy.v, -MAXSPEED), MAXSPEED)
+		enemy.h = Math.min(Math.max(enemy.h, -MAXSPEED), MAXSPEED);
+		enemy.v = Math.min(Math.max(enemy.v, -MAXSPEED), MAXSPEED);
+
+		enemy.sprite.rotation = enemy.h / MAXSPEED;
 
 		enemy.position.x += enemy.h;
 		enemy.position.y += enemy.v;
