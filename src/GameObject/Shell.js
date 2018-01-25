@@ -26,6 +26,9 @@ export default class Shell extends GameObject {
 	}
 	destroy() {
 		super.destroy();
+		this.exit();
+	}
+	exit() {
 		this.engine.stage.removeChild(this.graph)
 	}
 
