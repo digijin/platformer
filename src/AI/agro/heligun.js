@@ -8,6 +8,7 @@ import Rect from 'Utility/Rect';
 const CLOSEST_DISTANCE = 300;
 const FARTHEST_DISTANCE = 350;
 const ACCELERATION = 4;
+const MAXSPEED = 4;
 export default function* agro(enemy : Enemy, engine : Engine, player : Player): Generator < *, *, * > {
 	const dontFall = true;
 	let direction = 1;
@@ -20,6 +21,10 @@ export default function* agro(enemy : Enemy, engine : Engine, player : Player): 
 		let distance = player.position.distanceTo(enemy.position);
 		let direction = enemy.position.directionTo(player.position);
 		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
+
+		enemy.sprite.scale.x = player.position.x < enemy.position.x
+			? 1
+			: -1
 
 		//check below
 		// engine.grid.blocksOverlappingRect();
@@ -80,6 +85,10 @@ export default function* agro(enemy : Enemy, engine : Engine, player : Player): 
 			enemy.h -= Math.cos(direction) * engine.deltaTime * ACCELERATION;
 			enemy.v -= Math.sin(direction) * engine.deltaTime * ACCELERATION;
 		}
+
+		//CLAMP
+		enemy.h = Math.min(Math.max(enemy.h, -MAXSPEED), MAXSPEED)
+		enemy.v = Math.min(Math.max(enemy.v, -MAXSPEED), MAXSPEED)
 
 		enemy.position.x += enemy.h;
 		enemy.position.y += enemy.v;
