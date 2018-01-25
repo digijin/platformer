@@ -62,8 +62,8 @@ export default class Grid extends GameObject {
 		let screenRect = this.engine.ctx.screenRect();
 		this.renderBlocksPixi(screenRect);
 		// this.renderDecor();
-		this.decorStage.position.x = -this.engine.view.offset.x;
-		this.decorStage.position.y = -this.engine.view.offset.y;
+		// this.decorStage.position.x = -this.engine.view.offset.x;
+		// this.decorStage.position.y = -this.engine.view.offset.y;
 		// this.renderDebugBlockPixelLine();
 	};
 
@@ -91,9 +91,9 @@ export default class Grid extends GameObject {
 		});
 		this.getBlocksOverlappingRect(screenRect).forEach(block => {
 			let pos = {
-				x: Math.floor(block.position.x * config.grid.width - this.engine.view.offset.x),
+				x: Math.floor(block.position.x * config.grid.width),
 
-				y: Math.floor(block.position.y * config.grid.width - this.engine.view.offset.y)
+				y: Math.floor(block.position.y * config.grid.width)
 			};
 
 			if (block) {
