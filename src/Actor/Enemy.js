@@ -80,9 +80,7 @@ export default class Enemy extends Actor {
 		?Generator < *, *, * >;
 	update(engine
 	: Engine) {
-		this.sprite.position = this.position
-		// .add({ x: 10, y: 10 })
-			.subtract(this.engine.view.offset);
+		this.sprite.position = this.position;
 		let player = this.engine.objectsTagged("player").pop();
 		if (!player) {
 			// this.gravity();
@@ -135,7 +133,7 @@ export default class Enemy extends Actor {
 	render() {
 
 		this.graph.clear();
-		this.graph.position.set(this.position.x - this.engine.view.offset.x, this.position.y - this.engine.view.offset.y);
+		this.graph.position.set(this.position.x, this.position.y);
 		this.graph.lineStyle(5, 0xffffff).moveTo(0, 0).lineTo(20, 0)
 		this.graph.lineStyle(3, 0x00ff00).moveTo(0, 0).lineTo(20 * this.hp / this.type.hp, 0)
 	}

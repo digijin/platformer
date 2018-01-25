@@ -92,7 +92,7 @@ export default class Bullet extends Projectile {
 		this.checkGrid();
 
 		this.graph.clear();
-		this.graph.position.set(old.x - this.engine.view.offset.x, old.y - this.engine.view.offset.y);
+		this.graph.position.set(old.x, old.y);
 		this.graph.lineStyle(5, 0xffffff).moveTo(0, 0).lineTo(this.position.x - old.x, this.position.y - old.y)
 
 		//CHECK ENEMIES

@@ -39,8 +39,8 @@ export default class Explosion extends GameObject {
 	}
 	positionSprite() {
 		this.sprite.rotation = this.rotation;
-		this.sprite.position.x = this.position.x - this.engine.view.offset.x;
-		this.sprite.position.y = this.position.y - this.engine.view.offset.y;
+		this.sprite.position.x = this.position.x;
+		this.sprite.position.y = this.position.y;
 		this.sprite.width = this.sprite.height = this.size * Math.cos((1 - this.time) * Math.PI / 2);
 	}
 	destroy() {

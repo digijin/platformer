@@ -40,9 +40,8 @@ export default class Shell extends GameObject {
 		this.v *= 1 - engine.deltaTime;
 		this.v += engine.deltaTime * 3;
 		this.graph.clear();
-		this.graph.position.set(old.x - this.engine.view.offset.x, old.y - this.engine.view.offset.y);
+		this.graph.position.set(old.x, old.y);
 		this.graph.lineStyle(1, 0xffffff).moveTo(0, 0).lineTo(this.position.x - old.x, this.position.y - old.y)
-
 		//TODO DETECT GROUND PROPER LIKE
 		if (engine.grid.isPositionBlocked(this.position) && this.v > 0) {
 			// if(this.position.y>250 && this.v>0){

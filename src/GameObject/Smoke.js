@@ -43,8 +43,8 @@ export default class Smoke extends GameObject {
 		this.position.x += this.engine.deltaTime * this.h;
 		this.position.y += this.engine.deltaTime * this.v;
 		this.sprite.rotation = this.rotation;
-		this.sprite.position.x = this.position.x - this.engine.view.offset.x;
-		this.sprite.position.y = this.position.y - this.engine.view.offset.y;
+		this.sprite.position.x = this.position.x;
+		this.sprite.position.y = this.position.y;
 		this.sprite.width = this.sprite.height = 10 + this.time * 10;
 		this.sprite.alpha = this.time;
 		this.sprite.tint = new RGBA({

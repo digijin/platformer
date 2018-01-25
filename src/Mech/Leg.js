@@ -166,7 +166,7 @@ export default class Leg extends GameObject {
 		// if (facing < 0) {
 		// 	dir += Math.PI;
 		// }
-		this.gun.position = pos.subtract(this.engine.view.offset);
+		this.gun.position = pos;
 		this.gun.rotation = dir;
 		this.gun.scale.y = facing;
 		this.gun.anchor = {
@@ -183,7 +183,7 @@ export default class Leg extends GameObject {
 			y: 16
 		});
 
-		this.cockpit.position = pos.subtract(this.engine.view.offset);
+		this.cockpit.position = pos;
 		this.cockpit.scale.x = facing;
 	}
 	ik(target : Point, facing : Facing = FACING_LEFT, sprites : {
@@ -215,7 +215,7 @@ export default class Leg extends GameObject {
 		// upperleg 20x40
 		let upperlegdirection = joint.subtract(this.position).direction() - Math.PI / 2;
 
-		sprites.upper.position = this.position.subtract(this.engine.view.offset);
+		sprites.upper.position = this.position;
 		sprites.upper.anchor = {
 			x: 0.5,
 			y: 0.25
@@ -225,7 +225,7 @@ export default class Leg extends GameObject {
 
 		let lowerlegdirection = endpoint.subtract(joint).direction() - Math.PI / 2;
 
-		sprites.lower.position = joint.subtract(this.engine.view.offset);
+		sprites.lower.position = joint;
 		sprites.lower.anchor = {
 			x: 0.5,
 			y: 0.25
@@ -233,7 +233,7 @@ export default class Leg extends GameObject {
 		sprites.lower.scale.x = facing;
 		sprites.lower.rotation = lowerlegdirection;
 
-		sprites.foot.position = endpoint.subtract(this.engine.view.offset);
+		sprites.foot.position = endpoint;
 		sprites.foot.anchor = {
 			x: 0.5,
 			y: 1

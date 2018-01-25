@@ -110,7 +110,7 @@ export default class Player extends Actor {
 		// let pos = hand.offset.add(this.position);
 
 		this.graph.clear();
-		this.graph.position.set(hand.position.x - this.engine.view.offset.x, hand.position.y - this.engine.view.offset.y);
+		this.graph.position.set(hand.position.x, hand.position.y);
 		this.graph.lineStyle(5, 0xff0000).moveTo(0, 0).lineTo(this.position.add(hand.offset).x - hand.position.x, this.position.add(hand.offset).y - hand.position.y)
 	}
 	focusCameraOnSelf() {
