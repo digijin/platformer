@@ -2,6 +2,7 @@
 import GameObject from "GameObject";
 import type Engine from "Engine";
 import { ReflectionFilter } from "@pixi/filter-reflection";
+import { GlitchFilter } from "@pixi/filter-glitch";
 
 import skyline from "assets/skyline.png";
 
@@ -64,7 +65,9 @@ export default class Background extends GameObject {
         this.stage.addChild(this.buildingStage);
         this.buildingStage.filters = [
             new ReflectionFilter({ alpha: [1, 0], time: 1 })
+            // new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
         ];
+        // this.buildingStage.filters.push(new GlitchFilter());
 
         this.buildingStage.addChild(this.ground);
         this.engine.backgroundStage.addChild(this.stage);
@@ -82,7 +85,32 @@ export default class Background extends GameObject {
         this.buildingStage.addChild(sprite);
         return sprite;
     }
-
+    glitch() {
+        // let filters = this.buildingStage.filters;
+        // // this.buildingStage.filters = [
+        // //
+        // // 	this.buildingStage.filters[0],
+        // // 	new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
+        // // ];
+        // // glitch;
+        // // this.buildingStage.filters[0].seed = Math.random();
+        // if (Math.random() < 0.01) {
+        //     filters.push(
+        //         new GlitchFilter({
+        //             slices: 5,
+        //             offset: 10,
+        //             seed: Math.random()
+        //         })
+        //     );
+        // } else {
+        //     if (Math.random() < 0.1) {
+        //         if (filters.length > 1) {
+        //             filters.pop();
+        //         }
+        //     }
+        // }
+        // this.buildingStage.filters = filters;
+    }
     update() {
         //hack ReflectionFilter
         this.buildingStage.filters[0].time += this.engine.deltaTime;
