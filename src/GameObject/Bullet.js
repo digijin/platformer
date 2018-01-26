@@ -7,10 +7,15 @@ import type Block from "Grid/Block";
 import Line from "Utility/Line";
 import GameObject from "GameObject";
 import Explosion from "GameObject/Explosion";
-
+import { GlowFilter } from "@pixi/filter-glow";
 import Projectile from "GameObject/Projectile";
 
 import * as PIXI from "pixi.js";
+
+const COLOR = 0xffff00;
+const GLOWDIST = 10;
+const GLOWSTRENGTH = 2;
+const GLOWQUALITY = 0.5;
 
 export default class Bullet extends Projectile {
     // x: number; position
@@ -42,6 +47,9 @@ export default class Bullet extends Projectile {
     init(engine: Engine) {
         super.init(engine);
         this.graph = new PIXI.Graphics();
+        this.graph.filters = [
+            new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, COLOR, GLOWQUALITY)
+        ];
         this.engine.stage.addChild(this.graph);
     }
     destroy() {
