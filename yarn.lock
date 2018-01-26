@@ -6,9 +6,39 @@
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@mfl/flow-jasmine/-/flow-jasmine-1.6.1.tgz#ddf955193823af50f2180fc613e81cf7fbde2043"
 
+"@pixi/filter-advanced-bloom@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-advanced-bloom/-/filter-advanced-bloom-2.5.0.tgz#732acb18547a7576a1ad16ab8cee097ca46694e9"
+  dependencies:
+    "@pixi/filter-kawase-blur" "^2.5.0"
+
+"@pixi/filter-glitch@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-glitch/-/filter-glitch-2.5.0.tgz#31cc72e0c0edc0e59df46c9ae5ba276f147678eb"
+
 "@pixi/filter-glow@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-glow/-/filter-glow-2.5.0.tgz#44bd462ccbfebe2b7932291dddbee7ce14cb62c0"
+
+"@pixi/filter-godray@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-godray/-/filter-godray-2.5.0.tgz#57a4979aef4dc33a3c9d055623dd16fa134b9740"
+
+"@pixi/filter-kawase-blur@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-kawase-blur/-/filter-kawase-blur-2.5.0.tgz#d24096d1ebe4969bab80c6bd38935d755af75591"
+
+"@pixi/filter-pixelate@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-pixelate/-/filter-pixelate-2.5.0.tgz#07aeb3f00a48d9c4a7cb228860d6322d77db4bc3"
+
+"@pixi/filter-reflection@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-reflection/-/filter-reflection-2.5.0.tgz#3e90342ba40311da288fb77f6167410b573e5c21"
+
+"@pixi/filter-shockwave@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-shockwave/-/filter-shockwave-2.5.0.tgz#852f845e0d49edb5d8b540b4dde499ca20782316"
 
 "@types/node@^7.0.18":
   version "7.0.48"
