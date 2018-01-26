@@ -1,3 +1,4 @@
+//@flow
 import GameObject from "GameObject";
 import type Engine from "Engine";
 
@@ -23,106 +24,114 @@ const PAN_SPEED = 100;
 const OVERLAP = 50;
 
 export default class Background extends GameObject {
-	el: HTMLDivElement;
-	top: HTMLDivElement;
-	bottom: HTMLDivElement;
-	top2: HTMLDivElement;
-	bottom2: HTMLDivElement;
-	constructor() {
-		super();
-		this.stage = new PIXI.Container();
+    el: HTMLDivElement;
+    top: HTMLDivElement;
+    bottom: HTMLDivElement;
+    top2: HTMLDivElement;
+    bottom2: HTMLDivElement;
+    stage: PIXI.Container;
+    buildingStage: PIXI.Container;
+    bg: PIXI.Sprite;
+    buildings: Array<PIXI.Sprite>;
+    constructor() {
+        super();
+        this.stage = new PIXI.Container();
+        this.buildingStage = new PIXI.Container();
 
-		this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
-		this.bg.z = 1;
-		this.bg.tint = 0x171819;
-	}
-	init(engine: Engine) {
-		super.init(engine);
+        this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+        this.bg.z = 1;
+        this.bg.tint = 0x171819;
+    }
+    init(engine: Engine) {
+        super.init(engine);
 
-		this.engine.backgroundStage.addChild(this.stage);
-		// this.el.appendChild(new Building().canvas);
-		this.buildings = [];
-		for (let i = 0; i < NUM_BUILDINGS; i++) {
-			let building = this.makeBuilding();
-			building.x = Math.random() * window.innerWidth;
-			building.offset = building.x;
-			building.z = Math.random();
-			this.buildings.push(building);
-		}
-		this.stage.addChild(this.bg);
-	}
-	makeBuilding() {
-		let texture = new PIXI.Texture(
-			new PIXI.BaseTexture(Building.random().canvas)
-		);
-		let sprite = new PIXI.Sprite(texture);
-		sprite.anchor = { x: 0.5, y: 1 };
-		this.stage.addChild(sprite);
-		return sprite;
-	}
+        // this.el.appendChild(new Building().canvas);
+        this.buildings = [];
+        for (let i = 0; i < NUM_BUILDINGS; i++) {
+            let building = this.makeBuilding();
+            building.x = Math.random() * window.innerWidth;
+            building.offset = building.x;
+            building.z = Math.random();
+            this.buildings.push(building);
+        }
 
-	update() {
-		this.stage.position.y = window.innerHeight / 2;
-		this.stage.children.forEach(b => {
-			if (b.z == undefined) {
-				// debugger;
-				throw new Error("yolo no z on child ");
-			}
+        this.stage.addChild(this.bg);
+        this.stage.addChild(this.buildingStage);
+        this.engine.backgroundStage.addChild(this.stage);
+    }
 
-			// b.position.x +=
-			// 	(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
-			// if (b.position.x > window.innerWidth + OVERLAP) {
-			// 	b.position.x -= window.innerWidth + OVERLAP * 2;
-			// }
+    exit() {
+        this.engine.backgroundStage.removeChild(this.stage);
+    }
+    makeBuilding() {
+        let texture = new PIXI.Texture(
+            new PIXI.BaseTexture(Building.random().canvas)
+        );
+        let sprite = new PIXI.Sprite(texture);
+        sprite.anchor = { x: 0.5, y: 1 };
+        this.buildingStage.addChild(sprite);
+        return sprite;
+    }
 
-			b.position.x =
-				(b.offset - this.engine.view.offset.x * (1 + b.z) * 0.1) %
-				window.innerWidth;
-			if (b.position.x < 0) {
-				b.position.x += window.innerWidth;
-			}
-		});
-		if (Math.random() > 0.95) {
-			this.spawnExplosion();
-		}
-		this.sort();
-		this.bg.x = 0;
-		this.bg.width = window.innerWidth;
-		this.bg.height = window.innerHeight / 2;
-	}
-	sort() {
-		this.stage.children.sort((a, b) => {
-			a = a.z || 0;
-			b = b.z || 0;
-			return a - b;
-		});
-	}
+    update() {
+        this.stage.position.y = window.innerHeight / 2;
+        this.buildingStage.children.forEach(b => {
+            if (b.z == undefined) {
+                // debugger;
+                throw new Error("yolo no z on child ");
+            }
 
-	spawnExplosion() {
-		let types = [
-			ExplosionUp1,
-			ExplosionUp2,
-			ExplosionUp3,
-			ExplosionUp4,
-			ExplosionUp5,
-			ExplosionUp6
-		];
-		let type = types[Math.floor(types.length * Math.random())];
-		let exp = new type({
-			parent: this.stage,
-			speed: 0.2
-		});
-		exp.position.x = window.innerWidth * Math.random();
-		exp.movie.offset = exp.position.x;
-		exp.movie.z = Math.random();
-		// exp.positionSprite();
-		exp.movie.anchor = { x: 0.5, y: 0.9 };
-		// exp.speed = 0.2;
-		this.engine.register(exp);
-		exp.positionSprite = () => {};
-		// this.sort();
-	}
-	exit() {
-		this.engine.backgroundStage.removeChild(this.stage);
-	}
+            // b.position.x +=
+            // 	(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
+            // if (b.position.x > window.innerWidth + OVERLAP) {
+            // 	b.position.x -= window.innerWidth + OVERLAP * 2;
+            // }
+
+            b.position.x =
+                (b.offset - this.engine.view.offset.x * (1 + b.z) * 0.1) %
+                window.innerWidth;
+            if (b.position.x < 0) {
+                b.position.x += window.innerWidth;
+            }
+        });
+        if (Math.random() > 0.95) {
+            this.spawnExplosion();
+        }
+        this.sort();
+        this.bg.x = 0;
+        this.bg.width = window.innerWidth;
+        this.bg.height = window.innerHeight / 2;
+    }
+    sort() {
+        this.buildingStage.children.sort((a, b) => {
+            a = a.z || 0;
+            b = b.z || 0;
+            return a - b;
+        });
+    }
+
+    spawnExplosion() {
+        let types = [
+            ExplosionUp1,
+            ExplosionUp2,
+            ExplosionUp3,
+            ExplosionUp4,
+            ExplosionUp5,
+            ExplosionUp6
+        ];
+        let type = types[Math.floor(types.length * Math.random())];
+        let exp = new type({
+            parent: this.stage,
+            speed: 0.2
+        });
+        exp.position.x = window.innerWidth * Math.random();
+        exp.movie.offset = exp.position.x;
+        exp.movie.z = Math.random();
+        // exp.positionSprite();
+        exp.movie.anchor = { x: 0.5, y: 0.9 };
+        // exp.speed = 0.2;
+        this.engine.register(exp);
+        exp.positionSprite = () => {};
+        // this.sort();
+    }
 }
