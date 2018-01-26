@@ -12,124 +12,131 @@ import type Block from "Grid/Block";
 // let engine: Engine;
 
 export default class Actor extends Renderable {
-	h: number;
-	v: number;
-	z: number;
-	hp: number;
-	maxhp: number;
-	constructor(params : {}) {
-		super();
-		this.v = 0;
-		this.h = 0;
-		this.hp = 1;
-		this.maxhp = 1;
-		Object.assign(this, params)
+    h: number;
+    v: number;
+    z: number;
+    hp: number;
+    maxhp: number;
+    constructor(params: {}) {
+        super();
+        this.v = 0;
+        this.h = 0;
+        this.hp = 1;
+        this.maxhp = 1;
+        Object.assign(this, params);
 
-		this.tag("actor");
-	}
-	damage(amount : number) {
-		this.hp -= amount;
-		if (this.hp <= 0) {
-			this.explode();
-		}
-	}
+        this.tag("actor");
+    }
+    damage(amount: number) {
+        this.hp -= amount;
+        if (this.hp <= 0) {
+            this.explode();
+        }
+    }
 
-	explode = () => {
-		this.destroy();
-		//fill rect with explosions
-		let rect: Rect = this.getBoundingRect();
-		let center: Point = rect.centerPoint();
-		//find random points
-		for (let i = 0; i < 20; i++) {
-			let point: Point = new Point({
-				x: rect.l + rect.width() * Math.random(),
-				y: rect.t + rect.height() * Math.random()
-			});
-			//direction from center
-			let diff = point.subtract(center);
-			let dir = Math.atan2(diff.y, diff.x);
+    explode = () => {
+        this.destroy();
+        //fill rect with explosions
+        let rect: Rect = this.getBoundingRect();
+        let center: Point = rect.centerPoint();
+        //find random points
+        for (let i = 0; i < 20; i++) {
+            let point: Point = new Point({
+                x: rect.l + rect.width() * Math.random(),
+                y: rect.t + rect.height() * Math.random()
+            });
+            //direction from center
+            let diff = point.subtract(center);
+            let dir = Math.atan2(diff.y, diff.x);
 
-			this.engine.register(new Explosion({
-				position: point,
-				rotation: dir,
-				delay: Math.random() / 8
-			}));
-		}
-	};
+            this.engine.register(
+                new Explosion({
+                    position: point,
+                    rotation: dir,
+                    delay: Math.random() / 8
+                })
+            );
+        }
+    };
 
-	gravity = () => {
-		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
-		if (!this.canMoveVert(this.v)) {
-			if (this.v < 0) {
-				//heading upwards
-				this.v = 0.1;
-			} else {
-				//landed
-				this.v = 0;
-			}
-		}
-		this.position.y += this.v;
-	};
-	getBoundingRect = (): Rect => {
-		return Rect.fromPosSizeRego(this.position, this.size, this.registration);
-	};
-	canMoveHori = (amount : number): boolean => {
-		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({x: amount, y: 0});
-		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-		let obstacles = blocks.filter(block => {
-			return !block.isEmpty();
-		});
-		return obstacles.length == 0;
-	};
-	canMoveVert = (amount : number): boolean => {
-		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({x: 0, y: amount});
-		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-		let obstacles = blocks.filter(block => {
-			return !block.isEmpty();
-		});
-		return obstacles.length == 0;
-	};
-	//whether actor can step up
-	canStep = (amount : number): boolean => {
-		let boundingRect = this.getBoundingRect();
-		let targetRect = boundingRect.move({x: amount, y: 0});
-		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-		let obstacles = blocks.filter(block => {
-			return !block.isEmpty();
-		});
-		//if only one block is an obstacle, and it is in lower corner
-		let step:
-			?Block;
-		if (obstacles.length == 1) {
-			if (amount > 0) {
-				//moving right
-				if (!blocks[blocks.length - 1].isEmpty()) {
-					step = blocks[blocks.length - 1];
-				}
-			} else {
-				let bl = blocks.reduce((a
-				: Block, b
-				: Block) => {
-					if (a.position.x < b.position.x) {
-						//more left
-						return a;
-					}
-					if (a.position.y > b.position.y) {
-						//lower
-						return a;
-					}
-					return b;
-				});
-				if (!bl.isEmpty()) {
-					step = bl;
-				}
-			}
-		}
-		if (step) {
-			return this.canMoveVert(-config.grid.width);
-		}
-		return false;
-	};
+    setAgro(actor: Actor) {
+        this.agro = actor;
+    }
+
+    gravity = () => {
+        this.v += this.engine.deltaTime * config.gravity; //GRAVITY
+        if (!this.canMoveVert(this.v)) {
+            if (this.v < 0) {
+                //heading upwards
+                this.v = 0.1;
+            } else {
+                //landed
+                this.v = 0;
+            }
+        }
+        this.position.y += this.v;
+    };
+    getBoundingRect = (): Rect => {
+        return Rect.fromPosSizeRego(
+            this.position,
+            this.size,
+            this.registration
+        );
+    };
+    canMoveHori = (amount: number): boolean => {
+        let boundingRect = this.getBoundingRect();
+        let targetRect = boundingRect.move({ x: amount, y: 0 });
+        let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+        let obstacles = blocks.filter(block => {
+            return !block.isEmpty();
+        });
+        return obstacles.length == 0;
+    };
+    canMoveVert = (amount: number): boolean => {
+        let boundingRect = this.getBoundingRect();
+        let targetRect = boundingRect.move({ x: 0, y: amount });
+        let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+        let obstacles = blocks.filter(block => {
+            return !block.isEmpty();
+        });
+        return obstacles.length == 0;
+    };
+    //whether actor can step up
+    canStep = (amount: number): boolean => {
+        let boundingRect = this.getBoundingRect();
+        let targetRect = boundingRect.move({ x: amount, y: 0 });
+        let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+        let obstacles = blocks.filter(block => {
+            return !block.isEmpty();
+        });
+        //if only one block is an obstacle, and it is in lower corner
+        let step: ?Block;
+        if (obstacles.length == 1) {
+            if (amount > 0) {
+                //moving right
+                if (!blocks[blocks.length - 1].isEmpty()) {
+                    step = blocks[blocks.length - 1];
+                }
+            } else {
+                let bl = blocks.reduce((a: Block, b: Block) => {
+                    if (a.position.x < b.position.x) {
+                        //more left
+                        return a;
+                    }
+                    if (a.position.y > b.position.y) {
+                        //lower
+                        return a;
+                    }
+                    return b;
+                });
+                if (!bl.isEmpty()) {
+                    step = bl;
+                }
+            }
+        }
+        if (step) {
+            return this.canMoveVert(-config.grid.width);
+        }
+        return false;
+    };
 }

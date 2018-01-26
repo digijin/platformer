@@ -128,6 +128,7 @@ export default class Missile extends Projectile {
                 if (a.getBoundingRect().contains(this.position)) {
                     this.explode();
                     // a.explode();
+                    a.setAgro(this.owner);
                     a.damage(30 + Math.random() * 75);
                     return false;
                 }
