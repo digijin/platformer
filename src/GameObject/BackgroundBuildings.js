@@ -62,7 +62,9 @@ export default class Background extends GameObject {
 
         this.stage.addChild(this.bg);
         this.stage.addChild(this.buildingStage);
-        this.buildingStage.filters = [new ReflectionFilter({ alpha: [1, 0] })];
+        this.buildingStage.filters = [
+            new ReflectionFilter({ alpha: [1, 0], time: 1 })
+        ];
 
         this.buildingStage.addChild(this.ground);
         this.engine.backgroundStage.addChild(this.stage);
@@ -82,6 +84,9 @@ export default class Background extends GameObject {
     }
 
     update() {
+        //hack ReflectionFilter
+        this.buildingStage.filters[0].time += this.engine.deltaTime;
+
         this.stage.position.y = window.innerHeight / 2;
         this.buildingStage.children.forEach(b => {
             if (b.z == undefined) {
