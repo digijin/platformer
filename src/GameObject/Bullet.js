@@ -103,7 +103,7 @@ export default class Bullet extends Projectile {
         this.graph.clear();
         this.graph.position.set(old.x, old.y);
         this.graph
-            .lineStyle(5, 0xffffff)
+            .lineStyle(3, COLOR)
             .moveTo(0, 0)
             .lineTo(this.position.x - old.x, this.position.y - old.y);
 
