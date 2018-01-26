@@ -18,7 +18,7 @@ export default {
 			h: 50
 		},
 		legspeed: 20,
-		speed: 350
+		speed: 500
 	},
 	gravity: 20,
 	debug: {
@@ -27,7 +27,9 @@ export default {
 			boundingBox: false
 		}
 	},
-	missile: { guidedDist: 50 },
+	missile: {
+		guidedDist: 50
+	},
 	fpsmeter: {
 		graph: 1,
 		theme: "transparent",
@@ -39,8 +41,14 @@ export default {
 	},
 	enemy: {
 		walkSpeed: 50,
-		size: { w: 50, h: 50 },
-		registration: { x: 0.5, y: 1 }
+		size: {
+			w: 50,
+			h: 50
+		},
+		registration: {
+			x: 0.5,
+			y: 1
+		}
 	},
 	input: {
 		keyboardMapping: {
@@ -64,21 +72,24 @@ export default {
 					type: "keyboard",
 					positive: "d",
 					negative: "a"
-				},
-				{
+				}, {
 					type: "keyboard",
 					positive: "right",
 					negative: "left"
-				},
-				{ type: "gamepad", axis: 0 }
+				}, {
+					type: "gamepad",
+					axis: 0
+				}
 			],
 			vertical: [
 				{
 					type: "keyboard",
 					positive: "s",
 					negative: "w"
-				},
-				{ type: "gamepad", axis: 1 }
+				}, {
+					type: "gamepad",
+					axis: 1
+				}
 			],
 			wheel: [
 				{
@@ -88,27 +99,83 @@ export default {
 		},
 		buttons: {
 			jump: [
-				{ type: "gamepad", button: 0 },
-				{ type: "keyboard", key: "space" }
+				{
+					type: "gamepad",
+					button: 0
+				}, {
+					type: "keyboard",
+					key: "space"
+				}
 			],
 			special: [
-				{ type: "gamepad", button: 1 },
-				{ type: "gamepad", button: "lt" },
-				{ type: "mouse", button: 2 }
+				{
+					type: "gamepad",
+					button: 1
+				}, {
+					type: "gamepad",
+					button: "lt"
+				}, {
+					type: "mouse",
+					button: 2
+				}
 			],
 			fire: [
-				{ type: "gamepad", button: 2 },
-				{ type: "gamepad", button: "rt" },
-				{ type: "keyboard", key: "ctrl" },
-				{ type: "mouse", button: 0 }
+				{
+					type: "gamepad",
+					button: 2
+				}, {
+					type: "gamepad",
+					button: "rt"
+				}, {
+					type: "keyboard",
+					key: "ctrl"
+				}, {
+					type: "mouse",
+					button: 0
+				}
 			],
-			editor_add: [{ type: "mouse", button: 0 }],
-			editor_remove: [{ type: "mouse", button: 2 }],
-			editor_speed: [{ type: "keyboard", key: "shift" }],
-			editor_modifier: [{ type: "keyboard", key: "ctrl" }],
-			editor_drag: [{ type: "mouse", button: 1 }],
-			pause: [{ type: "keyboard", key: "escape" }],
-			stand: [{ type: "gamepad", button: 5 }]
+			editor_add: [
+				{
+					type: "mouse",
+					button: 0
+				}
+			],
+			editor_remove: [
+				{
+					type: "mouse",
+					button: 2
+				}
+			],
+			editor_speed: [
+				{
+					type: "keyboard",
+					key: "shift"
+				}
+			],
+			editor_modifier: [
+				{
+					type: "keyboard",
+					key: "ctrl"
+				}
+			],
+			editor_drag: [
+				{
+					type: "mouse",
+					button: 1
+				}
+			],
+			pause: [
+				{
+					type: "keyboard",
+					key: "escape"
+				}
+			],
+			stand: [
+				{
+					type: "gamepad",
+					button: 5
+				}
+			]
 		}
 	}
 };

@@ -54,13 +54,11 @@ export default class Leg extends GameObject {
 	}
 	init(engine : Engine) {
 		super.init(engine);
-
 		let cockpitTex = new PIXI.Texture(new PIXI.BaseTexture(cockpit));
 		let footTex = new PIXI.Texture(new PIXI.BaseTexture(foot));
 		let upperlegTex = new PIXI.Texture(new PIXI.BaseTexture(upperleg));
 		let lowerlegTex = new PIXI.Texture(new PIXI.BaseTexture(lowerleg));
 		let gunTex = new PIXI.Texture(new PIXI.BaseTexture(gun));
-
 		this.cockpit = new PIXI.Sprite(cockpitTex);
 		this.cockpit.anchor = {
 			x: 0.5,
@@ -120,7 +118,7 @@ export default class Leg extends GameObject {
 			//on ground
 			if (this.parent.h !== 0) {
 				//if moving
-				this.stride += this.engine.deltaTime * 10 * this.parent.h;
+				this.stride += this.engine.deltaTime * config.player.speed * this.parent.h / (30);
 
 				frontFootPosTarget = new Point({
 					x: Math.cos(this.stride) * 30,
@@ -135,8 +133,8 @@ export default class Leg extends GameObject {
 		}
 		//ease it all in
 		this.torsoOffset = this.torsoOffset.easeTo(torsoOffsetTarget, 5);
-		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget, 5);
-		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget, 5);
+		this.frontFootPos = this.frontFootPos.easeTo(frontFootPosTarget, 2);
+		this.rearFootPos = this.rearFootPos.easeTo(rearFootPosTarget, 2);
 		this.position = this.parent.position.add(this.offset).add(this.torsoOffset);
 		let facing = this.engine.input.mouse.position.x > this.engine.canvas.width / 2
 			? FACING_RIGHT
