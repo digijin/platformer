@@ -135,7 +135,7 @@ export default class Player extends Actor {
 		//VERTICAL MOVEMENT
 		if (this.engine.input.getButton("jump")) {
 			if (this.v == 0) {
-				this.v = -4; //jump
+				this.v = -config.player.jump.power; //jump
 			}
 			this.v -= this.engine.deltaTime * 4; //BOOSTERS
 			this.engine.register(new Shell({
