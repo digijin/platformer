@@ -1,6 +1,7 @@
 //@flow
 import GameObject from "GameObject";
 import type Engine from "Engine";
+import { ReflectionFilter } from "@pixi/filter-reflection";
 
 import skyline from "assets/skyline.png";
 
@@ -32,6 +33,7 @@ export default class Background extends GameObject {
     stage: PIXI.Container;
     buildingStage: PIXI.Container;
     bg: PIXI.Sprite;
+    ground: PIXI.Sprite;
     buildings: Array<PIXI.Sprite>;
     constructor() {
         super();
@@ -41,6 +43,9 @@ export default class Background extends GameObject {
         this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
         this.bg.z = 1;
         this.bg.tint = 0x171819;
+        this.ground = new PIXI.Sprite(PIXI.Texture.WHITE);
+        this.ground.z = 1;
+        this.ground.tint = 0x171819;
     }
     init(engine: Engine) {
         super.init(engine);
@@ -57,6 +62,9 @@ export default class Background extends GameObject {
 
         this.stage.addChild(this.bg);
         this.stage.addChild(this.buildingStage);
+        this.buildingStage.filters = [new ReflectionFilter({ alpha: [1, 0] })];
+
+        this.buildingStage.addChild(this.ground);
         this.engine.backgroundStage.addChild(this.stage);
     }
 
@@ -101,6 +109,9 @@ export default class Background extends GameObject {
         this.bg.x = 0;
         this.bg.width = window.innerWidth;
         this.bg.height = window.innerHeight / 2;
+        this.ground.x = 0;
+        this.ground.width = window.innerWidth;
+        this.ground.height = window.innerHeight / 2;
     }
     sort() {
         this.buildingStage.children.sort((a, b) => {
@@ -121,7 +132,7 @@ export default class Background extends GameObject {
         ];
         let type = types[Math.floor(types.length * Math.random())];
         let exp = new type({
-            parent: this.stage,
+            parent: this.buildingStage,
             speed: 0.2
         });
         exp.position.x = window.innerWidth * Math.random();
