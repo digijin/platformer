@@ -13,7 +13,7 @@ export default function* suicideBomber(
 
     let tryJump = () => {
         if (enemy.v == 0) {
-            enemy.v = -4;
+            enemy.v = -enemy.type.jumpPower;
         }
     };
     while (true) {

@@ -8,6 +8,7 @@ export type EnemyTypeParams = {
     name: string,
     walkSpeed: number,
     jumpSpeed: number,
+    jumpPower: number,
     hp: number,
     size: {
         w: number,
@@ -25,6 +26,7 @@ export default class EnemyType {
     name: string;
     walkSpeed: number;
     jumpSpeed: number;
+    jumpPower: number;
     hp: number;
     size: {
         w: number,
@@ -49,6 +51,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
         name: "hopper",
         walkSpeed: 50,
         jumpSpeed: 100,
+        jumpPower: 10,
         hp: 50,
         size: {
             w: 50,
@@ -67,6 +70,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
         name: "lil bouncy",
         walkSpeed: 250,
         jumpSpeed: 100,
+        jumpPower: 10,
         hp: 1,
         size: {
             w: 20,
@@ -85,6 +89,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
         name: "guard",
         walkSpeed: 50,
         jumpSpeed: 100,
+        jumpPower: 10,
         hp: 100,
         size: {
             w: 60,
@@ -103,6 +108,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
         name: "heli",
         walkSpeed: 50,
         jumpSpeed: 100,
+        jumpPower: 10,
         hp: 100,
         size: {
             w: 124,
