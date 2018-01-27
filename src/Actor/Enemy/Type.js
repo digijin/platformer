@@ -70,7 +70,7 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
         name: "lil bouncy",
         walkSpeed: 250,
         jumpSpeed: 100,
-        jumpPower: 10,
+        jumpPower: 6,
         hp: 1,
         size: {
             w: 20,

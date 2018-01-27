@@ -9,6 +9,7 @@ import GameObject from "GameObject";
 import Explosion from "GameObject/Explosion";
 import { GlowFilter } from "@pixi/filter-glow";
 import Projectile from "GameObject/Projectile";
+import Shell from "GameObject/Shell";
 
 import * as PIXI from "pixi.js";
 
@@ -73,17 +74,25 @@ export default class Bullet extends Projectile {
                 x: Math.cos(dir) * dist,
                 y: Math.sin(dir) * dist
             };
+            // this.engine.register(
+            //     new Explosion({
+            //         position: this.position.add(offset),
+            //         rotation: dir,
+            //         delay: Math.random() / 8,
+            //         size: 10
+            //     })
+            // );
             this.engine.register(
-                new Explosion({
+                new Shell({
                     position: this.position.add(offset),
-                    rotation: dir,
-                    delay: Math.random() / 8,
-                    size: 10
+                    color: "red",
+                    h: (Math.random() - 0.5) * 5,
+                    v: (Math.random() - 0.5) * 5,
+                    time: 0.5
                 })
             );
         }
     }
-
     update = () => {
         this.time -= this.engine.deltaTime;
 
