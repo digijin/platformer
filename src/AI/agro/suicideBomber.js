@@ -1,6 +1,7 @@
 import type Player from "Actor/Player";
 import Missile from "GameObject/Missile";
 const CLOSEST_DISTANCE = 50;
+const DETONATE_DISTANCE = 20;
 
 export default function* suicideBomber(
     enemy: Enemy,
@@ -20,6 +21,9 @@ export default function* suicideBomber(
         enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
         let distance = player.position.distanceTo(enemy.position);
         let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
+        if (distance < DETONATE_DISTANCE) {
+            enemy.explode();
+        }
         if (distance < CLOSEST_DISTANCE) {
             tryJump();
         }
