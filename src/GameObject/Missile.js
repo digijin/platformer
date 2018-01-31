@@ -21,7 +21,7 @@ export default class Missile extends Projectile {
     guided: boolean;
     remoteControl: boolean;
     trajectory: Line;
-    maxSpeed: number = 20;
+    maxSpeed: number = 40;
     minSpeed: number = 1;
     acceleration: number = 20;
     constructor(params: Object) {

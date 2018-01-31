@@ -21,7 +21,7 @@ export default class Smoke extends GameObject {
     v: number;
     constructor(params: Object) {
         super();
-        this.duration = 0.3;
+        this.duration = 0.2;
         Object.assign(this, params);
 
         this.time = this.duration;
@@ -50,13 +50,27 @@ export default class Smoke extends GameObject {
         this.sprite.position.x = this.position.x;
         this.sprite.position.y = this.position.y;
         this.sprite.width = this.sprite.height = 10 + timePc * 10;
-        this.sprite.alpha = timePc;
-        this.sprite.tint = new RGBA({
-            r: 1,
-            g: 1,
-            b: 1 - timePc,
-            a: 1
-        }).toNumber();
+        // this.sprite.alpha = timePc;
+        let stops = [
+            { r: 1, g: 0, b: 0, a: 1 },
+            { r: 0.3, g: 0.3, b: 0.3, a: 1 },
+            { r: 0.3, g: 0.3, b: 0.3, a: 1 },
+            { r: 0.3, g: 0.3, b: 0.3, a: 1 },
+            { r: 0.3, g: 0.3, b: 0.3, a: 1 },
+            { r: 0.3, g: 0.3, b: 0.3, a: 1 }
+            // { r: 0.3, g: 0.3, b: 0.3, a: 0.4 },
+            // { r: 0.3, g: 0.3, b: 0.3, a: 0.3 },
+            // { r: 0.3, g: 0.3, b: 0.3, a: 0.2 },
+            // { r: 0.3, g: 0.3, b: 0.3, a: 0.1 },
+            // { r: 0.3, g: 0.3, b: 0.3, a: 0 }
+        ];
+        this.sprite.tint = RGBA.fromStops(stops, 1 - timePc).toNumber();
+        // this.sprite.tint = new RGBA({
+        //     r: 1,
+        //     g: 1 - timePc,
+        //     b: 1 - timePc,
+        //     a: 1
+        // }).toNumber();
     }
     exit() {
         this.engine.stage.removeChild(this.sprite);
