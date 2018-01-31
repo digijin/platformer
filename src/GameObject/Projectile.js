@@ -3,6 +3,7 @@
 import type Engine from "Engine";
 import type Point from "Utility/Point";
 import type Actor from "Actor";
+import type Decor from "Grid/Decor";
 import GameObject from "GameObject";
 import Line from "Utility/Line";
 
@@ -73,16 +74,13 @@ export default class Projectile extends GameObject {
         }
     }
 
-    checkDecor(onHit) {
+    checkDecor(onHit: (decor: Decor, hitTest: {}) => {}) {
         let missDecor = this.engine.grid.decor.every(d => {
             if (d.getType().obstacle == false) {
                 return true;
             }
             let hitTest = this.trajectory.intersectsRect(d.rect);
             if (hitTest.result && hitTest.collision) {
-                // this.position.x = hitTest.collision.x;
-                // this.position.y = hitTest.collision.y;
-                // d.damage(1);
                 onHit(d, hitTest);
                 return false;
             } else {

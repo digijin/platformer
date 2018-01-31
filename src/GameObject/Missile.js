@@ -54,6 +54,12 @@ export default class Missile extends Projectile {
 
         //CHECK GRID
         this.checkGrid();
+        //check decor
+        this.checkDecor((decor, hitTest) => {
+            this.position.x = hitTest.collision.x;
+            this.position.y = hitTest.collision.y;
+            decor.damage(1);
+        });
         //CHECK ENEMIES
         //USING EVERY SO I DONT EXPLODE MULTIPLE TIMES
         this.checkActors();
