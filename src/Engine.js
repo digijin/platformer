@@ -119,7 +119,7 @@ export default class Engine {
         //     new ReflectionFilter({ alpha: [1, 0] })
         // ];
 
-        // this.stageContainer.filters = [new AdvancedBloomFilter()];
+        this.stageContainer.filters = [new AdvancedBloomFilter()];
         // this.stageContainer.filters = [new GlitchFilter()];
         // this.stageContainer.filters = [new GlowFilter()];
         // this.stageContainer.filters = [new GodrayFilter()];
