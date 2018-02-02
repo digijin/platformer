@@ -29,6 +29,9 @@ import { PixelateFilter } from "@pixi/filter-pixelate";
 import { ReflectionFilter } from "@pixi/filter-reflection";
 import { ShockwaveFilter } from "@pixi/filter-shockwave";
 
+import type Mission from "Mission";
+import { Missions } from "Mission";
+
 import Fpsmeter from "fpsmeter";
 let instance;
 export default class Engine {
@@ -37,6 +40,7 @@ export default class Engine {
     lastTime: number;
     mouse: Mouse;
     currentPlayer: Player;
+    mission: Mission = Missions[0];
     // keyboard: Input.Keyboard;
     deltaTime: number;
     state: State;

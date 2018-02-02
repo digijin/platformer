@@ -1,6 +1,10 @@
 // @flow
 
 export default class Mission {
+    level: any;
+    title: string;
+    description: string;
+    objectives: Array<{ text: string }>;
     constructor(params) {
         Object.assign(this, params);
     }
