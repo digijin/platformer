@@ -16,39 +16,49 @@ const styles = theme => ({
         left: "100px",
         right: "100px",
         top: "100px",
-        bottom: "100px"
+        bottom: "100px",
+        backgroundColor: "#0e0405",
+        color: "#c9d3d0"
     },
     title: {
-        fontSize: "30px",
-        fontFamily: "HeadingFont",
-        textAlign: "center",
-        margin: "10px"
+        fontSize: "20px",
+        fontFamily: "roboto",
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        textAlign: "left",
+        color: "#c9d3d0"
     },
     panel: {
-        backgroundColor: "rgba(255,255,255,0.7)"
+        backgroundColor: "#221d1f",
+        padding: "8px"
+    },
+    panelInner: {
+        // borderColor: "#655a61",
+        // borderWidth: "2px",
+        border: "2px solid #655a61",
+        padding: "10px"
     },
     missionList: {
-        border: "1px solid grey",
+        border: "1px solid black",
         width: "30%",
         display: "block"
     },
     missionListSelected: {
-        border: "1px solid grey"
+        border: "1px solid black"
     },
     missionDetails: {
-        float: "right",
-        border: "1px solid grey",
+        border: "1px solid black",
         width: "60%",
         display: "block"
     },
-    button: {
-        float: "right"
+    missionTitle: {
+        fontSize: "20px"
     },
+    button: {},
     map: {
-        float: "right",
         width: "100px",
         height: "100px",
-        border: "1px solid grey"
+        border: "1px solid black"
     }
 });
 export class Briefing extends React.Component<{}> {
@@ -70,7 +80,7 @@ export class Briefing extends React.Component<{}> {
         if (!selectedMission) {
             selectedMission = {
                 title: "None Selected",
-                description: "Please select a mission on the left",
+                description: "Please select a mission",
                 objectives: []
             };
         }
@@ -78,67 +88,73 @@ export class Briefing extends React.Component<{}> {
         return (
             <div className={classes.container}>
                 <div className={classes.panel}>
-                    <Button
-                        raised={true}
-                        className={classnames(classes.button, classes.menu)}
-                        onClick={() => {
-                            this.props.engine.startScene(new MainMenu());
-                        }}
-                    >
-                        go back to menu
-                    </Button>
-                    <div className={classes.title}>Briefing panel</div>
-                    <div className={classes.missionDetails}>
-                        {selectedMission.title}
-                        <hr />
-                        {selectedMission.description}
-                        <div className={classes.map}>some picture</div>
-                        <ul>
-                            {selectedMission.objectives.map((o, i) => {
-                                return <li key={i}>{o.text}</li>;
-                            })}
-                        </ul>
-                    </div>
-                    <div className={classes.missionList}>
-                        list of available missions here
-                        <ul>
-                            {Missions.map((mission, index) => {
-                                return (
-                                    <li
-                                        key={index}
-                                        className={
-                                            this.state.selectedMission == index
-                                                ? classes.missionListSelected
-                                                : ""
-                                        }
-                                    >
-                                        <a
-                                            onClick={() => {
-                                                this.changeMission(index);
-                                            }}
+                    <div className={classes.panelInner}>
+                        <Button
+                            raised={true}
+                            className={classnames(classes.button, classes.menu)}
+                            onClick={() => {
+                                this.props.engine.startScene(new MainMenu());
+                            }}
+                        >
+                            go back to menu
+                        </Button>
+                        <div className={classes.title}>
+                            &gt;&gt;Briefing panel
+                        </div>
+                        <div className={classes.missionDetails}>
+                            <div className={classes.missionTitle}>
+                                {selectedMission.title}
+                            </div>
+                            {selectedMission.description}
+
+                            <ul>
+                                {selectedMission.objectives.map((o, i) => {
+                                    return <li key={i}>{o.text}</li>;
+                                })}
+                            </ul>
+                        </div>
+                        <div className={classes.missionList}>
+                            list of available missions here
+                            <ul>
+                                {Missions.map((mission, index) => {
+                                    return (
+                                        <li
+                                            key={index}
+                                            className={
+                                                this.state.selectedMission ==
+                                                index
+                                                    ? classes.missionListSelected
+                                                    : ""
+                                            }
                                         >
-                                            {mission.title}
-                                        </a>
-                                    </li>
+                                            <a
+                                                onClick={() => {
+                                                    this.changeMission(index);
+                                                }}
+                                            >
+                                                {mission.title}
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                        <Button
+                            id="equipButton"
+                            className={classes.button}
+                            raised={true}
+                            disabled={this.state.selectedMission == null}
+                            onClick={() => {
+                                this.props.engine.mission = selectedMission;
+                                this.props.engine.startSceneTransition(
+                                    new Equip(),
+                                    new Doors()
                                 );
-                            })}
-                        </ul>
+                            }}
+                        >
+                            go to equip screen
+                        </Button>
                     </div>
-                    <Button
-                        id="equipButton"
-                        className={classes.button}
-                        raised={true}
-                        disabled={this.state.selectedMission == null}
-                        onClick={() => {
-                            this.props.engine.mission = selectedMission;
-                            this.props.engine.startSceneTransition(
-                                new Equip(),
-                                new Doors()
-                            );
-                        }}
-                    >
-                        go to equip screen
-                    </Button>
                 </div>
             </div>
         );
