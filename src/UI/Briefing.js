@@ -89,30 +89,6 @@ export class Briefing extends React.Component<{}> {
             <div className={classes.container}>
                 <div className={classes.panel}>
                     <div className={classes.panelInner}>
-                        <Button
-                            raised={true}
-                            className={classnames(classes.button, classes.menu)}
-                            onClick={() => {
-                                this.props.engine.startScene(new MainMenu());
-                            }}
-                        >
-                            go back to menu
-                        </Button>
-                        <div className={classes.title}>
-                            &gt;&gt;Briefing panel
-                        </div>
-                        <div className={classes.missionDetails}>
-                            <div className={classes.missionTitle}>
-                                {selectedMission.title}
-                            </div>
-                            {selectedMission.description}
-
-                            <ul>
-                                {selectedMission.objectives.map((o, i) => {
-                                    return <li key={i}>{o.text}</li>;
-                                })}
-                            </ul>
-                        </div>
                         <div className={classes.missionList}>
                             list of available missions here
                             <ul>
@@ -139,6 +115,35 @@ export class Briefing extends React.Component<{}> {
                                 })}
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div className={classes.panel}>
+                    <div className={classes.panelInner}>
+                        <Button
+                            raised={true}
+                            className={classnames(classes.button, classes.menu)}
+                            onClick={() => {
+                                this.props.engine.startScene(new MainMenu());
+                            }}
+                        >
+                            go back to menu
+                        </Button>
+                        <div className={classes.title}>
+                            &gt;&gt;Briefing panel
+                        </div>
+                        <div className={classes.missionDetails}>
+                            <div className={classes.missionTitle}>
+                                {selectedMission.title}
+                            </div>
+                            {selectedMission.description}
+
+                            <ul>
+                                {selectedMission.objectives.map((o, i) => {
+                                    return <li key={i}>{o.text}</li>;
+                                })}
+                            </ul>
+                        </div>
+
                         <Button
                             id="equipButton"
                             className={classes.button}
