@@ -17,7 +17,11 @@ const styles = theme => ({
         right: "100px",
         top: "100px",
         bottom: "100px",
-        color: "#c9d3d0"
+        color: "#c9d3d0",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "flex-start"
     },
     title: {
         fontSize: "20px",
@@ -30,24 +34,27 @@ const styles = theme => ({
     panel: {
         backgroundColor: "#221d1f",
         padding: "8px",
-        margin: "10px"
+        margin: "10px",
+        display: "block"
     },
     panelInner: {
         // borderColor: "#655a61",
         // borderWidth: "2px",
         border: "2px solid #655a61",
-        padding: "10px"
+        padding: "10px",
+        display: "block"
     },
     missionList: {
-        border: "1px solid black",
-        width: "30%",
+        // border: "1px solid black",
+        // width: "30%",
         display: "block"
     },
     missionListSelected: {
-        border: "1px solid black"
+        border: "1px solid white",
+        background: "#655a61"
     },
     missionDetails: {
-        border: "1px solid black",
+        // border: "1px solid black",
         width: "60%",
         display: "block"
     },
@@ -88,6 +95,9 @@ export class Briefing extends React.Component<{}> {
         return (
             <div className={classes.container}>
                 <div className={classes.panel}>
+                    <div className={classes.panelInner}>abc123</div>
+                </div>
+                <div className={classes.panel}>
                     <div className={classes.panelInner}>
                         <div className={classes.missionList}>
                             list of available missions here
@@ -117,17 +127,17 @@ export class Briefing extends React.Component<{}> {
                         </div>
                     </div>
                 </div>
+                <Button
+                    raised={true}
+                    className={classnames(classes.button, classes.menu)}
+                    onClick={() => {
+                        this.props.engine.startScene(new MainMenu());
+                    }}
+                >
+                    go back to menu
+                </Button>
                 <div className={classes.panel}>
                     <div className={classes.panelInner}>
-                        <Button
-                            raised={true}
-                            className={classnames(classes.button, classes.menu)}
-                            onClick={() => {
-                                this.props.engine.startScene(new MainMenu());
-                            }}
-                        >
-                            go back to menu
-                        </Button>
                         <div className={classes.title}>
                             &gt;&gt;Briefing panel
                         </div>
@@ -143,24 +153,23 @@ export class Briefing extends React.Component<{}> {
                                 })}
                             </ul>
                         </div>
-
-                        <Button
-                            id="equipButton"
-                            className={classes.button}
-                            raised={true}
-                            disabled={this.state.selectedMission == null}
-                            onClick={() => {
-                                this.props.engine.mission = selectedMission;
-                                this.props.engine.startSceneTransition(
-                                    new Equip(),
-                                    new Doors()
-                                );
-                            }}
-                        >
-                            go to equip screen
-                        </Button>
                     </div>
                 </div>
+                <Button
+                    id="equipButton"
+                    className={classes.button}
+                    raised={true}
+                    disabled={this.state.selectedMission == null}
+                    onClick={() => {
+                        this.props.engine.mission = selectedMission;
+                        this.props.engine.startSceneTransition(
+                            new Equip(),
+                            new Doors()
+                        );
+                    }}
+                >
+                    go to equip screen
+                </Button>
             </div>
         );
     }
