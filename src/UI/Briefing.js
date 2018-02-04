@@ -17,7 +17,6 @@ const styles = theme => ({
         right: "100px",
         top: "100px",
         bottom: "100px",
-        backgroundColor: "#0e0405",
         color: "#c9d3d0"
     },
     title: {
@@ -30,7 +29,8 @@ const styles = theme => ({
     },
     panel: {
         backgroundColor: "#221d1f",
-        padding: "8px"
+        padding: "8px",
+        margin: "10px"
     },
     panelInner: {
         // borderColor: "#655a61",
