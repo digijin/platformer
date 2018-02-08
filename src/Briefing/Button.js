@@ -8,6 +8,8 @@ export default class Button extends PIXI.Container {
     backgroundColorOver: number = 0x999999;
     backgroundColorSelected: number = 0x222222;
 
+    padding: { x: number, y: number } = { x: 10, y: 2 };
+
     over: boolean = false;
     constructor(params: { text: string, action: any }) {
         super();
@@ -20,10 +22,11 @@ export default class Button extends PIXI.Container {
             fill: this.textColor,
             align: "center"
         });
+        this.text.position = this.padding;
         this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
         this.background.tint = this.backgroundColor;
-        this.background.width = this.text.width;
-        this.background.height = this.text.height;
+        this.background.width = this.text.width + this.padding.x * 2;
+        this.background.height = this.text.height + this.padding.y * 2;
         this.addChild(this.background);
         this.addChild(this.text);
 
