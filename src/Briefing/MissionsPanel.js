@@ -20,6 +20,7 @@ export default class BriefingMissionsPanel extends Panel {
     selectedMission: Mission | null;
 
     textColor: number = 0xc9d3d0;
+    textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
         super();
