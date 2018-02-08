@@ -12,6 +12,7 @@ import Point from "Utility/Point";
 
 type Props = { offset: Point };
 import Equip from "Scene/Equip";
+import MainMenu from "Scene/MainMenu";
 import Doors from "Transition/Doors";
 
 export default class ActionPanel extends Panel {
@@ -23,6 +24,7 @@ export default class ActionPanel extends Panel {
     textColorSelected: number = 0xff6666;
 
     equipButton: Button;
+    exitButton: Button;
     constructor(props: Props) {
         super();
         this.props = props;
@@ -44,7 +46,14 @@ export default class ActionPanel extends Panel {
             // this.props.engine.mission = selectedMission;
             this.engine.startSceneTransition(new Equip(), new Doors());
         });
+        this.exitButton = new Button({ text: "Exit to menu" });
+        this.exitButton.position.y = 70;
+        this.exitButton.on("mouseup", () => {
+            // this.props.engine.mission = selectedMission;
+            this.engine.startSceneTransition(new MainMenu(), new Doors());
+        });
         this.content.addChild(this.equipButton);
+        this.content.addChild(this.exitButton);
         this.resizeFitContent();
     }
 
