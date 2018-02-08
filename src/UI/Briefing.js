@@ -16,7 +16,7 @@ const styles = theme => ({
         left: "100px",
         right: "100px",
         top: "100px",
-        bottom: "100px",
+        // bottom: "100px",
         color: "#c9d3d0",
         display: "flex",
         flexDirection: "row",

@@ -19,6 +19,14 @@ export default class BriefingManager extends GameObject {
 
         let spr = new PIXI.Sprite(PIXI.Texture.WHITE);
         this.container.addChild(spr);
+        spr.on("click", event => {
+            //handle event
+            console.log(event);
+        });
+        this.container.on("click", event => {
+            //handle event
+            console.log(event);
+        });
 
         this.engine.stage.addChild(this.container);
     }
