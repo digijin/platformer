@@ -47,7 +47,6 @@ export default class Engine {
     currentScene: SceneBase;
     ui: UI;
     grid: Grid;
-    canvas: HTMLCanvasElement;
     pixicanvas: HTMLCanvasElement;
     fpsmeter: Fpsmeter;
     view: {
@@ -90,12 +89,6 @@ export default class Engine {
         this.mouse = new Mouse().init(this);
         // FLOWHACK
         this.fpsmeter = new FPSMeter(null, config.fpsmeter);
-        let canvas: HTMLCanvasElement = document.createElement("canvas");
-        canvas.id = "engineCanvas";
-        canvas.width = config.game.width;
-        canvas.height = config.game.height;
-        container.appendChild(canvas);
-        this.canvas = canvas;
 
         let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
         pixicanvas.id = "pixiCanvas";
@@ -138,23 +131,24 @@ export default class Engine {
         container.appendChild(uiDiv);
         this.ui = new UI(uiDiv, this);
 
-        this.ctx = new Context(canvas.getContext("2d")).init(this);
         this.resize();
         window.addEventListener("resize", this.resize);
 
         this.input = new Input(
-            Object.assign({}, config.input, { target: canvas })
+            Object.assign({}, config.input, { target: pixicanvas })
         );
+
+        //HACK
+        this.canvas = this.pixicanvas;
+
         return this;
     }
 
     resize = () => {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
         this.pixicanvas.width = window.innerWidth;
         this.pixicanvas.height = window.innerHeight;
-        config.game.width = this.canvas.width;
-        config.game.height = this.canvas.height;
+        config.game.width = window.innerWidth;
+        config.game.height = window.innerHeight;
         if (this.renderer) {
             this.renderer.resize(this.pixicanvas.width, this.pixicanvas.height);
         }
@@ -224,9 +218,6 @@ export default class Engine {
         this.deltaTime = diff / 1000;
         this.mouse.update();
         if (!this.paused) {
-            //clear canvas
-            this.ctx.clearRect(0, 0, config.game.width, config.game.height);
-
             //sort objects on z
             this.objects.sort((a, b) => {
                 let az = 0;
