@@ -117,14 +117,6 @@ export default class Missile extends Projectile {
                 this.direction += Math.PI * 2;
             }
         }
-
-        // this.engine.ctx.drawSprite(missile, this.position, {
-        // 	w: 20,
-        // 	h: 10
-        // }, this.direction, {
-        // 	x: 0.2,
-        // 	y: 0.5
-        // });
     };
 
     checkActors() {

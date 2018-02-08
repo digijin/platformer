@@ -163,12 +163,6 @@ export default class Watcher extends GameObject {
         }
 
         //render cursor
-        // this.engine.ctx.fillRect(
-        //     rect.tl().x,
-        //     rect.tl().y,
-        //     this.size,
-        //     this.size
-        // );
         this.cursor.position = rect.tl();
         this.cursor.width = this.cursor.height = this.size;
 

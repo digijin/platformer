@@ -60,8 +60,17 @@ export default class Grid extends GameObject {
         this.engine.stage.removeChild(this.decorStage);
     }
 
+    screenRect(): Rect {
+        return new Rect({
+            t: 0,
+            l: 0,
+            r: window.innerWidth,
+            b: window.innerHeight
+        }).move(this.engine.view.offset);
+    }
+
     update = (engine: Engine) => {
-        let screenRect = this.engine.ctx.screenRect();
+        let screenRect = this.screenRect();
         this.renderBlocksPixi(screenRect);
         // this.renderDecor();
         // this.decorStage.position.x = -this.engine.view.offset.x;
@@ -126,13 +135,15 @@ export default class Grid extends GameObject {
     highlightBlock(block: Block) {
         if (block) {
             let rect = block.rect;
-            this.engine.ctx.context.strokeStyle = "#888";
-            this.engine.ctx.strokeRect(
-                rect.l,
-                rect.t,
-                rect.r - rect.l,
-                rect.b - rect.t
-            );
+
+            // TODO: RE ADD THIS IN PIXI
+            // this.engine.ctx.context.strokeStyle = "#888";
+            // this.engine.ctx.strokeRect(
+            //     rect.l,
+            //     rect.t,
+            //     rect.r - rect.l,
+            //     rect.b - rect.t
+            // );
         }
     }
 
@@ -343,12 +354,13 @@ export default class Grid extends GameObject {
                 this.highlightBlock(block);
             }
         });
-        this.engine.ctx.drawLine(
-            line.a.multiply(config.grid.width),
-            line.b.multiply(config.grid.width),
-            "red",
-            2
-        );
+        // TODO: RE ADD THIS IN PIXI
+        // this.engine.ctx.drawLine(
+        //     line.a.multiply(config.grid.width),
+        //     line.b.multiply(config.grid.width),
+        //     "red",
+        //     2
+        // );
     }
 
     bustCache(block: Block) {
