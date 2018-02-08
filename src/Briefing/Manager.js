@@ -6,6 +6,8 @@ import GameObject from "GameObject";
 
 import MissionsPanel from "./MissionsPanel";
 import InfoPanel from "./InfoPanel";
+import ActionPanel from "./ActionPanel";
+import BasePanel from "./BasePanel";
 
 import * as PIXI from "pixi.js";
 
@@ -19,17 +21,35 @@ export default class BriefingManager extends GameObject {
     init(engine: Engine) {
         super.init(engine);
         this.container = new PIXI.Container();
-
+        //MISSIONS
         this.missionsPanel = new MissionsPanel({
             onMissionChange: this.onMissionChange
         });
         this.engine.register(this.missionsPanel);
         this.container.addChild(this.missionsPanel.container);
-
-        this.infoPanel = new InfoPanel({
+        //ACTIONS
+        this.actionPanel = new ActionPanel({
+            offset: new Point({
+                x: 0,
+                y: this.missionsPanel.container.height + this.spacing
+            })
+        });
+        this.engine.register(this.actionPanel);
+        this.container.addChild(this.actionPanel.container);
+        //BASE
+        this.basePanel = new BasePanel({
             offset: new Point({
                 x: this.missionsPanel.container.width + this.spacing,
                 y: 0
+            })
+        });
+        this.engine.register(this.basePanel);
+        this.container.addChild(this.basePanel.container);
+        //INFO
+        this.infoPanel = new InfoPanel({
+            offset: new Point({
+                x: this.missionsPanel.container.width + this.spacing,
+                y: this.basePanel.container.height + this.spacing
             })
         });
         this.engine.register(this.infoPanel);
