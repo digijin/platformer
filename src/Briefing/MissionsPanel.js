@@ -18,6 +18,9 @@ export default class BriefingMissionsPanel extends Panel {
     missionButtons: Array<PIXI.DisplayObject>;
     props: Props;
     selectedMission: Mission | null;
+
+    textColor: number = 0xc9d3d0;
+    textColorSelected: number = 0xff6666;
     constructor(props: Props) {
         super();
         this.props = props;
@@ -27,7 +30,7 @@ export default class BriefingMissionsPanel extends Panel {
         this.heading = new PIXI.Text("Here is my heading", {
             fontFamily: "Arial",
             fontSize: 24,
-            fill: 0xc9d3d0,
+            fill: this.textColor,
             align: "center"
         });
         this.content.addChild(this.heading);
@@ -40,12 +43,13 @@ export default class BriefingMissionsPanel extends Panel {
             let text = new PIXI.Text(mission.title, {
                 fontFamily: "Arial",
                 fontSize: 18,
-                fill: 0xc9d3d0,
+                fill: this.textColor,
                 align: "center"
             });
 
             text.buttonMode = true;
             text.interactive = true;
+            text.mission = mission;
             text.on("mousedown", event => {
                 this.selectedMission = mission;
                 this.props.onMissionChange(mission);
@@ -53,6 +57,16 @@ export default class BriefingMissionsPanel extends Panel {
             text.position.y = 30 + index * 20;
             this.content.addChild(text);
             return text;
+        });
+    }
+
+    update() {
+        this.missionButtons.forEach(mb => {
+            if (mb.mission == this.selectedMission) {
+                mb.style.fill = this.textColorSelected;
+            } else {
+                mb.style.fill = this.textColor;
+            }
         });
     }
 }
