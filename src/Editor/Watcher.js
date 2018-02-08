@@ -13,6 +13,8 @@ import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";
 import { log } from "util";
 
+import * as PIXI from "pixi.js";
+
 export default class Watcher extends GameObject {
     el: HTMLDivElement;
     size: number;
@@ -38,12 +40,19 @@ export default class Watcher extends GameObject {
         this.mode = "block";
         this.drawMode = "paint";
     }
+
+    cursor: PIXI.Sprite;
     init(engine: Engine) {
         super.init(engine);
         // let el = document.createElement("DIV");
         // el.innerHTML = "I'm a div";
         // engine.ui.container.appendChild(el);
         this.lastMouse = this.engine.mouse.position;
+        this.cursor = new PIXI.Sprite(PIXI.Texture.WHITE);
+        this.engine.stage.addChild(this.cursor);
+    }
+    exit() {
+        this.engine.stage.removeChild(this.cursor);
     }
     update() {
         this.size += this.engine.input.getAxis("wheel") / 50;
@@ -154,12 +163,14 @@ export default class Watcher extends GameObject {
         }
 
         //render cursor
-        this.engine.ctx.fillRect(
-            rect.tl().x,
-            rect.tl().y,
-            this.size,
-            this.size
-        );
+        // this.engine.ctx.fillRect(
+        //     rect.tl().x,
+        //     rect.tl().y,
+        //     this.size,
+        //     this.size
+        // );
+        this.cursor.position = rect.tl();
+        this.cursor.width = this.cursor.height = this.size;
 
         this.engine.stage.position.x = Math.floor(-this.engine.view.offset.x);
         this.engine.stage.position.y = Math.floor(-this.engine.view.offset.y);
