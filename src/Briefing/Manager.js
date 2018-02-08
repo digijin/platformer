@@ -52,6 +52,7 @@ export default class BriefingManager extends GameObject {
             x: (this.engine.renderer.width - this.container.width) / 2,
             y: (this.engine.renderer.height - this.container.height) / 2
         });
-        this.container.position = target;
+
+        this.container.position = target.easeTo(this.container.position, 2);
     }
 }
