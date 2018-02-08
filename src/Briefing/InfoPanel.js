@@ -17,13 +17,15 @@ type Props = {
 
 export default class BriefingMissionsPanel extends Panel {
     heading: PIXI.Text;
-    missionButtons: Array<PIXI.DisplayObject>;
     props: Props;
     selectedMission: Mission | null;
 
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
+    title: PIXI.DisplayObject;
+    description: PIXI.DisplayObject;
+    objectives: PIXI.Container;
     constructor(props: Props) {
         super();
         this.props = props;
@@ -38,7 +40,57 @@ export default class BriefingMissionsPanel extends Panel {
             fill: this.textColor,
             align: "center"
         });
+        this.title = new PIXI.Text("title", {
+            fontFamily: "Arial",
+            fontSize: 24,
+            fill: this.textColor,
+            align: "center"
+        });
+
+        this.description = new PIXI.Text("desc", {
+            fontFamily: "Arial",
+            fontSize: 24,
+            fill: this.textColor,
+            align: "center"
+        });
+        this.objectives = new PIXI.Container();
+
         this.content.addChild(this.heading);
+        this.content.addChild(this.title);
+        this.content.addChild(this.description);
+        this.content.addChild(this.objectives);
+
+        this.render({
+            title: "None Selected",
+            description: "Please select a mission",
+            objectives: []
+        });
+
+        // this.resizeFitContent();
+    }
+
+    render(mission: {
+        title: string,
+        description: string,
+        objectives: Array<any>
+    }) {
+        let cursor = 30;
+        this.title.text = mission.title;
+        this.title.position.y = cursor;
+        cursor += 20;
+        this.description.text = mission.description;
+        this.description.position.y = cursor;
+        cursor += 20;
+        this.objectives.position.y = cursor;
+        this.objectives.children.forEach(child => {
+            //wipe it
+            this.objectives.removeChild(child);
+        });
+        let spr = new PIXI.Sprite(PIXI.Texture.WHITE);
+        spr.position.x = Math.random() * 100;
+        spr.position.y = Math.random() * 100;
+        this.objectives.addChild(spr);
+
         this.resizeFitContent();
     }
 
