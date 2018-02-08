@@ -69,11 +69,7 @@ export default class BriefingMissionsPanel extends Panel {
         // this.resizeFitContent();
     }
 
-    render(mission: {
-        title: string,
-        description: string,
-        objectives: Array<any>
-    }) {
+    render(mission: Mission) {
         let cursor = 30;
         this.title.text = mission.title;
         this.title.position.y = cursor;
@@ -82,7 +78,7 @@ export default class BriefingMissionsPanel extends Panel {
         this.description.position.y = cursor;
         cursor += 20;
         this.objectives.position.y = cursor;
-        this.objectives.children.forEach(child => {
+        this.objectives.children.slice().forEach(child => {
             //wipe it
             this.objectives.removeChild(child);
         });
@@ -90,7 +86,16 @@ export default class BriefingMissionsPanel extends Panel {
         spr.position.x = Math.random() * 100;
         spr.position.y = Math.random() * 100;
         this.objectives.addChild(spr);
-
+        mission.objectives.forEach((o, i) => {
+            let text = new PIXI.Text(o.text, {
+                fontFamily: "Arial",
+                fontSize: 18,
+                fill: this.textColor,
+                align: "center"
+            });
+            text.position.y = i * 20 + 10;
+            this.objectives.addChild(text);
+        });
         this.resizeFitContent();
     }
 

@@ -43,9 +43,11 @@ export default class BriefingManager extends GameObject {
     exit() {
         this.engine.stage.removeChild(this.container);
     }
-    onMissionChange(mission) {
-        console.log("mission changed to", mission);
-    }
+    onMissionChange = mission => {
+        // console.log("mission changed to", mission);
+
+        this.infoPanel.render(mission);
+    };
 
     update() {
         let target = new Point({

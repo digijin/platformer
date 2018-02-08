@@ -28,7 +28,7 @@ export default class BriefingMissionsPanel extends Panel {
     }
     init(engine: Engine) {
         super.init(engine);
-        this.heading = new PIXI.Text("Here is my heading", {
+        this.heading = new PIXI.Text("Available Missions", {
             fontFamily: "Arial",
             fontSize: 24,
             fill: this.textColor,
