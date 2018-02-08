@@ -11,6 +11,8 @@ import Button from "./Button";
 import Point from "Utility/Point";
 
 type Props = { offset: Point };
+import Equip from "Scene/Equip";
+import Doors from "Transition/Doors";
 
 export default class ActionPanel extends Panel {
     heading: PIXI.Text;
@@ -38,6 +40,10 @@ export default class ActionPanel extends Panel {
 
         this.equipButton = new Button({ text: "Equip" });
         this.equipButton.position.y = 30;
+        this.equipButton.on("mouseup", () => {
+            // this.props.engine.mission = selectedMission;
+            this.engine.startSceneTransition(new Equip(), new Doors());
+        });
         this.content.addChild(this.equipButton);
         this.resizeFitContent();
     }
