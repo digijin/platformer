@@ -25,9 +25,13 @@ export default class BriefingManager extends GameObject {
         this.missionsPanel = new MissionsPanel({
             offset: new Point(),
             z: -0.8,
-            onMissionChange: this.onMissionChange
+            onMissionChange: this.onMissionChange,
+            delay: 1
         });
         this.engine.register(this.missionsPanel);
+        // this.missionsPanel.props.offset.x = -this.missionsPanel.container.width;
+        // this.missionsPanel.props.offset.y = -this.missionsPanel.container
+        //     .height;
         this.container.addChild(this.missionsPanel.container);
         //ACTIONS
         this.actionPanel = new ActionPanel({
@@ -35,7 +39,8 @@ export default class BriefingManager extends GameObject {
                 x: 0,
                 y: this.missionsPanel.container.height + this.spacing
             }),
-            z: -0.8
+            z: -0.8,
+            delay: 2
         });
         this.engine.register(this.actionPanel);
         this.container.addChild(this.actionPanel.container);
@@ -45,7 +50,8 @@ export default class BriefingManager extends GameObject {
                 x: this.missionsPanel.container.width + this.spacing,
                 y: 0
             }),
-            z: -0.8
+            z: -0.8,
+            delay: 3
         });
         this.engine.register(this.basePanel);
         this.container.addChild(this.basePanel.container);
@@ -55,7 +61,8 @@ export default class BriefingManager extends GameObject {
                 x: this.missionsPanel.container.width + this.spacing,
                 y: this.basePanel.container.height + this.spacing
             }),
-            z: -0.8
+            z: -0.8,
+            delay: 4
         });
         this.engine.register(this.infoPanel);
         this.container.addChild(this.infoPanel.container);

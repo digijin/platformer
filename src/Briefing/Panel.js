@@ -25,6 +25,7 @@ export default class Panel extends GameObject {
     init(engine: Engine) {
         super.init(engine);
         this.setupContainers();
+        // this.position();
     }
     setupContainers() {
         this.content = new PIXI.Container();
@@ -51,11 +52,18 @@ export default class Panel extends GameObject {
     }
 
     update() {
+        // if (this.props.delay > 0) {
+        //     this.props.delay -= this.engine.deltaTime * 4;
+        //     // this.container.alpha = 0
+        //     this.container.visible = false;
+        // } else {
+        this.container.visible = true;
         this.props.z *= 1 - this.engine.deltaTime;
         // if (this.props.z < 0) {
         //     this.props.z += this.engine.deltaTime;
         // }
         this.position();
+        // }
     }
 
     resizeFitContent() {
