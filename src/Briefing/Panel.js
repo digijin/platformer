@@ -16,6 +16,7 @@ export default class Panel extends GameObject {
     container: PIXI.Container;
     content: PIXI.Container;
     background: PIXI.Container;
+    border: PIXI.Graphics;
 
     padding: number = 20;
     props: Props;
@@ -27,6 +28,7 @@ export default class Panel extends GameObject {
     init(engine: Engine) {
         super.init(engine);
         this.setupContainers();
+        this.props.delay = Math.random();
         // this.position();
     }
     setupContainers() {
@@ -45,6 +47,10 @@ export default class Panel extends GameObject {
         spr.tint = 0x221d1f;
         spr.width = 100;
         spr.height = 100;
+
+        this.border = new PIXI.Graphics();
+        this.container.addChild(this.border);
+
         this.background.addChild(spr);
     }
     position() {
@@ -70,7 +76,19 @@ export default class Panel extends GameObject {
             this.container.visible = false;
         } else {
             this.container.visible = true;
-            this.props.z *= 1 - this.engine.deltaTime;
+
+            let target = 0;
+            if (this.props.target) {
+                target = this.props.target.z;
+            }
+            let diff = this.props.z - target;
+
+            // this.props.z *= 1 - this.engine.deltaTime;
+            // this.props.z -= diff * this.engine.deltaTime;
+            if (diff < 0) {
+                this.props.z += this.engine.deltaTime / 4;
+            }
+
             // if (this.props.z < 0) {
             //     this.props.z += this.engine.deltaTime;
             // }
@@ -81,5 +99,17 @@ export default class Panel extends GameObject {
     resizeFitContent() {
         this.background.width = this.content.width + this.padding * 2;
         this.background.height = this.content.height + this.padding * 2;
+        this.border.position.set(this.padding / 2, this.padding / 2);
+        this.border.clear();
+        this.border
+            .lineStyle(1, 0x655a61)
+            .moveTo(0, 0)
+            .lineTo(this.content.width + this.padding, 0)
+            .lineTo(
+                this.content.width + this.padding,
+                this.content.height + this.padding
+            )
+            .lineTo(0, this.content.height + this.padding)
+            .lineTo(0, 0);
     }
 }

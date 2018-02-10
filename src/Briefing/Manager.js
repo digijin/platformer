@@ -86,6 +86,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
+            target: { z: 0.2 },
             delay: 3
         });
         this.engine.register(this.radarPanel);
@@ -103,6 +104,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
+            target: { z: 0.2 },
             delay: 3
         });
         this.engine.register(this.graphPanel);
