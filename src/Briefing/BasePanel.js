@@ -32,5 +32,7 @@ export default class BasePanel extends Panel {
         this.resizeFitContent();
     }
 
-    update() {}
+    update() {
+        super.update();
+    }
 }

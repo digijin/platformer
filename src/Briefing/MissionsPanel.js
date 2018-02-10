@@ -6,11 +6,14 @@ import * as PIXI from "pixi.js";
 import type Engine from "Engine";
 import Panel from "./Panel";
 import { Missions } from "Mission";
+import type Point from "Utility/Point";
 
 import type Mission from "Mission";
 
 type Props = {
-    onMissionChange: mission => {}
+    onMissionChange: mission => {},
+    offset: Point,
+    z: number
 };
 
 export default class BriefingMissionsPanel extends Panel {
@@ -23,7 +26,7 @@ export default class BriefingMissionsPanel extends Panel {
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
-        super();
+        super(props);
         this.props = props;
     }
     init(engine: Engine) {
@@ -62,6 +65,7 @@ export default class BriefingMissionsPanel extends Panel {
     }
 
     update() {
+        super.update();
         this.missionButtons.forEach(mb => {
             if (mb.mission == this.selectedMission) {
                 mb.style.fill = this.textColorSelected;

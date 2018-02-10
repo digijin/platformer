@@ -1,16 +1,28 @@
 // @flow
 import * as PIXI from "pixi.js";
 
-import GameObject from "GameObject";
+import Point from "Utility/Point";
+import type Engine from "Engine";
 
-export default class BriefingPanel extends GameObject {
+import GameObject from "GameObject";
+type Props = {
+    offset: Point,
+    z: number
+};
+
+export default class Panel extends GameObject {
     container: PIXI.Container;
     content: PIXI.Container;
     background: PIXI.Container;
 
     padding: number = 20;
+    props: Props;
 
-    init(engine) {
+    constructor(props: Props) {
+        super();
+        this.props = props;
+    }
+    init(engine: Engine) {
         super.init(engine);
         this.setupContainers();
     }
@@ -31,6 +43,19 @@ export default class BriefingPanel extends GameObject {
         spr.width = 100;
         spr.height = 100;
         this.background.addChild(spr);
+    }
+    position() {
+        this.container.position = this.props.offset.multiply(1 + this.props.z);
+        this.container.scale.x = 1 + this.props.z;
+        this.container.scale.y = 1 + this.props.z;
+    }
+
+    update() {
+        this.props.z *= 1 - this.engine.deltaTime;
+        // if (this.props.z < 0) {
+        //     this.props.z += this.engine.deltaTime;
+        // }
+        this.position();
     }
 
     resizeFitContent() {

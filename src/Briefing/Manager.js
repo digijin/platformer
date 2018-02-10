@@ -17,12 +17,14 @@ export default class BriefingManager extends GameObject {
     container: PIXI.Container;
     missionsPanel: MissionsPanel;
     infoPanel: InfoPanel;
-    spacing: number = 10;
+    spacing: number = 20;
     init(engine: Engine) {
         super.init(engine);
         this.container = new PIXI.Container();
         //MISSIONS
         this.missionsPanel = new MissionsPanel({
+            offset: new Point(),
+            z: -0.8,
             onMissionChange: this.onMissionChange
         });
         this.engine.register(this.missionsPanel);
@@ -32,7 +34,8 @@ export default class BriefingManager extends GameObject {
             offset: new Point({
                 x: 0,
                 y: this.missionsPanel.container.height + this.spacing
-            })
+            }),
+            z: -0.8
         });
         this.engine.register(this.actionPanel);
         this.container.addChild(this.actionPanel.container);
@@ -41,7 +44,8 @@ export default class BriefingManager extends GameObject {
             offset: new Point({
                 x: this.missionsPanel.container.width + this.spacing,
                 y: 0
-            })
+            }),
+            z: -0.8
         });
         this.engine.register(this.basePanel);
         this.container.addChild(this.basePanel.container);
@@ -50,7 +54,8 @@ export default class BriefingManager extends GameObject {
             offset: new Point({
                 x: this.missionsPanel.container.width + this.spacing,
                 y: this.basePanel.container.height + this.spacing
-            })
+            }),
+            z: -0.8
         });
         this.engine.register(this.infoPanel);
         this.container.addChild(this.infoPanel.container);
@@ -75,6 +80,10 @@ export default class BriefingManager extends GameObject {
             y: (this.engine.renderer.height - this.container.height) / 2
         });
 
-        this.container.position = target.easeTo(this.container.position, 2);
+        this.container.position = target;
+        // .easeTo(
+        //     this.container.position,
+        //     1 + this.engine.deltaTime
+        // );
     }
 }

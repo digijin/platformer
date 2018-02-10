@@ -32,7 +32,7 @@ export default class BriefingMissionsPanel extends Panel {
     }
     init(engine: Engine) {
         super.init(engine);
-        console.log(this.props);
+        // console.log(this.props);
         this.container.position = this.props.offset;
         this.heading = new PIXI.Text("Info Panel", {
             fontFamily: "Arial",
@@ -99,5 +99,7 @@ export default class BriefingMissionsPanel extends Panel {
         this.resizeFitContent();
     }
 
-    update() {}
+    update() {
+        super.update();
+    }
 }

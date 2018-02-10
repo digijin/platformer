@@ -10,14 +10,14 @@ import Button from "./Button";
 
 import Point from "Utility/Point";
 
-type Props = { offset: Point };
+// type Props = { offset: Point };
 import Equip from "Scene/Equip";
 import MainMenu from "Scene/MainMenu";
 import Doors from "Transition/Doors";
 
 export default class ActionPanel extends Panel {
     heading: PIXI.Text;
-    props: Props;
+    // props: Props;
 
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
@@ -25,13 +25,13 @@ export default class ActionPanel extends Panel {
 
     equipButton: Button;
     exitButton: Button;
-    constructor(props: Props) {
-        super();
-        this.props = props;
-    }
+    // constructor(props: Props) {
+    //     super();
+    //     this.props = props;
+    // }
     init(engine: Engine) {
         super.init(engine);
-        this.container.position = this.props.offset;
+        // this.container.position = this.props.offset;
         this.heading = new PIXI.Text("Action Panel", {
             fontFamily: "Arial",
             fontSize: 24,
@@ -43,13 +43,11 @@ export default class ActionPanel extends Panel {
         this.equipButton = new Button({ text: "Equip" });
         this.equipButton.position.y = 30;
         this.equipButton.on("mouseup", () => {
-            // this.props.engine.mission = selectedMission;
             this.engine.startSceneTransition(new Equip(), new Doors());
         });
         this.exitButton = new Button({ text: "Exit to menu" });
         this.exitButton.position.y = 70;
         this.exitButton.on("mouseup", () => {
-            // this.props.engine.mission = selectedMission;
             this.engine.startSceneTransition(new MainMenu(), new Doors());
         });
         this.content.addChild(this.equipButton);
@@ -57,5 +55,7 @@ export default class ActionPanel extends Panel {
         this.resizeFitContent();
     }
 
-    update() {}
+    update() {
+        super.update();
+    }
 }
