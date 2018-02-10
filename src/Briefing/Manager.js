@@ -8,6 +8,8 @@ import MissionsPanel from "./MissionsPanel";
 import InfoPanel from "./InfoPanel";
 import ActionPanel from "./ActionPanel";
 import BasePanel from "./BasePanel";
+import RadarPanel from "./RadarPanel";
+import GraphPanel from "./GraphPanel";
 
 import * as PIXI from "pixi.js";
 
@@ -76,6 +78,42 @@ export default class BriefingManager extends GameObject {
         this.engine.register(this.infoPanel);
         this.container.addChild(this.infoPanel.container);
 
+        //RADAR
+        this.radarPanel = new RadarPanel({
+            offset: new Point({
+                // x: this.missionsPanel.container.width + this.spacing,
+                x: 0,
+                y: 0
+            }),
+            z: -0.8,
+            delay: 3
+        });
+        this.engine.register(this.radarPanel);
+        this.radarPanel.props.offset.y =
+            -this.radarPanel.container.height -
+            this.spacing -
+            this.basePanel.container.height -
+            this.spacing;
+        this.container.addChild(this.radarPanel.container);
+        //GRAPH
+        this.graphPanel = new GraphPanel({
+            offset: new Point({
+                // x: this.missionsPanel.container.width + this.spacing,
+                x: 0,
+                y: 0
+            }),
+            z: -0.8,
+            delay: 3
+        });
+        this.engine.register(this.graphPanel);
+        this.graphPanel.props.offset.x =
+            -this.graphPanel.container.width -
+            this.spacing -
+            this.actionPanel.container.width -
+            this.spacing;
+        this.container.addChild(this.graphPanel.container);
+
+        //container
         this.container.position.x = this.engine.renderer.width / 2;
         this.container.position.y = this.engine.renderer.height / 2;
 

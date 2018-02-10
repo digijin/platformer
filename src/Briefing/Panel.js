@@ -4,6 +4,8 @@ import * as PIXI from "pixi.js";
 import Point from "Utility/Point";
 import type Engine from "Engine";
 
+import { GlitchFilter } from "@pixi/filter-glitch";
+
 import GameObject from "GameObject";
 type Props = {
     offset: Point,
@@ -51,7 +53,17 @@ export default class Panel extends GameObject {
         this.container.scale.y = 1 + this.props.z;
     }
 
+    glitching: boolean = false;
+    glitch() {
+        if (Math.random() < 0.01) {
+            this.container.filters = [new GlitchFilter()];
+        } else {
+            this.container.filters = [];
+        }
+    }
+
     update() {
+        this.glitch();
         if (this.props.delay > 0) {
             this.props.delay -= this.engine.deltaTime * 4;
             // this.container.alpha = 0
