@@ -87,10 +87,10 @@ export default class Panel extends GameObject {
             let diff = this.props.z - target;
 
             // this.props.z *= 1 - this.engine.deltaTime;
-            // this.props.z -= diff * this.engine.deltaTime;
-            if (diff < 0) {
-                this.props.z += this.engine.deltaTime / 4;
-            }
+            this.props.z -= diff * this.engine.deltaTime;
+            // if (diff < 0) {
+            //     this.props.z += this.engine.deltaTime / 4;
+            // }
 
             // if (this.props.z < 0) {
             //     this.props.z += this.engine.deltaTime;
@@ -102,6 +102,8 @@ export default class Panel extends GameObject {
     resizeFitContent() {
         this.background.width = this.content.width + this.padding * 2;
         this.background.height = this.content.height + this.padding * 2;
+
+        this.border.cacheAsBitmap = false;
         this.border.position.set(this.padding / 2, this.padding / 2);
         this.border.clear();
         this.border

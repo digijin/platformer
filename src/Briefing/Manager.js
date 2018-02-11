@@ -13,6 +13,8 @@ import GraphPanel from "./GraphPanel";
 
 import * as PIXI from "pixi.js";
 
+import dottedbg from "./dottedbg.png";
+
 import Point from "Utility/Point";
 
 export default class BriefingManager extends GameObject {
@@ -22,6 +24,14 @@ export default class BriefingManager extends GameObject {
     spacing: number = 20;
     init(engine: Engine) {
         super.init(engine);
+
+        this.bg = new PIXI.extras.TilingSprite(
+            new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
+        );
+        this.bg.width = window.innerWidth;
+        this.bg.height = window.innerHeight;
+        this.engine.stage.addChild(this.bg);
+
         this.container = new PIXI.Container();
         //MISSIONS
         this.missionsPanel = new MissionsPanel({

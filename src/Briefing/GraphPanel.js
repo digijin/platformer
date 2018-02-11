@@ -17,6 +17,7 @@ export default class ImagePanel extends Panel {
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
+    graph: PIXI.Graphics;
     constructor(props: Props) {
         super(props);
         this.props = props;
