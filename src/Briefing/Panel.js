@@ -24,6 +24,7 @@ export default class Panel extends GameObject {
     constructor(props: Props) {
         super();
         this.props = props;
+        this.z = props.target ? props.target.z : 0;
     }
     init(engine: Engine) {
         super.init(engine);
@@ -50,11 +51,13 @@ export default class Panel extends GameObject {
 
         this.border = new PIXI.Graphics();
         this.container.addChild(this.border);
-
+        this.container.z = this.z;
         this.background.addChild(spr);
     }
     position() {
-        this.container.position = this.props.offset.multiply(1 + this.props.z);
+        this.container.position = this.props.offset
+            .subtract(this.engine.view.offset)
+            .multiply(1 + this.props.z);
         this.container.scale.x = 1 + this.props.z;
         this.container.scale.y = 1 + this.props.z;
     }

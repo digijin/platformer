@@ -30,7 +30,7 @@ export default class ImagePanel extends Panel {
         //
         // this.content.addChild(this.image);
         this.graph = new PIXI.Graphics();
-        this.graph.lineStyle(3, 0x00ff00).moveTo(0, 100);
+        this.graph.lineStyle(1, 0x00ff00).moveTo(0, 100);
         for (let x = 0; x < 20; x++) {
             this.graph.lineTo(x * 5, 100 * Math.random());
         }

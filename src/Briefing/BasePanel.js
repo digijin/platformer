@@ -16,7 +16,7 @@ export default class BasePanel extends Panel {
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
-        super();
+        super(props);
         this.props = props;
     }
     init(engine: Engine) {

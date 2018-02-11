@@ -27,7 +27,7 @@ export default class BriefingMissionsPanel extends Panel {
     description: PIXI.DisplayObject;
     objectives: PIXI.Container;
     constructor(props: Props) {
-        super();
+        super(props);
         this.props = props;
     }
     init(engine: Engine) {

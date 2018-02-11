@@ -86,7 +86,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: 0.2 },
+            target: { z: -0.2 },
             delay: 3
         });
         this.engine.register(this.radarPanel);
@@ -104,7 +104,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: 0.2 },
+            target: { z: -0.2 },
             delay: 3
         });
         this.engine.register(this.graphPanel);
@@ -118,6 +118,17 @@ export default class BriefingManager extends GameObject {
         //container
         this.container.position.x = this.engine.renderer.width / 2;
         this.container.position.y = this.engine.renderer.height / 2;
+
+        //sort kids
+        // console.log("sorting kids", this.container.children.length);
+        this.container.children.sort((a, b) => {
+            // let az = a.props.target ? a.props.target.z : 0;
+            // let bz = b.props.target ? b.props.target.z : 0;
+            // console.log(az, bz);
+            // return bz - az;
+            // console.log(a.z, b.z);
+            return a.z - b.z;
+        });
 
         this.engine.stage.addChild(this.container);
     }
@@ -137,6 +148,11 @@ export default class BriefingManager extends GameObject {
             x: this.engine.renderer.width / 2,
             y: this.engine.renderer.height / 2
         });
+        // console.log(this.engine.mouse.position, target);
+        this.engine.view.offset = this.engine.mouse.position
+            .subtract(target)
+            .multiply(0.5)
+            .easeTo(this.engine.view.offset, 2);
 
         this.container.position = target;
         // .easeTo(
