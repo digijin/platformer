@@ -35,7 +35,7 @@ function clickClass(id) {
     mouseUtil.clickSelector("." + id);
 }
 
-describe.skip("functional.karma.js", () => {
+xdescribe("functional.karma.js", () => {
     let container;
     let game;
     beforeAll(function() {
