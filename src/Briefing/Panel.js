@@ -25,12 +25,15 @@ export default class Panel extends GameObject {
         super();
         this.props = props;
         this.z = props.target ? props.target.z : 0;
+        this.z = 0;
+        this.tag("briefingpanel");
     }
     init(engine: Engine) {
         super.init(engine);
         this.setupContainers();
-        this.props.delay = Math.random();
+        this.props.delay = Math.random() / 2;
         this.container.alpha = 0.8;
+        this.container.visible = false;
         // this.position();
     }
     setupContainers() {
@@ -75,16 +78,16 @@ export default class Panel extends GameObject {
     update() {
         // this.glitch();
         if (this.props.delay > 0) {
-            this.props.delay -= this.engine.deltaTime * 4;
+            this.props.delay -= this.engine.deltaTime;
             // this.container.alpha = 0
-            this.container.visible = false;
         } else {
             this.container.visible = true;
 
-            let target = 0;
-            if (this.props.target) {
-                target = this.props.target.z;
-            }
+            // let target = 0;
+            // if (this.props.target) {
+            //     target = this.props.target.z;
+            // }
+            let target = this.z;
             let diff = this.props.z - target;
 
             // this.props.z *= 1 - this.engine.deltaTime;

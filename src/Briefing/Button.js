@@ -31,7 +31,7 @@ export default class Button extends PIXI.Container {
         this.addChild(this.text);
 
         this.on("mousedown", e => {
-            console.log("md");
+            // console.log("md");
         });
         this.on("mouseover", e => {
             // console.log("mo");

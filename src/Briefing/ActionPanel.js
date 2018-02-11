@@ -14,6 +14,7 @@ import Point from "Utility/Point";
 import Equip from "Scene/Equip";
 import MainMenu from "Scene/MainMenu";
 import Doors from "Transition/Doors";
+import BriefingEnd from "Transition/BriefingEnd";
 
 export default class ActionPanel extends Panel {
     heading: PIXI.Text;
@@ -43,7 +44,7 @@ export default class ActionPanel extends Panel {
         this.equipButton = new Button({ text: "Equip" });
         this.equipButton.position.y = 30;
         this.equipButton.on("mouseup", () => {
-            this.engine.startSceneTransition(new Equip(), new Doors());
+            this.engine.startSceneTransition(new Equip(), new BriefingEnd());
         });
         this.exitButton = new Button({ text: "Exit to menu" });
         this.exitButton.position.y = 70;

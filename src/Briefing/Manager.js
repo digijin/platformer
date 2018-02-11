@@ -30,6 +30,7 @@ export default class BriefingManager extends GameObject {
     spacing: number = 20;
     init(engine: Engine) {
         super.init(engine);
+        this.tag("briefingmanager");
         this.container = new PIXI.Container();
 
         this.bg = new PIXI.extras.TilingSprite(
@@ -114,7 +115,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: -0.1 },
+            target: { z: 0.3 },
             delay: 3
         });
         this.engine.register(this.radarPanel);
@@ -132,7 +133,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: -0.1 },
+            target: { z: 0.1 },
             delay: 3
         });
         this.engine.register(this.graphPanel);
@@ -150,7 +151,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: -0.1 },
+            target: { z: 0.2 },
             delay: 3
         });
         this.engine.register(this.barPanel);
@@ -170,7 +171,7 @@ export default class BriefingManager extends GameObject {
                 y: 0
             }),
             z: -0.8,
-            target: { z: -0.1 },
+            target: { z: 0.1 },
             delay: 3
         });
         this.engine.register(this.lineChartPanel);
@@ -236,6 +237,7 @@ export default class BriefingManager extends GameObject {
 
         // console.log(this.bg.filters[0].time);
     }
+    mouseControl: Boolean = true;
     update() {
         this.animateFilters();
         // this.glitch();
@@ -246,10 +248,17 @@ export default class BriefingManager extends GameObject {
             y: this.engine.renderer.height / 2
         });
         // console.log(this.engine.mouse.position, target);
-        this.engine.view.offset = this.engine.mouse.position
-            .subtract(target)
-            .multiply(0.25)
-            .easeTo(this.engine.view.offset, 2);
+        if (this.mouseControl) {
+            this.engine.view.offset = this.engine.mouse.position
+                .subtract(target)
+                .multiply(0.25)
+                .easeTo(this.engine.view.offset, 2);
+        } else {
+            this.engine.view.offset = new Point().easeTo(
+                this.engine.view.offset,
+                2
+            );
+        }
 
         this.container.position = target;
         // .easeTo(
