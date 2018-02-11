@@ -34,6 +34,7 @@ export default class ImagePanel extends Panel {
         for (let x = 0; x < 20; x++) {
             this.graph.lineTo(x * 5, 100 * Math.random());
         }
+        this.graph.cacheAsBitmap = true;
         this.content.addChild(this.graph);
         this.resizeFitContent();
     }

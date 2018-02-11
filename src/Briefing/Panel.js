@@ -72,7 +72,7 @@ export default class Panel extends GameObject {
     }
 
     update() {
-        this.glitch();
+        // this.glitch();
         if (this.props.delay > 0) {
             this.props.delay -= this.engine.deltaTime * 4;
             // this.container.alpha = 0
@@ -114,5 +114,6 @@ export default class Panel extends GameObject {
             )
             .lineTo(0, this.content.height + this.padding)
             .lineTo(0, 0);
+        this.border.cacheAsBitmap = true;
     }
 }
