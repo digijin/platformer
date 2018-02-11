@@ -42,7 +42,7 @@ export default class Engine {
     currentPlayer: Player;
     mission: Mission = Missions[0];
     // keyboard: Input.Keyboard;
-    deltaTime: number;
+    deltaTime: number = 0;
     state: State;
     currentScene: SceneBase;
     ui: UI;

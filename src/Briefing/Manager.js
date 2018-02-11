@@ -11,6 +11,7 @@ import BasePanel from "./BasePanel";
 import RadarPanel from "./RadarPanel";
 import GraphPanel from "./GraphPanel";
 import BarPanel from "./BarPanel";
+import LineChartPanel from "./LineChartPanel";
 import { GlitchFilter } from "@pixi/filter-glitch";
 import { OldFilmFilter } from "@pixi/filter-old-film";
 import { CRTFilter } from "@pixi/filter-crt";
@@ -161,6 +162,28 @@ export default class BriefingManager extends GameObject {
             this.missionsPanel.container.height -
             this.spacing;
         this.container.addChild(this.barPanel.container);
+        //LINE CHART
+        this.lineChartPanel = new LineChartPanel({
+            offset: new Point({
+                // x: this.missionsPanel.container.width + this.spacing,
+                x: 0,
+                y: 0
+            }),
+            z: -0.8,
+            target: { z: -0.1 },
+            delay: 3
+        });
+        this.engine.register(this.lineChartPanel);
+        this.lineChartPanel.props.offset.x =
+            -this.lineChartPanel.container.width - this.spacing;
+        this.lineChartPanel.props.offset.y =
+            -this.lineChartPanel.container.height -
+            this.spacing -
+            this.barPanel.container.height -
+            this.spacing -
+            this.missionsPanel.container.height -
+            this.spacing;
+        this.container.addChild(this.lineChartPanel.container);
 
         //container
         this.container.position.x = this.engine.renderer.width / 2;

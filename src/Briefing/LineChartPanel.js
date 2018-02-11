@@ -20,6 +20,8 @@ export default class BarPanel extends Panel {
     graph: PIXI.Graphics;
     height: number = 60;
     numvalues: number = 25;
+    pointGap: number = 10;
+    speed: number = 0.5;
     constructor(props: Props) {
         super(props);
         this.props = props;
@@ -32,6 +34,7 @@ export default class BarPanel extends Panel {
         //prime lineS
         for (let i = 0; i < this.numvalues; i++) {
             this.values.push(Math.random());
+            this.targetValues.push(Math.random());
         }
         this.drawLines();
 
@@ -40,27 +43,34 @@ export default class BarPanel extends Panel {
     }
     drawLines() {
         this.graph.clear();
-        this.graph.lineStyle(3, 0x00ff00);
+        this.graph
+            .lineStyle(3, 0x00ff00)
+            .moveTo(0, this.height * this.values[0]);
         // for (let x = 0; x < 20; x++) {
         for (let x = 0; x < this.values.length; x++) {
+            // debugger;
+            let v = this.values[x];
+            let t = this.targetValues[x];
+            if (v < t) {
+                v += this.engine.deltaTime * this.speed;
+            } else {
+                v -= this.engine.deltaTime * this.speed;
+            }
+            // console.log(v, this.values[x], t, this.targetValues[x]);
+            this.values[x] = v;
+            if (Math.abs(v - t) < 0.1) {
+                this.targetValues[x] = Math.random();
+            }
             this.graph
-                .moveTo(x * 5, this.height)
-                .lineTo(x * 5, this.height * this.values[x]);
+                // .moveTo(x * this.pointGap, this.height)
+                .lineTo(x * this.pointGap, this.height * this.values[x]);
         }
     }
     values: Array<number> = [];
-    time: number = 0;
-    gap: number = 0.1;
+    targetValues: Array<number> = [];
     update() {
         super.update();
-        this.time += this.engine.deltaTime;
-        if (this.time > this.gap) {
-            this.time -= this.gap;
-            this.values.push(Math.random());
-            if (this.values.length > this.numvalues) {
-                this.values.shift();
-            }
-            this.drawLines();
-        }
+
+        this.drawLines();
     }
 }
