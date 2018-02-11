@@ -55,6 +55,7 @@
     "@pixi/filter-pixelate": "^2.5.0",
     "@pixi/filter-reflection": "^2.5.0",
     "@pixi/filter-shockwave": "^2.5.0",
+    "@pixi/filter-zoom-blur": "^2.5.1",
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-class-properties": "^6.9.1",

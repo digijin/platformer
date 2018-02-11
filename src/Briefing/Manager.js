@@ -13,6 +13,7 @@ import GraphPanel from "./GraphPanel";
 import { GlitchFilter } from "@pixi/filter-glitch";
 import { OldFilmFilter } from "@pixi/filter-old-film";
 import { CRTFilter } from "@pixi/filter-crt";
+import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
 
 import * as PIXI from "pixi.js";
 
@@ -42,7 +43,12 @@ export default class BriefingManager extends GameObject {
 
         // this.bg.filters = [new OldFilmFilter({ sepia: 0, noise: 0.1 })];
 
-        this.container.filters = [new CRTFilter()];
+        this.container.filters = [new CRTFilter(), new ZoomBlurFilter()];
+        this.container.filters[1].strength = 0.2;
+        this.container.filters[1].center = [
+            window.innerWidth / 2,
+            window.innerHeight / 2
+        ];
         //MISSIONS
         this.missionsPanel = new MissionsPanel({
             offset: new Point(),
@@ -177,6 +183,13 @@ export default class BriefingManager extends GameObject {
         //     // }
         // });
         this.container.filters[0].time += this.engine.deltaTime * 40;
+        if (this.container.filters.length > 1) {
+            this.container.filters[1].strength -= this.engine.deltaTime / 10;
+            if (this.container.filters[1].strength < 0) {
+                this.container.filters = [this.container.filters[0]];
+            }
+        }
+
         // console.log(this.bg.filters[0].time);
     }
     update() {

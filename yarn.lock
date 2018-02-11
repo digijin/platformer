@@ -48,6 +48,10 @@
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-shockwave/-/filter-shockwave-2.5.0.tgz#852f845e0d49edb5d8b540b4dde499ca20782316"
 
+"@pixi/filter-zoom-blur@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-zoom-blur/-/filter-zoom-blur-2.5.1.tgz#2d8cee1ef9a6e7a32da0ef1f790f2579542ded18"
+
 "@types/node@^7.0.18":
   version "7.0.48"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.48.tgz#24bfdc0aa82e8f6dbd017159c58094a2e06d0abb"
