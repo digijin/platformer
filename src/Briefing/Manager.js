@@ -191,7 +191,7 @@ export default class BriefingManager extends GameObject {
         // console.log(this.engine.mouse.position, target);
         this.engine.view.offset = this.engine.mouse.position
             .subtract(target)
-            .multiply(0.5)
+            .multiply(0.25)
             .easeTo(this.engine.view.offset, 2);
 
         this.container.position = target;

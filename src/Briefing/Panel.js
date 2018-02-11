@@ -30,6 +30,7 @@ export default class Panel extends GameObject {
         super.init(engine);
         this.setupContainers();
         this.props.delay = Math.random();
+        this.container.alpha = 0.8;
         // this.position();
     }
     setupContainers() {
