@@ -10,6 +10,9 @@ import ActionPanel from "./ActionPanel";
 import BasePanel from "./BasePanel";
 import RadarPanel from "./RadarPanel";
 import GraphPanel from "./GraphPanel";
+import { GlitchFilter } from "@pixi/filter-glitch";
+import { OldFilmFilter } from "@pixi/filter-old-film";
+import { CRTFilter } from "@pixi/filter-crt";
 
 import * as PIXI from "pixi.js";
 
@@ -24,15 +27,22 @@ export default class BriefingManager extends GameObject {
     spacing: number = 20;
     init(engine: Engine) {
         super.init(engine);
+        this.container = new PIXI.Container();
 
         this.bg = new PIXI.extras.TilingSprite(
             new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
         );
+        this.bg.z = -1;
         this.bg.width = window.innerWidth;
         this.bg.height = window.innerHeight;
-        this.engine.stage.addChild(this.bg);
+        this.bg.x = -window.innerWidth / 2;
+        this.bg.y = -window.innerHeight / 2;
+        // this.engine.stage.addChild(this.bg);
+        this.container.addChild(this.bg);
 
-        this.container = new PIXI.Container();
+        // this.bg.filters = [new OldFilmFilter({ sepia: 0, noise: 0.1 })];
+
+        this.container.filters = [new CRTFilter()];
         //MISSIONS
         this.missionsPanel = new MissionsPanel({
             offset: new Point(),
@@ -151,7 +161,27 @@ export default class BriefingManager extends GameObject {
         this.infoPanel.render(mission);
     };
 
+    glitching: boolean = false;
+    glitch() {
+        if (Math.random() < 0.01) {
+            this.container.filters = [new GlitchFilter()];
+        } else {
+            this.container.filters = [];
+        }
+    }
+
+    animateFilters() {
+        // this.bg.filters.forEach(f => {
+        //     // if (f.time) {
+        //     f.time += this.engine.deltaTime;
+        //     // }
+        // });
+        this.container.filters[0].time += this.engine.deltaTime * 40;
+        // console.log(this.bg.filters[0].time);
+    }
     update() {
+        this.animateFilters();
+        // this.glitch();
         let target = new Point({
             // x: (this.engine.renderer.width - this.container.width) / 2,
             // y: (this.engine.renderer.height - this.container.height) / 2

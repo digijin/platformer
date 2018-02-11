@@ -12,6 +12,10 @@
   dependencies:
     "@pixi/filter-kawase-blur" "^2.5.0"
 
+"@pixi/filter-crt@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-crt/-/filter-crt-2.5.0.tgz#7f445f7c31cd4db79d9013adde79ec68b02b968a"
+
 "@pixi/filter-glitch@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-glitch/-/filter-glitch-2.5.0.tgz#31cc72e0c0edc0e59df46c9ae5ba276f147678eb"
@@ -27,6 +31,10 @@
 "@pixi/filter-kawase-blur@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-kawase-blur/-/filter-kawase-blur-2.5.0.tgz#d24096d1ebe4969bab80c6bd38935d755af75591"
+
+"@pixi/filter-old-film@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-old-film/-/filter-old-film-2.5.0.tgz#fe6bc4b4f82fecafdc61af77fb883bc9f21f2c0e"
 
 "@pixi/filter-pixelate@^2.5.0":
   version "2.5.0"
