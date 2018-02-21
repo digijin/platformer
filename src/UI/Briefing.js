@@ -161,7 +161,7 @@ export class Briefing extends React.Component<{}> {
                     raised={true}
                     disabled={this.state.selectedMission == null}
                     onClick={() => {
-                        this.props.engine.mission = selectedMission;
+                        // this.props.engine.mission = selectedMission;
                         this.props.engine.startSceneTransition(
                             new Equip(),
                             new Doors()

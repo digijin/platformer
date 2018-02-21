@@ -19,6 +19,6 @@ export default class Equip extends Base {
 
         document.body.style.backgroundColor = "#16502d";
         engine.register(new Background());
-        engine.ui.dispatch({ type: "START_SCENE", scene: "equip" });
+        // engine.ui.dispatch({ type: "START_SCENE", scene: "equip" });
     }
 }

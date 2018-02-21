@@ -8,7 +8,7 @@ import { GlitchFilter } from "@pixi/filter-glitch";
 import { OldFilmFilter } from "@pixi/filter-old-film";
 import { CRTFilter } from "@pixi/filter-crt";
 import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
-import Doors from "Transition/Doors";
+// import Doors from "Transition/Doors";
 import Level from "Scene/Level";
 
 import * as PIXI from "pixi.js";
@@ -47,7 +47,9 @@ export default class EquipManager extends GameObject {
         this.launchButton.position.y = 200;
         this.launchButton.on("mouseup", () => {
             console.log("boop");
-            this.engine.startSceneTransition(new Level(), new Doors());
+
+            // this.engine.startSceneTransition(new Level(), new Doors());
+            this.engine.startScene(new Level());
         });
         this.container.addChild(this.launchButton);
 
