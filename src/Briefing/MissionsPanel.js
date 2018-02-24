@@ -46,7 +46,7 @@ export default class BriefingMissionsPanel extends Panel {
         this.missionButtons = Missions.map((mission, index) => {
             let text = new PIXI.Text(mission.title, {
                 fontFamily: "Arial",
-                fontSize: 18,
+                fontSize: 32,
                 fill: this.textColor,
                 align: "center"
             });
@@ -58,7 +58,7 @@ export default class BriefingMissionsPanel extends Panel {
                 this.selectedMission = mission;
                 this.props.onMissionChange(mission);
             });
-            text.position.y = 30 + index * 20;
+            text.position.y = 30 + index * 40;
             this.content.addChild(text);
             return text;
         });
