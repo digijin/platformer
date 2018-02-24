@@ -56,6 +56,7 @@ export default class BriefingMissionsPanel extends Panel {
             text.mission = mission;
             text.on("mousedown", event => {
                 this.selectedMission = mission;
+                this.engine.mission = mission;
                 this.props.onMissionChange(mission);
             });
             text.position.y = 30 + index * 40;
