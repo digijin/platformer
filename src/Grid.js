@@ -433,6 +433,7 @@ export default class Grid extends GameObject {
             });
         });
         if (data.enemies) {
+            console.log("loading", data.enemies.length, "enemies");
             data.enemies.forEach(e => {
                 let type = EnemyTypesMap[e.t];
                 if (!type) {

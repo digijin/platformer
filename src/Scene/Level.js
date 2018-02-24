@@ -27,8 +27,8 @@ export default class Level extends Base {
         // grid.makeTest();
         // grid.generate(1);
         // FLOWHACK
-        let gridData = engine.mission.level;
-        //require("levels/level.txt");
+        // let gridData = engine.mission.level;
+        let gridData = require("levels/level.txt");
         engine.register(grid);
         grid.load(gridData);
 

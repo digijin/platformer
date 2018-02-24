@@ -163,6 +163,11 @@ describe("functional.karma.js", () => {
         it("shouldnt throw any errors initializing", done => {
             setTimeout(done, 1000);
         });
+        describe("prep vars for level", () => {
+            it("should have engine.mission set", () => {
+                expect(game.engine.mission).toBeDefined();
+            });
+        });
         it("should click through to launch", () => {
             // clickId("launchButton");
             let equipManager = game.engine.objectsTagged("equipmanager")[0];
