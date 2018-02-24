@@ -35,7 +35,7 @@ function clickClass(id) {
     mouseUtil.clickSelector("." + id);
 }
 
-xdescribe("functional.karma.js", () => {
+describe("functional.karma.js", () => {
     let container;
     let game;
     beforeAll(function() {
@@ -68,10 +68,6 @@ xdescribe("functional.karma.js", () => {
             expect(container.childNodes[0].constructor.name).toBe(
                 "HTMLCanvasElement"
             );
-        });
-        it("should have a ui div", () => {
-            // FLOWHACK
-            expect(container.childNodes[2].id).toBe("ui");
         });
     });
     describe("wait out splash", () => {
@@ -148,7 +144,16 @@ xdescribe("functional.karma.js", () => {
             setTimeout(done, 2000);
         });
         it("should click through to equip", () => {
-            clickId("equipButton");
+            // clickId("equipButton");
+            let briefingManager = game.engine.objectsTagged(
+                "briefingmanager"
+            )[0];
+            expect(briefingManager).toBeDefined();
+            expect(briefingManager.actionPanel).toBeDefined();
+            expect(briefingManager.actionPanel.equipButton).toBeDefined();
+            expect(
+                briefingManager.actionPanel.equipButton.emit("mouseup")
+            ).toBe(true);
         });
         it("should trigger transition-finished", done => {
             window.addEventListener("transition-finished", done);
@@ -159,7 +164,11 @@ xdescribe("functional.karma.js", () => {
             setTimeout(done, 1000);
         });
         it("should click through to launch", () => {
-            clickId("launchButton");
+            // clickId("launchButton");
+            let equipManager = game.engine.objectsTagged("equipmanager")[0];
+            expect(equipManager).toBeDefined();
+            expect(equipManager.launchButton).toBeDefined();
+            expect(equipManager.launchButton.emit("mouseup")).toBe(true);
         });
     });
 
