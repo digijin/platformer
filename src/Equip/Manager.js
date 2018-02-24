@@ -21,12 +21,19 @@ import Button from "../Briefing/Button";
 
 import log from "loglevel";
 
+import CategorySelectorPanel from "./CategorySelectorPanel";
+
 export default class EquipManager extends GameObject {
     container: PIXI.Container;
     init(engine: Engine) {
         super.init(engine);
         this.tag("equipmanager");
         this.container = new PIXI.Container();
+
+        this.categorySelectorPanel = new CategorySelectorPanel();
+        this.engine.register(this.categorySelectorPanel);
+        this.container.addChild(this.categorySelectorPanel.container);
+        this.categorySelectorPanel.container.position.x = 300;
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);
