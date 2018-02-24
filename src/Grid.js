@@ -20,6 +20,8 @@ import type DecorType from "Grid/Decor/Type";
 
 import Pool from "Utility/Pool";
 
+import log from "loglevel";
+
 export default class Grid extends GameObject {
     blocks: Array<Array<Block>>;
     decor: Array<Decor>;
@@ -433,7 +435,7 @@ export default class Grid extends GameObject {
             });
         });
         if (data.enemies) {
-            console.log("loading", data.enemies.length, "enemies");
+            log.debug("loading", data.enemies.length, "enemies");
             data.enemies.forEach(e => {
                 let type = EnemyTypesMap[e.t];
                 if (!type) {

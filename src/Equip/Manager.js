@@ -19,6 +19,8 @@ import Point from "Utility/Point";
 
 import Button from "../Briefing/Button";
 
+import log from "loglevel";
+
 export default class EquipManager extends GameObject {
     container: PIXI.Container;
     init(engine: Engine) {
@@ -46,7 +48,7 @@ export default class EquipManager extends GameObject {
         this.launchButton = new Button({ text: "Launch" });
         this.launchButton.position.y = 200;
         this.launchButton.on("mouseup", () => {
-            console.log("boop");
+            log.debug("EquipManager launchButton mouseup");
 
             // this.engine.startSceneTransition(new Level(), new Doors());
             this.engine.startScene(new Level());
