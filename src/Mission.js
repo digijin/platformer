@@ -32,5 +32,12 @@ Missions.push(
             { text: "dont kill everything" },
             { text: "just joking, kill everything" }
         ]
+    }),
+
+    new Mission({
+        level: require("levels/testinglevel.txt"),
+        title: "Testing Mission",
+        description: "for automated testing. very basic level",
+        objectives: [{ text: "kill one thing" }]
     })
 );
