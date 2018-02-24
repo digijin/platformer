@@ -20,38 +20,41 @@ import ExplosionUp5 from "GameObject/ExplosionUp5";
 import ExplosionUp6 from "GameObject/ExplosionUp6";
 import * as PIXI from "pixi.js";
 
+import log from "loglevel";
+
 type Particle = {
-  time: number,
-  position: Point,
-  rotation: number
+    time: number,
+    position: Point,
+    rotation: number
 };
 
 export default class MainMenu extends GameObject {
-  hero: PIXI.Sprite
-  constructor() {
-    super();
-    // this.particles = [];
-    // this.spawnTimer = 0;
-    // this.timePassed = 0;
+    hero: PIXI.Sprite;
+    constructor() {
+        super();
+        // this.particles = [];
+        // this.spawnTimer = 0;
+        // this.timePassed = 0;
 
-    this.hero = new PIXI.Sprite(new PIXI.Texture(new PIXI.BaseTexture(mechHero)));
-    this.hero.anchor = {
-      x: 0.5,
-      y: 0.5
-    };
-  }
-  init(engine: Engine) {
-    super.init(engine);
-    this.engine.stage.addChild(this.hero);
-  }
-  update() {
-    this.hero.position.x = window.innerWidth / 2;
-    this.hero.position.y = window.innerHeight / 2;
+        this.hero = new PIXI.Sprite(
+            new PIXI.Texture(new PIXI.BaseTexture(mechHero))
+        );
+        this.hero.anchor = {
+            x: 0.5,
+            y: 0.5
+        };
+    }
+    init(engine: Engine) {
+        super.init(engine);
+        this.engine.stage.addChild(this.hero);
+    }
+    update() {
+        this.hero.position.x = window.innerWidth / 2;
+        this.hero.position.y = window.innerHeight / 2;
 
-    this.engine.view.offset.x += 400 * this.engine.deltaTime;
-  }
-  exit() {
-    this.engine.stage.removeChild(this.hero);
-  }
-
+        this.engine.view.offset.x += 400 * this.engine.deltaTime;
+    }
+    exit() {
+        this.engine.stage.removeChild(this.hero);
+    }
 }

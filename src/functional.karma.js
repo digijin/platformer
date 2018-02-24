@@ -70,7 +70,7 @@ describe("functional.karma.js", () => {
             );
         });
     });
-    describe("wait out splash", () => {
+    describe("Splash Screen", () => {
         it("should trigger logo-over", done => {
             window.addEventListener("logo-over", done);
         });
@@ -81,11 +81,18 @@ describe("functional.karma.js", () => {
             setTimeout(done, 2000);
         });
     });
+    describe("MainMenu", () => {
+        it("should have the engine container zeroed", () => {
+            expect(game.engine.stage.position.x).toBe(0);
+            expect(game.engine.stage.position.y).toBe(0);
+        });
 
-    describe("editor", () => {
         it("should open editor", () => {
             clickId("editorButton");
         });
+    });
+
+    describe("Editor", () => {
         it("shouldnt throw any errors initializing", done => {
             setTimeout(done, 1000);
         });
@@ -98,12 +105,18 @@ describe("functional.karma.js", () => {
         it("should quit back to main menu", () => {
             clickId("mainMenuButton");
         });
+    });
+
+    describe("MainMenu Again", () => {
         it("shouldnt throw any errors initializing", done => {
             setTimeout(done, 2000);
         });
-    });
 
-    describe("start game", () => {
+        it("should have the engine container zeroed - still", () => {
+            expect(game.engine.stage.position.x).toBe(0);
+            expect(game.engine.stage.position.y).toBe(0);
+        });
+
         it("null should be undefined", () => {
             expect(null).toBeDefined();
         });
@@ -112,6 +125,9 @@ describe("functional.karma.js", () => {
             expect(loadButton).not.toBe(null);
             mouseUtil.clickSelector("#loadButton");
         });
+    });
+
+    describe("Main Menu load profile", () => {
         it("shouldnt throw any errors initializing", done => {
             setTimeout(done, 100);
         });
