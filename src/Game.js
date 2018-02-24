@@ -24,7 +24,7 @@ import { BlockTypes } from "Grid/Block/Type";
 import { DecorTypes } from "Grid/Decor/Type";
 
 import log from "loglevel";
-log.setLevel("trace");
+log.setLevel("trace", true);
 
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();

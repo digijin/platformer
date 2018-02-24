@@ -166,7 +166,7 @@ export default class Engine {
             this.transitioning = true;
             transition.onEndLastScene(() => {
                 if (this.currentScene) this.currentScene.end();
-                this.objects.push(transition);
+                // this.objects.push(transition);
             });
             transition.onStartNextScene(() => {
                 this.currentScene = scene;

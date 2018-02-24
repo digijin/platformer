@@ -5,6 +5,8 @@ import Base from "./Base";
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import * as PIXI from "pixi.js";
 
+import log from "loglevel";
+
 const SECS = 2;
 // FLOWHACK
 export default class BriefingEnd extends Base {
@@ -12,6 +14,7 @@ export default class BriefingEnd extends Base {
     time: number = 0;
     flash: PIXI.Graphics;
     init(engine: Engine) {
+        log.debug("BriefingEnd transition has begun");
         this.tag("transition");
         super.init(engine);
         // this.engine.objectsTagged("briefingpanel").forEach(bp => {
@@ -50,6 +53,7 @@ export default class BriefingEnd extends Base {
             this.flash.width += this.engine.deltaTime * 1500;
             this.flash.height -= this.engine.deltaTime * 300;
         } else {
+            log.debug("BriefingEnd transition has reached end");
             this.endLastScene();
             this.startNextScene();
             this.end();
@@ -63,6 +67,8 @@ export default class BriefingEnd extends Base {
         // }
     }
     end() {
+        // super.end();
+
         this.engine.stage.removeChild(this.flash);
         this.destroy();
     }

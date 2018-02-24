@@ -7,10 +7,11 @@ export default class SceneBase {
     start(engine: Engine) {
         this.engine = engine;
         // this.engine.currentScene = this
+        log.debug("starting scene", this.constructor.name);
     }
     end() {
         //wipe engine
-        log.debug("ending scene");
+        log.debug("ending scene", this.constructor.name);
         this.engine.ui.dispatch({ type: "END_SCENE" });
         // this.engine.objects.forEach(o => {
         // 	if (o.exit) {
