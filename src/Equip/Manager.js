@@ -28,6 +28,7 @@ export default class EquipManager extends GameObject {
     container: PIXI.Container;
     categorySelectorPanel: CategorySelectorPanel;
     launchButton: Button;
+    image: PIXI.Sprite;
     init(engine: Engine) {
         super.init(engine);
         this.tag("equipmanager");
@@ -64,7 +65,6 @@ export default class EquipManager extends GameObject {
         this.launchButton.position.y = 200;
         this.launchButton.on("mouseup", () => {
             log.debug("EquipManager launchButton mouseup");
-
             // this.engine.startSceneTransition(new Level(), new Doors());
             this.engine.startScene(new Level());
         });
@@ -85,6 +85,9 @@ export default class EquipManager extends GameObject {
             this.removeComponentSelector();
         }
         this.componentSelector = new ComponentSelectorPanel(category);
+        this.componentSelector.onSelect(component => {
+            log.info("selected component", component);
+        });
         this.engine.register(this.componentSelector);
         this.container.addChild(this.componentSelector.container);
 
