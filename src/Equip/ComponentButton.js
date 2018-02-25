@@ -79,13 +79,13 @@ export default class Button extends GameObject {
         }
         // RGBA.fromNumber(textcolor);
         this.textColor = RGBA.fromNumber(textcolor)
-            .percentTo(RGBA.fromNumber(this.textColor), 0.9)
+            .percentTo(RGBA.fromNumber(this.textColor), 0.95)
             .toNumber();
         this.backgroundColor = RGBA.fromNumber(bgcolor)
-            .percentTo(RGBA.fromNumber(this.backgroundColor), 0.9)
+            .percentTo(RGBA.fromNumber(this.backgroundColor), 0.95)
             .toNumber();
 
         this.text.style.fill = this.textColor;
-        this.background.tint = bgcolor;
+        this.background.tint = this.backgroundColor;
     }
 }
