@@ -24,7 +24,8 @@ export default class Level extends Base {
             size: {
                 w: 200,
                 h: 50
-            }
+            },
+            parent: engine.stage
         });
         // grid.makeTest();
         // grid.generate(1);

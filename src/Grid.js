@@ -35,18 +35,21 @@ export default class Grid extends GameObject {
             size: {
                 w: number,
                 h: number
-            }
+            },
+            parent: PIXI.Container
         } = {
             size: {
                 w: 10,
                 h: 10
-            }
+            },
+            parent: new PIXI.Container()
         }
     ) {
         super();
         this.tileCache = {};
         this.height = params.size.h;
         this.width = params.size.w;
+        this.parent = params.parent;
         this.decor = [];
         this.z = -10;
         //make empty grid
@@ -58,12 +61,12 @@ export default class Grid extends GameObject {
         engine.grid = this;
         this.pixiInit();
 
-        this.engine.stage.addChild(this.blockStage);
-        this.engine.stage.addChild(this.decorStage);
+        this.parent.addChild(this.blockStage);
+        this.parent.addChild(this.decorStage);
     }
     exit() {
-        this.engine.stage.removeChild(this.blockStage);
-        this.engine.stage.removeChild(this.decorStage);
+        this.parent.removeChild(this.blockStage);
+        this.parent.removeChild(this.decorStage);
     }
 
     screenRect(): Rect {
