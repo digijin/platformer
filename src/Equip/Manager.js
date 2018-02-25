@@ -25,6 +25,7 @@ import CategorySelectorPanel from "./CategorySelectorPanel";
 
 export default class EquipManager extends GameObject {
     container: PIXI.Container;
+    categorySelectorPanel: CategorySelectorPanel;
     init(engine: Engine) {
         super.init(engine);
         this.tag("equipmanager");
@@ -34,6 +35,11 @@ export default class EquipManager extends GameObject {
         this.engine.register(this.categorySelectorPanel);
         this.container.addChild(this.categorySelectorPanel.container);
         this.categorySelectorPanel.container.position.x = 300;
+
+        this.categorySelectorPanel.onSelect(category => {
+            log.info("category selected", category);
+            this.showComponentSelector(category);
+        });
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);
@@ -69,6 +75,8 @@ export default class EquipManager extends GameObject {
 
         this.engine.stage.addChild(this.container);
     }
+
+    showComponentSelector(category: string) {}
     exit() {
         this.engine.stage.removeChild(this.container);
     }

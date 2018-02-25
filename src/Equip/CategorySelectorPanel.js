@@ -26,6 +26,13 @@ export default class CategorySelectorPanel extends GameObject {
             let button = new Button({ text: c });
             this.container.addChild(button);
             button.position.y = button.height * i;
+            button.on("mouseup", () => {
+                this._onSelect(c);
+            });
         });
+    }
+    _onSelect: () => {};
+    onSelect(func) {
+        this._onSelect = func;
     }
 }
