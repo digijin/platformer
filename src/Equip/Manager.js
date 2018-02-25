@@ -26,9 +26,25 @@ import ComponentSelectorPanel from "./ComponentSelectorPanel";
 
 export default class EquipManager extends GameObject {
     container: PIXI.Container;
+    category: string;
     categorySelectorPanel: CategorySelectorPanel;
     launchButton: Button;
     image: PIXI.Sprite;
+
+    onSelectCategory = category => {
+        this.category = category;
+        log.info("category selected", category);
+        this.showComponentSelector(category);
+    };
+    onSelectComponent = component => {
+        log.info(
+            "selected component",
+            component,
+            " in category",
+            this.category
+        );
+        this.engine.currentPlayer[this.category] = component.id;
+    };
     init(engine: Engine) {
         super.init(engine);
         this.tag("equipmanager");
@@ -39,10 +55,7 @@ export default class EquipManager extends GameObject {
         this.container.addChild(this.categorySelectorPanel.container);
         this.categorySelectorPanel.container.position.x = 300;
 
-        this.categorySelectorPanel.onSelect(category => {
-            log.info("category selected", category);
-            this.showComponentSelector(category);
-        });
+        this.categorySelectorPanel.onSelect(this.onSelectCategory);
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);
@@ -85,9 +98,7 @@ export default class EquipManager extends GameObject {
             this.removeComponentSelector();
         }
         this.componentSelector = new ComponentSelectorPanel(category);
-        this.componentSelector.onSelect(component => {
-            log.info("selected component", component);
-        });
+        this.componentSelector.onSelect(this.onSelectComponent);
         this.engine.register(this.componentSelector);
         this.container.addChild(this.componentSelector.container);
 

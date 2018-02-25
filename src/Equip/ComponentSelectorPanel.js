@@ -1,4 +1,4 @@
-import Button from "../Briefing/Button";
+import Button from "./ComponentButton";
 import GameObject from "GameObject";
 
 import type Engine from "Engine";
@@ -19,13 +19,13 @@ export default class ComponentSelectorPanel extends GameObject {
         this.options = [];
         switch (category) {
             case "engine":
-                this.options = Engines.map(e => e.name);
+                this.options = Engines;
                 break;
             case "legs":
-                this.options = Legs.map(e => e.name);
+                this.options = Legs;
                 break;
             case "primary":
-                this.options = Primarys.map(e => e.name);
+                this.options = Primarys;
                 break;
         }
     }
@@ -47,7 +47,7 @@ export default class ComponentSelectorPanel extends GameObject {
         this.container.addChild(this.buttonContainer);
         this.buttonContainer.position.y = 30;
         this.buttons = this.options.map((c, i) => {
-            let button = new Button({ text: c });
+            let button = new Button({ text: c.name });
             this.buttonContainer.addChild(button);
             button.position.y = button.height * i;
             button.on("mouseup", () => {
