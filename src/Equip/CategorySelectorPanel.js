@@ -5,14 +5,16 @@ import type Engine from "Engine";
 
 import * as PIXI from "pixi.js";
 
+import { CATEGORY } from "Component";
+
 const Categories = [
-    "engine",
-    "legs",
-    "primary",
-    "secondary",
-    "sidekick",
-    "armour",
-    "booster"
+    CATEGORY.ENGINE,
+    CATEGORY.LEGS,
+    CATEGORY.PRIMARY,
+    CATEGORY.SECONDARY,
+    CATEGORY.SIDEKICK,
+    CATEGORY.ARMOUR,
+    CATEGORY.BOOSTER
 ];
 
 export default class CategorySelectorPanel extends GameObject {
