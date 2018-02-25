@@ -11,8 +11,16 @@ export default class Editor extends Base {
     start(engine) {
         super.start(engine);
         let grid = new Grid({
-            size: { w: 200, h: 50 },
+            size: { w: 10, h: 10 },
             parent: engine.stage
+        });
+
+        engine.stage.position.x = 0;
+        engine.stage.position.y = 0;
+
+        engine.view.offset = new Point({
+            x: 0,
+            y: 0
         });
         // grid.makeTest();
         grid.generate(1);

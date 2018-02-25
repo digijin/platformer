@@ -3,9 +3,18 @@ import * as PIXI from "pixi.js";
 
 import type Engine from "Engine";
 
+import Grid from "Grid";
+
 export default class PreviewPanel extends GameObject {
     init(engine: Engine) {
         super.init(engine);
+
+        let grid = new Grid({
+            size: { w: 10, h: 10 },
+            parent: this.container
+        });
+        grid.load(require("levels/preview.txt"));
+        this.engine.register(grid);
     }
 
     constructor(params: { width: number, height: number }) {

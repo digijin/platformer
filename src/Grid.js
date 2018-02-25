@@ -21,6 +21,9 @@ import type DecorType from "Grid/Decor/Type";
 import Pool from "Utility/Pool";
 
 import log from "loglevel";
+//for console tools
+class GridBlockContainer extends PIXI.Container {}
+class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
     blocks: Array<Array<Block>>;
@@ -88,9 +91,9 @@ export default class Grid extends GameObject {
     };
 
     pixiInit() {
-        this.blockStage = new PIXI.Container();
+        this.blockStage = new GridBlockContainer();
         this.blockStage.interactiveChildren = false;
-        this.decorStage = new PIXI.Container();
+        this.decorStage = new GridDecorContainer();
         this.decorStage.interactiveChildren = false;
         this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
         this.spritePool.onCreate = spr => {
