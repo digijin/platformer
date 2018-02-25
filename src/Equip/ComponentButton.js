@@ -2,6 +2,8 @@ import * as PIXI from "pixi.js";
 
 import GameObject from "GameObject";
 
+import log from "loglevel";
+
 export default class Button extends GameObject {
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
@@ -15,8 +17,15 @@ export default class Button extends GameObject {
     container: PIXI.Container;
 
     over: boolean = false;
-    constructor(params: { text: string, action: any }) {
+    constructor(params: {
+        component: { id: string, name: string },
+        text: string,
+        action: any,
+        category: string
+    }) {
         super();
+        this.category = params.category;
+        this.component = params.component;
         this.container = new PIXI.Container();
         this.container.buttonMode = true;
         this.container.interactive = true;
@@ -41,14 +50,24 @@ export default class Button extends GameObject {
         this.container.on("mouseover", e => {
             // console.log("mo");
             this.over = true;
-            this.text.style.fill = this.textColorOver;
-            this.background.tint = this.backgroundColorOver;
         });
         this.container.on("mouseout", e => {
             // console.log("mo");
             this.over = false;
+        });
+    }
+    update() {
+        const selected = this.engine.currentPlayer[this.category];
+        // log.info(selected, this.component.id);
+        if (selected == this.component.id) {
+            this.text.style.fill = this.textColorSelected;
+            this.background.tint = this.backgroundColorSelected;
+        } else if (this.over) {
+            this.text.style.fill = this.textColorOver;
+            this.background.tint = this.backgroundColorOver;
+        } else {
             this.text.style.fill = this.textColor;
             this.background.tint = this.backgroundColor;
-        });
+        }
     }
 }

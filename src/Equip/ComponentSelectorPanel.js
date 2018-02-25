@@ -47,7 +47,13 @@ export default class ComponentSelectorPanel extends GameObject {
         this.container.addChild(this.buttonContainer);
         this.buttonContainer.position.y = 30;
         this.buttons = this.options.map((c, i) => {
-            let button = new Button({ text: c.name });
+            let button = new Button({
+                component: c,
+                text: c.name,
+                category: this.category
+            });
+            this.engine.register(button);
+            //TODO: also cleanup
             this.buttonContainer.addChild(button.container);
             button.container.position.y = button.container.height * i;
             button.container.on("mouseup", () => {
