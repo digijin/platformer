@@ -10,7 +10,7 @@ import EditorWatcher from "Editor/Watcher";
 export default class Editor extends Base {
     start(engine) {
         super.start(engine);
-        let grid = new Grid({ w: 200, h: 50 });
+        let grid = new Grid({ size: { w: 200, h: 50 } });
         // grid.makeTest();
         grid.generate(1);
         engine.register(grid);

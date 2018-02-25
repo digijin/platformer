@@ -48,7 +48,7 @@ describe("Grid.spec.js", () => {
     });
     describe("constructor", () => {
         it("should init an array full of blocks", () => {
-            let grid = new Grid({ w: 3, h: 4 });
+            let grid = new Grid({ size: { w: 3, h: 4 } });
             // debugger;
             // let block = grid.getBlock({ x: 0, y: 0 });
             // expect(grid.blocks.length).toBe(3);
@@ -65,7 +65,7 @@ describe("Grid.spec.js", () => {
     });
     describe("getBlock", () => {
         it("should return a block if in range", () => {
-            let grid = new Grid({ w: 3, h: 3 });
+            let grid = new Grid({ size: { w: 3, h: 3 } });
             let block = grid.getBlock({ x: 0, y: 0 });
             expect(block).toBe(grid.blocks[0][0]);
         });
@@ -73,7 +73,7 @@ describe("Grid.spec.js", () => {
     describe("getBlockAtPoint", () => {
         it("should get using config", () => {
             config.grid.width = 10;
-            let grid = new Grid({ w: 5, h: 5 });
+            let grid = new Grid({ size: { w: 5, h: 5 } });
             let block = grid.getBlockAtPoint({ x: 15, y: 15 });
             expect(block.position.x).toBe(1);
             expect(block.position.y).toBe(1);
@@ -89,7 +89,7 @@ describe("Grid.spec.js", () => {
             beforeEach(() => {
                 config.grid.width = 10;
 
-                grid = new Grid({ w: 10, h: 10 });
+                grid = new Grid({ size: { w: 10, h: 10 } });
                 rect = new Rect({ t: 15, r: 45, b: 45, l: 15 });
                 blocks = grid.getBlocksInRect(rect);
             });
@@ -115,7 +115,7 @@ describe("Grid.spec.js", () => {
             beforeEach(() => {
                 config.grid.width = 10;
 
-                grid = new Grid({ w: 10, h: 10 });
+                grid = new Grid({ size: { w: 10, h: 10 } });
                 rect = new Rect({ t: 15, r: 35, b: 35, l: 15 });
                 blocks = grid.getBlocksOverlappingRect(rect);
             });
@@ -137,13 +137,13 @@ describe("Grid.spec.js", () => {
     describe("save and load", () => {
         describe("load", () => {
             it("should have load", () => {
-                let grid = new Grid({ w: 10, h: 10 });
+                let grid = new Grid({ size: { w: 10, h: 10 } });
 
                 expect(grid.load).toBeDefined();
             });
             it("should restore the original grid size", () => {
-                let gridA = new Grid({ w: 10, h: 10 });
-                let gridB = new Grid({ w: 5, h: 5 });
+                let gridA = new Grid({ size: { w: 10, h: 10 } });
+                let gridB = new Grid({ size: { w: 5, h: 5 } });
                 gridB.load(gridA.save());
                 expect(gridB.blocks.length).toBe(gridA.blocks.length);
             });
@@ -155,8 +155,8 @@ describe("Grid.spec.js", () => {
         // 	);
         // });
         it("should restore block settings", () => {
-            let gridA = new Grid({ w: 5, h: 5 });
-            let gridB = new Grid({ w: 5, h: 5 });
+            let gridA = new Grid({ size: { w: 5, h: 5 } });
+            let gridB = new Grid({ size: { w: 5, h: 5 } });
             expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(true);
             gridA.getBlock({ x: 2, y: 2 }).add("2");
             expect(gridA.getBlock({ x: 2, y: 2 }).isEmpty()).toBe(false);
@@ -173,12 +173,12 @@ describe("Grid.spec.js", () => {
     });
     describe("integration", () => {
         it("should set itself on blocks", () => {
-            let grid = new Grid({ w: 10, h: 10 });
+            let grid = new Grid({ size: { w: 10, h: 10 } });
             let block = grid.getBlock({ x: 0, y: 0 });
             expect(block.grid).toBeDefined();
         });
         it("should let blocks destroy", () => {
-            let grid = new Grid({ w: 10, h: 10 });
+            let grid = new Grid({ size: { w: 10, h: 10 } });
             let block = grid.getBlock({ x: 0, y: 0 });
             expect(block).toBeDefined();
             expect(block.destroy).toBeDefined();
@@ -191,13 +191,13 @@ describe("Grid.spec.js", () => {
 
     describe("addRow", () => {
         it("should add above", () => {
-            let grid = new Grid({ w: 2, h: 2 });
+            let grid = new Grid({ size: { w: 2, h: 2 } });
             grid.addRowAbove();
             expect(grid.height).toBe(3);
             expect(grid.blocks[0].length).toBe(3);
         });
         it("should add below", () => {
-            let grid = new Grid({ w: 2, h: 2 });
+            let grid = new Grid({ size: { w: 2, h: 2 } });
             grid.addRowBelow();
             expect(grid.height).toBe(3);
             expect(grid.blocks[0].length).toBe(3);

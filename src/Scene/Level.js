@@ -21,8 +21,10 @@ export default class Level extends Base {
         // engine.register(new Skyline());
         engine.register(new PauseMenu());
         let grid = new Grid({
-            w: 200,
-            h: 50
+            size: {
+                w: 200,
+                h: 50
+            }
         });
         // grid.makeTest();
         // grid.generate(1);

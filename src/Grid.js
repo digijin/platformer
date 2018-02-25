@@ -31,22 +31,26 @@ export default class Grid extends GameObject {
     blockStage: PIXI.Container;
     decorStage: PIXI.Container;
     constructor(
-        size: {
-            w: number,
-            h: number
+        params: {
+            size: {
+                w: number,
+                h: number
+            }
         } = {
-            w: 10,
-            h: 10
+            size: {
+                w: 10,
+                h: 10
+            }
         }
     ) {
         super();
         this.tileCache = {};
-        this.height = size.h;
-        this.width = size.w;
+        this.height = params.size.h;
+        this.width = params.size.w;
         this.decor = [];
         this.z = -10;
         //make empty grid
-        this.makeEmptyGrid(size);
+        this.makeEmptyGrid(params.size);
     }
 
     init(engine: Engine) {
