@@ -2,15 +2,20 @@ import * as PIXI from "pixi.js";
 
 import GameObject from "GameObject";
 
+import RGBA from "Utility/RGBA";
+
 import log from "loglevel";
 
 export default class Button extends GameObject {
-    textColor: number = 0xc9d3d0;
+    textColorDefault: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
-    backgroundColor: number = 0x555555;
+    backgroundColorDefault: number = 0x555555;
     backgroundColorOver: number = 0x999999;
     backgroundColorSelected: number = 0x222222;
+
+    textColor: number = this.textColorDefault;
+    backgroundColor: number = this.backgroundColorDefault;
 
     padding: { x: number, y: number } = { x: 10, y: 2 };
 
@@ -33,12 +38,12 @@ export default class Button extends GameObject {
         this.text = new PIXI.Text(params.text, {
             fontFamily: "Arial",
             fontSize: 24,
-            fill: this.textColor,
+            fill: this.textColorDefault,
             align: "center"
         });
         this.text.position = this.padding;
         this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.background.tint = this.backgroundColor;
+        this.background.tint = this.backgroundColorDefault;
         this.background.width = this.text.width + this.padding.x * 2;
         this.background.height = this.text.height + this.padding.y * 2;
         this.container.addChild(this.background);
@@ -59,15 +64,28 @@ export default class Button extends GameObject {
     update() {
         const selected = this.engine.currentPlayer[this.category];
         // log.info(selected, this.component.id);
+        let textcolor = this.textColorDefault;
+        let bgcolor = this.backgroundColorDefault;
+
         if (selected == this.component.id) {
-            this.text.style.fill = this.textColorSelected;
-            this.background.tint = this.backgroundColorSelected;
+            textcolor = this.textColorSelected;
+            bgcolor = this.backgroundColorSelected;
         } else if (this.over) {
-            this.text.style.fill = this.textColorOver;
-            this.background.tint = this.backgroundColorOver;
+            textcolor = this.textColorOver;
+            bgcolor = this.backgroundColorOver;
         } else {
-            this.text.style.fill = this.textColor;
-            this.background.tint = this.backgroundColor;
+            textcolor = this.textColorDefault;
+            bgcolor = this.backgroundColorDefault;
         }
+        // RGBA.fromNumber(textcolor);
+        this.textColor = RGBA.fromNumber(textcolor)
+            .percentTo(RGBA.fromNumber(this.textColor), 0.9)
+            .toNumber();
+        this.backgroundColor = RGBA.fromNumber(bgcolor)
+            .percentTo(RGBA.fromNumber(this.backgroundColor), 0.9)
+            .toNumber();
+
+        this.text.style.fill = this.textColor;
+        this.background.tint = bgcolor;
     }
 }
