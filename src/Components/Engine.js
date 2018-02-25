@@ -1,18 +1,19 @@
 // @flow
 
+import Base from "./Base";
+
 type EngineParams = {
     name: string,
     id: string,
     weight: number,
     power: number
 };
-export default class Engine {
-    name: string;
-    id: string;
+export default class Engine extends Base {
     weight: number;
     power: number;
 
     constructor(params: EngineParams) {
+        super(params);
         Object.assign(this, params);
     }
 }

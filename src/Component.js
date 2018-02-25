@@ -5,6 +5,6 @@ export const CATEGORY = {
     PRIMARY: "primary",
     SECONDARY: "secondary",
     SIDEKICK: "sidekick",
-    ARMOUR: "armour",
+    BODY: "body",
     BOOSTER: "booster"
 };

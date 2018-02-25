@@ -1,18 +1,18 @@
 // @flow
 
+import Base from "./Base";
 type LegParams = {
     name: string,
     id: string,
     weight: number,
     power: number
 };
-export default class Leg {
-    name: string;
-    id: string;
+export default class Leg extends Base {
     weight: number;
     power: number;
 
     constructor(params: LegParams) {
+        super(params);
         Object.assign(this, params);
     }
 }

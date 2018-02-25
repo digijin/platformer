@@ -1,14 +1,13 @@
 // @flow
 
+import Base from "./Base";
 type PrimaryParams = {
     name: string,
     id: string,
     weight: number,
     power: number
 };
-export default class Primary {
-    name: string;
-    id: string;
+export default class Primary extends Base {
     //how much the component weighs
     weight: number;
     //the strength of the outputted projectile
@@ -19,6 +18,7 @@ export default class Primary {
     reloadTime: number;
 
     constructor(params: PrimaryParams) {
+        super();
         Object.assign(this, params);
     }
 }
