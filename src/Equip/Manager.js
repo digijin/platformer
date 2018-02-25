@@ -24,6 +24,8 @@ import log from "loglevel";
 import CategorySelectorPanel from "./CategorySelectorPanel";
 import ComponentSelectorPanel from "./ComponentSelectorPanel";
 
+import PreviewPanel from "./PreviewPanel";
+
 export default class EquipManager extends GameObject {
     container: PIXI.Container;
     category: string;
@@ -56,6 +58,14 @@ export default class EquipManager extends GameObject {
         this.categorySelectorPanel.container.position.x = 300;
 
         this.categorySelectorPanel.onSelect(this.onSelectCategory);
+
+        this.previewPanel = new PreviewPanel({
+            width: window.innerWidth / 2,
+            height: window.innerHeight / 2
+        });
+        this.engine.register(this.previewPanel);
+        this.container.addChild(this.previewPanel.container);
+        this.previewPanel.container.position.y = window.innerWidth / 2;
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);
