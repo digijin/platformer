@@ -8,6 +8,10 @@ import * as PIXI from "pixi.js";
 import { Engines } from "Components/Engine";
 import { Legs } from "Components/Legs";
 import { Primarys } from "Components/Primary";
+import { Secondarys } from "Components/Secondary";
+import { Sidekicks } from "Components/Sidekick";
+import { Bodys } from "Components/Body";
+import { Boosters } from "Components/Booster";
 
 export default class ComponentSelectorPanel extends GameObject {
     container: PIXI.Container;
@@ -26,6 +30,18 @@ export default class ComponentSelectorPanel extends GameObject {
                 break;
             case "primary":
                 this.options = Primarys;
+                break;
+            case "secondary":
+                this.options = Secondarys;
+                break;
+            case "sidekick":
+                this.options = Sidekicks;
+                break;
+            case "body":
+                this.options = Bodys;
+                break;
+            case "booster":
+                this.options = Boosters;
                 break;
         }
     }
