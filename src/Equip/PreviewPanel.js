@@ -6,8 +6,22 @@ import type Engine from "Engine";
 import Player from "Actor/Player";
 
 import Grid from "Grid";
+// import { AsciiFilter } from "@pixi/filter-ascii";
+import { PixelateFilter } from "@pixi/filter-pixelate";
 
 export default class PreviewPanel extends GameObject {
+    constructor(params: { width: number, height: number }) {
+        super();
+        this.container = new PIXI.Container();
+        // this.container.filters = [new PixelateFilter()];
+        // let cmx = new PIXI.filters.ColorMatrixFilter();
+        // this.container.filters = [cmx];
+        // // cmx.desaturate(1);
+        // this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+        // this.bg.width = params.width;
+        // this.bg.height = params.height;
+        // this.container.addChild(this.bg);
+    }
     init(engine: Engine) {
         super.init(engine);
 
@@ -27,13 +41,10 @@ export default class PreviewPanel extends GameObject {
         });
         engine.register(player);
     }
-
-    constructor(params: { width: number, height: number }) {
-        super();
-        this.container = new PIXI.Container();
-        this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.bg.width = params.width;
-        this.bg.height = params.height;
-        this.container.addChild(this.bg);
+    update() {
+        // this.engine.mouse.point.y -= window.innerHeight / 2;
+        this.container.position.x = Math.floor(-this.engine.view.offset.x);
+        this.container.position.y = window.innerHeight / 2;
+        //Math.floor(-this.engine.view.offset.y);
     }
 }

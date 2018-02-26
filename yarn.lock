@@ -12,6 +12,10 @@
   dependencies:
     "@pixi/filter-kawase-blur" "^2.5.0"
 
+"@pixi/filter-ascii@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-ascii/-/filter-ascii-2.5.0.tgz#62ef324c68412584e6e529a83c376c2855fbaf67"
+
 "@pixi/filter-crt@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-crt/-/filter-crt-2.5.0.tgz#7f445f7c31cd4db79d9013adde79ec68b02b968a"
