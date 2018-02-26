@@ -250,6 +250,7 @@ export default class Player extends Actor {
             dir += (Math.random() - 0.5) / 4; //spread
             this.engine.register(
                 new Bullet({
+                    container: this.container,
                     position: gunPoint,
                     owner: this,
                     time: 8,

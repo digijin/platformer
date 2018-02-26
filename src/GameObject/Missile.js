@@ -32,7 +32,6 @@ export default class Missile extends Projectile {
     constructor(params: { container: PIXI.Container }) {
         super(params);
 
-        log.info("missile with params", params);
         this.guided = true;
         this.remoteControl = false;
         this.container = params.container;
@@ -45,7 +44,7 @@ export default class Missile extends Projectile {
         super.explode();
         this.engine.register(
             new ExplosionRadial({
-                container: this.container,
+                parent: this.container,
                 position: this.position,
                 rotation: 0,
                 delay: 0

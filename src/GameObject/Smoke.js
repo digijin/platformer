@@ -23,7 +23,6 @@ export default class Smoke extends GameObject {
     container: PIXI.Container;
     constructor(params: { container: PIXI.Container }) {
         super();
-        log.info("smoke with params", params);
         this.duration = 0.2;
         Object.assign(this, params);
 
@@ -76,7 +75,7 @@ export default class Smoke extends GameObject {
         // }).toNumber();
     }
     exit() {
-        this.engine.stage.removeChild(this.sprite);
+        this.container.removeChild(this.sprite);
     }
     destroy() {
         this.exit();

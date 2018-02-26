@@ -28,6 +28,7 @@ export default class Bullet extends Projectile {
     owner: Actor;
     speed: number;
     trajectory: Line;
+    container: PIXI.Container;
     constructor(params: {
         position: Point,
         h: number,
@@ -47,18 +48,22 @@ export default class Bullet extends Projectile {
     graph: PIXI.Graphics;
     init(engine: Engine) {
         super.init(engine);
+
+        if (!this.container) {
+            this.container = this.engine.stage;
+        }
         this.graph = new PIXI.Graphics();
         this.graph.filters = [
             new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, COLOR, GLOWQUALITY)
         ];
-        this.engine.stage.addChild(this.graph);
+        this.container.addChild(this.graph);
     }
     destroy() {
         super.destroy();
         this.exit();
     }
     exit() {
-        this.engine.stage.removeChild(this.graph);
+        this.container.removeChild(this.graph);
     }
 
     explode() {
