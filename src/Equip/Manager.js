@@ -60,12 +60,12 @@ export default class EquipManager extends GameObject {
         this.categorySelectorPanel.onSelect(this.onSelectCategory);
 
         this.previewPanel = new PreviewPanel({
-            width: window.innerWidth / 2,
+            width: window.innerWidth,
             height: window.innerHeight / 2
         });
         this.engine.register(this.previewPanel);
         this.container.addChild(this.previewPanel.container);
-        this.previewPanel.container.position.y = window.innerHeight / 4;
+        this.previewPanel.container.position.y = window.innerHeight / 2;
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);

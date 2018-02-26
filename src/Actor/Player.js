@@ -147,6 +147,7 @@ export default class Player extends Actor {
             this.v -= this.engine.deltaTime * 4; //BOOSTERS
             this.engine.register(
                 new Shell({
+                    container: this.container,
                     position: this.position.subtract({
                         x: 0,
                         y: config.player.size.h / 2
@@ -233,6 +234,7 @@ export default class Player extends Actor {
             if (Math.random() < 0.25) {
                 this.engine.register(
                     new Shell({
+                        container: this.container,
                         position: this.position.add({
                             x: 0,
                             y: -this.size.h / 2
