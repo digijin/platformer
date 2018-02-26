@@ -1,7 +1,9 @@
 import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 
+import Point from "Utility/Point";
 import type Engine from "Engine";
+import Player from "Actor/Player";
 
 import Grid from "Grid";
 
@@ -15,6 +17,15 @@ export default class PreviewPanel extends GameObject {
         });
         grid.load(require("levels/preview.txt"));
         this.engine.register(grid);
+
+        let player = new Player({
+            position: new Point({
+                x: 150,
+                y: 100
+            }),
+            container: this.container
+        });
+        engine.register(player);
     }
 
     constructor(params: { width: number, height: number }) {

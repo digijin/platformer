@@ -69,6 +69,7 @@ export default function* agro(
                 firingCooldown = 1;
                 engine.register(
                     new Missile({
+                        container: engine.stage,
                         owner: enemy,
                         direction: enemy.direction == 1 ? 0 : Math.PI, //-Math.PI / 2,
                         speed: 10,

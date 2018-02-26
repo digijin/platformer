@@ -17,6 +17,10 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import Projectile from "GameObject/Projectile";
 
+import log from "loglevel";
+
+import * as PIXI from "pixi.js";
+
 export default class Missile extends Projectile {
     guided: boolean;
     remoteControl: boolean;
@@ -24,10 +28,14 @@ export default class Missile extends Projectile {
     maxSpeed: number = 40;
     minSpeed: number = 1;
     acceleration: number = 20;
-    constructor(params: Object) {
+    container: PIXI.Container;
+    constructor(params: { container: PIXI.Container }) {
         super(params);
+
+        log.info("missile with params", params);
         this.guided = true;
         this.remoteControl = false;
+        this.container = params.container;
         this.tag("missile");
     }
     init(engine: Engine) {
@@ -37,6 +45,7 @@ export default class Missile extends Projectile {
         super.explode();
         this.engine.register(
             new ExplosionRadial({
+                container: this.container,
                 position: this.position,
                 rotation: 0,
                 delay: 0
@@ -65,9 +74,17 @@ export default class Missile extends Projectile {
         this.checkActors();
 
         //smoke trail
-        this.engine.register(new Smoke({ position: this.position.clone() }));
         this.engine.register(
-            new Smoke({ position: this.trajectory.percent(0.5) })
+            new Smoke({
+                container: this.container,
+                position: this.position.clone()
+            })
+        );
+        this.engine.register(
+            new Smoke({
+                container: this.container,
+                position: this.trajectory.percent(0.5)
+            })
         );
 
         //aim at target

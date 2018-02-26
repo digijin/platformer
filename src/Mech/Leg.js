@@ -41,9 +41,11 @@ export default class Leg extends GameObject {
     rearupperleg: PIXI.Sprite;
     rearlowerleg: PIXI.Sprite;
     rearfoot: PIXI.Sprite;
-    constructor(params: { parent: Player }) {
+    container: PIXI.Container;
+    constructor(params: { parent: Player, container: PIXI.Container }) {
         super();
         this.parent = params.parent;
+        this.container = params.container;
         this.offset = new Point({ x: 0, y: -50 });
         this.stride = 0;
         this.torsoOffset = new Point();
@@ -79,7 +81,7 @@ export default class Leg extends GameObject {
             this.rearupperleg,
             this.rearlowerleg
         ].forEach(spr => {
-            this.engine.stage.addChild(spr);
+            this.container.addChild(spr);
         });
     }
     exit() {
@@ -93,7 +95,7 @@ export default class Leg extends GameObject {
             this.rearlowerleg,
             this.rearfoot
         ].forEach(spr => {
-            this.engine.stage.removeChild(spr);
+            this.container.removeChild(spr);
         });
     }
     update() {

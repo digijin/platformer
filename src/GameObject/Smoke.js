@@ -9,6 +9,7 @@ import GameObject from "GameObject";
 import RGBA from "Utility/RGBA";
 
 import * as PIXI from "pixi.js";
+import log from "loglevel";
 
 export default class Smoke extends GameObject {
     position: Point;
@@ -19,8 +20,10 @@ export default class Smoke extends GameObject {
     sprite: PIXI.Sprite;
     h: number;
     v: number;
-    constructor(params: Object) {
+    container: PIXI.Container;
+    constructor(params: { container: PIXI.Container }) {
         super();
+        log.info("smoke with params", params);
         this.duration = 0.2;
         Object.assign(this, params);
 
@@ -36,7 +39,7 @@ export default class Smoke extends GameObject {
             x: 0.5,
             y: 0.5
         };
-        this.engine.stage.addChild(this.sprite);
+        this.container.addChild(this.sprite);
 
         this.h = Math.random() - 0.5;
         this.v = Math.random() - 0.5;

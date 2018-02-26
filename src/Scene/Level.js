@@ -46,7 +46,8 @@ export default class Level extends Base {
             position: new Point({
                 x: 450,
                 y: 100
-            })
+            }),
+            container: this.engine.stage
         });
         engine.register(player);
 
