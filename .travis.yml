@@ -15,7 +15,7 @@ script:
 - yarn build
 - yarn build:sprites
 - ls dist
-- yarn test
+# - yarn test
 - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
 - yarn karma:ci
 - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
