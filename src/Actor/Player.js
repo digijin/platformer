@@ -259,7 +259,8 @@ export default class Player extends Actor {
                     owner: this,
                     time: 8,
                     h: Math.cos(dir) * 10,
-                    v: Math.sin(dir) * 10
+                    v: Math.sin(dir) * 10,
+                    style: this.engine.currentPlayer.primary
                 })
             );
         }

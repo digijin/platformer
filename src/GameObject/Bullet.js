@@ -29,6 +29,7 @@ export default class Bullet extends Projectile {
     speed: number;
     trajectory: Line;
     container: PIXI.Container;
+    style: string;
     constructor(params: {
         position: Point,
         h: number,
@@ -102,7 +103,7 @@ export default class Bullet extends Projectile {
     update = () => {
         this.time -= this.engine.deltaTime;
 
-        let old: Point = this.position.clone();
+        // let old: Point = this.position.clone();
         this.move();
 
         //CHECK TIME
@@ -119,24 +120,36 @@ export default class Bullet extends Projectile {
         //CHECK GRID
         this.checkGrid();
 
-        this.graph.clear();
-        this.graph.position.set(old.x, old.y);
-        this.graph
-            .lineStyle(3, COLOR)
-            .moveTo(0, 0)
-            .lineTo(this.position.x - old.x, this.position.y - old.y);
+        this.render();
 
         //CHECK ENEMIES
+        this.checkEnemies((actor: Actor) => {
+            this.explode();
+            actor.setAgro(this.owner);
+            actor.damage(2);
+        });
+    };
+    checkEnemies(func) {
         this.engine.objectsTagged("actor").forEach((o: GameObject) => {
             if (o !== this.owner) {
                 let a: Actor = ((o: any): Actor); //RECAST
                 if (a.getBoundingRect().contains(this.position)) {
-                    this.explode();
-                    // this.destroy();
-                    a.setAgro(this.owner);
-                    a.damage(2);
+                    // a.damage(2);
+                    func(a);
                 }
             }
         });
-    };
+    }
+
+    render() {
+        this.graph.clear();
+        this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
+        this.graph
+            .lineStyle(3, COLOR)
+            .moveTo(0, 0)
+            .lineTo(
+                this.position.x - this.trajectory.a.x,
+                this.position.y - this.trajectory.a.y
+            );
+    }
 }

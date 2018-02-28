@@ -26,7 +26,7 @@ export default class Primary extends Base {
 const PrimaryParams: Array<PrimaryParams> = [
     {
         name: "Fisher-Pryce My First Primary",
-        id: "Primary1",
+        id: "StarterPrimary",
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
