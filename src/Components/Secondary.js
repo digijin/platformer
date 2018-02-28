@@ -1,11 +1,15 @@
 // @flow
 
+import Missile from "../GameObject/Missile";
+import GuidedMissile from "./Secondary/GuidedMissile";
+
 import Base from "./Base";
 type SecondaryParams = {
     name: string,
     id: string,
     weight: number,
-    power: number
+    power: number,
+    projectile: Projectile
 };
 export default class Secondary extends Base {
     //how much the component weighs
@@ -16,6 +20,8 @@ export default class Secondary extends Base {
     energyCost: number;
     // the time between shots
     reloadTime: number;
+    //class to instantiate
+    projectile: Projectile;
 
     constructor(params: SecondaryParams) {
         super();
@@ -25,20 +31,22 @@ export default class Secondary extends Base {
 
 const SecondaryParams: Array<SecondaryParams> = [
     {
-        name: "Fisher-Pryce My First Secondary",
-        id: "Secondary1",
+        name: "Missile Pod",
+        id: "StarterSecondary",
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 100
+        power: 100,
+        projectile: Missile
     },
     {
-        name: "missile pod",
+        name: "Guided Missile Pod",
         id: "Secondary2",
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 500
+        power: 500,
+        projectile: GuidedMissile
     },
     {
         name: "homing mines",
@@ -46,7 +54,8 @@ const SecondaryParams: Array<SecondaryParams> = [
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 500
+        power: 500,
+        projectile: Missile
     },
 
     {
@@ -55,7 +64,8 @@ const SecondaryParams: Array<SecondaryParams> = [
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 1000
+        power: 1000,
+        projectile: Missile
     }
 ];
 

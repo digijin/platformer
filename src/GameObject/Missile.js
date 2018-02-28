@@ -89,7 +89,8 @@ export default class Missile extends Projectile {
         //aim at target
         if (this.guided) {
             if (this.remoteControl) {
-                this.target = this.engine.mouse.point;
+                // this.target = this.engine.mouse.point;
+                this.target = this.owner.getTargetPoint();
             }
             let diff = this.target.subtract(this.position);
             let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);

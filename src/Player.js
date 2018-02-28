@@ -8,7 +8,7 @@ export default class Player {
 
     constructor(params) {
         this.primary = "StarterPrimary";
-        this.secondary = "dumbfire";
+        this.secondary = "StarterSecondary";
         this.legs = "standard";
         this.body = "standard";
         Object.assign(this, params);

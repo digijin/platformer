@@ -15,6 +15,7 @@ import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
 import { PrimaryMap } from "../Components/Primary";
+import { SecondaryMap } from "../Components/Secondary";
 
 import * as PIXI from "pixi.js";
 
@@ -277,6 +278,7 @@ export default class Player extends Actor {
     }
 
     updateMissile() {
+        let secondary = SecondaryMap[this.engine.currentPlayer.secondary];
         if (missile.reload > 0) {
             missile.reload -= this.engine.deltaTime;
         } else {
@@ -289,7 +291,7 @@ export default class Player extends Actor {
                 missile.regenSpeed = missile.regenBaseSpeed;
                 // missile = false;
                 this.engine.register(
-                    new Missile({
+                    new secondary.projectile({
                         container: this.container,
                         owner: this,
                         direction:
