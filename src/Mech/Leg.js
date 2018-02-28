@@ -174,7 +174,10 @@ export default class Leg extends GameObject {
     }
     gunBarrelPos: Point;
     gunPosition(pos: Point, facing: Facing = FACING_LEFT) {
-        let dir = this.engine.mouse.point.subtract(pos).direction();
+        let dir = this.parent
+            .getTargetPoint()
+            .subtract(pos)
+            .direction();
         // if (facing < 0) {
         // 	dir += Math.PI;
         // }

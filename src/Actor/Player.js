@@ -265,6 +265,7 @@ export default class Player extends Actor {
         }
     }
 
+    //this stuff basically to hack in equip panel
     targetOffset: Point = new Point();
     getTargetPoint(): Point {
         return this.engine.mouse.point.subtract(this.targetOffset);
