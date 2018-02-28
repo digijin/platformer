@@ -5,6 +5,7 @@ import type Projectile from "../GameObject/Projectile";
 import Bullet from "../GameObject/Bullet";
 import BasicBullet from "./Primary/BasicBullet";
 import LaserBullet from "./Primary/LaserBullet";
+import FlameBullet from "./Primary/FlameBullet";
 
 import Base from "./Base";
 type PrimaryParams = {
@@ -34,7 +35,7 @@ export default class Primary extends Base {
 
 const PrimaryParams: Array<PrimaryParams> = [
     {
-        name: "Fisher-Pryce My First Primary",
+        name: "Gattling Gun",
         id: "StarterPrimary",
         weight: 1,
         reloadTime: 0.5,
@@ -43,13 +44,22 @@ const PrimaryParams: Array<PrimaryParams> = [
         projectile: BasicBullet
     },
     {
-        name: "Machine gun",
+        name: "Laser Cannon",
         id: "Primary2",
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
         power: 500,
         projectile: LaserBullet
+    },
+    {
+        name: "FlameThrower",
+        id: "Primary3",
+        weight: 1,
+        reloadTime: 0.5,
+        energyCost: 10,
+        power: 500,
+        projectile: FlameBullet
     },
 
     {

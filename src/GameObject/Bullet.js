@@ -129,7 +129,9 @@ export default class Bullet extends Projectile {
 
         //CHECK ENEMIES
         this.checkEnemies((actor: Actor) => {
+            // setTimeout(() => {
             this.explode();
+            // }, 0);
             actor.setAgro(this.owner);
             actor.damage(2);
         });

@@ -28,7 +28,10 @@ export default class Projectile extends GameObject {
         Object.assign(this, params);
     }
     explode() {
-        this.destroy();
+        //wait til after render
+        setTimeout(() => {
+            this.destroy();
+        }, 0);
     }
 
     move() {
