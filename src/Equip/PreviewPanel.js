@@ -32,19 +32,22 @@ export default class PreviewPanel extends GameObject {
         grid.load(require("levels/preview.txt"));
         this.engine.register(grid);
 
-        let player = new Player({
+        this.player = new Player({
             position: new Point({
                 x: 150,
                 y: 100
             }),
             container: this.container
         });
-        engine.register(player);
+        engine.register(this.player);
     }
     update() {
         // this.engine.mouse.point.y -= window.innerHeight / 2;
         this.container.position.x = Math.floor(-this.engine.view.offset.x);
-        this.container.position.y = window.innerHeight / 2;
+        // this.container.position.y = window.innerHeight / 2;
+        this.container.position.y =
+            Math.floor(-this.engine.view.offset.y) + window.innerHeight / 4;
+        this.player.targetOffset.y = window.innerHeight / 4;
         //Math.floor(-this.engine.view.offset.y);
     }
 }

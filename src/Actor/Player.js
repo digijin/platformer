@@ -120,11 +120,13 @@ export default class Player extends Actor {
                 this.position.add(hand.offset).y - hand.position.y
             );
     }
+    // viewTargetOffset: Point = new Point();
     focusCameraOnSelf() {
         let viewTarget = this.position.subtract({
             x: config.game.width / 2,
             y: config.game.height / 2
         });
+        // .subtract(this.viewTargetOffset);
         this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
     }
 
@@ -194,7 +196,7 @@ export default class Player extends Actor {
             //FIRE HAND
             if (hand.state == HAND_STATE.ARMED) {
                 hand.state = HAND_STATE.FIRED;
-                let diff = this.engine.mouse.point.subtract(hand.position);
+                let diff = this.getTargetPoint().subtract(hand.position);
                 let dir = Math.atan2(diff.y, diff.x);
                 hand.direction = dir;
             }
@@ -247,7 +249,7 @@ export default class Player extends Actor {
                 );
             }
             let gunPoint = this.leg.gunBarrelPos;
-            let diff = this.engine.mouse.point.subtract(gunPoint);
+            let diff = this.getTargetPoint().subtract(gunPoint);
             let dir = Math.atan2(diff.y, diff.x);
             dir += (Math.random() - 0.5) / 4; //spread
             this.engine.register(
@@ -261,6 +263,11 @@ export default class Player extends Actor {
                 })
             );
         }
+    }
+
+    targetOffset: Point = new Point();
+    getTargetPoint(): Point {
+        return this.engine.mouse.point.subtract(this.targetOffset);
     }
 
     updateMissile() {
@@ -285,7 +292,7 @@ export default class Player extends Actor {
                             this.leg.facing,
                         speed: 10 + Math.random() * 5,
                         position: this.leg.missileBarrelPos,
-                        target: this.engine.mouse.point.add(
+                        target: this.getTargetPoint().add(
                             new Point({
                                 x: (Math.random() - 0.5) * 20,
                                 y: (Math.random() - 0.5) * 20
