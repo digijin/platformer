@@ -1,11 +1,18 @@
 // @flow
 
+import type Projectile from "../GameObject/Projectile";
+
+import Bullet from "../GameObject/Bullet";
+import BasicBullet from "./Primary/BasicBullet";
+import LaserBullet from "./Primary/LaserBullet";
+
 import Base from "./Base";
 type PrimaryParams = {
     name: string,
     id: string,
     weight: number,
-    power: number
+    power: number,
+    projectile: Projectile
 };
 export default class Primary extends Base {
     //how much the component weighs
@@ -16,6 +23,8 @@ export default class Primary extends Base {
     energyCost: number;
     // the time between shots
     reloadTime: number;
+    //class to instantiate
+    projectile: Projectile;
 
     constructor(params: PrimaryParams) {
         super();
@@ -30,7 +39,8 @@ const PrimaryParams: Array<PrimaryParams> = [
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 100
+        power: 100,
+        projectile: BasicBullet
     },
     {
         name: "Machine gun",
@@ -38,7 +48,8 @@ const PrimaryParams: Array<PrimaryParams> = [
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 500
+        power: 500,
+        projectile: LaserBullet
     },
 
     {
@@ -47,7 +58,8 @@ const PrimaryParams: Array<PrimaryParams> = [
         weight: 1,
         reloadTime: 0.5,
         energyCost: 10,
-        power: 1000
+        power: 1000,
+        projectile: Bullet
     }
 ];
 

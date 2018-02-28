@@ -30,6 +30,7 @@ export default class Bullet extends Projectile {
     trajectory: Line;
     container: PIXI.Container;
     style: string;
+    color: number;
     constructor(params: {
         position: Point,
         h: number,
@@ -44,6 +45,10 @@ export default class Bullet extends Projectile {
         this.speed = 200;
         Object.assign(this, params);
         this.time = 1;
+        this.color = COLOR;
+        this.lineWidth = 3;
+        this.h = Math.cos(this.dir);
+        this.v = Math.sin(this.dir);
     }
 
     graph: PIXI.Graphics;
@@ -55,7 +60,7 @@ export default class Bullet extends Projectile {
         }
         this.graph = new PIXI.Graphics();
         this.graph.filters = [
-            new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, COLOR, GLOWQUALITY)
+            new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY)
         ];
         this.container.addChild(this.graph);
     }
@@ -129,7 +134,7 @@ export default class Bullet extends Projectile {
             actor.damage(2);
         });
     };
-    checkEnemies(func) {
+    checkEnemies(func: (actor: Actor) => {}) {
         this.engine.objectsTagged("actor").forEach((o: GameObject) => {
             if (o !== this.owner) {
                 let a: Actor = ((o: any): Actor); //RECAST
@@ -145,7 +150,7 @@ export default class Bullet extends Projectile {
         this.graph.clear();
         this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
         this.graph
-            .lineStyle(3, COLOR)
+            .lineStyle(this.lineWidth, this.color)
             .moveTo(0, 0)
             .lineTo(
                 this.position.x - this.trajectory.a.x,

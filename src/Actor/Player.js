@@ -14,6 +14,8 @@ let hSpeed = config.player.speed;
 import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
+import { PrimaryMap } from "../Components/Primary";
+
 import * as PIXI from "pixi.js";
 
 let firing = false;
@@ -233,6 +235,7 @@ export default class Player extends Actor {
 
     updateGuns() {
         if (this.engine.input.getButton("fire")) {
+            let primary = PrimaryMap[this.engine.currentPlayer.primary];
             if (Math.random() < 0.25) {
                 this.engine.register(
                     new Shell({
@@ -251,16 +254,17 @@ export default class Player extends Actor {
             let gunPoint = this.leg.gunBarrelPos;
             let diff = this.getTargetPoint().subtract(gunPoint);
             let dir = Math.atan2(diff.y, diff.x);
-            dir += (Math.random() - 0.5) / 4; //spread
+
             this.engine.register(
-                new Bullet({
+                // new Bullet({
+                new primary.projectile({
+                    dir: dir,
                     container: this.container,
                     position: gunPoint,
                     owner: this,
                     time: 8,
                     h: Math.cos(dir) * 10,
-                    v: Math.sin(dir) * 10,
-                    style: this.engine.currentPlayer.primary
+                    v: Math.sin(dir) * 10
                 })
             );
         }
