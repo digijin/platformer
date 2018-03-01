@@ -21,7 +21,7 @@ export default class Engine extends Base {
 const engineParams: Array<EngineParams> = [
     {
         name: "Fisher-Pryce My First Engine",
-        id: "en1",
+        id: "StarterEngine",
         weight: 1,
         power: 100
     },

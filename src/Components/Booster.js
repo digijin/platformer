@@ -20,7 +20,7 @@ export default class Booster extends Base {
 const BoosterParams: Array<BoosterParams> = [
     {
         name: "Fisher-Pryce My First Booster",
-        id: "Booster1",
+        id: "StarterBooster",
         weight: 1,
         power: 100
     },

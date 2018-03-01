@@ -9,8 +9,11 @@ export default class Player {
     constructor(params) {
         this.primary = "StarterPrimary";
         this.secondary = "StarterSecondary";
-        this.legs = "standard";
-        this.body = "standard";
+        this.body = "StarterBody";
+        this.legs = "StarterLegs";
+        this.booster = "StarterBooster";
+        this.engine = "StarterEngine";
+        this.sidekick = "none";
         Object.assign(this, params);
     }
 

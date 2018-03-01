@@ -20,7 +20,7 @@ export default class Leg extends Base {
 const LegParams: Array<LegParams> = [
     {
         name: "Fisher-Pryce My First Leg",
-        id: "leg1",
+        id: "StarterLegs",
         weight: 1,
         power: 100
     },

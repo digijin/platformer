@@ -19,20 +19,20 @@ export default class Body extends Base {
 
 const BodyParams: Array<BodyParams> = [
     {
-        name: "Fisher-Pryce My First Body",
-        id: "Body1",
+        name: "A Normal Body",
+        id: "StarterBody",
         weight: 1,
         power: 100
     },
     {
-        name: "Chicken Brand Body",
+        name: "Another Normal Body",
         id: "Body2",
         weight: 1,
         power: 500
     },
 
     {
-        name: "Rocket Hare",
+        name: "it's all the same shit",
         id: "Bodyx",
         weight: 1,
         power: 10000

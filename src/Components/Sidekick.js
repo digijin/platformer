@@ -18,6 +18,7 @@ export default class Sidekick extends Base {
 }
 
 const SidekickParams: Array<SidekickParams> = [
+    { name: "None", id: "none" },
     {
         name: "Fisher-Pryce My First Sidekick",
         id: "Sidekick1",
