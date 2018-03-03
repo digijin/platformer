@@ -5,6 +5,8 @@ import Point from "Utility/Point";
 import type Engine from "Engine";
 import Player from "Actor/Player";
 
+import EnergyBar from "../GameObject/EnergyBar";
+
 import Grid from "Grid";
 // import { AsciiFilter } from "@pixi/filter-ascii";
 import { PixelateFilter } from "@pixi/filter-pixelate";
@@ -31,6 +33,10 @@ export default class PreviewPanel extends GameObject {
         });
         grid.load(require("levels/preview.txt"));
         this.engine.register(grid);
+
+        this.energyBar = new EnergyBar();
+        this.engine.register(this.energyBar);
+        this.container.addChild(this.energyBar.container);
 
         this.player = new Player({
             position: new Point({
