@@ -110,7 +110,7 @@ export default class Bullet extends Projectile {
         this.time -= this.engine.deltaTime;
 
         // let old: Point = this.position.clone();
-        this.move();
+        this.move(); //sets trajectory
 
         //CHECK TIME
         if (this.time < 0) {
@@ -144,11 +144,17 @@ export default class Bullet extends Projectile {
                 if (a.getBoundingRect().contains(this.position)) {
                     // a.damage(2);
                     func(a);
+                } else {
+                    //ELSE USE EVEN MORE EXPENSIVE CHECK
+                    this.expensiveCheck(a);
                 }
             }
         });
     }
 
+    expensiveCheck(actor: Actor) {
+        //todo: this.trajectory.interceptsRect(a.getBoundingRect())
+    }
     render() {
         this.graph.clear();
         this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
