@@ -261,40 +261,46 @@ export default class Player extends Actor {
         }
     }
 
+    primaryReload: number = 0;
     updateGuns() {
-        if (this.engine.input.getButton("fire")) {
-            let primary = PrimaryMap[this.engine.currentPlayer.primary];
-            if (Math.random() < 0.25) {
-                this.engine.register(
-                    new Shell({
-                        container: this.container,
-                        position: this.position.add({
-                            x: 0,
-                            y: -this.size.h / 2
-                        }),
-                        // x: this.position.x,
-                        // y: this.position.y - (this.size.h/2),
-                        h: Math.random() - 0.5,
-                        v: -Math.random()
-                    })
-                );
-            }
-            let gunPoint = this.leg.gunBarrelPos;
-            let diff = this.getTargetPoint().subtract(gunPoint);
-            let dir = Math.atan2(diff.y, diff.x);
-            if (this.spendEnergy(primary.energyCost)) {
-                this.engine.register(
-                    // new Bullet({
-                    new primary.projectile({
-                        dir: dir,
-                        container: this.container,
-                        position: gunPoint,
-                        owner: this,
-                        time: 8,
-                        h: Math.cos(dir) * 10,
-                        v: Math.sin(dir) * 10
-                    })
-                );
+        if (this.primaryReload > 0) {
+            this.primaryReload -= this.engine.deltaTime;
+        } else {
+            if (this.engine.input.getButton("fire")) {
+                let primary = PrimaryMap[this.engine.currentPlayer.primary];
+                if (Math.random() < 0.25) {
+                    this.engine.register(
+                        new Shell({
+                            container: this.container,
+                            position: this.position.add({
+                                x: 0,
+                                y: -this.size.h / 2
+                            }),
+                            // x: this.position.x,
+                            // y: this.position.y - (this.size.h/2),
+                            h: Math.random() - 0.5,
+                            v: -Math.random()
+                        })
+                    );
+                }
+                let gunPoint = this.leg.gunBarrelPos;
+                let diff = this.getTargetPoint().subtract(gunPoint);
+                let dir = Math.atan2(diff.y, diff.x);
+                if (this.spendEnergy(primary.energyCost)) {
+                    this.primaryReload = primary.reloadTime;
+                    this.engine.register(
+                        // new Bullet({
+                        new primary.projectile({
+                            dir: dir,
+                            container: this.container,
+                            position: gunPoint,
+                            owner: this,
+                            time: 8,
+                            h: Math.cos(dir) * 10,
+                            v: Math.sin(dir) * 10
+                        })
+                    );
+                }
             }
         }
     }
