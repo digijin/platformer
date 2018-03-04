@@ -398,15 +398,18 @@ export default class Grid extends GameObject {
                 return { t: d.type, p: d.position };
             }),
             blocks: [
-                this.blocks.map(col => {
-                    return col.map(block => {
-                        return {
-                            t: block.type,
-                            b: block.backgroundType,
-                            i: block.tint
-                        };
-                    });
-                })
+                {
+                    layer: "main",
+                    blocks: this.blocks.map(col => {
+                        return col.map(block => {
+                            return {
+                                t: block.type,
+                                b: block.backgroundType,
+                                i: block.tint
+                            };
+                        });
+                    })
+                }
             ]
         });
     }
@@ -433,7 +436,11 @@ export default class Grid extends GameObject {
         // if (!Array.isArray(blocks)) {
         // blocks = [blocks];
         // }
-        this.blocks = blocks[0].map((d, x) => {
+        let mainlayer = blocks[0];
+        if (!Array.isArray(mainlayer)) {
+            mainlayer = mainlayer.blocks;
+        }
+        this.blocks = mainlayer.map((d, x) => {
             return d.map((block, y) => {
                 return new Block({
                     position: new Point({ x, y }),
