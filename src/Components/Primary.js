@@ -33,7 +33,7 @@ export default class Primary extends Base {
     }
 }
 
-const PrimaryParams: Array<PrimaryParams> = [
+const primaryParams: Array<PrimaryParams> = [
     {
         name: "Gattling Gun",
         id: "StarterPrimary",
@@ -47,7 +47,7 @@ const PrimaryParams: Array<PrimaryParams> = [
         name: "Laser Cannon",
         id: "Primary2",
         weight: 1,
-        reloadTime: 0.5,
+        reloadTime: 0,
         energyCost: 4,
         power: 500,
         projectile: LaserBullet
@@ -73,7 +73,7 @@ const PrimaryParams: Array<PrimaryParams> = [
     }
 ];
 
-export const Primarys: Array<Primary> = PrimaryParams.map(params => {
+export const Primarys: Array<Primary> = primaryParams.map(params => {
     return new Primary(params);
 });
 export const PrimaryMap: Object = Primarys.reduce(

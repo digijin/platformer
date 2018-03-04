@@ -4,6 +4,7 @@ import * as PIXI from "pixi.js";
 
 import Player from "../Actor/Player";
 
+class EnergyBarContainer extends PIXI.Container {}
 export default class EnergyBar extends GameObject {
     width: number = 200;
     height: number = 20;
@@ -15,7 +16,7 @@ export default class EnergyBar extends GameObject {
     }
     init(engine) {
         super.init(engine);
-        this.container = new PIXI.Container();
+        this.container = new EnergyBarContainer();
         this.graph = new PIXI.Graphics();
         this.container.addChild(this.graph);
     }

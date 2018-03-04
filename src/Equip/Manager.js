@@ -65,7 +65,7 @@ export default class EquipManager extends GameObject {
         });
         this.engine.register(this.previewPanel);
         this.container.addChild(this.previewPanel.container);
-        this.previewPanel.container.position.y = window.innerHeight / 2;
+        // this.previewPanel.container.position.y = window.innerHeight / 2;
 
         // let bt = new PIXI.BaseTexture();
         // bt._loadSvgSourceUsingString(front);

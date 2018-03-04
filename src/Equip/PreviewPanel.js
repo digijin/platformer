@@ -11,10 +11,14 @@ import Grid from "Grid";
 // import { AsciiFilter } from "@pixi/filter-ascii";
 import { PixelateFilter } from "@pixi/filter-pixelate";
 
+class PreviewPanelContainer extends PIXI.Container {}
+
 export default class PreviewPanel extends GameObject {
     constructor(params: { width: number, height: number }) {
         super();
-        this.container = new PIXI.Container();
+        this.container = new PreviewPanelContainer();
+        this.game = new PIXI.Container();
+        this.container.addChild(this.game);
         // this.container.filters = [new PixelateFilter()];
         // let cmx = new PIXI.filters.ColorMatrixFilter();
         // this.container.filters = [cmx];
@@ -29,7 +33,7 @@ export default class PreviewPanel extends GameObject {
 
         let grid = new Grid({
             size: { w: 10, h: 10 },
-            parent: this.container
+            parent: this.game
         });
         grid.load(require("levels/preview.txt"));
         this.engine.register(grid);
@@ -39,7 +43,7 @@ export default class PreviewPanel extends GameObject {
                 x: 150,
                 y: 100
             }),
-            container: this.container
+            container: this.game
         });
 
         this.energyBar = new EnergyBar({ player: this.player });
@@ -50,9 +54,9 @@ export default class PreviewPanel extends GameObject {
     }
     update() {
         // this.engine.mouse.point.y -= window.innerHeight / 2;
-        this.container.position.x = Math.floor(-this.engine.view.offset.x);
+        this.game.position.x = Math.floor(-this.engine.view.offset.x);
         // this.container.position.y = window.innerHeight / 2;
-        this.container.position.y =
+        this.game.position.y =
             Math.floor(-this.engine.view.offset.y) + window.innerHeight / 4;
         this.player.targetOffset.y = window.innerHeight / 4;
         //Math.floor(-this.engine.view.offset.y);
