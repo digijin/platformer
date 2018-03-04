@@ -312,11 +312,10 @@ export default class Player extends Actor {
         } else {
             if (
                 this.engine.input.getButton("special") &&
-                missile.energy >= missile.cost
+                this.spendEnergy(secondary.energyCost)
             ) {
-                missile.reload = missile.reloadTime;
-                missile.energy -= missile.cost;
-                missile.regenSpeed = missile.regenBaseSpeed;
+                missile.reload = secondary.reloadTime;
+
                 // missile = false;
                 this.engine.register(
                     new secondary.projectile({
@@ -336,13 +335,6 @@ export default class Player extends Actor {
                         )
                     })
                 );
-            } else {
-                missile.regenSpeed +=
-                    missile.regenSpeedIncrease * this.engine.deltaTime;
-                missile.energy += missile.regenSpeed * this.engine.deltaTime;
-                if (missile.energy > missile.maxEnergy) {
-                    missile.energy = missile.maxEnergy;
-                }
             }
         }
     }

@@ -34,7 +34,7 @@ const SecondaryParams: Array<SecondaryParams> = [
         name: "Missile Pod",
         id: "StarterSecondary",
         weight: 1,
-        reloadTime: 0.5,
+        reloadTime: 0.05,
         energyCost: 10,
         power: 100,
         projectile: Missile

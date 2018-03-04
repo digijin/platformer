@@ -39,7 +39,7 @@ const PrimaryParams: Array<PrimaryParams> = [
         id: "StarterPrimary",
         weight: 1,
         reloadTime: 0.5,
-        energyCost: 10,
+        energyCost: 2,
         power: 100,
         projectile: BasicBullet
     },
@@ -48,7 +48,7 @@ const PrimaryParams: Array<PrimaryParams> = [
         id: "Primary2",
         weight: 1,
         reloadTime: 0.5,
-        energyCost: 10,
+        energyCost: 4,
         power: 500,
         projectile: LaserBullet
     },
