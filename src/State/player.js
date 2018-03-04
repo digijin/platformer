@@ -6,11 +6,11 @@ export default function player(state, action) {
 	}
 
 	switch (action.type) {
-		case "SPEND_MONEY":
-			state.money -= action.cost;
-			break;
-		default:
-			return state;
+	case "SPEND_MONEY":
+		state.money -= action.cost;
+		break;
+	default:
+		return state;
 	}
 	return state;
 }

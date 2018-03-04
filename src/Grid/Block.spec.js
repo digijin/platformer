@@ -12,7 +12,7 @@ describe("Grid/Block", () => {
 				if (name !== "grid") return val;
 			})
 		).toBe(
-			'{"position":{"x":1,"y":2},"type":"0","tint":16777215,"backgroundType":"0"}'
+			"{\"position\":{\"x\":1,\"y\":2},\"type\":\"0\",\"tint\":16777215,\"backgroundType\":\"0\"}"
 		);
 	});
 });

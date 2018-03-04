@@ -25,7 +25,7 @@ describe("Utility/Point.spec.js", () => {
 		it("shuold stringify without functions", () => {
 			let p = new Point({ x: 1, y: 2 });
 			let str = JSON.stringify(p);
-			expect(str).toBe('{"x":1,"y":2}');
+			expect(str).toBe("{\"x\":1,\"y\":2}");
 		});
 	});
 	describe("easeTo", () => {
