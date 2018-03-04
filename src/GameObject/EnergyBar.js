@@ -2,10 +2,17 @@ import GameObject from "../GameObject";
 
 import * as PIXI from "pixi.js";
 
+import Player from "../Actor/Player";
+
 export default class EnergyBar extends GameObject {
-    width: number = 50;
-    height: number = 200;
+    width: number = 200;
+    height: number = 20;
     padding: number = 10;
+    player: Player;
+    constructor(params: { player: Player }) {
+        super();
+        this.player = params.player;
+    }
     init(engine) {
         super.init(engine);
         this.container = new PIXI.Container();
@@ -23,6 +30,11 @@ export default class EnergyBar extends GameObject {
                 this.height + this.padding * 2
             )
             .beginFill(0xff0000)
-            .drawRect(this.padding, this.padding, this.width, this.height);
+            .drawRect(
+                this.padding,
+                this.padding,
+                this.width * this.player.getEnergyPercent(),
+                this.height
+            );
     }
 }

@@ -16,6 +16,9 @@ import type Engine from "Engine";
 
 import { PrimaryMap } from "../Components/Primary";
 import { SecondaryMap } from "../Components/Secondary";
+import { EngineMap } from "../Components/Engine";
+
+import type ComponentEngine from "../Components/Engine";
 
 import * as PIXI from "pixi.js";
 
@@ -91,6 +94,9 @@ export default class Player extends Actor {
         //GAMEPAD HACK
         let gp = this.getGamePad();
 
+        //constantly regen
+        this.regenEnergy();
+
         /////////////////MISSILE MECHANICS
         this.updateMissile();
 
@@ -106,6 +112,27 @@ export default class Player extends Actor {
 
         // UI MISSILE
         this.render();
+    }
+
+    energy: number = 0;
+    regenEnergy() {
+        let engine: ComponentEngine =
+            EngineMap[this.engine.currentPlayer.engine];
+
+        this.energy += this.engine.deltaTime * engine.regenSpeed;
+        this.energy = Math.min(this.energy, engine.maxPower);
+    }
+    spendEnergy(amount: number): boolean {
+        if (this.energy >= amount) {
+            this.energy -= amount;
+            return true;
+        }
+        return false;
+    }
+    getEnergyPercent(): number {
+        let engine: ComponentEngine =
+            EngineMap[this.engine.currentPlayer.engine];
+        return this.energy / engine.maxPower;
     }
 
     render() {

@@ -34,10 +34,6 @@ export default class PreviewPanel extends GameObject {
         grid.load(require("levels/preview.txt"));
         this.engine.register(grid);
 
-        this.energyBar = new EnergyBar();
-        this.engine.register(this.energyBar);
-        this.container.addChild(this.energyBar.container);
-
         this.player = new Player({
             position: new Point({
                 x: 150,
@@ -45,6 +41,11 @@ export default class PreviewPanel extends GameObject {
             }),
             container: this.container
         });
+
+        this.energyBar = new EnergyBar({ player: this.player });
+        this.engine.register(this.energyBar);
+        this.container.addChild(this.energyBar.container);
+
         engine.register(this.player);
     }
     update() {

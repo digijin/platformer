@@ -6,11 +6,13 @@ type EngineParams = {
     name: string,
     id: string,
     weight: number,
-    power: number
+    maxPower: number,
+    regenSpeed: number
 };
 export default class Engine extends Base {
     weight: number;
-    power: number;
+    maxPower: number;
+    regenSpeed: number; //per second
 
     constructor(params: EngineParams) {
         super(params);
@@ -23,31 +25,36 @@ const engineParams: Array<EngineParams> = [
         name: "Fisher-Pryce My First Engine",
         id: "StarterEngine",
         weight: 1,
-        power: 100
+        maxPower: 100,
+        regenSpeed: 100
     },
     {
         name: "KR-VPx Mark 1",
         id: "en2",
         weight: 1,
-        power: 200
+        maxPower: 200,
+        regenSpeed: 100
     },
     {
         name: "KR-VPx Mark 2",
         id: "en3",
         weight: 1,
-        power: 300
+        maxPower: 300,
+        regenSpeed: 100
     },
     {
         name: "KR-VPx Mark 3",
         id: "en4",
         weight: 1,
-        power: 500
+        maxPower: 500,
+        regenSpeed: 100
     },
     {
         name: "Pocket ColdFusion",
         id: "enx",
         weight: 1,
-        power: 10000
+        maxPower: 10000,
+        regenSpeed: 1000
     }
 ];
 
