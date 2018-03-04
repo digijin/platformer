@@ -282,19 +282,20 @@ export default class Player extends Actor {
             let gunPoint = this.leg.gunBarrelPos;
             let diff = this.getTargetPoint().subtract(gunPoint);
             let dir = Math.atan2(diff.y, diff.x);
-
-            this.engine.register(
-                // new Bullet({
-                new primary.projectile({
-                    dir: dir,
-                    container: this.container,
-                    position: gunPoint,
-                    owner: this,
-                    time: 8,
-                    h: Math.cos(dir) * 10,
-                    v: Math.sin(dir) * 10
-                })
-            );
+            if (this.spendEnergy(primary.energyCost)) {
+                this.engine.register(
+                    // new Bullet({
+                    new primary.projectile({
+                        dir: dir,
+                        container: this.container,
+                        position: gunPoint,
+                        owner: this,
+                        time: 8,
+                        h: Math.cos(dir) * 10,
+                        v: Math.sin(dir) * 10
+                    })
+                );
+            }
         }
     }
 
