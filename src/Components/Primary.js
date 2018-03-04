@@ -6,7 +6,7 @@ import Bullet from "../GameObject/Bullet";
 import BasicBullet from "./Primary/BasicBullet";
 import LaserBullet from "./Primary/LaserBullet";
 import FlameBullet from "./Primary/FlameBullet";
-
+import GaussBullet from "./Primary/GaussBullet";
 import Base from "./Base";
 type PrimaryParams = {
     name: string,
@@ -63,13 +63,13 @@ const primaryParams: Array<PrimaryParams> = [
     },
 
     {
-        name: "Gattling Gauss Rifle",
-        id: "Primaryx",
+        name: "Gauss Rifle",
+        id: "PrimaryGauss",
         weight: 1,
-        reloadTime: 0.5,
+        reloadTime: 0.8,
         energyCost: 10,
         power: 1000,
-        projectile: Bullet
+        projectile: GaussBullet
     }
 ];
 

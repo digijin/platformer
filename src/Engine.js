@@ -33,6 +33,10 @@ import type Mission from "Mission";
 import { Missions } from "Mission";
 
 import Fpsmeter from "fpsmeter";
+
+class Stage extends PIXI.Container {}
+class StageContainer extends PIXI.Container {}
+
 let instance;
 export default class Engine {
     objects: Array<GameObject>;
@@ -97,8 +101,8 @@ export default class Engine {
         container.appendChild(pixicanvas);
         this.pixicanvas = pixicanvas;
 
-        this.stageContainer = new PIXI.Container();
-        this.stage = new PIXI.Container();
+        this.stageContainer = new StageContainer();
+        this.stage = new Stage();
         this.transitionStage = new PIXI.Container();
         this.backgroundStage = new PIXI.Container();
         this.stageContainer.addChild(this.backgroundStage);

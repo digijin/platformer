@@ -71,6 +71,7 @@ export default class Bullet extends Projectile {
     exit() {
         this.container.removeChild(this.graph);
     }
+    damage: number = 2;
 
     explode() {
         this.destroy();
@@ -133,7 +134,7 @@ export default class Bullet extends Projectile {
             this.explode();
             // }, 0);
             actor.setAgro(this.owner);
-            actor.damage(2);
+            actor.damage(this.damage);
         });
     };
     checkEnemies(func: (actor: Actor) => {}) {

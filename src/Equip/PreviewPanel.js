@@ -58,7 +58,9 @@ export default class PreviewPanel extends GameObject {
         // this.container.position.y = window.innerHeight / 2;
         this.game.position.y =
             Math.floor(-this.engine.view.offset.y) + window.innerHeight / 4;
+
         this.player.targetOffset.y = window.innerHeight / 4;
+        this.energyBar.container.position.y = this.game.position.y;
         //Math.floor(-this.engine.view.offset.y);
     }
 }

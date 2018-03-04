@@ -10,7 +10,7 @@ import Background from "GameObject/BackgroundBuildings";
 import Skyline from "GameObject/Skyline";
 
 import StoryTeller from "GameObject/StoryTeller";
-
+import EnergyBar from "../GameObject/EnergyBar";
 import type Engine from "Engine";
 
 import PauseMenu from "GameObject/PauseMenu";
@@ -49,6 +49,11 @@ export default class Level extends Base {
             }),
             container: this.engine.stage
         });
+
+        this.energyBar = new EnergyBar({ player: player });
+        this.engine.register(this.energyBar);
+        this.engine.stage.addChild(this.energyBar.container);
+
         engine.register(player);
 
         engine.ui.dispatch({
