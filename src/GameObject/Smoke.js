@@ -82,10 +82,10 @@ export default class Smoke extends GameObject {
     	super.destroy();
     }
 
-    update = (engine: Engine) => {
+    update = () => {
     	let timePc = this.time / this.duration;
     	this.positionSprite();
-    	this.time -= engine.deltaTime;
+    	this.time -= this.engine.deltaTime;
 
     	let w = 20;
     	let h = 20;

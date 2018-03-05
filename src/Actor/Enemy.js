@@ -75,7 +75,7 @@ export default class Enemy extends Actor {
     	super.destroy();
     }
     action: ?Generator<*, *, *>;
-    update(engine: Engine) {
+    update() {
     	this.sprite.position = this.position;
     	let player = this.engine.objectsTagged("player").pop();
     	if (!player) {

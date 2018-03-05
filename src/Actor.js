@@ -6,7 +6,7 @@ import Point from "Utility/Point";
 import config from "config";
 
 import Rect from "Utility/Rect";
-import type Engine from "Engine";
+// import type Engine from "Engine";
 import Explosion from "GameObject/Explosion";
 import type Block from "Grid/Block";
 // let engine: Engine;
