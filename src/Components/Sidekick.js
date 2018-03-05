@@ -12,44 +12,44 @@ export default class Sidekick extends Base {
     power: number;
 
     constructor(params: SidekickParams) {
-        super(params);
-        Object.assign(this, params);
+    	super(params);
+    	Object.assign(this, params);
     }
 }
 
 const SidekickParams: Array<SidekickParams> = [
-    { name: "None", id: "none" },
-    {
-        name: "Fisher-Pryce My First Sidekick",
-        id: "Sidekick1",
-        weight: 1,
-        power: 100
-    },
-    {
-        name: "Chicken Brand Sidekick",
-        id: "Sidekick2",
-        weight: 1,
-        power: 500
-    },
+	{ name: "None", id: "none" },
+	{
+		name: "Fisher-Pryce My First Sidekick",
+		id: "Sidekick1",
+		weight: 1,
+		power: 100
+	},
+	{
+		name: "Chicken Brand Sidekick",
+		id: "Sidekick2",
+		weight: 1,
+		power: 500
+	},
 
-    {
-        name: "Rocket Sidekick",
-        id: "Sidekickx",
-        weight: 1,
-        power: 10000
-    }
+	{
+		name: "Rocket Sidekick",
+		id: "Sidekickx",
+		weight: 1,
+		power: 10000
+	}
 ];
 
 export const Sidekicks: Array<Sidekick> = SidekickParams.map(params => {
-    return new Sidekick(params);
+	return new Sidekick(params);
 });
 export const SidekickMap: Object = Sidekicks.reduce(
-    (output: Object, type: Sidekicks) => {
-        if (output[type.id]) {
-            throw new Error("duplicate id");
-        }
-        output[type.id] = type;
-        return output;
-    },
-    {}
+	(output: Object, type: Sidekicks) => {
+		if (output[type.id]) {
+			throw new Error("duplicate id");
+		}
+		output[type.id] = type;
+		return output;
+	},
+	{}
 );

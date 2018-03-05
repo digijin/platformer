@@ -12,7 +12,8 @@
         }
     },
     "rules": {
-        "semi": 2
+        "semi": 2,
+        "indent": ["error", "tab"]
     },
     "env": {
         "browser": true,

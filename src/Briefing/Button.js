@@ -12,38 +12,38 @@ export default class Button extends PIXI.Container {
 
     over: boolean = false;
     constructor(params: { text: string, action: any }) {
-        super();
-        this.buttonMode = true;
-        this.interactive = true;
+    	super();
+    	this.buttonMode = true;
+    	this.interactive = true;
 
-        this.text = new PIXI.Text(params.text, {
-            fontFamily: "Arial",
-            fontSize: 24,
-            fill: this.textColor,
-            align: "center"
-        });
-        this.text.position = this.padding;
-        this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.background.tint = this.backgroundColor;
-        this.background.width = this.text.width + this.padding.x * 2;
-        this.background.height = this.text.height + this.padding.y * 2;
-        this.addChild(this.background);
-        this.addChild(this.text);
+    	this.text = new PIXI.Text(params.text, {
+    		fontFamily: "Arial",
+    		fontSize: 24,
+    		fill: this.textColor,
+    		align: "center"
+    	});
+    	this.text.position = this.padding;
+    	this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
+    	this.background.tint = this.backgroundColor;
+    	this.background.width = this.text.width + this.padding.x * 2;
+    	this.background.height = this.text.height + this.padding.y * 2;
+    	this.addChild(this.background);
+    	this.addChild(this.text);
 
-        this.on("mousedown", e => {
-            // console.log("md");
-        });
-        this.on("mouseover", e => {
-            // console.log("mo");
-            this.over = true;
-            this.text.style.fill = this.textColorOver;
-            this.background.tint = this.backgroundColorOver;
-        });
-        this.on("mouseout", e => {
-            // console.log("mo");
-            this.over = false;
-            this.text.style.fill = this.textColor;
-            this.background.tint = this.backgroundColor;
-        });
+    	this.on("mousedown", e => {
+    		// console.log("md");
+    	});
+    	this.on("mouseover", e => {
+    		// console.log("mo");
+    		this.over = true;
+    		this.text.style.fill = this.textColorOver;
+    		this.background.tint = this.backgroundColorOver;
+    	});
+    	this.on("mouseout", e => {
+    		// console.log("mo");
+    		this.over = false;
+    		this.text.style.fill = this.textColor;
+    		this.background.tint = this.backgroundColor;
+    	});
     }
 }

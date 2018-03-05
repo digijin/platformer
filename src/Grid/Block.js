@@ -8,7 +8,7 @@ import type Grid from "Grid";
 import type BlockType from "Grid/Block/Type";
 import {BlockTypeMap} from "Grid/Block/Type";
 
-import * as PIXI from 'pixi.js'
+import * as PIXI from "pixi.js";
 
 export default class Block {
 	position: Point;

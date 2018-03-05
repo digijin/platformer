@@ -16,23 +16,23 @@ export default class BasePanel extends Panel {
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
-        super(props);
-        this.props = props;
+    	super(props);
+    	this.props = props;
     }
     init(engine: Engine) {
-        super.init(engine);
-        this.container.position = this.props.offset;
-        this.heading = new PIXI.Text("Base Panel", {
-            fontFamily: "Arial",
-            fontSize: 24,
-            fill: this.textColor,
-            align: "center"
-        });
-        this.content.addChild(this.heading);
-        this.resizeFitContent();
+    	super.init(engine);
+    	this.container.position = this.props.offset;
+    	this.heading = new PIXI.Text("Base Panel", {
+    		fontFamily: "Arial",
+    		fontSize: 24,
+    		fill: this.textColor,
+    		align: "center"
+    	});
+    	this.content.addChild(this.heading);
+    	this.resizeFitContent();
     }
 
     update() {
-        super.update();
+    	super.update();
     }
 }

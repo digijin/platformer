@@ -23,54 +23,54 @@ export default class BarPanel extends Panel {
     pointGap: number = 10;
     speed: number = 0.5;
     constructor(props: Props) {
-        super(props);
-        this.props = props;
+    	super(props);
+    	this.props = props;
     }
     init(engine: Engine) {
-        super.init(engine);
-        this.container.position = this.props.offset;
-        this.graph = new PIXI.Graphics();
+    	super.init(engine);
+    	this.container.position = this.props.offset;
+    	this.graph = new PIXI.Graphics();
 
-        //prime lineS
-        for (let i = 0; i < this.numvalues; i++) {
-            this.values.push(Math.random());
-            this.targetValues.push(Math.random());
-        }
-        this.drawLines();
+    	//prime lineS
+    	for (let i = 0; i < this.numvalues; i++) {
+    		this.values.push(Math.random());
+    		this.targetValues.push(Math.random());
+    	}
+    	this.drawLines();
 
-        this.content.addChild(this.graph);
-        this.resizeFitContent();
+    	this.content.addChild(this.graph);
+    	this.resizeFitContent();
     }
     drawLines() {
-        this.graph.clear();
-        this.graph
-            .lineStyle(3, 0x00ff00)
-            .moveTo(0, this.height * this.values[0]);
-        // for (let x = 0; x < 20; x++) {
-        for (let x = 0; x < this.values.length; x++) {
-            // debugger;
-            let v = this.values[x];
-            let t = this.targetValues[x];
-            if (v < t) {
-                v += this.engine.deltaTime * this.speed;
-            } else {
-                v -= this.engine.deltaTime * this.speed;
-            }
-            // console.log(v, this.values[x], t, this.targetValues[x]);
-            this.values[x] = v;
-            if (Math.abs(v - t) < 0.1) {
-                this.targetValues[x] = Math.random();
-            }
-            this.graph
-                // .moveTo(x * this.pointGap, this.height)
-                .lineTo(x * this.pointGap, this.height * this.values[x]);
-        }
+    	this.graph.clear();
+    	this.graph
+    		.lineStyle(3, 0x00ff00)
+    		.moveTo(0, this.height * this.values[0]);
+    	// for (let x = 0; x < 20; x++) {
+    	for (let x = 0; x < this.values.length; x++) {
+    		// debugger;
+    		let v = this.values[x];
+    		let t = this.targetValues[x];
+    		if (v < t) {
+    			v += this.engine.deltaTime * this.speed;
+    		} else {
+    			v -= this.engine.deltaTime * this.speed;
+    		}
+    		// console.log(v, this.values[x], t, this.targetValues[x]);
+    		this.values[x] = v;
+    		if (Math.abs(v - t) < 0.1) {
+    			this.targetValues[x] = Math.random();
+    		}
+    		this.graph
+    		// .moveTo(x * this.pointGap, this.height)
+    			.lineTo(x * this.pointGap, this.height * this.values[x]);
+    	}
     }
     values: Array<number> = [];
     targetValues: Array<number> = [];
     update() {
-        super.update();
+    	super.update();
 
-        this.drawLines();
+    	this.drawLines();
     }
 }

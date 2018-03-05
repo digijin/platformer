@@ -12,17 +12,17 @@ export default function reducer(
 	action: Object
 ) {
 	switch (action.type) {
-		case "START_SCENE":
-			state = { ...state, scene: action.scene };
-			break;
+	case "START_SCENE":
+		state = { ...state, scene: action.scene };
+		break;
 
-		case "PAUSE":
-			state = { ...state, scene: "pause" };
-			break;
+	case "PAUSE":
+		state = { ...state, scene: "pause" };
+		break;
 
-		case "END_SCENE":
-			state = { ...state, scene: "none" };
-			break;
+	case "END_SCENE":
+		state = { ...state, scene: "none" };
+		break;
 	}
 
 	return state;

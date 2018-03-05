@@ -24,61 +24,61 @@ export default class Secondary extends Base {
     projectile: Projectile;
 
     constructor(params: SecondaryParams) {
-        super();
-        Object.assign(this, params);
+    	super();
+    	Object.assign(this, params);
     }
 }
 
 const SecondaryParams: Array<SecondaryParams> = [
-    {
-        name: "Missile Pod",
-        id: "StarterSecondary",
-        weight: 1,
-        reloadTime: 0.05,
-        energyCost: 10,
-        power: 100,
-        projectile: Missile
-    },
-    {
-        name: "Guided Missile Pod",
-        id: "Secondary2",
-        weight: 1,
-        reloadTime: 0.5,
-        energyCost: 10,
-        power: 500,
-        projectile: GuidedMissile
-    },
-    {
-        name: "homing mines",
-        id: "Secondary3",
-        weight: 1,
-        reloadTime: 0.5,
-        energyCost: 10,
-        power: 500,
-        projectile: Missile
-    },
+	{
+		name: "Missile Pod",
+		id: "StarterSecondary",
+		weight: 1,
+		reloadTime: 0.05,
+		energyCost: 10,
+		power: 100,
+		projectile: Missile
+	},
+	{
+		name: "Guided Missile Pod",
+		id: "Secondary2",
+		weight: 1,
+		reloadTime: 0.5,
+		energyCost: 10,
+		power: 500,
+		projectile: GuidedMissile
+	},
+	{
+		name: "homing mines",
+		id: "Secondary3",
+		weight: 1,
+		reloadTime: 0.5,
+		energyCost: 10,
+		power: 500,
+		projectile: Missile
+	},
 
-    {
-        name: "homing drones",
-        id: "Secondaryx",
-        weight: 1,
-        reloadTime: 0.5,
-        energyCost: 10,
-        power: 1000,
-        projectile: Missile
-    }
+	{
+		name: "homing drones",
+		id: "Secondaryx",
+		weight: 1,
+		reloadTime: 0.5,
+		energyCost: 10,
+		power: 1000,
+		projectile: Missile
+	}
 ];
 
 export const Secondarys: Array<Secondary> = SecondaryParams.map(params => {
-    return new Secondary(params);
+	return new Secondary(params);
 });
 export const SecondaryMap: Object = Secondarys.reduce(
-    (output: Object, type: Secondarys) => {
-        if (output[type.id]) {
-            throw new Error("duplicate id");
-        }
-        output[type.id] = type;
-        return output;
-    },
-    {}
+	(output: Object, type: Secondarys) => {
+		if (output[type.id]) {
+			throw new Error("duplicate id");
+		}
+		output[type.id] = type;
+		return output;
+	},
+	{}
 );

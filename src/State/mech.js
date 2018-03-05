@@ -10,14 +10,14 @@ type MechState = {
 }
 
 export default function mech(state:MechState, action:Object){
-    if(!state){
-        state = {
-            primary: 'starter',
-            secondary: 'starter',
-            arm: 'starter',
-            booster: 'starter',
-            ultimate: 'starter',
-            weapons: {}
-        }
-    }
+	if(!state){
+		state = {
+			primary: "starter",
+			secondary: "starter",
+			arm: "starter",
+			booster: "starter",
+			ultimate: "starter",
+			weapons: {}
+		};
+	}
 }

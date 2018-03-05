@@ -28,61 +28,61 @@ export default class Primary extends Base {
     projectile: Projectile;
 
     constructor(params: PrimaryParams) {
-        super();
-        Object.assign(this, params);
+    	super();
+    	Object.assign(this, params);
     }
 }
 
 const primaryParams: Array<PrimaryParams> = [
-    {
-        name: "Gattling Gun",
-        id: "StarterPrimary",
-        weight: 1,
-        reloadTime: 0.05,
-        energyCost: 2,
-        power: 100,
-        projectile: BasicBullet
-    },
-    {
-        name: "Laser Cannon",
-        id: "Primary2",
-        weight: 1,
-        reloadTime: 0,
-        energyCost: 4,
-        power: 500,
-        projectile: LaserBullet
-    },
-    {
-        name: "FlameThrower",
-        id: "Primary3",
-        weight: 1,
-        reloadTime: 0.5,
-        energyCost: 10,
-        power: 500,
-        projectile: FlameBullet
-    },
+	{
+		name: "Gattling Gun",
+		id: "StarterPrimary",
+		weight: 1,
+		reloadTime: 0.05,
+		energyCost: 2,
+		power: 100,
+		projectile: BasicBullet
+	},
+	{
+		name: "Laser Cannon",
+		id: "Primary2",
+		weight: 1,
+		reloadTime: 0,
+		energyCost: 4,
+		power: 500,
+		projectile: LaserBullet
+	},
+	{
+		name: "FlameThrower",
+		id: "Primary3",
+		weight: 1,
+		reloadTime: 0.5,
+		energyCost: 10,
+		power: 500,
+		projectile: FlameBullet
+	},
 
-    {
-        name: "Gauss Rifle",
-        id: "PrimaryGauss",
-        weight: 1,
-        reloadTime: 0.8,
-        energyCost: 10,
-        power: 1000,
-        projectile: GaussBullet
-    }
+	{
+		name: "Gauss Rifle",
+		id: "PrimaryGauss",
+		weight: 1,
+		reloadTime: 0.8,
+		energyCost: 10,
+		power: 1000,
+		projectile: GaussBullet
+	}
 ];
 
 export const Primarys: Array<Primary> = primaryParams.map(params => {
-    return new Primary(params);
+	return new Primary(params);
 });
 export const PrimaryMap: Object = Primarys.reduce(
-    (output: Object, type: Primarys) => {
-        if (output[type.id]) {
-            throw new Error("duplicate id");
-        }
-        output[type.id] = type;
-        return output;
-    },
-    {}
+	(output: Object, type: Primarys) => {
+		if (output[type.id]) {
+			throw new Error("duplicate id");
+		}
+		output[type.id] = type;
+		return output;
+	},
+	{}
 );

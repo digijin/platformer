@@ -12,40 +12,40 @@ export default class Leg extends Base {
     power: number;
 
     constructor(params: LegParams) {
-        super(params);
-        Object.assign(this, params);
+    	super(params);
+    	Object.assign(this, params);
     }
 }
 
 const LegParams: Array<LegParams> = [
-    {
-        name: "Fisher-Pryce My First Leg",
-        id: "StarterLegs",
-        weight: 1,
-        power: 100
-    },
-    {
-        name: "Chicken Brand Leg",
-        id: "leg2",
-        weight: 1,
-        power: 500
-    },
+	{
+		name: "Fisher-Pryce My First Leg",
+		id: "StarterLegs",
+		weight: 1,
+		power: 100
+	},
+	{
+		name: "Chicken Brand Leg",
+		id: "leg2",
+		weight: 1,
+		power: 500
+	},
 
-    {
-        name: "Rocket Hare",
-        id: "legx",
-        weight: 1,
-        power: 10000
-    }
+	{
+		name: "Rocket Hare",
+		id: "legx",
+		weight: 1,
+		power: 10000
+	}
 ];
 
 export const Legs: Array<Leg> = LegParams.map(params => {
-    return new Leg(params);
+	return new Leg(params);
 });
 export const LegMap: Object = Legs.reduce((output: Object, type: Legs) => {
-    if (output[type.id]) {
-        throw new Error("duplicate id");
-    }
-    output[type.id] = type;
-    return output;
+	if (output[type.id]) {
+		throw new Error("duplicate id");
+	}
+	output[type.id] = type;
+	return output;
 }, {});

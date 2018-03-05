@@ -18,21 +18,21 @@ export default class ImagePanel extends Panel {
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
-        super(props);
-        this.props = props;
+    	super(props);
+    	this.props = props;
     }
     init(engine: Engine) {
-        super.init(engine);
-        this.container.position = this.props.offset;
-        this.image = new PIXI.Sprite(
-            new PIXI.Texture(new PIXI.BaseTexture(radar))
-        );
+    	super.init(engine);
+    	this.container.position = this.props.offset;
+    	this.image = new PIXI.Sprite(
+    		new PIXI.Texture(new PIXI.BaseTexture(radar))
+    	);
 
-        this.content.addChild(this.image);
-        this.resizeFitContent();
+    	this.content.addChild(this.image);
+    	this.resizeFitContent();
     }
 
     update() {
-        super.update();
+    	super.update();
     }
 }

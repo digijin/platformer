@@ -40,130 +40,130 @@ export default class Bullet extends Projectile {
         target: Point,
         owner: Actor
     }) {
-        super(params);
-        this.tag("bullet");
-        this.speed = 200;
-        Object.assign(this, params);
-        this.time = 1;
-        this.color = COLOR;
-        this.lineWidth = 3;
-        this.h = Math.cos(this.dir);
-        this.v = Math.sin(this.dir);
+    	super(params);
+    	this.tag("bullet");
+    	this.speed = 200;
+    	Object.assign(this, params);
+    	this.time = 1;
+    	this.color = COLOR;
+    	this.lineWidth = 3;
+    	this.h = Math.cos(this.dir);
+    	this.v = Math.sin(this.dir);
     }
 
     graph: PIXI.Graphics;
     init(engine: Engine) {
-        super.init(engine);
+    	super.init(engine);
 
-        if (!this.container) {
-            this.container = this.engine.stage;
-        }
-        this.graph = new PIXI.Graphics();
-        this.graph.filters = [
-            new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY)
-        ];
-        this.container.addChild(this.graph);
+    	if (!this.container) {
+    		this.container = this.engine.stage;
+    	}
+    	this.graph = new PIXI.Graphics();
+    	this.graph.filters = [
+    		new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY)
+    	];
+    	this.container.addChild(this.graph);
     }
     destroy() {
-        super.destroy();
-        this.exit();
+    	super.destroy();
+    	this.exit();
     }
     exit() {
-        this.container.removeChild(this.graph);
+    	this.container.removeChild(this.graph);
     }
     damage: number = 2;
 
     explode() {
-        this.destroy();
-        // super.explode();
+    	this.destroy();
+    	// super.explode();
 
-        for (let i = 0; i < 1; i++) {
-            //we want red outlines to be on the outside
-            //pick a direction
-            let dir = Math.random() * Math.PI * 2;
-            let dist = Math.random() * 2;
-            let offset = {
-                x: Math.cos(dir) * dist,
-                y: Math.sin(dir) * dist
-            };
-            // this.engine.register(
-            //     new Explosion({
-            //         position: this.position.add(offset),
-            //         rotation: dir,
-            //         delay: Math.random() / 8,
-            //         size: 10
-            //     })
-            // );
-            this.engine.register(
-                new Shell({
-                    container: this.container,
-                    position: this.position.add(offset),
-                    color: "red",
-                    h: (Math.random() - 0.5) * 5,
-                    v: (Math.random() - 0.5) * 5,
-                    time: 0.5
-                })
-            );
-        }
+    	for (let i = 0; i < 1; i++) {
+    		//we want red outlines to be on the outside
+    		//pick a direction
+    		let dir = Math.random() * Math.PI * 2;
+    		let dist = Math.random() * 2;
+    		let offset = {
+    			x: Math.cos(dir) * dist,
+    			y: Math.sin(dir) * dist
+    		};
+    		// this.engine.register(
+    		//     new Explosion({
+    		//         position: this.position.add(offset),
+    		//         rotation: dir,
+    		//         delay: Math.random() / 8,
+    		//         size: 10
+    		//     })
+    		// );
+    		this.engine.register(
+    			new Shell({
+    				container: this.container,
+    				position: this.position.add(offset),
+    				color: "red",
+    				h: (Math.random() - 0.5) * 5,
+    				v: (Math.random() - 0.5) * 5,
+    				time: 0.5
+    			})
+    		);
+    	}
     }
     update = () => {
-        this.time -= this.engine.deltaTime;
+    	this.time -= this.engine.deltaTime;
 
-        // let old: Point = this.position.clone();
-        this.move(); //sets trajectory
+    	// let old: Point = this.position.clone();
+    	this.move(); //sets trajectory
 
-        //CHECK TIME
-        if (this.time < 0) {
-            this.destroy();
-        }
-        //check decor
-        this.checkDecor((decor, hitTest) => {
-            this.position.x = hitTest.collision.x;
-            this.position.y = hitTest.collision.y;
-            decor.damage(1);
-        });
+    	//CHECK TIME
+    	if (this.time < 0) {
+    		this.destroy();
+    	}
+    	//check decor
+    	this.checkDecor((decor, hitTest) => {
+    		this.position.x = hitTest.collision.x;
+    		this.position.y = hitTest.collision.y;
+    		decor.damage(1);
+    	});
 
-        //CHECK GRID
-        this.checkGrid();
+    	//CHECK GRID
+    	this.checkGrid();
 
-        this.render();
+    	this.render();
 
-        //CHECK ENEMIES
-        this.checkEnemies((actor: Actor) => {
-            // setTimeout(() => {
-            this.explode();
-            // }, 0);
-            actor.setAgro(this.owner);
-            actor.damage(this.damage);
-        });
+    	//CHECK ENEMIES
+    	this.checkEnemies((actor: Actor) => {
+    		// setTimeout(() => {
+    		this.explode();
+    		// }, 0);
+    		actor.setAgro(this.owner);
+    		actor.damage(this.damage);
+    	});
     };
     checkEnemies(func: (actor: Actor) => {}) {
-        this.engine.objectsTagged("actor").forEach((o: GameObject) => {
-            if (o !== this.owner) {
-                let a: Actor = ((o: any): Actor); //RECAST
-                if (a.getBoundingRect().contains(this.position)) {
-                    // a.damage(2);
-                    func(a);
-                } else {
-                    //ELSE USE EVEN MORE EXPENSIVE CHECK
-                    this.expensiveCheck(a);
-                }
-            }
-        });
+    	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
+    		if (o !== this.owner) {
+    			let a: Actor = ((o: any): Actor); //RECAST
+    			if (a.getBoundingRect().contains(this.position)) {
+    				// a.damage(2);
+    				func(a);
+    			} else {
+    				//ELSE USE EVEN MORE EXPENSIVE CHECK
+    				this.expensiveCheck(a);
+    			}
+    		}
+    	});
     }
 
     expensiveCheck(actor: Actor) {
-        //todo: this.trajectory.interceptsRect(a.getBoundingRect())
+    	//todo: this.trajectory.interceptsRect(a.getBoundingRect())
     }
     render() {
-        this.graph.clear();
-        this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
-        this.graph
-            .lineStyle(this.lineWidth, this.color)
-            .moveTo(0, 0)
-            .lineTo(
-                this.position.x - this.trajectory.a.x,
-                this.position.y - this.trajectory.a.y
-            );
+    	this.graph.clear();
+    	this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
+    	this.graph
+    		.lineStyle(this.lineWidth, this.color)
+    		.moveTo(0, 0)
+    		.lineTo(
+    			this.position.x - this.trajectory.a.x,
+    			this.position.y - this.trajectory.a.y
+    		);
     }
 }

@@ -23,7 +23,7 @@ export default class AnimateOnce extends GameObject {
 		let frames = [];
 		for (let i = 0; i < this.numFrames; i++) {
 			let framenum = i.toString().padStart(params.pad, "0");
-			frames.push(PIXI.loader.resources[params.resource].textures[params.prefix + framenum + params.suffix])
+			frames.push(PIXI.loader.resources[params.resource].textures[params.prefix + framenum + params.suffix]);
 			// PIXI.Texture.fromFrame("explosion" + framenum + ".png"));
 		}
 		this.movie = new PIXI.extras.AnimatedSprite(frames);

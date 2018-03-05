@@ -17,14 +17,14 @@ type WeaponState = {
 
 export default function weapons(state:WeaponState, action:Object){
 
-    if(!state){
-        state = {
-            primary: {starter: {type:'basic'}},
-            secondary: {starter: {type:'basic'}},
-            arm: {starter: {type:'basic'}},
-            booster: {starter: {type:'basic'}},
-            ultimate: {},
-        }
-    }
+	if(!state){
+		state = {
+			primary: {starter: {type:"basic"}},
+			secondary: {starter: {type:"basic"}},
+			arm: {starter: {type:"basic"}},
+			booster: {starter: {type:"basic"}},
+			ultimate: {},
+		};
+	}
 
 }

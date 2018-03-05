@@ -8,7 +8,7 @@ import type Grid from "Grid";
 import type DecorType from "Grid/Decor/Type";
 import {DecorTypeMap} from "Grid/Decor/Type";
 
-import * as PIXI from 'pixi.js'
+import * as PIXI from "pixi.js";
 
 export default class Decor {
 	position: Point; //grid position

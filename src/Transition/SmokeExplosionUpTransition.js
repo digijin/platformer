@@ -15,29 +15,29 @@ export default class SmokeExplosionUpTransition extends Base {
   swapped: boolean
   transition: SmokeExplosionUpTransitionAnimation
   init(engine: Engine) {
-    super.init(engine);
-    // this.engine.container.appendChild(this.el);
-    this.transition = new SmokeExplosionUpTransitionAnimation();
-    this.engine.register(this.transition);
-    this.time = 0;
-    this.swapped = false;
+  	super.init(engine);
+  	// this.engine.container.appendChild(this.el);
+  	this.transition = new SmokeExplosionUpTransitionAnimation();
+  	this.engine.register(this.transition);
+  	this.time = 0;
+  	this.swapped = false;
   }
   time: number;
   update() {
-    this.time += this.engine.deltaTime;
+  	this.time += this.engine.deltaTime;
 
-    if (!this.swapped && this.transition.movie.currentFrame >= 35) {
-      this.swapped = true;
-      this.endLastScene();
-      this.startNextScene();
-    }
+  	if (!this.swapped && this.transition.movie.currentFrame >= 35) {
+  		this.swapped = true;
+  		this.endLastScene();
+  		this.startNextScene();
+  	}
 
-    if (this.time > SECS * 2) {
-      this.end();
-    }
+  	if (this.time > SECS * 2) {
+  		this.end();
+  	}
   }
   end() {
-    // this.engine.container.removeChild(this.el);
-    this.destroy();
+  	// this.engine.container.removeChild(this.el);
+  	this.destroy();
   }
 }

@@ -11,31 +11,31 @@ export default class EnergyBar extends GameObject {
     padding: number = 10;
     player: Player;
     constructor(params: { player: Player }) {
-        super();
-        this.player = params.player;
+    	super();
+    	this.player = params.player;
     }
     init(engine) {
-        super.init(engine);
-        this.container = new EnergyBarContainer();
-        this.graph = new PIXI.Graphics();
-        this.container.addChild(this.graph);
+    	super.init(engine);
+    	this.container = new EnergyBarContainer();
+    	this.graph = new PIXI.Graphics();
+    	this.container.addChild(this.graph);
     }
     update() {
-        this.graph.clear();
-        this.graph
-            .beginFill(0xdddddd)
-            .drawRect(
-                0,
-                0,
-                this.width + this.padding * 2,
-                this.height + this.padding * 2
-            )
-            .beginFill(0xff0000)
-            .drawRect(
-                this.padding,
-                this.padding,
-                this.width * this.player.getEnergyPercent(),
-                this.height
-            );
+    	this.graph.clear();
+    	this.graph
+    		.beginFill(0xdddddd)
+    		.drawRect(
+    			0,
+    			0,
+    			this.width + this.padding * 2,
+    			this.height + this.padding * 2
+    		)
+    		.beginFill(0xff0000)
+    		.drawRect(
+    			this.padding,
+    			this.padding,
+    			this.width * this.player.getEnergyPercent(),
+    			this.height
+    		);
     }
 }

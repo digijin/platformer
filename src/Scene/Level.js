@@ -16,49 +16,49 @@ import type Engine from "Engine";
 import PauseMenu from "GameObject/PauseMenu";
 
 export default class Level extends Base {
-    start(engine: Engine) {
-        super.start(engine);
-        // engine.register(new Skyline());
-        engine.register(new PauseMenu());
-        let grid = new Grid({
-            size: {
-                w: 200,
-                h: 50
-            },
-            parent: engine.stage
-        });
-        // grid.makeTest();
-        // grid.generate(1);
-        // FLOWHACK
-        let gridData = engine.mission.level;
-        // let gridData = require("levels/level.txt");
-        engine.register(grid);
-        grid.load(gridData);
+	start(engine: Engine) {
+		super.start(engine);
+		// engine.register(new Skyline());
+		engine.register(new PauseMenu());
+		let grid = new Grid({
+			size: {
+				w: 200,
+				h: 50
+			},
+			parent: engine.stage
+		});
+		// grid.makeTest();
+		// grid.generate(1);
+		// FLOWHACK
+		let gridData = engine.mission.level;
+		// let gridData = require("levels/level.txt");
+		engine.register(grid);
+		grid.load(gridData);
 
-        // FLOWHACK
-        document.body.style.backgroundColor = "#ddaaee";
-        let bg = new Background();
-        bg.spawnExplosion = () => {};
-        engine.register(bg);
-        engine.register(new StoryTeller());
+		// FLOWHACK
+		document.body.style.backgroundColor = "#ddaaee";
+		let bg = new Background();
+		bg.spawnExplosion = () => {};
+		engine.register(bg);
+		engine.register(new StoryTeller());
 
-        let player = new Player({
-            position: new Point({
-                x: 450,
-                y: 100
-            }),
-            container: this.engine.stage
-        });
+		let player = new Player({
+			position: new Point({
+				x: 450,
+				y: 100
+			}),
+			container: this.engine.stage
+		});
 
-        this.energyBar = new EnergyBar({ player: player });
-        this.engine.register(this.energyBar);
-        this.engine.stage.addChild(this.energyBar.container);
+		this.energyBar = new EnergyBar({ player: player });
+		this.engine.register(this.energyBar);
+		this.engine.stage.addChild(this.energyBar.container);
 
-        engine.register(player);
+		engine.register(player);
 
-        engine.ui.dispatch({
-            type: "START_SCENE",
-            scene: "level"
-        });
-    }
+		engine.ui.dispatch({
+			type: "START_SCENE",
+			scene: "level"
+		});
+	}
 }

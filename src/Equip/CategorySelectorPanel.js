@@ -8,33 +8,33 @@ import * as PIXI from "pixi.js";
 import { CATEGORY } from "Component";
 
 const Categories = [
-    CATEGORY.ENGINE,
-    CATEGORY.LEGS,
-    CATEGORY.PRIMARY,
-    CATEGORY.SECONDARY,
-    CATEGORY.SIDEKICK,
-    CATEGORY.BODY,
-    CATEGORY.BOOSTER
+	CATEGORY.ENGINE,
+	CATEGORY.LEGS,
+	CATEGORY.PRIMARY,
+	CATEGORY.SECONDARY,
+	CATEGORY.SIDEKICK,
+	CATEGORY.BODY,
+	CATEGORY.BOOSTER
 ];
 
 export default class CategorySelectorPanel extends GameObject {
     container: PIXI.Container;
     init(engine: Engine) {
-        super.init(engine);
+    	super.init(engine);
 
-        this.container = new PIXI.Container();
+    	this.container = new PIXI.Container();
 
-        this.buttons = Categories.map((c, i) => {
-            let button = new Button({ text: c });
-            this.container.addChild(button);
-            button.position.y = button.height * i;
-            button.on("mouseup", () => {
-                this._onSelect(c);
-            });
-        });
+    	this.buttons = Categories.map((c, i) => {
+    		let button = new Button({ text: c });
+    		this.container.addChild(button);
+    		button.position.y = button.height * i;
+    		button.on("mouseup", () => {
+    			this._onSelect(c);
+    		});
+    	});
     }
     _onSelect: () => {};
     onSelect(func) {
-        this._onSelect = func;
+    	this._onSelect = func;
     }
 }

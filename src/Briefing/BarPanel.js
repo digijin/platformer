@@ -21,46 +21,46 @@ export default class BarPanel extends Panel {
     height: number = 60;
     numvalues: number = 25;
     constructor(props: Props) {
-        super(props);
-        this.props = props;
+    	super(props);
+    	this.props = props;
     }
     init(engine: Engine) {
-        super.init(engine);
-        this.container.position = this.props.offset;
-        this.graph = new PIXI.Graphics();
+    	super.init(engine);
+    	this.container.position = this.props.offset;
+    	this.graph = new PIXI.Graphics();
 
-        //prime lineS
-        for (let i = 0; i < this.numvalues; i++) {
-            this.values.push(Math.random());
-        }
-        this.drawLines();
+    	//prime lineS
+    	for (let i = 0; i < this.numvalues; i++) {
+    		this.values.push(Math.random());
+    	}
+    	this.drawLines();
 
-        this.content.addChild(this.graph);
-        this.resizeFitContent();
+    	this.content.addChild(this.graph);
+    	this.resizeFitContent();
     }
     drawLines() {
-        this.graph.clear();
-        this.graph.lineStyle(3, 0x00ff00);
-        // for (let x = 0; x < 20; x++) {
-        for (let x = 0; x < this.values.length; x++) {
-            this.graph
-                .moveTo(x * 5, this.height)
-                .lineTo(x * 5, this.height * this.values[x]);
-        }
+    	this.graph.clear();
+    	this.graph.lineStyle(3, 0x00ff00);
+    	// for (let x = 0; x < 20; x++) {
+    	for (let x = 0; x < this.values.length; x++) {
+    		this.graph
+    			.moveTo(x * 5, this.height)
+    			.lineTo(x * 5, this.height * this.values[x]);
+    	}
     }
     values: Array<number> = [];
     time: number = 0;
     gap: number = 0.1;
     update() {
-        super.update();
-        this.time += this.engine.deltaTime;
-        if (this.time > this.gap) {
-            this.time -= this.gap;
-            this.values.push(Math.random());
-            if (this.values.length > this.numvalues) {
-                this.values.shift();
-            }
-            this.drawLines();
-        }
+    	super.update();
+    	this.time += this.engine.deltaTime;
+    	if (this.time > this.gap) {
+    		this.time -= this.gap;
+    		this.values.push(Math.random());
+    		if (this.values.length > this.numvalues) {
+    			this.values.shift();
+    		}
+    		this.drawLines();
+    	}
     }
 }

@@ -267,85 +267,85 @@ export class Equip extends React.Component {
 	itemDetails = () => {
 		const { classes } = this.props;
 		switch (this.state.item) {
-			case "primary":
-				return (
-					<div id="primary">
-						<div
-							onClick={() => {
-								this.props.engine.currentPlayer.primary =
+		case "primary":
+			return (
+				<div id="primary">
+					<div
+						onClick={() => {
+							this.props.engine.currentPlayer.primary =
 									"machinegun";
-								this.forceUpdate();
-							}}
-							className={
-								this.props.engine.currentPlayer.primary ==
+							this.forceUpdate();
+						}}
+						className={
+							this.props.engine.currentPlayer.primary ==
 								"machinegun"
-									? classes.optionSelected
-									: classes.option
-							}
-							dangerouslySetInnerHTML={{
-								__html: bulletIcon
-							}}
-						/>
-						<div
-							onClick={() => {
-								this.props.engine.currentPlayer.primary =
+								? classes.optionSelected
+								: classes.option
+						}
+						dangerouslySetInnerHTML={{
+							__html: bulletIcon
+						}}
+					/>
+					<div
+						onClick={() => {
+							this.props.engine.currentPlayer.primary =
 									"flamethrower";
-								this.forceUpdate();
-							}}
-							className={
-								this.props.engine.currentPlayer.primary ==
+							this.forceUpdate();
+						}}
+						className={
+							this.props.engine.currentPlayer.primary ==
 								"flamethrower"
-									? classes.optionSelected
-									: classes.option
-							}
-							dangerouslySetInnerHTML={{
-								__html: fireIcon
-							}}
-						/>
-						<div
-							onClick={() => {
-								this.props.engine.currentPlayer.primary =
+								? classes.optionSelected
+								: classes.option
+						}
+						dangerouslySetInnerHTML={{
+							__html: fireIcon
+						}}
+					/>
+					<div
+						onClick={() => {
+							this.props.engine.currentPlayer.primary =
 									"frostgun";
-								this.forceUpdate();
-							}}
-							className={
-								this.props.engine.currentPlayer.primary ==
+							this.forceUpdate();
+						}}
+						className={
+							this.props.engine.currentPlayer.primary ==
 								"frostgun"
-									? classes.optionSelected
-									: classes.option
-							}
-							dangerouslySetInnerHTML={{
-								__html: frostIcon
-							}}
-						/>
-						<div
-							onClick={() => {
-								this.props.engine.currentPlayer.primary =
+								? classes.optionSelected
+								: classes.option
+						}
+						dangerouslySetInnerHTML={{
+							__html: frostIcon
+						}}
+					/>
+					<div
+						onClick={() => {
+							this.props.engine.currentPlayer.primary =
 									"energygun";
-								this.forceUpdate();
-							}}
-							className={
-								this.props.engine.currentPlayer.primary ==
+							this.forceUpdate();
+						}}
+						className={
+							this.props.engine.currentPlayer.primary ==
 								"energygun"
-									? classes.optionSelected
-									: classes.option
-							}
-							dangerouslySetInnerHTML={{
-								__html: energyIcon
-							}}
-						/>
-					</div>
-				);
-				break;
-			case "secondary":
-				return (
-					<div id="secondary">
-						<div className={classes.option}>dumb fire</div>
-						<div className={classes.option}>heat seeking</div>
-						<div className={classes.option}>remote control</div>
-					</div>
-				);
-				break;
+								? classes.optionSelected
+								: classes.option
+						}
+						dangerouslySetInnerHTML={{
+							__html: energyIcon
+						}}
+					/>
+				</div>
+			);
+			break;
+		case "secondary":
+			return (
+				<div id="secondary">
+					<div className={classes.option}>dumb fire</div>
+					<div className={classes.option}>heat seeking</div>
+					<div className={classes.option}>remote control</div>
+				</div>
+			);
+			break;
 		}
 		return <div>not implemented</div>;
 	};
