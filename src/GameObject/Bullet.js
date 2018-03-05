@@ -13,7 +13,7 @@ import Shell from "GameObject/Shell";
 
 import * as PIXI from "pixi.js";
 
-import log from "loglevel";
+// import log from "loglevel";
 
 const COLOR = 0xffff00;
 const GLOWDIST = 10;

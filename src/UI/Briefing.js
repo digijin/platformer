@@ -82,7 +82,7 @@ export class Briefing extends React.Component<{}> {
     }
 
     render() {
-    	let availableMissions = Missions;
+    	// let availableMissions = Missions;
     	let selectedMission = Missions[this.state.selectedMission];
     	if (!selectedMission) {
     		selectedMission = {
