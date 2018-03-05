@@ -31,6 +31,8 @@ export default class Bullet extends Projectile {
     container: PIXI.Container;
     style: string;
     color: number;
+    lineWidth: number;
+    dir: number;
     constructor(params: {
         position: Point,
         h: number,
@@ -141,19 +143,20 @@ export default class Bullet extends Projectile {
     	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
     		if (o !== this.owner) {
     			let a: Actor = ((o: any): Actor); //RECAST
-    			if (a.getBoundingRect().contains(this.position)) {
+    			if (this.cheapCheck(a) || this.expensiveCheck(a)) {
     				// a.damage(2);
     				func(a);
     			} else {
     				//ELSE USE EVEN MORE EXPENSIVE CHECK
-    				this.expensiveCheck(a);
     			}
     		}
     	});
     }
-
+    cheapCheck(actor: Actor) {
+    	return actor.getBoundingRect().contains(this.position);
+    }
     expensiveCheck(actor: Actor) {
-    	//todo: this.trajectory.interceptsRect(a.getBoundingRect())
+    	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
     }
     render() {
     	this.graph.clear();
