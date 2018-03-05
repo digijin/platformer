@@ -1,0 +1,5 @@
+**/*.spec.js
+**/*.karma.js
+**/*.test.js
+temp
+flow-typed
