@@ -28,8 +28,8 @@
         "electron:karma": "electron-open http://localhost:9876",
         "electron:dev": "electron http://localhost:8080/",
         "electron:debug": "electron --inspect-brk=5859 http://localhost:8080/",
-        "lint": "eslint src/ --plugin flowtype --parser babel-eslint",
-        "lint:fix": "eslint src/ --plugin flowtype --parser babel-eslint --fix"
+        "lint": "eslint src/ ",
+        "lint:fix": "eslint src/ --fix"
     },
     "repository": {
         "type": "git",

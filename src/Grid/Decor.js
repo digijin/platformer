@@ -17,7 +17,7 @@ export default class Decor {
 	hp: number;
 	texture: PIXI.Texture;
 	sprite: PIXI.Sprite;
-	constructor(params : {
+	constructor(params: {
 		position: Point,
 		type: string,
 		grid: Grid
@@ -39,7 +39,7 @@ export default class Decor {
 	isEmpty(): boolean {
 		return this.type == "0";
 	}
-	damage(amount : number) {
+	damage(amount: number) {
 		let type = this.getType();
 		if (type && type.destructable) {
 			this.hp -= amount;
@@ -53,7 +53,7 @@ export default class Decor {
 		this.grid.removeDecor(this.position);
 	}
 	//for editor
-	add(blockId : string) {
+	add(blockId: string) {
 		this.type = blockId;
 	}
 	//for editor

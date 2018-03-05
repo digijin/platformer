@@ -13,14 +13,14 @@ export default class GameObject {
 		this.tags = [];
 	}
 
-	init(engine : Engine) {
+	init(engine: Engine) {
 		this.engine = engine;
 	}
-	update(engine : Engine) {}
-	tag = (tag : string) => {
+	update(engine: Engine) {}
+	tag = (tag: string) => {
 		this.tags.push(tag);
 	};
-	hasTag = (tag : string) => {
+	hasTag = (tag: string) => {
 		return this.tags.indexOf(tag) > -1;
 	};
 	destroy() {

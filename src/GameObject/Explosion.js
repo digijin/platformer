@@ -17,7 +17,7 @@ export default class Explosion extends GameObject {
 	rotation: number;
 	sprite: PIXI.Sprite;
 	texture: PIXI.Texture;
-	constructor(params : Object) {
+	constructor(params: Object) {
 		super();
 		//defaults
 		this.time = 1;
@@ -26,7 +26,7 @@ export default class Explosion extends GameObject {
 
 		Object.assign(this, params);
 	}
-	init(engine : Engine) {
+	init(engine: Engine) {
 		super.init(engine);
 		this.texture = new PIXI.Texture(new PIXI.BaseTexture(explosion));
 		this.sprite = new PIXI.Sprite(this.texture);
@@ -51,7 +51,7 @@ export default class Explosion extends GameObject {
 		this.engine.stage.removeChild(this.sprite);
 
 	}
-	update(engine : Engine) {
+	update(engine: Engine) {
 		this.positionSprite();
 		if (this.delay > 0) {
 			this.delay -= engine.deltaTime;

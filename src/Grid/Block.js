@@ -18,7 +18,7 @@ export default class Block {
 	tint: number;
 	hp: number;
 	sprite: PIXI.Sprite;
-	constructor(params : {
+	constructor(params: {
 		position: Point,
 		type: string,
 		grid: Grid,
@@ -64,7 +64,7 @@ export default class Block {
 	isBackgroundEmpty(): boolean {
 		return this.backgroundType == "0";
 	}
-	damage(amount : number) {
+	damage(amount: number) {
 		let type = this.getType();
 		if (type && type.destructable) {
 			this.hp -= amount;
@@ -78,11 +78,11 @@ export default class Block {
 		this.grid.bustCache(this);
 	}
 	//for editor
-	add(blockId : string) {
+	add(blockId: string) {
 		this.type = blockId;
 		this.grid.bustCache(this);
 	}
-	addBackground(blockId : string) {
+	addBackground(blockId: string) {
 		this.backgroundType = blockId;
 		this.grid.bustCache(this);
 	}
@@ -104,7 +104,7 @@ export default class Block {
 			y: this.position.y * config.grid.width
 		});
 	}
-	is(block : Block): boolean {
+	is(block: Block): boolean {
 		return (block.position.x === this.position.x && block.position.y === this.position.y);
 	}
 

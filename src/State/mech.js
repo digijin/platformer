@@ -9,7 +9,7 @@ type MechState = {
     weapons: Object
 }
 
-export default function mech(state:MechState, action:Object){
+export default function mech(state: MechState, action: Object){
 	if(!state){
 		state = {
 			primary: "starter",

@@ -1,7 +1,7 @@
 // @flow
 
 type WeaponList = {
-    [id:string]: {
+    [id: string]: {
         type: string
     }
 }
@@ -15,7 +15,7 @@ type WeaponState = {
 }
 
 
-export default function weapons(state:WeaponState, action:Object){
+export default function weapons(state: WeaponState, action: Object){
 
 	if(!state){
 		state = {

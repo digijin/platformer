@@ -1,6 +1,7 @@
 {
     "parser": "babel-eslint",
     "plugins": ["flowtype"],
+    "extends": ["plugin:flowtype/recommended"],
     "settings": {
         "flowtype": { "onlyFilesWithFlowAnnotation": true }
     },
@@ -13,7 +14,8 @@
     },
     "rules": {
         "semi": 2,
-        "indent": ["error", "tab"]
+        "indent": ["error", "tab"],
+        "flowtype/no-types-missing-file-annotation": 0
     },
     "env": {
         "browser": true,
