@@ -240,13 +240,16 @@ export default class Engine {
     	}
 
     	// this.objects = this.objects.filter(o => o);
-    	this.renderer.render(this.stageContainer);
-
+    	this.render();
     	//wait for next frame
     	this.updateId = requestAnimationFrame(this.update);
     	this.input.endTick();
     	this.fpsmeter.tick();
     };
+    render() {
+    	// console.log("render");
+    	this.renderer.render(this.stageContainer);
+    }
     updateId: number;
     kill = () => {
     	cancelAnimationFrame(this.updateId);

@@ -67,10 +67,14 @@ export default class Bullet extends Projectile {
     		new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY)
     	];
     	this.container.addChild(this.graph);
+    	// console.log("init");
     }
     destroy() {
-    	super.destroy();
-    	this.exit();
+    	// console.log("destroy");
+    	setTimeout(() => {
+    		super.destroy();
+    		this.exit();
+    	}, 0);
     }
     exit() {
     	this.container.removeChild(this.graph);
@@ -111,6 +115,7 @@ export default class Bullet extends Projectile {
     	}
     }
     update = () => {
+    	// console.log("update");
     	this.time -= this.engine.deltaTime;
 
     	// let old: Point = this.position.clone();
