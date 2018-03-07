@@ -10,8 +10,12 @@ import EditorWatcher from "Editor/Watcher";
 export default class Editor extends Base {
 	start(engine) {
 		super.start(engine);
+
+		let watcher = new EditorWatcher();
+		engine.register(watcher);
+
 		let grid = new Grid({
-			size: { w: 10, h: 10 },
+			size: { w: 100, h: 100 },
 			parent: engine.stage
 		});
 
@@ -30,9 +34,6 @@ export default class Editor extends Base {
 		let bg = new Background();
 		bg.spawnExplosion = () => {};
 		engine.register(bg);
-
-		let watcher = new EditorWatcher();
-		engine.register(watcher);
 
 		engine.ui.dispatch({ type: "START_SCENE", scene: "editor" });
 	}

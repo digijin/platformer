@@ -58,18 +58,20 @@ export default class Grid extends GameObject {
     	//make empty grid
     	this.makeEmptyGrid(params.size);
     }
-
+    graph: PIXI.Graphics = new PIXI.Graphics();
     init(engine: Engine) {
     	super.init(engine);
     	engine.grid = this;
     	this.pixiInit();
-
+    	this.graph = new PIXI.Graphics();
     	this.parent.addChild(this.blockStage);
     	this.parent.addChild(this.decorStage);
+    	this.parent.addChild(this.graph);
     }
     exit() {
     	this.parent.removeChild(this.blockStage);
     	this.parent.removeChild(this.decorStage);
+    	this.parent.removeChild(this.graph);
     }
 
     screenRect(): Rect {
@@ -82,10 +84,14 @@ export default class Grid extends GameObject {
     }
 
     update = (engine: Engine) => {
+    	// console.group("Grid");
+
     	let screenRect = this.screenRect();
     	this.renderBlocksPixi(screenRect);
-    	// this.renderDecor();
+    	// console.groupEnd("Grid");
+
     	// this.decorStage.position.x = -this.engine.view.offset.x;
+    	// this.renderDecor();
     	// this.decorStage.position.y = -this.engine.view.offset.y;
     	// this.renderDebugBlockPixelLine();
     };
@@ -107,6 +113,9 @@ export default class Grid extends GameObject {
     	};
     }
     renderBlocksPixi(screenRect: Rect) {
+    	setTimeout(() => {
+    		this.graph.clear();
+    	}, 0);
     	// screenRect = new Rect({ t: 0, r: 200, b: 200, l: 0 });
     	this.spritePool.reset();
     	this.spritePool.pool.forEach((spr: PIXI.Sprite) => {
@@ -145,8 +154,16 @@ export default class Grid extends GameObject {
     }
 
     highlightBlock(block: Block) {
+    	// console.log("highlight");
     	if (block) {
     		let rect = block.rect;
+    		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
+    		this.graph.drawRect(
+    			rect.l,
+    			rect.t,
+    			rect.r - rect.l,
+    			rect.b - rect.t
+    		);
 
     		// TODO: RE ADD THIS IN PIXI
     		// this.engine.ctx.context.strokeStyle = "#888";
