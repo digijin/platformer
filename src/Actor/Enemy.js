@@ -24,6 +24,8 @@ import * as PIXI from "pixi.js";
 const AGRO_DISTANCE = 500;
 const DEAGRO_DISTANCE = 1000;
 
+class EnemySprite extends PIXI.Sprite {}
+
 export default class Enemy extends Actor {
     walkSpeed: number;
     v: number;
@@ -33,6 +35,8 @@ export default class Enemy extends Actor {
 
     direction: number;
     sprite: PIXI.Sprite;
+
+    parent: PIXI.Container;
     constructor(params: { position: Point, type: EnemyType }) {
     	super(params);
     	this.hp = params.type.hp;
@@ -42,11 +46,15 @@ export default class Enemy extends Actor {
     	this.size = params.type.size;
     	this.registration = params.type.registration;
     	this.direction = 1;
+    	this.parent = params.parent;
     	if (!this.size) {
     		throw new Error("no size in enemy init");
     	}
     	if (!this.registration) {
     		throw new Error("no rewgistration in enemy init");
+    	}
+    	if (!this.parent) {
+    		throw new Error("no parent in enemy init");
     	}
     	// this.size = config.enemy.size;
     	// this.registration = config.enemy.registration;
@@ -57,18 +65,18 @@ export default class Enemy extends Actor {
     init(engine: Engine) {
     	super.init(engine);
     	let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
-    	this.sprite = new PIXI.Sprite(texture);
+    	this.sprite = new EnemySprite(texture);
     	this.sprite.anchor = this.registration;
     	this.sprite.width = this.size.w;
     	this.sprite.height = this.size.h;
-    	this.engine.stage.addChild(this.sprite);
+    	this.parent.addChild(this.sprite);
 
     	this.graph = new PIXI.Graphics();
-    	this.engine.stage.addChild(this.graph);
+    	this.parent.addChild(this.graph);
     }
     exit() {
-    	this.engine.stage.removeChild(this.sprite);
-    	this.engine.stage.removeChild(this.graph);
+    	this.parent.removeChild(this.sprite);
+    	this.parent.removeChild(this.graph);
     }
     destroy() {
     	this.exit();

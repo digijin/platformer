@@ -175,9 +175,10 @@ export default class Watcher extends GameObject {
     	// if (this.engine.input.getButton("editor_add")) {
     	if (action == "add") {
     		blocks.forEach(b => {
-    			this.engine.register(
-    				new Enemy({ position: b.center, type: this.enemyType })
-    			);
+    			this.engine.grid.addEnemy({
+    				position: b.center,
+    				type: this.enemyType
+    			});
     		});
     	}
     	if (action == "remove") {

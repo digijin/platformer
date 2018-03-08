@@ -30,6 +30,7 @@ export default class Grid extends GameObject {
     decor: Array<Decor>;
     z: number;
     spritePool: Pool;
+    parent: PIXI.Container;
 
     blockStage: PIXI.Container;
     decorStage: PIXI.Container;
@@ -471,22 +472,25 @@ export default class Grid extends GameObject {
     		});
     	});
     	if (data.enemies) {
-    		log.debug("loading", data.enemies.length, "enemies");
+    		log.info("loading", data.enemies.length, "enemies");
     		data.enemies.forEach(e => {
     			let type = EnemyTypesMap[e.t];
     			if (!type) {
     				throw new Error("could not look up enemy " + e.t);
     			}
-    			this.engine.register(
-    				new Enemy({
-    					position: new Point(e.p),
-    					type: type
-    				})
-    			);
+    			this.addEnemy({
+    				position: new Point(e.p),
+    				type: type
+    			});
     		});
     	}
 
     	// this.initDecor();
+    }
+
+    addEnemy(params: { position: Point, type: any }) {
+    	params.parent = this.parent;
+    	this.engine.register(new Enemy(params));
     }
     addRowAbove() {
     	this.height++;
