@@ -25,6 +25,13 @@ Missions.push(
 	}),
 
 	new Mission({
+		level: require("levels/flatcolour.txt"),
+		title: "flat colours",
+		description: "different design",
+		objectives: [{ text: "more killing shit" }]
+	}),
+
+	new Mission({
 		level: require("levels/level.txt"),
 		title: "Second Mission",
 		description: "Exactly the same as first mission. here for testing",
