@@ -157,7 +157,9 @@ export default class Grid extends GameObject {
     	// console.log("highlight");
     	if (block) {
     		let rect = block.rect;
+
     		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
+    		this.graph.beginFill(0x00ff00, 0.5);
     		this.graph.drawRect(
     			rect.l,
     			rect.t,
