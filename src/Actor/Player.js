@@ -61,6 +61,8 @@ import Leg from "Mech/Leg";
 export default class Player extends Actor {
     leg: Leg;
     container: PIXI.Container;
+    airborne: boolean = false;
+
     constructor(params: { position: Point, container: PIXI.Container }) {
     	super(params);
     	this.tag("player");
@@ -177,6 +179,7 @@ export default class Player extends Actor {
     	}
     	//check walls
     	let hDelta = this.h * this.engine.deltaTime * config.player.speed;
+
     	//VERTICAL MOVEMENT
     	if (this.engine.input.getButton("jump")) {
     		if (this.v == 0) {
@@ -202,6 +205,16 @@ export default class Player extends Actor {
     	} else {
     		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
     	}
+
+    	if (!this.canMoveVert(this.v)) {
+    		this.v = 0;
+    		//TODO: if going down land on ground precisely
+    		this.airborne = false;
+    	} else {
+    		this.airborne = true;
+    	}
+    	// END VERTICAL
+
     	if (hand.state == HAND_STATE.GRIPPED) {
     		//REEL IN
     		let diff = this.position.add(hand.offset).subtract(hand.position);
@@ -210,6 +223,7 @@ export default class Player extends Actor {
     		this.v = -Math.sin(dir) * this.engine.deltaTime * hand.reelSpeed;
     		hDelta = this.h * this.engine.deltaTime * hand.reelSpeed;
     	}
+
     	if (!this.canMoveHori(hDelta)) {
     		if (this.canStep(hDelta)) {
     			//step up and keep going
@@ -219,12 +233,9 @@ export default class Player extends Actor {
     			hDelta = 0;
     		}
     	}
-    	this.position.x += hDelta;
-    	if (!this.canMoveVert(this.v)) {
-    		this.v = 0;
-    		//TODO: if going down land on ground precisely
-    	}
+
     	this.position.y += this.v;
+    	this.position.x += hDelta;
     }
 
     updateGrapple() {
