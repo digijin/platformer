@@ -16,12 +16,12 @@ export default class Booster extends Base {
     energyCost: number;
 
     constructor(params: BoosterParams) {
-    	super(params);
+    	super();
     	Object.assign(this, params);
     }
 }
 
-const BoosterParams: Array<BoosterParams> = [
+const boosterParams: Array<BoosterParams> = [
 	{
 		name: "Fisher-Pryce My First Booster",
 		id: "StarterBooster",
@@ -49,11 +49,11 @@ const BoosterParams: Array<BoosterParams> = [
 	}
 ];
 
-export const Boosters: Array<Booster> = BoosterParams.map(params => {
+export const Boosters: Array<Booster> = boosterParams.map(params => {
 	return new Booster(params);
 });
 export const BoosterMap: Object = Boosters.reduce(
-	(output: Object, type: Boosters) => {
+	(output: Object, type: Booster) => {
 		if (output[type.id]) {
 			throw new Error("duplicate id");
 		}
