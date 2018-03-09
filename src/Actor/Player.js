@@ -59,10 +59,14 @@ let hand = {
 
 import Leg from "Mech/Leg";
 export default class Player extends Actor {
-    leg: Leg;
+    //this stuff basically to hack in equip panel
+    targetOffset: Point = new Point();
     container: PIXI.Container;
-    airborne: boolean = false;
+    primaryReload: number = 0;
     graph: PIXI.Graphics;
+    airborne: boolean = false;
+    energy: number = 0;
+    leg: Leg;
 
     constructor(params: { position: Point, container: PIXI.Container }) {
     	super(params);
@@ -79,9 +83,6 @@ export default class Player extends Actor {
 
     	this.leg = new Leg({ parent: this, container: this.container });
     }
-    damage() {
-    	//overrides parent, does nothing... invincible!
-    }
 
     init(engine: Engine) {
     	super.init(engine);
@@ -89,9 +90,11 @@ export default class Player extends Actor {
     	this.graph = new PIXI.Graphics();
     	this.container.addChild(this.graph);
     }
+
     exit() {
     	this.container.removeChild(this.graph);
     }
+
     update() {
     	//adjust camera
     	this.focusCameraOnSelf();
@@ -117,52 +120,6 @@ export default class Player extends Actor {
 
     	// UI MISSILE
     	this.render();
-    }
-
-    energy: number = 0;
-    regenEnergy() {
-    	let engine: ComponentEngine =
-            EngineMap[this.engine.currentPlayer.engine];
-
-    	this.energy += this.engine.deltaTime * engine.regenSpeed;
-    	this.energy = Math.min(this.energy, engine.maxPower);
-    }
-    spendEnergy(amount: number): boolean {
-    	if (this.energy >= amount) {
-    		this.energy -= amount;
-    		return true;
-    	}
-    	return false;
-    }
-    getEnergyPercent(): number {
-    	let engine: ComponentEngine =
-            EngineMap[this.engine.currentPlayer.engine];
-    	return this.energy / engine.maxPower;
-    }
-
-    render() {
-    	//HAND
-    	// ctx.fillStyle = '#aaaaaa'
-    	// let pos = hand.offset.add(this.position);
-
-    	this.graph.clear();
-    	this.graph.position.set(hand.position.x, hand.position.y);
-    	this.graph
-    		.lineStyle(5, 0xff0000)
-    		.moveTo(0, 0)
-    		.lineTo(
-    			this.position.add(hand.offset).x - hand.position.x,
-    			this.position.add(hand.offset).y - hand.position.y
-    		);
-    }
-    // viewTargetOffset: Point = new Point();
-    focusCameraOnSelf() {
-    	let viewTarget = this.position.subtract({
-    		x: config.game.width / 2,
-    		y: config.game.height / 2
-    	});
-    	// .subtract(this.viewTargetOffset);
-    	this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
     }
 
     updateMovement(gp: any) {
@@ -281,7 +238,6 @@ export default class Player extends Actor {
     	}
     }
 
-    primaryReload: number = 0;
     updateGuns() {
     	if (this.primaryReload > 0) {
     		this.primaryReload -= this.engine.deltaTime;
@@ -325,12 +281,6 @@ export default class Player extends Actor {
     	}
     }
 
-    //this stuff basically to hack in equip panel
-    targetOffset: Point = new Point();
-    getTargetPoint(): Point {
-    	return this.engine.mouse.point.subtract(this.targetOffset);
-    }
-
     updateMissile() {
     	let secondary = SecondaryMap[this.engine.currentPlayer.secondary];
     	if (missile.reload > 0) {
@@ -365,6 +315,16 @@ export default class Player extends Actor {
     	}
     }
 
+    damage() {
+    	//overrides parent, does nothing... invincible!
+    }
+
+    getEnergyPercent(): number {
+    	let engine: ComponentEngine =
+            EngineMap[this.engine.currentPlayer.engine];
+    	return this.energy / engine.maxPower;
+    }
+
     getGamePad() {
     	let gp = this.engine.input.gamepad.getGamePad();
     	if (this.engine.input.getDevice() == "gamepad") {
@@ -379,5 +339,51 @@ export default class Player extends Actor {
     			});
     	}
     	return gp;
+    }
+
+    render() {
+    	//HAND
+    	// ctx.fillStyle = '#aaaaaa'
+    	// let pos = hand.offset.add(this.position);
+
+    	this.graph.clear();
+    	this.graph.position.set(hand.position.x, hand.position.y);
+    	this.graph
+    		.lineStyle(5, 0xff0000)
+    		.moveTo(0, 0)
+    		.lineTo(
+    			this.position.add(hand.offset).x - hand.position.x,
+    			this.position.add(hand.offset).y - hand.position.y
+    		);
+    }
+
+    regenEnergy() {
+    	let engine: ComponentEngine =
+            EngineMap[this.engine.currentPlayer.engine];
+
+    	this.energy += this.engine.deltaTime * engine.regenSpeed;
+    	this.energy = Math.min(this.energy, engine.maxPower);
+    }
+
+    getTargetPoint(): Point {
+    	return this.engine.mouse.point.subtract(this.targetOffset);
+    }
+
+    // viewTargetOffset: Point = new Point();
+    focusCameraOnSelf() {
+    	let viewTarget = this.position.subtract({
+    		x: config.game.width / 2,
+    		y: config.game.height / 2
+    	});
+    	// .subtract(this.viewTargetOffset);
+    	this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
+    }
+
+    spendEnergy(amount: number): boolean {
+    	if (this.energy >= amount) {
+    		this.energy -= amount;
+    		return true;
+    	}
+    	return false;
     }
 }
