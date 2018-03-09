@@ -16,7 +16,10 @@ import type Engine from "Engine";
 
 import { PrimaryMap } from "../Components/Primary";
 import { SecondaryMap } from "../Components/Secondary";
+import { LegMap } from "../Components/Legs";
+import { BoosterMap } from "../Components/Booster";
 import { EngineMap } from "../Components/Engine";
+import type Booster from "../Components/Booster";
 
 import type ComponentEngine from "../Components/Engine";
 
@@ -161,6 +164,9 @@ export default class Player extends Actor {
     }
 
     updateMovement(gp: any) {
+    	let booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
+    	let legs = LegMap[this.engine.currentPlayer.legs];
+
     	let boundingRect = this.getBoundingRect();
     	this.h = this.engine.input.getAxis("horizontal");
     	if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
@@ -176,7 +182,10 @@ export default class Player extends Actor {
     		if (this.v == 0) {
     			this.v = -config.player.jump.power; //jump
     		}
-    		this.v -= this.engine.deltaTime * 4; //BOOSTERS
+    		if (this.spendEnergy(booster.energyDrain * this.engine.deltaTime)) {
+    			this.v -= this.engine.deltaTime * 4; //BOOSTERS
+    		}
+
     		this.engine.register(
     			new Shell({
     				container: this.container,

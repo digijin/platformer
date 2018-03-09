@@ -38,8 +38,8 @@ const primaryParams: Array<PrimaryParams> = [
 		name: "Gattling Gun",
 		id: "StarterPrimary",
 		weight: 1,
-		reloadTime: 0.05,
-		energyCost: 2,
+		reloadTime: 0.04,
+		energyCost: 4,
 		power: 100,
 		projectile: BasicBullet
 	},
