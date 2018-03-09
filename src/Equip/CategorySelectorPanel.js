@@ -19,6 +19,7 @@ const Categories = [
 
 export default class CategorySelectorPanel extends GameObject {
     container: PIXI.Container;
+    _onSelect: () => {};
     init(engine: Engine) {
     	super.init(engine);
 
@@ -33,7 +34,7 @@ export default class CategorySelectorPanel extends GameObject {
     		});
     	});
     }
-    _onSelect: () => {};
+
     onSelect(func) {
     	this._onSelect = func;
     }

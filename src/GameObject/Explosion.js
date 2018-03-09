@@ -10,13 +10,13 @@ import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 
 export default class Explosion extends GameObject {
+    texture: PIXI.Texture;
     position: Point;
-    time: number; //life
     delay: number;
     size: number;
     rotation: number;
     sprite: PIXI.Sprite;
-    texture: PIXI.Texture;
+    time: number; //life
     constructor(params: Object) {
     	super();
     	//defaults
@@ -26,6 +26,7 @@ export default class Explosion extends GameObject {
 
     	Object.assign(this, params);
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.texture = new PIXI.Texture(new PIXI.BaseTexture(explosion));
@@ -37,20 +38,11 @@ export default class Explosion extends GameObject {
     	this.engine.grid.parent.addChild(this.sprite);
     	this.positionSprite();
     }
-    positionSprite() {
-    	this.sprite.rotation = this.rotation;
-    	this.sprite.position.x = this.position.x;
-    	this.sprite.position.y = this.position.y;
-    	this.sprite.width = this.sprite.height =
-            this.size * Math.cos((1 - this.time) * Math.PI / 2);
-    }
-    destroy() {
-    	super.destroy();
-    	this.exit();
-    }
+
     exit() {
     	this.engine.grid.parent.removeChild(this.sprite);
     }
+
     update() {
     	this.positionSprite();
     	if (this.delay > 0) {
@@ -64,5 +56,18 @@ export default class Explosion extends GameObject {
     			this.destroy();
     		}
     	}
+    }
+
+    positionSprite() {
+    	this.sprite.rotation = this.rotation;
+    	this.sprite.position.x = this.position.x;
+    	this.sprite.position.y = this.position.y;
+    	this.sprite.width = this.sprite.height =
+            this.size * Math.cos((1 - this.time) * Math.PI / 2);
+    }
+
+    destroy() {
+    	super.destroy();
+    	this.exit();
     }
 }

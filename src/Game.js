@@ -39,14 +39,6 @@ export default class Game {
     shells: Array<Object>;
     engine: Engine;
     inited: boolean;
-    constructor(container: HTMLElement) {
-    	this.container = container;
-    	window.game = this;
-    	PIXI.loader.load(this.init);
-    	// console.log("game constructed");
-    	// this.init();
-    	this.inited = false;
-    }
     init = () => {
     	this.inited = true;
     	//init textures that were just loaded
@@ -94,6 +86,16 @@ export default class Game {
 
     	this.engine.update(); //starts
     };
+
+    constructor(container: HTMLElement) {
+    	this.container = container;
+    	window.game = this;
+    	PIXI.loader.load(this.init);
+    	// console.log("game constructed");
+    	// this.init();
+    	this.inited = false;
+    }
+
     destroy() {
     	this.engine.kill();
     }

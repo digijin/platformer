@@ -27,16 +27,17 @@ const DEAGRO_DISTANCE = 1000;
 class EnemySprite extends PIXI.Sprite {}
 
 export default class Enemy extends Actor {
-    walkSpeed: number;
-    v: number;
-    h: number;
+    sprite: PIXI.Sprite;
     type: EnemyType;
     agro: Player | null;
-
     direction: number;
-    sprite: PIXI.Sprite;
-
+    h: number;
     parent: PIXI.Container;
+    v: number;
+    graph: PIXI.Graphics;
+    action: ?Generator<*, *, *>;
+    walkSpeed: number;
+
     constructor(params: { position: Point, type: EnemyType }) {
     	super(params);
     	this.hp = params.type.hp;
@@ -61,7 +62,7 @@ export default class Enemy extends Actor {
 
     	Object.assign(this, params);
     }
-    graph: PIXI.Graphics;
+
     init(engine: Engine) {
     	super.init(engine);
     	let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
@@ -74,15 +75,12 @@ export default class Enemy extends Actor {
     	this.graph = new PIXI.Graphics();
     	this.parent.addChild(this.graph);
     }
+
     exit() {
     	this.parent.removeChild(this.sprite);
     	this.parent.removeChild(this.graph);
     }
-    destroy() {
-    	this.exit();
-    	super.destroy();
-    }
-    action: ?Generator<*, *, *>;
+
     update() {
     	this.sprite.position = this.position;
     	let player = this.engine.objectsTagged("player").pop();
@@ -105,6 +103,12 @@ export default class Enemy extends Actor {
     	}
     	this.render();
     }
+
+    destroy() {
+    	this.exit();
+    	super.destroy();
+    }
+
     newAction() {
     	let player = this.engine.objectsTagged("player").pop();
     	if (this.agro) {
@@ -152,6 +156,7 @@ export default class Enemy extends Actor {
     		.moveTo(0, 0)
     		.lineTo(20 * this.hp / this.type.hp, 0);
     }
+
     startIdle() {
     	this.agro = null;
     	switch (this.type.idle) {
@@ -171,6 +176,7 @@ export default class Enemy extends Actor {
     		throw new Error("no idle for Enemy");
     	}
     }
+
     startAgro(player: Player) {
     	this.agro = player;
 

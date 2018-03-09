@@ -12,28 +12,6 @@ import type Block from "Grid/Block";
 // let engine: Engine;
 
 export default class Actor extends Renderable {
-    h: number;
-    v: number;
-    z: number;
-    hp: number;
-    maxhp: number;
-    constructor(params: {}) {
-    	super();
-    	this.v = 0;
-    	this.h = 0;
-    	this.hp = 1;
-    	this.maxhp = 1;
-    	Object.assign(this, params);
-
-    	this.tag("actor");
-    }
-    damage(amount: number) {
-    	this.hp -= amount;
-    	if (this.hp <= 0) {
-    		this.explode();
-    	}
-    }
-
     explode = () => {
     	this.destroy();
     	//fill rect with explosions
@@ -59,9 +37,38 @@ export default class Actor extends Renderable {
     	}
     };
 
-    setAgro(actor: Actor) {
-    	this.agro = actor;
-    }
+    h: number;
+    z: number;
+    hp: number;
+    maxhp: number;
+    canMoveVert = (amount: number): boolean => {
+    	let boundingRect = this.getBoundingRect();
+    	let targetRect = boundingRect.move({ x: 0, y: amount });
+    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+    	let obstacles = blocks.filter(block => {
+    		return !block.isEmpty();
+    	});
+    	return obstacles.length == 0;
+    };
+
+    canMoveHori = (amount: number): boolean => {
+    	let boundingRect = this.getBoundingRect();
+    	let targetRect = boundingRect.move({ x: amount, y: 0 });
+    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+    	let obstacles = blocks.filter(block => {
+    		return !block.isEmpty();
+    	});
+    	return obstacles.length == 0;
+    };
+
+    v: number;
+    getBoundingRect = (): Rect => {
+    	return Rect.fromPosSizeRego(
+    		this.position,
+    		this.size,
+    		this.registration
+    	);
+    };
 
     gravity = () => {
     	this.v += this.engine.deltaTime * config.gravity; //GRAVITY
@@ -76,31 +83,7 @@ export default class Actor extends Renderable {
     	}
     	this.position.y += this.v;
     };
-    getBoundingRect = (): Rect => {
-    	return Rect.fromPosSizeRego(
-    		this.position,
-    		this.size,
-    		this.registration
-    	);
-    };
-    canMoveHori = (amount: number): boolean => {
-    	let boundingRect = this.getBoundingRect();
-    	let targetRect = boundingRect.move({ x: amount, y: 0 });
-    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-    	let obstacles = blocks.filter(block => {
-    		return !block.isEmpty();
-    	});
-    	return obstacles.length == 0;
-    };
-    canMoveVert = (amount: number): boolean => {
-    	let boundingRect = this.getBoundingRect();
-    	let targetRect = boundingRect.move({ x: 0, y: amount });
-    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-    	let obstacles = blocks.filter(block => {
-    		return !block.isEmpty();
-    	});
-    	return obstacles.length == 0;
-    };
+
     //whether actor can step up
     canStep = (amount: number): boolean => {
     	let boundingRect = this.getBoundingRect();
@@ -139,4 +122,26 @@ export default class Actor extends Renderable {
     	}
     	return false;
     };
+
+    constructor(params: {}) {
+    	super();
+    	this.v = 0;
+    	this.h = 0;
+    	this.hp = 1;
+    	this.maxhp = 1;
+    	Object.assign(this, params);
+
+    	this.tag("actor");
+    }
+
+    setAgro(actor: Actor) {
+    	this.agro = actor;
+    }
+
+    damage(amount: number) {
+    	this.hp -= amount;
+    	if (this.hp <= 0) {
+    		this.explode();
+    	}
+    }
 }

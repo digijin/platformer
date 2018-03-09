@@ -14,12 +14,15 @@ type Props = {
 
 export default class Panel extends GameObject {
     container: PIXI.Container;
-    content: PIXI.Container;
     background: PIXI.Container;
     border: PIXI.Graphics;
 
     padding: number = 20;
     props: Props;
+
+    content: PIXI.Container;
+
+    glitching: boolean = false;
 
     constructor(props: Props) {
     	super();
@@ -28,6 +31,7 @@ export default class Panel extends GameObject {
     	this.z = 0;
     	this.tag("briefingpanel");
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.setupContainers();
@@ -35,44 +39,6 @@ export default class Panel extends GameObject {
     	this.container.alpha = 0.8;
     	this.container.visible = false;
     	// this.position();
-    }
-    setupContainers() {
-    	this.content = new PIXI.Container();
-    	this.background = new PIXI.Container();
-
-    	this.container = new PIXI.Container();
-    	this.container.addChild(this.background);
-    	this.container.addChild(this.content);
-    	this.content.position = {
-    		x: this.padding,
-    		y: this.padding
-    	};
-
-    	let spr = new PIXI.Sprite(PIXI.Texture.WHITE);
-    	spr.tint = 0x221d1f;
-    	spr.width = 100;
-    	spr.height = 100;
-
-    	this.border = new PIXI.Graphics();
-    	this.container.addChild(this.border);
-    	this.container.z = this.z;
-    	this.background.addChild(spr);
-    }
-    position() {
-    	this.container.position = this.props.offset
-    		.subtract(this.engine.view.offset)
-    		.multiply(1 + this.props.z);
-    	this.container.scale.x = 1 + this.props.z;
-    	this.container.scale.y = 1 + this.props.z;
-    }
-
-    glitching: boolean = false;
-    glitch() {
-    	if (Math.random() < 0.01) {
-    		this.container.filters = [new GlitchFilter()];
-    	} else {
-    		this.container.filters = [];
-    	}
     }
 
     update() {
@@ -100,6 +66,45 @@ export default class Panel extends GameObject {
     		//     this.props.z += this.engine.deltaTime;
     		// }
     		this.position();
+    	}
+    }
+
+    position() {
+    	this.container.position = this.props.offset
+    		.subtract(this.engine.view.offset)
+    		.multiply(1 + this.props.z);
+    	this.container.scale.x = 1 + this.props.z;
+    	this.container.scale.y = 1 + this.props.z;
+    }
+
+    setupContainers() {
+    	this.content = new PIXI.Container();
+    	this.background = new PIXI.Container();
+
+    	this.container = new PIXI.Container();
+    	this.container.addChild(this.background);
+    	this.container.addChild(this.content);
+    	this.content.position = {
+    		x: this.padding,
+    		y: this.padding
+    	};
+
+    	let spr = new PIXI.Sprite(PIXI.Texture.WHITE);
+    	spr.tint = 0x221d1f;
+    	spr.width = 100;
+    	spr.height = 100;
+
+    	this.border = new PIXI.Graphics();
+    	this.container.addChild(this.border);
+    	this.container.z = this.z;
+    	this.background.addChild(spr);
+    }
+
+    glitch() {
+    	if (Math.random() < 0.01) {
+    		this.container.filters = [new GlitchFilter()];
+    	} else {
+    		this.container.filters = [];
     	}
     }
 

@@ -16,19 +16,22 @@ import { log } from "util";
 import * as PIXI from "pixi.js";
 
 export default class Watcher extends GameObject {
+    lastMouse: Point;
     el: HTMLDivElement;
-    size: number;
-
-    blockId: string;
     enemyId: string;
     decorId: string;
     enemyType: EnemyType;
     tint: string;
-    lastMouse: Point;
+
+    blockId: string;
     rectStart: Point | void;
 
     mode: "block" | "enemy" | "decor" | "tint";
     drawMode: "point" | "paint" | "dragrect";
+
+    size: number;
+
+    cursor: PIXI.Sprite;
 
     constructor() {
     	super();
@@ -41,7 +44,6 @@ export default class Watcher extends GameObject {
     	this.drawMode = "paint";
     }
 
-    cursor: PIXI.Sprite;
     init(engine: Engine) {
     	super.init(engine);
     	// let el = document.createElement("DIV");
@@ -51,9 +53,11 @@ export default class Watcher extends GameObject {
     	this.cursor = new PIXI.Sprite(PIXI.Texture.WHITE);
     	this.engine.stage.addChild(this.cursor);
     }
+
     exit() {
     	this.engine.stage.removeChild(this.cursor);
     }
+
     update() {
     	this.size += this.engine.input.getAxis("wheel") / 50;
     	let rect = Rect.fromPosSizeRego(
@@ -171,6 +175,7 @@ export default class Watcher extends GameObject {
 
     	this.lastMouse = this.engine.mouse.position;
     }
+
     drawEnemy(blocks: Array<Block>, action: string) {
     	// if (this.engine.input.getButton("editor_add")) {
     	if (action == "add") {

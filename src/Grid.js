@@ -26,14 +26,42 @@ class GridBlockContainer extends PIXI.Container {}
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
+    width: number;
+
     blocks: Array<Array<Block>>;
-    decor: Array<Decor>;
     z: number;
     spritePool: Pool;
     parent: PIXI.Container;
 
     blockStage: PIXI.Container;
     decorStage: PIXI.Container;
+
+    tileCache: {};
+    graph: PIXI.Graphics = new PIXI.Graphics();
+
+    getBlocksFlattened = (): Array<Block> => {
+    	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
+    		// return a.splice(0, 0, ...b);
+    		return [].concat(a, b);
+    	}, []);
+    };
+
+    decor: Array<Decor>;
+    height: number;
+
+    update = (engine: Engine) => {
+    	// console.group("Grid");
+
+    	let screenRect = this.screenRect();
+    	this.renderBlocksPixi(screenRect);
+    	// console.groupEnd("Grid");
+
+    	// this.decorStage.position.x = -this.engine.view.offset.x;
+    	// this.renderDecor();
+    	// this.decorStage.position.y = -this.engine.view.offset.y;
+    	// this.renderDebugBlockPixelLine();
+    };
+
     constructor(
     	params: {
             size: {
@@ -59,7 +87,7 @@ export default class Grid extends GameObject {
     	//make empty grid
     	this.makeEmptyGrid(params.size);
     }
-    graph: PIXI.Graphics = new PIXI.Graphics();
+
     init(engine: Engine) {
     	super.init(engine);
     	engine.grid = this;
@@ -69,10 +97,82 @@ export default class Grid extends GameObject {
     	this.parent.addChild(this.decorStage);
     	this.parent.addChild(this.graph);
     }
+
     exit() {
     	this.parent.removeChild(this.blockStage);
     	this.parent.removeChild(this.decorStage);
     	this.parent.removeChild(this.graph);
+    }
+
+    destroyBlockAtPosition(pos: { x: number, y: number }) {
+    	let x = Math.floor(pos.x / config.grid.width);
+    	let y = Math.floor(pos.y / config.grid.width);
+    	if (this.blocks[x]) {
+    		if (this.blocks[x][y]) {
+    			// this.grid[x][y] = "0";
+    			this.blocks[x][y].type = "0";
+    		}
+    	}
+    }
+
+    addDecor(position: Point, type: string) {
+    	let decor = this.getDecor(position);
+    	if (decor) {
+    		this.removeDecor(position);
+    	}
+    	decor = new Decor({ position, type, grid: this });
+    	this.decor.push(decor);
+    	this.addDecorSprite(decor);
+    }
+
+    addDecorSprite(decor: Decor) {
+    	if (this.decorStage) {
+    		let type = decor.getType();
+    		let sprite = type.getSprite();
+    		if (type.mode) {
+    			sprite.blendMode = type.mode;
+    		}
+    		sprite.position.x = decor.position.x * config.grid.width;
+    		sprite.position.y = decor.position.y * config.grid.width;
+    		this.decorStage.addChild(sprite);
+    		decor.sprite = sprite; //store for deletion later
+    	}
+    }
+
+    getDecor(position: Point) {
+    	return this.decor.find(d => {
+    		return d.position.is(position);
+    	});
+    }
+
+    removeDecor(position: Point) {
+    	this.decor = this.decor.filter(d => {
+    		let isDecor = d.position.is(position);
+    		if (isDecor) {
+    			this.removeDecorSprite(d);
+    		}
+    		return !isDecor;
+    	});
+    }
+
+    removeDecorSprite(decor: Decor) {
+    	if (this.decorStage) {
+    		this.decorStage.removeChild(decor.sprite);
+    	}
+    }
+
+    generate(seed: number) {
+    	let noise = new Noise(seed);
+    	this.blocks.forEach((col, x) => {
+    		col.forEach((block, y) => {
+    			let value = noise.simplex2(x / 50, y / 50);
+    			// console.log(x, y, value);
+    			value += y / col.length * 2 - 1;
+    			if (value > 0) {
+    				block.type = "1";
+    			}
+    		});
+    	});
     }
 
     screenRect(): Rect {
@@ -83,19 +183,6 @@ export default class Grid extends GameObject {
     		b: window.innerHeight
     	}).move(this.engine.view.offset);
     }
-
-    update = (engine: Engine) => {
-    	// console.group("Grid");
-
-    	let screenRect = this.screenRect();
-    	this.renderBlocksPixi(screenRect);
-    	// console.groupEnd("Grid");
-
-    	// this.decorStage.position.x = -this.engine.view.offset.x;
-    	// this.renderDecor();
-    	// this.decorStage.position.y = -this.engine.view.offset.y;
-    	// this.renderDebugBlockPixelLine();
-    };
 
     pixiInit() {
     	this.blockStage = new GridBlockContainer();
@@ -113,6 +200,73 @@ export default class Grid extends GameObject {
     		this.blockStage.removeChild(spr);
     	};
     }
+
+    fromTestStrings(strings: Array<string>): Grid {
+    	let testdata = strings.map(a => a.split(""));
+    	this.blocks = testdata[0].map(function(col, x) {
+    		return testdata.map(function(row, y) {
+    			return new Block({
+    				position: new Point({ x: x, y: y }),
+    				type: row[x],
+    				grid: this
+    			});
+    		});
+    	});
+    	return this;
+    }
+
+    makeEmptyGrid(size: { w: number, h: number }) {
+    	this.blocks = Array(size.w)
+    		.fill(0)
+    		.map((i, x) =>
+    			Array(size.h)
+    				.fill(0)
+    				.map(
+    					(j, y) =>
+    						new Block({
+    							position: new Point({ x, y }),
+    							type: "0",
+    							grid: this
+    						})
+    				)
+    		);
+    }
+
+    getBlock(pos: { x: number, y: number }): Block | void {
+    	if (this.blocks[pos.x]) {
+    		return this.blocks[pos.x][pos.y];
+    	}
+    }
+
+    getBlockAtPoint(point: { x: number, y: number }): Block | void {
+    	return this.blockAtPosition(point);
+    }
+
+    highlightBlock(block: Block) {
+    	// console.log("highlight");
+    	if (block) {
+    		let rect = block.rect;
+
+    		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
+    		this.graph.beginFill(0x00ff00, 0.5);
+    		this.graph.drawRect(
+    			rect.l,
+    			rect.t,
+    			rect.r - rect.l,
+    			rect.b - rect.t
+    		);
+
+    		// TODO: RE ADD THIS IN PIXI
+    		// this.engine.ctx.context.strokeStyle = "#888";
+    		// this.engine.ctx.strokeRect(
+    		//     rect.l,
+    		//     rect.t,
+    		//     rect.r - rect.l,
+    		//     rect.b - rect.t
+    		// );
+    	}
+    }
+
     renderBlocksPixi(screenRect: Rect) {
     	setTimeout(() => {
     		this.graph.clear();
@@ -154,152 +308,6 @@ export default class Grid extends GameObject {
     	// this.engine.renderer.render(this.stage);
     }
 
-    highlightBlock(block: Block) {
-    	// console.log("highlight");
-    	if (block) {
-    		let rect = block.rect;
-
-    		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
-    		this.graph.beginFill(0x00ff00, 0.5);
-    		this.graph.drawRect(
-    			rect.l,
-    			rect.t,
-    			rect.r - rect.l,
-    			rect.b - rect.t
-    		);
-
-    		// TODO: RE ADD THIS IN PIXI
-    		// this.engine.ctx.context.strokeStyle = "#888";
-    		// this.engine.ctx.strokeRect(
-    		//     rect.l,
-    		//     rect.t,
-    		//     rect.r - rect.l,
-    		//     rect.b - rect.t
-    		// );
-    	}
-    }
-
-    initDecor() {
-    	this.decor.forEach(decor => {
-    		this.addDecorSprite(decor);
-    	});
-    }
-
-    addDecor(position: Point, type: string) {
-    	let decor = this.getDecor(position);
-    	if (decor) {
-    		this.removeDecor(position);
-    	}
-    	decor = new Decor({ position, type, grid: this });
-    	this.decor.push(decor);
-    	this.addDecorSprite(decor);
-    }
-    addDecorSprite(decor: Decor) {
-    	if (this.decorStage) {
-    		let type = decor.getType();
-    		let sprite = type.getSprite();
-    		if (type.mode) {
-    			sprite.blendMode = type.mode;
-    		}
-    		sprite.position.x = decor.position.x * config.grid.width;
-    		sprite.position.y = decor.position.y * config.grid.width;
-    		this.decorStage.addChild(sprite);
-    		decor.sprite = sprite; //store for deletion later
-    	}
-    }
-    getDecor(position: Point) {
-    	return this.decor.find(d => {
-    		return d.position.is(position);
-    	});
-    }
-    removeDecor(position: Point) {
-    	this.decor = this.decor.filter(d => {
-    		let isDecor = d.position.is(position);
-    		if (isDecor) {
-    			this.removeDecorSprite(d);
-    		}
-    		return !isDecor;
-    	});
-    }
-    removeDecorSprite(decor: Decor) {
-    	if (this.decorStage) {
-    		this.decorStage.removeChild(decor.sprite);
-    	}
-    }
-
-    generate(seed: number) {
-    	let noise = new Noise(seed);
-    	this.blocks.forEach((col, x) => {
-    		col.forEach((block, y) => {
-    			let value = noise.simplex2(x / 50, y / 50);
-    			// console.log(x, y, value);
-    			value += y / col.length * 2 - 1;
-    			if (value > 0) {
-    				block.type = "1";
-    			}
-    		});
-    	});
-    }
-    height: number;
-    width: number;
-
-    fromTestStrings(strings: Array<string>): Grid {
-    	let testdata = strings.map(a => a.split(""));
-    	this.blocks = testdata[0].map(function(col, x) {
-    		return testdata.map(function(row, y) {
-    			return new Block({
-    				position: new Point({ x: x, y: y }),
-    				type: row[x],
-    				grid: this
-    			});
-    		});
-    	});
-    	return this;
-    }
-
-    makeEmptyGrid(size: { w: number, h: number }) {
-    	this.blocks = Array(size.w)
-    		.fill(0)
-    		.map((i, x) =>
-    			Array(size.h)
-    				.fill(0)
-    				.map(
-    					(j, y) =>
-    						new Block({
-    							position: new Point({ x, y }),
-    							type: "0",
-    							grid: this
-    						})
-    				)
-    		);
-    }
-
-    getBlock(pos: { x: number, y: number }): Block | void {
-    	if (this.blocks[pos.x]) {
-    		return this.blocks[pos.x][pos.y];
-    	}
-    }
-    getBlockAtPoint(point: { x: number, y: number }): Block | void {
-    	return this.blockAtPosition(point);
-    }
-
-    getBlocksFlattened = (): Array<Block> => {
-    	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
-    		// return a.splice(0, 0, ...b);
-    		return [].concat(a, b);
-    	}, []);
-    };
-    destroyBlockAtPosition(pos: { x: number, y: number }) {
-    	let x = Math.floor(pos.x / config.grid.width);
-    	let y = Math.floor(pos.y / config.grid.width);
-    	if (this.blocks[x]) {
-    		if (this.blocks[x][y]) {
-    			// this.grid[x][y] = "0";
-    			this.blocks[x][y].type = "0";
-    		}
-    	}
-    }
-
     isPositionBlocked(pos: { x: number, y: number }) {
     	let block = this.getBlockAtPoint(pos);
     	return block && block.type != "0";
@@ -318,6 +326,7 @@ export default class Grid extends GameObject {
     	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
     	// return out.filter(b => b !== undefined);
     }
+
     getBlockRect(
     	firstCol: number,
     	lastCol: number,
@@ -369,7 +378,12 @@ export default class Grid extends GameObject {
     	});
     }
 
-    tileCache: {};
+    initDecor() {
+    	this.decor.forEach(decor => {
+    		this.addDecorSprite(decor);
+    	});
+    }
+
     renderDebugBlockPixelLine() {
     	let line = new Line({
     		a: new Point({ x: 10.5, y: 10.5 }),
@@ -433,6 +447,7 @@ export default class Grid extends GameObject {
     		]
     	});
     }
+
     load(str: string) {
     	//wipe enemies
     	if (this.engine) {
@@ -492,6 +507,7 @@ export default class Grid extends GameObject {
     	params.parent = this.parent;
     	this.engine.register(new Enemy(params));
     }
+
     addRowAbove() {
     	this.height++;
     	this.blocks.forEach(col => {
@@ -499,6 +515,7 @@ export default class Grid extends GameObject {
     	});
     	this.rebuildBlocks();
     }
+
     addRowBelow() {
     	this.height++;
     	this.blocks.forEach(col => {
@@ -506,6 +523,7 @@ export default class Grid extends GameObject {
     	});
     	this.rebuildBlocks();
     }
+
     addColLeft() {
     	this.width++;
     	this.blocks.unshift(this.blocks[0].map((b: Block) => new Block(b)));
@@ -515,6 +533,7 @@ export default class Grid extends GameObject {
     	});
     	this.rebuildBlocks();
     }
+
     addColRight() {
     	this.width++;
     	this.blocks.push(
@@ -522,6 +541,7 @@ export default class Grid extends GameObject {
     	);
     	this.rebuildBlocks();
     }
+
     rebuildBlocks() {
     	this.tileCache = {};
     	this.blocks.forEach((col, x) =>

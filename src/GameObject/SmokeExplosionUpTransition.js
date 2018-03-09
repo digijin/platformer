@@ -34,6 +34,11 @@ export default class SmokeExplosionUpTransition extends AnimateOnce {
 		this.parent = engine.transitionStage;
 		super.init(engine);
 	}
+
+	exit() {
+		// console.log("exited");
+	}
+
 	update() {
 		super.update();
 
@@ -45,9 +50,7 @@ export default class SmokeExplosionUpTransition extends AnimateOnce {
 		// 	this.movie.alpha = this.time * 2;
 		// }
 	}
-	exit() {
-		// console.log("exited");
-	}
+
 	destroy() {
 		// console.log("destroy");
 		super.destroy();

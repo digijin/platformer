@@ -15,69 +15,71 @@ import Collapse from "material-ui/transitions/Collapse";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class DecorSelector extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			expanded: false
-		};
-	}
-	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
-		watcher.mode = target;
-		let newstate = { expanded: {} };
-		newstate.expanded = !this.state.expanded;
-		this.setState(newstate);
-	};
-	render() {
-		const { classes } = this.props;
-		let decor = {};
-		DecorTypes.forEach(dt => {
-			if (!decor[dt.category]) {
-				decor[dt.category] = [];
-			}
-			decor[dt.category].push(dt);
-		});
-		return (
-			<CardContent className={classes.content}>
-				{Object.keys(decor).map(k => {
-					return (
-						<div>
-							<div>{k}</div>
-							{decor[k].map(b => (
-								<Tooltip
-									key={b.id}
-									title={b.name}
-									placement="bottom"
-								>
-									<Button
-										raised
-										className={classes.iconButton}
-										color={
-											this.props.watcher.decorId == b.id
-												? "primary"
-												: "default"
-										}
-										onClick={() => {
-											this.props.watcher.decorId = b.id;
-											this.forceUpdate();
-										}}
-									>
-										<img
-											style={{
-												width: "32px",
-												height: "32px"
-											}}
-											src={b.image.src}
-										/>
-									</Button>
-								</Tooltip>
-							))}
-						</div>
-					);
-				})}
-			</CardContent>
-		);
-	}
+    handleExpandClick = target => {
+    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	watcher.mode = target;
+    	let newstate = { expanded: {} };
+    	newstate.expanded = !this.state.expanded;
+    	this.setState(newstate);
+    };
+
+    constructor() {
+    	super();
+    	this.state = {
+    		expanded: false
+    	};
+    }
+
+    render() {
+    	const { classes } = this.props;
+    	let decor = {};
+    	DecorTypes.forEach(dt => {
+    		if (!decor[dt.category]) {
+    			decor[dt.category] = [];
+    		}
+    		decor[dt.category].push(dt);
+    	});
+    	return (
+    		<CardContent className={classes.content}>
+    			{Object.keys(decor).map(k => {
+    				return (
+    					<div>
+    						<div>{k}</div>
+    						{decor[k].map(b => (
+    							<Tooltip
+    								key={b.id}
+    								title={b.name}
+    								placement="bottom"
+    							>
+    								<Button
+    									raised
+    									className={classes.iconButton}
+    									color={
+    										this.props.watcher.decorId == b.id
+    											? "primary"
+    											: "default"
+    									}
+    									onClick={() => {
+    										this.props.watcher.decorId = b.id;
+    										this.forceUpdate();
+    									}}
+    								>
+    									<img
+    										style={{
+    											width: "32px",
+    											height: "32px"
+    										}}
+    										src={b.image.src}
+    									/>
+    								</Button>
+    							</Tooltip>
+    						))}
+    					</div>
+    				);
+    			})}
+    		</CardContent>
+    	);
+    }
 }
 
 export default engineConnect(DecorSelector);

@@ -27,17 +27,6 @@ import ComponentSelectorPanel from "./ComponentSelectorPanel";
 import PreviewPanel from "./PreviewPanel";
 
 export default class EquipManager extends GameObject {
-    container: PIXI.Container;
-    category: string;
-    categorySelectorPanel: CategorySelectorPanel;
-    launchButton: Button;
-    image: PIXI.Sprite;
-
-    onSelectCategory = category => {
-    	this.category = category;
-    	log.info("category selected", category);
-    	this.showComponentSelector(category);
-    };
     onSelectComponent = component => {
     	log.info(
     		"selected component",
@@ -47,6 +36,21 @@ export default class EquipManager extends GameObject {
     	);
     	this.engine.currentPlayer[this.category] = component.id;
     };
+
+    container: PIXI.Container;
+    categorySelectorPanel: CategorySelectorPanel;
+    launchButton: Button;
+    image: PIXI.Sprite;
+
+    onSelectCategory = category => {
+    	this.category = category;
+    	log.info("category selected", category);
+    	this.showComponentSelector(category);
+    };
+
+    category: string;
+
+    componentSelector: ComponentSelectorPanel;
     init(engine: Engine) {
     	super.init(engine);
     	this.tag("equipmanager");
@@ -101,7 +105,11 @@ export default class EquipManager extends GameObject {
     	this.engine.stage.addChild(this.container);
     }
 
-    componentSelector: ComponentSelectorPanel;
+    exit() {
+    	this.engine.stage.removeChild(this.container);
+    }
+
+    update() {}
     showComponentSelector(category: string) {
     	//cleanup
     	if (this.componentSelector) {
@@ -114,13 +122,9 @@ export default class EquipManager extends GameObject {
 
     	this.componentSelector.container.position.x = 500;
     }
+
     removeComponentSelector() {
     	this.container.removeChild(this.componentSelector.container);
     	this.componentSelector.destroy();
     }
-    exit() {
-    	this.engine.stage.removeChild(this.container);
-    }
-
-    update() {}
 }

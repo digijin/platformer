@@ -21,6 +21,7 @@ export default class Background extends GameObject {
 		super();
 		this.stage = new PIXI.Container();
 	}
+
 	init(engine: Engine) {
 		super.init(engine);
 
@@ -66,6 +67,12 @@ export default class Background extends GameObject {
 		this.top2.style.backgroundImage = url;
 		this.update();
 	}
+
+	exit() {
+		this.engine.stage.removeChild(this.stage);
+		this.engine.container.removeChild(this.el);
+	}
+
 	update() {
 		this.top.style.backgroundPositionX =
 			-this.engine.view.offset.x / 8 + "px";
@@ -77,9 +84,5 @@ export default class Background extends GameObject {
 		this.bottom.style.top = p1 - this.engine.view.offset.y / 4 + "px";
 		this.top2.style.height = p2 - this.engine.view.offset.y / 5 + "px";
 		this.bottom2.style.top = p2 - this.engine.view.offset.y / 5 + "px";
-	}
-	exit() {
-		this.engine.stage.removeChild(this.stage);
-		this.engine.container.removeChild(this.el);
 	}
 }

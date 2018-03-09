@@ -36,6 +36,7 @@ class Runner extends GameObject {
 
 		this.engine.register(this.obj);
 	}
+
 	update() {
 		// this.obj.movie.position = this.engine.mouse.position;
 		this.obj.movie.position.x = window.innerWidth / 2;
@@ -50,6 +51,7 @@ export default class Demo extends Base {
 		engine.ui.dispatch({ type: "START_SCENE", scene: "demo" });
 		this.doStuff();
 	}
+
 	doStuff() {
 		this.engine.register(new Runner());
 	}

@@ -28,6 +28,7 @@ export default class PreviewPanel extends GameObject {
 		// this.bg.height = params.height;
 		// this.container.addChild(this.bg);
 	}
+
 	init(engine: Engine) {
 		super.init(engine);
 
@@ -52,6 +53,7 @@ export default class PreviewPanel extends GameObject {
 
 		engine.register(this.player);
 	}
+
 	update() {
 		// this.engine.mouse.point.y -= window.innerHeight / 2;
 		this.game.position.x = Math.floor(-this.engine.view.offset.x);

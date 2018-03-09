@@ -17,40 +17,42 @@ import ColorPicker from "material-ui-color-picker";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class TintSelector extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			expanded: false
-		};
-	}
-	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
-		watcher.mode = target;
-		let newstate = { expanded: {} };
-		newstate.expanded = !this.state.expanded;
-		this.setState(newstate);
-	};
-	render() {
-		const { classes } = this.props;
-		let decor = {};
-		DecorTypes.forEach(dt => {
-			if (!decor[dt.category]) {
-				decor[dt.category] = [];
-			}
-			decor[dt.category].push(dt);
-		});
-		return (
-			<CardContent className={classes.content}>
+    handleExpandClick = target => {
+    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	watcher.mode = target;
+    	let newstate = { expanded: {} };
+    	newstate.expanded = !this.state.expanded;
+    	this.setState(newstate);
+    };
+
+    constructor() {
+    	super();
+    	this.state = {
+    		expanded: false
+    	};
+    }
+
+    render() {
+    	const { classes } = this.props;
+    	let decor = {};
+    	DecorTypes.forEach(dt => {
+    		if (!decor[dt.category]) {
+    			decor[dt.category] = [];
+    		}
+    		decor[dt.category].push(dt);
+    	});
+    	return (
+    		<CardContent className={classes.content}>
 				tint colour:
-				<ColorPicker
-					defaultValue={this.props.watcher.tint}
-					onChange={color => {
-						this.props.watcher.tint = color;
-					}}
-				/>
-			</CardContent>
-		);
-	}
+    			<ColorPicker
+    				defaultValue={this.props.watcher.tint}
+    				onChange={color => {
+    					this.props.watcher.tint = color;
+    				}}
+    			/>
+    		</CardContent>
+    	);
+    }
 }
 
 export default engineConnect(TintSelector);

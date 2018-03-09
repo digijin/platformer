@@ -17,98 +17,6 @@ let defaults = {
 };
 
 export default class Building {
-	frontColor: string;
-	sideColor: string;
-	sideWidth: number;
-	windowColor: string;
-	windowLitColor: string;
-	width: number;
-	floors: number;
-	floorHeight: number;
-	windowHeight: number;
-	windowWidth: number;
-	windowMargin: number;
-	canvas: HTMLCanvasElement;
-	context: CanvasRenderingContext2D;
-	constructor(params: {} = {}) {
-		Object.assign(this, defaults, params);
-		this.canvas = document.createElement("canvas");
-		let height = this.floors * this.floorHeight;
-
-		this.canvas.height = height;
-		this.canvas.width = this.width + this.sideWidth;
-		this.context = this.canvas.getContext("2d");
-
-		if (this.context) {
-			this.context.fillStyle = this.frontColor;
-			this.context.fillRect(0, 0, this.width, height);
-			this.context.fillStyle = this.sideColor;
-			this.context.fillRect(this.width, 0, this.sideWidth, height);
-
-			for (let y = 0; y < this.floors; y++) {
-				let litFloor = Math.random() < 0.3;
-				for (
-					let x = 0;
-					x < this.width - this.windowWidth;
-					x += this.windowMargin + this.windowWidth
-				) {
-					this.context.fillStyle = this.windowColor;
-					this.context.shadowBlur = 0;
-					if (litFloor && Math.random() < 0.2) {
-						let unlit = RGBA.fromString(this.windowColor);
-						let lit = RGBA.fromString(this.windowLitColor);
-						let pc = Math.random();
-
-						this.context.shadowColor = this.windowLitColor;
-						this.context.shadowBlur = pc * 5;
-
-						this.context.fillStyle = unlit
-							.percentTo(lit, pc)
-							.toHex();
-					}
-					this.context.fillRect(
-						x,
-						y * this.floorHeight,
-						this.windowWidth,
-						this.windowHeight
-					);
-					//and on side
-
-					if (litFloor && Math.random() < 0.2) {
-						let unlit = RGBA.fromString(this.windowColor);
-						let lit = RGBA.fromString(this.windowLitColor);
-						let pc = Math.random();
-
-						this.context.shadowColor = this.windowLitColor;
-						this.context.shadowBlur = pc * 5;
-
-						this.context.fillStyle = unlit
-							.percentTo(lit, pc)
-							.toHex();
-					}
-
-					let ratio = this.sideWidth / this.width;
-
-					this.context.fillRect(
-						this.width + x * ratio,
-						y * this.floorHeight,
-						this.windowWidth,
-						this.windowHeight
-					);
-				}
-			}
-
-			//faded overlay
-			let gradient = this.context.createLinearGradient(0, 0, 0, height);
-			gradient.addColorStop(0, "rgba(0,0,0,0)");
-			gradient.addColorStop(1, "rgba(23,24,25,1)");
-			this.context.shadowBlur = 0;
-			this.context.fillStyle = gradient;
-			// this.context.fillRect(0, 0, this.width, this.height);
-			this.context.fillRect(0, 0, this.sideWidth + this.width, height);
-		}
-	}
-
 	static random() {
 		return new Building({
 			windowLitColor: new RGBA({
@@ -126,4 +34,96 @@ export default class Building {
 			sideWidth: 10 + Math.floor(Math.random() * 20)
 		});
 	}
+
+    frontColor: string;
+    sideWidth: number;
+    windowColor: string;
+    windowLitColor: string;
+    width: number;
+    floors: number;
+    sideColor: string;
+    windowHeight: number;
+    windowWidth: number;
+    windowMargin: number;
+    canvas: HTMLCanvasElement;
+    context: CanvasRenderingContext2D;
+    floorHeight: number;
+    constructor(params: {} = {}) {
+    	Object.assign(this, defaults, params);
+    	this.canvas = document.createElement("canvas");
+    	let height = this.floors * this.floorHeight;
+
+    	this.canvas.height = height;
+    	this.canvas.width = this.width + this.sideWidth;
+    	this.context = this.canvas.getContext("2d");
+
+    	if (this.context) {
+    		this.context.fillStyle = this.frontColor;
+    		this.context.fillRect(0, 0, this.width, height);
+    		this.context.fillStyle = this.sideColor;
+    		this.context.fillRect(this.width, 0, this.sideWidth, height);
+
+    		for (let y = 0; y < this.floors; y++) {
+    			let litFloor = Math.random() < 0.3;
+    			for (
+    				let x = 0;
+    				x < this.width - this.windowWidth;
+    				x += this.windowMargin + this.windowWidth
+    			) {
+    				this.context.fillStyle = this.windowColor;
+    				this.context.shadowBlur = 0;
+    				if (litFloor && Math.random() < 0.2) {
+    					let unlit = RGBA.fromString(this.windowColor);
+    					let lit = RGBA.fromString(this.windowLitColor);
+    					let pc = Math.random();
+
+    					this.context.shadowColor = this.windowLitColor;
+    					this.context.shadowBlur = pc * 5;
+
+    					this.context.fillStyle = unlit
+    						.percentTo(lit, pc)
+    						.toHex();
+    				}
+    				this.context.fillRect(
+    					x,
+    					y * this.floorHeight,
+    					this.windowWidth,
+    					this.windowHeight
+    				);
+    				//and on side
+
+    				if (litFloor && Math.random() < 0.2) {
+    					let unlit = RGBA.fromString(this.windowColor);
+    					let lit = RGBA.fromString(this.windowLitColor);
+    					let pc = Math.random();
+
+    					this.context.shadowColor = this.windowLitColor;
+    					this.context.shadowBlur = pc * 5;
+
+    					this.context.fillStyle = unlit
+    						.percentTo(lit, pc)
+    						.toHex();
+    				}
+
+    				let ratio = this.sideWidth / this.width;
+
+    				this.context.fillRect(
+    					this.width + x * ratio,
+    					y * this.floorHeight,
+    					this.windowWidth,
+    					this.windowHeight
+    				);
+    			}
+    		}
+
+    		//faded overlay
+    		let gradient = this.context.createLinearGradient(0, 0, 0, height);
+    		gradient.addColorStop(0, "rgba(0,0,0,0)");
+    		gradient.addColorStop(1, "rgba(23,24,25,1)");
+    		this.context.shadowBlur = 0;
+    		this.context.fillStyle = gradient;
+    		// this.context.fillRect(0, 0, this.width, this.height);
+    		this.context.fillRect(0, 0, this.sideWidth + this.width, height);
+    	}
+    }
 }

@@ -8,18 +8,19 @@ import * as PIXI from "pixi.js";
 
 export default class Shell extends GameObject {
     position: Point;
-    h: number; //momentum
     v: number; //momentum
     time: number;
     color: string;
     container: PIXI.Container;
+    h: number; //momentum
+    graph: PIXI.Graphics;
     constructor(params: Object) {
     	super();
     	this.time = 1 + Math.random();
     	this.color = 0xffffff;
     	Object.assign(this, params);
     }
-    graph: PIXI.Graphics;
+
     init(engine: Engine) {
     	super.init(engine);
     	if (!this.container) {
@@ -28,10 +29,7 @@ export default class Shell extends GameObject {
     	this.graph = new PIXI.Graphics();
     	this.container.addChild(this.graph);
     }
-    destroy() {
-    	super.destroy();
-    	this.exit();
-    }
+
     exit() {
     	this.container.removeChild(this.graph);
     }
@@ -57,5 +55,10 @@ export default class Shell extends GameObject {
     	if (this.time < 0) {
     		this.destroy();
     	}
+    }
+
+    destroy() {
+    	super.destroy();
+    	this.exit();
     }
 }

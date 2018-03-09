@@ -18,77 +18,80 @@ import Divider from "material-ui/Divider";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class Main extends React.Component {
-	constructor() {
-		super();
-		this.storage = new Storage();
-		this.state = {
-			expanded: false,
-			savename: ""
-		};
-	}
-	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
-		watcher.mode = target;
-		let newstate = { expanded: {} };
-		newstate.expanded = !this.state.expanded;
-		this.setState(newstate);
-	};
-	render() {
-		const { classes } = this.props;
-		let saves = this.storage.list();
-		return (
-			<CardContent>
-				<div className={classes.loadPanel}>
+    handleExpandClick = target => {
+    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	watcher.mode = target;
+    	let newstate = { expanded: {} };
+    	newstate.expanded = !this.state.expanded;
+    	this.setState(newstate);
+    };
+
+    updateSavename = (e: Event) => {
+    	console.log(e);
+    	// this.savename = e.target.value;
+    	this.setState({ savename: e.target.value });
+    };
+
+    constructor() {
+    	super();
+    	this.storage = new Storage();
+    	this.state = {
+    		expanded: false,
+    		savename: ""
+    	};
+    }
+
+    render() {
+    	const { classes } = this.props;
+    	let saves = this.storage.list();
+    	return (
+    		<CardContent>
+    			<div className={classes.loadPanel}>
 					Load Game:
-					{saves.map(savename => {
-						return (
-							<Button
-								raised
-								key={savename + "loadbutton"}
-								onClick={() => {
-									this.props.engine.grid.load(
-										this.storage.load(savename)
-									);
-									this.forceUpdate();
-								}}
-							>
-								{savename}
-							</Button>
-						);
-					})}
-				</div>
-				<Divider light />
-				<TextField
-					// hintText="Enter filename here"
-					// floatingLabelText="Save Name"
-					type="text"
-					value={this.state.savename}
-					onChange={this.updateSavename}
-				/>
-				<br />
-				<Tooltip title="Save" placement="bottom">
-					<Button
-						raised
-						className={classes.iconButton}
-						onClick={() => {
-							this.storage.save(
-								this.state.savename,
-								this.props.engine.grid.save()
-							);
-							this.forceUpdate();
-						}}
-					>
-						<Save />
-					</Button>
-				</Tooltip>
-			</CardContent>
-		);
-	}
-	updateSavename = (e: Event) => {
-		console.log(e);
-		// this.savename = e.target.value;
-		this.setState({ savename: e.target.value });
-	};
+    				{saves.map(savename => {
+    					return (
+    						<Button
+    							raised
+    							key={savename + "loadbutton"}
+    							onClick={() => {
+    								this.props.engine.grid.load(
+    									this.storage.load(savename)
+    								);
+    								this.forceUpdate();
+    							}}
+    						>
+    							{savename}
+    						</Button>
+    					);
+    				})}
+    			</div>
+    			<Divider light />
+    			<TextField
+    				// hintText="Enter filename here"
+    				// floatingLabelText="Save Name"
+    				type="text"
+    				value={this.state.savename}
+    				onChange={this.updateSavename}
+    			/>
+    			<br />
+    			<Tooltip title="Save" placement="bottom">
+    				<Button
+    					raised
+    					className={classes.iconButton}
+    					onClick={() => {
+    						this.storage.save(
+    							this.state.savename,
+    							this.props.engine.grid.save()
+    						);
+    						this.forceUpdate();
+    					}}
+    				>
+    					<Save />
+    				</Button>
+    			</Tooltip>
+    		</CardContent>
+    	);
+    }
 }
 
 export default engineConnect(Main);

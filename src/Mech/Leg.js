@@ -24,8 +24,8 @@ export const FACING_RIGHT: Facing = 1;
 export const FACING_LEFT: Facing = -1;
 
 export default class Leg extends GameObject {
+    rearupperleg: PIXI.Sprite;
     parent: Player;
-    offset: Point;
     position: Point;
     stride: number;
     torsoOffset: Point;
@@ -38,10 +38,12 @@ export default class Leg extends GameObject {
     lowerleg: PIXI.Sprite;
     foot: PIXI.Sprite;
     gun: PIXI.Sprite;
-    rearupperleg: PIXI.Sprite;
+    offset: Point;
     rearlowerleg: PIXI.Sprite;
     rearfoot: PIXI.Sprite;
     container: PIXI.Container;
+    missileBarrelPos: Point;
+    gunBarrelPos: Point;
     constructor(params: { parent: Player, container: PIXI.Container }) {
     	super();
     	this.parent = params.parent;
@@ -52,6 +54,7 @@ export default class Leg extends GameObject {
     	this.frontFootPos = new Point();
     	this.rearFootPos = new Point();
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	let cockpitTex = new PIXI.Texture(new PIXI.BaseTexture(cockpit));
@@ -84,6 +87,7 @@ export default class Leg extends GameObject {
     		this.container.addChild(spr);
     	});
     }
+
     exit() {
     	[
     		this.cockpit,
@@ -98,6 +102,7 @@ export default class Leg extends GameObject {
     		this.container.removeChild(spr);
     	});
     }
+
     update() {
     	let offsetTarget;
     	if (this.engine.input.getAxis("vertical") == 1) {
@@ -172,7 +177,7 @@ export default class Leg extends GameObject {
     		facing
     	);
     }
-    gunBarrelPos: Point;
+
     gunPosition(pos: Point, facing: Facing = FACING_LEFT) {
     	let dir = this.parent
     		.getTargetPoint()
@@ -193,7 +198,7 @@ export default class Leg extends GameObject {
     		.move(dir, 40)
     		.move(dir + Math.PI * facing / 2, -3);
     }
-    missileBarrelPos: Point;
+
     head(pos: Point, facing: Facing = FACING_LEFT) {
     	this.missileBarrelPos = this.position.subtract({
     		x: 16 * facing,
@@ -203,6 +208,7 @@ export default class Leg extends GameObject {
     	this.cockpit.position = pos;
     	this.cockpit.scale.x = facing;
     }
+
     ik(
     	target: Point,
     	facing: Facing = FACING_LEFT,

@@ -25,6 +25,7 @@ export default class ExplosionUp2 extends AnimateOnce {
 		// this.movie.rotation = Math.random() * Math.PI;
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 	}
+
 	update() {
 		super.update();
 		if (this.time < 0.5) {

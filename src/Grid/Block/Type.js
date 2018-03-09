@@ -29,12 +29,12 @@ export type BlockTypeParams = {
 };
 
 export default class BlockType {
+    textureId: string;
     name: string;
-    id: string;
     destructable: boolean;
     image: any;
     hp: number;
-    textureId: string;
+    id: string;
     texture: PIXI.Texture;
     textureId: string;
     pattern: CanvasPattern;
@@ -74,6 +74,7 @@ export default class BlockType {
     		};
     	}
     }
+
     init() {
     	if (PIXI.loader.resources["blocks"].textures) {
     		this.texture =

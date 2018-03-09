@@ -14,12 +14,14 @@ export default class EnergyBar extends GameObject {
     	super();
     	this.player = params.player;
     }
+
     init(engine) {
     	super.init(engine);
     	this.container = new EnergyBarContainer();
     	this.graph = new PIXI.Graphics();
     	this.container.addChild(this.graph);
     }
+
     update() {
     	this.graph.clear();
     	this.graph

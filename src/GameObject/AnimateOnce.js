@@ -47,10 +47,10 @@ export default class AnimateOnce extends GameObject {
 		this.positionSprite();
 	}
 
-	positionSprite() {
-		this.movie.position.x = this.position.x;
-		this.movie.position.y = this.position.y;
+	exit() {
+		this.parent.removeChild(this.movie);
 	}
+
 	update() {
 		this.positionSprite();
 		this.time -= this.engine.deltaTime;
@@ -58,9 +58,12 @@ export default class AnimateOnce extends GameObject {
 			this.destroy();
 		}
 	}
-	exit() {
-		this.parent.removeChild(this.movie);
+
+	positionSprite() {
+		this.movie.position.x = this.position.x;
+		this.movie.position.y = this.position.y;
 	}
+
 	destroy() {
 		// console.log("cleanup ");
 		this.parent.removeChild(this.movie);

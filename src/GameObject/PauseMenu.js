@@ -4,6 +4,7 @@ export default class PauseMenu extends GameObject {
 	constructor() {
 		super();
 	}
+
 	update() {
 		if (this.engine.input.getKeyDown("escape")) {
 			this.engine.paused = !this.engine.paused;

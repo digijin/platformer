@@ -15,6 +15,7 @@ export class Router extends React.Component {
 		scene: string,
 		engine: Engine
 	};
+
 	render() {
 		if (this.props.scene == "menu") {
 			return <Menu />;

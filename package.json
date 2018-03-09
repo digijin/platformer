@@ -31,7 +31,7 @@
         "lint": "eslint src/ ",
         "lint:fix": "eslint src/ --fix",
         "lint:sortClass":
-            "jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/Actor/Player.js"
+            "jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/"
     },
     "repository": {
         "type": "git",

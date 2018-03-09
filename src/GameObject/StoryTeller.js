@@ -46,6 +46,11 @@ export default class StoryTeller extends GameObject {
 
 		engine.register(player);
 	}
+
+	exit() {
+		this.engine.stage.removeChild(this.container);
+	}
+
 	update() {
 		// console.log(this.engine.stage.position, this.engine.view.offset)
 		// this.engine.stage.position = this.engine.view.offset.multiply(-1)
@@ -58,8 +63,5 @@ export default class StoryTeller extends GameObject {
 			//my job here is done
 			this.destroy();
 		}
-	}
-	exit() {
-		this.engine.stage.removeChild(this.container);
 	}
 }

@@ -13,6 +13,8 @@ export default class BriefingEnd extends Base {
     frame: number = 0;
     time: number = 0;
     flash: PIXI.Graphics;
+    swapped: boolean = false;
+    flashMaxWidth: number = 100;
     init(engine: Engine) {
     	log.debug("BriefingEnd transition has begun");
     	this.tag("transition");
@@ -32,8 +34,7 @@ export default class BriefingEnd extends Base {
     	this.engine.stage.addChild(this.flash);
     	this.manager = this.engine.objectsTagged("briefingmanager")[0];
     }
-    swapped: boolean = false;
-    flashMaxWidth: number = 100;
+
     update() {
     	if (
     		this.manager.container.transform.scale.x > 0.1 &&
@@ -66,6 +67,7 @@ export default class BriefingEnd extends Base {
     	// } else if (this.time > SECS * 2) {
     	// }
     }
+
     end() {
     	// super.end();
 

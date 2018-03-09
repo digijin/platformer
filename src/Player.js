@@ -1,4 +1,15 @@
 export default class Player {
+	static getCurrentPlayer() {
+    	if (!this.currentPlayer) {
+    		this.currentPlayer = new Player();
+    	}
+    	return this.currentPlayer;
+	}
+
+	static load(data): string {
+    	this.currentPlayer = new Player(JSON.parse(data));
+	}
+
     currentPlayer: Player;
     primary: string;
     secondary: string;
@@ -17,16 +28,7 @@ export default class Player {
     	Object.assign(this, params);
     }
 
-    static getCurrentPlayer() {
-    	if (!this.currentPlayer) {
-    		this.currentPlayer = new Player();
-    	}
-    	return this.currentPlayer;
-    }
     save(): string {
     	return JSON.stringify(this);
-    }
-    static load(data): string {
-    	this.currentPlayer = new Player(JSON.parse(data));
     }
 }

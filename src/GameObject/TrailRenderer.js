@@ -18,9 +18,6 @@ export default class TrailRenderer extends GameObject {
 		Object.assign(this, params);
 		this.calcPosition();
 	}
-	calcPosition() {
-		this.position = this.offset.add(this.target.position);
-	}
 
 	update() {
 		// this.engine.register(new Smoke({ position: this.position }));
@@ -42,6 +39,11 @@ export default class TrailRenderer extends GameObject {
 
 		this.render();
 	}
+
+	calcPosition() {
+		this.position = this.offset.add(this.target.position);
+	}
+
 	die() {
 		this.target = null;
 	}

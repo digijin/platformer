@@ -32,6 +32,7 @@ export default class WindowDecor extends Abstract {
 			hp: 1
 		});
 	}
+
 	getSprite() {
 		let image = new PIXI.Container();
 		options.forEach(layer => {

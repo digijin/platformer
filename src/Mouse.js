@@ -13,6 +13,7 @@ export default class Mouse {
 		this.delta = { x: 0, y: 0 };
 		this.point = new Point();
 	}
+
 	init(engine: Engine): Mouse {
 		this.engine = engine;
 		document.addEventListener("mousemove", (e: MouseEvent): void => {
@@ -20,6 +21,7 @@ export default class Mouse {
 		});
 		return this;
 	}
+
 	update() {
 		let newPoint = this.engine.view.offset.add(this.position);
 		this.delta = newPoint.subtract(this.point);

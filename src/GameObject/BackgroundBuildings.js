@@ -26,8 +26,8 @@ const PAN_SPEED = 100;
 const OVERLAP = 50;
 
 export default class Background extends GameObject {
+    buildings: Array<PIXI.Sprite>;
     el: HTMLDivElement;
-    top: HTMLDivElement;
     bottom: HTMLDivElement;
     top2: HTMLDivElement;
     bottom2: HTMLDivElement;
@@ -35,7 +35,7 @@ export default class Background extends GameObject {
     buildingStage: PIXI.Container;
     bg: PIXI.Sprite;
     ground: PIXI.Sprite;
-    buildings: Array<PIXI.Sprite>;
+    top: HTMLDivElement;
     constructor() {
     	super();
     	this.stage = new PIXI.Container();
@@ -48,6 +48,7 @@ export default class Background extends GameObject {
     	this.ground.z = 1;
     	this.ground.tint = 0x171819;
     }
+
     init(engine: Engine) {
     	super.init(engine);
 
@@ -81,41 +82,7 @@ export default class Background extends GameObject {
     exit() {
     	this.engine.backgroundStage.removeChild(this.stage);
     }
-    makeBuilding() {
-    	let texture = new PIXI.Texture(
-    		new PIXI.BaseTexture(Building.random().canvas)
-    	);
-    	let sprite = new PIXI.Sprite(texture);
-    	sprite.anchor = { x: 0.5, y: 1 };
-    	this.buildingStage.addChild(sprite);
-    	return sprite;
-    }
-    glitch() {
-    	// let filters = this.buildingStage.filters;
-    	// // this.buildingStage.filters = [
-    	// //
-    	// // 	this.buildingStage.filters[0],
-    	// // 	new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
-    	// // ];
-    	// // glitch;
-    	// // this.buildingStage.filters[0].seed = Math.random();
-    	// if (Math.random() < 0.01) {
-    	//     filters.push(
-    	//         new GlitchFilter({
-    	//             slices: 5,
-    	//             offset: 10,
-    	//             seed: Math.random()
-    	//         })
-    	//     );
-    	// } else {
-    	//     if (Math.random() < 0.1) {
-    	//         if (filters.length > 1) {
-    	//             filters.pop();
-    	//         }
-    	//     }
-    	// }
-    	// this.buildingStage.filters = filters;
-    }
+
     update() {
     	//hack ReflectionFilter
     	this.buildingStage.filters[0].time += this.engine.deltaTime;
@@ -151,6 +118,44 @@ export default class Background extends GameObject {
     	this.ground.width = window.innerWidth;
     	this.ground.height = window.innerHeight / 2;
     }
+
+    makeBuilding() {
+    	let texture = new PIXI.Texture(
+    		new PIXI.BaseTexture(Building.random().canvas)
+    	);
+    	let sprite = new PIXI.Sprite(texture);
+    	sprite.anchor = { x: 0.5, y: 1 };
+    	this.buildingStage.addChild(sprite);
+    	return sprite;
+    }
+
+    glitch() {
+    	// let filters = this.buildingStage.filters;
+    	// // this.buildingStage.filters = [
+    	// //
+    	// // 	this.buildingStage.filters[0],
+    	// // 	new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
+    	// // ];
+    	// // glitch;
+    	// // this.buildingStage.filters[0].seed = Math.random();
+    	// if (Math.random() < 0.01) {
+    	//     filters.push(
+    	//         new GlitchFilter({
+    	//             slices: 5,
+    	//             offset: 10,
+    	//             seed: Math.random()
+    	//         })
+    	//     );
+    	// } else {
+    	//     if (Math.random() < 0.1) {
+    	//         if (filters.length > 1) {
+    	//             filters.pop();
+    	//         }
+    	//     }
+    	// }
+    	// this.buildingStage.filters = filters;
+    }
+
     sort() {
     	this.buildingStage.children.sort((a, b) => {
     		a = a.z || 0;

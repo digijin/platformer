@@ -142,213 +142,218 @@ class EquipItemToggle extends React.Component {
 }
 
 export class Equip extends React.Component {
-	props: {
+    props: {
 		scene: string,
 		engine: Engine
 	};
-	state = {
-		item: "primary"
-	};
 
-	handleChange = name => event => {
-		this.setState({ [name]: event.target.checked });
-	};
-	selectItem = item => {
-		this.setState({ item: item });
-	};
-	render() {
-		//https://material-ui-next.com/demos/selection-controls/
-		const { classes } = this.props;
-		return (
-			<div className={classes.screen}>
-				<div className={classes.title}>Mech Equip Screen</div>
-				<Tooltip title="exit to menu" placement="bottom">
-					<Button
-						raised
-						className={classes.button}
-						onClick={() => {
-							this.props.engine.startScene(new MainMenu());
-						}}
-					>
-						go back to menu<KeyboardArrowDown />
-					</Button>
-				</Tooltip>
-				<hr className={classnames(classes.hr)} />
-				{this.equipTable()}
-				<div className={classes.itemDetails}>
-					<div className={classes.title}>{this.state.item}</div>
-					{this.itemDetails()}
-				</div>
+    state = {
+    	item: "primary"
+    };
 
-				<Button
-					raised
-					id="launchButton"
-					className={classes.launchButton}
-					onClick={() => {
-						// this.props.engine.startScene(new Level());
-						this.props.engine.startSceneTransition(
-							new Level(),
-							new Doors()
-						);
-					}}
-				>
-					LAUNCH
-				</Button>
-			</div>
-		);
-	}
-	equipTable() {
-		const { classes } = this.props;
-		return (
-			<table className={classnames(classes.table)}>
-				<tbody>
-					<tr>
-						<td>
-							<EquipItemToggle
-								type="primary"
-								selected={this.state.item}
-								classes={classes}
-								title="primary weapon"
-							/>
-						</td>
-						<td rowSpan="2">
-							<div
-								className={classnames(
-									classes.svg,
-									classes.front
-								)}
-								dangerouslySetInnerHTML={{
-									__html: stripStyles(front)
-								}}
-							/>
-						</td>
-						<td rowSpan="2">
-							<div
-								className={classnames(
-									classes.svg,
-									classes.side
-								)}
-								dangerouslySetInnerHTML={{
-									__html: stripStyles(side)
-								}}
-							/>
-						</td>
-						<td>
-							<EquipItemToggle
-								type="secondary"
-								selected={this.state.item}
-								classes={classes}
-								title="secondary weapon"
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<EquipItemToggle
-								type="legs"
-								selected={this.state.item}
-								classes={classes}
-								title="legs"
-							/>
-						</td>
-						<td>
-							<EquipItemToggle
-								type="body"
-								selected={this.state.item}
-								classes={classes}
-								title="body"
-							/>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		);
-	}
-	itemDetails = () => {
-		const { classes } = this.props;
-		switch (this.state.item) {
-		case "primary":
-			return (
-				<div id="primary">
-					<div
-						onClick={() => {
-							this.props.engine.currentPlayer.primary =
+    handleChange = name => event => {
+    	this.setState({ [name]: event.target.checked });
+    };
+
+    selectItem = item => {
+    	this.setState({ item: item });
+    };
+
+    itemDetails = () => {
+    	const { classes } = this.props;
+    	switch (this.state.item) {
+    	case "primary":
+    		return (
+    			<div id="primary">
+    				<div
+    					onClick={() => {
+    						this.props.engine.currentPlayer.primary =
 									"machinegun";
-							this.forceUpdate();
-						}}
-						className={
-							this.props.engine.currentPlayer.primary ==
+    						this.forceUpdate();
+    					}}
+    					className={
+    						this.props.engine.currentPlayer.primary ==
 								"machinegun"
-								? classes.optionSelected
-								: classes.option
-						}
-						dangerouslySetInnerHTML={{
-							__html: bulletIcon
-						}}
-					/>
-					<div
-						onClick={() => {
-							this.props.engine.currentPlayer.primary =
+    							? classes.optionSelected
+    							: classes.option
+    					}
+    					dangerouslySetInnerHTML={{
+    						__html: bulletIcon
+    					}}
+    				/>
+    				<div
+    					onClick={() => {
+    						this.props.engine.currentPlayer.primary =
 									"flamethrower";
-							this.forceUpdate();
-						}}
-						className={
-							this.props.engine.currentPlayer.primary ==
+    						this.forceUpdate();
+    					}}
+    					className={
+    						this.props.engine.currentPlayer.primary ==
 								"flamethrower"
-								? classes.optionSelected
-								: classes.option
-						}
-						dangerouslySetInnerHTML={{
-							__html: fireIcon
-						}}
-					/>
-					<div
-						onClick={() => {
-							this.props.engine.currentPlayer.primary =
+    							? classes.optionSelected
+    							: classes.option
+    					}
+    					dangerouslySetInnerHTML={{
+    						__html: fireIcon
+    					}}
+    				/>
+    				<div
+    					onClick={() => {
+    						this.props.engine.currentPlayer.primary =
 									"frostgun";
-							this.forceUpdate();
-						}}
-						className={
-							this.props.engine.currentPlayer.primary ==
+    						this.forceUpdate();
+    					}}
+    					className={
+    						this.props.engine.currentPlayer.primary ==
 								"frostgun"
-								? classes.optionSelected
-								: classes.option
-						}
-						dangerouslySetInnerHTML={{
-							__html: frostIcon
-						}}
-					/>
-					<div
-						onClick={() => {
-							this.props.engine.currentPlayer.primary =
+    							? classes.optionSelected
+    							: classes.option
+    					}
+    					dangerouslySetInnerHTML={{
+    						__html: frostIcon
+    					}}
+    				/>
+    				<div
+    					onClick={() => {
+    						this.props.engine.currentPlayer.primary =
 									"energygun";
-							this.forceUpdate();
-						}}
-						className={
-							this.props.engine.currentPlayer.primary ==
+    						this.forceUpdate();
+    					}}
+    					className={
+    						this.props.engine.currentPlayer.primary ==
 								"energygun"
-								? classes.optionSelected
-								: classes.option
-						}
-						dangerouslySetInnerHTML={{
-							__html: energyIcon
-						}}
-					/>
-				</div>
-			);
-			break;
-		case "secondary":
-			return (
-				<div id="secondary">
-					<div className={classes.option}>dumb fire</div>
-					<div className={classes.option}>heat seeking</div>
-					<div className={classes.option}>remote control</div>
-				</div>
-			);
-			break;
-		}
-		return <div>not implemented</div>;
-	};
+    							? classes.optionSelected
+    							: classes.option
+    					}
+    					dangerouslySetInnerHTML={{
+    						__html: energyIcon
+    					}}
+    				/>
+    			</div>
+    		);
+    		break;
+    	case "secondary":
+    		return (
+    			<div id="secondary">
+    				<div className={classes.option}>dumb fire</div>
+    				<div className={classes.option}>heat seeking</div>
+    				<div className={classes.option}>remote control</div>
+    			</div>
+    		);
+    		break;
+    	}
+    	return <div>not implemented</div>;
+    };
+
+    render() {
+    	//https://material-ui-next.com/demos/selection-controls/
+    	const { classes } = this.props;
+    	return (
+    		<div className={classes.screen}>
+    			<div className={classes.title}>Mech Equip Screen</div>
+    			<Tooltip title="exit to menu" placement="bottom">
+    				<Button
+    					raised
+    					className={classes.button}
+    					onClick={() => {
+    						this.props.engine.startScene(new MainMenu());
+    					}}
+    				>
+						go back to menu<KeyboardArrowDown />
+    				</Button>
+    			</Tooltip>
+    			<hr className={classnames(classes.hr)} />
+    			{this.equipTable()}
+    			<div className={classes.itemDetails}>
+    				<div className={classes.title}>{this.state.item}</div>
+    				{this.itemDetails()}
+    			</div>
+
+    			<Button
+    				raised
+    				id="launchButton"
+    				className={classes.launchButton}
+    				onClick={() => {
+    					// this.props.engine.startScene(new Level());
+    					this.props.engine.startSceneTransition(
+    						new Level(),
+    						new Doors()
+    					);
+    				}}
+    			>
+					LAUNCH
+    			</Button>
+    		</div>
+    	);
+    }
+
+    equipTable() {
+    	const { classes } = this.props;
+    	return (
+    		<table className={classnames(classes.table)}>
+    			<tbody>
+    				<tr>
+    					<td>
+    						<EquipItemToggle
+    							type="primary"
+    							selected={this.state.item}
+    							classes={classes}
+    							title="primary weapon"
+    						/>
+    					</td>
+    					<td rowSpan="2">
+    						<div
+    							className={classnames(
+    								classes.svg,
+    								classes.front
+    							)}
+    							dangerouslySetInnerHTML={{
+    								__html: stripStyles(front)
+    							}}
+    						/>
+    					</td>
+    					<td rowSpan="2">
+    						<div
+    							className={classnames(
+    								classes.svg,
+    								classes.side
+    							)}
+    							dangerouslySetInnerHTML={{
+    								__html: stripStyles(side)
+    							}}
+    						/>
+    					</td>
+    					<td>
+    						<EquipItemToggle
+    							type="secondary"
+    							selected={this.state.item}
+    							classes={classes}
+    							title="secondary weapon"
+    						/>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<EquipItemToggle
+    							type="legs"
+    							selected={this.state.item}
+    							classes={classes}
+    							title="legs"
+    						/>
+    					</td>
+    					<td>
+    						<EquipItemToggle
+    							type="body"
+    							selected={this.state.item}
+    							classes={classes}
+    							title="body"
+    						/>
+    					</td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	);
+    }
 }
 
 // export default Equip;

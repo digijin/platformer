@@ -8,7 +8,8 @@ import hero from "MainMenu/mech_hero.png";
 const SECS = 0.5;
 
 export default class Wipe extends Base {
-  el: HTMLDivElement; in: boolean;
+  el: HTMLDivElement;in: boolean;
+  time: number;
   init(engine: Engine) {
   	super.init(engine);
   	this.el = document.createElement("div");
@@ -21,7 +22,7 @@ export default class Wipe extends Base {
   	this.time = 0;
   	this.in = true;
   }
-  time: number;
+
   update() {
   	this.time += this.engine.deltaTime;
   	if (this.in) {
@@ -40,6 +41,7 @@ export default class Wipe extends Base {
   		}
   	}
   }
+
   end() {
   	this.engine.container.removeChild(this.el);
   	this.destroy();

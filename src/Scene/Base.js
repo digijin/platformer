@@ -9,6 +9,7 @@ export default class SceneBase {
     	// this.engine.currentScene = this
     	log.debug("starting scene", this.constructor.name);
     }
+
     end() {
     	//wipe engine
     	log.debug("ending scene", this.constructor.name);

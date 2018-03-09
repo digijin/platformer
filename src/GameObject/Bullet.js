@@ -21,20 +21,57 @@ const GLOWSTRENGTH = 2;
 const GLOWQUALITY = 0.5;
 
 export default class Bullet extends Projectile {
+    style: string;
     // x: number; position
     // y: number; position
     position: Point;
-    h: number; //momentum
-    v: number; //momentum
     time: number;
     owner: Actor;
     speed: number;
     trajectory: Line;
     container: PIXI.Container;
-    style: string;
+    v: number; //momentum
     color: number;
     lineWidth: number;
     dir: number;
+    h: number; //momentum
+
+    graph: PIXI.Graphics;
+    update = () => {
+    	// console.log("update");
+    	this.time -= this.engine.deltaTime;
+
+    	// let old: Point = this.position.clone();
+    	this.move(); //sets trajectory
+
+    	//CHECK TIME
+    	if (this.time < 0) {
+    		this.destroy();
+    	}
+    	//check decor
+    	this.checkDecor((decor, hitTest) => {
+    		this.position.x = hitTest.collision.x;
+    		this.position.y = hitTest.collision.y;
+    		decor.damage(1);
+    	});
+
+    	//CHECK GRID
+    	this.checkGrid();
+
+    	this.render();
+
+    	//CHECK ENEMIES
+    	this.checkEnemies((actor: Actor) => {
+    		// setTimeout(() => {
+    		this.explode();
+    		// }, 0);
+    		actor.setAgro(this.owner);
+    		actor.damage(this.damage);
+    	});
+    };
+
+    damage: number = 2;
+
     constructor(params: {
         position: Point,
         h: number,
@@ -55,7 +92,6 @@ export default class Bullet extends Projectile {
     	this.v = Math.sin(this.dir);
     }
 
-    graph: PIXI.Graphics;
     init(engine: Engine) {
     	super.init(engine);
 
@@ -69,6 +105,11 @@ export default class Bullet extends Projectile {
     	this.container.addChild(this.graph);
     	// console.log("init");
     }
+
+    exit() {
+    	this.container.removeChild(this.graph);
+    }
+
     destroy() {
     	// console.log("destroy");
     	setTimeout(() => {
@@ -76,10 +117,6 @@ export default class Bullet extends Projectile {
     		this.exit();
     	}, 0);
     }
-    exit() {
-    	this.container.removeChild(this.graph);
-    }
-    damage: number = 2;
 
     explode() {
     	this.destroy();
@@ -114,38 +151,7 @@ export default class Bullet extends Projectile {
     		);
     	}
     }
-    update = () => {
-    	// console.log("update");
-    	this.time -= this.engine.deltaTime;
 
-    	// let old: Point = this.position.clone();
-    	this.move(); //sets trajectory
-
-    	//CHECK TIME
-    	if (this.time < 0) {
-    		this.destroy();
-    	}
-    	//check decor
-    	this.checkDecor((decor, hitTest) => {
-    		this.position.x = hitTest.collision.x;
-    		this.position.y = hitTest.collision.y;
-    		decor.damage(1);
-    	});
-
-    	//CHECK GRID
-    	this.checkGrid();
-
-    	this.render();
-
-    	//CHECK ENEMIES
-    	this.checkEnemies((actor: Actor) => {
-    		// setTimeout(() => {
-    		this.explode();
-    		// }, 0);
-    		actor.setAgro(this.owner);
-    		actor.damage(this.damage);
-    	});
-    };
     checkEnemies(func: (actor: Actor) => {}) {
     	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
     		if (o !== this.owner) {
@@ -159,12 +165,15 @@ export default class Bullet extends Projectile {
     		}
     	});
     }
+
     cheapCheck(actor: Actor) {
     	return actor.getBoundingRect().contains(this.position);
     }
+
     expensiveCheck(actor: Actor) {
     	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
     }
+
     render() {
     	this.graph.clear();
     	this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);

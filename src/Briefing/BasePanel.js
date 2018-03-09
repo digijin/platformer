@@ -19,6 +19,7 @@ export default class BasePanel extends Panel {
     	super(props);
     	this.props = props;
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.container.position = this.props.offset;

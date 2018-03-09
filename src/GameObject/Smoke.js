@@ -12,15 +12,31 @@ import * as PIXI from "pixi.js";
 import log from "loglevel";
 
 export default class Smoke extends GameObject {
+    v: number;
     position: Point;
-    time: number; //life
     duration: number; //amount of sec this thing plays for
     rotation: number; //radians
     texture: PIXI.Texture;
     sprite: PIXI.Sprite;
     h: number;
-    v: number;
+    time: number; //life
     container: PIXI.Container;
+
+    update = () => {
+    	let timePc = this.time / this.duration;
+    	this.positionSprite();
+    	this.time -= this.engine.deltaTime;
+
+    	let w = 20;
+    	let h = 20;
+    	h *= timePc;
+    	w *= timePc;
+
+    	if (this.time < 0) {
+    		this.destroy();
+    	}
+    };
+
     constructor(params: { container: PIXI.Container }) {
     	super();
     	this.duration = 0.2;
@@ -29,6 +45,7 @@ export default class Smoke extends GameObject {
     	this.time = this.duration;
     	this.rotation = Math.random() * Math.PI * 2;
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.texture = new PIXI.Texture(new PIXI.BaseTexture(smoke));
@@ -44,6 +61,11 @@ export default class Smoke extends GameObject {
     	this.v = Math.random() - 0.5;
     	this.positionSprite();
     }
+
+    exit() {
+    	this.container.removeChild(this.sprite);
+    }
+
     positionSprite() {
     	let timePc = this.time / this.duration;
     	this.position.x += this.engine.deltaTime * this.h;
@@ -74,26 +96,9 @@ export default class Smoke extends GameObject {
     	//     a: 1
     	// }).toNumber();
     }
-    exit() {
-    	this.container.removeChild(this.sprite);
-    }
+
     destroy() {
     	this.exit();
     	super.destroy();
     }
-
-    update = () => {
-    	let timePc = this.time / this.duration;
-    	this.positionSprite();
-    	this.time -= this.engine.deltaTime;
-
-    	let w = 20;
-    	let h = 20;
-    	h *= timePc;
-    	w *= timePc;
-
-    	if (this.time < 0) {
-    		this.destroy();
-    	}
-    };
 }

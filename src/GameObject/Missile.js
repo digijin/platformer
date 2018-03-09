@@ -23,40 +23,12 @@ import * as PIXI from "pixi.js";
 
 export default class Missile extends Projectile {
     guided: boolean;
-    remoteControl: boolean;
     trajectory: Line;
     maxSpeed: number = 40;
     minSpeed: number = 1;
     acceleration: number = 20;
     container: PIXI.Container;
-    constructor(params: { container: PIXI.Container }) {
-    	super(params);
-
-    	this.guided = true;
-    	this.remoteControl = false;
-    	this.container = params.container;
-    	this.tag("missile");
-    }
-    init(engine: Engine) {
-    	super.init(engine);
-    }
-    explode() {
-    	super.explode();
-    	this.engine.register(
-    		new ExplosionRadial({
-    			parent: this.container,
-    			position: this.position,
-    			rotation: 0,
-    			delay: 0
-    		})
-    	);
-    }
-    move() {
-    	let old = this.position.clone();
-    	this.position.y += Math.sin(this.direction) * this.speed;
-    	this.position.x += Math.cos(this.direction) * this.speed;
-    	this.trajectory = new Line({ a: old, b: this.position });
-    }
+    remoteControl: boolean;
     update = () => {
     	this.move();
 
@@ -135,6 +107,38 @@ export default class Missile extends Projectile {
     		}
     	}
     };
+
+    constructor(params: { container: PIXI.Container }) {
+    	super(params);
+
+    	this.guided = true;
+    	this.remoteControl = false;
+    	this.container = params.container;
+    	this.tag("missile");
+    }
+
+    init(engine: Engine) {
+    	super.init(engine);
+    }
+
+    explode() {
+    	super.explode();
+    	this.engine.register(
+    		new ExplosionRadial({
+    			parent: this.container,
+    			position: this.position,
+    			rotation: 0,
+    			delay: 0
+    		})
+    	);
+    }
+
+    move() {
+    	let old = this.position.clone();
+    	this.position.y += Math.sin(this.direction) * this.speed;
+    	this.position.x += Math.cos(this.direction) * this.speed;
+    	this.trajectory = new Line({ a: old, b: this.position });
+    }
 
     checkActors() {
     	this.engine.objectsTagged("actor").every((o: GameObject) => {

@@ -65,6 +65,7 @@ export default class Point {
   		y: this.y + diff.y
   	});
   }
+
   subtract(diff: {
     x: number,
     y: number
@@ -74,20 +75,26 @@ export default class Point {
   		y: this.y - diff.y
   	});
   }
+
   multiply(num: number) {
   	return new Point({
   		x: this.x * num,
   		y: this.y * num
   	});
   }
+
   distanceTo(point: Point): number {
   	let diff = this.subtract(point);
   	return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2));
   }
-  /** in radians from 0,0 */
-  direction(): number {
-  	return Math.atan2(this.y, this.x);
+
+  ceil(): Point {
+  	return new Point({
+  		x: Math.ceil(this.x),
+  		y: Math.ceil(this.y)
+  	});
   }
+
   directionTo(point: Point): number {
   	let diff = this.subtract(point);
   	return Math.atan2(diff.y, diff.x);
@@ -155,22 +162,23 @@ export default class Point {
   		y: Math.round(this.y)
   	});
   }
+
   round(): Point {
   	return new Point({
   		x: Math.round(this.x),
   		y: Math.round(this.y)
   	});
   }
+
   floor(): Point {
   	return new Point({
   		x: Math.floor(this.x),
   		y: Math.floor(this.y)
   	});
   }
-  ceil(): Point {
-  	return new Point({
-  		x: Math.ceil(this.x),
-  		y: Math.ceil(this.y)
-  	});
+
+  /** in radians from 0,0 */
+  direction(): number {
+  	return Math.atan2(this.y, this.x);
   }
 }

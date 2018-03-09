@@ -11,9 +11,10 @@ import SmokeExplosionUpTransitionAnimation from "GameObject/SmokeExplosionUpTran
 const SECS = 1;
 
 export default class SmokeExplosionUpTransition extends Base {
-  el: HTMLDivElement; in: boolean;
+  el: HTMLDivElement;in: boolean;
   swapped: boolean
   transition: SmokeExplosionUpTransitionAnimation
+  time: number;
   init(engine: Engine) {
   	super.init(engine);
   	// this.engine.container.appendChild(this.el);
@@ -22,7 +23,7 @@ export default class SmokeExplosionUpTransition extends Base {
   	this.time = 0;
   	this.swapped = false;
   }
-  time: number;
+
   update() {
   	this.time += this.engine.deltaTime;
 
@@ -36,6 +37,7 @@ export default class SmokeExplosionUpTransition extends Base {
   		this.end();
   	}
   }
+
   end() {
   	// this.engine.container.removeChild(this.el);
   	this.destroy();

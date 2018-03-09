@@ -5,6 +5,7 @@ const engineConnect = ComponentToWrap => {
 		static contextTypes = {
 			engine: PropTypes.object.isRequired
 		};
+
 		render() {
 			const { engine } = this.context;
 			// what we do is basically rendering `ComponentToWrap`

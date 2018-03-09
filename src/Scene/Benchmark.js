@@ -15,6 +15,7 @@ class Runner extends GameObject {
 		this.scores = [];
 		this.gap = 1;
 	}
+
 	update() {
 		this.gap -= this.engine.deltaTime;
 		if (this.gap < 0) {

@@ -19,9 +19,11 @@ export class Level extends React.Component {
     		this.forceUpdate();
     	}, 1000);
     }
+
     componentWillUnmount() {
     	clearInterval(this.intervalId);
     }
+
     render() {
     	const { classes } = this.props;
     	return (

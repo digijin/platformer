@@ -9,15 +9,19 @@ export default class State {
 	constructor() {
 		this.state = reducer({}, { type: "INIT" });
 	}
+
 	dispatch(action: Object) {
 		this.state = reducer(this.state, action);
 	}
+
 	getState() {
 		return this.state;
 	}
+
 	save() {
 		localStorage.setItem("save", JSON.stringify(this.state, null, 1));
 	}
+
 	load() {
 		let data = localStorage.getItem("save");
 		if (data) {

@@ -17,6 +17,7 @@ export default class ComponentSelectorPanel extends GameObject {
     container: PIXI.Container;
     category: string;
     options: Array<any>;
+    _onSelect: () => {};
     constructor(category) {
     	super();
     	this.category = category;
@@ -45,6 +46,7 @@ export default class ComponentSelectorPanel extends GameObject {
     		break;
     	}
     }
+
     init(engine: Engine) {
     	super.init(engine);
 
@@ -77,7 +79,7 @@ export default class ComponentSelectorPanel extends GameObject {
     		});
     	});
     }
-    _onSelect: () => {};
+
     onSelect(func) {
     	this._onSelect = func;
     }

@@ -24,10 +24,19 @@ import dottedbg from "./dottedbg.png";
 import Point from "Utility/Point";
 
 export default class BriefingManager extends GameObject {
+    onMissionChange = mission => {
+    	// console.log("mission changed to", mission);
+
+    	this.infoPanel.render(mission);
+    };
+
     container: PIXI.Container;
-    missionsPanel: MissionsPanel;
     infoPanel: InfoPanel;
     spacing: number = 20;
+    mouseControl: Boolean = true;
+
+    glitching: boolean = false;
+    missionsPanel: MissionsPanel;
     init(engine: Engine) {
     	super.init(engine);
     	this.tag("briefingmanager");
@@ -203,41 +212,11 @@ export default class BriefingManager extends GameObject {
 
     	this.engine.stage.addChild(this.container);
     }
+
     exit() {
     	this.engine.stage.removeChild(this.container);
     }
-    onMissionChange = mission => {
-    	// console.log("mission changed to", mission);
 
-    	this.infoPanel.render(mission);
-    };
-
-    glitching: boolean = false;
-    glitch() {
-    	if (Math.random() < 0.01) {
-    		this.container.filters = [new GlitchFilter()];
-    	} else {
-    		this.container.filters = [];
-    	}
-    }
-
-    animateFilters() {
-    	// this.bg.filters.forEach(f => {
-    	//     // if (f.time) {
-    	//     f.time += this.engine.deltaTime;
-    	//     // }
-    	// });
-    	this.container.filters[0].time += this.engine.deltaTime * 40;
-    	if (this.container.filters.length > 1) {
-    		this.container.filters[1].strength -= this.engine.deltaTime / 10;
-    		if (this.container.filters[1].strength < 0) {
-    			this.container.filters = [this.container.filters[0]];
-    		}
-    	}
-
-    	// console.log(this.bg.filters[0].time);
-    }
-    mouseControl: Boolean = true;
     update() {
     	this.animateFilters();
     	// this.glitch();
@@ -265,5 +244,30 @@ export default class BriefingManager extends GameObject {
     	//     this.container.position,
     	//     1 + this.engine.deltaTime
     	// );
+    }
+
+    glitch() {
+    	if (Math.random() < 0.01) {
+    		this.container.filters = [new GlitchFilter()];
+    	} else {
+    		this.container.filters = [];
+    	}
+    }
+
+    animateFilters() {
+    	// this.bg.filters.forEach(f => {
+    	//     // if (f.time) {
+    	//     f.time += this.engine.deltaTime;
+    	//     // }
+    	// });
+    	this.container.filters[0].time += this.engine.deltaTime * 40;
+    	if (this.container.filters.length > 1) {
+    		this.container.filters[1].strength -= this.engine.deltaTime / 10;
+    		if (this.container.filters[1].strength < 0) {
+    			this.container.filters = [this.container.filters[0]];
+    		}
+    	}
+
+    	// console.log(this.bg.filters[0].time);
     }
 }

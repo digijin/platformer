@@ -27,6 +27,7 @@ export default class ExplosionRadial extends AnimateOnce {
 
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 	}
+
 	update() {
 		super.update();
 		if (this.time < 0.5) {

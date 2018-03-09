@@ -21,6 +21,7 @@ export default class ImagePanel extends Panel {
     	super(props);
     	this.props = props;
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.container.position = this.props.offset;

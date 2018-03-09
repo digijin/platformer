@@ -18,9 +18,11 @@ export default class Pool {
 		this.pool = [];
 		this.args = [...arguments];
 	}
+
 	reset() {
 		this.index = 0;
 	}
+
 	get() {
 		if (this.index >= this.pool.length) {
 			let instance = this.create();

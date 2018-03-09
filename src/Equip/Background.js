@@ -8,5 +8,6 @@ export default class Background extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
 	}
+
 	update() {}
 }

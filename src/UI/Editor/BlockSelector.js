@@ -15,51 +15,53 @@ import Collapse from "material-ui/transitions/Collapse";
 
 import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
 class BlockSelector extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			expanded: true
-		};
-	}
-	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
-		watcher.mode = target;
-		let newstate = { expanded: {} };
-		newstate.expanded = !this.state.expanded;
-		this.setState(newstate);
-	};
-	render() {
-		const { classes } = this.props;
-		return (
-			<CardContent className={classes.content}>
-				{BlockTypes.map(b => (
-					<Tooltip key={b.id} title={b.name} placement="bottom">
-						<Button
-							raised
-							className={classes.iconButton}
-							color={
-								this.props.watcher.blockId == b.id
-									? "primary"
-									: "default"
-							}
-							onClick={() => {
-								this.props.watcher.blockId = b.id;
-								this.forceUpdate();
-							}}
-						>
-							<img
-								style={{
-									width: "32px",
-									height: "32px"
-								}}
-								src={b.image.src}
-							/>
-						</Button>
-					</Tooltip>
-				))}
-			</CardContent>
-		);
-	}
+    handleExpandClick = target => {
+    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	watcher.mode = target;
+    	let newstate = { expanded: {} };
+    	newstate.expanded = !this.state.expanded;
+    	this.setState(newstate);
+    };
+
+    constructor() {
+    	super();
+    	this.state = {
+    		expanded: true
+    	};
+    }
+
+    render() {
+    	const { classes } = this.props;
+    	return (
+    		<CardContent className={classes.content}>
+    			{BlockTypes.map(b => (
+    				<Tooltip key={b.id} title={b.name} placement="bottom">
+    					<Button
+    						raised
+    						className={classes.iconButton}
+    						color={
+    							this.props.watcher.blockId == b.id
+    								? "primary"
+    								: "default"
+    						}
+    						onClick={() => {
+    							this.props.watcher.blockId = b.id;
+    							this.forceUpdate();
+    						}}
+    					>
+    						<img
+    							style={{
+    								width: "32px",
+    								height: "32px"
+    							}}
+    							src={b.image.src}
+    						/>
+    					</Button>
+    				</Tooltip>
+    			))}
+    		</CardContent>
+    	);
+    }
 }
 
 export default engineConnect(BlockSelector);

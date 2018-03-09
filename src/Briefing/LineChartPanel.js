@@ -11,8 +11,8 @@ import Panel from "./Panel";
 type Props = {};
 
 export default class BarPanel extends Panel {
+    pointGap: number = 10;
     heading: PIXI.Text;
-    props: Props;
 
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
@@ -20,12 +20,16 @@ export default class BarPanel extends Panel {
     graph: PIXI.Graphics;
     height: number = 60;
     numvalues: number = 25;
-    pointGap: number = 10;
+    props: Props;
+
     speed: number = 0.5;
+    targetValues: Array<number> = [];
+    values: Array<number> = [];
     constructor(props: Props) {
     	super(props);
     	this.props = props;
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.container.position = this.props.offset;
@@ -41,6 +45,13 @@ export default class BarPanel extends Panel {
     	this.content.addChild(this.graph);
     	this.resizeFitContent();
     }
+
+    update() {
+    	super.update();
+
+    	this.drawLines();
+    }
+
     drawLines() {
     	this.graph.clear();
     	this.graph
@@ -65,12 +76,5 @@ export default class BarPanel extends Panel {
     		// .moveTo(x * this.pointGap, this.height)
     			.lineTo(x * this.pointGap, this.height * this.values[x]);
     	}
-    }
-    values: Array<number> = [];
-    targetValues: Array<number> = [];
-    update() {
-    	super.update();
-
-    	this.drawLines();
     }
 }

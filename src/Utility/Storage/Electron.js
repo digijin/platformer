@@ -15,24 +15,29 @@ export default class ElectronAdapter extends StorageAdapter {
     		this.fs.mkdirSync(this.savedir);
     	}
     }
+
     list(): Array<string> {
     	return this.fs
     		.readdirSync(this.savedir)
     		.map(save => save.substr(0, save.length - 4));
     }
+
     saveFileName(name: string): string {
     	return this.path.resolve(this.savedir, name + ".txt");
     }
+
     save(name: string, data: string) {
     	// console.log("write", this.saveFileName(name));
     	return this.fs.writeFileSync(this.saveFileName(name), data);
     }
+
     load(name: string): string | null {
     	if (!this.fs.existsSync(this.saveFileName(name))) {
     		return null;
     	}
     	return this.fs.readFileSync(this.saveFileName(name)).toString();
     }
+
     remove(name: string) {
     	// console.log("remove", this.saveFileName(name));
     	if (this.fs.existsSync(this.saveFileName(name))) {

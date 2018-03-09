@@ -12,11 +12,11 @@ import * as PIXI from "pixi.js";
 
 export default class Decor {
 	position: Point; //grid position
-	type: string;
 	grid: Grid;
 	hp: number;
 	texture: PIXI.Texture;
 	sprite: PIXI.Sprite;
+	type: string;
 	constructor(params: {
 		position: Point,
 		type: string,
@@ -36,9 +36,16 @@ export default class Decor {
 		return DecorTypeMap[this.type];
 	}
 
-	isEmpty(): boolean {
-		return this.type == "0";
+	get rect(): Rect {
+		let type = this.getType();
+		return new Rect({
+			t: this.position.y * config.grid.width,
+			r: (this.position.x + type.width) * config.grid.width,
+			b: (this.position.y + type.height) * config.grid.width,
+			l: this.position.x * config.grid.width
+		});
 	}
+
 	damage(amount: number) {
 		let type = this.getType();
 		if (type && type.destructable) {
@@ -48,14 +55,17 @@ export default class Decor {
 			}
 		}
 	}
+
 	destroy() {
 		// this.type = "0";
 		this.grid.removeDecor(this.position);
 	}
+
 	//for editor
 	add(blockId: string) {
 		this.type = blockId;
 	}
+
 	//for editor
 	remove() {
 		this.type = "0";
@@ -67,6 +77,7 @@ export default class Decor {
 			y: (this.position.y + 0.5) * config.grid.width
 		});
 	}
+
 	get point(): Point {
 		return new Point({
 			x: this.position.x * config.grid.width,
@@ -74,13 +85,7 @@ export default class Decor {
 		});
 	}
 
-	get rect(): Rect {
-		let type = this.getType();
-		return new Rect({
-			t: this.position.y * config.grid.width,
-			r: (this.position.x + type.width) * config.grid.width,
-			b: (this.position.y + type.height) * config.grid.width,
-			l: this.position.x * config.grid.width
-		});
+	isEmpty(): boolean {
+		return this.type == "0";
 	}
 }

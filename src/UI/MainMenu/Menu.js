@@ -16,6 +16,7 @@ class MainMenu extends React.Component {
 		super();
 		this.state = { page: "main" };
 	}
+
 	// <div id="instructions">
 	// 	<span className="key">wasd</span>:move and crouch<br />
 	// 	<span className="key">e</span>:grapple arm left<br />

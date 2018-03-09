@@ -44,17 +44,20 @@ export default class MainMenu extends GameObject {
     		y: 0.5
     	};
     }
+
     init(engine: Engine) {
     	super.init(engine);
     	this.engine.stage.addChild(this.hero);
     }
+
+    exit() {
+    	this.engine.stage.removeChild(this.hero);
+    }
+
     update() {
     	this.hero.position.x = window.innerWidth / 2;
     	this.hero.position.y = window.innerHeight / 2;
 
     	this.engine.view.offset.x += 400 * this.engine.deltaTime;
-    }
-    exit() {
-    	this.engine.stage.removeChild(this.hero);
     }
 }

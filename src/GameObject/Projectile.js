@@ -8,14 +8,14 @@ import GameObject from "GameObject";
 import Line from "Utility/Line";
 
 export default class Projectile extends GameObject {
+    h: number;
     position: Point;
-    direction: number;
     target: Point;
     owner: Actor;
     speed: number;
     guided: boolean;
     trajectory: Line;
-    h: number;
+    direction: number;
     v: number;
     constructor(params: {
         position: Point,
@@ -27,6 +27,7 @@ export default class Projectile extends GameObject {
 
     	Object.assign(this, params);
     }
+
     explode() {
     	//wait til after render
     	setTimeout(() => {

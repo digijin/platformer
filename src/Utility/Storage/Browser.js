@@ -8,6 +8,7 @@ export default class BrowserAdapter extends StorageAdapter {
 		super();
 		this.prefix = type;
 	}
+
 	list(): Array<string> {
 		return Object.keys(localStorage)
 			.filter(key => {
@@ -17,12 +18,15 @@ export default class BrowserAdapter extends StorageAdapter {
 				return key.substr(this.prefix.length);
 			});
 	}
+
 	save(name: string, data: string) {
 		return localStorage.setItem(this.prefix + name, data);
 	}
+
 	load(name: string): string {
 		return localStorage.getItem(this.prefix + name);
 	}
+
 	remove(name: string) {
 		return localStorage.removeItem(this.prefix + name);
 	}

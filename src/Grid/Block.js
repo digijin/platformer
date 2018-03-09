@@ -12,12 +12,12 @@ import * as PIXI from "pixi.js";
 
 export default class Block {
 	position: Point;
-	type: string;
 	backgroundType: string | void;
 	grid: Grid;
 	tint: number;
 	hp: number;
 	sprite: PIXI.Sprite;
+	type: string;
 	constructor(params: {
 		position: Point,
 		type: string,
@@ -45,6 +45,7 @@ export default class Block {
 			this.hp = this.getType().hp;
 		}
 	}
+
 	toString() {
 		return JSON.stringify({position: this.position, type: this.type});
 	}
@@ -55,57 +56,6 @@ export default class Block {
 
 	getBackgroundType(): BlockType {
 		return BlockTypeMap[this.backgroundType];
-	}
-
-	isEmpty(): boolean {
-		return this.type == "0";
-	}
-
-	isBackgroundEmpty(): boolean {
-		return this.backgroundType == "0";
-	}
-	damage(amount: number) {
-		let type = this.getType();
-		if (type && type.destructable) {
-			this.hp -= amount;
-			if (this.hp <= 0) {
-				this.destroy();
-			}
-		}
-	}
-	destroy() {
-		this.type = "0";
-		this.grid.bustCache(this);
-	}
-	//for editor
-	add(blockId: string) {
-		this.type = blockId;
-		this.grid.bustCache(this);
-	}
-	addBackground(blockId: string) {
-		this.backgroundType = blockId;
-		this.grid.bustCache(this);
-	}
-	//for editor
-	remove() {
-		this.type = "0";
-		this.grid.bustCache(this);
-	}
-
-	get center(): Point {
-		return new Point({
-			x: (this.position.x + 0.5) * config.grid.width,
-			y: (this.position.y + 0.5) * config.grid.width
-		});
-	}
-	get point(): Point {
-		return new Point({
-			x: this.position.x * config.grid.width,
-			y: this.position.y * config.grid.width
-		});
-	}
-	is(block: Block): boolean {
-		return (block.position.x === this.position.x && block.position.y === this.position.y);
 	}
 
 	get rect(): Rect {
@@ -127,4 +77,62 @@ export default class Block {
 	// 		y: Math.floor(point.y / config.grid.width)
 	// 	});
 	// }
+
+	isBackgroundEmpty(): boolean {
+		return this.backgroundType == "0";
+	}
+
+	damage(amount: number) {
+		let type = this.getType();
+		if (type && type.destructable) {
+			this.hp -= amount;
+			if (this.hp <= 0) {
+				this.destroy();
+			}
+		}
+	}
+
+	destroy() {
+		this.type = "0";
+		this.grid.bustCache(this);
+	}
+
+	//for editor
+	add(blockId: string) {
+		this.type = blockId;
+		this.grid.bustCache(this);
+	}
+
+	addBackground(blockId: string) {
+		this.backgroundType = blockId;
+		this.grid.bustCache(this);
+	}
+
+	//for editor
+	remove() {
+		this.type = "0";
+		this.grid.bustCache(this);
+	}
+
+	get center(): Point {
+		return new Point({
+			x: (this.position.x + 0.5) * config.grid.width,
+			y: (this.position.y + 0.5) * config.grid.width
+		});
+	}
+
+	get point(): Point {
+		return new Point({
+			x: this.position.x * config.grid.width,
+			y: this.position.y * config.grid.width
+		});
+	}
+
+	is(block: Block): boolean {
+		return (block.position.x === this.position.x && block.position.y === this.position.y);
+	}
+
+	isEmpty(): boolean {
+		return this.type == "0";
+	}
 }
