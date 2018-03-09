@@ -34,7 +34,7 @@ export default class Explosion extends GameObject {
     		x: 0.5,
     		y: 0.5
     	};
-    	this.engine.stage.addChild(this.sprite);
+    	this.engine.grid.parent.addChild(this.sprite);
     	this.positionSprite();
     }
     positionSprite() {
@@ -49,7 +49,7 @@ export default class Explosion extends GameObject {
     	this.exit();
     }
     exit() {
-    	this.engine.stage.removeChild(this.sprite);
+    	this.engine.grid.parent.removeChild(this.sprite);
     }
     update() {
     	this.positionSprite();

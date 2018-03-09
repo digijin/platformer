@@ -6,7 +6,7 @@ import Player from "../Actor/Player";
 
 class EnergyBarContainer extends PIXI.Container {}
 export default class EnergyBar extends GameObject {
-    width: number = 200;
+    width: number = 500;
     height: number = 20;
     padding: number = 10;
     player: Player;
