@@ -62,6 +62,7 @@ export default class Player extends Actor {
     leg: Leg;
     container: PIXI.Container;
     airborne: boolean = false;
+    graph: PIXI.Graphics;
 
     constructor(params: { position: Point, container: PIXI.Container }) {
     	super(params);
@@ -82,7 +83,6 @@ export default class Player extends Actor {
     	//overrides parent, does nothing... invincible!
     }
 
-    graph: PIXI.Graphics;
     init(engine: Engine) {
     	super.init(engine);
     	engine.register(this.leg);
