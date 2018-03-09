@@ -16,7 +16,7 @@ export default class Shell extends GameObject {
     constructor(params: Object) {
     	super();
     	this.time = 1 + Math.random();
-    	this.color = "#000000";
+    	this.color = 0xffffff;
     	Object.assign(this, params);
     }
     graph: PIXI.Graphics;
@@ -46,7 +46,7 @@ export default class Shell extends GameObject {
     	this.graph.clear();
     	this.graph.position.set(old.x, old.y);
     	this.graph
-    		.lineStyle(1, 0xffffff)
+    		.lineStyle(1, this.color)
     		.moveTo(0, 0)
     		.lineTo(this.position.x - old.x, this.position.y - old.y);
     	//TODO DETECT GROUND PROPER LIKE

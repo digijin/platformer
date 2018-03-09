@@ -193,7 +193,7 @@ export default class Player extends Actor {
     					x: 0,
     					y: config.player.size.h / 2
     				}),
-    				color: "red",
+    				color: 0xff0000,
     				h: Math.random() - 0.5,
     				v: 5 + Math.random() * 2,
     				time: 0.2

@@ -106,7 +106,7 @@ export default class Bullet extends Projectile {
     			new Shell({
     				container: this.container,
     				position: this.position.add(offset),
-    				color: "red",
+    				color: 0xffff00,
     				h: (Math.random() - 0.5) * 5,
     				v: (Math.random() - 0.5) * 5,
     				time: 0.5
