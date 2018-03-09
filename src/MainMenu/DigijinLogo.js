@@ -191,29 +191,41 @@ let offset = {
 };
 export default class DigijinLogo extends GameObject {
   time: number;
-  canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   hiddenCanvas: HTMLCanvasElement;
   hiddenCtx: CanvasRenderingContext2D;
+  canvas: HTMLCanvasElement;
   constructor() {
   	super();
   	// console.log(letters);
   	this.time = -INITDELAY;
   }
 
-  init(engine: Engine) {
-  	super.init(engine);
-
-  	this.canvas = document.createElement("canvas");
-  	this.canvas.width = window.innerWidth;
-  	this.canvas.height = window.innerHeight;
-  	this.hiddenCanvas = document.createElement("canvas");
-  	this.hiddenCanvas.width = window.innerWidth;
-  	this.hiddenCanvas.height = window.innerHeight;
-  	engine.container.appendChild(this.canvas);
-
-  	this.ctx = this.canvas.getContext("2d");
-  	this.hiddenCtx = this.hiddenCanvas.getContext("2d");
+  drawPartialLine(from, to, progress, dist, l, ctx: CanvasRenderingContext2D, size, offset) {
+  	let mid = from.percentTo(to, progress / dist);
+  	if (Math.random() < SPAWNCHANCE) {
+  		let dir = to.subtract(from).direction();
+  		dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
+  		this.engine.register(
+  			new Spike({
+  				position: mid,
+  				direction: dir,
+  				ctx: this.ctx,
+  				color: l.color
+  			})
+  		);
+  	}
+  	ctx.lineTo(
+  		mid.multiply(size).add(offset).x,
+  		mid.multiply(size).add(offset).y
+  	);
+  	ctx.arc(
+  		mid.multiply(size).add(offset).x,
+  		mid.multiply(size).add(offset).y,
+  		4,
+  		0,
+  		2 * Math.PI
+  	);
   }
 
   exit() {
@@ -325,31 +337,19 @@ export default class DigijinLogo extends GameObject {
   	);
   }
 
-  drawPartialLine(from, to, progress, dist, l, ctx: CanvasRenderingContext2D, size, offset) {
-  	let mid = from.percentTo(to, progress / dist);
-  	if (Math.random() < SPAWNCHANCE) {
-  		let dir = to.subtract(from).direction();
-  		dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
-  		this.engine.register(
-  			new Spike({
-  				position: mid,
-  				direction: dir,
-  				ctx: this.ctx,
-  				color: l.color
-  			})
-  		);
-  	}
-  	ctx.lineTo(
-  		mid.multiply(size).add(offset).x,
-  		mid.multiply(size).add(offset).y
-  	);
-  	ctx.arc(
-  		mid.multiply(size).add(offset).x,
-  		mid.multiply(size).add(offset).y,
-  		4,
-  		0,
-  		2 * Math.PI
-  	);
+  init(engine: Engine) {
+  	super.init(engine);
+
+  	this.canvas = document.createElement("canvas");
+  	this.canvas.width = window.innerWidth;
+  	this.canvas.height = window.innerHeight;
+  	this.hiddenCanvas = document.createElement("canvas");
+  	this.hiddenCanvas.width = window.innerWidth;
+  	this.hiddenCanvas.height = window.innerHeight;
+  	engine.container.appendChild(this.canvas);
+
+  	this.ctx = this.canvas.getContext("2d");
+  	this.hiddenCtx = this.hiddenCanvas.getContext("2d");
   }
 }
 
