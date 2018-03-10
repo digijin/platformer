@@ -28,7 +28,7 @@ class MainMenu extends React.Component {
 		let content = (
 			<div>
 				<a id="playButton" onClick={this.props.play}>
-					Play
+                    Quick Play
 				</a>
 				<a
 					id="loadButton"
@@ -36,10 +36,10 @@ class MainMenu extends React.Component {
 						this.setState({ page: "load" });
 					}}
 				>
-					Load
+                    Load Profile
 				</a>
 				<a id="editorButton" onClick={this.props.editor}>
-					Editor
+                    Level Editor
 				</a>
 			</div>
 		);
@@ -51,7 +51,7 @@ class MainMenu extends React.Component {
 				<div className="title">
 					<div className="subsub">I don't have a good name</div>
 					<div className="sub">so for now it's called</div>
-					PLATFORMER
+                    PLATFORMER
 				</div>
 				{content}
 			</div>
