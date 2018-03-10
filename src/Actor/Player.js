@@ -4,6 +4,7 @@ import Point from "Utility/Point";
 import Missile from "GameObject/Missile";
 import Bullet from "GameObject/Bullet";
 import Shell from "GameObject/Shell";
+import BoosterParticle from "../GameObject/Particle/BoosterParticle";
 import mech from "assets/mech.png";
 
 import Actor from "Actor";
@@ -153,13 +154,12 @@ export default class Player extends Actor {
     		}
 
     		this.engine.register(
-    			new Shell({
+    			new BoosterParticle({
     				container: this.container,
     				position: this.position.subtract({
     					x: 0,
     					y: config.player.size.h / 2
     				}),
-    				color: 0x0000ff,
     				h: Math.random() - 0.5,
     				v: 5 + Math.random() * 2,
     				time: 0.2

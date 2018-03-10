@@ -6,33 +6,28 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 
-const defaults = {
-	color: 0xffffff,
-	h: 0,
-	v: 0,
-	time: 1
-};
-
 export default class Particle extends GameObject {
     position: Point;
-    v: number; //momentum
-    time: number;
-    color: string;
+    v: number = 0; //momentum
+    time: number = 1;
+    color: string = 0xffffff;
     container: PIXI.Container;
-    h: number; //momentum
+    h: number = 0; //momentum
     graph: PIXI.Graphics;
+    lineWidth: number = 1;
     constructor(params: {
         container: PIXI.Container,
         position: Point,
         color?: number,
         h?: number,
         v?: number,
-        time: number
+        time?: number,
+        lineWidth?: number
     }) {
     	super();
     	// this.time = 1 + Math.random();
     	// this.color = 0xffffff;
-    	Object.assign(this, defaults, params);
+    	Object.assign(this, params);
     }
 
     init(engine: Engine) {
@@ -58,7 +53,7 @@ export default class Particle extends GameObject {
     	this.graph.clear();
     	this.graph.position.set(old.x, old.y);
     	this.graph
-    		.lineStyle(1, this.color)
+    		.lineStyle(this.lineWidth, this.color)
     		.moveTo(0, 0)
     		.lineTo(this.position.x - old.x, this.position.y - old.y);
     	//TODO DETECT GROUND PROPER LIKE
