@@ -163,12 +163,12 @@ export default class Player extends Actor {
     		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
     	}
 
+    	const onGround = this.v > 0 && !this.canMoveVert(this.v);
+    	this.airborne = !onGround;
+
     	if (!this.canMoveVert(this.v)) {
     		this.v = 0;
     		//TODO: if going down land on ground precisely
-    		this.airborne = false;
-    	} else {
-    		this.airborne = true;
     	}
     	// END VERTICAL
 
