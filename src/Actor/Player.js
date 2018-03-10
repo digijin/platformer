@@ -138,12 +138,18 @@ export default class Player extends Actor {
     	let hDelta = this.h * this.engine.deltaTime * config.player.speed;
 
     	//VERTICAL MOVEMENT
-    	if (this.engine.input.getButton("jump")) {
-    		if (this.v == 0) {
+    	if (this.engine.input.getButtonDown("jump")) {
+    		if (!this.airborne) {
     			this.v = -config.player.jump.power; //jump
-    		}
-    		if (this.spendEnergy(booster.energyDrain * this.engine.deltaTime)) {
-    			this.v -= this.engine.deltaTime * 4; //BOOSTERS
+    		} else {
+    			if (
+    				this.spendEnergy(
+    					booster.energyDrain * this.engine.deltaTime
+    				)
+    			) {
+    				this.v -= 4; //BOOSTERS
+    				// this.v -= this.engine.deltaTime * 4; //BOOSTERS
+    			}
     		}
 
     		this.engine.register(
@@ -153,7 +159,7 @@ export default class Player extends Actor {
     					x: 0,
     					y: config.player.size.h / 2
     				}),
-    				color: 0xff0000,
+    				color: 0x0000ff,
     				h: Math.random() - 0.5,
     				v: 5 + Math.random() * 2,
     				time: 0.2
