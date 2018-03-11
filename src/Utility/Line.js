@@ -33,51 +33,8 @@ export default class Line {
 		});
 	}
 
-	//Liang-Barsky algorithm
-	//https://gist.github.com/ChickenProp/3194723
-	intersectsRect(rect: {
-		t: number,
-		r: number,
-		b: number,
-		l: number
-	}): { result: boolean, collision?: { x: number, y: number } } {
-		let x = this.a.x;
-		let y = this.a.y;
-		let vx = this.b.x - this.a.x;
-		let vy = this.b.y - this.a.y;
-
-		let left = rect.l;
-		let right = rect.r;
-		let top = rect.t;
-		let bottom = rect.b;
-
-		let p = [-vx, vx, -vy, vy];
-		let q = [x - left, right - x, y - top, bottom - y];
-		let u1 = -Infinity;
-		let u2 = Infinity;
-		for (let i = 0; i <= 4; i++) {
-			if (p[i] == 0) {
-				if (q[i] < 0) {
-					return { result: false };
-				}
-			} else {
-				var t = q[i] / p[i];
-				if (p[i] < 0 && u1 < t) {
-					u1 = t;
-				} else if (p[i] > 0 && u2 > t) {
-					u2 = t;
-				}
-			}
-		}
-
-		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
-
-		let collision = {};
-		collision.x = x + u1 * vx;
-		collision.y = y + u1 * vy;
-		// console.log(collision);
-
-		return { result: true, collision: collision };
+	percent(pc: number): Point {
+		return this.a.percentTo(this.b, pc);
 	}
 
 	//returns all blocks the line travels through
@@ -218,7 +175,50 @@ export default class Line {
 		return out;
 	}
 
-	percent(pc: number): Point {
-		return this.a.percentTo(this.b, pc);
+	//Liang-Barsky algorithm
+    //https://gist.github.com/ChickenProp/3194723
+    intersectsRect(rect: {
+		t: number,
+		r: number,
+		b: number,
+		l: number
+	}): { result: boolean, collision?: { x: number, y: number } } {
+		let x = this.a.x;
+		let y = this.a.y;
+		let vx = this.b.x - this.a.x;
+		let vy = this.b.y - this.a.y;
+
+		let left = rect.l;
+		let right = rect.r;
+		let top = rect.t;
+		let bottom = rect.b;
+
+		let p = [-vx, vx, -vy, vy];
+		let q = [x - left, right - x, y - top, bottom - y];
+		let u1 = -Infinity;
+		let u2 = Infinity;
+		for (let i = 0; i <= 4; i++) {
+			if (p[i] == 0) {
+				if (q[i] < 0) {
+					return { result: false };
+				}
+			} else {
+				var t = q[i] / p[i];
+				if (p[i] < 0 && u1 < t) {
+					u1 = t;
+				} else if (p[i] > 0 && u2 > t) {
+					u2 = t;
+				}
+			}
+		}
+
+		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
+
+		let collision = {};
+		collision.x = x + u1 * vx;
+		collision.y = y + u1 * vy;
+		// console.log(collision);
+
+		return { result: true, collision: collision };
 	}
 }

@@ -29,12 +29,12 @@ export type BlockTypeParams = {
 };
 
 export default class BlockType {
+    id: string;
     textureId: string;
-    name: string;
     destructable: boolean;
     image: any;
     hp: number;
-    id: string;
+    name: string;
     texture: PIXI.Texture;
     textureId: string;
     pattern: CanvasPattern;

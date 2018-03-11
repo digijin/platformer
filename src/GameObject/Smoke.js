@@ -12,14 +12,14 @@ import * as PIXI from "pixi.js";
 import log from "loglevel";
 
 export default class Smoke extends GameObject {
+    time: number; //life
     v: number;
-    position: Point;
     duration: number; //amount of sec this thing plays for
     rotation: number; //radians
     texture: PIXI.Texture;
     sprite: PIXI.Sprite;
     h: number;
-    time: number; //life
+    position: Point;
     container: PIXI.Container;
 
     update = () => {

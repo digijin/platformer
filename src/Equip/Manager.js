@@ -4,10 +4,10 @@ import type Engine from "Engine";
 
 import GameObject from "GameObject";
 
-import { GlitchFilter } from "@pixi/filter-glitch";
-import { OldFilmFilter } from "@pixi/filter-old-film";
-import { CRTFilter } from "@pixi/filter-crt";
-import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
+// import { GlitchFilter } from "@pixi/filter-glitch";
+// import { OldFilmFilter } from "@pixi/filter-old-film";
+// import { CRTFilter } from "@pixi/filter-crt";
+// import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
 // import Doors from "Transition/Doors";
 import Level from "Scene/Level";
 
@@ -27,6 +27,8 @@ import ComponentSelectorPanel from "./ComponentSelectorPanel";
 import PreviewPanel from "./PreviewPanel";
 
 export default class EquipManager extends GameObject {
+    category: string;
+
     onSelectComponent = component => {
     	log.info(
     		"selected component",
@@ -37,7 +39,6 @@ export default class EquipManager extends GameObject {
     	this.engine.currentPlayer[this.category] = component.id;
     };
 
-    container: PIXI.Container;
     categorySelectorPanel: CategorySelectorPanel;
     launchButton: Button;
     image: PIXI.Sprite;
@@ -48,7 +49,7 @@ export default class EquipManager extends GameObject {
     	this.showComponentSelector(category);
     };
 
-    category: string;
+    container: PIXI.Container;
 
     componentSelector: ComponentSelectorPanel;
     init(engine: Engine) {
