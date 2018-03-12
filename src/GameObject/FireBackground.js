@@ -5,11 +5,6 @@ PIXI.loader.add(
 	"assets/Fire 048 Up HD loop Transition.json"
 );
 
-// PIXI.loader.add("ExplosionUp6", "assets/ExplosionUp6.json");
-import GameObject from "GameObject";
-
-import Point from "Utility/Point";
-
 import AnimateOnce from "./AnimateOnce";
 
 export default class FireBackground extends AnimateOnce {
@@ -27,15 +22,12 @@ export default class FireBackground extends AnimateOnce {
 				params
 			)
 		);
-		// this.movie.rotation = Math.random() * Math.PI;
-		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 		this.once = false;
+		this.movie.anchor = { x: 0, y: 0 };
 	}
 
-	// update() {
-	// 	super.update();
-	// 	if (this.time < 0.5) {
-	// 		this.movie.alpha = this.time * 2;
-	// 	}
-	// }
+	update() {
+		super.update();
+		this.movie.height = window.innerHeight;
+	}
 }

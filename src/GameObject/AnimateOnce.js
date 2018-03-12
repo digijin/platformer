@@ -35,7 +35,7 @@ export default class AnimateOnce extends GameObject {
     		);
     		// PIXI.Texture.fromFrame("explosion" + framenum + ".png"));
     	}
-    	console.log("loading frames", frames);
+    	// console.log("loading frames", frames);
     	this.movie = new PIXI.extras.AnimatedSprite(frames);
     	this.time = this.numFrames / (60 * this.speed);
     	this.movie.animationSpeed = this.speed;
@@ -59,7 +59,7 @@ export default class AnimateOnce extends GameObject {
     		this.parent.constructor.name
     	);
     	this.parent.addChild(this.movie);
-    	console.log(this.parent.children);
+    	// console.log(this.parent.children);
     	// console.log("adding", this.movie, "to", this.engine.stage);
     	// this.movie.position = this.position;
     	this.positionSprite();

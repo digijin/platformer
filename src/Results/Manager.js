@@ -18,7 +18,7 @@ export default class ResultsManager extends GameObject {
 		// this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.background = new FireBackground({
 			parent: this.container,
-			position: new Point(),
+			position: new Point({ x: 0, y: 0 }),
 			rotation: 0,
 			delay: 0
 		});
