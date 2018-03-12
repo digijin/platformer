@@ -4,20 +4,26 @@ import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 import Point from "Utility/Point";
 import FireUpLoopTransition from "../GameObject/FireUpLoopTransition";
+
+import ExplosionUp6 from "../GameObject/ExplosionUp6";
+import FireBackground from "../GameObject/FireBackground";
+
+class ResultsContainer extends PIXI.Container {}
 export default class ResultsManager extends GameObject {
 	init(engine: Engine) {
 		super.init(engine);
-		this.container = new PIXI.Container();
+		this.container = new ResultsContainer();
 		this.engine.stage.addChild(this.container);
 
 		// this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-		this.background = new FireUpLoopTransition({
+		this.background = new FireBackground({
 			parent: this.container,
 			position: new Point(),
 			rotation: 0,
 			delay: 0
 		});
 		this.engine.register(this.background);
+
 		// this.container.addChild(this.background);
 	}
 
