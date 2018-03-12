@@ -3,9 +3,9 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 import Point from "Utility/Point";
-import FireUpLoopTransition from "../GameObject/FireUpLoopTransition";
-
-import ExplosionUp6 from "../GameObject/ExplosionUp6";
+// import FireUpLoopTransition from "../GameObject/FireUpLoopTransition";
+//
+// import ExplosionUp6 from "../GameObject/ExplosionUp6";
 import FireBackground from "../GameObject/FireBackground";
 
 class ResultsContainer extends PIXI.Container {}

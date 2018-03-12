@@ -1,5 +1,10 @@
 import * as PIXI from "pixi.js";
 
+PIXI.loader.add(
+	"FireUpLoopTransition",
+	"assets/Fire 048 Up HD loop Transition.json"
+);
+
 // PIXI.loader.add("ExplosionUp6", "assets/ExplosionUp6.json");
 import GameObject from "GameObject";
 
@@ -12,9 +17,9 @@ export default class FireBackground extends AnimateOnce {
 		super(
 			Object.assign(
 				{
-					numFrames: 20,
-					resource: "ExplosionUp6",
-					prefix: "Explosion 012 Up MIX_",
+					numFrames: 15,
+					resource: "FireUpLoopTransition",
+					prefix: "Fire 048 Up HD loop Transition_",
 					suffix: ".png",
 					pad: 5,
 					speed: 0.5

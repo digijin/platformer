@@ -1,9 +1,5 @@
 import * as PIXI from "pixi.js";
 
-PIXI.loader.add(
-	"FireUpLoopTransition",
-	"assets/Fire 048 Up HD loop Transition.json"
-);
 // import GameObject from "GameObject";
 
 // import Point from "Utility/Point";
