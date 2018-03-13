@@ -11,7 +11,7 @@ export default class Results extends Base {
 		this.manager = new ResultsManager();
 		engine.register(this.manager);
 
-		document.body.style.backgroundColor = "yellow";
-		engine.ui.dispatch({ type: "START_SCENE", scene: "results" });
+		document.body.style.backgroundColor = "#521b0a";
+		// engine.ui.dispatch({ type: "START_SCENE", scene: "results" });
 	}
 }
