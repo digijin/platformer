@@ -52,7 +52,7 @@ export default class AnimateOnce extends GameObject {
     	if (!this.parent) {
     		this.parent = this.engine.stage;
     	}
-    	log.info(
+    	log.debug(
     		"adding",
     		this.movie.constructor.name,
     		"to",
@@ -68,12 +68,6 @@ export default class AnimateOnce extends GameObject {
     exit() {
     	// console.log("exit");
     	this.parent.removeChild(this.movie);
-    	log.info(
-    		"removing",
-    		this.movie.constructor.name,
-    		"from",
-    		this.parent.constructor.name
-    	);
     }
 
     update() {
