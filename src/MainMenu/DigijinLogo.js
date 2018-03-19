@@ -193,8 +193,8 @@ let letters: Array<letterData> = lettersConfig.map((l: letterData) => {
 const INITDELAY = 6;
 const SPEED = 12;
 const RENDERTIME = 12;
-const HOLDTIME = 1 * SPEED;
-const FADETIME = SPEED / 2;
+const HOLDTIME = 2 * SPEED;
+const FADETIME = 1.5 * SPEED;
 const SPAWNCHANCE = 0.2;
 const SPIKE_SPEED = 8;
 let size = 40;
@@ -277,11 +277,12 @@ export default class DigijinLogo extends GameObject {
     }
 
     hiddenContextFade() {
+    	//draw faded to hidden
     	this.hiddenCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     	this.hiddenCtx.globalAlpha = 0.8;
     	this.hiddenCtx.drawImage(this.canvas, 0, 0);
+    	//draw back to main canvas
     	this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    	// this.ctx.globalAlpha = 0.5;
     	this.ctx.drawImage(this.hiddenCanvas, 0, 0);
     }
 
