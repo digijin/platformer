@@ -14,15 +14,15 @@ type Props = {
 
 export default class Panel extends GameObject {
     container: PIXI.Container;
-    border: PIXI.Graphics;
     padding: number = 20;
-
     props: Props;
-    content: PIXI.Container;
 
+    content: PIXI.Container;
     glitching: boolean = false;
 
     background: PIXI.Container;
+
+    border: PIXI.Graphics;
 
     constructor(props: Props) {
     	super();

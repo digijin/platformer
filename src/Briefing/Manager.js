@@ -24,19 +24,19 @@ import dottedbg from "./dottedbg.png";
 import Point from "Utility/Point";
 
 export default class BriefingManager extends GameObject {
+    container: PIXI.Container;
+
     missionsPanel: MissionsPanel;
-
-    onMissionChange = mission => {
-    	// console.log("mission changed to", mission);
-
-    	this.infoPanel.render(mission);
-    };
     infoPanel: InfoPanel;
     spacing: number = 20;
     mouseControl: Boolean = true;
 
     glitching: boolean = false;
-    container: PIXI.Container;
+    onMissionChange = mission => {
+    	// console.log("mission changed to", mission);
+
+    	this.infoPanel.render(mission);
+    };
     init(engine: Engine) {
     	super.init(engine);
     	this.tag("briefingmanager");

@@ -13,7 +13,8 @@ import Briefing from "../Scene/Briefing";
 
 class ResultsContainer extends PIXI.Container {}
 export default class ResultsManager extends GameObject {
-	init(engine: Engine) {
+    time: number = 0;
+    init(engine: Engine) {
 		super.init(engine);
 		this.container = new ResultsContainer();
 		this.engine.stage.addChild(this.container);
@@ -46,11 +47,10 @@ export default class ResultsManager extends GameObject {
 		// this.container.addChild(this.background);
 	}
 
-	exit() {
+    exit() {
 		this.engine.stage.removeChild(this.container);
 	}
 
-    time: number = 0;
     update() {
     	this.time += this.engine.deltaTime;
     	this.button.position.x = (window.innerWidth - this.button.width) / 2;

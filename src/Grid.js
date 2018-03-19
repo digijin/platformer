@@ -26,27 +26,26 @@ class GridBlockContainer extends PIXI.Container {}
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
+    decor: Array<Decor>;
+
     getBlocksFlattened = (): Array<Block> => {
     	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
     		// return a.splice(0, 0, ...b);
     		return [].concat(a, b);
     	}, []);
     };
-
-    width: number;
-    spritePool: Pool;
     parent: PIXI.Container;
     blockStage: PIXI.Container;
-
     decorStage: PIXI.Container;
+
     tileCache: {};
-
     graph: PIXI.Graphics = new PIXI.Graphics();
-    z: number;
 
-    decor: Array<Decor>;
+    z: number;
+    spritePool: Pool;
 
     height: number;
+
     update = (engine: Engine) => {
     	// console.group("Grid");
 
@@ -59,8 +58,9 @@ export default class Grid extends GameObject {
     	// this.decorStage.position.y = -this.engine.view.offset.y;
     	// this.renderDebugBlockPixelLine();
     };
-
     blocks: Array<Array<Block>>;
+
+    width: number;
 
     constructor(
     	params: {
@@ -184,11 +184,21 @@ export default class Grid extends GameObject {
     	}).move(this.engine.view.offset);
     }
 
-    rebuildBlocks() {
-    	this.tileCache = {};
-    	this.blocks.forEach((col, x) =>
-    		col.forEach((block, y) => (block.position = new Point({ x, y })))
-    	);
+    pixiInit() {
+    	this.blockStage = new GridBlockContainer();
+    	this.blockStage.interactiveChildren = false;
+    	this.decorStage = new GridDecorContainer();
+    	this.decorStage.interactiveChildren = false;
+    	this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
+    	this.spritePool.onCreate = spr => {
+    		this.blockStage.addChild(spr);
+
+    		spr.width = config.grid.width;
+    		spr.height = config.grid.width;
+    	};
+    	this.spritePool.onRemove = spr => {
+    		this.blockStage.removeChild(spr);
+    	};
     }
 
     fromTestStrings(strings: Array<string>): Grid {
@@ -532,20 +542,10 @@ export default class Grid extends GameObject {
     	this.rebuildBlocks();
     }
 
-    pixiInit() {
-    	this.blockStage = new GridBlockContainer();
-    	this.blockStage.interactiveChildren = false;
-    	this.decorStage = new GridDecorContainer();
-    	this.decorStage.interactiveChildren = false;
-    	this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
-    	this.spritePool.onCreate = spr => {
-    		this.blockStage.addChild(spr);
-
-    		spr.width = config.grid.width;
-    		spr.height = config.grid.width;
-    	};
-    	this.spritePool.onRemove = spr => {
-    		this.blockStage.removeChild(spr);
-    	};
+    rebuildBlocks() {
+    	this.tileCache = {};
+    	this.blocks.forEach((col, x) =>
+    		col.forEach((block, y) => (block.position = new Point({ x, y })))
+    	);
     }
 }

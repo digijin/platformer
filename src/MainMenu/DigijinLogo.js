@@ -191,10 +191,10 @@ let offset = {
 };
 export default class DigijinLogo extends GameObject {
   time: number;
-  hiddenCtx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   hiddenCanvas: HTMLCanvasElement;
+  hiddenCtx: CanvasRenderingContext2D;
   constructor() {
   	super();
   	// console.log(letters);

@@ -27,17 +27,9 @@ import ComponentSelectorPanel from "./ComponentSelectorPanel";
 import PreviewPanel from "./PreviewPanel";
 
 export default class EquipManager extends GameObject {
-    category: string;
+    container: PIXI.Container;
 
-    onSelectComponent = component => {
-    	log.info(
-    		"selected component",
-    		component,
-    		" in category",
-    		this.category
-    	);
-    	this.engine.currentPlayer[this.category] = component.id;
-    };
+    category: string;
 
     categorySelectorPanel: CategorySelectorPanel;
     launchButton: Button;
@@ -49,7 +41,15 @@ export default class EquipManager extends GameObject {
     	this.showComponentSelector(category);
     };
 
-    container: PIXI.Container;
+    onSelectComponent = component => {
+    	log.info(
+    		"selected component",
+    		component,
+    		" in category",
+    		this.category
+    	);
+    	this.engine.currentPlayer[this.category] = component.id;
+    };
 
     componentSelector: ComponentSelectorPanel;
     init(engine: Engine) {

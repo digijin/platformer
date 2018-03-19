@@ -87,10 +87,12 @@ export default class Rect {
     	return this.b - this.t;
     }
 
-    centerPoint() {
-    	return new Point({
-    		x: this.l + this.width() / 2,
-    		y: this.t + this.height() / 2
+    add(rect: { t: number, r: number, b: number, l: number }): Rect {
+    	return new Rect({
+    		t: this.t + rect.t,
+    		r: this.r + rect.r,
+    		b: this.b + rect.b,
+    		l: this.l + rect.l
     	});
     }
 
@@ -142,12 +144,10 @@ export default class Rect {
     	return new Point({ x: this.r, y: this.b });
     }
 
-    add(rect: { t: number, r: number, b: number, l: number }): Rect {
-    	return new Rect({
-    		t: this.t + rect.t,
-    		r: this.r + rect.r,
-    		b: this.b + rect.b,
-    		l: this.l + rect.l
+    centerPoint() {
+    	return new Point({
+    		x: this.l + this.width() / 2,
+    		y: this.t + this.height() / 2
     	});
     }
 }
