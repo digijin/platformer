@@ -7,7 +7,6 @@ import * as PIXI from "pixi.js";
 
 import log from "loglevel";
 
-const SECS = 2;
 // FLOWHACK
 export default class BriefingEnd extends Base {
     frame: number = 0;
@@ -15,6 +14,7 @@ export default class BriefingEnd extends Base {
     flash: PIXI.Graphics;
     swapped: boolean = false;
     flashMaxWidth: number = 100;
+    manager: Object;
     init(engine: Engine) {
     	log.debug("BriefingEnd transition has begun");
     	this.tag("transition");

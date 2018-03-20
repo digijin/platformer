@@ -14,42 +14,43 @@ import Briefing from "../Scene/Briefing";
 class ResultsContainer extends PIXI.Container {}
 export default class ResultsManager extends GameObject {
     time: number = 0;
+    heading: PIXI.Text;
     init(engine: Engine) {
-		super.init(engine);
-		this.container = new ResultsContainer();
-		this.engine.stage.addChild(this.container);
+    	super.init(engine);
+    	this.container = new ResultsContainer();
+    	this.engine.stage.addChild(this.container);
 
-		// this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-		this.background = new FireBackground({
-			parent: this.container,
-			position: new Point({ x: 0, y: 0 }),
-			rotation: 0,
-			delay: 0
-		});
-		this.engine.register(this.background);
+    	// this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
+    	this.background = new FireBackground({
+    		parent: this.container,
+    		position: new Point({ x: 0, y: 0 }),
+    		rotation: 0,
+    		delay: 0
+    	});
+    	this.engine.register(this.background);
 
-		this.button = new Button({ text: "Back to Menu" });
-		this.button.on("mouseup", () => {
-			log.debug("ResultsManager button mouseup");
-			// this.engine.startSceneTransition(new Level(), new Doors());
-			this.engine.startScene(new Briefing());
-		});
-		this.container.addChild(this.button);
+    	this.button = new Button({ text: "Back to Menu" });
+    	this.button.on("mouseup", () => {
+    		log.debug("ResultsManager button mouseup");
+    		// this.engine.startSceneTransition(new Level(), new Doors());
+    		this.engine.startScene(new Briefing());
+    	});
+    	this.container.addChild(this.button);
 
-		this.heading = new PIXI.Text("Level Complete", {
-			fontFamily: "HeadingFont",
-			fontSize: 72,
-			fill: 0xffffff,
-			align: "center"
-		});
-		this.container.addChild(this.heading);
+    	this.heading = new PIXI.Text("Level Complete", {
+    		fontFamily: "HeadingFont",
+    		fontSize: 72,
+    		fill: 0xffffff,
+    		align: "center"
+    	});
+    	this.container.addChild(this.heading);
 
-		// this.container.addChild(this.background);
-	}
+    	// this.container.addChild(this.background);
+    }
 
     exit() {
-		this.engine.stage.removeChild(this.container);
-	}
+    	this.engine.stage.removeChild(this.container);
+    }
 
     update() {
     	this.time += this.engine.deltaTime;

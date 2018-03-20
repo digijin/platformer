@@ -1,16 +1,9 @@
 // @flow
 
-import Player from "Actor/Player";
-import Enemy from "Actor/Enemy";
-
-import Point from "Utility/Point";
 import Base from "./Base";
-import Grid from "Grid";
 import Background from "GameObject/BackgroundBuildings";
-import Skyline from "GameObject/Skyline";
 
 import StoryTeller from "GameObject/StoryTeller";
-import EnergyBar from "../GameObject/EnergyBar";
 import type Engine from "Engine";
 
 import PauseMenu from "GameObject/PauseMenu";
@@ -27,7 +20,8 @@ export default class Level extends Base {
 		// FLOWHACK
 		document.body.style.backgroundColor = "#ddaaee";
 		let bg = new Background();
-		bg.spawnExplosion = () => {};
+		// bg.spawnExplosion = () => {};
+		bg.explosions = false;
 		engine.register(bg);
 
 		engine.ui.dispatch({

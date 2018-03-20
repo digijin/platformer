@@ -36,6 +36,7 @@ export default class Background extends GameObject {
     bg: PIXI.Sprite;
     ground: PIXI.Sprite;
     buildings: Array<PIXI.Sprite>;
+    explosions: boolean = true;
     constructor() {
     	super();
     	this.stage = new PIXI.Container();
@@ -165,6 +166,9 @@ export default class Background extends GameObject {
     }
 
     spawnExplosion() {
+    	if (!this.explosions) {
+    		return;
+    	}
     	let types = [
     		ExplosionUp1,
     		ExplosionUp2,
