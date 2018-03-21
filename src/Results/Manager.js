@@ -15,6 +15,7 @@ class ResultsContainer extends PIXI.Container {}
 export default class ResultsManager extends GameObject {
     time: number = 0;
     heading: PIXI.Text;
+    button: Button;
     init(engine: Engine) {
     	super.init(engine);
     	this.container = new ResultsContainer();
