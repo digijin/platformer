@@ -62,6 +62,7 @@ export default class Actor extends Renderable {
     		);
     	}
     };
+
     getBoundingRect = (): Rect => {
     	return Rect.fromPosSizeRego(
     		this.position,

@@ -34,6 +34,7 @@ export default class Grid extends GameObject {
     		return [].concat(a, b);
     	}, []);
     };
+
     parent: PIXI.Container;
     blockStage: PIXI.Container;
     decorStage: PIXI.Container;
@@ -58,6 +59,7 @@ export default class Grid extends GameObject {
     	// this.decorStage.position.y = -this.engine.view.offset.y;
     	// this.renderDebugBlockPixelLine();
     };
+
     blocks: Array<Array<Block>>;
 
     width: number;

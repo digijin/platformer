@@ -101,6 +101,7 @@ export default class Missile extends Projectile {
     		}
     	}
     };
+
     maxSpeed: number = 40;
     minSpeed: number = 1;
     acceleration: number = 20;

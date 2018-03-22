@@ -127,6 +127,7 @@ class EditorPanel extends React.Component {
     	newstate.expanded[target] = !this.state.expanded[target];
     	this.setState(newstate);
     };
+
     handleTabChange = (event, value) => {
     	this.setState({ tab: value });
     	this.watcher.mode = this.tabs[value];

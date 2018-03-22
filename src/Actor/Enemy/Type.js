@@ -27,6 +27,7 @@ export default class EnemyType {
         x: number,
         y: number
     };
+
     name: string;
 
     jumpSpeed: number;

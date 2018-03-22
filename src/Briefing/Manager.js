@@ -37,6 +37,7 @@ export default class BriefingManager extends GameObject {
 
     	this.infoPanel.render(mission);
     };
+
     init(engine: Engine) {
     	super.init(engine);
     	this.tag("briefingmanager");
