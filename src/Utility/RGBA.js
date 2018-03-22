@@ -1,6 +1,6 @@
 //@flow
 
-import type Point from "Utility/Point";
+// import type Point from "Utility/Point";
 
 type rgbaParams = {
     r: number,
@@ -11,38 +11,38 @@ type rgbaParams = {
 
 export default class RGBA {
 	static fromStops(stops: Array<rgbaParams>, pc: number) {
-    	let l = stops.length - 1;
-    	let prevStop = Math.floor(pc * l);
-    	let nextStop = Math.ceil(pc * l);
-    	pc = (l * pc) % 1;
-    	let ipc = 1 - pc;
-    	let p = stops[prevStop];
-    	let n = stops[nextStop];
-    	return new RGBA({
-    		r: p.r * ipc + n.r * pc,
-    		g: p.g * ipc + n.g * pc,
-    		b: p.b * ipc + n.b * pc,
-    		a: p.a * ipc + n.a * pc
-    	});
+		let l = stops.length - 1;
+		let prevStop = Math.floor(pc * l);
+		let nextStop = Math.ceil(pc * l);
+		pc = (l * pc) % 1;
+		let ipc = 1 - pc;
+		let p = stops[prevStop];
+		let n = stops[nextStop];
+		return new RGBA({
+			r: p.r * ipc + n.r * pc,
+			g: p.g * ipc + n.g * pc,
+			b: p.b * ipc + n.b * pc,
+			a: p.a * ipc + n.a * pc
+		});
 	}
 
 	static fromNumber(num: number) {
-    	return new RGBA({
-    		r: ((num >> 16) % 256) / 255,
-    		g: ((num >> 8) % 256) / 255,
-    		b: (num % 256) / 255,
-    		a: 1
-    	});
+		return new RGBA({
+			r: ((num >> 16) % 256) / 255,
+			g: ((num >> 8) % 256) / 255,
+			b: (num % 256) / 255,
+			a: 1
+		});
 	}
 
 	static fromString(str: string) {
-    	str = str.replace("#", "");
-    	return new RGBA({
-    		r: parseInt(str.substr(0, 2), 16) / 255,
-    		g: parseInt(str.substr(2, 2), 16) / 255,
-    		b: parseInt(str.substr(4, 2), 16) / 255,
-    		a: 1
-    	});
+		str = str.replace("#", "");
+		return new RGBA({
+			r: parseInt(str.substr(0, 2), 16) / 255,
+			g: parseInt(str.substr(2, 2), 16) / 255,
+			b: parseInt(str.substr(4, 2), 16) / 255,
+			a: 1
+		});
 	}
 
     a: number;
