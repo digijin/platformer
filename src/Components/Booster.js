@@ -26,7 +26,7 @@ const boosterParams: Array<BoosterParams> = [
 		name: "Fisher-Pryce My First Booster",
 		id: "StarterBooster",
 		weight: 1,
-		power: 100,
+		power: 10,
 		energyDrain: 300,
 		energyCost: 20
 	},
@@ -34,7 +34,7 @@ const boosterParams: Array<BoosterParams> = [
 		name: "Chicken Brand Booster",
 		id: "Booster2",
 		weight: 1,
-		power: 500,
+		power: 20,
 		energyDrain: 300,
 		energyCost: 20
 	},
@@ -43,7 +43,7 @@ const boosterParams: Array<BoosterParams> = [
 		name: "Rocket Hare",
 		id: "Boosterx",
 		weight: 1,
-		power: 10000,
+		power: 100,
 		energyDrain: 300,
 		energyCost: 20
 	}

@@ -148,7 +148,7 @@ export default class Player extends Actor {
     					booster.energyDrain * this.engine.deltaTime
     				)
     			) {
-    				this.v -= 4; //BOOSTERS
+    				this.v -= booster.power; //BOOSTERS
     				// this.v -= this.engine.deltaTime * 4; //BOOSTERS
     			}
     		}
