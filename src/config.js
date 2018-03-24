@@ -104,6 +104,16 @@ export default {
 			]
 		},
 		buttons: {
+			down: [
+				{
+					type: "keyboard",
+					key: "down"
+				},
+				{
+					type: "keyboard",
+					key: "s"
+				}
+			],
 			jump: [
 				{
 					type: "gamepad",
