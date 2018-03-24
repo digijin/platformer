@@ -136,12 +136,12 @@ export default class Player extends Actor {
     		this.h = 0;
     	}
     	//check walls
-    	let hDelta = this.h * this.engine.deltaTime * config.player.speed;
+    	let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
     	//VERTICAL MOVEMENT
     	if (this.engine.input.getButtonDown("jump")) {
     		if (!this.airborne) {
-    			this.v = -config.player.jump.power; //jump
+    			this.v = -legs.jumpPower; //jump
     		} else {
     			if (
     				this.spendEnergy(
