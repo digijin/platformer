@@ -12,32 +12,6 @@ import type Block from "Grid/Block";
 // let engine: Engine;
 
 export default class Actor extends Renderable {
-    h: number;
-
-    v: number;
-    z: number;
-    hp: number;
-    maxhp: number;
-    canMoveVert = (amount: number): boolean => {
-    	let boundingRect = this.getBoundingRect();
-    	let targetRect = boundingRect.move({ x: 0, y: amount });
-    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-    	let obstacles = blocks.filter(block => {
-    		return !block.isEmpty();
-    	});
-    	return obstacles.length == 0;
-    };
-
-    canMoveHori = (amount: number): boolean => {
-    	let boundingRect = this.getBoundingRect();
-    	let targetRect = boundingRect.move({ x: amount, y: 0 });
-    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-    	let obstacles = blocks.filter(block => {
-    		return !block.isEmpty();
-    	});
-    	return obstacles.length == 0;
-    };
-
     explode = () => {
     	this.destroy();
     	//fill rect with explosions
@@ -62,6 +36,32 @@ export default class Actor extends Renderable {
     		);
     	}
     };
+
+    h: number;
+    z: number;
+    hp: number;
+    maxhp: number;
+    canMoveVert = (amount: number): boolean => {
+    	let boundingRect = this.getBoundingRect();
+    	let targetRect = boundingRect.move({ x: 0, y: amount });
+    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+    	let obstacles = blocks.filter(block => {
+    		return !block.isEmpty();
+    	});
+    	return obstacles.length == 0;
+    };
+
+    canMoveHori = (amount: number): boolean => {
+    	let boundingRect = this.getBoundingRect();
+    	let targetRect = boundingRect.move({ x: amount, y: 0 });
+    	let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+    	let obstacles = blocks.filter(block => {
+    		return !block.isEmpty();
+    	});
+    	return obstacles.length == 0;
+    };
+
+    v: number;
 
     getBoundingRect = (): Rect => {
     	return Rect.fromPosSizeRego(

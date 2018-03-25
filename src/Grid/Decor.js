@@ -12,11 +12,11 @@ import * as PIXI from "pixi.js";
 
 export default class Decor {
 	position: Point; //grid position
-	texture: PIXI.Texture;
 	sprite: PIXI.Sprite;
 	type: string;
 	grid: Grid;
 	hp: number;
+	texture: PIXI.Texture;
 	constructor(params: {
 		position: Point,
 		type: string,
@@ -36,14 +36,8 @@ export default class Decor {
 		return DecorTypeMap[this.type];
 	}
 
-	get rect(): Rect {
-		let type = this.getType();
-		return new Rect({
-			t: this.position.y * config.grid.width,
-			r: (this.position.x + type.width) * config.grid.width,
-			b: (this.position.y + type.height) * config.grid.width,
-			l: this.position.x * config.grid.width
-		});
+	isEmpty(): boolean {
+		return this.type == "0";
 	}
 
 	damage(amount: number) {
@@ -85,7 +79,13 @@ export default class Decor {
 		});
 	}
 
-	isEmpty(): boolean {
-		return this.type == "0";
+	get rect(): Rect {
+		let type = this.getType();
+		return new Rect({
+			t: this.position.y * config.grid.width,
+			r: (this.position.x + type.width) * config.grid.width,
+			b: (this.position.y + type.height) * config.grid.width,
+			l: this.position.x * config.grid.width
+		});
 	}
 }

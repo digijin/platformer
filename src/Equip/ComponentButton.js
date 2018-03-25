@@ -7,14 +7,14 @@ import RGBA from "Utility/RGBA";
 import log from "loglevel";
 
 export default class Button extends GameObject {
+    textColor: number = this.textColorDefault;
     textColorDefault: number = 0xc9d3d0;
-    textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     backgroundColorDefault: number = 0x555555;
     backgroundColorOver: number = 0x999999;
     backgroundColorSelected: number = 0x222222;
 
-    textColor: number = this.textColorDefault;
+    textColorOver: number = 0xffffff;
     backgroundColor: number = this.backgroundColorDefault;
 
     padding: { x: number, y: number } = { x: 10, y: 2 };

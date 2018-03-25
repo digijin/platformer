@@ -61,13 +61,13 @@ let hand = {
 import Leg from "Mech/Leg";
 export default class Player extends Actor {
     leg: Leg;
-    //this stuff basically to hack in equip panel
-    targetOffset: Point = new Point();
-    primaryReload: number = 0;
     graph: PIXI.Graphics;
     airborne: boolean = false;
     energy: number = 0;
     container: PIXI.Container;
+    primaryReload: number = 0;
+    //this stuff basically to hack in equip panel
+    targetOffset: Point = new Point();
 
     constructor(params: { position: Point, container: PIXI.Container }) {
     	super(params);
@@ -217,24 +217,6 @@ export default class Player extends Actor {
     	this.position.x += hDelta;
     }
 
-    handleLanding(speed: number) {
-    	for (let i = 0; i < speed; i++) {
-    		this.engine.register(
-    			new Shell({
-    				container: this.container,
-    				position: this.position.subtract({
-    					x: 0,
-    					// y: config.player.size.h / 2
-    					y: 0
-    				}),
-    				h: (Math.random() - 0.5) * 10,
-    				v: Math.random() * 2,
-    				time: 0.1 + Math.random()
-    			})
-    		);
-    	}
-    }
-
     updateGrapple() {
     	if (hand.state == HAND_STATE.ARMED) {
     		hand.position = this.position.add(hand.offset);
@@ -355,6 +337,14 @@ export default class Player extends Actor {
     	}
     }
 
+    spendEnergy(amount: number): boolean {
+    	if (this.energy >= amount) {
+    		this.energy -= amount;
+    		return true;
+    	}
+    	return false;
+    }
+
     damage() {
     	//overrides parent, does nothing... invincible!
     }
@@ -419,11 +409,21 @@ export default class Player extends Actor {
     	this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
     }
 
-    spendEnergy(amount: number): boolean {
-    	if (this.energy >= amount) {
-    		this.energy -= amount;
-    		return true;
+    handleLanding(speed: number) {
+    	for (let i = 0; i < speed; i++) {
+    		this.engine.register(
+    			new Shell({
+    				container: this.container,
+    				position: this.position.subtract({
+    					x: 0,
+    					// y: config.player.size.h / 2
+    					y: 0
+    				}),
+    				h: (Math.random() - 0.5) * 10,
+    				v: Math.random() * 2,
+    				time: 0.1 + Math.random()
+    			})
+    		);
     	}
-    	return false;
     }
 }

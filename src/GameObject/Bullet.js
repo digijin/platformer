@@ -21,10 +21,10 @@ const GLOWSTRENGTH = 2;
 const GLOWQUALITY = 0.5;
 
 export default class Bullet extends Projectile {
+    style: string;
     // x: number; position
     // y: number; position
     position: Point;
-    graph: PIXI.Graphics;
     time: number;
     owner: Actor;
     speed: number;
@@ -36,7 +36,7 @@ export default class Bullet extends Projectile {
     dir: number;
     h: number; //momentum
 
-    style: string;
+    graph: PIXI.Graphics;
     update = () => {
     	// console.log("update");
     	this.time -= this.engine.deltaTime;

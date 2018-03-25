@@ -11,8 +11,8 @@ import Panel from "./Panel";
 type Props = {};
 
 export default class BarPanel extends Panel {
+    pointGap: number = 10;
     heading: PIXI.Text;
-    props: Props;
 
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
@@ -20,7 +20,7 @@ export default class BarPanel extends Panel {
     graph: PIXI.Graphics;
     height: number = 60;
     numvalues: number = 25;
-    pointGap: number = 10;
+    props: Props;
 
     speed: number = 0.5;
     targetValues: Array<number> = [];
