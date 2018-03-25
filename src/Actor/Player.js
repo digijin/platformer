@@ -136,7 +136,6 @@ export default class Player extends Actor {
     		this.h = 0;
     	}
     	//check walls
-    	let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
     	//DOWNWARD BOOSTERS
     	if (this.airborne) {
@@ -144,6 +143,26 @@ export default class Player extends Actor {
     			this.v = booster.power;
     		}
     	}
+
+    	//BOOSTERS
+    	if (this.engine.input.getButton("boost")) {
+    		// console.log(this.engine.input.getAxis("horizontal"));
+    		this.h *= 2;
+    		this.engine.register(
+    			new BoosterParticle({
+    				container: this.container,
+    				position: this.position.subtract({
+    					x: 0,
+    					y: config.player.size.h / 2
+    				}),
+    				h: this.h,
+    				v: 0.5,
+    				time: 0.2
+    			})
+    		);
+    	}
+
+    	let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
     	//VERTICAL MOVEMENT
     	if (this.engine.input.getButtonDown("jump")) {

@@ -104,6 +104,12 @@ export default {
 			]
 		},
 		buttons: {
+			boost: [
+				{
+					type: "keyboard",
+					key: "shift"
+				}
+			],
 			down: [
 				{
 					type: "keyboard",
