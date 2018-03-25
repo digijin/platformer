@@ -180,17 +180,15 @@ export default class Player extends Actor {
     	this.airborne = !onGround;
 
     	if (!this.canMoveVert(this.v)) {
-    		//TODO: if going down land on ground precisely
-    		// console.log("abs123");
-    		const landing = this.position.y % config.grid.width !== 0;
-    		// this.position.y +=
-    		//     config.grid.width - this.position.y % config.grid.width;
+    		//LAND ON GROUND
+    		const isLanding = this.position.y % config.grid.width !== 0;
     		this.position.y =
                 Math.ceil(this.position.y / config.grid.width) *
                 config.grid.width;
 
-    		if (landing) {
-    			console.log("yoloooo", this.v);
+    		if (isLanding) {
+    			// console.log("yoloooo", this.v);
+    			this.handleLanding(this.v);
     		}
     		this.v = 0;
     	}
@@ -217,6 +215,24 @@ export default class Player extends Actor {
 
     	this.position.y += this.v;
     	this.position.x += hDelta;
+    }
+
+    handleLanding(speed: number) {
+    	for (let i = 0; i < speed; i++) {
+    		this.engine.register(
+    			new Shell({
+    				container: this.container,
+    				position: this.position.subtract({
+    					x: 0,
+    					// y: config.player.size.h / 2
+    					y: 0
+    				}),
+    				h: (Math.random() - 0.5) * 10,
+    				v: Math.random() * 2,
+    				time: 0.1 + Math.random()
+    			})
+    		);
+    	}
     }
 
     updateGrapple() {
