@@ -141,7 +141,6 @@ export default class Player extends Actor {
     	//DOWNWARD BOOSTERS
     	if (this.airborne) {
     		if (this.engine.input.getButtonDown("down")) {
-    			console.log("...data");
     			this.v = booster.power;
     		}
     	}
@@ -181,8 +180,19 @@ export default class Player extends Actor {
     	this.airborne = !onGround;
 
     	if (!this.canMoveVert(this.v)) {
-    		this.v = 0;
     		//TODO: if going down land on ground precisely
+    		// console.log("abs123");
+    		const landing = this.position.y % config.grid.width !== 0;
+    		// this.position.y +=
+    		//     config.grid.width - this.position.y % config.grid.width;
+    		this.position.y =
+                Math.ceil(this.position.y / config.grid.width) *
+                config.grid.width;
+
+    		if (landing) {
+    			console.log("yoloooo", this.v);
+    		}
+    		this.v = 0;
     	}
     	// END VERTICAL
 
