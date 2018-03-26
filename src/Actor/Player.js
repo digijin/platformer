@@ -128,7 +128,13 @@ export default class Player extends Actor {
     	let legs = LegMap[this.engine.currentPlayer.legs];
 
     	let boundingRect = this.getBoundingRect();
-    	this.h = this.engine.input.getAxis("horizontal");
+
+    	if (this.airborne) {
+    		this.h += this.engine.input.getAxis("horizontal");
+    		this.h *= 0.7;
+    	} else {
+    		this.h = this.engine.input.getAxis("horizontal");
+    	}
     	if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
     		this.h = gp.axes[0];
     	}
