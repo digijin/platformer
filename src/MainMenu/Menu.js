@@ -31,6 +31,7 @@ export default class MainMenu extends GameObject {
     		y: 0.5
     	};
     	this.fadein = new PIXI.Sprite(PIXI.Texture.WHITE);
+    	this.fadein.tint = 0x000000;
     }
 
     init(engine: Engine) {
@@ -42,7 +43,7 @@ export default class MainMenu extends GameObject {
 
     exit() {
     	this.engine.stage.removeChild(this.hero);
-    	this.engine.stage.removeChild(this.fadeIn);
+    	this.engine.stage.removeChild(this.fadein);
     }
 
     update() {
