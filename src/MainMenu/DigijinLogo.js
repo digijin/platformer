@@ -268,7 +268,11 @@ export default class DigijinLogo extends GameObject {
     	if (this.time > RENDERTIME + HOLDTIME + FADETIME) {
     		document.body.style.backgroundColor = "black";
     	}
-    	if (this.time > RENDERTIME + HOLDTIME + FADETIME + SPEED) {
+
+    	if (
+    		this.engine.input.getButton("fire") ||
+            this.time > RENDERTIME + HOLDTIME + FADETIME + SPEED
+    	) {
     		//end
     		ctx.globalAlpha = 1;
     		this.engine.startScene(new MainMenu());

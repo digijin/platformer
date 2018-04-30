@@ -36,7 +36,7 @@ export default class MainMenu extends GameObject {
 
     init(engine: Engine) {
     	super.init(engine);
-    	this.engine.stage.addChild(this.hero);
+    	// this.engine.stage.addChild(this.hero);
     	this.engine.stage.addChild(this.fadein);
     	this.update();
     }

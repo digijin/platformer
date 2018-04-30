@@ -129,6 +129,9 @@ export default class Player extends Actor {
 
     	let boundingRect = this.getBoundingRect();
 
+    	//CHANGE THIS SHIT
+    	// conserve momentum in the air
+
     	if (this.airborne) {
     		this.h += this.engine.input.getAxis("horizontal");
     		this.h *= 0.7;
