@@ -22,6 +22,8 @@ import { BoosterMap } from "../Components/Booster";
 import { EngineMap } from "../Components/Engine";
 import type Booster from "../Components/Booster";
 
+import { clamp } from "lodash-es";
+
 import type ComponentEngine from "../Components/Engine";
 
 import * as PIXI from "pixi.js";
@@ -133,8 +135,12 @@ export default class Player extends Actor {
     	// conserve momentum in the air
 
     	if (this.airborne) {
-    		this.h += this.engine.input.getAxis("horizontal");
-    		this.h *= 0.7;
+    		this.h +=
+                this.engine.input.getAxis("horizontal") *
+                this.engine.deltaTime *
+                5;
+    		this.h = clamp(this.h, -1, 1);
+    		// this.h *= 0.7;
     	} else {
     		this.h = this.engine.input.getAxis("horizontal");
     	}
