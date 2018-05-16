@@ -11,6 +11,7 @@ import BasePanel from "./BasePanel";
 import RadarPanel from "./RadarPanel";
 import GraphPanel from "./GraphPanel";
 import BarPanel from "./BarPanel";
+import SideMenu from "./SideMenu";
 import LineChartPanel from "./LineChartPanel";
 import { GlitchFilter } from "@pixi/filter-glitch";
 import { OldFilmFilter } from "@pixi/filter-old-film";
@@ -22,6 +23,9 @@ import * as PIXI from "pixi.js";
 import dottedbg from "./dottedbg.png";
 
 import Point from "Utility/Point";
+
+class BriefingContainer extends PIXI.Container {}
+class NewBriefingContainer extends PIXI.Container {}
 
 export default class BriefingManager extends GameObject {
     onMissionChange = mission => {
@@ -41,7 +45,8 @@ export default class BriefingManager extends GameObject {
     init(engine: Engine) {
     	super.init(engine);
     	this.tag("briefingmanager");
-    	this.container = new PIXI.Container();
+    	this.container = new BriefingContainer();
+    	this.newcontainer = new NewBriefingContainer();
 
     	this.bg = new PIXI.extras.TilingSprite(
     		new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
@@ -62,6 +67,11 @@ export default class BriefingManager extends GameObject {
     		window.innerWidth / 2,
     		window.innerHeight / 2
     	];
+    	//SIDE SideMenu
+    	this.sideMenu = new SideMenu();
+    	this.engine.register(this.sideMenu);
+    	this.newcontainer.addChild(this.sideMenu.container);
+
     	//MISSIONS
     	this.missionsPanel = new MissionsPanel({
     		offset: new Point(),
@@ -212,10 +222,12 @@ export default class BriefingManager extends GameObject {
     	});
 
     	this.engine.stage.addChild(this.container);
+    	this.engine.stage.addChild(this.newcontainer);
     }
 
     exit() {
     	this.engine.stage.removeChild(this.container);
+    	this.engine.stage.removeChild(this.newcontainer);
     }
 
     update() {
