@@ -1,6 +1,8 @@
 /// @flow
 import GameObject from "GameObject";
 
+import Header from "./SideMenu/Header";
+
 import * as PIXI from "pixi.js";
 
 export default class SideMenu extends GameObject {
@@ -12,6 +14,8 @@ export default class SideMenu extends GameObject {
 
     init() {
     	this.container = new PIXI.Container();
+    	this.header = new Header();
+    	this.container.addChild(this.header);
     	this.background = new PIXI.Container();
     	this.container.addChild(this.background);
     	this.border = new PIXI.Graphics();
