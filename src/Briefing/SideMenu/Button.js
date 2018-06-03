@@ -22,12 +22,12 @@ export default class Button extends PIXI.Container {
 		this.addChild(this.bg);
 
 		this.text = new PIXI.Text(params.text, {
-			fontFamily: "Arial",
-			fontSize: 24,
+			fontFamily: "RobotoBold",
+			fontSize: 20,
 			fill: UICOLOUR,
 			align: "center"
 		});
-		this.text.x = this.text.y = 16;
+		this.text.x = this.text.y = 14;
 		this.addChild(this.text);
 
 		this.on("mouseover", e => {

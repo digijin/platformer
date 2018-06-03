@@ -4,7 +4,7 @@ export default class Header extends PIXI.Container {
 	constructor() {
 		super();
 		let text = new PIXI.Text("header", {
-			fontFamily: "Arial",
+			fontFamily: "Roboto",
 			fontSize: 24,
 			fill: 0xffffff,
 			align: "center"

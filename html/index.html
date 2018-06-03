@@ -5,13 +5,23 @@
 	<meta charset="UTF-8">
 	<title>Sim</title>
 	<script src="/bundle.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link hrf="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<style type="text/css">
+	@font-face {
+	    font-family: "Roboto";
+	    src: url(/assets/Roboto-Regular.ttf) format("truetype");
+	}
+	@font-face {
+	    font-family: "RobotoBold";
+	    src: url(/assets/Roboto-Bold.ttf) format("truetype");
+	}
+	</style>
 	<script>
-		if (window.require) {
-			console.log('zap!');
-			require('./bundle.js');
-		}/*electron*/
-	</script>
+	if (window.require) {
+	console.log("zap!");
+	require("./bundle.js");
+} /*electron*/
+</script>
 </head>
 
 <body>

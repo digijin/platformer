@@ -69,9 +69,6 @@ export default class BriefingManager extends GameObject {
 			window.innerHeight / 2
 		];
 		//SIDE SideMenu
-		// this.sideMenu = new SideMenu();
-		// this.engine.register(this.sideMenu);
-		// this.newcontainer.addChild(this.sideMenu.container);
 		this.newcontainer.addChild(new Menu());
 
 		//MISSIONS
