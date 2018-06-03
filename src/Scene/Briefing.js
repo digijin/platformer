@@ -18,7 +18,9 @@ export default class Briefing extends Base {
 			y: 0
 		});
 
-		engine.register(new Manager());
+		setTimeout(() => {
+			engine.register(new Manager());
+		}, 100);
 
 		document.body.style.backgroundColor = "#0e0405";
 		// engine.ui.dispatch({ type: "START_SCENE", scene: "briefing" });

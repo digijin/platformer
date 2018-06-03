@@ -36,10 +36,10 @@ export default class Menu extends PIXI.Container {
 				alpha: 0.25
 			})
 		);
-		const header = new Header();
-		header.x = 100;
-		header.y = 20;
-		this.addChild(header);
+		this.header = new Header();
+		this.header.x = 100;
+		this.header.y = 20;
+		this.addChild(this.header);
 		//BUTTONS
 		[
 			{ text: "MISSIONS" },

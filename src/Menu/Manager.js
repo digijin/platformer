@@ -49,7 +49,14 @@ export default class MenuManager extends GameObject {
 		// 	window.innerHeight / 2
 		// ];
 		//SIDE SideMenu
-		this.container.addChild(new Menu());
+
+		this.loading = new PIXI.Text("LOADING", {
+			fontFamily: "RobotoBold",
+			fontSize: 20,
+			fill: 0xffffff,
+			align: "center"
+		});
+		this.container.addChild(this.loading);
 
 		this.engine.stage.addChild(this.container);
 	}
@@ -59,7 +66,22 @@ export default class MenuManager extends GameObject {
 		this.engine.stage.removeChild(this.newcontainer);
 	}
 
+	checkLoaded() {
+		if (this.loading) {
+			const width = this.loading.width;
+			this.loading.style.fill = Math.floor(Math.random() * 0xffffff);
+			if (this.loading.width !== width) {
+				this.container.removeChild(this.loading);
+				delete this.loading;
+				this.menu = new Menu();
+				this.container.addChild(this.menu);
+			}
+		}
+	}
+
 	update() {
+		this.checkLoaded();
+		// this.menu.header.text.style.fill = 0x0;
 		// this.animateFilters();
 		// this.glitch();
 	}
