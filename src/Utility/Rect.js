@@ -15,14 +15,14 @@ export type RenderParams = {
 };
 
 export default class Rect {
-	// static fromXYWH(params: { x: number, y: number, w: number, h: number }) {
-	// 	return new Rect({
-	// 		l: params.x,
-	// 		t: params.y,
-	// 		r: params.x + params.w,
-	// 		b: params.y + params.h
-	// 	});
-	// }
+	static fromXYWH(params: { x: number, y: number, w: number, h: number }) {
+		return new Rect({
+			l: params.x,
+			t: params.y,
+			r: params.x + params.w,
+			b: params.y + params.h
+		});
+	}
 
 	static fromPosSizeRego(
 		pos: Point,
@@ -39,7 +39,10 @@ export default class Rect {
 		});
 	}
 
-	static fromPoints(pt1: { x: number, y: number }, pt2: { x: number, y: number }) {
+	static fromPoints(
+		pt1: { x: number, y: number },
+		pt2: { x: number, y: number }
+	) {
 		return new Rect({
 			l: Math.min(pt1.x, pt2.x),
 			r: Math.max(pt1.x, pt2.x),
