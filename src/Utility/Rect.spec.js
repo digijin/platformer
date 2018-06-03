@@ -2,6 +2,15 @@ import Rect from "./Rect";
 import Point from "./Point";
 
 describe("Utility/Rect", () => {
+	describe("fromXYWH", () => {
+		it('should work', () => {
+			let rect = Rect.fromXYWH({x:10, y:20, w:30, h:40});
+			expect(rect.t).toBe(20)
+			expect(rect.r).toBe(40)
+			expect(rect.b).toBe(60)
+			expect(rect.l).toBe(10)
+		})
+	})
 	describe("fromPosSizeRego", () => {
 		it("should work", () => {
 			let pos = { x: 100, y: 200 };
