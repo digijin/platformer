@@ -5,8 +5,13 @@ import Header from "./SideMenu/Header";
 
 import * as PIXI from "pixi.js";
 
+import { UICOLOUR } from "./constants";
+
 export default class SideMenu extends GameObject {
     container: PIXI.Container;
+    header: Header;
+    background: PIXI.Container;
+    border: PIXI.Graphics;
 
     constructor() {
     	super();
@@ -20,10 +25,10 @@ export default class SideMenu extends GameObject {
     	this.container.addChild(this.background);
     	this.border = new PIXI.Graphics();
     	this.background.addChild(this.border);
-    	this.resize();
+    	this.render();
     }
 
-    resize() {
+    render() {
     	const width = 300;
     	const height = window.innerHeight;
     	const padding = 10;
@@ -32,7 +37,7 @@ export default class SideMenu extends GameObject {
     	this.border.position.set(10, 10);
     	this.border.clear();
     	this.border
-    		.lineStyle(1, 0x655a61)
+    		.lineStyle(1, UICOLOUR)
     		.moveTo(0, 0)
     		.lineTo(width, 0)
     		.lineTo(width, height - padding)
