@@ -20,7 +20,7 @@ export default class Menu extends Base {
 
 		engine.register(new Manager());
 
-		document.body.style.backgroundColor = "#0e0405";
+		document.body.style.backgroundColor = "#353232";
 		// engine.ui.dispatch({ type: "START_SCENE", scene: "briefing" });
 	}
 }

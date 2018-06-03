@@ -15,7 +15,7 @@ export default class Menu extends PIXI.Container {
 				rect: new Rect({
 					t: 10,
 					b: window.innerHeight - 10,
-					r: 250,
+					r: 260,
 					l: 10
 				}),
 				border: 1,
@@ -29,7 +29,7 @@ export default class Menu extends PIXI.Container {
 				rect: new Rect({
 					t: 14,
 					b: 70,
-					r: 246,
+					r: 256,
 					l: 14
 				}),
 				fillColor: UICOLOUR,

@@ -29,16 +29,16 @@ export default class MenuManager extends GameObject {
 		this.tag("menumanager");
 		this.container = new MenuContainer();
 
-		this.bg = new PIXI.extras.TilingSprite(
-			new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
-		);
-		this.bg.z = -1;
-		this.bg.width = window.innerWidth;
-		this.bg.height = window.innerHeight;
-		// this.bg.x = -window.innerWidth / 2;
-		// this.bg.y = -window.innerHeight / 2;
-		// this.engine.stage.addChild(this.bg);
-		this.container.addChild(this.bg);
+		// this.bg = new PIXI.extras.TilingSprite(
+		// 	new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
+		// );
+		// this.bg.z = -1;
+		// this.bg.width = window.innerWidth;
+		// this.bg.height = window.innerHeight;
+		// // this.bg.x = -window.innerWidth / 2;
+		// // this.bg.y = -window.innerHeight / 2;
+		// // this.engine.stage.addChild(this.bg);
+		// this.container.addChild(this.bg);
 
 		// this.bg.filters = [new OldFilmFilter({ sepia: 0, noise: 0.1 })];
 
