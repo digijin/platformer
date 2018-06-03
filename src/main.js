@@ -22,7 +22,11 @@ window.onload = () => {
 		// load pixi assets before we even parse Game
 		// so that any references to pixi can be referenced as they are parsed
 		// and not have init checks and shit everywhere
-		let Game = require("Game").default;
-		window.game = new Game(document.getElementById("container"));
+		// console.log("beep", new Date().getTime());
+		setTimeout(() => {
+			// console.log("boop", new Date().getTime());
+			let Game = require("Game").default;
+			window.game = new Game(document.getElementById("container"));
+		}, 1);
 	});
 };
