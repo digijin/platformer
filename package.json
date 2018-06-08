@@ -5,7 +5,7 @@
 	"main": "dist/bundle.js",
 	"scripts": {
 		"clean": "rm -rf coverage dist",
-		"test": "jest",
+		"test": "./node_modules/.bin/jest",
 		"dev:unit": "jest -o --watch",
 		"dev": "webpack-dev-server --hot --inline",
 		"build": "webpack",
