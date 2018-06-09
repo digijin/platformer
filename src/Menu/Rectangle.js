@@ -33,12 +33,13 @@ export default class Rectangle extends PIXI.Graphics {
 		if (this.fillColor) {
 			this.beginFill(this.fillColor, this.alpha);
 		}
+		//0.5 is added to center the lines into the pixels
 		this.lineStyle(this.border, this.borderColor)
-			.moveTo(this.rect.l, this.rect.t)
-			.lineTo(this.rect.l, this.rect.b)
-			.lineTo(this.rect.r, this.rect.b)
-			.lineTo(this.rect.r, this.rect.t)
-			.lineTo(this.rect.l, this.rect.t);
+			.moveTo(this.rect.l + 0.5, this.rect.t + 0.5)
+			.lineTo(this.rect.r + 0.5, this.rect.t + 0.5)
+			.lineTo(this.rect.r + 0.5, this.rect.b + 0.5)
+			.lineTo(this.rect.l + 0.5, this.rect.b + 0.5)
+			.lineTo(this.rect.l + 0.5, this.rect.t + 0.5);
 		this.cacheAsBitmap = true;
 	}
 }
