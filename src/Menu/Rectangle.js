@@ -1,45 +1,32 @@
+import { CustomPIXIComponent } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 
-import Rect from "Utility/Rect";
-
-type Params = {
-	rect: Rect,
-	border?: number,
-	borderColor: number,
-	alpha?: number,
-	fillColor?: number
-};
-
-export default class Rectangle extends PIXI.Graphics {
-	rect: Rect;
-
-	constructor(params: Params) {
-		super();
-		Object.assign(this, params);
-		this.render();
-	}
-
-	apply(params: Params) {
-		Object.assign(this, params);
-		this.render();
-	}
-
-	render() {
-		this.cacheAsBitmap = false;
-		// this.position.set(10, 10);
-
-		this.clear();
-
-		if (this.fillColor) {
-			this.beginFill(this.fillColor, this.alpha);
+const TYPE = "Rectangle";
+export const behavior = {
+	customDisplayObject: props => new PIXI.Graphics(),
+	customApplyProps: function(instance, oldProps, newProps) {
+		let {
+			fill,
+			x,
+			y,
+			width,
+			height,
+			border,
+			borderColor,
+			alpha
+		} = newProps;
+		// this.cacheAsBitmap = false;
+		if (alpha == undefined) {
+			alpha = 1;
 		}
-		//0.5 is added to center the lines into the pixels
-		this.lineStyle(this.border, this.borderColor)
-			.moveTo(this.rect.l + 0.5, this.rect.t + 0.5)
-			.lineTo(this.rect.r + 0.5, this.rect.t + 0.5)
-			.lineTo(this.rect.r + 0.5, this.rect.b + 0.5)
-			.lineTo(this.rect.l + 0.5, this.rect.b + 0.5)
-			.lineTo(this.rect.l + 0.5, this.rect.t + 0.5);
-		this.cacheAsBitmap = true;
+		instance.clear();
+		if (fill) {
+			instance.beginFill(fill, alpha);
+		}
+		instance.lineStyle(border, borderColor);
+		instance.drawRect(x, y, width, height);
+		instance.endFill();
+		// this.cacheAsBitmap = true;
 	}
-}
+};
+export default CustomPIXIComponent(behavior, TYPE);

@@ -8,13 +8,15 @@ import { GlitchFilter } from "@pixi/filter-glitch";
 // import { OldFilmFilter } from "@pixi/filter-old-film";
 // import { CRTFilter } from "@pixi/filter-crt";
 // import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
-import Menu from "./Menu";
+// import Menu from "./Menu";
 
 // import dottedbg from "./dottedbg.png";
 
 import { render, Text } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import React from "react";
+
+import SideMenu from "./SideMenu";
 
 // Setup PixiJS Application
 
@@ -86,7 +88,8 @@ export default class MenuManager extends GameObject {
 				// this.menu = new Menu();
 				// this.container.addChild(this.menu);
 				render(
-					<Text text="Hello World!" x={200} y={200} />,
+					// <Text text="Hello World!" x={200} y={200} />,
+					<SideMenu />,
 					this.container
 				);
 			}
