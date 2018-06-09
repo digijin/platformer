@@ -5,6 +5,7 @@ class Klass {
 		this.position = { x: 0, y: 0 };
 		this.tilePosition = { x: 0, y: 0 };
 	}
+
 	addChild() {}
 }
 let prox = new Proxy(
@@ -35,6 +36,8 @@ const pixi = {
 	Texture: Klass,
 	Container: Klass,
 	BaseTexture: Klass,
+	Sprite: Klass,
+	Graphics: Klass,
 	extras: {
 		TilingSprite: Klass
 	},
