@@ -6,13 +6,17 @@ import GameObject from "GameObject";
 
 import { GlitchFilter } from "@pixi/filter-glitch";
 // import { OldFilmFilter } from "@pixi/filter-old-film";
-import { CRTFilter } from "@pixi/filter-crt";
-import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
+// import { CRTFilter } from "@pixi/filter-crt";
+// import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
 import Menu from "./Menu";
 
-import * as PIXI from "pixi.js";
+// import dottedbg from "./dottedbg.png";
 
-import dottedbg from "./dottedbg.png";
+import { render, Text } from "react-pixi-fiber";
+import * as PIXI from "pixi.js";
+import React from "react";
+
+// Setup PixiJS Application
 
 class MenuContainer extends PIXI.Container {}
 
@@ -63,7 +67,6 @@ export default class MenuManager extends GameObject {
 
 	exit() {
 		this.engine.stage.removeChild(this.container);
-		this.engine.stage.removeChild(this.newcontainer);
 	}
 
 	update() {
@@ -80,8 +83,12 @@ export default class MenuManager extends GameObject {
 			if (this.loading.width !== width) {
 				this.container.removeChild(this.loading);
 				delete this.loading;
-				this.menu = new Menu();
-				this.container.addChild(this.menu);
+				// this.menu = new Menu();
+				// this.container.addChild(this.menu);
+				render(
+					<Text text="Hello World!" x={200} y={200} />,
+					this.container
+				);
 			}
 		}
 	}
