@@ -19,15 +19,7 @@ export default function SideMenu(props) {
 				border={1}
 				borderColor={0xff5000}
 			/>
-			<Rectangle
-				x={15}
-				y={15}
-				width={250}
-				height={60}
-				fill={0xff5000}
-				alpha={0.25}
-			/>
-			<Header />
+			<Header text={"header text"} />
 		</Container>
 	);
 	// return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
