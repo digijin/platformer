@@ -12,6 +12,8 @@ import type Block from "Grid/Block";
 // let engine: Engine;
 
 export default class Actor extends Renderable {
+    v: number;
+
     explode = () => {
     	this.destroy();
     	//fill rect with explosions
@@ -36,8 +38,6 @@ export default class Actor extends Renderable {
     		);
     	}
     };
-
-    h: number;
     z: number;
     hp: number;
     maxhp: number;
@@ -61,7 +61,7 @@ export default class Actor extends Renderable {
     	return obstacles.length == 0;
     };
 
-    v: number;
+    h: number;
 
     getBoundingRect = (): Rect => {
     	return Rect.fromPosSizeRego(

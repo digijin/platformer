@@ -88,9 +88,11 @@ export default class Point {
   	return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2));
   }
 
-  /** in radians from 0,0 */
-  direction(): number {
-  	return Math.atan2(this.y, this.x);
+  ceil(): Point {
+  	return new Point({
+  		x: Math.ceil(this.x),
+  		y: Math.ceil(this.y)
+  	});
   }
 
   directionTo(point: Point): number {
@@ -175,10 +177,8 @@ export default class Point {
   	});
   }
 
-  ceil(): Point {
-  	return new Point({
-  		x: Math.ceil(this.x),
-  		y: Math.ceil(this.y)
-  	});
+  /** in radians from 0,0 */
+  direction(): number {
+  	return Math.atan2(this.y, this.x);
   }
 }

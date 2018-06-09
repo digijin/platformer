@@ -35,13 +35,13 @@ export default class Building {
 		});
 	}
 
-    sideColor: string;
+    frontColor: string;
     sideWidth: number;
     windowColor: string;
     windowLitColor: string;
     width: number;
     floors: number;
-    frontColor: string;
+    sideColor: string;
     windowHeight: number;
     windowWidth: number;
     windowMargin: number;

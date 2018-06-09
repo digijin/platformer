@@ -22,14 +22,6 @@ import log from "loglevel";
 import * as PIXI from "pixi.js";
 
 export default class Missile extends Projectile {
-    guided: boolean;
-    trajectory: Line;
-
-    maxSpeed: number = 40;
-    minSpeed: number = 1;
-    acceleration: number = 20;
-    container: PIXI.Container;
-    remoteControl: boolean;
     update = () => {
     	this.move();
 
@@ -108,6 +100,14 @@ export default class Missile extends Projectile {
     		}
     	}
     };
+    guided: boolean;
+
+    maxSpeed: number = 40;
+    minSpeed: number = 1;
+    acceleration: number = 20;
+    container: PIXI.Container;
+    remoteControl: boolean;
+    trajectory: Line;
 
     constructor(params: { container: PIXI.Container }) {
     	super(params);

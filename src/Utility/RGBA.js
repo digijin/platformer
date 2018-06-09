@@ -26,21 +26,21 @@ export default class RGBA {
 		});
 	}
 
+	static fromNumber(num: number) {
+		return new RGBA({
+			r: ((num >> 16) % 256) / 255,
+			g: ((num >> 8) % 256) / 255,
+			b: (num % 256) / 255,
+			a: 1
+		});
+	}
+
 	static fromString(str: string) {
 		str = str.replace("#", "");
 		return new RGBA({
 			r: parseInt(str.substr(0, 2), 16) / 255,
 			g: parseInt(str.substr(2, 2), 16) / 255,
 			b: parseInt(str.substr(4, 2), 16) / 255,
-			a: 1
-		});
-	}
-
-	static fromNumber(num: number) {
-		return new RGBA({
-			r: ((num >> 16) % 256) / 255,
-			g: ((num >> 8) % 256) / 255,
-			b: (num % 256) / 255,
 			a: 1
 		});
 	}

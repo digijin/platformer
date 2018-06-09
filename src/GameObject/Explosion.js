@@ -10,13 +10,13 @@ import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 
 export default class Explosion extends GameObject {
+    time: number; //life
     texture: PIXI.Texture;
-    position: Point;
     delay: number;
     size: number;
     rotation: number;
     sprite: PIXI.Sprite;
-    time: number; //life
+    position: Point;
     constructor(params: Object) {
     	super();
     	//defaults

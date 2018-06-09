@@ -17,13 +17,13 @@ type Props = {
 };
 
 export default class BriefingMissionsPanel extends Panel {
+    missionButtons: Array<PIXI.DisplayObject>;
     textColorOver: number = 0xffffff;
-    heading: PIXI.Text;
     props: Props;
     selectedMission: Mission | null;
 
     textColor: number = 0xc9d3d0;
-    missionButtons: Array<PIXI.DisplayObject>;
+    heading: PIXI.Text;
     textColorSelected: number = 0xff6666;
     constructor(props: Props) {
     	super(props);

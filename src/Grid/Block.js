@@ -12,12 +12,12 @@ import * as PIXI from "pixi.js";
 
 export default class Block {
 	position: Point;
-	hp: number;
 	sprite: PIXI.Sprite;
 	type: string;
 	backgroundType: string | void;
 	grid: Grid;
 	tint: number;
+	hp: number;
 	constructor(params: {
 		position: Point,
 		type: string,
@@ -58,8 +58,13 @@ export default class Block {
 		return BlockTypeMap[this.backgroundType];
 	}
 
-	isEmpty(): boolean {
-		return this.type == "0";
+	get rect(): Rect {
+		return new Rect({
+			t: this.position.y * config.grid.width,
+			r: (this.position.x + 1) * config.grid.width,
+			b: (this.position.y + 1) * config.grid.width,
+			l: this.position.x * config.grid.width
+		});
 	}
 
 	// get key():string{
@@ -127,12 +132,7 @@ export default class Block {
 		return (block.position.x === this.position.x && block.position.y === this.position.y);
 	}
 
-	get rect(): Rect {
-		return new Rect({
-			t: this.position.y * config.grid.width,
-			r: (this.position.x + 1) * config.grid.width,
-			b: (this.position.y + 1) * config.grid.width,
-			l: this.position.x * config.grid.width
-		});
+	isEmpty(): boolean {
+		return this.type == "0";
 	}
 }

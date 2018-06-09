@@ -18,11 +18,11 @@ class MenuContainer extends PIXI.Container {}
 
 export default class MenuManager extends GameObject {
 	container: PIXI.Container;
-	infoPanel: InfoPanel;
 	spacing: number = 20;
 	mouseControl: Boolean = true;
-
 	glitching: boolean = false;
+
+	infoPanel: InfoPanel;
 
 	init(engine: Engine) {
 		super.init(engine);
@@ -66,6 +66,13 @@ export default class MenuManager extends GameObject {
 		this.engine.stage.removeChild(this.newcontainer);
 	}
 
+	update() {
+		this.checkLoaded();
+		// this.menu.header.text.style.fill = 0x0;
+		// this.animateFilters();
+		// this.glitch();
+	}
+
 	checkLoaded() {
 		if (this.loading) {
 			const width = this.loading.width;
@@ -77,13 +84,6 @@ export default class MenuManager extends GameObject {
 				this.container.addChild(this.menu);
 			}
 		}
-	}
-
-	update() {
-		this.checkLoaded();
-		// this.menu.header.text.style.fill = 0x0;
-		// this.animateFilters();
-		// this.glitch();
 	}
 
 	glitch() {
