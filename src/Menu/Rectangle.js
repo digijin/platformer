@@ -26,6 +26,10 @@ export const behavior = {
 		instance.lineStyle(border, borderColor);
 		instance.drawRect(x, y, width, height);
 		instance.endFill();
+		// console.log(instance);
+		// instance.mouseover = () => {
+		// 	console.log("yolo");
+		// };
 		// this.cacheAsBitmap = true;
 	}
 };
