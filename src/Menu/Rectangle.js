@@ -5,6 +5,9 @@ const TYPE = "Rectangle";
 export const behavior = {
 	customDisplayObject: props => new PIXI.Graphics(),
 	customApplyProps: function(instance, oldProps, newProps) {
+		instance.onMouseOver = newProps.onMouseOver;
+		instance.onMouseOut = newProps.onMouseOut;
+		instance.onClick = newProps.onClick;
 		let {
 			fill,
 			x,
