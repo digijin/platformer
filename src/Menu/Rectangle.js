@@ -4,6 +4,13 @@ import * as PIXI from "pixi.js";
 const TYPE = "Rectangle";
 export const behavior = {
 	customDisplayObject: props => new PIXI.Graphics(),
+	customDidAttach: instance => {
+		// instance.buttonMode = true;
+		// instance.interactive = true;
+		instance.on("mouseover", instance.onMouseOver);
+		instance.on("mouseout", instance.onMouseOut);
+		instance.on("click", instance.onClick);
+	},
 	customApplyProps: function(instance, oldProps, newProps) {
 		instance.onMouseOver = newProps.onMouseOver;
 		instance.onMouseOut = newProps.onMouseOut;
@@ -16,7 +23,9 @@ export const behavior = {
 			height,
 			border,
 			borderColor,
-			alpha
+			alpha,
+			buttonMode,
+			interactive
 		} = newProps;
 		// this.cacheAsBitmap = false;
 		if (alpha == undefined) {
@@ -29,6 +38,9 @@ export const behavior = {
 		instance.lineStyle(border, borderColor);
 		instance.drawRect(x, y, width, height);
 		instance.endFill();
+
+		instance.buttonMode = buttonMode;
+		instance.interactive = interactive;
 		// console.log(instance);
 		// instance.mouseover = () => {
 		// 	console.log("yolo");
