@@ -4,14 +4,14 @@ import Rectangle from "../Rectangle";
 import React, { Component } from "react";
 import { UICOLOUR } from "../constants";
 
-export default class OutfittingButton extends Component {
+export default class MissionsButton extends Component {
 	state = {
 		over: false,
 		down: false
 	};
 
 	render() {
-		let { text, sub, x, y } = this.props;
+		let { title, x, y } = this.props;
 		return (
 			<Container x={x} y={y}>
 				<Rectangle
@@ -21,8 +21,8 @@ export default class OutfittingButton extends Component {
 					height={65}
 					fill={this.state.down ? 0xffffff : UICOLOUR}
 					alpha={this.state.over || this.props.selected ? 1 : 0.25}
-					border={0}
-					borderColor={UICOLOUR}
+					border={1}
+					borderColor={this.state.down ? 0xffffff : UICOLOUR}
 					buttonMode={true}
 					interactive={true}
 					onMouseOver={() => {
@@ -52,23 +52,9 @@ export default class OutfittingButton extends Component {
 					onClick={this.props.onClick}
 				/>
 				<Text
-					text={text}
+					text={title}
 					style={{
 						fontFamily: "RobotoBold",
-						fontSize: 24,
-						fill:
-							this.state.over || this.props.selected
-								? 0x0
-								: UICOLOUR,
-						align: "center"
-					}}
-					x={14}
-					y={10}
-				/>
-				<Text
-					text={sub}
-					style={{
-						fontFamily: "Roboto",
 						fontSize: 14,
 						fill:
 							this.state.over || this.props.selected
@@ -77,7 +63,36 @@ export default class OutfittingButton extends Component {
 						align: "center"
 					}}
 					x={14}
-					y={38}
+					y={14}
+				/>
+				<Text
+					text={"$" + this.props.reward}
+					style={{
+						fontFamily: "RobotoBold",
+						fontSize: 14,
+						fill:
+							this.state.over || this.props.selected
+								? 0x0
+								: UICOLOUR,
+						align: "center"
+					}}
+					x={14}
+					y={40}
+				/>
+
+				<Text
+					text={"".padEnd(this.props.rank, "★").padStart(5, "☆")}
+					style={{
+						fontFamily: "Roboto",
+						fontSize: 14,
+						fill:
+							this.state.over || this.props.selected
+								? 0x0
+								: UICOLOUR,
+						align: "right"
+					}}
+					x={185}
+					y={45}
 				/>
 			</Container>
 		);

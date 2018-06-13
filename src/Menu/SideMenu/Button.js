@@ -6,7 +6,8 @@ import { UICOLOUR } from "../constants";
 
 export default class MenuButton extends Component {
 	state = {
-		over: false
+		over: false,
+		down: false
 	};
 
 	render() {
@@ -18,10 +19,10 @@ export default class MenuButton extends Component {
 					y={0}
 					width={235}
 					height={45}
-					fill={UICOLOUR}
+					fill={this.state.down ? 0xffffff : UICOLOUR}
 					alpha={this.state.over || this.props.selected ? 1 : 0.25}
 					border={1}
-					borderColor={UICOLOUR}
+					borderColor={this.state.down ? 0xffffff : UICOLOUR}
 					buttonMode={true}
 					interactive={true}
 					onMouseOver={() => {
@@ -34,6 +35,18 @@ export default class MenuButton extends Component {
 						this.setState(state => ({
 							...state,
 							over: false
+						}));
+					}}
+					onMouseDown={() => {
+						this.setState(state => ({
+							...state,
+							down: true
+						}));
+					}}
+					onMouseUp={() => {
+						this.setState(state => ({
+							...state,
+							down: false
 						}));
 					}}
 					onClick={this.props.onClick}

@@ -9,11 +9,15 @@ export const behavior = {
 		// instance.interactive = true;
 		instance.on("mouseover", instance.onMouseOver);
 		instance.on("mouseout", instance.onMouseOut);
+		instance.on("mouseup", instance.onMouseUp);
+		instance.on("mousedown", instance.onMouseDown);
 		instance.on("click", instance.onClick);
 	},
 	customApplyProps: function(instance, oldProps, newProps) {
 		instance.onMouseOver = newProps.onMouseOver;
 		instance.onMouseOut = newProps.onMouseOut;
+		instance.onMouseDown = newProps.onMouseDown;
+		instance.onMouseUp = newProps.onMouseUp;
 		instance.onClick = newProps.onClick;
 		let {
 			fill,
