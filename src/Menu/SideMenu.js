@@ -2,6 +2,7 @@ import { Text, Container } from "react-pixi-fiber";
 import React, { Component } from "react";
 import Rectangle from "./Rectangle";
 import Header from "./SideMenu/Header";
+import Missions from "./Missions";
 
 import Btn from "./SideMenu/Btn";
 // export default class SideMenu extends Container {
@@ -22,6 +23,13 @@ export default class SideMenu extends Component {
 			selected: section
 		}));
 	};
+
+	getSectionMenu(section: String) {
+		switch (section) {
+		case "MISSIONS":
+			return <Missions x={300} y={100} />;
+		}
+	}
 
 	render() {
 		const sections = ["MISSIONS", "OUTFITTING", "OPTIONS", "SAVE", "QUIT"];
@@ -49,6 +57,7 @@ export default class SideMenu extends Component {
 						y={87 + i * 53}
 					/>
 				))}
+				{this.getSectionMenu(this.state.selected)}
 			</Container>
 		);
 	}
