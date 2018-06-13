@@ -1,5 +1,5 @@
 import { Text, Container } from "react-pixi-fiber";
-import React from "react";
+import React, { Component } from "react";
 import Rectangle from "./Rectangle";
 import Header from "./SideMenu/Header";
 
@@ -10,22 +10,49 @@ import Btn from "./SideMenu/Btn";
 // 	}
 // }
 
-export default function SideMenu(props) {
-	return (
-		<Container>
-			<Rectangle
-				x={10}
-				y={10}
-				width={260}
-				height={760}
-				border={1}
-				borderColor={0xff5000}
-			/>
-			<Header text={"header text"} />
-			<Btn text={"I'm a button"} x={22} y={87} />
-			<Btn text={"Also a button"} x={22} y={138} />
-			<Btn text={"Me too."} x={22} y={189} />
-		</Container>
-	);
-	// return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
+export default class SideMenu extends Component {
+	state = {
+		selected: ""
+	};
+
+	onSectionClick = section => {
+		// console.log("clicked", section);
+		this.setState(state => ({
+			...state,
+			selected: section
+		}));
+	};
+
+	render() {
+		const sections = ["MISSIONS", "OUTFITTING", "OPTIONS", "SAVE", "QUIT"];
+
+		return (
+			<Container>
+				<Rectangle
+					x={10}
+					y={10}
+					width={260}
+					height={760}
+					border={1}
+					borderColor={0xff5000}
+				/>
+				<Header text={"header text"} />
+				{sections.map((s, i) => (
+					<Btn
+						onClick={() => {
+							this.onSectionClick(s);
+						}}
+						selected={s === this.state.selected}
+						key={s}
+						text={s}
+						x={22}
+						y={87 + i * 53}
+					/>
+				))}
+			</Container>
+		);
+	}
 }
+// export default function SideMenu(props) {
+// 	// return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
+// }

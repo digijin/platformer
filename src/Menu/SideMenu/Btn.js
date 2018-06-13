@@ -19,7 +19,7 @@ export default class MenuButton extends Component {
 					width={235}
 					height={45}
 					fill={0xff5000}
-					alpha={this.state.over ? 1 : 0.25}
+					alpha={this.state.over || this.props.selected ? 1 : 0.25}
 					border={1}
 					borderColor={UICOLOUR}
 					buttonMode={true}
@@ -36,13 +36,17 @@ export default class MenuButton extends Component {
 							over: false
 						}));
 					}}
+					onClick={this.props.onClick}
 				/>
 				<Text
 					text={text}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 20,
-						fill: this.state.over ? 0x0 : UICOLOUR,
+						fill:
+							this.state.over || this.props.selected
+								? 0x0
+								: UICOLOUR,
 						align: "center"
 					}}
 					x={14}
