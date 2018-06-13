@@ -4,16 +4,42 @@ import Rectangle from "../Rectangle";
 import React, { Component } from "react";
 import { UICOLOUR } from "../constants";
 
-export default class MenuButton extends Component {
-	state = {
-		over: false,
-		down: false
-	};
+import { GlitchFilter } from "@pixi/filter-glitch";
+import BaseButton from "../Base/Button";
+
+export default class MenuButton extends BaseButton {
+	// state = {
+	// 	over: false,
+	// 	down: false,
+	// 	glitch: 4
+	// };
+
+	// componentDidMount() {
+	// 	this.timeout = setTimeout(this.glitch, 100);
+	// }
+	//
+	// componentWillUnmount() {
+	// 	clearTimeout(this.timeout);
+	// }
+	//
+	// glitch = () => {
+	// 	if (this.state.glitch > 0) {
+	// 		this.setState(state => ({
+	// 			...state,
+	// 			glitch: this.state.glitch - 1
+	// 		}));
+	// 		this.timeout = setTimeout(this.glitch, 100 * Math.random());
+	// 	}
+	// };
 
 	render() {
 		let { text, x, y } = this.props;
 		return (
-			<Container x={x} y={y}>
+			<Container
+				x={x}
+				y={y}
+				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
+			>
 				<Rectangle
 					x={0}
 					y={0}

@@ -32,6 +32,7 @@ export default class OutfittingMenu extends Component {
 					<OutfittingButton
 						x={288}
 						y={87 + index * 73}
+						key={index}
 						{...section}
 					/>
 				))}

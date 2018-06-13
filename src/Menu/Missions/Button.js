@@ -3,17 +3,23 @@ import * as PIXI from "pixi.js";
 import Rectangle from "../Rectangle";
 import React, { Component } from "react";
 import { UICOLOUR } from "../constants";
+import BaseButton from "../Base/Button";
+import { GlitchFilter } from "@pixi/filter-glitch";
 
-export default class MissionsButton extends Component {
-	state = {
-		over: false,
-		down: false
-	};
+export default class MissionsButton extends BaseButton {
+	// state = {
+	// 	over: false,
+	// 	down: false
+	// };
 
 	render() {
 		let { title, x, y } = this.props;
 		return (
-			<Container x={x} y={y}>
+			<Container
+				x={x}
+				y={y}
+				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
+			>
 				<Rectangle
 					x={0}
 					y={0}
