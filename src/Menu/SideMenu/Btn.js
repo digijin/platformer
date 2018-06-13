@@ -18,7 +18,7 @@ export default class MenuButton extends Component {
 					y={0}
 					width={235}
 					height={45}
-					fill={0xff5000}
+					fill={UICOLOUR}
 					alpha={this.state.over || this.props.selected ? 1 : 0.25}
 					border={1}
 					borderColor={UICOLOUR}

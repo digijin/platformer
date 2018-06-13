@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import Rectangle from "./Rectangle";
 import Header from "./SideMenu/Header";
 import Missions from "./Missions";
-
+import OutfittingMenu from "./Outfitting";
+import { UICOLOUR } from "./constants";
 import Btn from "./SideMenu/Btn";
 // export default class SideMenu extends Container {
 // 	render() {
@@ -13,7 +14,7 @@ import Btn from "./SideMenu/Btn";
 
 export default class SideMenu extends Component {
 	state = {
-		selected: ""
+		selected: "MISSIONS"
 	};
 
 	onSectionClick = section => {
@@ -27,7 +28,9 @@ export default class SideMenu extends Component {
 	getSectionMenu(section: String) {
 		switch (section) {
 		case "MISSIONS":
-			return <Missions x={300} y={100} />;
+			return <Missions />;
+		case "OUTFITTING":
+			return <OutfittingMenu />;
 		}
 	}
 
@@ -42,7 +45,7 @@ export default class SideMenu extends Component {
 					width={260}
 					height={760}
 					border={1}
-					borderColor={0xff5000}
+					borderColor={UICOLOUR}
 				/>
 				<Header text={"header text"} />
 				{sections.map((s, i) => (

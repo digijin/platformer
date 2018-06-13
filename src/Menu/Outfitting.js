@@ -3,12 +3,12 @@ import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "./Rectangle";
 import { UICOLOUR } from "./constants";
 
-export default class SideMenu extends Component {
+export default class OutfittingMenu extends Component {
 	render() {
 		return (
 			<Container x={this.props.x} y={this.props.y}>
 				<Text
-					text={"Missions"}
+					text={"Outfitting"}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 30,
