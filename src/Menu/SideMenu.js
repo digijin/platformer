@@ -5,7 +5,7 @@ import Header from "./SideMenu/Header";
 import Missions from "./Missions";
 import OutfittingMenu from "./Outfitting";
 import { UICOLOUR } from "./constants";
-import Btn from "./SideMenu/Btn";
+import Button from "./SideMenu/Button";
 // export default class SideMenu extends Container {
 // 	render() {
 // 		return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
@@ -49,7 +49,7 @@ export default class SideMenu extends Component {
 				/>
 				<Header text={"header text"} />
 				{sections.map((s, i) => (
-					<Btn
+					<Button
 						onClick={() => {
 							this.onSectionClick(s);
 						}}

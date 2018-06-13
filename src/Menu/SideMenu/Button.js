@@ -1,46 +1,58 @@
+import { render, Container, CustomPIXIComponent, Text } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
-
 import Rectangle from "../Rectangle";
-
-import Rect from "../../Utility/Rect";
-
+import React, { Component } from "react";
 import { UICOLOUR } from "../constants";
 
-export default class Button extends PIXI.Container {
-	constructor(params) {
-		super();
-		Object.assign(this, params);
-		this.buttonMode = true;
-		this.interactive = true;
-		this.bg = new Rectangle({
-			rect: new Rect({ t: 0, l: 0, r: 235, b: 45 }),
-			fillColor: UICOLOUR,
-			borderColor: UICOLOUR,
-			alpha: 0.25,
-			border: 1
-		});
-		this.addChild(this.bg);
+export default class MenuButton extends Component {
+	state = {
+		over: false
+	};
 
-		this.text = new PIXI.Text(params.text, {
-			fontFamily: "RobotoBold",
-			fontSize: 20,
-			fill: UICOLOUR,
-			align: "center"
-		});
-		this.text.x = this.text.y = 14;
-		this.addChild(this.text);
-
-		this.on("mouseover", e => {
-			this.bg.apply({
-				alpha: 1
-			});
-			this.text.style.fill = 0x0;
-		});
-		this.on("mouseout", e => {
-			this.bg.apply({
-				alpha: 0.25
-			});
-			this.text.style.fill = UICOLOUR;
-		});
+	render() {
+		let { text, x, y } = this.props;
+		return (
+			<Container x={x} y={y}>
+				<Rectangle
+					x={0}
+					y={0}
+					width={235}
+					height={45}
+					fill={UICOLOUR}
+					alpha={this.state.over || this.props.selected ? 1 : 0.25}
+					border={1}
+					borderColor={UICOLOUR}
+					buttonMode={true}
+					interactive={true}
+					onMouseOver={() => {
+						this.setState(state => ({
+							...state,
+							over: true
+						}));
+					}}
+					onMouseOut={() => {
+						this.setState(state => ({
+							...state,
+							over: false
+						}));
+					}}
+					onClick={this.props.onClick}
+				/>
+				<Text
+					text={text}
+					style={{
+						fontFamily: "RobotoBold",
+						fontSize: 20,
+						fill:
+							this.state.over || this.props.selected
+								? 0x0
+								: UICOLOUR,
+						align: "center"
+					}}
+					x={14}
+					y={14}
+				/>
+			</Container>
+		);
 	}
 }
