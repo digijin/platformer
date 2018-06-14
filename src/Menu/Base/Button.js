@@ -34,6 +34,19 @@ export default class BaseButton extends Component {
 				glitch: this.state.glitch - 1
 			}));
 			this.timeout = setTimeout(this.glitch, 100 * Math.random());
+		} else {
+			this.timeout = setTimeout(
+				this.reglitch,
+				5 * 1000 + 30 * 1000 * Math.random()
+			);
 		}
+	};
+
+	reglitch = () => {
+		this.setState(state => ({
+			...state,
+			glitch: Math.ceil(Math.random() * 10)
+		}));
+		this.timeout = setTimeout(this.glitch, 100 * Math.random());
 	};
 }
