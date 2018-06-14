@@ -12,6 +12,8 @@ import { CRTFilter } from "@pixi/filter-crt";
 
 // import dottedbg from "./dottedbg.png";
 
+import EngineProvider from "../React/EngineProvider";
+
 import { render, Text } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import React from "react";
@@ -78,6 +80,17 @@ export default class MenuManager extends GameObject {
 		// this.glitch();
 	}
 
+	render() {
+		render(
+			// <Text text="Hello World!" x={200} y={200} />,
+
+			<EngineProvider engine={this.engine}>
+				<SideMenu />
+			</EngineProvider>,
+			this.container
+		);
+	}
+
 	checkLoaded() {
 		if (this.loading) {
 			const width = this.loading.width;
@@ -87,11 +100,7 @@ export default class MenuManager extends GameObject {
 				delete this.loading;
 				// this.menu = new Menu();
 				// this.container.addChild(this.menu);
-				render(
-					// <Text text="Hello World!" x={200} y={200} />,
-					<SideMenu />,
-					this.container
-				);
+				this.render();
 			}
 		}
 	}

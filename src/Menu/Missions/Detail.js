@@ -3,12 +3,13 @@ import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "../Rectangle";
 import { UICOLOUR } from "../constants";
 import MissionLaunchButton from "./LaunchButton";
+import engineConnect from "React/engineConnect";
 
-export default class MissionDetail extends Component {
+class MissionDetail extends Component {
 	render() {
 		const mission = this.props.mission;
 		return (
-			<Container x={this.props.x} y={this.props.y}>
+			<Container>
 				<Text
 					text={mission.title}
 					style={{
@@ -53,8 +54,16 @@ export default class MissionDetail extends Component {
 					x={593}
 					y={180}
 				/>
-				<MissionLaunchButton x={window.innerWidth - 260} y={693} />
+				<MissionLaunchButton
+					x={window.innerWidth - 260}
+					y={693}
+					onClick={() => {
+						console.log(this.props.engine);
+					}}
+				/>
 			</Container>
 		);
 	}
 }
+
+export default engineConnect(MissionDetail);

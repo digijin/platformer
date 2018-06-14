@@ -18,7 +18,6 @@ export default class SideMenu extends Component {
 	};
 
 	onSectionClick = section => {
-		// console.log("clicked", section);
 		this.setState(state => ({
 			...state,
 			selected: section
@@ -54,7 +53,7 @@ export default class SideMenu extends Component {
 							this.onSectionClick(s);
 						}}
 						selected={s === this.state.selected}
-						key={s}
+						key={"section" + i}
 						text={s}
 						x={22}
 						y={87 + i * 53}

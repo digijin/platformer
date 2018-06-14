@@ -4,6 +4,7 @@ import Rectangle from "./Rectangle";
 import { UICOLOUR } from "./constants";
 import MissionsButton from "./Missions/Button";
 import MissionDetail from "./Missions/Detail";
+import { Missions } from "Mission";
 
 export default class SideMenu extends Component {
 	state = {
@@ -39,7 +40,7 @@ export default class SideMenu extends Component {
 		];
 
 		return (
-			<Container x={this.props.x} y={this.props.y}>
+			<Container>
 				<Text
 					text={"Missions"}
 					style={{
@@ -51,7 +52,7 @@ export default class SideMenu extends Component {
 					x={288}
 					y={30}
 				/>
-				{missions.map((mission, index) => (
+				{Missions.map((mission, index) => (
 					<MissionsButton
 						onClick={() => {
 							this.setState(state => ({
@@ -67,7 +68,7 @@ export default class SideMenu extends Component {
 					/>
 				))}
 				{this.state.selected >= 0 && (
-					<MissionDetail mission={missions[this.state.selected]} />
+					<MissionDetail mission={Missions[this.state.selected]} />
 				)}
 			</Container>
 		);

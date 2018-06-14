@@ -20,7 +20,7 @@ export default class OutfittingMenu extends Component {
 			{ text: "SIDEKICK", sub: "Companion" }
 		];
 		return (
-			<Container x={this.props.x} y={this.props.y}>
+			<Container>
 				<Text
 					text={"Outfitting"}
 					style={{
