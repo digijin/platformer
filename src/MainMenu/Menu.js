@@ -42,7 +42,7 @@ export default class MainMenu extends GameObject {
 	}
 
 	exit() {
-		this.engine.stage.removeChild(this.hero);
+		// this.engine.stage.removeChild(this.hero);
 		this.engine.stage.removeChild(this.fadein);
 	}
 

@@ -10,6 +10,7 @@ import SmokeExplosionUpTransition from "Transition/SmokeExplosionUpTransition";
 
 import engineConnect from "React/engineConnect";
 import Load from "./Load";
+import Menu from "../../Scene/Menu";
 
 class MainMenu extends React.Component {
 	constructor() {
@@ -28,7 +29,7 @@ class MainMenu extends React.Component {
 		let content = (
 			<div>
 				<a id="playButton" onClick={this.props.play}>
-                    Quick Play
+					Quick Play
 				</a>
 				<a
 					id="loadButton"
@@ -36,10 +37,10 @@ class MainMenu extends React.Component {
 						this.setState({ page: "load" });
 					}}
 				>
-                    Load Profile
+					Load Profile
 				</a>
 				<a id="editorButton" onClick={this.props.editor}>
-                    Level Editor
+					Level Editor
 				</a>
 			</div>
 		);
@@ -51,7 +52,7 @@ class MainMenu extends React.Component {
 				<div className="title">
 					<div className="subsub">I don't have a good name</div>
 					<div className="sub">so for now it's called</div>
-                    PLATFORMER
+					PLATFORMER
 				</div>
 				{content}
 			</div>
@@ -68,10 +69,11 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 		play: () => {
 			// props.engine.startScene(new Level());
 			dispatch({ type: "END_SCENE" });
-			props.engine.startSceneTransition(
-				new Level(),
-				new SmokeExplosionUpTransition()
-			);
+			props.engine.startScene(new Menu());
+			// props.engine.startSceneTransition(
+			// 	new Menu(),
+			// 	new SmokeExplosionUpTransition()
+			// );
 		},
 		editor: () => {
 			props.engine.startScene(new Editor());
