@@ -3,6 +3,7 @@ import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "./Rectangle";
 import { UICOLOUR } from "./constants";
 import OutfittingButton from "./Outfitting/Button";
+import OutfittingDetail from "./Outfitting/Detail";
 
 export default class OutfittingMenu extends Component {
 	state = {
@@ -48,6 +49,11 @@ export default class OutfittingMenu extends Component {
 						{...section}
 					/>
 				))}
+				{this.state.selected >= 0 && (
+					<OutfittingDetail
+						component={sections[this.state.selected]}
+					/>
+				)}
 			</Container>
 		);
 	}
