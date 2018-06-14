@@ -18,6 +18,7 @@ export default class MissionsButton extends BaseButton {
 			<Container
 				x={x}
 				y={y}
+				visible={this.state.visible}
 				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
 			>
 				<Rectangle

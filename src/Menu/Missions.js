@@ -14,9 +14,21 @@ export default class SideMenu extends Component {
 				description: "Enter the training area to test out your machine"
 			},
 			{
+				title: "Resource Recovery",
+				reward: 1000,
+				rank: 2,
+				description: "Collect the designated material"
+			},
+			{
+				title: "Destroy Enemy Installation",
+				reward: 25000,
+				rank: 3,
+				description: "Assault enemy installation and disable it"
+			},
+			{
 				title: "Assassinate Pirate Lord Sassafras",
 				reward: 123456,
-				rank: 3,
+				rank: 4,
 				description: "Lorem ipsum dolor sit amet"
 			}
 		];
@@ -34,7 +46,12 @@ export default class SideMenu extends Component {
 					y={30}
 				/>
 				{missions.map((mission, index) => (
-					<MissionsButton x={288} y={87 + index * 73} {...mission} />
+					<MissionsButton
+						delay={index}
+						x={288}
+						y={87 + index * 73}
+						{...mission}
+					/>
 				))}
 			</Container>
 		);
