@@ -4,6 +4,7 @@ import Rectangle from "../Rectangle";
 import { UICOLOUR } from "../constants";
 import MissionLaunchButton from "./LaunchButton";
 import engineConnect from "React/engineConnect";
+import Level from "Scene/Level";
 
 class MissionDetail extends Component {
 	render() {
@@ -59,6 +60,9 @@ class MissionDetail extends Component {
 					y={693}
 					onClick={() => {
 						console.log(this.props.engine);
+
+						this.props.engine.mission = this.props.mission;
+						this.props.engine.startScene(new Level());
 					}}
 				/>
 			</Container>

@@ -38,7 +38,11 @@ export default class MenuButton extends BaseButton {
 			<Container
 				x={x}
 				y={y}
-				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
+				filters={
+					this.state.glitch > 0
+						? [new GlitchFilter({ slices: 3 })]
+						: []
+				}
 			>
 				<Rectangle
 					x={0}
