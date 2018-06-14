@@ -4,7 +4,7 @@ export default class BaseButton extends Component {
 	state = {
 		over: false,
 		down: false,
-		glitch: 4,
+		glitch: 6,
 		visible: false
 	};
 

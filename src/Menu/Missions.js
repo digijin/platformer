@@ -3,8 +3,13 @@ import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "./Rectangle";
 import { UICOLOUR } from "./constants";
 import MissionsButton from "./Missions/Button";
+import MissionDetail from "./Missions/Detail";
 
 export default class SideMenu extends Component {
+	state = {
+		selected: -1
+	};
+
 	render() {
 		const missions = [
 			{
@@ -32,6 +37,7 @@ export default class SideMenu extends Component {
 				description: "Lorem ipsum dolor sit amet"
 			}
 		];
+
 		return (
 			<Container x={this.props.x} y={this.props.y}>
 				<Text
@@ -47,12 +53,22 @@ export default class SideMenu extends Component {
 				/>
 				{missions.map((mission, index) => (
 					<MissionsButton
+						onClick={() => {
+							this.setState(state => ({
+								...state,
+								selected: index
+							}));
+						}}
+						selected={index === this.state.selected}
 						delay={index}
 						x={288}
 						y={87 + index * 73}
 						{...mission}
 					/>
 				))}
+				{this.state.selected >= 0 && (
+					<MissionDetail mission={missions[this.state.selected]} />
+				)}
 			</Container>
 		);
 	}
