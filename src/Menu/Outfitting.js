@@ -5,6 +5,10 @@ import { UICOLOUR } from "./constants";
 import OutfittingButton from "./Outfitting/Button";
 
 export default class OutfittingMenu extends Component {
+	state = {
+		selected: -1
+	};
+
 	render() {
 		const sections = [
 			{ text: "ENGINE", sub: "Energy recharge rate" },
@@ -30,6 +34,13 @@ export default class OutfittingMenu extends Component {
 				/>
 				{sections.map((section, index) => (
 					<OutfittingButton
+						onClick={() => {
+							this.setState(state => ({
+								...state,
+								selected: index
+							}));
+						}}
+						selected={index === this.state.selected}
 						x={288}
 						y={87 + index * 73}
 						delay={index}

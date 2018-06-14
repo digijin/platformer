@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "../Rectangle";
 import { UICOLOUR } from "../constants";
+import MissionLaunchButton from "./LaunchButton";
 
 export default class MissionDetail extends Component {
 	render() {
@@ -31,7 +32,7 @@ export default class MissionDetail extends Component {
 					y={86}
 				/>
 				<Text
-					text={"Payout: " + mission.reward}
+					text={"Payout: $" + mission.reward}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 18,
@@ -52,6 +53,7 @@ export default class MissionDetail extends Component {
 					x={593}
 					y={180}
 				/>
+				<MissionLaunchButton x={window.innerWidth - 260} y={693} />
 			</Container>
 		);
 	}

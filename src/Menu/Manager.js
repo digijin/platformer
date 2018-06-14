@@ -6,7 +6,7 @@ import GameObject from "GameObject";
 
 import { GlitchFilter } from "@pixi/filter-glitch";
 // import { OldFilmFilter } from "@pixi/filter-old-film";
-// import { CRTFilter } from "@pixi/filter-crt";
+import { CRTFilter } from "@pixi/filter-crt";
 // import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
 // import Menu from "./Menu";
 
@@ -47,7 +47,7 @@ export default class MenuManager extends GameObject {
 		// this.container.addChild(this.bg);
 
 		// this.bg.filters = [new OldFilmFilter({ sepia: 0, noise: 0.1 })];
-
+		// this.container.filters = [new CRTFilter()];
 		// this.container.filters = [new CRTFilter(), new ZoomBlurFilter()];
 		// this.container.filters[1].strength = 0.2;
 		// this.container.filters[1].center = [
