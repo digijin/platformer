@@ -59,7 +59,7 @@ export default class OutfittingButton extends BaseButton {
 					onClick={this.props.onClick}
 				/>
 				<Text
-					text={text}
+					text={text.toUpperCase()}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 24,

@@ -9,7 +9,7 @@ class OutfittingDetail extends Component {
 		return (
 			<Container>
 				<Text
-					text={"component.title"}
+					text={this.props.component.text}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 30,
