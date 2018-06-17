@@ -15,16 +15,19 @@ before_install:
 - sudo apt-get -y install imagemagick
 jobs:
   include:
-    - stage: build
-      script:
-      - yarn build
-      - yarn build:sprites
     - stage: test
       script:
       - yarn test
+    - stage: test
+      script:
+      - yarn build:sprites
       - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
       - yarn karma:ci
       - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    - stage: dockerify
+      - docker build -t platformer .
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      script:
 deploy:
   skip_cleanup: true
   provider: s3
