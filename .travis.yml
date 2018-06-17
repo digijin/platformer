@@ -20,6 +20,7 @@ jobs:
       - yarn test
     - stage: test
       script:
+      - yarn build
       - yarn build:sprites
       - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
       - yarn karma:ci
