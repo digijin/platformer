@@ -2,6 +2,8 @@ language: node_js
 node_js:
 - '8'
 sudo: required
+services:
+- docker
 cache:
   yarn: true
   directories:
@@ -11,14 +13,17 @@ addons:
 before_install:
 - sudo apt-get update
 - sudo apt-get -y install imagemagick
-script:
-- yarn build
-- yarn build:sprites
-- ls dist
-- yarn test
-- sudo chmod 4755 /opt/google/chrome/chrome-sandbox
-- yarn karma:ci
-- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+jobs:
+  include:
+    - stage: build
+      script:
+      - yarn build
+      - yarn build:sprites
+    - stage: test
+      - yarn test
+      - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
+      - yarn karma:ci
+      - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 deploy:
   skip_cleanup: true
   provider: s3
