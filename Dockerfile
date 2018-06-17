@@ -1,11 +1,14 @@
-FROM node:8
-RUN apt-get update
-# for flow-watch
-RUN apt-get install -y ocaml libelf-dev
+FROM mhart/alpine-node:8.11
 
-COPY . /var/dev/
-WORKDIR /var/dev
-RUN cd /var/dev
+RUN apk add --update git && \
+  rm -rf /tmp/* /var/cache/apk/*
+
+RUN mkdir /var/app
+RUN cd /var/app
+
+COPY . /var/app
+WORKDIR /var/app
 RUN yarn
 RUN npm rebuild
-ENTRYPOINT bash
+
+ENTRYPOINT npm run dev

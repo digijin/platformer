@@ -1,9 +1,9 @@
 version: '3'
 services:
-  bash:
+  node:
     build: .
     ports:
-     - "5000:5000"
+     - "8080:8080"
     volumes:
-     - ./src:/var/dev/src
-     - ./dist:/var/dev/dist
+     - ./src:/var/app/src
+     - ./dist:/var/app/dist
