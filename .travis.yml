@@ -33,7 +33,7 @@ jobs:
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker images
       - docker tag platformer $DOCKER_USERNAME/platformer
-      - docker push $DOCKER_USERNAME/node-xvfb-chrome
+      - docker push $DOCKER_USERNAME/platformer
 deploy:
   skip_cleanup: true
   provider: s3
