@@ -32,8 +32,8 @@ jobs:
       - docker build -t platformer .
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker images
-      - docker tag platformer $DOCKER_USERNAME/platformer
-      - docker push $DOCKER_USERNAME/platformer
+      - docker tag platformer $DOCKER_USERNAME/platformer:$TRAVIS_BUILD_NUMBER
+      - docker push $DOCKER_USERNAME/platformer:$TRAVIS_BUILD_NUMBER
 deploy:
   skip_cleanup: true
   provider: s3
