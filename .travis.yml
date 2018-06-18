@@ -11,8 +11,8 @@ cache:
 addons:
   chrome: stable
 before_install:
-- sudo apt-get update
-- sudo apt-get -y install imagemagick
+# - sudo apt-get update
+# - sudo apt-get -y install imagemagick
 jobs:
   include:
     - stage: test
@@ -27,8 +27,6 @@ jobs:
       - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
     - stage: dockerify
       script:
-      - yarn build
-      - yarn build:sprites
       - docker build -t platformer .
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker images
