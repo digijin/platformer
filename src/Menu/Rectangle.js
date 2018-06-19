@@ -36,7 +36,7 @@ export const behavior = {
 			alpha = 1;
 		}
 		instance.clear();
-		if (fill) {
+		if (fill !== undefined) {
 			instance.beginFill(fill, alpha);
 		}
 		instance.lineStyle(border, borderColor);

@@ -14,7 +14,7 @@ import Button from "./SideMenu/Button";
 
 export default class SideMenu extends Component {
 	state = {
-		selected: "MISSIONS"
+		selected: "OUTFITTING"
 	};
 
 	onSectionClick = section => {
