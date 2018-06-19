@@ -22,6 +22,8 @@ import SideMenu from "./SideMenu";
 
 // Setup PixiJS Application
 
+const MAGIC_TEXT_WIDTH = 84;
+
 class MenuContainer extends PIXI.Container {}
 
 export default class MenuManager extends GameObject {
@@ -93,9 +95,10 @@ export default class MenuManager extends GameObject {
 
 	checkLoaded() {
 		if (this.loading) {
-			const width = this.loading.width;
+			// const width = this.loading.width;
 			this.loading.style.fill = Math.floor(Math.random() * 0xffffff);
-			if (this.loading.width !== width) {
+			// console.log(this.loading.width);
+			if (this.loading.width == MAGIC_TEXT_WIDTH) {
 				this.container.removeChild(this.loading);
 				delete this.loading;
 				// this.menu = new Menu();
