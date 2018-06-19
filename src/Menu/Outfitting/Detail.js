@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "../Rectangle";
+import Line from "../Line";
 import { UICOLOUR } from "../constants";
 import engineConnect from "React/engineConnect";
 
@@ -40,13 +41,74 @@ class OutfittingDetail extends Component {
 					x={606}
 					y={101}
 				/>
-				<Rectangle
+				<Line
 					x={606}
-					y={130}
+					y={132}
+					width={670}
+					height={0}
+					lineWidth={1}
+					color={UICOLOUR}
+				/>
+				<Text
+					text={"weight".toUpperCase()}
+					style={{
+						fontFamily: "Roboto",
+						fontSize: 16,
+						fill: UICOLOUR,
+						align: "center"
+					}}
+					alpha={0.5}
+					x={606}
+					y={138}
+				/>
+				<Text
+					text={"10T"}
+					style={{
+						fontFamily: "Roboto",
+						fontSize: 16,
+						fill: UICOLOUR,
+						align: "center"
+					}}
+					x={799}
+					y={138}
+				/>
+				<Line
+					x={606}
+					y={132 + 29}
+					width={670}
+					height={0}
+					lineWidth={1}
+					color={UICOLOUR}
+				/>
+				<Text
+					text={"max power".toUpperCase()}
+					style={{
+						fontFamily: "Roboto",
+						fontSize: 16,
+						fill: UICOLOUR,
+						align: "center"
+					}}
+					alpha={0.5}
+					x={606}
+					y={138 + 29}
+				/>
+				<Text
+					text={"120MW"}
+					style={{
+						fontFamily: "Roboto",
+						fontSize: 16,
+						fill: UICOLOUR,
+						align: "center"
+					}}
+					x={799}
+					y={138 + 29}
+				/>
+
+				<Rectangle
+					x={591}
+					y={348}
 					width={700}
-					height={1}
-					fill={0x0}
-					alpha={0.25}
+					height={210}
 					border={1}
 					borderColor={UICOLOUR}
 				/>
