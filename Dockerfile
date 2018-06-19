@@ -7,16 +7,16 @@ RUN apk add --update git && \
 
 RUN mkdir /var/app
 RUN cd /var/app
+WORKDIR /var/app
 
-COPY package.json /var/app
-COPY node_modules /var/app
+COPY . /var/app
 RUN yarn
 RUN npm rebuild
+
+RUN ls
 
 RUN yarn build
 RUN yarn build:sprites
 
-COPY . /var/app
-WORKDIR /var/app
 
 ENTRYPOINT npm run serve
