@@ -40,235 +40,236 @@ class StageContainer extends PIXI.Container {}
 let instance;
 export default class Engine {
 	static getInstance(): Engine {
-    	if (!instance) {
-    		instance = new Engine();
-    	}
-    	return instance;
+		if (!instance) {
+			instance = new Engine();
+		}
+		return instance;
 	}
 
 	static mock(container: HTMLElement = document.createElement("DIV")) {
-    	return new Engine().init(container);
+		return new Engine().init(container);
 	}
 
-    stageContainer: PIXI.Container;
-    mouse: Mouse;
-    currentPlayer: Player;
-    mission: Mission = Missions[0];
-    // keyboard: Input.Keyboard;
-    deltaTime: number = 0;
-    state: State;
-    currentScene: SceneBase;
-    ui: UI;
-    grid: Grid;
-    pixicanvas: HTMLCanvasElement;
-    fpsmeter: Fpsmeter;
-    view: {
-        offset: Point
-    };
+	stageContainer: PIXI.Container;
+	mouse: Mouse;
+	currentPlayer: Player;
+	mission: Mission = Missions[0];
+	// keyboard: Input.Keyboard;
+	deltaTime: number = 0;
+	state: State;
+	currentScene: SceneBase;
+	ui: UI;
+	grid: Grid;
+	pixicanvas: HTMLCanvasElement;
+	fpsmeter: Fpsmeter;
+	view: {
+		offset: Point
+	};
 
-    input: Input;
-    container: HTMLElement;
-    paused: boolean;
-    stage: PIXI.Container;
-    ctx: Context;
-    transitionStage: PIXI.Container;
-    backgroundStage: PIXI.Container;
-    renderer: any;
-    objects: Array<GameObject>;
-    lastTime: number;
-    updateId: number;
+	input: Input;
+	container: HTMLElement;
+	paused: boolean;
+	stage: PIXI.Container;
+	ctx: Context;
+	transitionStage: PIXI.Container;
+	backgroundStage: PIXI.Container;
+	renderer: any;
+	objects: Array<GameObject>;
+	lastTime: number;
+	updateId: number;
 
-    //main game loop
-    update = () => {
-    	this.fpsmeter.tickStart();
-    	//handle time
-    	let nowTime = new Date().getTime();
-    	let diff = nowTime - this.lastTime;
-    	this.lastTime = nowTime;
-    	if (diff > 1000) {
-    		//window probably lost focus or switched tabs
-    		diff = 1;
-    	}
-    	this.deltaTime = diff / 1000;
-    	this.mouse.update();
-    	if (!this.paused) {
-    		//sort objects on z
-    		this.objects.sort((a, b) => {
-    			let az = 0;
-    			if (a && a.z) az = a.z;
-    			let bz = 0;
-    			if (b && b.z) bz = b.z;
-    			return az - bz;
-    		});
+	//main game loop
+	update = () => {
+		this.fpsmeter.tickStart();
+		//handle time
+		let nowTime = new Date().getTime();
+		let diff = nowTime - this.lastTime;
+		this.lastTime = nowTime;
+		if (diff > 1000) {
+			//window probably lost focus or switched tabs
+			diff = 1;
+		}
+		this.deltaTime = diff / 1000;
+		this.mouse.update();
+		if (!this.paused) {
+			//sort objects on z
+			this.objects.sort((a, b) => {
+				let az = 0;
+				if (a && a.z) az = a.z;
+				let bz = 0;
+				if (b && b.z) bz = b.z;
+				return az - bz;
+			});
 
-    		//update clone list of all object so I can delete from original
-    		this.objects.slice(0).forEach(o => {
-    			if (o) {
-    				o.update(this);
-    			}
-    		});
-    	}
+			//update clone list of all object so I can delete from original
+			this.objects.slice(0).forEach(o => {
+				if (o) {
+					o.update(this);
+				}
+			});
+		}
 
-    	// this.objects = this.objects.filter(o => o);
-    	this.render();
-    	//wait for next frame
-    	this.updateId = requestAnimationFrame(this.update);
-    	this.input.endTick();
-    	this.fpsmeter.tick();
-    };
+		// this.objects = this.objects.filter(o => o);
+		this.render();
+		//wait for next frame
+		this.updateId = requestAnimationFrame(this.update);
+		this.input.endTick();
+		this.fpsmeter.tick();
+	};
 
-    resize = () => {
-    	this.pixicanvas.width = window.innerWidth;
-    	this.pixicanvas.height = window.innerHeight;
-    	config.game.width = window.innerWidth;
-    	config.game.height = window.innerHeight;
-    	if (this.renderer) {
-    		this.renderer.resize(this.pixicanvas.width, this.pixicanvas.height);
-    	}
-    };
+	resize = () => {
+		this.pixicanvas.width = window.innerWidth;
+		this.pixicanvas.height = window.innerHeight;
+		config.game.width = window.innerWidth;
+		config.game.height = window.innerHeight;
+		if (this.renderer) {
+			this.renderer.resize(this.pixicanvas.width, this.pixicanvas.height);
+		}
+	};
 
-    objectsTagged = (tag: string): Array<GameObject> => {
-    	return this.objects.filter(o => {
-    		return o && o.hasTag(tag);
-    	});
-    };
+	objectsTagged = (tag: string): Array<GameObject> => {
+		return this.objects.filter(o => {
+			return o && o.hasTag(tag);
+		});
+	};
 
-    transitioning: boolean;
+	transitioning: boolean;
 
-    //add new objects to be tracked by engine
-    register = (obj: GameObject) => {
-    	obj.init(this);
-    	this.objects.push(obj);
-    };
+	//add new objects to be tracked by engine
+	register = (obj: GameObject) => {
+		obj.init(this);
+		this.objects.push(obj);
+	};
 
-    kill = () => {
-    	cancelAnimationFrame(this.updateId);
-    	this.container.removeChild(this.canvas);
-    	this.container.removeChild(this.pixicanvas);
-    	this.container.removeChild(this.ui.container);
-    	this.fpsmeter.destroy();
-    	this.objects.forEach(o => {
-    		if (o.exit) {
-    			o.exit();
-    		}
-    	});
-    };
+	kill = () => {
+		cancelAnimationFrame(this.updateId);
+		this.container.removeChild(this.canvas);
+		this.container.removeChild(this.pixicanvas);
+		this.container.removeChild(this.ui.container);
+		this.fpsmeter.destroy();
+		this.objects.forEach(o => {
+			if (o.exit) {
+				o.exit();
+			}
+		});
+	};
 
-    //init
-    constructor() {
-    	instance = this;
-    	this.paused = false;
-    	this.view = {
-    		offset: new Point({ x: 120, y: 0 })
-    	};
+	//init
+	constructor() {
+		instance = this;
+		this.paused = false;
+		this.view = {
+			offset: new Point({ x: 120, y: 0 })
+		};
 
-    	this.objects = [];
-    	this.lastTime = new Date().getTime();
-    	this.state = new State();
-    	// this.keyboard = this.input.keyboard;
-    	this.currentPlayer = Player.getCurrentPlayer(); //here for now...
-    }
+		this.objects = [];
+		this.lastTime = new Date().getTime();
+		this.state = new State();
+		// this.keyboard = this.input.keyboard;
+		this.currentPlayer = Player.getCurrentPlayer(); //here for now...
+	}
 
-    init(container: HTMLElement) {
-    	this.container = container;
-    	this.mouse = new Mouse().init(this);
-    	// FLOWHACK
-    	this.fpsmeter = new FPSMeter(null, config.fpsmeter);
+	init(container: HTMLElement) {
+		this.container = container;
+		this.mouse = new Mouse().init(this);
+		// FLOWHACK
+		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 
-    	let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
-    	pixicanvas.id = "pixiCanvas";
-    	pixicanvas.width = config.game.width;
-    	pixicanvas.height = config.game.height;
-    	container.appendChild(pixicanvas);
-    	this.pixicanvas = pixicanvas;
+		let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
+		pixicanvas.id = "pixiCanvas";
+		pixicanvas.width = config.game.width;
+		pixicanvas.height = config.game.height;
+		container.appendChild(pixicanvas);
+		this.pixicanvas = pixicanvas;
 
-    	this.stageContainer = new StageContainer();
-    	this.stage = new Stage();
-    	this.transitionStage = new PIXI.Container();
-    	this.backgroundStage = new PIXI.Container();
-    	this.stageContainer.addChild(this.backgroundStage);
-    	this.stageContainer.addChild(this.stage);
-    	this.stageContainer.addChild(this.transitionStage);
-    	this.renderer = PIXI.autoDetectRenderer(
-    		window.innerWidth,
-    		window.innerHeight,
-    		{
-    			view: this.pixicanvas,
-    			transparent: true
-    		}
-    	);
-    	// this.backgroundStage.filters = [
-    	//     new ReflectionFilter({ alpha: [1, 0] })
-    	// ];
+		this.stageContainer = new StageContainer();
+		this.stage = new Stage();
+		this.transitionStage = new PIXI.Container();
+		this.backgroundStage = new PIXI.Container();
+		this.stageContainer.addChild(this.backgroundStage);
+		this.stageContainer.addChild(this.stage);
+		this.stageContainer.addChild(this.transitionStage);
+		this.renderer = PIXI.autoDetectRenderer(
+			window.innerWidth,
+			window.innerHeight,
+			{
+				view: this.pixicanvas,
+				transparent: true,
+				antialias: true
+			}
+		);
+		// this.backgroundStage.filters = [
+		//     new ReflectionFilter({ alpha: [1, 0] })
+		// ];
 
-    	// this.stageContainer.filters = [new AdvancedBloomFilter()];
-    	// this.stageContainer.filters = [new GlitchFilter()];
-    	// this.stageContainer.filters = [new GlowFilter()];
-    	// this.stageContainer.filters = [new GodrayFilter()];
-    	// this.stageContainer.filters = [new PixelateFilter()];
-    	// this.stageContainer.filters = [new ReflectionFilter()];
-    	// this.stageContainer.filters = [
-    	//     new ShockwaveFilter([0.5, 0.5], { radius: -1 })
-    	// ];
+		// this.stageContainer.filters = [new AdvancedBloomFilter()];
+		// this.stageContainer.filters = [new GlitchFilter()];
+		// this.stageContainer.filters = [new GlowFilter()];
+		// this.stageContainer.filters = [new GodrayFilter()];
+		// this.stageContainer.filters = [new PixelateFilter()];
+		// this.stageContainer.filters = [new ReflectionFilter()];
+		// this.stageContainer.filters = [
+		//     new ShockwaveFilter([0.5, 0.5], { radius: -1 })
+		// ];
 
-    	let uiDiv: HTMLDivElement = document.createElement("div");
-    	uiDiv.id = "ui";
-    	container.appendChild(uiDiv);
-    	this.ui = new UI(uiDiv, this);
+		let uiDiv: HTMLDivElement = document.createElement("div");
+		uiDiv.id = "ui";
+		container.appendChild(uiDiv);
+		this.ui = new UI(uiDiv, this);
 
-    	this.resize();
-    	window.addEventListener("resize", this.resize);
+		this.resize();
+		window.addEventListener("resize", this.resize);
 
-    	this.input = new Input(
-    		Object.assign({}, config.input, { target: pixicanvas })
-    	);
+		this.input = new Input(
+			Object.assign({}, config.input, { target: pixicanvas })
+		);
 
-    	//HACK
-    	this.canvas = this.pixicanvas;
+		//HACK
+		this.canvas = this.pixicanvas;
 
-    	return this;
-    }
+		return this;
+	}
 
-    startSceneTransition(scene: SceneBase, transition: Transition) {
-    	// trnasition.on
-    	if (!this.transitioning) {
-    		this.transitioning = true;
-    		transition.onEndLastScene(() => {
-    			if (this.currentScene) this.currentScene.end();
-    			// this.objects.push(transition);
-    		});
-    		transition.onStartNextScene(() => {
-    			this.currentScene = scene;
-    			this.currentScene.start(this);
+	startSceneTransition(scene: SceneBase, transition: Transition) {
+		// trnasition.on
+		if (!this.transitioning) {
+			this.transitioning = true;
+			transition.onEndLastScene(() => {
+				if (this.currentScene) this.currentScene.end();
+				// this.objects.push(transition);
+			});
+			transition.onStartNextScene(() => {
+				this.currentScene = scene;
+				this.currentScene.start(this);
 
-    			this.transitioning = false;
-    			window.dispatchEvent(new Event("transition-finished"));
-    		});
-    		this.register(transition);
-    	}
-    }
+				this.transitioning = false;
+				window.dispatchEvent(new Event("transition-finished"));
+			});
+			this.register(transition);
+		}
+	}
 
-    destroy(obj: GameObject) {
-    	let i = this.objects.indexOf(obj);
-    	if (i > -1) {
-    		this.objects.splice(i, 1);
-    	} else {
-    		// throw new Error("destroying non existant object");
-    		console.warn(
-    			"destroying non existant object",
-    			obj.constructor.name
-    		);
-    	}
-    }
+	destroy(obj: GameObject) {
+		let i = this.objects.indexOf(obj);
+		if (i > -1) {
+			this.objects.splice(i, 1);
+		} else {
+			// throw new Error("destroying non existant object");
+			console.warn(
+				"destroying non existant object",
+				obj.constructor.name
+			);
+		}
+	}
 
-    startScene(scene: SceneBase) {
-    	if (this.currentScene) this.currentScene.end();
-    	this.currentScene = scene;
-    	this.currentScene.start(this);
-    }
+	startScene(scene: SceneBase) {
+		if (this.currentScene) this.currentScene.end();
+		this.currentScene = scene;
+		this.currentScene.start(this);
+	}
 
-    render() {
-    	// console.log("render");
-    	this.renderer.render(this.stageContainer);
-    }
+	render() {
+		// console.log("render");
+		this.renderer.render(this.stageContainer);
+	}
 }
