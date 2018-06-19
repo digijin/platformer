@@ -59,8 +59,6 @@ class MissionDetail extends Component {
 					x={window.innerWidth - 260}
 					y={693}
 					onClick={() => {
-						console.log(this.props.engine);
-
 						this.props.engine.mission = this.props.mission;
 						this.props.engine.startScene(new Level());
 					}}

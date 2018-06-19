@@ -6,18 +6,23 @@ import Missions from "./Missions";
 import OutfittingMenu from "./Outfitting";
 import { UICOLOUR } from "./constants";
 import Button from "./SideMenu/Button";
+import engineConnect from "React/engineConnect";
+import MainMenu from "../Scene/MainMenu";
 // export default class SideMenu extends Container {
 // 	render() {
 // 		return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
 // 	}
 // }
 
-export default class SideMenu extends Component {
+class SideMenu extends Component {
 	state = {
 		selected: "OUTFITTING"
 	};
 
 	onSectionClick = section => {
+		if (section == "QUIT") {
+			this.props.engine.startScene(new MainMenu());
+		}
 		this.setState(state => ({
 			...state,
 			selected: section
@@ -64,6 +69,4 @@ export default class SideMenu extends Component {
 		);
 	}
 }
-// export default function SideMenu(props) {
-// 	// return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
-// }
+export default engineConnect(SideMenu);
