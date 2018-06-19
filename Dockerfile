@@ -13,10 +13,9 @@ COPY . /var/app
 RUN yarn
 RUN npm rebuild
 
-RUN ls
-
 RUN yarn build
 RUN yarn build:sprites
 
+EXPOSE 8080
 
 ENTRYPOINT npm run serve
