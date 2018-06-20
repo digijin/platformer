@@ -5,6 +5,7 @@ import Line from "../Line";
 import Tab from "../Tab";
 import { UICOLOUR } from "../constants";
 import engineConnect from "React/engineConnect";
+import Folder from "./Detail/Folder";
 
 import { Engines } from "Components/Engine";
 import { Legs } from "Components/Legs";
@@ -113,23 +114,7 @@ class OutfittingDetail extends Component {
 					y={138 + 29}
 				/>
 
-				<Rectangle
-					x={591}
-					y={348}
-					width={700}
-					height={210}
-					border={1}
-					borderColor={UICOLOUR}
-				/>
-				<Tab
-					x={591 + 10}
-					y={348}
-					width={75}
-					height={25}
-					border={1}
-					sideWidth={15}
-					borderColor={UICOLOUR}
-				/>
+				<Folder />
 			</Container>
 		);
 	}
