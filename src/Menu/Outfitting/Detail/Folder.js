@@ -16,6 +16,14 @@ export default class Folder extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<Rectangle
+					x={X}
+					y={Y}
+					fill={UICOLOUR}
+					alpha={0.25}
+					width={MAGIC_WIDTH}
+					height={MAGIC_HEIGHT}
+				/>
 				<Line x={X} y={Y} width={10} lineWidth={1} color={UICOLOUR} />
 				<Line
 					x={X + MAGIC_WIDTH}
