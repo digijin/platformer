@@ -4,6 +4,8 @@ import Rectangle from "../../Rectangle";
 import Line from "../../Line";
 import { UICOLOUR } from "../../constants";
 
+import Owned from "./Folder/Owned";
+
 const MAGIC_HEIGHT = 210;
 const MAGIC_WIDTH = 700;
 const TAB_LEFT = 10;
@@ -78,6 +80,7 @@ export default class Folder extends React.Component {
 					x={X + TAB_LEFT + TAB_WIDTH * 2}
 					y={Y}
 				/>
+				<Owned x={X} y={Y} width={MAGIC_WIDTH} height={MAGIC_HEIGHT} />
 			</React.Fragment>
 		);
 	}
