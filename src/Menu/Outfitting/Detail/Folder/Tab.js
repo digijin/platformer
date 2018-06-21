@@ -11,11 +11,16 @@ export default class Tab extends React.Component {
 				<PrimitiveTab
 					x={this.props.x}
 					y={this.props.y}
-					width={75}
+					width={70}
 					height={25}
 					border={1}
-					sideWidth={15}
+					sideWidth={16}
+					fill={this.props.fill}
+					alpha={0.25}
 					borderColor={UICOLOUR}
+					bottom={this.props.bottom}
+					leftCorner={this.props.leftCorner}
+					rightCorner={this.props.rightCorner}
 				/>
 				<Text
 					text={this.props.text}
@@ -25,7 +30,7 @@ export default class Tab extends React.Component {
 						fill: 0xffffff,
 						align: "center"
 					}}
-					x={this.props.x + 25}
+					x={this.props.x + 24}
 					y={this.props.y - 21}
 				/>
 			</React.Fragment>

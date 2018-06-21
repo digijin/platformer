@@ -7,7 +7,7 @@ import { UICOLOUR } from "../../constants";
 const MAGIC_HEIGHT = 210;
 const MAGIC_WIDTH = 700;
 const TAB_LEFT = 10;
-const TAB_WIDTH = 85;
+const TAB_WIDTH = 86;
 
 const X = 591;
 const Y = 348;
@@ -20,7 +20,7 @@ export default class Folder extends React.Component {
 				<Line
 					x={X + MAGIC_WIDTH}
 					y={Y}
-					width={-MAGIC_WIDTH + 20 + TAB_LEFT + TAB_WIDTH * 3}
+					width={-MAGIC_WIDTH + 16 + TAB_LEFT + TAB_WIDTH * 3}
 					lineWidth={1}
 					color={UICOLOUR}
 				/>
@@ -46,11 +46,28 @@ export default class Folder extends React.Component {
 					lineWidth={1}
 					color={UICOLOUR}
 				/>
-				<Tab text={"OWNED"} x={X + TAB_LEFT} y={Y} />
-				<Tab text={"SHOPS"} x={X + TAB_LEFT + TAB_WIDTH} y={Y} />
 				<Tab
+					leftCorner={true}
+					rightCorner={true}
+					text={"OWNED"}
+					fill={UICOLOUR}
+					x={X + TAB_LEFT}
+					y={Y}
+				/>
+				<Tab
+					rightCorner={true}
+					bottom={true}
+					text={"SHOPS"}
+					fill={0x0}
+					x={X + TAB_LEFT + TAB_WIDTH}
+					y={Y}
+				/>
+				<Tab
+					rightCorner={true}
+					bottom={true}
 					text={"ADDON"}
-					x={X + TAB_LEFT + TAB_WIDTH + TAB_WIDTH}
+					fill={0x0}
+					x={X + TAB_LEFT + TAB_WIDTH * 2}
 					y={Y}
 				/>
 			</React.Fragment>

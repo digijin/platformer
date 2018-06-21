@@ -30,9 +30,12 @@ export const behavior = {
 			alpha,
 			buttonMode,
 			interactive,
-			sideWidth
+			sideWidth,
+			bottom,
+			leftCorner,
+			rightCorner
 		} = newProps;
-		this.cacheAsBitmap = false;
+		// this.cacheAsBitmap = false;
 		if (alpha == undefined) {
 			alpha = 1;
 		}
@@ -41,12 +44,32 @@ export const behavior = {
 			instance.beginFill(fill, alpha);
 		}
 		instance.lineStyle(border, borderColor);
-
-		instance.moveTo(x, y);
+		if (leftCorner) {
+			instance.moveTo(x, y);
+		} else {
+			instance.moveTo(x + sideWidth / 2, y - height / 2);
+		}
 		instance.lineTo(x + sideWidth, y - height);
 		instance.lineTo(x + sideWidth + width, y - height);
-		instance.lineTo(x + sideWidth + width + sideWidth, y);
+		if (rightCorner) {
+			instance.lineTo(x + sideWidth + width + sideWidth, y);
+		} else {
+			instance.lineTo(
+				x + sideWidth + width + sideWidth / 2,
+				y - height / 2
+			);
+		}
 
+		if (!bottom) {
+			instance.lineStyle(0);
+		}
+		instance.lineTo(x + sideWidth + width, y);
+		instance.lineTo(x + sideWidth, y);
+		if (leftCorner) {
+			instance.lineTo(x, y);
+		} else {
+			instance.lineTo(x + sideWidth / 2, y - height / 2);
+		}
 		instance.endFill();
 
 		instance.buttonMode = buttonMode;
@@ -55,7 +78,7 @@ export const behavior = {
 		// instance.mouseover = () => {
 		// 	console.log("yolo");
 		// };
-		this.cacheAsBitmap = true;
+		// this.cacheAsBitmap = true;
 	}
 };
 export default CustomPIXIComponent(behavior, TYPE);
