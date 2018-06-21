@@ -2,6 +2,7 @@ import { CustomPIXIComponent } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 
 const TYPE = "Line";
+class Line extends PIXI.Graphics {}
 export const behavior = {
 	customDisplayObject: props => new PIXI.Graphics(),
 	customDidAttach: instance => {},

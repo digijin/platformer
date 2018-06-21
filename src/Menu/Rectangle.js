@@ -2,8 +2,9 @@ import { CustomPIXIComponent } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 
 const TYPE = "Rectangle";
+class Rectangle extends PIXI.Graphics {}
 export const behavior = {
-	customDisplayObject: props => new PIXI.Graphics(),
+	customDisplayObject: props => new Rectangle(),
 	customDidAttach: instance => {
 		// instance.buttonMode = true;
 		// instance.interactive = true;
