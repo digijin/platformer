@@ -59,7 +59,7 @@ export default class FolderButton extends BaseButton {
 					onClick={this.props.onClick}
 				/>
 				<Text
-					text={"LAUNCH"}
+					text={title}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 18,
