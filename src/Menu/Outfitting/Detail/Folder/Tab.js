@@ -5,7 +5,7 @@ import PrimitiveTab from "../../../Tab";
 
 export default class Tab extends React.Component {
 	render() {
-		console.log(this.props.x - 626, this.props.y - 327);
+		// console.log(this.props.x - 626, this.props.y - 327);
 		return (
 			<React.Fragment>
 				<PrimitiveTab

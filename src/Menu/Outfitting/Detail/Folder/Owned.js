@@ -23,12 +23,15 @@ export default class Owned extends React.Component {
 					y={PADDING}
 					width={this.props.width - PADDING * 2}
 					height={this.props.height - PADDING * 2}
+					padding={PADDING}
 				>
 					<Container x={PADDING} y={PADDING}>
 						<FolderButton y={0} />
 						<FolderButton y={50} />
 						<FolderButton y={100} />
 						<FolderButton y={150} />
+						<FolderButton y={200} />
+						<FolderButton y={250} />
 					</Container>
 				</ScrollArea>
 			</Container>
