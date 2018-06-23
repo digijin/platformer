@@ -34,7 +34,7 @@
 			"jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/",
 		"docker:alpine-node":
 			"docker run -it -v $(pwd):/var/app mhart/alpine-node sh",
-		"precomm1it": "npm run test && npm run karma:ci",
+		"precommit": "npm run test && npm run karma:ci",
 		"serve": "http-server dist"
 	},
 	"repository": {
