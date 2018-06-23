@@ -59,6 +59,7 @@ export default class Folder extends React.Component {
 				<Tab
 					leftCorner={true}
 					rightCorner={true}
+					active={true}
 					text={"OWNED"}
 					fill={UICOLOUR}
 					x={X + TAB_LEFT}

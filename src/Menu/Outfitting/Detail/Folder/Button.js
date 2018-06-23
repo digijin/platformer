@@ -24,7 +24,7 @@ export default class FolderButton extends BaseButton {
 				<Rectangle
 					x={0}
 					y={0}
-					width={250}
+					width={450}
 					height={45}
 					fill={this.state.down ? 0xffffff : UICOLOUR}
 					alpha={this.state.over || this.props.selected ? 1 : 0.25}
