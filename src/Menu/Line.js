@@ -4,7 +4,7 @@ import * as PIXI from "pixi.js";
 const TYPE = "Line";
 class Line extends PIXI.Graphics {}
 export const behavior = {
-	customDisplayObject: props => new PIXI.Graphics(),
+	customDisplayObject: props => new Line(),
 	customDidAttach: instance => {},
 	customApplyProps: function(instance, oldProps, newProps) {
 		let { x, y, width, height, lineWidth, color } = newProps;

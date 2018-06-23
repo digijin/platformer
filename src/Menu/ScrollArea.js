@@ -1,5 +1,6 @@
 import { CustomPIXIComponent } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
+import engineConnect from "../React/engineConnect";
 
 const TYPE = "ScrollArea";
 class ScrollArea extends PIXI.Container {}
@@ -12,15 +13,32 @@ export const behavior = {
 		scrollArea.mask = mask;
 		mask.width = props.width;
 		mask.height = props.height;
-		mask.buttonMode = true;
-		mask.interactive = true;
+		// mask.buttonMode = true;
+		scrollArea.interactive = true;
 		mask.on("click", console.log("yolo"));
 		// mask.x = props.x;
 		// mask.y = props.y;
+		scrollArea.engine = props.engine; //pass reference for later
 		return scrollArea;
 	},
-	customDidAttach: instance => {},
-	customWillDetach: instance => {}
+	customDidAttach: instance => {
+		instance.on("mouseover", () => {
+			console.log("MO");
+			instance.over = true;
+		});
+		instance.on("mouseout", () => {
+			console.log("MOut");
+			instance.over = false;
+		});
+		const onWheel = function(e) {
+			console.log("mfw", instance.over, this.over);
+		};
+		instance.onWheel = onWheel.bind(instance);
+		instance.engine.canvas.addEventListener("wheel", instance.onWheel);
+	},
+	customWillDetach: instance => {
+		instance.engine.canvas.removeEventListener("wheel", instance.onWheel);
+	}
 
 	// customDidAttach: instance => {
 	// 	// instance.buttonMode = true;
@@ -70,4 +88,4 @@ export const behavior = {
 	// 	// this.cacheAsBitmap = true;
 	// }
 };
-export default CustomPIXIComponent(behavior, TYPE);
+export default engineConnect(CustomPIXIComponent(behavior, TYPE));
