@@ -25,6 +25,9 @@ const NUM_BUILDINGS = 150;
 const PAN_SPEED = 100;
 const OVERLAP = 50;
 
+class BackgroundStage extends PIXI.Container {}
+class BackgroundBuildingStage extends PIXI.Container {}
+
 export default class Background extends GameObject {
 	top: HTMLDivElement;
 	buildings: Array<PIXI.Sprite>;
@@ -39,8 +42,8 @@ export default class Background extends GameObject {
 	explosions: boolean = true;
 	constructor() {
 		super();
-		this.stage = new PIXI.Container();
-		this.buildingStage = new PIXI.Container();
+		this.stage = new BackgroundStage();
+		this.buildingStage = new BackgroundBuildingStage();
 
 		this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.bg.z = 1;
