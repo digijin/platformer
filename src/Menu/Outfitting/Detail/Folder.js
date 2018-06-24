@@ -81,7 +81,13 @@ export default class Folder extends React.Component {
 					x={X + TAB_LEFT + TAB_WIDTH * 2}
 					y={Y}
 				/>
-				<Owned x={X} y={Y} width={MAGIC_WIDTH} height={MAGIC_HEIGHT} />
+				<Owned
+					options={this.props.options}
+					x={X}
+					y={Y}
+					width={MAGIC_WIDTH}
+					height={MAGIC_HEIGHT}
+				/>
 			</React.Fragment>
 		);
 	}

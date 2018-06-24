@@ -57,7 +57,7 @@ class OutfittingDetail extends Component {
 					component={this.props.component}
 				/>
 
-				<Folder />
+				<Folder options={options} />
 			</Container>
 		);
 	}

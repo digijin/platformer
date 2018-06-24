@@ -26,12 +26,9 @@ export default class Owned extends React.Component {
 					padding={PADDING}
 				>
 					<Container x={PADDING} y={PADDING}>
-						<FolderButton title={"something"} y={0} />
-						<FolderButton title={"something else"} y={50} />
-						<FolderButton title={"another thing"} y={100} />
-						<FolderButton title={"yet another"} y={150} />
-						<FolderButton title={"even more"} y={200} />
-						<FolderButton title={"what is this"} y={250} />
+						{this.props.options.map((o, i) => {
+							return <FolderButton title={o.name} y={50 * i} />;
+						})}
 					</Container>
 				</ScrollArea>
 			</Container>
