@@ -29,7 +29,7 @@ export default class Tab extends React.Component {
 					buttonMode={true}
 					interactive={true}
 					onMouseOver={() => {
-						console.log(this);
+						// console.log(this);
 						this.setState(state => ({
 							...state,
 							over: true
