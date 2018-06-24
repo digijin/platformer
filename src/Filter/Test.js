@@ -31,8 +31,9 @@ const TestFilter = new PIXI.Filter(
 	uniform float time;
 	void main(){
 		float blockWidth = 20.0;
-		float pc = abs(mod(time, 1.0));
-		// float pc = mouse.x/resolution.x;
+		// float pc = abs(mod(time, 1.0));
+		float pc = mouse.y/resolution.y * 2.0;
+		pc -= gl_FragCoord.y / resolution.y;
 		float col = ceil(gl_FragCoord.x/blockWidth);
 		if(mod(gl_FragCoord.y + (col * blockWidth/2.0), blockWidth) < blockWidth * pc){
 			// gl_FragColor = vec4(0.0,0.0,0.0,0.0);
@@ -41,6 +42,13 @@ const TestFilter = new PIXI.Filter(
 			// gl_FragColor = vec4(gl_FragCoord.x/mouse.x,gl_FragCoord.y/mouse.x,sin(time),1.0);
 			gl_FragColor = texture2D(uSampler, vTextureCoord);
 		}
+
+		// if(gl_FragCoord.x>mouse.x){
+		// 	gl_FragColor = texture2D(uSampler, vTextureCoord);
+		// }
+		// if(gl_FragCoord.y>resolution.y/2.0){
+		// 	gl_FragColor = texture2D(uSampler, vTextureCoord);
+		// }
 	}
 	`,
 	uniforms
@@ -57,6 +65,7 @@ document.onmousemove = function(evt) {
 	const mousePos = { x: evt.clientX, y: evt.clientY };
 	// uniforms.mouse.value = mousePos;
 	TestFilter.uniforms.mouse = [mousePos.x, mousePos.y];
+	TestFilter.uniforms.resolution = [window.innerWidth, window.innerHeight];
 };
 
 export default TestFilter;
