@@ -41,7 +41,7 @@ class CheckerboardTransitionFilter extends PIXI.Filter {
 	}
 }
 
-const TestFilter = new CheckerboardTransitionFilter();
+// const TestFilter = new CheckerboardTransitionFilter();
 
 // TestFilter.uniforms.mouse = [300, 300];
 
@@ -52,16 +52,16 @@ const TestFilter = new CheckerboardTransitionFilter();
 // 	// console.log(TestFilter.uniforms.time);
 // }
 // animate();
-document.onmousemove = function(evt) {
-	const mousePos = { x: evt.clientX, y: evt.clientY };
-	// uniforms.mouse.value = mousePos;
-	// TestFilter.uniforms.mouse = [mousePos.x, mousePos.y];
-	console.log(TestFilter.uniforms.mouse);
-	// TestFilter.uniforms.mouse = [300, 300];
-	// TestFilter.uniforms.resolution = [window.innerWidth, window.innerHeight];
-};
+// document.onmousemove = function(evt) {
+// 	const mousePos = { x: evt.clientX, y: evt.clientY };
+// 	// uniforms.mouse.value = mousePos;
+// 	// TestFilter.uniforms.mouse = [mousePos.x, mousePos.y];
+// 	console.log(TestFilter.uniforms.mouse);
+// 	// TestFilter.uniforms.mouse = [300, 300];
+// 	// TestFilter.uniforms.resolution = [window.innerWidth, window.innerHeight];
+// };
 
-export default TestFilter;
+export default CheckerboardTransitionFilter;
 
 // ////////////////
 //

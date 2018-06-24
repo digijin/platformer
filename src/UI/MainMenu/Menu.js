@@ -6,6 +6,7 @@ import Editor from "Scene/Editor";
 import Equip from "Scene/Equip";
 
 import Doors from "Transition/Doors";
+import CheckerboardOut from "Transition/CheckerboardOut";
 import SmokeExplosionUpTransition from "Transition/SmokeExplosionUpTransition";
 
 import engineConnect from "React/engineConnect";
@@ -69,11 +70,15 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 		play: () => {
 			// props.engine.startScene(new Level());
 			dispatch({ type: "END_SCENE" });
-			props.engine.startScene(new Menu());
+			// props.engine.startScene(new Menu());
 			// props.engine.startSceneTransition(
 			// 	new Menu(),
 			// 	new SmokeExplosionUpTransition()
 			// );
+			props.engine.startSceneTransition(
+				new Menu(),
+				new CheckerboardOut()
+			);
 		},
 		editor: () => {
 			props.engine.startScene(new Editor());
@@ -88,5 +93,8 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 }
 
 export default engineConnect(
-	connect(mapStateToProps, mapDispatchToProps)(MainMenu)
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(MainMenu)
 );

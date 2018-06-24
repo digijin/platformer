@@ -13,7 +13,9 @@ import * as PIXI from "pixi.js";
 
 import log from "loglevel";
 
-const FADETIME = 8;
+const FADETIME = 4;
+
+import CheckerboardTransition from "Filter/CheckerboardTransition";
 
 export default class MainMenu extends GameObject {
 	hero: PIXI.Sprite;
@@ -38,15 +40,19 @@ export default class MainMenu extends GameObject {
 		super.init(engine);
 		// this.engine.stage.addChild(this.hero);
 		this.engine.stage.addChild(this.fadein);
+		// this.transitionFilter = new CheckerboardTransition();
+		// this.engine.stageContainer.filters = [this.transitionFilter];
 		this.update();
 	}
 
 	exit() {
 		// this.engine.stage.removeChild(this.hero);
 		this.engine.stage.removeChild(this.fadein);
+		// this.engine.stageContainer.filters = [];
 	}
 
 	update() {
+		// this.transitionFilter.percent += this.engine.deltaTime;
 		this.time += this.engine.deltaTime;
 		this.hero.position.x = window.innerWidth / 2;
 		this.hero.position.y = window.innerHeight / 2;
