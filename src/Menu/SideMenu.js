@@ -14,6 +14,8 @@ import MainMenu from "../Scene/MainMenu";
 // 	}
 // }
 
+import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
+
 class SideMenu extends Component {
 	state = {
 		selected: "OUTFITTING"
@@ -42,7 +44,11 @@ class SideMenu extends Component {
 		const sections = ["MISSIONS", "OUTFITTING", "OPTIONS", "SAVE", "QUIT"];
 
 		return (
-			<Container>
+			<Container
+				filters={[
+					new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 })
+				]}
+			>
 				<Rectangle
 					x={10}
 					y={10}
