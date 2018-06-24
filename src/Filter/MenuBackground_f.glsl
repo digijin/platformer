@@ -153,9 +153,17 @@ void main()
     //if(uv.x>.98 || uv.y>.98) col += 1.;
     #else
     col *= 1.-dot(uv,uv);
-    t = mod(time, 230.);
-    col *= S(0., 20., t)*S(224., 200., t);
+    // t = mod(time, 230.);
+    // col *= S(0., 20., t)*S(224., 200., t);
+	t = sin(time);
+	col *= 0.1 + (t/100.);
     #endif
+
+	if(time<0.){
+		col *= 0.;
+	}else if(time<10.){
+		col *= time/10.;
+	}
 
     gl_FragColor = vec4(col,0.1);
 }

@@ -5,7 +5,7 @@ const uniforms = {};
 
 uniforms.time = {
 	type: "f",
-	value: 0
+	value: -1
 };
 uniforms.resolution = {
 	type: "v2",
