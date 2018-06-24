@@ -18,3 +18,4 @@ buildstats.*
 src/Storage/saves
 saves
 **/automated_test*
+glslangValidator.exe

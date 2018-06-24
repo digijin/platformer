@@ -47,3 +47,8 @@ files ending in `.karma.js` are run only in Karma (for browser specifics)
 files ending in `.spec.js` are run in both
 
 if using vscode hit f5 with chrome debugger installed
+
+### for GLSL linting
+
+download validator https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/tools/glslang/Install/Windows/
+put in root

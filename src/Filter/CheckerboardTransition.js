@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 
-import fragment from "./CheckerboardTransition/fragment.glsl";
+import fragment from "./CheckerboardTransition/fragment_f.glsl";
 
 //https://codepen.io/anon/pen/GGGByM
 //https://codepen.io/omarshe7ta/pen/wGbBge
