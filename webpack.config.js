@@ -45,6 +45,10 @@ module.exports = [
 					loader: "raw-loader"
 				},
 				{
+					test: /\.glsl$/,
+					loader: "raw-loader"
+				},
+				{
 					test: /\.html$/,
 					loader: "html-loader"
 				},
