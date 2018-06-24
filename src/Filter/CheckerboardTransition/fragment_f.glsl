@@ -13,7 +13,8 @@ void main(){
 	//invert
 	pc -= (resolution.y-gl_FragCoord.y) / resolution.y;
 	float col = ceil(gl_FragCoord.x/blockWidth);
-	if(mod(gl_FragCoord.y + (col * blockWidth/2.0), blockWidth) < blockWidth * pc){
+	float modulus = mod(gl_FragCoord.y + (col * blockWidth/2.0), blockWidth);
+	if(modulus < blockWidth * pc){
 		gl_FragColor = vec4(0.0,0.0,0.0,0.0);
 	}else{
 		gl_FragColor = texture2D(uSampler, vTextureCoord);
