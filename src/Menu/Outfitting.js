@@ -12,13 +12,13 @@ export default class OutfittingMenu extends Component {
 
 	render() {
 		const sections = [
-			{ text: "Engine", sub: "Energy recharge rate" },
-			{ text: "Legs", sub: "Movement speed" },
-			{ text: "Primary", sub: "Primary weapon" },
-			{ text: "Secondary", sub: "Secondary weapon" },
-			{ text: "Body", sub: "Chassis and armour" },
-			{ text: "Booster", sub: "Aerial maneuverability" },
-			{ text: "Sidekick", sub: "Companion" }
+			{ id: "engine", text: "Engine", sub: "Energy recharge rate" },
+			{ id: "legs", text: "Legs", sub: "Movement speed" },
+			{ id: "primary", text: "Primary", sub: "Primary weapon" },
+			{ id: "secondary", text: "Secondary", sub: "Secondary weapon" },
+			{ id: "body", text: "Body", sub: "Chassis and armour" },
+			{ id: "booster", text: "Booster", sub: "Aerial maneuverability" },
+			{ id: "sidekick", text: "Sidekick", sub: "Companion" }
 		];
 		return (
 			<Container>

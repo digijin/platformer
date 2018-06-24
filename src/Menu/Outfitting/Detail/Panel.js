@@ -6,6 +6,7 @@ import { UICOLOUR } from "../../constants";
 
 export default class OutfittingPanel extends React.Component {
 	render() {
+		// console.log(this.props.part);
 		return (
 			<React.Fragment>
 				<Text
@@ -30,7 +31,7 @@ export default class OutfittingPanel extends React.Component {
 					borderColor={UICOLOUR}
 				/>
 				<Text
-					text={"fisher-pryce my first engine".toUpperCase()}
+					text={this.props.part.name.toUpperCase()}
 					style={{
 						fontFamily: "RobotoBold",
 						fontSize: 18,

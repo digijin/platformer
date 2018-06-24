@@ -19,9 +19,43 @@ import OutfittingPanel from "./Detail/Panel";
 
 class OutfittingDetail extends Component {
 	render() {
+		let options = [];
+		const category = this.props.component.id;
+
+		switch (category) {
+		case "engine":
+			options = Engines;
+			break;
+		case "legs":
+			options = Legs;
+			break;
+		case "primary":
+			options = Primarys;
+			break;
+		case "secondary":
+			options = Secondarys;
+			break;
+		case "sidekick":
+			options = Sidekicks;
+			break;
+		case "body":
+			options = Bodys;
+			break;
+		case "booster":
+			options = Boosters;
+			break;
+		}
+		// console.log(this.props.engine.currentPlayer[category], options);
+		const part = options.find(e => {
+			return e.id == this.props.engine.currentPlayer[category];
+		});
 		return (
 			<Container>
-				<OutfittingPanel component={this.props.component} />
+				<OutfittingPanel
+					part={part}
+					options={options}
+					component={this.props.component}
+				/>
 
 				<Folder />
 			</Container>
