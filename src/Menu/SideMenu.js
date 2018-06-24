@@ -13,13 +13,28 @@ import MainMenu from "../Scene/MainMenu";
 // 		return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
 // 	}
 // }
+import GameObject from "GameObject";
 
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
+import MenuBackgroundFilter from "Filter/MenuBackground";
+
+class FilterUpdater extends GameObject {
+	constructor(filter) {
+		super();
+		this.filter = filter;
+	}
+
+	update() {
+		this.filter.time += this.engine.deltaTime;
+	}
+}
 
 class SideMenu extends Component {
 	state = {
 		selected: "OUTFITTING"
 	};
+
+	bgFilter = new MenuBackgroundFilter();
 
 	onSectionClick = section => {
 		if (section == "QUIT") {
@@ -40,6 +55,10 @@ class SideMenu extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.props.engine.register(new FilterUpdater(this.bgFilter));
+	}
+
 	render() {
 		const sections = ["MISSIONS", "OUTFITTING", "OPTIONS", "SAVE", "QUIT"];
 
@@ -49,6 +68,16 @@ class SideMenu extends Component {
 					new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 })
 				]}
 			>
+				<Container filters={[this.bgFilter]}>
+					<Rectangle
+						x={0}
+						y={0}
+						width={window.innerWidth}
+						height={window.innerHeight}
+						border={3}
+						borderColor={UICOLOUR}
+					/>
+				</Container>
 				<Rectangle
 					x={10}
 					y={10}
