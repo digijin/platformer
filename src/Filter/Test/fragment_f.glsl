@@ -1,0 +1,33 @@
+// Created by inigo quilez - iq/2013
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+
+// Volumetric clouds. It performs level of detail (LOD) for faster rendering
+
+precision mediump float;
+varying vec2 vTextureCoord;
+uniform sampler2D uSampler;
+uniform sampler2D iChannel0;
+
+uniform vec2 iResolution;
+uniform vec2 iMouse;
+uniform float iTime;
+uniform vec4 filterArea;
+
+void main( )
+{
+	vec2 pixelCoord = vTextureCoord * filterArea.xy;
+
+	gl_FragColor = texture2D(iChannel0, vTextureCoord);
+	
+	if(abs(pixelCoord.y - iMouse.y)<10. || abs(pixelCoord.x - iMouse.x)<10.){
+		gl_FragColor = vec4(sin(pixelCoord.x/100.), cos(pixelCoord.y/100.), abs(sin(iTime)), 0.5);
+	}
+
+	if(iResolution.x-pixelCoord.x < 10.){
+		gl_FragColor = vec4(1.,1.,0.,1.);
+	}
+	if(iResolution.y-pixelCoord.y < 10.){
+		gl_FragColor = vec4(1.,1.,0.,1.);
+	}
+
+}
