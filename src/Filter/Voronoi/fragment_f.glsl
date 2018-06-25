@@ -19,22 +19,15 @@ uniform vec3 colors[8];
 void main() {
     float dist = distance(seeds[0] * iResolution, gl_FragCoord.xy);
     vec3 color = vec3(0.5);
-    for (int i = 1; i < 32; i++) {
+    for (int i = 1; i < 8; i++) {
         float current = distance(seeds[i] * iResolution, gl_FragCoord.xy);
         if (current < dist) {
             color = colors[i];
+			color *= 1.-(current/(iResolution.x/4.));
             dist = current;
         }
     }
     gl_FragColor = vec4(color, 1.0);
-	// gl_FragColor = vec4(1.);
-	// for (int i = 0; i < 3; i++) {
-	// 	if(gl_FragCoord.x<seeds[i].x * iResolution.x){
-	// 		gl_FragColor *= 0.8;
-	// 	}
-	// 	if(gl_FragCoord.y<seeds[i].y * iResolution.y){
-	// 		gl_FragColor *= 0.8;
-	// 	}
-	// }
+
 
 }
