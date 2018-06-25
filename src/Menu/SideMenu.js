@@ -16,7 +16,7 @@ import MainMenu from "../Scene/MainMenu";
 import GameObject from "GameObject";
 
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
-import MenuBackgroundFilter from "Filter/MenuBackground";
+import MenuBackgroundFilter from "Filter/ShaderToy/UniverseWithin/Filter";
 
 class FilterUpdater extends GameObject {
 	constructor(filter) {
@@ -64,9 +64,11 @@ class SideMenu extends Component {
 
 		return (
 			<Container
-				filters={[
-					new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 })
-				]}
+				filters={
+					[
+						//new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 })
+					]
+				}
 			>
 				<Container filters={[this.bgFilter]}>
 					<Rectangle

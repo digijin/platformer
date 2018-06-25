@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
-import fragment from "./Clouds_f.glsl";
-import cloudshader from "./cloudshader.png";
+import fragment from "./fragment_f.glsl";
+import texture from "./texture.png";
 
 const uniforms = {};
 
@@ -14,7 +14,7 @@ uniforms.resolution = {
 };
 uniforms.iChannel0 = {
 	type: "sampler2D",
-	value: new PIXI.Texture(new PIXI.BaseTexture(cloudshader))
+	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
 };
 
 export default class MenuBackgroundFilter extends PIXI.Filter {

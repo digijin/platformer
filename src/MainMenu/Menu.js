@@ -13,9 +13,9 @@ import * as PIXI from "pixi.js";
 
 import log from "loglevel";
 
-const FADETIME = 4;
+const FADETIME = 1;
 
-import CheckerboardTransition from "Filter/CheckerboardTransition";
+// import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
 export default class MainMenu extends GameObject {
 	hero: PIXI.Sprite;

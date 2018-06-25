@@ -3,7 +3,7 @@ import type Engine from "Engine";
 import Base from "./Base";
 import * as PIXI from "pixi.js";
 
-import CheckerboardTransitionFilter from "../Filter/CheckerboardTransition";
+import CheckerboardTransitionFilter from "../Filter/CheckerboardTransition/Filter";
 
 import log from "loglevel";
 

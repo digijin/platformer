@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import fragment from "./MenuBackground_f.glsl";
+import fragment from "./fragment_f.glsl";
 
 const uniforms = {};
 
