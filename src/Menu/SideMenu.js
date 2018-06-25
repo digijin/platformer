@@ -16,7 +16,7 @@ import MainMenu from "../Scene/MainMenu";
 import GameObject from "GameObject";
 
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
-import MenuBackgroundFilter from "Filter/ShaderToy/UniverseWithin/Filter";
+import MenuBackgroundFilter from "Filter/Voronoi/Filter";
 
 class FilterUpdater extends GameObject {
 	constructor(filter) {
@@ -26,6 +26,7 @@ class FilterUpdater extends GameObject {
 
 	update() {
 		this.filter.time += this.engine.deltaTime;
+		this.filter.mouse = this.engine.mouse.position;
 	}
 }
 
