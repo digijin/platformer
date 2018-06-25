@@ -1,6 +1,6 @@
 import * as PIXI from "pixi.js";
 import fragment from "./Clouds_f.glsl";
-import cloudshader from "assets/cloudshader.png";
+import cloudshader from "./cloudshader.png";
 
 const uniforms = {};
 
