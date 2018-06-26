@@ -24,7 +24,7 @@ uniforms.iChannel0 = {
 uniforms.seeds = {
 	type: "v2v",
 	// value: [0.123, 0.321, 0.456, 0.654, 0.789, 0.987]
-	value: new Array(16).fill(0).map(() => {
+	value: new Array(32).fill(0).map(() => {
 		return Math.random();
 	})
 };
