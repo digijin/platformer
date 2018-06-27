@@ -36,7 +36,7 @@ uniforms.colors = {
 	})
 };
 
-export default class PerlinFilter extends PIXI.Filter {
+export default class StormCloudsFilter extends PIXI.Filter {
 	constructor() {
 		super("", fragment, uniforms);
 	}
@@ -51,5 +51,9 @@ export default class PerlinFilter extends PIXI.Filter {
 
 	set mouse(point: { x: number, y: number }) {
 		this.uniforms.iMouse = [point.x, point.y];
+	}
+
+	set size(point: { x: number, y: number }) {
+		this.uniforms.iResolution = [point.x, point.y];
 	}
 }

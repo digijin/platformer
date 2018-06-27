@@ -7,6 +7,7 @@ import { GlitchFilter } from "@pixi/filter-glitch";
 import skyline from "assets/skyline.png";
 
 // console.log(skyline.src);
+import StormCloudsFilter from "Filter/StormClouds/Filter";
 
 import Building from "Background/Building";
 
@@ -63,11 +64,14 @@ export default class Background extends GameObject {
 			building.x = Math.random() * window.innerWidth;
 			building.offset = building.x;
 			building.z = Math.random();
+			this.buildingStage.addChild(building);
 			this.buildings.push(building);
 		}
 
+		this.makeClouds();
 		this.stage.addChild(this.bg);
 		this.stage.addChild(this.buildingStage);
+		this.stage.addChild(this.clouds);
 		this.buildingStage.filters = [
 			new ReflectionFilter({
 				alpha: [1, 0],
@@ -83,6 +87,19 @@ export default class Background extends GameObject {
 		this.engine.backgroundStage.addChild(this.stage);
 	}
 
+	makeClouds() {
+		this.clouds = new PIXI.Sprite(PIXI.Texture.WHITE);
+		this.clouds.width = window.innerWidth;
+		this.clouds.height = window.innerHeight / 2;
+		this.clouds.y = -window.innerHeight / 2;
+		this.cloudFilter = new StormCloudsFilter();
+		this.cloudFilter.size = {
+			x: window.innerWidth,
+			y: window.innerHeight / 2
+		};
+		this.clouds.filters = [this.cloudFilter];
+	}
+
 	exit() {
 		this.engine.backgroundStage.removeChild(this.stage);
 	}
@@ -90,6 +107,7 @@ export default class Background extends GameObject {
 	update() {
 		//hack ReflectionFilter
 		this.buildingStage.filters[0].time += this.engine.deltaTime;
+		this.cloudFilter.time += this.engine.deltaTime;
 
 		this.stage.position.y = window.innerHeight / 2;
 		this.buildingStage.children.forEach(b => {
@@ -129,7 +147,6 @@ export default class Background extends GameObject {
 		);
 		let sprite = new PIXI.Sprite(texture);
 		sprite.anchor = { x: 0.5, y: 1 };
-		this.buildingStage.addChild(sprite);
 		return sprite;
 	}
 

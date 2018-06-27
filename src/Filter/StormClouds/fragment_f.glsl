@@ -54,11 +54,12 @@ float pNoise(vec2 p, int res){
 
 
 void main() {
+	vec3 colorFG = vec3(33.,51.,55.)/255.;
+	vec3 colorBG = vec3(56.,128.,108.)/255.;
 
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
 
-	// pixelCoord.x *= 1.+offFromCenter.y;
 	vec2 angle = vec2(0.,50.*PI/180.) + offFromCenter;
 	// angle += (iMouse/iResolution)-0.5;
 	// vec2 angle = (iMouse/iResolution)*30.*PI/180.;
@@ -70,19 +71,21 @@ void main() {
 	// recalculate dist so it can influence x;
 	dist = sqrt(pow(dist, 2.)+pow(y, 2.));
 	float x = tan(angle.x) * dist;
-	vec2 coord = vec2(x,y);
+	vec2 coord = vec2(x,y);// + iMouse;
+	coord.x += iTime*100.;
 	// vec2 coord = tan(angle) * dist;
 	// coord += iMouse;
 
-	float str = pNoise(coord.xy, 10);
+	float str = pNoise(coord.xy, 16);
 
 	// str = fract(str+iTime/4.);
 
-	vec3 color = mix(vec3(.2), vec3(1.), vec3(str));
+	vec3 color = mix(colorFG, colorBG, vec3(str));
 
 	// color += vec3(offFromCenter, 0.);
 
-	gl_FragColor = vec4(color, 1.);
+	gl_FragColor = vec4(color, .8);
+
 
 
 }
