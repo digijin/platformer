@@ -14,16 +14,16 @@ uniform float iTime;
 uniform vec4 filterArea;
 
 uniform vec2 seeds[16];
-uniform vec3 colors[8];
+uniform vec3 colors[16];
 
 void main() {
     float closest = distance(seeds[0] * iResolution, gl_FragCoord.xy);
 	float next = closest;
     vec3 color = vec3(0.5);
-    for (int i = 1; i < 16; i++) {
+    for (int i = 0; i < 16; i++) {
         float current = distance(seeds[i] * iResolution, gl_FragCoord.xy);
         if (current < closest) {
-            // color = colors[i];
+            color = colors[i];
 			// color = vec4(1.,1.,1.,1.);
 			// color *= 1.-(current/(iResolution.x/4.));
 			next = closest;
@@ -33,7 +33,9 @@ void main() {
 		}
     }
 	float ratio = closest/next;
-	color *= ratio*ratio;
+	// color *= ratio;
+	color = mix(color, vec3(0.), ratio);
+	// color = vec3(ratio);
     gl_FragColor = vec4(color, 1.0);
 
 

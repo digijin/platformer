@@ -31,7 +31,7 @@ uniforms.seeds = {
 
 uniforms.colors = {
 	type: "v3v",
-	value: new Array(24).fill(0).map(() => {
+	value: new Array(48).fill(0).map(() => {
 		return Math.random();
 	})
 };
