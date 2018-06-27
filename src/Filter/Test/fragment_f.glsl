@@ -16,6 +16,7 @@ uniform vec4 filterArea;
 void main( )
 {
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
+	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
 
 	gl_FragColor = texture2D(iChannel0, vTextureCoord);
 
@@ -29,6 +30,7 @@ void main( )
 	if(iResolution.y-pixelCoord.y < 10.){
 		gl_FragColor = vec4(1.,1.,0.,1.);
 	}
+	gl_FragColor += vec4(offFromCenter, 0., 0.);
 	// gl_FragColor = vec4(1.);
 	// for (int i = 0; i < 3; i++) {
 	// 	if(gl_FragCoord.x<seeds[i].x * iResolution.x){

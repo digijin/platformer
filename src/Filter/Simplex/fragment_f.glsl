@@ -84,7 +84,7 @@ float snoise(vec3 v){
 }
 
 void main() {
-	vec3 pos = vec3(gl_FragCoord.xy/iResolution*10.,iMouse.x/1000.);
+	vec3 pos = vec3(gl_FragCoord.xy/iResolution*10.,iTime);
 	vec3 pos2 = pos;
 	pos2.z += .1;
 	vec3 color = vec3(snoise(pos), snoise(pos2), 0.);
