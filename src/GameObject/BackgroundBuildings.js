@@ -69,9 +69,9 @@ export default class Background extends GameObject {
 		}
 
 		this.makeClouds();
+		this.stage.addChild(this.clouds);
 		this.stage.addChild(this.bg);
 		this.stage.addChild(this.buildingStage);
-		this.stage.addChild(this.clouds);
 		this.buildingStage.filters = [
 			new ReflectionFilter({
 				alpha: [1, 0],

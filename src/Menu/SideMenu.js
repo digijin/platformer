@@ -35,7 +35,7 @@ class SideMenu extends Component {
 		selected: "OUTFITTING"
 	};
 
-	bgFilter = new MenuBackgroundFilter();
+	// bgFilter = new MenuBackgroundFilter();
 
 	onSectionClick = section => {
 		if (section == "QUIT") {
@@ -57,7 +57,7 @@ class SideMenu extends Component {
 	}
 
 	componentDidMount() {
-		this.props.engine.register(new FilterUpdater(this.bgFilter));
+		// this.props.engine.register(new FilterUpdater(this.bgFilter));
 	}
 
 	render() {
@@ -71,7 +71,13 @@ class SideMenu extends Component {
 					]
 				}
 			>
-				<Container filters={[this.bgFilter]}>
+				<Container
+					filters={
+						[
+							// this.bgFilter
+						]
+					}
+				>
 					<Rectangle
 						x={0}
 						y={0}

@@ -60,7 +60,7 @@ void main() {
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
 
-	vec2 angle = vec2(0.,50.*PI/180.) + offFromCenter;
+	vec2 angle = vec2(0.,85.*PI/180.) + offFromCenter/2.;
 	// angle += (iMouse/iResolution)-0.5;
 	// vec2 angle = (iMouse/iResolution)*30.*PI/180.;
 	// angle += offFromCenter * 20.;
@@ -83,8 +83,9 @@ void main() {
 	vec3 color = mix(colorFG, colorBG, vec3(str));
 
 	// color += vec3(offFromCenter, 0.);
+	color = mix(color, vec3(0.), pixelCoord.y/iResolution.y);
 
-	gl_FragColor = vec4(color, .8);
+	gl_FragColor = vec4(color, 1.);
 
 
 
