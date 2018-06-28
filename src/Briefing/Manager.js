@@ -29,19 +29,19 @@ class BriefingContainer extends PIXI.Container {}
 class NewBriefingContainer extends PIXI.Container {}
 
 export default class BriefingManager extends GameObject {
+	container: PIXI.Container;
+
 	missionsPanel: MissionsPanel;
-
-	onMissionChange = mission => {
-		// console.log("mission changed to", mission);
-
-		this.infoPanel.render(mission);
-	};
 	infoPanel: InfoPanel;
 	spacing: number = 20;
 	mouseControl: Boolean = true;
 
 	glitching: boolean = false;
-	container: PIXI.Container;
+	onMissionChange = mission => {
+		// console.log("mission changed to", mission);
+
+		this.infoPanel.render(mission);
+	};
 
 	init(engine: Engine) {
 		super.init(engine);

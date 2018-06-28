@@ -8,8 +8,6 @@ import Rect from "Utility/Rect";
 
 export default class Context {
     engine: Engine;
-    context: CanvasRenderingContext2D;
-
     drawSprite = function(image: any, position: Point = new Point({x: 0, y: 0}), size: {
 		w: number,
 		h: number
@@ -44,6 +42,8 @@ export default class Context {
     	this.context.drawImage(...imageParams, -size.w * registration.x, -size.h * registration.y, size.w, size.h);
     	this.resetTransform();
     };
+
+    context: CanvasRenderingContext2D;
 
     constructor(
     	context: ?CanvasRenderingContext2D) {
@@ -106,8 +106,8 @@ export default class Context {
     	this.context.fill(...arguments);
     }
 
-    resetTransform() {
-    	this.context.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
+    fillText() {
+    	this.context.fillText(...arguments);
     }
 
     fillRect(x: number, y: number, w: number, h: number) {
@@ -153,7 +153,7 @@ export default class Context {
     	return new Rect({t: 0, l: 0, r: window.innerWidth, b: window.innerHeight}).move(this.engine.view.offset);
     }
 
-    fillText() {
-    	this.context.fillText(...arguments);
+    resetTransform() {
+    	this.context.setTransform(1, 0, 0, 1, 0, 0); //reset translate and rotate
     }
 }

@@ -2,17 +2,8 @@
 import GameObject from "GameObject";
 import type Engine from "Engine";
 import { ReflectionFilter } from "@pixi/filter-reflection";
-import { GlitchFilter } from "@pixi/filter-glitch";
-
-import skyline from "assets/skyline.png";
-
-// console.log(skyline.src);
 import StormCloudsFilter from "Filter/StormClouds/Filter";
-
 import Building from "Background/Building";
-
-let url = "url(" + skyline.src + ")";
-import RGBA from "Utility/RGBA";
 import * as PIXI from "pixi.js";
 
 import ExplosionUp1 from "GameObject/ExplosionUp1";
@@ -30,8 +21,8 @@ class BackgroundStage extends PIXI.Container {}
 class BackgroundBuildingStage extends PIXI.Container {}
 
 export default class Background extends GameObject {
+	explosions: boolean = true;
 	top: HTMLDivElement;
-	buildings: Array<PIXI.Sprite>;
 	bottom: HTMLDivElement;
 	top2: HTMLDivElement;
 	bottom2: HTMLDivElement;
@@ -40,7 +31,7 @@ export default class Background extends GameObject {
 	bg: PIXI.Sprite;
 	ground: PIXI.Sprite;
 	el: HTMLDivElement;
-	explosions: boolean = true;
+	buildings: Array<PIXI.Sprite>;
 	constructor() {
 		super();
 		this.stage = new BackgroundStage();
@@ -87,19 +78,6 @@ export default class Background extends GameObject {
 		this.engine.backgroundStage.addChild(this.stage);
 	}
 
-	makeClouds() {
-		this.clouds = new PIXI.Sprite(PIXI.Texture.WHITE);
-		this.clouds.width = window.innerWidth;
-		this.clouds.height = window.innerHeight / 2;
-		this.clouds.y = -window.innerHeight / 2;
-		this.cloudFilter = new StormCloudsFilter();
-		this.cloudFilter.size = {
-			x: window.innerWidth,
-			y: window.innerHeight / 2
-		};
-		this.clouds.filters = [this.cloudFilter];
-	}
-
 	exit() {
 		this.engine.backgroundStage.removeChild(this.stage);
 	}
@@ -139,6 +117,19 @@ export default class Background extends GameObject {
 		this.ground.x = 0;
 		this.ground.width = window.innerWidth;
 		this.ground.height = window.innerHeight / 2;
+	}
+
+	makeClouds() {
+		this.clouds = new PIXI.Sprite(PIXI.Texture.WHITE);
+		this.clouds.width = window.innerWidth;
+		this.clouds.height = window.innerHeight / 2;
+		this.clouds.y = -window.innerHeight / 2;
+		this.cloudFilter = new StormCloudsFilter();
+		this.cloudFilter.size = {
+			x: window.innerWidth,
+			y: window.innerHeight / 2
+		};
+		this.clouds.filters = [this.cloudFilter];
 	}
 
 	makeBuilding() {

@@ -16,8 +16,8 @@ import { log } from "util";
 import * as PIXI from "pixi.js";
 
 export default class Watcher extends GameObject {
+    el: HTMLDivElement;
     cursor: PIXI.Sprite;
-    lastMouse: Point;
     enemyId: string;
     decorId: string;
     enemyType: EnemyType;
@@ -31,7 +31,7 @@ export default class Watcher extends GameObject {
 
     size: number;
 
-    el: HTMLDivElement;
+    lastMouse: Point;
 
     constructor() {
     	super();

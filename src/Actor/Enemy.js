@@ -27,7 +27,6 @@ class EnemySprite extends PIXI.Sprite {}
 
 export default class Enemy extends Actor {
 	sprite: PIXI.Sprite;
-	parent: PIXI.Container;
 	v: number;
 	graph: PIXI.Graphics;
 	action: ?Generator<*, *, *>;
@@ -36,6 +35,7 @@ export default class Enemy extends Actor {
 	agro: Player | null;
 	direction: number;
 	h: number;
+	parent: PIXI.Container;
 
 	constructor(params: { position: Point, type: EnemyType }) {
 		super(params);
