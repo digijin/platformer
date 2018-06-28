@@ -1,56 +1,61 @@
 {
-    "parser": "babel-eslint",
-    "plugins": ["flowtype", "sort-class-members"],
-    "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
-    "settings": {
-        "flowtype": { "onlyFilesWithFlowAnnotation": true }
-    },
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "rules": {
-        "semi": 2,
-        "indent": ["error", "tab"],
-        "flowtype/no-types-missing-file-annotation": 0,
-        "no-mixed-spaces-and-tabs": 0,
-        "lines-between-class-members": [
-            2,
-            "always",
-            { "exceptAfterSingleLine": true }
-        ],
-        "sort-class-members/sort-class-members": [
-            2,
-            {
-                "order": [
-                    "[static-properties]",
-                    "[static-methods]",
-                    "[properties]",
-                    "[conventional-private-properties]",
-                    "constructor",
-                    "init",
-                    "exit",
-                    "update",
-                    "[update-handlers]",
-                    "[methods]",
-                    "[conventional-private-methods]"
-                ],
-                "groups": {
-                    "update-handlers": [
-                        { "name": "/update.+/", "type": "method" }
-                    ]
-                },
-                "accessorPairPositioning": "getThenSet"
-            }
-        ]
-    },
-    "env": {
-        "browser": true,
-        "node": true,
-        "jest": true,
-        "jasmine": true
-    }
+	"parser": "babel-eslint",
+	"plugins": ["flowtype", "sort-class-members"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:flowtype/recommended",
+		"plugin:react/recommended"
+	],
+	"settings": {
+		"flowtype": { "onlyFilesWithFlowAnnotation": true }
+	},
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"rules": {
+		"react/prop-types": [0, {}],
+		"semi": 2,
+		"indent": ["error", "tab"],
+		"flowtype/no-types-missing-file-annotation": 0,
+		"no-mixed-spaces-and-tabs": 0,
+		"lines-between-class-members": [
+			2,
+			"always",
+			{ "exceptAfterSingleLine": true }
+		],
+		"sort-class-members/sort-class-members": [
+			2,
+			{
+				"order": [
+					"[static-properties]",
+					"[static-methods]",
+					"[properties]",
+					"[conventional-private-properties]",
+					"constructor",
+					"init",
+					"exit",
+					"update",
+					"[update-handlers]",
+					"[methods]",
+					"[conventional-private-methods]"
+				],
+				"groups": {
+					"update-handlers": [
+						{ "name": "/update.+/", "type": "method" }
+					]
+				},
+				"accessorPairPositioning": "getThenSet"
+			}
+		]
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"jest": true,
+		"jasmine": true
+	}
 }

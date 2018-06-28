@@ -4,7 +4,7 @@ import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
 import MainMenu from "Scene/MainMenu";
 import engineConnect from "React/engineConnect";
-const styles = theme => ({
+const styles = () => ({
 	container: {
 		position: "fixed",
 		left: 0,

@@ -1,11 +1,11 @@
 //@flow
 import React from "react";
 import Button from "material-ui/Button";
-import MainMenu from "Scene/MainMenu";
+// import MainMenu from "Scene/MainMenu";
 import Briefing from "Scene/Briefing";
 import { withStyles } from "material-ui/styles";
 import engineConnect from "React/engineConnect";
-const styles = theme => ({
+const styles = () => ({
 	panel: {
 		backgroundColor: "rgba(255,255,255,0.3)",
 		position: "fixed",
@@ -43,7 +43,7 @@ export class Results extends React.Component {
 						this.props.engine.startScene(new Briefing());
 					}}
 				>
-                    back to menu
+					back to menu
 				</Button>
 			</div>
 		);

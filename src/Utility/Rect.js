@@ -5,8 +5,6 @@ import config from "config";
 
 import Point from "./Point";
 
-import Block from "Grid/Block";
-
 export type RenderParams = {
 	x: number,
 	y: number,
@@ -63,7 +61,7 @@ export default class Rect {
 	 */
 	constructor(params: { t: number, r: number, b: number, l: number }) {
 		if (arguments.length === 1) {
-			let a = arguments[0];
+			let a = params;
 			if (a.t !== undefined) {
 				extend(this, a);
 			} else if (a.x !== undefined) {
@@ -131,10 +129,6 @@ export default class Rect {
 			b: Math.ceil(this.b / config.grid.width),
 			l: Math.floor(this.l / config.grid.width)
 		});
-	}
-
-	width(): number {
-		return this.r - this.l;
 	}
 
 	//corners

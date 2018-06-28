@@ -37,12 +37,15 @@ export class Router extends React.Component {
 	}
 }
 
-function mapStateToProps(state: Object, props: Object): Object {
+function mapStateToProps(state: Object): Object {
 	return { scene: state.scene };
 }
 
-function mapDispatchToProps(dispatch: Function, props: Object): Object {
+function mapDispatchToProps(): Object {
 	return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Router);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Router);

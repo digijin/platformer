@@ -2,7 +2,6 @@
 //UNTESTED - framework
 
 import Point from "./Point";
-import Rect from "./Rect";
 
 import config from "config";
 
@@ -51,15 +50,16 @@ export default class Line {
 		let src = this.a.floor();
 		let dest = this.b.floor();
 		let out = [];
-		let diff = this.b.subtract(this.a);
+		// let diff = this.b.subtract(this.a);
 		let hdir = src.x < dest.x ? 1 : -1;
 		let vdir = src.y < dest.y ? 1 : -1;
 		//return early use cases
 		//eliminate vertical first
+		let step;
 		if (src.x == dest.x) {
 			let a = src.y;
 			let b = dest.y;
-			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
+			for (step = a > b ? -1 : +1; a != b + step; a += step) {
 				out.push({ x: src.x, y: a });
 			}
 			return out;
@@ -67,7 +67,7 @@ export default class Line {
 		if (src.y == dest.y) {
 			let a = src.x;
 			let b = dest.x;
-			for (var step = a > b ? -1 : +1; a != b + step; a += step) {
+			for (step = a > b ? -1 : +1; a != b + step; a += step) {
 				out.push({ x: a, y: src.y });
 			}
 			return out;
@@ -176,8 +176,8 @@ export default class Line {
 	}
 
 	//Liang-Barsky algorithm
-    //https://gist.github.com/ChickenProp/3194723
-    intersectsRect(rect: {
+	//https://gist.github.com/ChickenProp/3194723
+	intersectsRect(rect: {
 		t: number,
 		r: number,
 		b: number,

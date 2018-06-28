@@ -18,22 +18,17 @@
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
 		"karma": "karma start --reporters spec",
-		"karma:ci":
-			"karma start --reporters coverage-istanbul,spec --browsers ChromeHeadless --single-run",
-		"karma:headless":
-			"karma start --reporters nyan --browsers ChromeHeadless",
+		"karma:ci": "karma start --reporters coverage-istanbul,spec --browsers ChromeHeadless --single-run",
+		"karma:headless": "karma start --reporters nyan --browsers ChromeHeadless",
 		"karma:chrome": "karma start --reporters nyan --browsers Chrome",
-		"karma:electron":
-			"karma start --reporters nyan --browsers Electron --single-run",
+		"karma:electron": "karma start --reporters nyan --browsers Electron --single-run",
 		"electron:karma": "electron-open http://localhost:9876",
 		"electron:dev": "electron http://localhost:8080/",
 		"electron:debug": "electron --inspect-brk=5859 http://localhost:8080/",
 		"lint": "eslint src/ ",
 		"lint:fix": "eslint src/ --fix",
-		"lint:sort":
-			"jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/",
-		"docker:alpine-node":
-			"docker run -it -v $(pwd):/var/app mhart/alpine-node sh",
+		"lint:sort": "jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/",
+		"docker:alpine-node": "docker run -it -v $(pwd):/var/app mhart/alpine-node sh",
 		"precommit": "npm run test && npm run karma:ci",
 		"serve": "http-server dist"
 	},
@@ -87,6 +82,7 @@
 		"electron": "^1.7.9",
 		"eslint": "^4.18.2",
 		"eslint-plugin-flowtype": "^2.46.1",
+		"eslint-plugin-react": "^7.10.0",
 		"eslint-plugin-sort-class-members": "^1.3.0",
 		"file-loader": "^0.10.0",
 		"flow-bin": "0.38.0",
@@ -154,15 +150,25 @@
 	},
 	"jest": {
 		"setupTestFrameworkScriptFile": "<rootDir>/setupTest.js",
-		"moduleFileExtensions": ["js", "jsx"],
-		"moduleDirectories": ["node_modules", "src"],
-		"modulePaths": ["/src"],
+		"moduleFileExtensions": [
+			"js",
+			"jsx"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"modulePaths": [
+			"/src"
+		],
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-				"<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|less|styl)$": "<rootDir>/__mocks__/styleMock.js"
 		},
 		"collectCoverage": false,
-		"coverageReporters": ["json", "lcov"]
+		"coverageReporters": [
+			"json",
+			"lcov"
+		]
 	}
 }

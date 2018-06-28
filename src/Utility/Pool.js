@@ -12,7 +12,7 @@ export default class Pool {
 	args: Array<any>;
 	onCreate: (instance: any) => {} | void;
 	onRemove: (instance: any) => {} | void;
-	constructor(type: any, args: any) {
+	constructor(type: any) {
 		this.type = type;
 		this.index = 0;
 		this.pool = [];
