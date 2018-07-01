@@ -6,6 +6,7 @@ import * as PIXI from "pixi.js";
 //http://www.shaderific.com/glsl-types
 //https://www.awwwards.com/a-gentle-introduction-to-shaders-with-pixi-js.html
 //https://github.com/pixijs/pixi.js/wiki/v4-Creating-Filters
+//https://www.shadertoy.com/view/lsBfDz
 
 const uniforms = {};
 uniforms.mouse = {

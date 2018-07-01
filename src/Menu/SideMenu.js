@@ -16,7 +16,7 @@ import MainMenu from "../Scene/MainMenu";
 import GameObject from "GameObject";
 
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
-import MenuBackgroundFilter from "Filter/StormClouds/Filter";
+import MenuBackgroundFilter from "Filter/Background/Filter";
 
 class FilterUpdater extends GameObject {
 	constructor(filter) {
@@ -71,13 +71,7 @@ class SideMenu extends Component {
 					]
 				}
 			>
-				<Container
-					filters={
-						[
-							//this.bgFilter
-						]
-					}
-				>
+				<Container filters={[this.bgFilter]}>
 					<Rectangle
 						x={0}
 						y={0}
