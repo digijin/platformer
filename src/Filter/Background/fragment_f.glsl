@@ -24,15 +24,27 @@ void main( )
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
 
-	vec2 grid = floor(pixelCoord/gridsize);
-	vec2 gridpos = mod(pixelCoord, vec2(gridsize));
+	vec2 grid = floor(pixelCoord/gridsize);// + vec2(i,j);
+	vec2 gridpos = pixelCoord - grid*gridsize;
 	vec2 point = hash2(grid);
-	if(gridpos.x<1.||gridpos.y<1.){
-		gl_FragColor = vec4(1.);
-	}else{
-		gl_FragColor = vec4(1.-length(point-gridpos/gridsize)*10.);
+	gl_FragColor = vec4(0.,0.,0.,1.);
+	// for(int i=-1;i<=1;i++){
+	// 	for(int j=-1;j<=1;j++){
 
+
+		vec2 offsetgrid = grid + vec2(0.,-1.);
+		vec2 offsetpoint = hash2(offsetgrid);
+		vec2 screen = (offsetpoint + offsetgrid) * gridsize;
+		gl_FragColor.r += 1.-distance(pixelCoord, screen)/10.;
+
+	// 	}
+	// }
+	// }
+	if(gridpos.x<1.||gridpos.y<1.){
+		gl_FragColor.g  = 1.;
 	}
+
+	gl_FragColor.b += 1.-length(point-gridpos/gridsize)*10.;
 
 	// gl_FragColor = texture2D(iChannel0, vTextureCoord);
 	//
