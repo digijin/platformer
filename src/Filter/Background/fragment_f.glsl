@@ -28,17 +28,23 @@ void main( )
 	vec2 gridpos = pixelCoord - grid*gridsize;
 	vec2 point = hash2(grid);
 	gl_FragColor = vec4(0.,0.,0.,1.);
-	// for(int i=-1;i<=1;i++){
-	// 	for(int j=-1;j<=1;j++){
+
+    for( int j=-1; j<=1; j++ )
+    for( int i=-1; i<=1; i++ )
+    {
+        vec2 g = vec2(float(i),float(j));
 
 
-		vec2 offsetgrid = grid + vec2(0.,-1.);
+		vec2 offsetgrid = grid + g;
 		vec2 offsetpoint = hash2(offsetgrid);
 		vec2 screen = (offsetpoint + offsetgrid) * gridsize;
-		gl_FragColor.r += 1.-distance(pixelCoord, screen)/10.;
+		float dist = 1.-distance(pixelCoord, screen)/10.;
+		if(dist > 0.){
+			gl_FragColor.r += dist;
+		}
 
 	// 	}
-	// }
+	}
 	// }
 	if(gridpos.x<1.||gridpos.y<1.){
 		gl_FragColor.g  = 1.;
