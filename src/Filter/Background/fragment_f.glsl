@@ -20,14 +20,15 @@ vec2 hash2( vec2 p )
 }
 void main( )
 {
+	vec3 uicolor = vec3(255.,147.,98.)/255.;
 	float gridsize = 100.;
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
-	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
+
+	pixelCoord.y -= iTime*50.;
 
 	vec2 grid = floor(pixelCoord/gridsize);// + vec2(i,j);
-	vec2 gridpos = pixelCoord - grid*gridsize;
-	vec2 point = hash2(grid);
-	gl_FragColor = vec4(0.,0.,0.,1.);
+
+	gl_FragColor = vec4(0.,0.,0.,0.);
 
     for( int j=-1; j<=1; j++ )
     for( int i=-1; i<=1; i++ )
@@ -37,42 +38,20 @@ void main( )
 
 		vec2 offsetgrid = grid + g;
 		vec2 offsetpoint = hash2(offsetgrid);
+
+		offsetpoint = 0.5 + 0.5*sin( iTime + 6.2831*offsetpoint );
+		vec2 lastOffsetpoint = 0.5 + 0.5*sin( (iTime-0.1) + 6.2831*offsetpoint);
 		vec2 screen = (offsetpoint + offsetgrid) * gridsize;
 		float dist = 1.-distance(pixelCoord, screen)/10.;
 		if(dist > 0.){
-			gl_FragColor.r += dist;
+			dist *= offsetpoint.y - lastOffsetpoint.y;
+			gl_FragColor += vec4(dist*uicolor, dist);
 		}
-
-	// 	}
-	}
-	// }
-	if(gridpos.x<1.||gridpos.y<1.){
-		gl_FragColor.g  = 1.;
 	}
 
-	gl_FragColor.b += 1.-length(point-gridpos/gridsize)*10.;
-
-	// gl_FragColor = texture2D(iChannel0, vTextureCoord);
-	//
-	// if(abs(pixelCoord.y - iMouse.y)<10. || abs(pixelCoord.x - iMouse.x)<10.){
-	// 	gl_FragColor = vec4(sin(pixelCoord.x/100.), cos(pixelCoord.y/100.), abs(sin(iTime)), 0.5);
+	// vec2 gridpos = pixelCoord - grid*gridsize;
+	// if(gridpos.x<1.||gridpos.y<1.){
+	// 	gl_FragColor.g  = 1.;
 	// }
-	//
-	// if(iResolution.x-pixelCoord.x < 10.){
-	// 	gl_FragColor = vec4(1.,1.,0.,1.);
-	// }
-	// if(iResolution.y-pixelCoord.y < 10.){
-	// 	gl_FragColor = vec4(1.,1.,0.,1.);
-	// }
-	// gl_FragColor += vec4(offFromCenter, 0., 0.);
-	// // gl_FragColor = vec4(1.);
-	// // for (int i = 0; i < 3; i++) {
-	// // 	if(gl_FragCoord.x<seeds[i].x * iResolution.x){
-	// // 		gl_FragColor *= 0.8;
-	// // 	}
-	// // 	if(gl_FragCoord.y<seeds[i].y * iResolution.y){
-	// // 		gl_FragColor *= 0.8;
-	// // 	}
-	// // }
 
 }
