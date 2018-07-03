@@ -146,10 +146,10 @@ void main( )
 		vec2 lastOffsetpoint = 0.5 + 0.5*sin( (iTime-0.5) + 6.2831*offsetpoint);
 		vec2 offsetDiff = offsetpoint - lastOffsetpoint;
 		vec2 screen = (offsetpoint + offsetgrid) * gridsize;
-		float dist = triangle(pixelCoord, screen, offsetDiff);
+		float dist = triangle(pixelCoord, screen, offsetDiff + (iTime * sin(length(offsetpoint))));
 		//sin(iTime)*PI
 		if(dist > 0.){
-			dist *= offsetpoint.y - lastOffsetpoint.y;
+			// dist *= offsetpoint.y - lastOffsetpoint.y;
 			gl_FragColor += vec4(dist*uicolor, dist);
 		}
 	}
