@@ -4,19 +4,19 @@ import Storage from "Utility/Storage";
 
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
-import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
-import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
-import IconButton from "material-ui/IconButton";
-import classnames from "classnames";
-import ExpandMoreIcon from "material-ui-icons/ExpandMore";
-import Collapse from "material-ui/transitions/Collapse";
+// import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+// import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
+// import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
+// import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
+// import IconButton from "material-ui/IconButton";
+// import classnames from "classnames";
+// import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+// import Collapse from "material-ui/transitions/Collapse";
 import TextField from "material-ui/TextField";
 import Save from "material-ui-icons/Save";
 import Divider from "material-ui/Divider";
 
-import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
+import  {  CardContent } from "material-ui/Card";
 class Main extends React.Component {
     handleExpandClick = target => {
     	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
@@ -27,7 +27,6 @@ class Main extends React.Component {
     };
 
     updateSavename = (e: Event) => {
-    	console.log(e);
     	// this.savename = e.target.value;
     	this.setState({ savename: e.target.value });
     };

@@ -2,20 +2,20 @@ import React from "react";
 import engineConnect from "React/engineConnect";
 
 import { DecorTypes } from "Grid/Decor/Type";
-import Tooltip from "material-ui/Tooltip";
-import Button from "material-ui/Button";
-import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
-import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
-import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
-import IconButton from "material-ui/IconButton";
-import classnames from "classnames";
-import ExpandMoreIcon from "material-ui-icons/ExpandMore";
-import Collapse from "material-ui/transitions/Collapse";
+// import Tooltip from "material-ui/Tooltip";
+// import Button from "material-ui/Button";
+// import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";
+// import KeyboardArrowRight from "material-ui-icons/KeyboardArrowRight";
+// import KeyboardArrowUp from "material-ui-icons/KeyboardArrowUp";
+// import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
+// import IconButton from "material-ui/IconButton";
+// import classnames from "classnames";
+// import ExpandMoreIcon from "material-ui-icons/ExpandMore";
+// import Collapse from "material-ui/transitions/Collapse";
 
 import ColorPicker from "material-ui-color-picker";
 
-import Card, { CardActions, CardContent, CardHeader } from "material-ui/Card";
+import  {  CardContent } from "material-ui/Card";
 class TintSelector extends React.Component {
     handleExpandClick = target => {
     	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];

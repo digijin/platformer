@@ -1,19 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
-import Menu from "./MainMenu/Menu";
-import EditorPanel from "./Editor/Panel";
+// import { connect } from "react-redux";
+// import Menu from "./MainMenu/Menu";
+// import EditorPanel from "./Editor/Panel";
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
-import { FormGroup, FormControlLabel } from "material-ui/Form";
+// import { FormGroup, FormControlLabel } from "material-ui/Form";
 
-import { FormControl, FormHelperText } from "material-ui/Form";
-import Input, { InputLabel } from "material-ui/Input";
-import config from "config";
-import Select from "material-ui/Select";
-import { MenuItem } from "material-ui/Menu";
+// import { FormControl, FormHelperText } from "material-ui/Form";
+// import Input, { InputLabel } from "material-ui/Input";
+// import config from "config";
+// import Select from "material-ui/Select";
+// import { MenuItem } from "material-ui/Menu";
 import classnames from "classnames";
 import { withStyles } from "material-ui/styles";
 import type Engine from "Engine";
@@ -23,7 +23,7 @@ import hazard from "assets/hazard.png";
 
 import front from "Equip/front.svg";
 import side from "Equip/side.svg";
-import Checkbox from "material-ui/Checkbox";
+// import Checkbox from "material-ui/Checkbox";
 
 import bulletIcon from "Equip/bullet.svg";
 import fireIcon from "Equip/fire.svg";
@@ -38,7 +38,7 @@ let stripStyles = (str: string): string => {
 };
 const GREEN = "#00ff00";
 const DARKGREEN = "#16502d";
-const styles = theme => ({
+const styles = () => ({
 	svg: {
 		display: "inline-block",
 		border: "2px solid green",
@@ -231,7 +231,7 @@ export class Equip extends React.Component {
     				/>
     			</div>
     		);
-    		break;
+    		// break;
     	case "secondary":
     		return (
     			<div id="secondary">
@@ -240,7 +240,7 @@ export class Equip extends React.Component {
     				<div className={classes.option}>remote control</div>
     			</div>
     		);
-    		break;
+    		// break;
     	}
     	return <div>not implemented</div>;
     };
