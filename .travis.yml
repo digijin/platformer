@@ -32,6 +32,8 @@ jobs:
       - docker images
       - docker tag platformer $DOCKER_USERNAME/platformer:$TRAVIS_BUILD_NUMBER
       - docker push $DOCKER_USERNAME/platformer:$TRAVIS_BUILD_NUMBER
+      - docker tag platformer $DOCKER_USERNAME/platformer:latest
+      - docker push $DOCKER_USERNAME/platformer:latest
 deploy:
   skip_cleanup: true
   provider: s3
