@@ -127,7 +127,7 @@ void main( )
 	float gridsize = 100.;
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 
-	pixelCoord.y -= iTime*50.;
+	// pixelCoord.y -= iTime*50.;
 
 	vec2 grid = floor(pixelCoord/gridsize);// + vec2(i,j);
 
@@ -149,7 +149,7 @@ void main( )
 		float dist = triangle(pixelCoord, screen, offsetDiff + (iTime * sin(length(offsetpoint))));
 		//sin(iTime)*PI
 		if(dist > 0.){
-			// dist *= offsetpoint.y - lastOffsetpoint.y;
+			dist *= offsetpoint.y - lastOffsetpoint.y;
 			gl_FragColor += vec4(dist*uicolor, dist);
 		}
 	}
