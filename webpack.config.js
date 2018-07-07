@@ -82,7 +82,19 @@ module.exports = [
 			new CopyWebpackPlugin([
 				{ from: path.resolve(__dirname, "html") }, // to: output.path
 				{ from: path.resolve(__dirname, "assets"), to: "assets" }
-			])
+			]),
+			new StatsWriterPlugin({
+				// transform: function(data) {
+				// 	console.log(
+				// 		"TODO HERE DATA",
+				// 		JSON.stringify(data, null, 2)
+				// 	);
+				// 	return {
+				// 		main: data.assetsByChunkName.main[0],
+				// 		css: data.assetsByChunkName.main[1]
+				// 	};
+				// }
+			})
 		]
 	}
 ];
