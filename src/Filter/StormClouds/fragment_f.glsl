@@ -56,6 +56,7 @@ float pNoise(vec2 p, int res){
 void main() {
 	vec3 colorFG = vec3(33.,51.,55.)/255.;
 	vec3 colorBG = vec3(56.,128.,108.)/255.;
+	vec3 colorFade = vec3(23.,24.,25.)/255.;
 
 	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 	vec2 offFromCenter = (pixelCoord - iResolution/2.)/iResolution;
@@ -83,7 +84,7 @@ void main() {
 	vec3 color = mix(colorFG, colorBG, vec3(str));
 
 	// color += vec3(offFromCenter, 0.);
-	color = mix(color, vec3(0.), pixelCoord.y/iResolution.y);
+	color = mix(color, colorFade, pixelCoord.y/iResolution.y);
 
 	gl_FragColor = vec4(color, 1.);
 
