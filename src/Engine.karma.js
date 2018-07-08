@@ -50,6 +50,12 @@ describe("Game/Engine.spec.js", () => {
     // 	engine.kill();
     // 	expect(engine.objects.length).toBe(0);
     // });
+	it("should call init", () => {
+		let go = new GameObject();
+		spyOn(go, "init");
+		engine.register(go);
+		expect(go.init).toHaveBeenCalled();
+	})
 
     describe("transitions", () => {
         it("sohuld register transition", () => {
