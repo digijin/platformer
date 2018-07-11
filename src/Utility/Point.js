@@ -84,7 +84,7 @@ export default class Point {
 	}
 
 	/** in radians from 0,0 */
-	direction(): number {
+    direction(): number {
 		return Math.atan2(this.y, this.x);
 	}
 

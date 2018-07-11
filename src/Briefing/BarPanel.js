@@ -11,15 +11,15 @@ import Panel from "./Panel";
 type Props = {};
 
 export default class BarPanel extends Panel {
-    heading: PIXI.Text;
     props: Props;
+    numvalues: number = 25;
 
     textColor: number = 0xc9d3d0;
     textColorOver: number = 0xffffff;
     textColorSelected: number = 0xff6666;
     graph: PIXI.Graphics;
     height: number = 60;
-    numvalues: number = 25;
+    heading: PIXI.Text;
 
     gap: number = 0.1;
     time: number = 0;

@@ -12,11 +12,11 @@ import * as PIXI from "pixi.js";
 
 export default class Decor {
 	position: Point; //grid position
-	grid: Grid;
-	hp: number;
 	texture: PIXI.Texture;
 	sprite: PIXI.Sprite;
 	type: string;
+	grid: Grid;
+	hp: number;
 	constructor(params: {
 		position: Point,
 		type: string,

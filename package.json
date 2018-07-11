@@ -42,7 +42,8 @@
 		"url": "https://github.com/digijin/platformer/issues"
 	},
 	"homepage": "https://github.com/digijin/platformer#readme",
-	"devDependencies": {
+	"devDependencies": {},
+	"dependencies": {
 		"@mfl/flow-jasmine": "^1.6.1",
 		"babel-jest": "^18.0.0",
 		"coveralls": "^3.0.0",
@@ -51,9 +52,7 @@
 		"karma-spec-reporter": "0.0.30",
 		"sizzle": "^2.3.3",
 		"sort-class-members-codemod": "^0.5.1",
-		"source-map-loader": "^0.2.3"
-	},
-	"dependencies": {
+		"source-map-loader": "^0.2.3",
 		"@pixi/filter-advanced-bloom": "^2.5.0",
 		"@pixi/filter-ascii": "^2.5.0",
 		"@pixi/filter-crt": "^2.5.0",

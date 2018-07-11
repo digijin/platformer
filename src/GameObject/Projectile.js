@@ -8,14 +8,14 @@ import GameObject from "GameObject";
 import Line from "Utility/Line";
 
 export default class Projectile extends GameObject {
-    position: Point;
     direction: number;
+    h: number;
     target: Point;
     owner: Actor;
     speed: number;
     guided: boolean;
     trajectory: Line;
-    h: number;
+    position: Point;
     v: number;
     constructor(params: {
         position: Point,

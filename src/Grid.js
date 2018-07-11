@@ -26,7 +26,28 @@ class GridBlockContainer extends PIXI.Container {}
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
-    blocks: Array<Array<Block>>;
+    getBlocksFlattened = (): Array<Block> => {
+    	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
+    		// return a.splice(0, 0, ...b);
+    		return [].concat(a, b);
+    	}, []);
+    };
+
+    width: number;
+
+    z: number;
+    spritePool: Pool;
+    parent: PIXI.Container;
+
+    blockStage: PIXI.Container;
+    decorStage: PIXI.Container;
+
+    tileCache: {};
+    graph: PIXI.Graphics = new PIXI.Graphics();
+
+    decor: Array<Decor>;
+
+    height: number;
 
     update = (engine: Engine) => {
     	// console.group("Grid");
@@ -41,28 +62,7 @@ export default class Grid extends GameObject {
     	// this.renderDebugBlockPixelLine();
     };
 
-    tileCache: {};
-    graph: PIXI.Graphics = new PIXI.Graphics();
-    z: number;
-
-    spritePool: Pool;
-    parent: PIXI.Container;
-
-    blockStage: PIXI.Container;
-    decorStage: PIXI.Container;
-
-    width: number;
-
-    getBlocksFlattened = (): Array<Block> => {
-    	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
-    		// return a.splice(0, 0, ...b);
-    		return [].concat(a, b);
-    	}, []);
-    };
-
-    decor: Array<Decor>;
-
-    height: number;
+    blocks: Array<Array<Block>>;
 
     constructor(
     	params: {

@@ -28,11 +28,11 @@ class MenuContainer extends PIXI.Container {}
 
 export default class MenuManager extends GameObject {
 	container: PIXI.Container;
-	mouseControl: Boolean = true;
-	glitching: boolean = false;
 	infoPanel: InfoPanel;
-
 	spacing: number = 20;
+	mouseControl: Boolean = true;
+
+	glitching: boolean = false;
 
 	init(engine: Engine) {
 		super.init(engine);

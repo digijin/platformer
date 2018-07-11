@@ -12,12 +12,12 @@ import * as PIXI from "pixi.js";
 
 export default class Block {
 	position: Point;
-	type: string;
-	backgroundType: string | void;
 	grid: Grid;
 	tint: number;
 	hp: number;
 	sprite: PIXI.Sprite;
+	type: string;
+	backgroundType: string | void;
 	constructor(params: {
 		position: Point,
 		type: string,
