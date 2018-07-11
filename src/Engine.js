@@ -252,6 +252,7 @@ export default class Engine {
 	destroy(obj: GameObject) {
 		let i = this.objects.indexOf(obj);
 		if (i > -1) {
+			obj.exit();
 			this.objects.splice(i, 1);
 		} else {
 			// throw new Error("destroying non existant object");

@@ -55,6 +55,27 @@ describe("Game/Engine.spec.js", () => {
 		spyOn(go, "init");
 		engine.register(go);
 		expect(go.init).toHaveBeenCalled();
+	});
+
+	describe("destroy", () =>{
+
+		it('should remove from list of objects', () => {
+			let go = new GameObject();
+			expect(engine.objects.length).toBe(0);
+			engine.register(go);
+			expect(engine.objects.length).toBe(1);
+			engine.destroy(go);
+			expect(engine.objects.length).toBe(0);
+		})
+
+		it("should call exit when removed", () => {
+			let go = new GameObject();
+			spyOn(go, "exit");
+			engine.register(go);
+			engine.destroy(go);
+			expect(go.exit).toHaveBeenCalled();
+		});
+
 	})
 
     describe("transitions", () => {
