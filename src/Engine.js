@@ -55,6 +55,8 @@ export default class Engine {
 	currentPlayer: Player;
 	mission: Mission = Missions[0];
 	// keyboard: Input.Keyboard;
+
+	transitioning: boolean;
 	deltaTime: number = 0;
 	state: State;
 	currentScene: SceneBase;
@@ -74,48 +76,9 @@ export default class Engine {
 	transitionStage: PIXI.Container;
 	backgroundStage: PIXI.Container;
 	renderer: any;
-	objects: Array<GameObject>;
 	lastTime: number;
 	updateId: number;
-
-	//main game loop
-	update = () => {
-		this.fpsmeter.tickStart();
-		//handle time
-		let nowTime = new Date().getTime();
-		let diff = nowTime - this.lastTime;
-		this.lastTime = nowTime;
-		if (diff > 1000) {
-			//window probably lost focus or switched tabs
-			diff = 1;
-		}
-		this.deltaTime = diff / 1000;
-		this.mouse.update();
-		if (!this.paused) {
-			//sort objects on z
-			this.objects.sort((a, b) => {
-				let az = 0;
-				if (a && a.z) az = a.z;
-				let bz = 0;
-				if (b && b.z) bz = b.z;
-				return az - bz;
-			});
-
-			//update clone list of all object so I can delete from original
-			this.objects.slice(0).forEach(o => {
-				if (o) {
-					o.update(this);
-				}
-			});
-		}
-
-		// this.objects = this.objects.filter(o => o);
-		this.render();
-		//wait for next frame
-		this.updateId = requestAnimationFrame(this.update);
-		this.input.endTick();
-		this.fpsmeter.tick();
-	};
+	// objects: Array<GameObject>;
 
 	resize = () => {
 		this.pixicanvas.width = window.innerWidth;
@@ -133,9 +96,6 @@ export default class Engine {
 		});
 	};
 
-	transitioning: boolean;
-
-	//add new objects to be tracked by engine
 	register = (obj: GameObject) => {
 		obj.init(this);
 		this.objects.push(obj);
@@ -154,6 +114,7 @@ export default class Engine {
 		});
 	};
 
+	_objects: Array<GameObject> = [];
 	//init
 	constructor() {
 		instance = this;
@@ -162,7 +123,7 @@ export default class Engine {
 			offset: new Point({ x: 120, y: 0 })
 		};
 
-		this.objects = [];
+		// this.objects = [];
 		this.lastTime = new Date().getTime();
 		this.state = new State();
 		// this.keyboard = this.input.keyboard;
@@ -230,6 +191,57 @@ export default class Engine {
 		return this;
 	}
 
+	//main game loop
+	update = () => {
+		this.fpsmeter.tickStart();
+		//handle time
+		let nowTime = new Date().getTime();
+		let diff = nowTime - this.lastTime;
+		this.lastTime = nowTime;
+		if (diff > 1000) {
+			//window probably lost focus or switched tabs
+			diff = 1;
+		}
+		this.deltaTime = diff / 1000;
+		this.mouse.update();
+		if (!this.paused) {
+			//sort objects on z
+			this._objects.sort((a, b) => {
+				let az = 0;
+				if (a && a.z) az = a.z;
+				let bz = 0;
+				if (b && b.z) bz = b.z;
+				return az - bz;
+			});
+
+			//update clone list of all object so I can delete from original
+			this._objects.slice(0).forEach(o => {
+				if (o) {
+					o.update(this);
+				}
+			});
+		}
+
+		// this.objects = this.objects.filter(o => o);
+		this.render();
+		//wait for next frame
+		this.updateId = requestAnimationFrame(this.update);
+		this.input.endTick();
+		this.fpsmeter.tick();
+	};
+
+	get objects(): Array<GameObject> {
+		return this._objects;
+	}
+
+	set objects(value) {
+		throw new Error(
+			"dont set engine objects directly. use register and destroy"
+		);
+	}
+
+	//add new objects to be tracked by engine
+
 	startSceneTransition(scene: SceneBase, transition: Transition) {
 		// trnasition.on
 		if (!this.transitioning) {
@@ -261,6 +273,14 @@ export default class Engine {
 				obj.constructor.name
 			);
 		}
+	}
+
+	destroyAllExceptTagged(tag: string) {
+		this._objects.slice(0).forEach(o => {
+			if (!o.hasTag(tag)) {
+				this.destroy(o);
+			}
+		});
 	}
 
 	startScene(scene: SceneBase) {
