@@ -104,7 +104,7 @@ export default class Enemy extends Actor {
 	}
 
 	destroy() {
-		this.exit();
+		// this.exit();
 		super.destroy();
 	}
 
@@ -153,7 +153,7 @@ export default class Enemy extends Actor {
 		this.graph
 			.lineStyle(3, 0x00ff00)
 			.moveTo(0, 0)
-			.lineTo(20 * this.hp / this.type.hp, 0);
+			.lineTo((20 * this.hp) / this.type.hp, 0);
 	}
 
 	startIdle() {
