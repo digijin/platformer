@@ -104,7 +104,7 @@ export default class Background extends GameObject {
 				(b.offset - this.engine.view.offset.x * (1 + b.z) * 0.1) %
 				window.innerWidth;
 			if (b.position.x < -b.width) {
-				b.position.x += window.innerWidth + b.width * 2;
+				b.position.x += window.innerWidth + b.width + b.width;
 			}
 		});
 		if (Math.random() > 0.99) {
