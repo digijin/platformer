@@ -23,7 +23,7 @@ module.exports = function(config) {
 			"node_modules/babel-polyfill/dist/polyfill.js",
 			{ pattern: "src/**/*spec.js", watched: false },
 			{ pattern: "src/**/*karma.js", watched: false },
-			{ pattern: "src/worker/*worker.js", watched: true },
+			// { pattern: "src/worker/*worker.js", watched: true },
 			{
 				pattern: "dist/assets/*.*",
 				watched: false,
@@ -38,7 +38,7 @@ module.exports = function(config) {
 		browser: { fs: false },
 		exclude: [],
 		preprocessors: {
-			"src/worker/*worker.js": ["webpack", "sourcemap"],
+			// "src/worker/*worker.js": ["webpack", "sourcemap"],
 			"src/**/!(*.spec|*.karma|worker).js": ["electron", "coverage"],
 			"**/*karma.js": ["webpack", "sourcemap"],
 			"**/*spec.js": ["webpack", "sourcemap"]
