@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");
 
-describe("scene/menu.karma.js", () => {
+fdescribe("scene/menu.karma.js", () => {
     let container;
     let game;
 
@@ -148,6 +148,7 @@ describe("scene/menu.karma.js", () => {
 		})
 		it('should click butotn', () => {
 			let button = getByTestingId("SideMenu-MISSIONS")
+			button.onClick();
 			// console.log(button);
 		})
 		it('should click into missions section', done => {
