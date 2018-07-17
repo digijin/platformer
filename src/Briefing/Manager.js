@@ -36,6 +36,7 @@ export default class BriefingManager extends GameObject {
 
 		this.infoPanel.render(mission);
 	};
+
 	infoPanel: InfoPanel;
 	spacing: number = 20;
 	mouseControl: Boolean = true;

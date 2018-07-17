@@ -118,6 +118,7 @@ class EditorPanel extends React.Component {
     	newstate.expanded[target] = !this.state.expanded[target];
     	this.setState(newstate);
     };
+
     props: Props;
     handleDrawModeChange = (event, value) => {
     	this.setState({ drawMode: value });

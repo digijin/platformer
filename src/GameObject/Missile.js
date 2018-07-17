@@ -100,6 +100,7 @@ export default class Missile extends Projectile {
     		}
     	}
     };
+
     guided: boolean;
 
     maxSpeed: number = 40;

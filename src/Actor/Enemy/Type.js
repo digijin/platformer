@@ -39,6 +39,7 @@ export default class EnemyType {
         x: number,
         y: number
     };
+
     idle: string;
     agro: string;
     image: any;

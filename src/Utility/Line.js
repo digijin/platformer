@@ -176,8 +176,8 @@ export default class Line {
 	}
 
 	//Liang-Barsky algorithm
-    //https://gist.github.com/ChickenProp/3194723
-    intersectsRect(rect: {
+	//https://gist.github.com/ChickenProp/3194723
+	intersectsRect(rect: {
 		t: number,
 		r: number,
 		b: number,

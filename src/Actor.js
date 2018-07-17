@@ -38,6 +38,7 @@ export default class Actor extends Renderable {
     		);
     	}
     };
+
     z: number;
     hp: number;
     maxhp: number;
