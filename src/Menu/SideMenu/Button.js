@@ -45,6 +45,7 @@ export default class MenuButton extends BaseButton {
 				}
 			>
 				<Rectangle
+					testingId={"SideMenu-" + text}
 					x={0}
 					y={0}
 					width={235}

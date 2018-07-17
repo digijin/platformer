@@ -30,7 +30,8 @@ export const behavior = {
 			borderColor,
 			alpha,
 			buttonMode,
-			interactive
+			interactive,
+			testingId
 		} = newProps;
 		// this.cacheAsBitmap = false;
 		if (alpha == undefined) {
@@ -46,6 +47,7 @@ export const behavior = {
 
 		instance.buttonMode = buttonMode;
 		instance.interactive = interactive;
+		instance.testingId = testingId;
 		// console.log(instance);
 		// instance.mouseover = () => {
 		// 	console.log("yolo");

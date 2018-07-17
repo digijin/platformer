@@ -38,6 +38,8 @@ export default class MenuManager extends GameObject {
 		super.init(engine);
 		this.tag("menumanager");
 		this.container = new MenuContainer();
+		this.container.testingId = "MenuContainer";
+		this.loadTime = 0;
 
 		// this.bg = new PIXI.extras.TilingSprite(
 		// 	new PIXI.Texture(new PIXI.BaseTexture(dottedbg))
@@ -66,6 +68,7 @@ export default class MenuManager extends GameObject {
 			fill: 0xffffff,
 			align: "center"
 		});
+		this.loading.testingId = "MenuLoadingHACK";
 		this.container.addChild(this.loading);
 
 		this.engine.stage.addChild(this.container);
@@ -95,10 +98,11 @@ export default class MenuManager extends GameObject {
 
 	checkLoaded() {
 		if (this.loading) {
+			this.loadTime += this.engine.deltaTime;
 			// const width = this.loading.width;
 			this.loading.style.fill = Math.floor(Math.random() * 0xffffff);
 			// console.log(this.loading.width);
-			if (this.loading.width == MAGIC_TEXT_WIDTH) {
+			if (this.loading.width == MAGIC_TEXT_WIDTH || this.loadTime > 1) {
 				this.container.removeChild(this.loading);
 				delete this.loading;
 				// this.menu = new Menu();
