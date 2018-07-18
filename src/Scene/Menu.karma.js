@@ -127,33 +127,41 @@ fdescribe("scene/menu.karma.js", () => {
         it("should open menu scene", done => {
             game.engine.startScene(new Menu());
 
-			setTimeout(done, 1100)
+			setTimeout(done, 2000)
         });
     });
 
 	describe('missions', () => {
-		// it('should force remove loading for now ____HACK', done => {
-		// 	let cont = getByTestingId("MenuContainer");
-		// 	let loading = getByTestingId("MenuLoadingHACK");
-		// 	if(loading){
-		// 		cont.removeChild(loading);
-		// 		setTimeout(done, 1000)
-		// 	}else{
-		// 		done();
-		// 	}
-		//
-		// })
 		it('should find button', () => {
 			expect(getByTestingId("SideMenu-MISSIONS")).toBeDefined();
 		})
-		it('should click butotn', () => {
-			let button = getByTestingId("SideMenu-MISSIONS")
-			button.onClick();
-			// console.log(button);
+		it('should click butotn', done => {
+			getByTestingId("SideMenu-MISSIONS").onClick()
+			setTimeout(done, 1000);
 		})
-		it('should click into missions section', done => {
-            setTimeout(done, 8000);
-        })
 	})
 
+	describe('outfitting', () => {
+		it('should find button', () => {
+			expect(getByTestingId("SideMenu-OUTFITTING")).toBeDefined();
+		})
+		it('should click butotn', done => {
+			getByTestingId("SideMenu-OUTFITTING").onClick()
+			setTimeout(done, 1000);
+		})
+		it("should click all children", done => {
+			let cont = getByTestingId("OutfittingContainer");
+			cont.children.forEach((o,i) => {
+				setTimeout(() => {
+					let btn = recurseSearch('OutfittingButton', o);
+					if(btn){btn.onClick();}
+				}, 100*i);
+
+			})
+			setTimeout(done, (cont.children.length + 1) * 100);
+		})
+	})
+	it('should wait', done => {
+		setTimeout(done, 8000);
+	})
 });

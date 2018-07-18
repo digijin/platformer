@@ -27,7 +27,14 @@ export default class Owned extends React.Component {
 				>
 					<Container x={PADDING} y={PADDING}>
 						{this.props.options.map((o, i) => {
-							return <FolderButton title={o.name} y={50 * i} />;
+							return (
+								<FolderButton
+									key={i}
+									title={o.name}
+									x={0}
+									y={50 * i}
+								/>
+							);
 						})}
 					</Container>
 				</ScrollArea>

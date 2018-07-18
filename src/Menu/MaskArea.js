@@ -15,7 +15,7 @@ export const behavior = {
 		mask.height = props.height;
 		// mask.buttonMode = true;
 		scrollArea.interactive = true;
-		mask.on("click", console.log("yolo"));
+		// mask.on("click", console.log("yolo"));
 		// mask.x = props.x;
 		// mask.y = props.y;
 		scrollArea.engine = props.engine; //pass reference for later
