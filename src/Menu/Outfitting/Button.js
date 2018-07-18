@@ -22,6 +22,7 @@ export default class OutfittingButton extends BaseButton {
 				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
 			>
 				<Rectangle
+					testingId={"OutfittingButton"}
 					x={0}
 					y={0}
 					width={250}

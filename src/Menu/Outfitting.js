@@ -21,7 +21,7 @@ export default class OutfittingMenu extends Component {
 			{ id: "sidekick", text: "Sidekick", sub: "Companion" }
 		];
 		return (
-			<Container>
+			<Container testingId={"OutfittingContainer"}>
 				<Text
 					text={"Outfitting"}
 					style={{
