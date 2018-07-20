@@ -6,6 +6,9 @@ import mechHero from "./mech_hero.png";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 import log from "loglevel";
+import EngineProvider from "../React/EngineProvider";
+import { render, Text } from "react-pixi-fiber";
+import React from "react";
 
 const FADETIME = 1;
 
@@ -13,7 +16,7 @@ const FADETIME = 1;
 
 export default class MainMenu extends GameObject {
 	hero: PIXI.Sprite;
-
+	ui: PIXI.Container;
 	time: number = 0;
 
 	constructor() {
@@ -34,10 +37,33 @@ export default class MainMenu extends GameObject {
 		super.init(engine);
 		this.engine.stage.addChild(this.fadein);
 		this.update();
+		this.ui = new PIXI.Container();
+		this.engine.stage.addChild(this.ui);
+		this.render();
 	}
 
 	exit() {
 		this.engine.stage.removeChild(this.fadein);
+		this.engine.stage.removeChild(this.ui);
+	}
+
+	render() {
+		render(
+			// <Text text="Hello World!" x={200} y={200} />,
+
+			<EngineProvider engine={this.engine}>
+				<Text
+					text="sup world"
+					style={{
+						fontFamily: "HeadingFont",
+						fontSize: 92,
+						fill: 0xffffff,
+						align: "center"
+					}}
+				/>
+			</EngineProvider>,
+			this.ui
+		);
 	}
 
 	update() {
