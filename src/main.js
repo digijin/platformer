@@ -45,6 +45,7 @@ window.onload = () => {
 	// console.log("window loaded");
 	PIXI.loader.add("/assets/Roboto-Regular.ttf");
 	PIXI.loader.add("/assets/Roboto-Bold.ttf");
+
 	PIXI.loader.load(() => {
 		// console.log("pixi loaded n shit");
 		// load pixi assets before we even parse Game

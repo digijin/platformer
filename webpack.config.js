@@ -67,7 +67,7 @@ module.exports = [
 				},
 				{
 					test: /\.(ttf|otf|eot|TTF)$/,
-					loader: "file-loader"
+					loader: "url-loader"
 				},
 				{
 					test: /sprites\.(png|json)/,

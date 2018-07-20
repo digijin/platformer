@@ -3,7 +3,7 @@ import Player from "Actor/Player";
 import Point from "Utility/Point";
 import EnergyBar from "../GameObject/EnergyBar";
 
-import Doors from "Transition/Doors";
+import Transition from "Transition/CheckerboardOut";
 import Results from "Scene/Results";
 import Grid from "Grid";
 import log from "loglevel";
@@ -60,7 +60,7 @@ export default class StoryTeller extends GameObject {
 
 		if (this.engine.objectsTagged("enemy").length == 0) {
 			log.debug("StoryTeller ran out of enemies");
-			this.engine.startSceneTransition(new Results(), new Doors());
+			this.engine.startSceneTransition(new Results(), new Transition());
 			//my job here is done
 			this.destroy();
 		}

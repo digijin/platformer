@@ -62,16 +62,17 @@ export default class MenuManager extends GameObject {
 		// ];
 		//SIDE SideMenu
 
-		this.loading = new PIXI.Text("LOADING", {
-			fontFamily: "RobotoBold",
-			fontSize: 20,
-			fill: 0xffffff,
-			align: "center"
-		});
-		this.loading.testingId = "MenuLoadingHACK";
-		this.container.addChild(this.loading);
+		// this.loading = new PIXI.Text("LOADING", {
+		// 	fontFamily: "RobotoBold",
+		// 	fontSize: 20,
+		// 	fill: 0xffffff,
+		// 	align: "center"
+		// });
+		// this.loading.testingId = "MenuLoadingHACK";
+		// this.container.addChild(this.loading);
 
 		this.engine.stage.addChild(this.container);
+		this.render();
 	}
 
 	exit() {
@@ -79,7 +80,7 @@ export default class MenuManager extends GameObject {
 	}
 
 	update() {
-		this.checkLoaded();
+		// this.checkLoaded();
 		// this.menu.header.text.style.fill = 0x0;
 		// this.animateFilters();
 		// this.glitch();

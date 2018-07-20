@@ -4,7 +4,7 @@ import Storage from "Utility/Storage";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Briefing from "Scene/Briefing";
-import Doors from "Transition/Doors";
+import Doors from "Transition/CheckerboardOut";
 
 import Player from "Player";
 

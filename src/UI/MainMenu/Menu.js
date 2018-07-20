@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Editor from "Scene/Editor";
 import Equip from "Scene/Equip";
 
-import Doors from "Transition/Doors";
+// import Doors from "Transition/Doors";
 import CheckerboardOut from "Transition/CheckerboardOut";
 // import SmokeExplosionUpTransition from "Transition/SmokeExplosionUpTransition";
 
@@ -84,8 +84,11 @@ function mapDispatchToProps(dispatch: Function, props: Object): Object {
 			props.engine.startScene(new Editor());
 		},
 		equip: () => {
-			props.engine.startSceneTransition(new Equip(), new Doors());
-		},
+			props.engine.startSceneTransition(
+				new Equip(),
+				new CheckerboardOut()
+			);
+		}
 		// close: id => {
 		// 	// dispatch({type:'CLOSE_CONTEXT_MENU'});
 		// }
