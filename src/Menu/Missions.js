@@ -54,6 +54,7 @@ export default class SideMenu extends Component {
 				/>
 				{Missions.map((mission, index) => (
 					<MissionsButton
+						key={index}
 						onClick={() => {
 							this.setState(state => ({
 								...state,

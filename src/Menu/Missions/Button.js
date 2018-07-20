@@ -22,6 +22,7 @@ export default class MissionsButton extends BaseButton {
 				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
 			>
 				<Rectangle
+					testingId={"MissionsButton"}
 					x={0}
 					y={0}
 					width={250}

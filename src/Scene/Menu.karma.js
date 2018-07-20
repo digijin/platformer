@@ -120,14 +120,14 @@ fdescribe("scene/menu.karma.js", () => {
         it("should be inited", () => {
             expect(game.inited).toBe(true);
         });
-		it('should open mainmenu', done => {
-			game.engine.startScene(new MainMenu());
-			setTimeout(done, 1000)
-		})
+		// it('should open mainmenu', done => {
+		// 	game.engine.startScene(new MainMenu());
+		// 	setTimeout(done, 1000)
+		// })
         it("should open menu scene", done => {
             game.engine.startScene(new Menu());
 
-			setTimeout(done, 2000)
+			setTimeout(done, 1000)
         });
     });
 
@@ -161,7 +161,31 @@ fdescribe("scene/menu.karma.js", () => {
 			setTimeout(done, (cont.children.length + 1) * 100);
 		})
 	})
+
+
+	describe('start mission', () => {
+		afterAll(done => {
+			game.engine.startScene(new Menu());
+			setTimeout(done, 1000);
+		});
+		it('should enter mission section', done => {
+			getByTestingId("SideMenu-MISSIONS").onClick()
+			setTimeout(done, 100);
+		});
+		it('should click a MissionsButton', done => {
+			expect(getByTestingId("MissionsButton")).toBeDefined();
+			getByTestingId("MissionsButton").onClick();
+			setTimeout(done, 100);
+		});
+		it('should click launch', done => {
+			expect(getByTestingId("LaunchButton")).toBeDefined();
+			getByTestingId("LaunchButton").onClick();
+			setTimeout(done, 100);
+		});
+
+	})
+
 	it('should wait', done => {
-		setTimeout(done, 8000);
+		setTimeout(done, 1000);
 	})
 });
