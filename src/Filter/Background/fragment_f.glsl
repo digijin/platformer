@@ -146,7 +146,7 @@ void main( )
 		vec2 lastOffsetpoint = 0.5 + 0.5*sin( (iTime-0.5) + 6.2831*offsetpoint);
 		vec2 offsetDiff = offsetpoint - lastOffsetpoint;
 		vec2 screen = (offsetpoint + offsetgrid) * gridsize;
-		float dist = triangle(pixelCoord, screen, offsetDiff + (iTime * sin(length(offsetpoint))));
+		float dist = triangle(pixelCoord, screen, vec2(iTime) + offsetgrid);
 		//sin(iTime)*PI
 		if(dist > 0.){
 			dist *= offsetpoint.y - lastOffsetpoint.y;
