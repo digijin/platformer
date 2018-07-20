@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");
 
-fdescribe("scene/menu.karma.js", () => {
+describe("scene/menu.karma.js", () => {
     let container;
     let game;
 
