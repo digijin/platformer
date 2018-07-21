@@ -7,8 +7,13 @@ import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 import log from "loglevel";
 import EngineProvider from "../React/EngineProvider";
-import { render, Text } from "react-pixi-fiber";
+import { render, Text, Container } from "react-pixi-fiber";
 import React from "react";
+import Button from "./Button";
+
+import Menu from "Scene/Menu";
+import Editor from "Scene/Editor";
+import CheckerboardOut from "Transition/CheckerboardOut";
 
 const FADETIME = 1;
 
@@ -52,15 +57,44 @@ export default class MainMenu extends GameObject {
 			// <Text text="Hello World!" x={200} y={200} />,
 
 			<EngineProvider engine={this.engine}>
-				<Text
-					text="sup world"
-					style={{
-						fontFamily: "HeadingFont",
-						fontSize: 92,
-						fill: 0xffffff,
-						align: "center"
-					}}
-				/>
+				<Container>
+					<Text
+						text="platformer"
+						style={{
+							fontFamily: "HeadingFont",
+							fontSize: 92,
+							fill: 0xe38696,
+							align: "center"
+						}}
+						anchor={{ x: 0.5, y: 1 }}
+						x={window.innerWidth / 2}
+						y={window.innerHeight / 2}
+					/>
+					<Button
+						onClick={() => {
+							this.engine.startSceneTransition(
+								new Menu(),
+								new CheckerboardOut()
+							);
+						}}
+						text={"Quick Play"}
+						x={(window.innerWidth - 200) / 2}
+						y={window.innerHeight / 2}
+						width={200}
+					/>
+					<Button
+						onClick={() => {
+							this.engine.startSceneTransition(
+								new Editor(),
+								new CheckerboardOut()
+							);
+						}}
+						text={"editor"}
+						x={(window.innerWidth - 200) / 2}
+						y={window.innerHeight / 2 + 50}
+						width={200}
+					/>
+				</Container>
 			</EngineProvider>,
 			this.ui
 		);
