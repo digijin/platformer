@@ -77,7 +77,7 @@ export default class MainMenu extends GameObject {
 								new CheckerboardOut()
 							);
 						}}
-						text={"Quick Play"}
+						text={"Play"}
 						x={(window.innerWidth - 200) / 2}
 						y={window.innerHeight / 2}
 						width={200}
@@ -89,7 +89,7 @@ export default class MainMenu extends GameObject {
 								new CheckerboardOut()
 							);
 						}}
-						text={"editor"}
+						text={"Editor"}
 						x={(window.innerWidth - 200) / 2}
 						y={window.innerHeight / 2 + 50}
 						width={200}

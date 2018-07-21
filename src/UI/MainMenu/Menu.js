@@ -29,9 +29,6 @@ class MainMenu extends React.Component {
 	render() {
 		let content = (
 			<div>
-				<a id="playButton" onClick={this.props.play}>
-					Quick Play
-				</a>
 				<a
 					id="loadButton"
 					onClick={() => {
@@ -40,24 +37,12 @@ class MainMenu extends React.Component {
 				>
 					Load Profile
 				</a>
-				<a id="editorButton" onClick={this.props.editor}>
-					Level Editor
-				</a>
 			</div>
 		);
 		if (this.state.page == "load") {
 			content = <Load engine={this.props.engine} />;
 		}
-		return (
-			<div id="MainMenuUI">
-				<div className="title">
-					<div className="subsub">{"I don't have a good name"}</div>
-					<div className="sub">{"so for now it's called"}</div>
-					PLATFORMER
-				</div>
-				{content}
-			</div>
-		);
+		return <div id="MainMenuUI">{content}</div>;
 	}
 }
 
