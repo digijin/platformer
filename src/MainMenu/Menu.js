@@ -14,8 +14,9 @@ import Button from "./Button";
 import Menu from "Scene/Menu";
 import Editor from "Scene/Editor";
 import CheckerboardOut from "Transition/CheckerboardOut";
+import ChromeFilter from "Filter/Chrome/Filter";
 
-const FADETIME = 1;
+const FADETIME = 4;
 
 // import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
@@ -23,6 +24,7 @@ export default class MainMenu extends GameObject {
 	hero: PIXI.Sprite;
 	ui: PIXI.Container;
 	time: number = 0;
+	fadein: PIXI.Sprite;
 
 	constructor() {
 		super();
@@ -40,10 +42,10 @@ export default class MainMenu extends GameObject {
 
 	init(engine: Engine) {
 		super.init(engine);
-		this.engine.stage.addChild(this.fadein);
 		this.update();
 		this.ui = new PIXI.Container();
 		this.engine.stage.addChild(this.ui);
+		this.engine.stage.addChild(this.fadein);
 		this.render();
 	}
 
@@ -60,6 +62,7 @@ export default class MainMenu extends GameObject {
 				<Container>
 					<Text
 						text="platformer"
+						filters={[new ChromeFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
 							fontSize: 92,
@@ -81,6 +84,7 @@ export default class MainMenu extends GameObject {
 						x={(window.innerWidth - 200) / 2}
 						y={window.innerHeight / 2}
 						width={200}
+						testingId={"playbutton"}
 					/>
 					<Button
 						onClick={() => {
@@ -93,6 +97,20 @@ export default class MainMenu extends GameObject {
 						x={(window.innerWidth - 200) / 2}
 						y={window.innerHeight / 2 + 50}
 						width={200}
+						testingId={"editorbutton"}
+					/>
+					<Button
+						onClick={() => {
+							this.engine.startSceneTransition(
+								new Editor(),
+								new CheckerboardOut()
+							);
+						}}
+						text={"Load"}
+						x={(window.innerWidth - 200) / 2}
+						y={window.innerHeight / 2 + 100}
+						width={200}
+						testingId={"loadbutton"}
 					/>
 				</Container>
 			</EngineProvider>,

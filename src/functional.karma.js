@@ -111,8 +111,8 @@ describe("functional.karma.js", () => {
 
 		it("should open editor", () => {
 			// clickId("editorButton");
-			expect(getByTestingId("MainMenu-Editor")).toBeDefined();
-			getByTestingId("MainMenu-Editor").onClick();
+			expect(getByTestingId("editorbutton")).toBeDefined();
+			getByTestingId("editorbutton").onClick();
 		});
 	});
 

@@ -10,7 +10,10 @@ import BaseButton from "../Menu/Base/Button";
 
 export default class MenuButton extends BaseButton {
 	render() {
-		let { text, x, y, width } = this.props;
+		let { text, x, y, width, testingId } = this.props;
+		if (!testingId) {
+			testingId = "MainMenu-" + text;
+		}
 		return (
 			<Container
 				x={x}
@@ -22,7 +25,7 @@ export default class MenuButton extends BaseButton {
 				}
 			>
 				<Rectangle
-					testingId={"MainMenu-" + text}
+					testingId={testingId}
 					x={0}
 					y={0}
 					width={width}
@@ -69,8 +72,9 @@ export default class MenuButton extends BaseButton {
 						fill: this.state.over ? LOCOLOUR : HICOLOUR,
 						align: "center"
 					}}
-					x={14}
+					x={width / 2}
 					y={14}
+					anchor={{ x: 0.5, y: 0 }}
 				/>
 			</Container>
 		);
