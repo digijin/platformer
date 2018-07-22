@@ -11,5 +11,7 @@ export default class MainMenu extends Base {
 		document.body.style.backgroundColor = "black";
 		engine.ui.dispatch({ type: "START_SCENE", scene: "logo" });
 		engine.register(new DigijinLogo());
+
+		window.dispatchEvent(new Event("logo-start"));
 	}
 }

@@ -40,8 +40,8 @@ module.exports = function(config) {
 		preprocessors: {
 			// "src/worker/*worker.js": ["webpack", "sourcemap"],
 			"src/**/!(*.spec|*.karma|worker).js": ["electron", "coverage"],
-			"**/*karma.js": ["webpack", "sourcemap"],
-			"**/*spec.js": ["webpack", "sourcemap"]
+			"**/*karma.js": ["webpack"], //, "sourcemap"],
+			"**/*spec.js": ["webpack"] //, "sourcemap"]
 		},
 		webpack: webpackConf[0],
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter

@@ -42,14 +42,15 @@ describe("Scene/Level.karma.js", () => {
 
 	describe("boot", () => {
 		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 2000);
+			window.addEventListener("logo-start", done);
 		});
 		it("should be inited", () => {
 			expect(game.inited).toBe(true);
 		});
 		it("should open Level scene", done => {
+			window.addEventListener("level-start", done);
 			game.engine.startScene(new Level());
-			setTimeout(done, 1000);
+			// setTimeout(done, 1000);
 		});
 	});
 
@@ -75,10 +76,10 @@ describe("Scene/Level.karma.js", () => {
 		it(
 			"should move cursor",
 			testGen(function*() {
-				for (let i = 0; i < 100; i++) {
+				for (let i = 0; i < 50; i++) {
 					let target = {
 						clientX: window.innerWidth / 2 + 200,
-						clientY: window.innerHeight / 2 - 200 + i * 2
+						clientY: window.innerHeight / 2 - 200 + i * 4
 					};
 					mouseUtil.mouseEvent(
 						"mousemove",
@@ -221,7 +222,7 @@ describe("Scene/Level.karma.js", () => {
 			window.onkeyup({ keyCode: 27 }); //39
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should be paused", () => {
 			expect(game.engine.paused).toBe(true);
@@ -230,7 +231,7 @@ describe("Scene/Level.karma.js", () => {
 			clickId("resumeButton");
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should not be paused", () => {
 			expect(game.engine.paused).toBe(false);
@@ -243,7 +244,7 @@ describe("Scene/Level.karma.js", () => {
 			window.onkeyup({ keyCode: 27 });
 		});
 		it("should wait for a while", done => {
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should be paused for a second time", () => {
 			expect(game.engine.paused).toBe(true);

@@ -12,7 +12,7 @@ export default class MainMenu extends Base {
 		super.start(engine);
 		// setTimeout(() => {
 		// 	engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
-		window.dispatchEvent(new Event("menu-ready"));
+		window.dispatchEvent(new Event("mainmenu-ready"));
 		// }, 500);
 
 		engine.stage.position.x = 0;

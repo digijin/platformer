@@ -22,5 +22,7 @@ export default class Menu extends Base {
 
 		document.body.style.backgroundColor = "#353232";
 		// engine.ui.dispatch({ type: "START_SCENE", scene: "briefing" });
+
+		window.dispatchEvent(new Event("menu-start"));
 	}
 }

@@ -13,58 +13,6 @@ describe("scene/menu.karma.js", () => {
 		return recurseSearch(id, game.engine.stage);
 	};
 
-	describe("recurseSearch", () => {
-		let stage: PIXI.Container;
-		let firstChild;
-		let secondChild;
-		let firstGrandChild;
-		let secondGrandChild;
-		let thirdGrandChild;
-		beforeAll(() => {
-			stage = new PIXI.Container();
-			firstChild = new PIXI.Container();
-			secondChild = new PIXI.Container();
-			firstGrandChild = new PIXI.Container();
-			secondGrandChild = new PIXI.Container();
-			thirdGrandChild = new PIXI.Container();
-			stage.addChild(firstChild);
-			stage.addChild(secondChild);
-			firstChild.addChild(firstGrandChild);
-			firstChild.addChild(secondGrandChild);
-			secondChild.addChild(thirdGrandChild);
-			stage.testingId = "stage";
-			firstChild.testingId = "firstChild";
-			secondChild.testingId = "secondChild";
-			firstGrandChild.testingId = "firstGrandChild";
-			secondGrandChild.testingId = "secondGrandChild";
-			thirdGrandChild.testingId = "thirdGrandChild";
-		});
-		it("firstChild", () => {
-			expect(recurseSearch("firstChild", stage)).toBe(firstChild);
-		});
-		it("secondChild", () => {
-			expect(recurseSearch("secondChild", stage)).toBe(secondChild);
-		});
-		it("firstGrandChild", () => {
-			expect(recurseSearch("firstGrandChild", stage).testingId).toBe(
-				firstGrandChild.testingId
-			);
-		});
-		it("secondGrandChild", () => {
-			expect(recurseSearch("secondGrandChild", stage).testingId).toBe(
-				secondGrandChild.testingId
-			);
-		});
-		it("thirdGrandChild", () => {
-			expect(recurseSearch("thirdGrandChild", stage).testingId).toBe(
-				thirdGrandChild.testingId
-			);
-		});
-		it("undefined", () => {
-			expect(recurseSearch("undefined", stage)).not.toBeDefined();
-		});
-	});
-
 	beforeAll(function() {
 		// FLOWHACK
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 15 * 1000;
@@ -82,8 +30,9 @@ describe("scene/menu.karma.js", () => {
 	});
 	//
 	describe("boot", () => {
-		it("shouldnt throw any errors initializing", done => {
-			setTimeout(done, 2000);
+		it("should start logo", done => {
+			// setTimeout(done, 2000);
+			window.addEventListener("logo-start", done);
 		});
 		it("should be inited", () => {
 			expect(game.inited).toBe(true);
@@ -93,9 +42,11 @@ describe("scene/menu.karma.js", () => {
 		// 	setTimeout(done, 1000)
 		// })
 		it("should open menu scene", done => {
+			window.addEventListener("menu-start", done);
+
 			game.engine.startScene(new Menu());
 
-			setTimeout(done, 1000);
+			// setTimeout(done, 1000);
 		});
 	});
 
@@ -105,7 +56,7 @@ describe("scene/menu.karma.js", () => {
 		});
 		it("should click butotn", done => {
 			getByTestingId("SideMenu-MISSIONS").onClick();
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 	});
 
@@ -115,7 +66,7 @@ describe("scene/menu.karma.js", () => {
 		});
 		it("should click butotn", done => {
 			getByTestingId("SideMenu-OUTFITTING").onClick();
-			setTimeout(done, 1000);
+			setTimeout(done, 100);
 		});
 		it("should click all children", done => {
 			let cont = getByTestingId("OutfittingContainer");
@@ -133,8 +84,9 @@ describe("scene/menu.karma.js", () => {
 
 	describe("start mission", () => {
 		afterAll(done => {
+			window.addEventListener("menu-start", done);
 			game.engine.startScene(new Menu());
-			setTimeout(done, 1000);
+			// setTimeout(done, 1000);
 		});
 		it("should enter mission section", done => {
 			getByTestingId("SideMenu-MISSIONS").onClick();
@@ -150,9 +102,5 @@ describe("scene/menu.karma.js", () => {
 			getByTestingId("LaunchButton").onClick();
 			setTimeout(done, 100);
 		});
-	});
-
-	it("should wait", done => {
-		setTimeout(done, 1000);
 	});
 });

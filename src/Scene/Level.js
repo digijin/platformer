@@ -24,9 +24,11 @@ export default class Level extends Base {
 		bg.explosions = false;
 		engine.register(bg);
 
-		engine.ui.dispatch({
-			type: "START_SCENE",
-			scene: "level"
-		});
+		// engine.ui.dispatch({
+		// 	type: "START_SCENE",
+		// 	scene: "level"
+		// });
+
+		window.dispatchEvent(new Event("level-start"));
 	}
 }
