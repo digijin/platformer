@@ -107,9 +107,9 @@ export default class Background extends GameObject {
 				b.position.x += window.innerWidth + b.width + b.width;
 			}
 		});
-		if (Math.random() > 0.99) {
-			this.spawnExplosion();
-		}
+		// if (Math.random() > 0.99) {
+		// 	this.spawnExplosion();
+		// }
 		this.sort();
 		this.bg.x = 0;
 		this.bg.width = window.innerWidth;
@@ -176,31 +176,31 @@ export default class Background extends GameObject {
 		});
 	}
 
-	spawnExplosion() {
-		if (!this.explosions) {
-			return;
-		}
-		let types = [
-			ExplosionUp1,
-			ExplosionUp2,
-			ExplosionUp3,
-			ExplosionUp4,
-			ExplosionUp5,
-			ExplosionUp6
-		];
-		let type = types[Math.floor(types.length * Math.random())];
-		let exp = new type({
-			parent: this.buildingStage,
-			speed: 0.2
-		});
-		exp.position.x = window.innerWidth * Math.random();
-		exp.movie.offset = exp.position.x;
-		exp.movie.z = Math.random();
-		// exp.positionSprite();
-		exp.movie.anchor = { x: 0.5, y: 0.9 };
-		// exp.speed = 0.2;
-		this.engine.register(exp);
-		exp.positionSprite = () => {};
-		// this.sort();
-	}
+	// spawnExplosion() {
+	// 	if (!this.explosions) {
+	// 		return;
+	// 	}
+	// 	let types = [
+	// 		ExplosionUp1,
+	// 		ExplosionUp2,
+	// 		ExplosionUp3,
+	// 		ExplosionUp4,
+	// 		ExplosionUp5,
+	// 		ExplosionUp6
+	// 	];
+	// 	let type = types[Math.floor(types.length * Math.random())];
+	// 	let exp = new type({
+	// 		parent: this.buildingStage,
+	// 		speed: 0.2
+	// 	});
+	// 	exp.position.x = window.innerWidth * Math.random();
+	// 	exp.movie.offset = exp.position.x;
+	// 	exp.movie.z = Math.random();
+	// 	// exp.positionSprite();
+	// 	exp.movie.anchor = { x: 0.5, y: 0.9 };
+	// 	// exp.speed = 0.2;
+	// 	this.engine.register(exp);
+	// 	exp.positionSprite = () => {};
+	// 	// this.sort();
+	// }
 }

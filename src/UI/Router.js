@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import Menu from "./MainMenu/Menu";
 import EditorPanel from "./Editor/Panel";
-import Equip from "./Equip";
-import Level from "./Level";
-import Briefing from "./Briefing";
 import Results from "./Results";
 import Pause from "./Pause";
 
@@ -17,16 +13,8 @@ export class Router extends React.Component {
 	};
 
 	render() {
-		if (this.props.scene == "menu") {
-			return <Menu />;
-		} else if (this.props.scene == "editor") {
+		if (this.props.scene == "editor") {
 			return <EditorPanel />;
-		} else if (this.props.scene == "equip") {
-			return <Equip />;
-		} else if (this.props.scene == "level") {
-			return <Level />;
-		} else if (this.props.scene == "briefing") {
-			return <Briefing />;
 		} else if (this.props.scene == "results") {
 			return <Results />;
 		} else if (this.props.scene == "pause") {

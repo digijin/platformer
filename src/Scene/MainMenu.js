@@ -10,10 +10,10 @@ import Point from "Utility/Point";
 export default class MainMenu extends Base {
 	start(engine: Engine) {
 		super.start(engine);
-		setTimeout(() => {
-			engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
-			window.dispatchEvent(new Event("menu-ready"));
-		}, 500);
+		// setTimeout(() => {
+		// 	engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
+		window.dispatchEvent(new Event("menu-ready"));
+		// }, 500);
 
 		engine.stage.position.x = 0;
 		engine.stage.position.y = 0;

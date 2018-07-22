@@ -15,7 +15,7 @@ import Menu from "Scene/Menu";
 import Editor from "Scene/Editor";
 import CheckerboardOut from "Transition/CheckerboardOut";
 import ChromeFilter from "Filter/Chrome/Filter";
-import {BevelFilter} from  "@pixi/filter-bevel";
+import { BevelFilter } from "@pixi/filter-bevel";
 
 const FADETIME = 4;
 
@@ -70,7 +70,7 @@ export default class MainMenu extends GameObject {
 							fill: 0xe38696,
 							align: "center"
 						}}
-						anchor={{ x: 0.5, y: 1 }}
+						anchor={{ x: 0.5, y: 0.15 }}
 						x={window.innerWidth / 2}
 						y={window.innerHeight / 2}
 					/>
@@ -83,7 +83,7 @@ export default class MainMenu extends GameObject {
 						}}
 						text={"Play"}
 						x={(window.innerWidth - 200) / 2}
-						y={window.innerHeight / 2}
+						y={window.innerHeight / 2 + 100}
 						width={200}
 						testingId={"playbutton"}
 					/>
@@ -96,7 +96,7 @@ export default class MainMenu extends GameObject {
 						}}
 						text={"Editor"}
 						x={(window.innerWidth - 200) / 2}
-						y={window.innerHeight / 2 + 50}
+						y={window.innerHeight / 2 + 150}
 						width={200}
 						testingId={"editorbutton"}
 					/>
@@ -109,7 +109,7 @@ export default class MainMenu extends GameObject {
 						}}
 						text={"Load"}
 						x={(window.innerWidth - 200) / 2}
-						y={window.innerHeight / 2 + 100}
+						y={window.innerHeight / 2 + 200}
 						width={200}
 						testingId={"loadbutton"}
 					/>

@@ -17,7 +17,7 @@
 		"flow:watch": "flow-watch",
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
-		"karma": "karma start --reporters spec",
+		"karma": "karma start --reporters spec --max_old_space_size=4096",
 		"karma:single": "karma start --reporters spec --single-run",
 		"karma:ci": "karma start --reporters coverage-istanbul,spec --browsers ChromeHeadless --single-run",
 		"karma:headless": "karma start --reporters nyan --browsers ChromeHeadless",

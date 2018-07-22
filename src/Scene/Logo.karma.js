@@ -45,9 +45,6 @@ describe("Scene/Logo.karma.js", () => {
 		it("should trigger logo-over", done => {
 			window.addEventListener("logo-over", done);
 		});
-		it("should trigger menu-ready", done => {
-			window.addEventListener("menu-ready", done);
-		});
 		it("shouldnt throw any errors initializing", done => {
 			setTimeout(done, 100);
 		});
