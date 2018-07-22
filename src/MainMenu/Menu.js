@@ -15,6 +15,7 @@ import Menu from "Scene/Menu";
 import Editor from "Scene/Editor";
 import CheckerboardOut from "Transition/CheckerboardOut";
 import ChromeFilter from "Filter/Chrome/Filter";
+import {BevelFilter} from  "@pixi/filter-bevel";
 
 const FADETIME = 4;
 
@@ -62,7 +63,7 @@ export default class MainMenu extends GameObject {
 				<Container>
 					<Text
 						text="platformer"
-						filters={[new ChromeFilter()]}
+						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
 							fontSize: 92,

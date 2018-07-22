@@ -85,6 +85,10 @@
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-ascii/-/filter-ascii-2.5.0.tgz#62ef324c68412584e6e529a83c376c2855fbaf67"
 
+"@pixi/filter-bevel@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@pixi/filter-bevel/-/filter-bevel-2.6.0.tgz#f45bb12f25fd61defedfc222bee15ba03a32e8e4"
+
 "@pixi/filter-crt@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@pixi/filter-crt/-/filter-crt-2.5.0.tgz#7f445f7c31cd4db79d9013adde79ec68b02b968a"
@@ -9609,10 +9613,6 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.2.tgz#d697b99f1f59512df2751be42769c1580b5801fe"
   dependencies:
     minimalistic-assert "^1.0.0"
-
-webfontloader@^1.6.28:
-  version "1.6.28"
-  resolved "https://registry.yarnpkg.com/webfontloader/-/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

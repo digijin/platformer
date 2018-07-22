@@ -19,6 +19,7 @@ jasmine.getEnv().addReporter(failFast.init());
 
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");
+import recurseSearch from "test/util/recurseSearch";
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -35,32 +36,12 @@ function clickClass(id) {
 	mouseUtil.clickSelector("." + id);
 }
 
-describe("functional.karma.js", () => {
+xdescribe("functional.karma.js", () => {
 	let container;
 	let game;
 
 	let getByTestingId = id => {
 		return recurseSearch(id, game.engine.stage);
-	};
-	let recurseSearch = (id, node) => {
-		if (node.testingId == id) {
-			return node;
-		}
-		let direct = node.children.find(child => {
-			return child.testingId == id;
-		});
-		if (direct) {
-			return direct;
-		}
-		let result;
-		node.children.find(child => {
-			const search = recurseSearch(id, child);
-			if (search) {
-				result = search;
-			}
-			return search;
-		});
-		return result;
 	};
 
 	beforeAll(function() {
