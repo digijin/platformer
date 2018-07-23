@@ -74,6 +74,20 @@ export default class MainMenu extends GameObject {
 						x={window.innerWidth / 2}
 						y={window.innerHeight / 2}
 					/>
+					<Text
+						text={"for now its called"}
+						filters={[new BevelFilter()]}
+						style={{
+							fontFamily: "Lazer84",
+							fontSize: 36,
+							fill: 0xf162dc,
+							align: "center"
+						}}
+						anchor={{ x: 0.5, y: 0.5 }}
+						x={window.innerWidth / 2}
+						y={window.innerHeight / 2 - 10}
+					/>
+
 					<Button
 						onClick={() => {
 							this.engine.startSceneTransition(
