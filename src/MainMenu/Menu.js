@@ -17,7 +17,7 @@ import CheckerboardOut from "Transition/CheckerboardOut";
 import ChromeFilter from "Filter/Chrome/Filter";
 import { BevelFilter } from "@pixi/filter-bevel";
 
-const FADETIME = 4;
+const FADETIME = 5;
 
 // import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
