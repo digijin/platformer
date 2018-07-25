@@ -18,17 +18,18 @@ import GameObject from "GameObject";
 import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import MenuBackgroundFilter from "Filter/Background/Filter";
 
-class FilterUpdater extends GameObject {
-	constructor(filter) {
-		super();
-		this.filter = filter;
-	}
+import FilterUpdater from "Filter/Updater";
+// class FilterUpdater extends GameObject {
+// 	constructor(filter) {
+// 		super();
+// 		this.filter = filter;
+// 	}
 
-	update() {
-		this.filter.time += this.engine.deltaTime;
-		this.filter.mouse = this.engine.mouse.position;
-	}
-}
+// 	update() {
+// 		this.filter.time += this.engine.deltaTime;
+// 		this.filter.mouse = this.engine.mouse.position;
+// 	}
+// }
 
 class SideMenu extends Component {
 	state = {
