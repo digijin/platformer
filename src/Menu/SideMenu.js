@@ -32,7 +32,7 @@ class FilterUpdater extends GameObject {
 
 class SideMenu extends Component {
 	state = {
-		selected: "OUTFITTING"
+		selected: "MISSIONS"
 	};
 
 	bgFilter = new MenuBackgroundFilter();
