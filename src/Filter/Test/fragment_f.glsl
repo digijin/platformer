@@ -1,7 +1,3 @@
-// Created by inigo quilez - iq/2013
-// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-
-// Volumetric clouds. It performs level of detail (LOD) for faster rendering
 
 precision mediump float;
 varying vec2 vTextureCoord;

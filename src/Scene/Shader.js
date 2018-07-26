@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 
-import Filter from "Filter/Test/Filter";
+import Filter from "Filter/Explosion/Filter";
 import FilterUpdater from "Filter/Updater";
 
 export default class Shader extends Base {
