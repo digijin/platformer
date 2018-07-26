@@ -19,6 +19,7 @@ import Results from "Scene/Results";
 import Benchmark from "Scene/Benchmark";
 import Demo from "Scene/Demo";
 import Menu from "Scene/Menu";
+import Shader from "Scene/Shader";
 
 //textures
 import { BlockTypes } from "Grid/Block/Type";
@@ -81,6 +82,9 @@ export default class Game {
 			break;
 		case "menu":
 			this.engine.startScene(new Menu());
+			break;
+		case "shader":
+			this.engine.startScene(new Shader());
 			break;
 		default:
 			this.engine.startScene(new Logo());
