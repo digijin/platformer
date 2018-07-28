@@ -80,6 +80,21 @@ float sphericalCapSDF(vec3 p, float pc){
 	return sphereDist;
 
 }
+float sphericalSliceSDF(vec3 p, float s1, float s2){
+	float top = max(s1, s2);
+	float bottom = min(s1, s2);
+	// float plane = pc;//*2.-1.;
+	float sphereDist = sphereSDF(p);
+	// if(p/
+	if(p.x < bottom){
+		return max(bottom - p.x, sphereDist);
+	}
+	if(p.x > top){
+		return max(p.x - top, sphereDist);
+	}
+	return sphereDist;
+
+}
 
 /**
  * Signed distance function describing the scene.
@@ -89,12 +104,13 @@ float sphericalCapSDF(vec3 p, float pc){
  * negative indicating inside.
  */
 float sceneSDF(vec3 samplePoint) {
-    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
-    float sphereCapDist = sphericalCapSDF(samplePoint / 1.2, sin(iTime)) * 1.2;
+    // float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+    // float sphereCapDist = sphericalCapSDF(samplePoint / 1.2, sin(iTime)) * 1.2;
     // float cubeDist = cubeSDF(samplePoint);
     // return intersectSDF(cubeDist, sphereDist);
 	// return intersectSDF(sphereDist, sphereCapDist);
-	return sphereCapDist;
+	// return sphereCapDist;
+	return sphericalSliceSDF(samplePoint, sin(iTime), cos(iTime));
 }
 
 /**
