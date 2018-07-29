@@ -68,14 +68,14 @@ float cubeSDF(vec3 p) {
 /**
  * Signed distance function for a sphere centered at the origin with radius 1.0;
  */
-float sphereSDF(vec3 p) {
-    return length(p) - 1.0;
+float sphereSDF(vec3 p, vec3 center, float radius) {
+    return length(p-center) - radius;
 }
 
 //returns a sliced up sphere
 float sphericalCapSDF(vec3 p, float pc){
 	float plane = pc;//*2.-1.;
-	float sphereDist = sphereSDF(p);
+	float sphereDist = sphereSDF(p, vec3(0.), 1.);
 	if(p.x > plane){
 		return max(p.x - plane, sphereDist);
 	}
@@ -86,7 +86,7 @@ float sphericalSliceSDF(vec3 p, float s1, float s2){
 	float top = max(s1, s2);
 	float bottom = min(s1, s2);
 	// float plane = pc;//*2.-1.;
-	float sphereDist = sphereSDF(p);
+	float sphereDist = sphereSDF(p, vec3(0.), 1.);
 	// if(p/
 	if(p.x < bottom){
 		return max(bottom - p.x, sphereDist);
@@ -98,6 +98,11 @@ float sphericalSliceSDF(vec3 p, float s1, float s2){
 
 }
 
+float sinusoidBumps(in vec3 p){
+
+    return sin(p.x*16.+iTime*0.57)*cos(p.y*16.+iTime*2.17)*sin(p.z*16.-iTime*1.31);// + 0.5*sin(p.x*32.+iTime*0.07)*cos(p.y*32.+iTime*2.11)*sin(p.z*32.-iTime*1.23);
+}
+
 /**
  * Signed distance function describing the scene.
  *
@@ -106,6 +111,9 @@ float sphericalSliceSDF(vec3 p, float s1, float s2){
  * negative indicating inside.
  */
 vec4 sceneSDF(vec3 samplePoint) {
+
+	// return vec4( vec3(0.8), sphereSDF(samplePoint, vec3(0., 0. , 0.), 1.) + 0.04*sinusoidBumps(samplePoint));
+
     // float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
     // float sphereCapDist = sphericalCapSDF(samplePoint / 1.2, sin(iTime)) * 1.2;
     // float cubeDist = cubeSDF(samplePoint);
@@ -114,10 +122,11 @@ vec4 sceneSDF(vec3 samplePoint) {
 	// return sphereCapDist;
 	float pc = mod(iTime/10., 1.)*4.-1.;
 	// float sliceB = sphericalSliceSDF(samplePoint, sin(iTime+PI), cos(iTime+PI));
-	float sliceA = sphericalSliceSDF(samplePoint, 1., pc-1.);
-	float sliceB = sphericalSliceSDF(samplePoint, pc-1., pc-2.);
-	float sliceC = sphericalSliceSDF(samplePoint, pc-2., pc-3.);
-	float sliceD = sphericalSliceSDF(samplePoint, pc-3., pc-4.);
+	float bumps = sinusoidBumps(samplePoint);
+	float sliceA = sphericalSliceSDF(samplePoint, 1., pc-1.)+ 0.04*bumps;
+	float sliceB = sphericalSliceSDF(samplePoint, pc-1., pc-2.)+ 0.03*bumps;
+	float sliceC = sphericalSliceSDF(samplePoint, pc-2., pc-3.)+ 0.02*bumps;
+	float sliceD = sphericalSliceSDF(samplePoint, pc-3., pc-4.)+ 0.01*bumps;
 	//yellow red dark light
 	if(sliceA < sliceB){
 		return vec4( vec3(1.,1.,0.),sliceA);
@@ -295,8 +304,8 @@ void main( )
 
 	////
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
-	vec2 pos =  iMouse/iResolution.xy;
-    vec3 eye = vec3(10.0* pos.x, 5.0*pos.y, 7.0);
+	vec2 pos =  (iMouse/iResolution.xy) - .5;
+    vec3 eye = vec3(10.0* pos.x, 5.0, 7.0*pos.y);
 
     mat4 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
 
