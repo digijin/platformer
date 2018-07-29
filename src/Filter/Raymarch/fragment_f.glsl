@@ -120,13 +120,20 @@ vec4 sceneSDF(vec3 samplePoint) {
     // return intersectSDF(cubeDist, sphereDist);
 	// return intersectSDF(sphereDist, sphereCapDist);
 	// return sphereCapDist;
-	float pc = mod(iTime/10., 1.)*4.-1.;
+	float pc = mod(iTime/4., 1.);
 	// float sliceB = sphericalSliceSDF(samplePoint, sin(iTime+PI), cos(iTime+PI));
 	float bumps = sinusoidBumps(samplePoint);
-	float sliceA = sphericalSliceSDF(samplePoint, 1., pc-1.)+ 0.04*bumps;
-	float sliceB = sphericalSliceSDF(samplePoint, pc-1., pc-2.)+ 0.03*bumps;
-	float sliceC = sphericalSliceSDF(samplePoint, pc-2., pc-3.)+ 0.02*bumps;
-	float sliceD = sphericalSliceSDF(samplePoint, pc-3., pc-4.)+ 0.01*bumps;
+	float phase = pc*4.;
+	float planeA = -1.;
+	float planeB = clamp(1. - phase, -1., 1.);
+	float planeC = clamp(2. - phase, -1., 1.);
+	float planeD = clamp(3. - phase, -1., 1.);
+	float planeE = 1.;
+
+	float sliceA = sphericalSliceSDF(samplePoint, planeA, planeB)+ 0.05*bumps;
+	float sliceB = sphericalSliceSDF(samplePoint, planeB, planeC)+ 0.05*bumps;
+	float sliceC = sphericalSliceSDF(samplePoint, planeC, planeD)+ 0.05*bumps;
+	float sliceD = sphericalSliceSDF(samplePoint, planeD, planeE)+ 0.05*bumps;
 	//yellow red dark light
 	if(sliceA < sliceB){
 		return vec4( vec3(1.,1.,0.),sliceA);
