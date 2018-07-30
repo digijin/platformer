@@ -102,8 +102,9 @@ float sphericalSliceSDF(vec3 p, float s1, float s2){
 }
 
 float sinusoidBumps(in vec3 p){
+	float f = 6.;
 
-    return sin(p.x*16.+iTime*0.57)*cos(p.y*16.+iTime*2.17)*sin(p.z*16.-iTime*1.31);// + 0.5*sin(p.x*32.+iTime*0.07)*cos(p.y*32.+iTime*2.11)*sin(p.z*32.-iTime*1.23);
+    return sin(p.x*f+iTime*0.57)*cos(p.y*f+iTime*2.17)*sin(p.z*f-iTime*1.31);// + 0.5*sin(p.x*32.+iTime*0.07)*cos(p.y*32.+iTime*2.11)*sin(p.z*32.-iTime*1.23);
 }
 
 /**
@@ -114,6 +115,13 @@ float sinusoidBumps(in vec3 p){
  * negative indicating inside.
  */
 vec4 sceneSDF(vec3 samplePoint) {
+	float bumps = sinusoidBumps(samplePoint);
+	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.) + bumps*.1;
+	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime), cos(iTime), 0.), 1.) + bumps*.1;
+	float sphereDist = min(sphere1, sphere2);
+	return vec4(vec3(1.), sphereDist);
+}
+vec4 sphericalSlicesSceneSDF(vec3 samplePoint) {
 
 	// return vec4( vec3(0.8), sphereSDF(samplePoint, vec3(0., 0. , 0.), 1.) + 0.04*sinusoidBumps(samplePoint));
 
@@ -126,6 +134,7 @@ vec4 sceneSDF(vec3 samplePoint) {
 	float pc = mod(iTime/4., 1.);
 	// float sliceB = sphericalSliceSDF(samplePoint, sin(iTime+PI), cos(iTime+PI));
 	float bumps = sinusoidBumps(samplePoint);
+
 	float phase = pc*4.;
 	float planeA = -1.;
 	float planeB = clamp(1. - phase, -1., 1.);
@@ -133,10 +142,11 @@ vec4 sceneSDF(vec3 samplePoint) {
 	float planeD = clamp(3. - phase, -1., 1.);
 	float planeE = 1.;
 
-	float sliceA = sphericalSliceSDF(samplePoint, planeA, planeB)+ 0.05*bumps;
-	float sliceB = sphericalSliceSDF(samplePoint, planeB, planeC)+ 0.05*bumps;
-	float sliceC = sphericalSliceSDF(samplePoint, planeC, planeD)+ 0.05*bumps;
-	float sliceD = sphericalSliceSDF(samplePoint, planeD, planeE)+ 0.05*bumps;
+	float amp = 0.1;
+	float sliceA = sphericalSliceSDF(samplePoint, planeA, planeB)+ amp*bumps;
+	float sliceB = sphericalSliceSDF(samplePoint, planeB, planeC)+ amp*bumps;
+	float sliceC = sphericalSliceSDF(samplePoint, planeC, planeD)+ amp*bumps;
+	float sliceD = sphericalSliceSDF(samplePoint, planeD, planeE)+ amp*bumps;
 	//yellow red dark light
 	if(sliceA < sliceB){
 		return vec4( vec3(1.,1.,0.),sliceA);
@@ -315,7 +325,7 @@ void main( )
 	////
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
 	vec2 pos =  (iMouse/iResolution.xy) - .5;
-    vec3 eye = vec3(10.0* pos.x, 5.0, 7.0*pos.y);
+    vec3 eye = vec3(10.0* sin(pos.x), 10.0*cos(pos.x), 7.0*pos.y);
 
     mat4 viewToWorld = viewMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
 
@@ -344,8 +354,18 @@ void main( )
 	vec3 normal = estimateNormal(p);
 	//translate from world to camera;
 	// normal = worldDir-normal;
-	gl_FragColor = vec4(normal, 1.0);
-	gl_FragColor = vec4(vec3(length(worldDir-normal)/2.), 1.);
+	// gl_FragColor = vec4(normal, 1.0);
+	// vec3 screenNormal = vec3(length(worldDir-normal)/2.);
+
+	// gl_FragColor = vec4(normal, 1.);
+
+	if(length(worldDir-normal)<1.8){
+		gl_FragColor = vec4(vec3(.4), 1.);
+	}else if(length(worldDir-normal)<1.999){
+		gl_FragColor = vec4(vec3(.8), 1.);
+	}else{
+		gl_FragColor = vec4(1.,0.,0., 1.);
+	}
 
     // gl_FragColor = vec4(data.rgb, 1.0);
 
