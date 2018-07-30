@@ -1,4 +1,7 @@
 
+
+//https://raw.githubusercontent.com/darrenmothersele/raymarch/master/shaders/frag.glsl
+
 precision mediump float;
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
@@ -329,17 +332,22 @@ void main( )
 
     // The closest point on the surface to the eyepoint along the view ray
     vec3 p = eye + dist * worldDir;
-
-    vec3 K_a = vec3(0.2, 0.2, 0.2);
-    vec3 K_d = vec3(0.7, 0.2, 0.2);
-    vec3 K_s = vec3(1.0, 1.0, 1.0);
-    float shininess = 10.0;
-
-    vec3 color = phongIllumination(K_a, K_d, K_s, shininess, p, eye);
-
+	//
+    // vec3 K_a = vec3(0.2, 0.2, 0.2);
+    // vec3 K_d = vec3(0.7, 0.2, 0.2);
+    // vec3 K_s = vec3(1.0, 1.0, 1.0);
+    // float shininess = 10.0;
+	//
+    // vec3 color = phongIllumination(K_a, K_d, K_s, shininess, p, eye);
+	//
     // gl_FragColor = vec4(color, 1.0);
+	vec3 normal = estimateNormal(p);
+	//translate from world to camera;
+	// normal = worldDir-normal;
+	gl_FragColor = vec4(normal, 1.0);
+	gl_FragColor = vec4(vec3(length(worldDir-normal)/2.), 1.);
 
-    gl_FragColor = vec4(data.rgb, 1.0);
+    // gl_FragColor = vec4(data.rgb, 1.0);
 
 
 }
