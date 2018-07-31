@@ -117,8 +117,14 @@ float sinusoidBumps(in vec3 p){
 vec4 sceneSDF(vec3 samplePoint) {
 	float bumps = sinusoidBumps(samplePoint);
 	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.) + bumps*.1;
-	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime), cos(iTime), 0.), 1.) + bumps*.1;
+	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.) + bumps*.1;
 	float sphereDist = min(sphere1, sphere2);
+
+	for(int i = 0; i<10; i++){
+		float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.) + bumps*.1;
+		sphereDist = min(sphereDist, sphere);
+	}
+
 	return vec4(vec3(1.), sphereDist);
 }
 vec4 sphericalSlicesSceneSDF(vec3 samplePoint) {
@@ -357,15 +363,15 @@ void main( )
 	// gl_FragColor = vec4(normal, 1.0);
 	// vec3 screenNormal = vec3(length(worldDir-normal)/2.);
 
-	// gl_FragColor = vec4(normal, 1.);
+	gl_FragColor = vec4(normal, 1.);
 
-	if(length(worldDir-normal)<1.8){
-		gl_FragColor = vec4(vec3(.4), 1.);
-	}else if(length(worldDir-normal)<1.999){
-		gl_FragColor = vec4(vec3(.8), 1.);
-	}else{
-		gl_FragColor = vec4(1.,0.,0., 1.);
-	}
+	// if(length(worldDir-normal)<1.8){
+	// 	gl_FragColor = vec4(vec3(.4), 1.);
+	// }else if(length(worldDir-normal)<1.999){
+	// 	gl_FragColor = vec4(vec3(.8), 1.);
+	// }else{
+	// 	gl_FragColor = vec4(1.,0.,0., 1.);
+	// }
 
     // gl_FragColor = vec4(data.rgb, 1.0);
 
