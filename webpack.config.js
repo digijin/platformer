@@ -46,7 +46,7 @@ module.exports = [
 				},
 				{
 					test: /\.glsl$/,
-					loader: "raw-loader"
+					loader: "raw-loader!glslify-loader"
 				},
 				{
 					test: /\.html$/,
