@@ -1,11 +1,12 @@
 import * as PIXI from "pixi.js";
 import fragment from "./fragment_f.glsl";
 
-import glsl from "glslify";
+// import glsl from "glslify";
 
 // console.log(glsl);
 // let src = glsl(fragment);
 // console.log(src);
+// console.log(fragment);
 
 // import texture from "./texture.png";
 import texture from "assets/mech.png";
@@ -41,7 +42,7 @@ uniforms.iChannel0 = {
 // };
 export default class MenuBackgroundFilter extends PIXI.Filter {
 	constructor() {
-		super("", glsl(fragment), uniforms);
+		super("", fragment, uniforms);
 	}
 
 	get time() {
