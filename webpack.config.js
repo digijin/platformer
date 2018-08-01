@@ -1,4 +1,4 @@
-var webpack = require("webpack");
+// var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 var path = require("path");
