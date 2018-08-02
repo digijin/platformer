@@ -4105,6 +4105,14 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
+glsl-combine-chamfer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/glsl-combine-chamfer/-/glsl-combine-chamfer-1.0.0.tgz#e9b8355da2edae623b96b85a9f0de4034e656766"
+
+glsl-easings@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/glsl-easings/-/glsl-easings-1.0.0.tgz#d4f7b499915e922921f4f03d0f8089724bdf5b8e"
+
 glsl-inject-defines@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/glsl-inject-defines/-/glsl-inject-defines-1.0.3.tgz#dd1aacc2c17fcb2bd3fc32411c6633d0d7b60fd4"
@@ -4131,6 +4139,10 @@ glsl-smooth-min@^1.0.0:
 glsl-specular-beckmann@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/glsl-specular-beckmann/-/glsl-specular-beckmann-1.1.2.tgz#fce9056933ecdf2456278376a54d082893e775f1"
+
+glsl-specular-blinn-phong@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/glsl-specular-blinn-phong/-/glsl-specular-blinn-phong-1.0.2.tgz#49cd056d9a76f042efce94c1bca3f38e5e4ccd27"
 
 glsl-specular-cook-torrance@^2.0.1:
   version "2.0.1"

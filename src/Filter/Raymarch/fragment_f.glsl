@@ -3,13 +3,17 @@
 //https://raw.githubusercontent.com/darrenmothersele/raymarch/master/shaders/frag.glsl
 
 #pragma glslify: smin = require(glsl-smooth-min)
+#pragma glslify: combineChamfer = require(glsl-combine-chamfer)
 #pragma glslify: noise = require(glsl-noise/simplex/2d)
 #pragma glslify: unionSDF = require(../utility/unionSDF.glsl)
 #pragma glslify: sphereSDF = require(../utility/sphereSDF_f.glsl)
 #pragma glslify: sinusoidBumps = require(../utility/sinusoidBumps_f.glsl)
 #pragma glslify: lookAtMatrix = require(../utility/lookAtMatrix_f.glsl)
 #pragma glslify: rayDirection = require(../utility/rayDirection_f.glsl)
-#pragma glslify: light = require(glsl-specular-phong)
+#pragma glslify: light = require(glsl-specular-blinn-phong)
+#pragma glslify: snoise3 = require(glsl-noise/simplex/3d)
+#pragma glslify: snoise4 = require(glsl-noise/simplex/4d)
+
 
 precision mediump float;
 varying vec2 vTextureCoord;
@@ -38,12 +42,11 @@ const float EPSILON = 0.0001;
  * negative indicating inside.
  */
 float sceneSDF(vec3 samplePoint) {
-	float bumps = sinusoidBumps(samplePoint, iTime);
-	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.) + bumps*.1;
-	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.) + bumps*.1;
-	// float sphereDist = min(sphere1, sphere2);
-	float sphereDist = smin(sphere1, sphere2, 0.8);
-	// float sphereDist = unionSDF(sphere1, sphere2);
+
+	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
+	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.+cos(iTime*2.8)/4.);
+
+	float sphereDist = combineChamfer(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
 
 	// for(int i = 0; i<10; i++){
 	// 	float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.) + bumps*.1;
@@ -62,15 +65,11 @@ void main( )
 {
 
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
-	vec2 pos =  (iMouse/iResolution.xy) - .5;
-    vec3 eye = vec3(10.0* sin(pos.x), 10.0*cos(pos.x), 7.0*pos.y);
-
+	vec2 pos =  ((iMouse/iResolution.xy) - .5)*4.;
+    vec3 eye = vec3(10.0* sin(pos.x), 10.0*cos(pos.x), 7.0);
     mat4 viewToWorld = lookAtMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
-
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
-
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
-
     if (dist > MAX_DIST - EPSILON) {
         // Didn't hit anything
         gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
@@ -107,7 +106,7 @@ void main( )
 	// }
 
 	float power = light(
-		normalize(vec3(100.)-p),
+		normalize(vec3(-100.)-p),
 		normalize(worldDir),
 		normal,
 		0.5
