@@ -4128,6 +4128,20 @@ glsl-smooth-min@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/glsl-smooth-min/-/glsl-smooth-min-1.0.0.tgz#93f00a06675be789933676e9210cd597ad5b1c57"
 
+glsl-specular-beckmann@^1.1.1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/glsl-specular-beckmann/-/glsl-specular-beckmann-1.1.2.tgz#fce9056933ecdf2456278376a54d082893e775f1"
+
+glsl-specular-cook-torrance@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/glsl-specular-cook-torrance/-/glsl-specular-cook-torrance-2.0.1.tgz#a891cc06c8c7b4f4728702b4824fdacbb967d78f"
+  dependencies:
+    glsl-specular-beckmann "^1.1.1"
+
+glsl-specular-phong@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/glsl-specular-phong/-/glsl-specular-phong-1.0.0.tgz#a0450808e4629ee64ccb460b7ee0425a97bf6204"
+
 glsl-token-assignments@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/glsl-token-assignments/-/glsl-token-assignments-2.0.2.tgz#a5d82ab78499c2e8a6b83cb69495e6e665ce019f"

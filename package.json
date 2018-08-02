@@ -86,6 +86,8 @@
 		"glob": "~4.5.3",
 		"glsl-noise": "^0.0.0",
 		"glsl-smooth-min": "^1.0.0",
+		"glsl-specular-cook-torrance": "^2.0.1",
+		"glsl-specular-phong": "^1.0.0",
 		"glslify": "^6.2.1",
 		"glslify-loader": "^1.0.2",
 		"html-loader": "^0.4.3",

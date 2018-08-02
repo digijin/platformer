@@ -9,6 +9,7 @@
 #pragma glslify: sinusoidBumps = require(../utility/sinusoidBumps_f.glsl)
 #pragma glslify: lookAtMatrix = require(../utility/lookAtMatrix_f.glsl)
 #pragma glslify: rayDirection = require(../utility/rayDirection_f.glsl)
+#pragma glslify: light = require(glsl-specular-phong)
 
 precision mediump float;
 varying vec2 vTextureCoord;
@@ -52,122 +53,8 @@ float sceneSDF(vec3 samplePoint) {
 	return sphereDist;
 }
 
-
-/**
- * Return the shortest distance from the eyepoint to the scene surface along
- * the marching direction. If no part of the surface is found between start and end,
- * return end.
- *
- * eye: the eye point, acting as the origin of the ray
- * marchingDirection: the normalized direction to march in
- * start: the starting distance away from the eye
- * end: the max distance away from the ey to march before giving up
- */
-float shortestDistanceToSurface(vec3 eye, vec3 marchingDirection, float start, float end) {
-    float depth = start;
-    for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-		float dist = sceneSDF(eye + depth * marchingDirection);
-
-        if (dist < EPSILON) {
-			return depth;
-        }
-        depth += dist;
-        if (depth >= end) {
-			return end;
-        }
-    }
-    return end;
-}
-
-
-
-
-/**
- * Using the gradient of the SDF, estimate the normal on the surface at point p.
- */
-vec3 estimateNormal(vec3 p) {
-    return normalize(vec3(
-        sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
-        sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
-        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
-    ));
-}
-
-// /**
-//  * Lighting contribution of a single point light source via Phong illumination.
-//  *
-//  * The vec3 returned is the RGB color of the light's contribution.
-//  *
-//  * k_a: Ambient color
-//  * k_d: Diffuse color
-//  * k_s: Specular color
-//  * alpha: Shininess coefficient
-//  * p: position of point being lit
-//  * eye: the position of the camera
-//  * lightPos: the position of the light
-//  * lightIntensity: color/intensity of the light
-//  *
-//  * See https://en.wikipedia.org/wiki/Phong_reflection_model#Description
-//  */
-// vec3 phongContribForLight(vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye,
-//                           vec3 lightPos, vec3 lightIntensity) {
-//     vec3 N = estimateNormal(p);
-//     vec3 L = normalize(lightPos - p);
-//     vec3 V = normalize(eye - p);
-//     vec3 R = normalize(reflect(-L, N));
-//
-//     float dotLN = dot(L, N);
-//     float dotRV = dot(R, V);
-//
-//     if (dotLN < 0.0) {
-//         // Light not visible from this point on the surface
-//         return vec3(0.0, 0.0, 0.0);
-//     }
-//
-//     if (dotRV < 0.0) {
-//         // Light reflection in opposite direction as viewer, apply only diffuse
-//         // component
-//         return lightIntensity * (k_d * dotLN);
-//     }
-//     return lightIntensity * (k_d * dotLN + k_s * pow(dotRV, alpha));
-// }
-//
-// /**
-//  * Lighting via Phong illumination.
-//  *
-//  * The vec3 returned is the RGB color of that point after lighting is applied.
-//  * k_a: Ambient color
-//  * k_d: Diffuse color
-//  * k_s: Specular color
-//  * alpha: Shininess coefficient
-//  * p: position of point being lit
-//  * eye: the position of the camera
-//  *
-//  * See https://en.wikipedia.org/wiki/Phong_reflection_model#Description
-//  */
-// vec3 phongIllumination(vec3 k_a, vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye) {
-//     const vec3 ambientLight = 0.5 * vec3(1.0, 1.0, 1.0);
-//     vec3 color = ambientLight * k_a;
-//
-//     vec3 light1Pos = vec3(4.0 * sin(iTime),
-//                           2.0,
-//                           4.0 * cos(iTime));
-//     vec3 light1Intensity = vec3(0.4, 0.4, 0.4);
-//
-//     color += phongContribForLight(k_d, k_s, alpha, p, eye,
-//                                   light1Pos,
-//                                   light1Intensity);
-//
-//     vec3 light2Pos = vec3(2.0 * sin(0.37 * iTime),
-//                           2.0 * cos(0.37 * iTime),
-//                           2.0);
-//     vec3 light2Intensity = vec3(0.4, 0.4, 0.4);
-//
-//     color += phongContribForLight(k_d, k_s, alpha, p, eye,
-//                                   light2Pos,
-//                                   light2Intensity);
-//     return color;
-// }
+#pragma glslify: shortestDistanceToSurface = require(../utility/Raymarch_f.glsl,sceneSDF=sceneSDF)
+#pragma glslify: estimateNormal = require(../utility/estimateNormal_f.glsl,sceneSDF=sceneSDF)
 
 
 
@@ -209,15 +96,23 @@ void main( )
 
 	// gl_FragColor = vec4(normal, 1.);
 
-	float a = 1.8;
-	float b = 1.99;
-	if(length(worldDir-normal)<a){
-		gl_FragColor = vec4(vec3(.4), 1.);
-	}else if(length(worldDir-normal)<b){
-		gl_FragColor = vec4(vec3(.8), 1.);
-	}else{
-		gl_FragColor = vec4(1.,0.,0., 1.);
-	}
+	// float a = 1.8;
+	// float b = 1.99;
+	// if(length(worldDir-normal)<a){
+	// 	gl_FragColor = vec4(vec3(.4), 1.);
+	// }else if(length(worldDir-normal)<b){
+	// 	gl_FragColor = vec4(vec3(.8), 1.);
+	// }else{
+	// 	gl_FragColor = vec4(1.,0.,0., 1.);
+	// }
+
+	float power = light(
+		normalize(vec3(100.)-p),
+		normalize(worldDir),
+		normal,
+		0.5
+		);
+	gl_FragColor = vec4(vec3(power), 1.);
 
     // gl_FragColor = vec4(data.rgb, 1.0);
 
