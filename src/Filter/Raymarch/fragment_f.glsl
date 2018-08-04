@@ -44,13 +44,13 @@ const float PHI = 137.5 * PI / 180.;
  * negative indicating inside.
  */
 float sceneSDF(vec3 samplePoint) {
-
-	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
+	float sphereDist = MAX_DIST;
+	// float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
 	// float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.+cos(iTime*2.8)/4.);
 
 	// float sphereDist = smin(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
 
-	float sphereDist = sphere1;
+	// float sphereDist = sphere1;
 
 	for(int i = 0; i<20; i++){
 		float angle = PHI * float(i);
@@ -59,7 +59,7 @@ float sceneSDF(vec3 samplePoint) {
 		vec3 pos = vec3(sin(angle), cos(angle), 0.)*float(i)/4.;
 		float size = 1. + float(i)/10.;
 		// size *= fract(iTime/10.);
-		size *= ease(smoothstep((float(i)-5.)/20., (float(i)+1.)/20., fract(iTime/4.)));
+		size *= ease(smoothstep((float(i))/40., 1., fract(iTime/4.)));
 		float sphere = sphereSDF(samplePoint, pos, size);
 		sphereDist = smin(sphereDist, sphere, 0.2);
 	}
