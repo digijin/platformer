@@ -46,12 +46,12 @@ float sceneSDF(vec3 samplePoint) {
 	float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
 	float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.+cos(iTime*2.8)/4.);
 
-	float sphereDist = combineChamfer(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
+	float sphereDist = smin(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
 
-	// for(int i = 0; i<10; i++){
-	// 	float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.) + bumps*.1;
-	// 	sphereDist = min(sphereDist, sphere);
-	// }
+	for(int i = 0; i<10; i++){
+		float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.);// + bumps*.1;
+		sphereDist = smin(sphereDist, sphere, 0.5);
+	}
 
 	return sphereDist;
 }
