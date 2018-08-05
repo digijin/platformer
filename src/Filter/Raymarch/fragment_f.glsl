@@ -52,19 +52,21 @@ float sceneSDF(vec3 samplePoint) {
 
 	// float sphereDist = sphere1;
 
-	for(int i = 0; i<20; i++){
+	for(int i = 0; i<10; i++){
 		float angle = PHI * float(i);
 
 		// float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.);// + bumps*.1;
 		vec3 pos = vec3(sin(angle), cos(angle), 0.)*float(i)/4.;
 		float size = 1. + float(i)/10.;
 		// size *= fract(iTime/10.);
-		size *= ease(smoothstep((float(i))/40., 1., fract(iTime/4.)));
+		float pc = ease(smoothstep((float(i))/40., 1., fract(iTime/4.)*2.) *3.);
+		size *= pc;
+		pos *=pc;
 		float sphere = sphereSDF(samplePoint, pos, size);
 		sphereDist = smin(sphereDist, sphere, 0.2);
 	}
 
-	return sphereDist+  0.1*snoise3(samplePoint);
+	return sphereDist+  0.1*snoise3(samplePoint+vec3(0., iTime/2., 0.));
 }
 
 #pragma glslify: shortestDistanceToSurface = require(../utility/Raymarch_f.glsl,sceneSDF=sceneSDF)
@@ -77,7 +79,7 @@ void main( )
 
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
 	vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
-    vec3 eye = vec3(10.0* sin(pos.x), 10.0*cos(pos.x), 20.0);
+    vec3 eye = vec3(40.0* sin(pos.x), 0.0, 40.0*cos(pos.x));
     mat4 viewToWorld = lookAtMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
@@ -112,6 +114,7 @@ void main( )
 		gl_FragColor = vec4(vec3(.4), 1.);
 	}else if(length(worldDir-normal)<b){
 		gl_FragColor = vec4(vec3(.8), 1.);
+		// gl_FragColor = smoothste
 	}else{
 		gl_FragColor = vec4(1.,0.,0., 1.);
 	}
