@@ -8,6 +8,7 @@
 #pragma glslify: noise = require(glsl-noise/simplex/2d)
 #pragma glslify: unionSDF = require(../utility/unionSDF.glsl)
 #pragma glslify: sphereSDF = require(../utility/sphereSDF_f.glsl)
+#pragma glslify: boxSDF = require(../utility/sdBox_f.glsl)
 #pragma glslify: sinusoidBumps = require(../utility/sinusoidBumps_f.glsl)
 #pragma glslify: lookAtMatrix = require(../utility/lookAtMatrix_f.glsl)
 #pragma glslify: rayDirection = require(../utility/rayDirection_f.glsl)
@@ -81,53 +82,17 @@ mat3 rotAxis(vec3 axis, float a) {
  * Sign indicates whether the point is inside or outside the surface,
  * negative indicating inside.
  */
-const int NUM_SPHERES = 10;
-const int NUM_FRAGS = 6;
 float sceneSDF(vec3 samplePoint) {
-	float sphereDist = MAX_DIST;
-	// float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
-	// float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.+cos(iTime*2.8)/4.);
 
-	// float sphereDist = smin(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
-	mat3 rot = rotAxis(normalize(vec3(1.,1.6,0.)), iTime);
-	// float sphereDist = sphere1;
-	// sphereDist = sdCone((samplePoint+ vec3(0.,0.,2.))*rot, vec3(1.,1.,1.));
-	//+ vec3(0.,0.,0.)
-	float pc = fract(iTime/4.);
+	float blockwidth = 3.;
+	vec3 block = floor(samplePoint/blockwidth);
+	samplePoint.x = mod(samplePoint.x, blockwidth) - blockwidth/2.;
+	samplePoint.z = mod(samplePoint.z, blockwidth) - blockwidth/2.;
+	// float sphere = sphereSDF(samplePoint, vec3(0.), 1.4);
+	float box = boxSDF(samplePoint, vec3(1., 1., 1.));
+	return box;
+	//max(-sphere, box);
 
-	for(int i = 0; i<NUM_FRAGS; i++){
-		float angle = PHI * float(i+1);
-		vec3 pos = vec3(sin(angle),sin(float(i)), cos(angle))*(6.+float(i)/2.);
-
-		float off = float(i)/20.;
-		vec3 start = pos * ease(smoothstep(.3,1.,pc));
-		vec3 end = pos * ease(smoothstep(.1,.8,pc));
-		vec3 point = samplePoint;
-		point.y = point.y + point.x*point.x/10.;
-		point.y = point.y + point.z*point.z/10.;
-		float frag = sdCapsule(point, end, start, sin(pc*PI)*.2);
-		sphereDist = min(sphereDist, frag);
-
-	}
-	for(int i = 0; i<NUM_SPHERES; i++){
-		float angle = PHI * float(i);
-
-		// float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.);// + bumps*.1;
-		vec3 pos = vec3(sin(angle), cos(angle), 0.)*float(i)/4.;
-		float size = 1. + float(i)/10.;
-		// size *= fract(iTime/10.);
-		float phase = ease(smoothstep(float(i)/40., 1., pc*2.));
-		float outphase = ease(smoothstep(float(i)/10., 2., pc*2.));
-		// size *= phase;
-		// pos *=phase;
-		float sphere = sphereSDF(samplePoint, pos*phase, size*phase);
-		float outsphere = sphereSDF(samplePoint, pos*outphase, size*outphase*1.2);
-		// sphere = min(sphere,outsphere);
-		sphere = max(sphere,-outsphere);
-		sphereDist = min(sphereDist, sphere);
-	}
-
-	return sphereDist+  0.1*snoise3(samplePoint+vec3(0., iTime/2., 0.));
 }
 
 #pragma glslify: shortestDistanceToSurface = require(../utility/Raymarch_f.glsl,sceneSDF=sceneSDF)
@@ -140,7 +105,7 @@ void main( )
 
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
 	vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
-    vec3 eye = vec3(40.0* sin(pos.x), pos.y, 40.0*cos(pos.x));
+    vec3 eye = vec3(40.0* sin(pos.x), 40.*sin(pos.y), 40.0*cos(pos.x));
     mat4 viewToWorld = lookAtMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
@@ -155,25 +120,23 @@ void main( )
 
 	vec3 normal = estimateNormal(p);
 
+	// float a = 1.8;
+	// float b = 1.99;
+	// if(length(worldDir-normal)<a){
+	// 	gl_FragColor = vec4(vec3(.4), 1.);
+	// }else if(length(worldDir-normal)<b){
+	// 	gl_FragColor = vec4(vec3(.8), 1.);
+	// }else{
+	// 	gl_FragColor = vec4(1.,0.,0., 1.);
+	// }
 
-	float a = 1.8;
-	float b = 1.99;
-	if(length(worldDir-normal)<a){
-		gl_FragColor = vec4(vec3(.4), 1.);
-	}else if(length(worldDir-normal)<b){
-		gl_FragColor = vec4(vec3(.8), 1.);
-		// gl_FragColor = smoothste
-	}else{
-		gl_FragColor = vec4(1.,0.,0., 1.);
-	}
-
-	// float power = light(
-	// 	normalize(vec3(10., 10., 100.)-p),
-	// 	normalize(worldDir),
-	// 	normal,
-	// 	0.5
-	// 	);
-	// gl_FragColor = vec4(vec3(power), 1.);
+	float power = light(
+		normalize(vec3(10., 10., 100.)-p),
+		normalize(worldDir),
+		normal,
+		0.5
+		);
+	gl_FragColor = vec4(vec3(power), 1.);
 
     // gl_FragColor = vec4(data.rgb, 1.0);
 
