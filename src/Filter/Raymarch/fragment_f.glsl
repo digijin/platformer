@@ -82,6 +82,7 @@ mat3 rotAxis(vec3 axis, float a) {
  * negative indicating inside.
  */
 const int NUM_SPHERES = 10;
+const int NUM_FRAGS = 6;
 float sceneSDF(vec3 samplePoint) {
 	float sphereDist = MAX_DIST;
 	// float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
@@ -93,11 +94,21 @@ float sceneSDF(vec3 samplePoint) {
 	// sphereDist = sdCone((samplePoint+ vec3(0.,0.,2.))*rot, vec3(1.,1.,1.));
 	//+ vec3(0.,0.,0.)
 	float pc = fract(iTime/4.);
-	vec3 start = vec3(4.) * ease(smoothstep(.3,1.,pc));
-	vec3 end = vec3(4.) * ease(smoothstep(.1,.8,pc));
-	sphereDist = sdCapsule(samplePoint, end, start, sin(pc*PI)*.2);
 
+	for(int i = 0; i<NUM_FRAGS; i++){
+		float angle = PHI * float(i+1);
+		vec3 pos = vec3(sin(angle),sin(float(i)), cos(angle))*(6.+float(i)/2.);
 
+		float off = float(i)/20.;
+		vec3 start = pos * ease(smoothstep(.3,1.,pc));
+		vec3 end = pos * ease(smoothstep(.1,.8,pc));
+		vec3 point = samplePoint;
+		point.y = point.y + point.x*point.x/10.;
+		point.y = point.y + point.z*point.z/10.;
+		float frag = sdCapsule(point, end, start, sin(pc*PI)*.2);
+		sphereDist = min(sphereDist, frag);
+
+	}
 	for(int i = 0; i<NUM_SPHERES; i++){
 		float angle = PHI * float(i);
 
@@ -110,7 +121,7 @@ float sceneSDF(vec3 samplePoint) {
 		// size *= phase;
 		// pos *=phase;
 		float sphere = sphereSDF(samplePoint, pos*phase, size*phase);
-		float outsphere = sphereSDF(samplePoint, pos*outphase, size*outphase*1.1);
+		float outsphere = sphereSDF(samplePoint, pos*outphase, size*outphase*1.2);
 		// sphere = min(sphere,outsphere);
 		sphere = max(sphere,-outsphere);
 		sphereDist = min(sphereDist, sphere);
