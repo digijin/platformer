@@ -59,6 +59,8 @@ export default {
 			d: 68,
 			w: 87,
 			s: 83,
+			r: 82,
+			f: 70,
 			left: 37,
 			up: 38,
 			right: 39,
@@ -95,6 +97,13 @@ export default {
 				{
 					type: "gamepad",
 					axis: 1
+				}
+			],
+			ascent: [
+				{
+					type: "keyboard",
+					positive: "r",
+					negative: "f"
 				}
 			],
 			wheel: [

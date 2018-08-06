@@ -29,6 +29,14 @@ uniforms.iChannel0 = {
 	type: "sampler2D",
 	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
 };
+uniforms.iPosition = {
+	type: "v3",
+	value: [0, 0, 0]
+};
+uniforms.iRotation = {
+	type: "v3",
+	value: [0, 0, 0]
+};
 // uniforms.iChannel0 = {
 // 	type: "sampler2D",
 // 	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
@@ -55,5 +63,13 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 
 	set mouse(point: { x: number, y: number }) {
 		this.uniforms.iMouse = [point.x, point.y];
+	}
+
+	set position(point: { x: number, y: number, z: number }) {
+		this.uniforms.iPosition = [point.x, point.y, point.z];
+	}
+
+	set rotation(point: { x: number, y: number, z: number }) {
+		this.uniforms.iRotation = [point.x, point.y, point.z];
 	}
 }
