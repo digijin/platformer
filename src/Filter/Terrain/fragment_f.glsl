@@ -76,7 +76,7 @@ void main( )
     // vec3 eye = vec3(40.0* sin(pos.x), 40.*sin(pos.y), 40.0*cos(pos.x)) + iPosition;
 	// vec3 eye = iPosition * 40.;
 	// eye.x += iTime*10.;
-    mat4 viewToWorld = lookAtMatrix(eye, eye+ vec3(1., 0.,0.), vec3(0.0, 1.0, 0.0));
+    mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     float dist = raymarch(eye, worldDir, MIN_DIST, MAX_DIST, DELTA_DIST);
     if (dist > MAX_DIST - EPSILON) {

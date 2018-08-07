@@ -4,10 +4,26 @@ export default class FilterUpdater extends GameObject {
 		super();
 		this.filter = filter;
 		this.position = { x: 0, y: 0, z: 0 };
-		this.rotation = { x: 0, y: 0, z: 0 };
+		this.rotation = { x: 1, y: 0, z: 0 };
 	}
 
 	update() {
+		let mp = this.engine.input.mouse.position;
+		// console.log(mp);
+		if (this.engine.input.getButtonDown("fire")) {
+			//update rotation
+			this.lastMouse = mp;
+		}
+		if (this.engine.input.getButton("fire")) {
+			//update rotation
+			let diff = mp.subtract(this.lastMouse);
+			// console.log(diff);
+			this.rotation.x += diff.x;
+			this.rotation.z += diff.y;
+
+			this.lastMouse = mp;
+		}
+
 		this.position.x +=
 			-this.engine.input.getAxis("vertical") * this.engine.deltaTime;
 		this.position.y +=
