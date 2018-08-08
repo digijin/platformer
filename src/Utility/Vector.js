@@ -7,6 +7,35 @@ function Vector(x, y, z) {
 }
 
 Vector.prototype = {
+	rotateAround: function(axis, angle) {
+		axis = axis.unit();
+		const s = Math.sin(angle);
+		const c = Math.cos(angle);
+		const oc = 1 - c;
+
+		const mat = [
+			[
+				oc * axis.x * axis.x + c,
+				oc * axis.x * axis.y - axis.z * s,
+				oc * axis.z * axis.x + axis.y * s
+			],
+			[
+				oc * axis.x * axis.y + axis.z * s,
+				oc * axis.y * axis.y + c,
+				oc * axis.y * axis.z - axis.x * s
+			],
+			[
+				oc * axis.z * axis.x - axis.y * s,
+				oc * axis.y * axis.z + axis.x * s,
+				oc * axis.z * axis.z + c
+			]
+		];
+		return new Vector(
+			this.x * mat[0][0] + this.y * mat[0][1] + this.z * mat[0][2],
+			this.x * mat[1][0] + this.y * mat[1][1] + this.z * mat[1][2],
+			this.x * mat[2][0] + this.y * mat[2][1] + this.z * mat[2][2]
+		);
+	},
 	negative: function() {
 		return new Vector(-this.x, -this.y, -this.z);
 	},

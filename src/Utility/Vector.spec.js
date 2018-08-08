@@ -22,4 +22,16 @@ describe("Utility/Vector", () => {
 			expect(cross.z).toBe(1);
 		});
 	});
+
+	describe("rotateAround", () => {
+		it("up axis", () => {
+			const vec = new Vector(1, 2, 0).rotateAround(
+				new Vector(0, 1, 0),
+				Math.PI / 2
+			);
+			expect(vec.y).toBe(2);
+			expect(vec.z).toBe(-1);
+			expect(vec.x).toBeLessThan(0.01);
+		});
+	});
 });

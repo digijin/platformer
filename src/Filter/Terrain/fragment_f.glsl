@@ -44,7 +44,7 @@ const float PHI = 137.5 * PI / 180.;
 
 float terrainHeight(vec2 coord){
 	// return sin(coord.x)*sin(coord.y);
-	return snoise3(vec3(coord/5., iTime/100.));
+	return abs(snoise3(vec3(coord/8., iTime/50.)))*2.;
 }
 vec3 getNormal( vec3 p )
 {
@@ -101,8 +101,10 @@ void main( )
 	// 	gl_FragColor = vec4(1.,0.,0., 1.);
 	// }
 
+	vec3 lightpos = vec3(10., 10., 10.) + eye;
+
 	float power = light(
-		normalize(vec3(10., 10., 100.)-p),
+		normalize(lightpos-p),
 		normalize(worldDir),
 		normal,
 		0.5
