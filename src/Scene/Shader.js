@@ -5,6 +5,7 @@ import * as PIXI from "pixi.js";
 
 import Filter from "Filter/Terrain/Filter";
 import FilterUpdater from "Filter/Updater";
+import AntiAlias from "Filter/Antialias/Filter";
 
 export default class Shader extends Base {
 	start(engine: Engine) {
@@ -14,7 +15,8 @@ export default class Shader extends Base {
 		sprite.width = window.innerWidth;
 		sprite.height = window.innerHeight;
 		let filter = new Filter();
-		sprite.filters = [filter];
+		let aaFilter = new AntiAlias();
+		sprite.filters = [filter, aaFilter];
 		this.engine.stage.addChild(sprite);
 		this.engine.register(new FilterUpdater(filter));
 	}

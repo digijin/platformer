@@ -34,7 +34,7 @@ uniform vec4 filterArea;
 
 const int MAX_MARCHING_STEPS = 1023;
 const float MIN_DIST = 0.0;
-const float MAX_DIST = 100.0;
+const float MAX_DIST = 1000.0;
 const float DELTA_DIST = 0.01;
 const float EPSILON = 0.0001;
 
@@ -44,7 +44,7 @@ const float PHI = 137.5 * PI / 180.;
 
 float terrainHeight(vec2 coord){
 	// return sin(coord.x)*sin(coord.y);
-	return abs(snoise3(vec3(coord/8., iTime/50.)))*2.;
+	return -abs(snoise3(vec3(coord/8., iTime/50.)))*2.;
 }
 vec3 getNormal( vec3 p )
 {
@@ -71,7 +71,7 @@ void main( )
 {
 
 	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
-	vec3 eye = vec3(40., 3., 20.) + iPosition*10.;
+	vec3 eye = vec3(40., 3., 20.) + iPosition*100.;
 	// vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
     // vec3 eye = vec3(40.0* sin(pos.x), 40.*sin(pos.y), 40.0*cos(pos.x)) + iPosition;
 	// vec3 eye = iPosition * 40.;
