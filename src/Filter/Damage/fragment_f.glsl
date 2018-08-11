@@ -13,13 +13,31 @@ uniform vec4 filterArea;
 
 void main( )
 {
+	float pc = fract(-iTime/2.);
+	vec2 pixelCoord = vTextureCoord * filterArea.xy;
 	vec2 coord = vTextureCoord;
 	// coord.x += iTime;
-	float noise = snoise3(vec3(coord*4., iTime/6.))/2.;
-	noise += snoise3(vec3(coord*8., iTime/6.))/4.;
-	noise += snoise3(vec3(coord*16., iTime/6.))/8.;
-	noise += snoise3(vec3(coord*32., iTime/6.))/16.;
+	float noise = snoise2(coord*4.)/2.;
+	noise += snoise2(coord*8.)/4.;
+	noise += snoise2(coord*16.)/8.;
+	noise += snoise2(coord*32.)/16.;
 	noise = abs(noise);
+	noise = 1.-noise;
+	noise *= noise*noise;
+	
+	noise = 1.0-noise*(1.-pc);
+
+
+	vec2 centerOffset = (pixelCoord/iResolution)-.5;
+	// if(length(centerOffset)< fract(iTime)){
+	// 	noise = 1.;
+	// }
+	// noise *= length(centerOffset);
+	// noise = max(smoothstep(length(centerOffset)-.5, length(centerOffset) +0.1,  fract(-iTime/8.)), noise);
+	float str = clamp(pc - length(centerOffset),0.,1.);
+	str = smoothstep(0.3, 0.6, str);
+	// noise = noise*str;
+	noise = mix(noise, 1., str);
 	gl_FragColor = vec4(vec3(noise), 1.);
 
 
