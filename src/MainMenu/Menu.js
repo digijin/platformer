@@ -62,7 +62,7 @@ export default class MainMenu extends GameObject {
 			<EngineProvider engine={this.engine}>
 				<Container>
 					<Text
-						text="shadowmech"
+						text="ghost claw"
 						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
