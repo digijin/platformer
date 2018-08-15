@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 
-import Filter from "Filter/Damage/Filter";
+import Filter from "Filter/Buildings/Filter";
 import FilterUpdater from "Filter/Updater";
 import AntiAlias from "Filter/Antialias/Filter";
 
@@ -16,7 +16,7 @@ export default class Shader extends Base {
 		sprite.height = window.innerHeight;
 		let filter = new Filter();
 		let aaFilter = new AntiAlias();
-		sprite.filters = [filter, aaFilter];
+		sprite.filters = [filter];
 		this.engine.stage.addChild(sprite);
 		this.engine.register(new FilterUpdater(filter));
 	}

@@ -9,7 +9,7 @@ export default class FilterUpdater extends GameObject {
 		this.filter = filter;
 		// this.position = { x: 0, y: 0, z: 0 };
 		// this.rotation = { x: 1, y: 0, z: 0 };
-		this.position = new Vector(0, 0, 0);
+		this.position = new Vector(-4, 0, 0);
 		this.rotation = new Vector(1, 0, 0);
 	}
 
@@ -52,6 +52,7 @@ export default class FilterUpdater extends GameObject {
 					this.engine.input.getAxis("ascent") * this.engine.deltaTime
 				)
 			);
+		// console.log(this.position);
 		this.filter.time += this.engine.deltaTime;
 		this.filter.mouse = this.engine.mouse.position;
 		this.filter.position = this.position;
