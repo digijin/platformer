@@ -1,4 +1,4 @@
-import Enemy from "Actor/Enemy";
+import Enemy from "Level/Actor/Enemy";
 
 import Point from "Utility/Point";
 import Base from "./Base";

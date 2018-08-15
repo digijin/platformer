@@ -1,7 +1,7 @@
 //@flow
 
-import type Player from "Actor/Player";
-import type Enemy from "Actor/Enemy";
+import type Player from "Level/Actor/Player";
+import type Enemy from "Level/Actor/Enemy";
 import type Engine from "Engine";
 import Missile from "GameObject/Missile";
 import Rect from "Utility/Rect";

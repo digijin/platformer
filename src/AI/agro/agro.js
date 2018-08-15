@@ -1,4 +1,4 @@
-import type Player from "Actor/Player";
+import type Player from "Level/Actor/Player";
 import Missile from "GameObject/Missile";
 const CLOSEST_DISTANCE = 100;
 const FARTHEST_DISTANCE = 400;

@@ -1,10 +1,10 @@
 //@flow
 
-import { EnemyTypesMap } from "Actor/Enemy/Type";
+import { EnemyTypesMap } from "Level/Actor/Enemy/Type";
 import { Noise } from "noisejs";
 import Block from "Level/Grid/Block";
 import config from "config";
-import Enemy from "Actor/Enemy";
+import Enemy from "Level/Actor/Enemy";
 import GameObject from "GameObject";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";

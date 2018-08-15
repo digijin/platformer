@@ -1,4 +1,4 @@
-import Actor from "Actor";
+import Actor from "Level/Actor";
 import Point from "Utility/Point";
 import Grid from "Grid";
 import config from "config";
@@ -7,7 +7,7 @@ if (window.jest) {
 	jest.mock("pixi.js");
 }
 
-describe("Actor", () => {
+describe("Level/Actor", () => {
 	let actor: Actor;
 	let grid: Grid;
 	beforeEach(() => {

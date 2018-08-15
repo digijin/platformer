@@ -9,8 +9,8 @@ import RGBA from "Utility/RGBA";
 
 import type Block from "Level/Grid/Block";
 
-import type EnemyType from "Actor/Enemy/Type";
-import Enemy from "Actor/Enemy";
+import type EnemyType from "Level/Actor/Enemy/Type";
+import Enemy from "Level/Actor/Enemy";
 import { log } from "util";
 
 import * as PIXI from "pixi.js";

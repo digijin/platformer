@@ -1,5 +1,5 @@
 import GameObject from "GameObject";
-import Player from "Actor/Player";
+import Player from "Level/Actor/Player";
 import Point from "Utility/Point";
 import EnergyBar from "../GameObject/EnergyBar";
 

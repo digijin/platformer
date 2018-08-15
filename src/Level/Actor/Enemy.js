@@ -5,9 +5,9 @@ import type Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import mech from "assets/mech.png";
 
-import Actor from "Actor";
+import Actor from "Level/Actor";
 import config from "config";
-import type Player from "Actor/Player";
+import type Player from "Level/Actor/Player";
 
 import bounce from "AI/idle/bounce";
 import patrol from "AI/idle/patrol";
@@ -16,7 +16,7 @@ import hover from "AI/idle/hover";
 import agro from "AI/agro/agro";
 import heligun from "AI/agro/heligun";
 import suicideBomber from "AI/agro/suicideBomber";
-import type EnemyType from "Actor/Enemy/Type";
+import type EnemyType from "Level/Actor/Enemy/Type";
 
 import * as PIXI from "pixi.js";
 

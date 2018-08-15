@@ -33,7 +33,7 @@ import Save from "material-ui-icons/Save";
 import Tooltip from "material-ui/Tooltip";
 import engineConnect from "React/engineConnect";
 
-import { EnemyTypes } from "Actor/Enemy/Type";
+import { EnemyTypes } from "Level/Actor/Enemy/Type";
 
 import avatar from "assets/mech.png";
 

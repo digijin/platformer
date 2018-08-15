@@ -2,7 +2,7 @@
 
 import type Engine from "Engine";
 import type Point from "Utility/Point";
-import type Actor from "Actor";
+import type Actor from "Level/Actor";
 // import type Block from "Level/Grid/Block";
 import Line from "Utility/Line";
 import GameObject from "GameObject";

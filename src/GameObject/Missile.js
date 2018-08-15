@@ -3,7 +3,7 @@
 import Smoke from "GameObject/Smoke";
 import ExplosionRadial from "GameObject/ExplosionRadial";
 import Rect from "Utility/Rect";
-import type Actor from "Actor";
+import type Actor from "Level/Actor";
 
 import Line from "Utility/Line";
 

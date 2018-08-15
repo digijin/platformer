@@ -1,4 +1,4 @@
-// import { ai } from "Actor/Enemy";
+// import { ai } from "Level/Actor/Enemy";
 
 export function* testgen(a): Generator<*, *, *> {
 	let b = yield a;
@@ -17,6 +17,6 @@ describe("test generators", () => {
 	});
 });
 
-describe("Actor/Enemy", () => {
+describe("Level/Actor/Enemy", () => {
 	describe("testgen", () => {});
 });

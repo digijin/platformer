@@ -1,7 +1,7 @@
 import { EnemyTypes } from "./Type";
 import EnemyType from "./Type";
 
-describe("Actor/Enemy/Type", () => {
+describe("Level/Actor/Enemy/Type", () => {
 	describe("EnemyTypes array", () => {
 		it("should an array of more than one object", () => {
 			expect(EnemyTypes.length).toBeGreaterThan(0);
