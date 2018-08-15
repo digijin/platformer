@@ -1,7 +1,7 @@
 import React from "react";
 import engineConnect from "React/engineConnect";
 
-import { BlockTypes } from "Grid/Block/Type";
+import { BlockTypes } from "Level/Grid/Block/Type";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";

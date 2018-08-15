@@ -3,7 +3,7 @@ import GameObject from "GameObject";
 import type Engine from "Engine";
 import { ReflectionFilter } from "@pixi/filter-reflection";
 import StormCloudsFilter from "Filter/StormClouds/Filter";
-import Building from "Background/Building";
+import Building from "GameObject/Background/Building";
 import * as PIXI from "pixi.js";
 
 import ExplosionUp1 from "GameObject/ExplosionUp1";

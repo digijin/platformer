@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import EditorPanel from "./Editor/Panel";
-import Results from "./Results";
 import Pause from "./Pause";
 
 import type Engine from "Engine";
@@ -15,8 +14,6 @@ export class Router extends React.Component {
 	render() {
 		if (this.props.scene == "editor") {
 			return <EditorPanel />;
-		} else if (this.props.scene == "results") {
-			return <Results />;
 		} else if (this.props.scene == "pause") {
 			return <Pause />;
 		} else {

@@ -1,10 +1,10 @@
 import Grid from "Grid";
 import config from "config";
 import Point from "Utility/Point";
-import Block from "Grid/Block";
+import Block from "Level/Grid/Block";
 import Rect from "Utility/Rect";
 
-import { DecorTypes } from "Grid/Decor/Type";
+import { DecorTypes } from "Level/Grid/Decor/Type";
 
 describe("Grid.spec.js", () => {
     it("should be a class", () => {

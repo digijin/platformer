@@ -2,7 +2,7 @@ import GameObject from "../GameObject";
 
 import * as PIXI from "pixi.js";
 
-import Player from "../Actor/Player";
+import Player from "Level/Actor/Player";
 
 class EnergyBarContainer extends PIXI.Container {}
 export default class EnergyBar extends GameObject {

@@ -1,22 +1,22 @@
 //@flow
 
-import { EnemyTypesMap } from "Actor/Enemy/Type";
+import { EnemyTypesMap } from "Level/Actor/Enemy/Type";
 import { Noise } from "noisejs";
-import Block from "Grid/Block";
+import Block from "Level/Grid/Block";
 import config from "config";
-import Enemy from "Actor/Enemy";
+import Enemy from "Level/Actor/Enemy";
 import GameObject from "GameObject";
 import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
-import { BlockTypes } from "Grid/Block/Type";
+import { BlockTypes } from "Level/Grid/Block/Type";
 
 import * as PIXI from "pixi.js";
 
-import Decor from "Grid/Decor";
-import type DecorType from "Grid/Decor/Type";
+import Decor from "Level/Grid/Decor";
+import type DecorType from "Level/Grid/Decor/Type";
 
 import Pool from "Utility/Pool";
 
