@@ -12,9 +12,7 @@ import UI from "UI";
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 import Editor from "Scene/Editor";
-import Equip from "Scene/Equip";
 import Logo from "Scene/Logo";
-import Briefing from "Scene/Briefing";
 import Results from "Scene/Results";
 import Benchmark from "Scene/Benchmark";
 import Demo from "Scene/Demo";
@@ -61,12 +59,6 @@ export default class Game {
 			break;
 		case "mainmenu":
 			this.engine.startScene(new MainMenu());
-			break;
-		case "equip":
-			this.engine.startScene(new Equip());
-			break;
-		case "briefing":
-			this.engine.startScene(new Briefing());
 			break;
 		case "results":
 			this.engine.startScene(new Results());
