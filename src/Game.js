@@ -22,8 +22,8 @@ import Menu from "Scene/Menu";
 import Shader from "Scene/Shader";
 
 //textures
-import { BlockTypes } from "Grid/Block/Type";
-import { DecorTypes } from "Grid/Decor/Type";
+import { BlockTypes } from "Level/Grid/Block/Type";
+import { DecorTypes } from "Level/Grid/Decor/Type";
 
 import log from "loglevel";
 log.setLevel("info", true);

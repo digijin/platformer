@@ -7,7 +7,7 @@ import Rect from "Utility/Rect";
 import Point from "Utility/Point";
 import RGBA from "Utility/RGBA";
 
-import type Block from "Grid/Block";
+import type Block from "Level/Grid/Block";
 
 import type EnemyType from "Actor/Enemy/Type";
 import Enemy from "Actor/Enemy";

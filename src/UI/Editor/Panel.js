@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Storage from "Utility/Storage";
 
-import { BlockTypes } from "Grid/Block/Type";
+import { BlockTypes } from "Level/Grid/Block/Type";
 import type Engine from "Engine";
 
 import AppBar from "material-ui/AppBar";

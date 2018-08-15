@@ -1,4 +1,4 @@
-import Block from "Grid/Block";
+import Block from "Level/Grid/Block";
 import Point from "Utility/Point";
 describe("Grid/Block", () => {
 	it("should stringify", () => {

@@ -1,16 +1,16 @@
 //@flow
-// import dirt from "Grid/dirt.jpg";
-// import brick_tile from "Grid/brick_tile.png";
-// import metal_tile from "Grid/metal_tile.png";
-// import wood_tile from "Grid/wood_tile.png";
-// import grass from "Grid/grass.jpg";
-// import stone from "Grid/stone.jpg";
-// import tiles from "Grid/tiles.jpg";
+// import dirt from "Level/Grid/dirt.jpg";
+// import brick_tile from "Level/Grid/brick_tile.png";
+// import metal_tile from "Level/Grid/metal_tile.png";
+// import wood_tile from "Level/Grid/wood_tile.png";
+// import grass from "Level/Grid/grass.jpg";
+// import stone from "Level/Grid/stone.jpg";
+// import tiles from "Level/Grid/tiles.jpg";
 
-// import brick2 from "Grid/brick2.png";
-// import brick3 from "Grid/brick3.png";
-// import moon from "Grid/moon.jpg";
-// import volcanic from "Grid/volcanic.jpg";
+// import brick2 from "Level/Grid/brick2.png";
+// import brick3 from "Level/Grid/brick3.png";
+// import moon from "Level/Grid/moon.jpg";
+// import volcanic from "Level/Grid/volcanic.jpg";
 
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();

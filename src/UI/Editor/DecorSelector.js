@@ -1,7 +1,7 @@
 import React from "react";
 import engineConnect from "React/engineConnect";
 
-import { DecorTypes } from "Grid/Decor/Type";
+import { DecorTypes } from "Level/Grid/Decor/Type";
 import Tooltip from "material-ui/Tooltip";
 import Button from "material-ui/Button";
 import KeyboardArrowLeft from "material-ui-icons/KeyboardArrowLeft";

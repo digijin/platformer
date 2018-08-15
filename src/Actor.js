@@ -8,7 +8,7 @@ import config from "config";
 import Rect from "Utility/Rect";
 // import type Engine from "Engine";
 import Explosion from "GameObject/Explosion";
-import type Block from "Grid/Block";
+import type Block from "Level/Grid/Block";
 // let engine: Engine;
 
 export default class Actor extends Renderable {

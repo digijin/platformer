@@ -1,10 +1,10 @@
 //@flow
-// import dirtTile from "Grid/dirt_tile.png";
-// import brickTile from "Grid/brick_tile.png";
-// import metalTile from "Grid/metal_tile.png";
-// import woodTile from "Grid/wood_tile.png";
+// import dirtTile from "Level/Grid/dirt_tile.png";
+// import brickTile from "Level/Grid/brick_tile.png";
+// import metalTile from "Level/Grid/metal_tile.png";
+// import woodTile from "Level/Grid/wood_tile.png";
 
-// import windowDecor from "Grid/window.png";
+// import windowDecor from "Level/Grid/window.png";
 
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();

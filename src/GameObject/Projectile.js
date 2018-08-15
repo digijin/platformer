@@ -3,7 +3,7 @@
 import type Engine from "Engine";
 import type Point from "Utility/Point";
 import type Actor from "Actor";
-import type Decor from "Grid/Decor";
+import type Decor from "Level/Grid/Decor";
 import GameObject from "GameObject";
 import Line from "Utility/Line";
 

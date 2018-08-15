@@ -5,8 +5,8 @@ import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import type Grid from "Grid";
 
-import type BlockType from "Grid/Block/Type";
-import {BlockTypeMap} from "Grid/Block/Type";
+import type BlockType from "Level/Grid/Block/Type";
+import {BlockTypeMap} from "Level/Grid/Block/Type";
 
 import * as PIXI from "pixi.js";
 

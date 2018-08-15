@@ -3,7 +3,7 @@
 import Base from "./Base";
 import Background from "GameObject/BackgroundBuildings";
 
-import StoryTeller from "GameObject/StoryTeller";
+import StoryTeller from "Level/StoryTeller";
 import type Engine from "Engine";
 
 import PauseMenu from "GameObject/PauseMenu";
