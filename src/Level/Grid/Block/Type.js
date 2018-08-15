@@ -19,68 +19,69 @@ PIXI.utils.skipHello();
 // require("./sprites.png");
 
 export type BlockTypeParams = {
-    // hp: name,
-    name: string,
-    id: string,
-    image: any,
-    destructable: boolean,
-    hp: number,
-    textureId: string
+	// hp: name,
+	name: string,
+	id: string,
+	image: any,
+	destructable: boolean,
+	hp: number,
+	textureId: string
 };
 
 export default class BlockType {
-    id: string;
-    textureId: string;
-    destructable: boolean;
-    image: any;
-    hp: number;
-    name: string;
-    texture: PIXI.Texture;
-    textureId: string;
-    pattern: CanvasPattern;
-    constructor(params: BlockTypeParams) {
-    	this.name = params.name;
-    	this.id = params.id;
-    	this.destructable = params.destructable;
-    	this.hp = params.hp;
-    	this.image = params.image;
-    	this.textureId = params.textureId;
+	id: string;
+	textureId: string;
+	destructable: boolean;
+	image: any;
+	hp: number;
+	name: string;
+	texture: PIXI.Texture;
+	textureId: string;
+	pattern: CanvasPattern;
+	constructor(params: BlockTypeParams) {
+		this.name = params.name;
+		this.id = params.id;
+		this.destructable = params.destructable;
+		this.hp = params.hp;
+		this.image = params.image;
+		this.textureId = params.textureId;
+		this.platform = params.platform || false;
 
-    	if (this.image) {
-    		this.image.onload = () => {
-    			let canvas = document.createElement("canvas");
-    			canvas.width = this.image.width;
-    			canvas.height = this.image.height;
+		if (this.image) {
+			this.image.onload = () => {
+				let canvas = document.createElement("canvas");
+				canvas.width = this.image.width;
+				canvas.height = this.image.height;
 
-    			// this.texture = new PIXI.Texture(
-    			// 	new PIXI.BaseTexture(this.image)
-    			// );
-    			this.texture = PIXI.Texture.WHITE;
-    			// this.textureId = "BlockType" + this.id;
-    			// PIXI.Texture.addToCache(this.texture, this.textureId);
+				// this.texture = new PIXI.Texture(
+				// 	new PIXI.BaseTexture(this.image)
+				// );
+				this.texture = PIXI.Texture.WHITE;
+				// this.textureId = "BlockType" + this.id;
+				// PIXI.Texture.addToCache(this.texture, this.textureId);
 
-    			let context = canvas.getContext("2d");
-    			if (context) {
-    				context.drawImage(this.image, 0, 0);
-    				// this.imageData = context.getImageData(
-    				//   0,
-    				//   0,
-    				//   canvas.width,
-    				//   canvas.height
-    				// );
-    				this.pattern = context.createPattern(this.image, "repeat");
-    				// console.log("made pattern", context, this.pattern);
-    			}
-    		};
-    	}
-    }
+				let context = canvas.getContext("2d");
+				if (context) {
+					context.drawImage(this.image, 0, 0);
+					// this.imageData = context.getImageData(
+					//   0,
+					//   0,
+					//   canvas.width,
+					//   canvas.height
+					// );
+					this.pattern = context.createPattern(this.image, "repeat");
+					// console.log("made pattern", context, this.pattern);
+				}
+			};
+		}
+	}
 
-    init() {
-    	if (PIXI.loader.resources["blocks"].textures) {
-    		this.texture =
-                PIXI.loader.resources["blocks"].textures[this.textureId];
-    	}
-    }
+	init() {
+		if (PIXI.loader.resources["blocks"].textures) {
+			this.texture =
+				PIXI.loader.resources["blocks"].textures[this.textureId];
+		}
+	}
 }
 
 let blockTypeConfig: Array<BlockTypeParams> = [
@@ -299,6 +300,15 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/flatgrey.png"),
 		textureId: "flatgrey.png",
 		destructable: false,
+		hp: 100
+	},
+	{
+		name: "platform",
+		id: "platform",
+		image: require("./images/struts.png"),
+		textureId: "struts.png",
+		destructable: false,
+		platform: true,
 		hp: 100
 	}
 ];

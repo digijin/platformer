@@ -13,6 +13,15 @@ export default class Mission {
 export const Missions = [];
 Missions.push(
 	new Mission({
+		level: require("levels/test1.txt"),
+		title: "TEST MISSION",
+		reward: 0,
+		rank: 1,
+		description: "FOR DEV TESTING",
+		objectives: [{ text: "TEST OBJECTIVE" }]
+	}),
+
+	new Mission({
 		level: require("levels/level.txt"),
 		title: "First Mission",
 		reward: 0,

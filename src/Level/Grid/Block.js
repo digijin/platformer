@@ -6,7 +6,7 @@ import Rect from "Utility/Rect";
 import type Grid from "Grid";
 
 import type BlockType from "Level/Grid/Block/Type";
-import {BlockTypeMap} from "Level/Grid/Block/Type";
+import { BlockTypeMap } from "Level/Grid/Block/Type";
 
 import * as PIXI from "pixi.js";
 
@@ -47,7 +47,7 @@ export default class Block {
 	}
 
 	toString() {
-		return JSON.stringify({position: this.position, type: this.type});
+		return JSON.stringify({ position: this.position, type: this.type });
 	}
 
 	getType(): BlockType {
@@ -60,6 +60,10 @@ export default class Block {
 
 	isEmpty(): boolean {
 		return this.type == "0";
+	}
+
+	isPlatform(): boolean {
+		return this.type == "1";
 	}
 
 	// get key():string{
@@ -124,7 +128,10 @@ export default class Block {
 	}
 
 	is(block: Block): boolean {
-		return (block.position.x === this.position.x && block.position.y === this.position.y);
+		return (
+			block.position.x === this.position.x &&
+			block.position.y === this.position.y
+		);
 	}
 
 	get rect(): Rect {
