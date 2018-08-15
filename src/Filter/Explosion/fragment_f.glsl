@@ -81,7 +81,7 @@ mat3 rotAxis(vec3 axis, float a) {
  * Sign indicates whether the point is inside or outside the surface,
  * negative indicating inside.
  */
-const int NUM_SPHERES = 10;
+const int NUM_SPHERES = 16;
 const int NUM_FRAGS = 6;
 float sceneSDF(vec3 samplePoint) {
 	float sphereDist = MAX_DIST;
@@ -93,7 +93,7 @@ float sceneSDF(vec3 samplePoint) {
 	// float sphereDist = sphere1;
 	// sphereDist = sdCone((samplePoint+ vec3(0.,0.,2.))*rot, vec3(1.,1.,1.));
 	//+ vec3(0.,0.,0.)
-	float pc = fract(iTime/4.);
+	float pc = fract(iTime/8.);
 
 	for(int i = 0; i<NUM_FRAGS; i++){
 		float angle = PHI * float(i+1);
@@ -110,18 +110,19 @@ float sceneSDF(vec3 samplePoint) {
 
 	}
 	for(int i = 0; i<NUM_SPHERES; i++){
-		float angle = PHI * float(i);
+		float n = float(i);
+		float angle = PHI * n;
 
 		// float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.);// + bumps*.1;
-		vec3 pos = vec3(sin(angle), cos(angle), 0.)*float(i)/4.;
-		float size = 1. + float(i)/10.;
+		vec3 pos = vec3(sin(angle)*n/8., cos(angle)*n/8., n/8.);
+		float size = 1. + sin(n)/2.;// + n/10.;
 		// size *= fract(iTime/10.);
-		float phase = ease(smoothstep(float(i)/40., 1., pc*2.));
-		float outphase = ease(smoothstep(float(i)/10., 2., pc*2.));
+		float phase = ease(smoothstep(n/40., 1., pc*2.));
+		float outphase = ease(smoothstep(n/10., 2., pc*2.));
 		// size *= phase;
 		// pos *=phase;
 		float sphere = sphereSDF(samplePoint, pos*phase, size*phase);
-		float outsphere = sphereSDF(samplePoint, pos*outphase, size*outphase*1.2);
+		float outsphere = sphereSDF(samplePoint, pos*phase, size*outphase*1.2);
 		// sphere = min(sphere,outsphere);
 		sphere = max(sphere,-outsphere);
 		sphereDist = min(sphereDist, sphere);
@@ -155,7 +156,7 @@ void main( )
 
 	vec3 normal = estimateNormal(p);
 
-	float pc = fract(iTime/4.);
+	float pc = fract(iTime/8.);
 	float a = 1.8;
 	float b = 1.99;
 	float c = mix(a, b, smoothstep(0.1, 0.3, pc));
