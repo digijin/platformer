@@ -213,18 +213,27 @@ export default class Player extends Actor {
 		const onGround = this.v > 0 && !this.canMoveVert(this.v);
 		this.airborne = !onGround;
 
-		if (!this.canMoveVert(this.v)) {
+		let vertObjects = this.vertObstacles(this.v);
+
+		if (vertObjects.length > 0) {
 			//LAND ON GROUND
 			const isLanding = this.position.y % config.grid.width !== 0;
-			this.position.y =
-				Math.ceil(this.position.y / config.grid.width) *
-				config.grid.width;
-
-			if (isLanding) {
-				// console.log("yoloooo", this.v);
-				this.handleLanding(this.v);
+			if (this.v > 0) {
+				this.position.y = vertObjects[0].position.y * config.grid.width;
 			}
-			this.v = 0;
+			let allPlatform =
+				vertObjects.find(o => {
+					return o.isPlatform() == false;
+				}) == undefined;
+			if (allPlatform && this.engine.input.getButton("down")) {
+				//jump through platform
+			} else {
+				if (isLanding) {
+					// console.log("yoloooo", this.v);
+					this.handleLanding(this.v);
+				}
+				this.v = 0;
+			}
 		}
 		// END VERTICAL
 

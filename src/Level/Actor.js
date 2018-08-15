@@ -42,19 +42,23 @@ export default class Actor extends Renderable {
 	z: number;
 	hp: number;
 	maxhp: number;
-	canMoveVert = (amount: number): boolean => {
+	vertObstacles = (amount: number): Array<Block> => {
 		let boundingRect = this.getBoundingRect();
 		let targetRect = boundingRect.move({ x: 0, y: amount });
 		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		let obstacles = blocks.filter(block => {
-			//heading upwards into platform
-			if (amount < 0 && block.isPlatform()) {
-				return false;
+			//heading downwards onto platform
+			if (amount > 0 && block.isPlatform()) {
+				return true;
 			}
 
-			return !block.isEmpty();
+			return !block.isVacant();
 		});
-		return obstacles.length == 0;
+		return obstacles;
+	};
+
+	canMoveVert = (amount: number): boolean => {
+		return this.vertObstacles(amount).length == 0;
 	};
 
 	canMoveHori = (amount: number): boolean => {
@@ -62,7 +66,7 @@ export default class Actor extends Renderable {
 		let targetRect = boundingRect.move({ x: amount, y: 0 });
 		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		let obstacles = blocks.filter(block => {
-			return !block.isEmpty();
+			return !block.isVacant();
 		});
 		return obstacles.length == 0;
 	};

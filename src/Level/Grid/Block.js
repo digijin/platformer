@@ -62,8 +62,13 @@ export default class Block {
 		return this.type == "0";
 	}
 
+	isVacant(): boolean {
+		return this.isPlatform() || this.type == "0";
+	}
+
 	isPlatform(): boolean {
-		return this.type == "1";
+		// return this.type == "platform";
+		return this.getType().platform;
 	}
 
 	// get key():string{
