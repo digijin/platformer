@@ -5,11 +5,11 @@ import GameObject from "GameObject";
 import type Player from "Actor/Player";
 import Point from "Utility/Point";
 
-import cockpit from "Player/cockpit.png";
-import foot from "Player/foot.png";
-import upperleg from "Player/upperleg.png";
-import lowerleg from "Player/lowerleg.png";
-import gun from "Player/gun.png";
+import cockpit from "Level/Player/cockpit.png";
+import foot from "Level/Player/foot.png";
+import upperleg from "Level/Player/upperleg.png";
+import lowerleg from "Level/Player/lowerleg.png";
+import gun from "Level/Player/gun.png";
 import config from "config";
 
 import type Engine from "Engine";

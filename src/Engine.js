@@ -10,7 +10,7 @@ import Point from "Utility/Point";
 
 import config from "config";
 
-import Player from "Player";
+import Player from "Level/Player";
 
 import type GameObject from "GameObject";
 import type Transition from "Transition/Base";
