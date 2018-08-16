@@ -4,7 +4,7 @@ import * as PIXI from "pixi.js";
 const TYPE = "Tab";
 class Tab extends PIXI.Graphics {}
 export const behavior = {
-	customDisplayObject: props => new Tab(),
+	customDisplayObject: () => new Tab(),
 	customDidAttach: instance => {
 		// instance.buttonMode = true;
 		// instance.interactive = true;

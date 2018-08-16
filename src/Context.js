@@ -93,7 +93,7 @@ export default class Context {
     }
 
     clearRect(x: number, y: number, w: number, h: number) {
-    	this.context.clearRect(...arguments);
+    	this.context.clearRect(x,y,w,h);
     }
 
     strokeRect(x: number, y: number, w: number, h: number) {

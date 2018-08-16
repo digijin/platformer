@@ -134,6 +134,7 @@ export default class Engine {
 		this.container = container;
 		this.mouse = new Mouse().init(this);
 		// FLOWHACK
+		// eslint-disable-next-line no-undef
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 
 		let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
@@ -277,10 +278,10 @@ export default class Engine {
 			this.objects.splice(i, 1);
 		} else {
 			// throw new Error("destroying non existant object");
-			console.warn(
-				"destroying non existant object",
-				obj.constructor.name
-			);
+			// console.warn(
+			// 	"destroying non existant object",
+			// 	obj.constructor.name
+			// );
 		}
 	}
 

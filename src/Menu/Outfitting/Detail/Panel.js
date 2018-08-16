@@ -1,6 +1,6 @@
 import React from "react";
 import Rectangle from "../../Rectangle";
-import { Text, Container } from "react-pixi-fiber";
+import { Text } from "react-pixi-fiber";
 import Line from "../../Line";
 import { UICOLOUR } from "../../constants";
 

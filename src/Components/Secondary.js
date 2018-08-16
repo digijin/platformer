@@ -29,7 +29,7 @@ export default class Secondary extends Base {
     }
 }
 
-const SecondaryParams: Array<SecondaryParams> = [
+const SecondaryParamsList: Array<SecondaryParams> = [
 	{
 		name: "Missile Pod",
 		id: "StarterSecondary",
@@ -69,7 +69,7 @@ const SecondaryParams: Array<SecondaryParams> = [
 	}
 ];
 
-export const Secondarys: Array<Secondary> = SecondaryParams.map(params => {
+export const Secondarys: Array<Secondary> = SecondaryParamsList.map(params => {
 	return new Secondary(params);
 });
 export const SecondaryMap: Object = Secondarys.reduce(

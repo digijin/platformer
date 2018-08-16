@@ -19,7 +19,7 @@ export default class Leg extends Base {
     }
 }
 
-const LegParams: Array<LegParams> = [
+const LegParamsList: Array<LegParams> = [
 	{
 		name: "Fisher-Pryce My First Leg",
 		id: "StarterLegs",
@@ -44,7 +44,7 @@ const LegParams: Array<LegParams> = [
 	}
 ];
 
-export const Legs: Array<Leg> = LegParams.map(params => {
+export const Legs: Array<Leg> = LegParamsList.map(params => {
 	return new Leg(params);
 });
 export const LegMap: Object = Legs.reduce((output: Object, type: Leg) => {

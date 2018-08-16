@@ -1,4 +1,4 @@
-import { Text, Container } from "react-pixi-fiber";
+import { Container } from "react-pixi-fiber";
 import React, { Component } from "react";
 import Rectangle from "./Rectangle";
 import Header from "./SideMenu/Header";
@@ -13,9 +13,9 @@ import MainMenu from "../Scene/MainMenu";
 // 		return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
 // 	}
 // }
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
 
-import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
+// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import MenuBackgroundFilter from "Filter/Background/Filter";
 
 import FilterUpdater from "Filter/Updater";

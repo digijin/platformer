@@ -7,7 +7,7 @@ import { UICOLOUR } from "../constants";
 
 const TYPE = "SideMenuHeader";
 export const behavior = {
-	customDisplayObject: props => new PIXI.Container(),
+	customDisplayObject: () => new PIXI.Container(),
 	customApplyProps: function(instance, oldProps, newProps) {
 		let { text } = newProps;
 		// this.cacheAsBitmap = false;

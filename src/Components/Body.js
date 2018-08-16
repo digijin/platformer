@@ -17,7 +17,7 @@ export default class Body extends Base {
     }
 }
 
-const BodyParams: Array<BodyParams> = [
+const BodyParamsList: Array<BodyParams> = [
 	{
 		name: "A Normal Body",
 		id: "StarterBody",
@@ -39,7 +39,7 @@ const BodyParams: Array<BodyParams> = [
 	}
 ];
 
-export const Bodys: Array<Body> = BodyParams.map(params => {
+export const Bodys: Array<Body> = BodyParamsList.map(params => {
 	return new Body(params);
 });
 export const BodyMap: Object = Bodys.reduce((output: Object, type: Bodys) => {

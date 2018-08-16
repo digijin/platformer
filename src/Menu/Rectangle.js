@@ -4,7 +4,7 @@ import * as PIXI from "pixi.js";
 const TYPE = "Rectangle";
 class Rectangle extends PIXI.Graphics {}
 export const behavior = {
-	customDisplayObject: props => new Rectangle(),
+	customDisplayObject: () => new Rectangle(),
 	customDidAttach: instance => {
 		// instance.buttonMode = true;
 		// instance.interactive = true;

@@ -2,7 +2,7 @@
 
 import type Projectile from "../GameObject/Projectile";
 
-import Bullet from "../GameObject/Bullet";
+// import Bullet from "../GameObject/Bullet";
 import BasicBullet from "./Primary/BasicBullet";
 import LaserBullet from "./Primary/LaserBullet";
 import FlameBullet from "./Primary/FlameBullet";

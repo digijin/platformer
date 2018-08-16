@@ -1,7 +1,7 @@
-import { render, Container, CustomPIXIComponent, Text } from "react-pixi-fiber";
-import * as PIXI from "pixi.js";
+import {  Container, Text } from "react-pixi-fiber";
+// import * as PIXI from "pixi.js";
 import Rectangle from "../Rectangle";
-import React, { Component } from "react";
+import React from "react";
 import { UICOLOUR } from "../constants";
 
 import { GlitchFilter } from "@pixi/filter-glitch";

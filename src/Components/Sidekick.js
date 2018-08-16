@@ -17,7 +17,7 @@ export default class Sidekick extends Base {
     }
 }
 
-const SidekickParams: Array<SidekickParams> = [
+const SidekickParamsList: Array<SidekickParams> = [
 	{ name: "None", id: "none" },
 	{
 		name: "Fisher-Pryce My First Sidekick",
@@ -40,7 +40,7 @@ const SidekickParams: Array<SidekickParams> = [
 	}
 ];
 
-export const Sidekicks: Array<Sidekick> = SidekickParams.map(params => {
+export const Sidekicks: Array<Sidekick> = SidekickParamsList.map(params => {
 	return new Sidekick(params);
 });
 export const SidekickMap: Object = Sidekicks.reduce(
