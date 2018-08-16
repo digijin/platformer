@@ -156,6 +156,7 @@ export default class Player extends Actor {
 		if (this.airborne) {
 			if (this.engine.input.getButtonDown("down")) {
 				this.v = booster.power;
+				this.h = 0;
 			}
 		}
 
@@ -453,17 +454,17 @@ export default class Player extends Actor {
 	}
 
 	handleLanding(speed: number) {
-		for (let i = 0; i < speed; i++) {
+		for (let i = 0; i < speed * 4; i++) {
 			this.engine.register(
 				new Shell({
 					container: this.container,
 					position: this.position.subtract({
-						x: 0,
+						x: (Math.random() - 0.5) * 15 * speed,
 						// y: config.player.size.h / 2
 						y: 0
 					}),
-					h: (Math.random() - 0.5) * 10,
-					v: Math.random() * 2,
+					h: (Math.random() - 0.5) / 10,
+					v: (-Math.random() * speed) / 4,
 					time: 0.1 + Math.random()
 				})
 			);
