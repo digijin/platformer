@@ -234,7 +234,7 @@ export default class Engine {
 
 	recurseFindUpdate(node) {
 		if (node.update) {
-			node.update();
+			node.update(this);
 		}
 		node.children.forEach(c => this.recurseFindUpdate(c));
 	}
