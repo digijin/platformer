@@ -41,7 +41,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: true,
 		obstacle: true,
 		category: "general",
-		hp: 10
+		hp: 5
 	},
 	{
 		name: "window",

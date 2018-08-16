@@ -48,7 +48,7 @@ const HAND_STATE = {
 	RELEASED: 3
 };
 let hand = {
-	speed: 1000,
+	speed: 2000,
 	reelSpeed: 400,
 	offset: new Point({
 		x: -config.player.size.w / 2,
@@ -56,6 +56,7 @@ let hand = {
 	}),
 	position: new Point({ x: 0, y: 0 }),
 	direction: 0,
+	distance: 500,
 	// firing: false,
 	state: HAND_STATE.ARMED
 };
@@ -190,7 +191,7 @@ export default class Player extends Actor {
 						booster.energyDrain * this.engine.deltaTime
 					)
 				) {
-					this.v -= booster.power; //BOOSTERS
+					this.v = -booster.power; //BOOSTERS
 					// this.v -= this.engine.deltaTime * 4; //BOOSTERS
 				}
 			}
@@ -283,6 +284,9 @@ export default class Player extends Actor {
 				Math.cos(hand.direction) * this.engine.deltaTime * hand.speed;
 			hand.position.y +=
 				Math.sin(hand.direction) * this.engine.deltaTime * hand.speed;
+			if (this.position.distanceTo(hand.position) > hand.distance) {
+				hand.state = HAND_STATE.RELEASED;
+			}
 			if (this.engine.grid.isPositionBlocked(hand.position)) {
 				// if(grid.blockAtPosition(hand.position).block !== "0"){
 				hand.state = HAND_STATE.GRIPPED;

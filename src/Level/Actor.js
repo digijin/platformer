@@ -45,7 +45,14 @@ export default class Actor extends Renderable {
 	vertObstacles = (amount: number): Array<Block> => {
 		let boundingRect = this.getBoundingRect();
 		let targetRect = boundingRect.move({ x: 0, y: amount });
-		let blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+		const nowBlocks = this.engine.grid.getBlocksOverlappingRect(
+			boundingRect
+		);
+		const nextBlocks = this.engine.grid.getBlocksOverlappingRect(
+			targetRect
+		);
+		//dont check in blocks we are already in
+		let blocks = nextBlocks.filter(b => nowBlocks.indexOf(b) == -1);
 		let obstacles = blocks.filter(block => {
 			//heading downwards onto platform
 			if (amount > 0 && block.isPlatform()) {

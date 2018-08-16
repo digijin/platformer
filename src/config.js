@@ -23,7 +23,7 @@ export default {
 			power: 10
 		}
 	},
-	gravity: 20,
+	gravity: 30,
 	debug: {
 		fpsmeter: true,
 		player: {
