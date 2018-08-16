@@ -6,7 +6,7 @@ import GameObject from "GameObject";
 
 import { GlitchFilter } from "@pixi/filter-glitch";
 // import { OldFilmFilter } from "@pixi/filter-old-film";
-import { CRTFilter } from "@pixi/filter-crt";
+// import { CRTFilter } from "@pixi/filter-crt";
 // import { ZoomBlurFilter } from "@pixi/filter-zoom-blur";
 // import Menu from "./Menu";
 
@@ -14,7 +14,7 @@ import { CRTFilter } from "@pixi/filter-crt";
 
 import EngineProvider from "../React/EngineProvider";
 
-import { render, Text } from "react-pixi-fiber";
+import { render } from "react-pixi-fiber";
 import * as PIXI from "pixi.js";
 import React from "react";
 

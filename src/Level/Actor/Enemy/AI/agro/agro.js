@@ -1,14 +1,17 @@
 import type Player from "Level/Actor/Player";
 import Missile from "GameObject/Missile";
+import type Engine from "Engine";
+import type Enemy from "Level/Actor/Enemy";
 const CLOSEST_DISTANCE = 100;
 const FARTHEST_DISTANCE = 400;
 export default function* agro(
 	enemy: Enemy,
 	engine: Engine,
 	player: Player
-): Generator<*, *, *> {
+){
+// ): Generator<*, *, *> {
 	const dontFall = true;
-	let direction = 1;
+	// let direction = 1;
 	let firingCooldown = 0;
 	while (true) {
 		firingCooldown -= engine.deltaTime;

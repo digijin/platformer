@@ -1,3 +1,6 @@
+import type Engine from "Engine";
+import type Enemy from "Level/Actor/Enemy";
+
 export default function walk(enemy: Enemy, engine: Engine): { status: string } {
 	const dontFall = true;
 	let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;

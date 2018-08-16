@@ -98,24 +98,24 @@ export default class Block {
 
 	destroy() {
 		this.type = "0";
-		this.grid.bustCache(this);
+		// this.grid.bustCache(this);
 	}
 
 	//for editor
 	add(blockId: string) {
 		this.type = blockId;
-		this.grid.bustCache(this);
+		// this.grid.bustCache(this);
 	}
 
 	addBackground(blockId: string) {
 		this.backgroundType = blockId;
-		this.grid.bustCache(this);
+		// this.grid.bustCache(this);
 	}
 
 	//for editor
 	remove() {
 		this.type = "0";
-		this.grid.bustCache(this);
+		// this.grid.bustCache(this);
 	}
 
 	get center(): Point {

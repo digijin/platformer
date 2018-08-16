@@ -1,7 +1,7 @@
-import { render, Container, CustomPIXIComponent, Text } from "react-pixi-fiber";
-import * as PIXI from "pixi.js";
+import {  Container, Text } from "react-pixi-fiber";
+// import * as PIXI from "pixi.js";
 import Rectangle from "../Menu/Rectangle";
-import React, { Component } from "react";
+import React from "react";
 
 import { GlitchFilter } from "@pixi/filter-glitch";
 const LOCOLOUR = 0x212127;

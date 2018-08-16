@@ -2,8 +2,8 @@
 
 import type Engine from "Engine";
 import type Point from "Utility/Point";
-import Rect from "Utility/Rect";
-import mech from "assets/mech.png";
+// import Rect from "Utility/Rect";
+// import mech from "assets/mech.png";
 
 import Actor from "Level/Actor";
 import config from "config";

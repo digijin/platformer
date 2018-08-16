@@ -1,17 +1,19 @@
 import type Player from "Level/Actor/Player";
 import Rect from "Utility/Rect";
-import Missile from "GameObject/Missile";
+// import Missile from "GameObject/Missile";
 const CLOSEST_DISTANCE = 50;
 const DETONATE_DISTANCE = 20;
-
+import type Engine from "Engine";
+import type Enemy from "Level/Actor/Enemy";
 export default function* suicideBomber(
 	enemy: Enemy,
 	engine: Engine,
 	player: Player
-): Generator<*, *, *> {
+){
+// ): Generator<*, *, *> {
 	const dontFall = true;
-	let direction = 1;
-	let firingCooldown = 0;
+	// let direction = 1;
+	// let firingCooldown = 0;
 
 	let tryJump = () => {
 		if (enemy.v == 0) {

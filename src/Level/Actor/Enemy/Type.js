@@ -1,5 +1,5 @@
 //@flow
-import config from "config";
+// import config from "config";
 import mech from "assets/mech.png";
 import heli from "assets/heli.png";
 

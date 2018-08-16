@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
-import Rectangle from "../Rectangle";
+// import Rectangle from "../Rectangle";
 import { UICOLOUR } from "../constants";
 import MissionLaunchButton from "./LaunchButton";
 import engineConnect from "React/engineConnect";

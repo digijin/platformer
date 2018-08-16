@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
-import Rectangle from "./Rectangle";
-import { UICOLOUR } from "./constants";
+// import Rectangle from "./Rectangle";
+// import { UICOLOUR } from "./constants";
 import OutfittingButton from "./Outfitting/Button";
 import OutfittingDetail from "./Outfitting/Detail";
 

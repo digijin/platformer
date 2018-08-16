@@ -14,8 +14,8 @@ export default function* agro(
 	engine: Engine,
 	player: Player
 ): Generator<*, *, *> {
-	const dontFall = true;
-	let direction = 1;
+	// const dontFall = true;
+	// let direction = 1;
 	let firingCooldown = 0;
 	while (true) {
 		firingCooldown -= engine.deltaTime;

@@ -1,5 +1,5 @@
 // @flow
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
 import Renderable from "GameObject/Renderable";
 import Point from "Utility/Point";
 

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Text, Container } from "react-pixi-fiber";
-import Rectangle from "../Rectangle";
-import Line from "../Line";
-import Tab from "../Tab";
-import { UICOLOUR } from "../constants";
+import {  Container } from "react-pixi-fiber";
+// import Rectangle from "../Rectangle";
+// import Line from "../Line";
+// import Tab from "../Tab";
+// import { UICOLOUR } from "../constants";
 import engineConnect from "React/engineConnect";
 import Folder from "./Detail/Folder";
 

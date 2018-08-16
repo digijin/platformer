@@ -1,18 +1,18 @@
 // @flow
 
 import Point from "Utility/Point";
-import Missile from "GameObject/Missile";
-import Bullet from "GameObject/Bullet";
+// import Missile from "GameObject/Missile";
+// import Bullet from "GameObject/Bullet";
 import Shell from "GameObject/Shell";
 import BoosterParticle from "GameObject/Particle/BoosterParticle";
-import mech from "assets/mech.png";
+// import mech from "assets/mech.png";
 
 import Actor from "Level/Actor";
 
 import config from "config";
-let hSpeed = config.player.speed;
+// let hSpeed = config.player.speed;
 
-import Rect from "Utility/Rect";
+// import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
 import { PrimaryMap } from "Components/Primary";
@@ -28,7 +28,7 @@ import type ComponentEngine from "Components/Engine";
 
 import * as PIXI from "pixi.js";
 
-let firing = false;
+// let firing = false;
 let missile = {
 	firing: false,
 	maxEnergy: 800,
@@ -130,7 +130,7 @@ export default class Player extends Actor {
 		let booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
 		let legs = LegMap[this.engine.currentPlayer.legs];
 
-		let boundingRect = this.getBoundingRect();
+		// let boundingRect = this.getBoundingRect();
 
 		//CHANGE THIS SHIT
 		// conserve momentum in the air

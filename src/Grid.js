@@ -11,12 +11,12 @@ import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
 
-import { BlockTypes } from "Level/Grid/Block/Type";
+// import { BlockTypes } from "Level/Grid/Block/Type";
 
 import * as PIXI from "pixi.js";
 
 import Decor from "Level/Grid/Decor";
-import type DecorType from "Level/Grid/Decor/Type";
+// import type DecorType from "Level/Grid/Decor/Type";
 
 import Pool from "Utility/Pool";
 
@@ -49,18 +49,7 @@ export default class Grid extends GameObject {
 
     height: number;
 
-    update = (engine: Engine) => {
-    	// console.group("Grid");
 
-    	let screenRect = this.screenRect();
-    	this.renderBlocksPixi(screenRect);
-    	// console.groupEnd("Grid");
-
-    	// this.decorStage.position.x = -this.engine.view.offset.x;
-    	// this.renderDecor();
-    	// this.decorStage.position.y = -this.engine.view.offset.y;
-    	// this.renderDebugBlockPixelLine();
-    };
 
     blocks: Array<Array<Block>>;
 
@@ -105,6 +94,19 @@ export default class Grid extends GameObject {
     	this.parent.removeChild(this.decorStage);
     	this.parent.removeChild(this.graph);
     }
+
+    update = () => {
+    	// console.group("Grid");
+
+    	let screenRect = this.screenRect();
+    	this.renderBlocksPixi(screenRect);
+    	// console.groupEnd("Grid");
+
+    	// this.decorStage.position.x = -this.engine.view.offset.x;
+    	// this.renderDecor();
+    	// this.decorStage.position.y = -this.engine.view.offset.y;
+    	// this.renderDebugBlockPixelLine();
+    };
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
     	let x = Math.floor(pos.x / config.grid.width);
@@ -401,10 +403,10 @@ export default class Grid extends GameObject {
     	// );
     }
 
-    bustCache(block: Block) {
-    	// do nothing
-    	//this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
-    }
+    // bustCache(block: Block) {
+    // 	// do nothing
+    // 	//this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
+    // }
 
     save(): string {
     	// return JSON.stringify({ blocks: this.blocks }, (name, val) => {

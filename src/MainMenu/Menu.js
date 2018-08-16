@@ -5,7 +5,7 @@ import GameObject from "GameObject";
 import mechHero from "./mech_hero.png";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
-import log from "loglevel";
+// import log from "loglevel";
 import EngineProvider from "../React/EngineProvider";
 import { render, Text, Container } from "react-pixi-fiber";
 import React from "react";
@@ -54,6 +54,23 @@ export default class MainMenu extends GameObject {
 		this.engine.stage.removeChild(this.fadein);
 		this.engine.stage.removeChild(this.ui);
 	}
+	
+	update() {
+		this.time += this.engine.deltaTime;
+		this.hero.position.x = window.innerWidth / 2;
+		this.hero.position.y = window.innerHeight / 2;
+
+		this.fadein.width = window.innerWidth;
+		this.fadein.height = window.innerHeight;
+		if (this.time < FADETIME) {
+			this.fadein.alpha = (FADETIME - this.time) / FADETIME;
+		} else {
+			this.fadein.visible = false;
+		}
+
+		this.engine.view.offset.x += 400 * this.engine.deltaTime;
+	}
+	
 
 	render() {
 		render(
@@ -133,19 +150,4 @@ export default class MainMenu extends GameObject {
 		);
 	}
 
-	update() {
-		this.time += this.engine.deltaTime;
-		this.hero.position.x = window.innerWidth / 2;
-		this.hero.position.y = window.innerHeight / 2;
-
-		this.fadein.width = window.innerWidth;
-		this.fadein.height = window.innerHeight;
-		if (this.time < FADETIME) {
-			this.fadein.alpha = (FADETIME - this.time) / FADETIME;
-		} else {
-			this.fadein.visible = false;
-		}
-
-		this.engine.view.offset.x += 400 * this.engine.deltaTime;
-	}
 }

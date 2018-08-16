@@ -11,7 +11,7 @@ export default class DecorType {
 	name: string;
 	pattern: CanvasPattern;
 	category: string;
-	constructor(params: DecorTypeParams) {
+	constructor(params) {
 		this.name = params.name;
 		this.id = params.id;
 		this.destructable = params.destructable;

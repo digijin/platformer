@@ -1,10 +1,15 @@
 import walk from "./walk";
 
+// import type Engine from "Engine";
+import type Enemy from "Level/Actor/Enemy";
+
 export default function* jump(
 	enemy: Enemy,
-	engine: Engine
-): Generator<*, *, *> {
-	const dontFall = true;
+	// engine: Engine
+)
+// : Generator<*, *, *>
+{
+	// const dontFall = true;
 
 	enemy.v = -4;
 

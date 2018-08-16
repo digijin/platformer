@@ -2,10 +2,10 @@
 import jump from "../actions/jump";
 
 import type Enemy from "Level/Actor/Enemy";
-import type Engine from "Engine";
+// import type Engine from "Engine";
 export default function* rabbit(
 	enemy: Enemy,
-	engine: Engine
+	// engine: Engine
 ): Generator<*, *, *> {
 	// let direction = 1;
 	// while (true) {
