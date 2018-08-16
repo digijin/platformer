@@ -1,13 +1,13 @@
 import Base from "./Base";
 import type Engine from "Engine";
 
-import * as PIXI from "pixi.js";
+// import * as PIXI from "pixi.js";
 
 import Point from "Utility/Point";
-import config from "config";
+// import config from "config";
 import GameObject from "GameObject";
-import Grid from "Grid";
-import { BlockTypes } from "Level/Grid/Block/Type";
+// import Grid from "Grid";
+// import { BlockTypes } from "Level/Grid/Block/Type";
 
 import FireRadialTransition from "GameObject/FireRadialTransition";
 

@@ -26,7 +26,7 @@
 		"electron:karma": "electron-open http://localhost:9876",
 		"electron:dev": "electron http://localhost:8080/",
 		"electron:debug": "electron --inspect-brk=5859 http://localhost:8080/",
-		"lint": "eslint src/ ",
+		"lint": "eslint -f table src/ ",
 		"lint:fix": "eslint src/ --fix",
 		"lint:sort": "jscodeshift --parser flow -t node_modules/sort-class-members-codemod/index.js src/",
 		"docker:alpine-node": "docker run -it -v $(pwd):/var/app mhart/alpine-node sh",

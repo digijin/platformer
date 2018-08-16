@@ -20,4 +20,8 @@ export default function mech(state: MechState, action: Object){
 			weapons: {}
 		};
 	}
+	switch(action){
+	default: 
+		return state;
+	}
 }

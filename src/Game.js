@@ -1,20 +1,14 @@
 // @flow
 
-import Point from "Utility/Point";
 
-// let debugTextDiv;
 
-import Grid from "Grid";
 import Engine from "Engine";
-import Context from "Context";
-import UI from "UI";
 
 import MainMenu from "Scene/MainMenu";
 import Level from "Scene/Level";
 import Editor from "Scene/Editor";
 import Logo from "Scene/Logo";
 import Results from "Scene/Results";
-import Benchmark from "Scene/Benchmark";
 import Demo from "Scene/Demo";
 import Menu from "Scene/Menu";
 import Shader from "Scene/Shader";
@@ -39,6 +33,15 @@ export default class Game {
 	shells: Array<Object>;
 	engine: Engine;
 	inited: boolean;
+	constructor(container: HTMLElement) {
+		this.container = container;
+		window.game = this;
+		PIXI.loader.load(this.init);
+		// console.log("game constructed");
+		// this.init();
+		this.inited = false;
+	}
+
 	init = () => {
 		this.inited = true;
 		//init textures that were just loaded
@@ -66,9 +69,6 @@ export default class Game {
 		case "level":
 			this.engine.startScene(new Level());
 			break;
-		case "benchmark":
-			this.engine.startScene(new Benchmark());
-			break;
 		case "demo":
 			this.engine.startScene(new Demo());
 			break;
@@ -87,14 +87,7 @@ export default class Game {
 		this.engine.update(); //starts
 	};
 
-	constructor(container: HTMLElement) {
-		this.container = container;
-		window.game = this;
-		PIXI.loader.load(this.init);
-		// console.log("game constructed");
-		// this.init();
-		this.inited = false;
-	}
+	
 
 	destroy() {
 		this.engine.kill();

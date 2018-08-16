@@ -1,9 +1,8 @@
 {
 	"javascript.validate.enable": false,
-	"editor.formatOnSave": true,
+	"editor.formatOnSave": false,
 	"prettier.eslintIntegration": true,
 	"prettier.useTabs": true,
-
 	"files.exclude": {
 		"**/.vscode/**": true
 	},

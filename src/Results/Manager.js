@@ -7,7 +7,7 @@ import Point from "Utility/Point";
 //
 // import ExplosionUp6 from "../GameObject/ExplosionUp6";
 import FireBackground from "../GameObject/FireBackground";
-import log from "loglevel";
+// import log from "loglevel";
 // import Button from "../Briefing/Button";
 // import Briefing from "../Scene/Briefing";
 
