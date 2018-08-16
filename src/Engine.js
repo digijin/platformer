@@ -221,6 +221,8 @@ export default class Engine {
 				}
 			});
 		}
+		//check pixi objects for update
+		this.recurseFindUpdate(this.stage);
 
 		// this.objects = this.objects.filter(o => o);
 		this.render();
@@ -229,6 +231,13 @@ export default class Engine {
 		this.input.endTick();
 		this.fpsmeter.tick();
 	};
+
+	recurseFindUpdate(node) {
+		if (node.update) {
+			node.update();
+		}
+		node.children.forEach(c => this.recurseFindUpdate(c));
+	}
 
 	get objects(): Array<GameObject> {
 		return this._objects;

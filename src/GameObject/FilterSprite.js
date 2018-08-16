@@ -11,6 +11,9 @@ export default class FilterSprite extends FilterUpdater {
 		super(filter);
 		Object.assign(this, params);
 		this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+		this.sprite.update = () => {
+			// console.log("filtersprite", this.parent);
+		};
 		this.sprite.height = 100;
 		this.sprite.width = 100;
 		this.sprite.anchor = { x: 0.5, y: 0.5 };

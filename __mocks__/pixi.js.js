@@ -32,6 +32,7 @@ const pixi = {
 		}
 	},
 	autoDetectRenderer: () => {},
+	Filter: Klass,
 	BaseTexture: Klass,
 	Texture: Klass,
 	Container: Klass,
