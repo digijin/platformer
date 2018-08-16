@@ -21,7 +21,7 @@ export default function mech(state: MechState, action: Object){
 		};
 	}
 	switch(action){
-	default: 
+	default:
 		return state;
 	}
 }

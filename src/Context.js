@@ -8,7 +8,7 @@ import Rect from "Utility/Rect";
 
 export default class Context {
     engine: Engine;
-    drawSprite = function(image: any, position: Point = new Point({x: 0, y: 0}), size: {
+    drawSprite = function(image: any, position: Point = new Point({ x: 0, y: 0 }), size: {
 		w: number,
 		h: number
 	} = {
@@ -93,7 +93,7 @@ export default class Context {
     }
 
     clearRect(x: number, y: number, w: number, h: number) {
-    	this.context.clearRect(x,y,w,h);
+    	this.context.clearRect(x, y, w, h);
     }
 
     strokeRect(x: number, y: number, w: number, h: number) {
@@ -150,7 +150,7 @@ export default class Context {
     }
 
     screenRect(): Rect {
-    	return new Rect({t: 0, l: 0, r: window.innerWidth, b: window.innerHeight}).move(this.engine.view.offset);
+    	return new Rect({ t: 0, l: 0, r: window.innerWidth, b: window.innerHeight }).move(this.engine.view.offset);
     }
 
     resetTransform() {

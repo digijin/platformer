@@ -6,7 +6,7 @@ import Rect from "Utility/Rect";
 import type Grid from "Grid";
 
 import type DecorType from "Level/Grid/Decor/Type";
-import {DecorTypeMap} from "Level/Grid/Decor/Type";
+import { DecorTypeMap } from "Level/Grid/Decor/Type";
 
 import * as PIXI from "pixi.js";
 
