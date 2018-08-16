@@ -1,15 +1,15 @@
 import * as PIXI from "pixi.js";
 
 PIXI.loader.add("FireRadialTransition", "assets/FireRadialTransition.json");
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
 
-import Point from "Utility/Point";
+// import Point from "Utility/Point";
 
 import AnimateOnce from "./AnimateOnce";
 
 export default class FireRadialTransition extends AnimateOnce {
 	constructor(params) {
-		console.log("FireRadialTransition");
+		// console.log("FireRadialTransition");
 		super(
 			Object.assign(
 				{

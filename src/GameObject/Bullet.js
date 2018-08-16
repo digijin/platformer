@@ -37,38 +37,7 @@ export default class Bullet extends Projectile {
 	// x: number; position
 	// y: number; position
 	position: Point;
-	update = () => {
-		// console.log("update");
-		this.time -= this.engine.deltaTime;
-
-		// let old: Point = this.position.clone();
-		this.move(); //sets trajectory
-
-		//CHECK TIME
-		if (this.time < 0) {
-			this.destroy();
-		}
-		//check decor
-		this.checkDecor((decor, hitTest) => {
-			this.position.x = hitTest.collision.x;
-			this.position.y = hitTest.collision.y;
-			decor.damage(1);
-		});
-
-		//CHECK GRID
-		this.checkGrid();
-
-		this.render();
-
-		//CHECK ENEMIES
-		this.checkEnemies((actor: Actor) => {
-			// setTimeout(() => {
-			this.explode();
-			// }, 0);
-			actor.setAgro(this.owner);
-			actor.damage(this.damage);
-		});
-	};
+	
 
 	damage: number = 2;
 
@@ -109,6 +78,39 @@ export default class Bullet extends Projectile {
 	exit() {
 		this.container.removeChild(this.graph);
 	}
+
+	update = () => {
+		// console.log("update");
+		this.time -= this.engine.deltaTime;
+
+		// let old: Point = this.position.clone();
+		this.move(); //sets trajectory
+
+		//CHECK TIME
+		if (this.time < 0) {
+			this.destroy();
+		}
+		//check decor
+		this.checkDecor((decor, hitTest) => {
+			this.position.x = hitTest.collision.x;
+			this.position.y = hitTest.collision.y;
+			decor.damage(1);
+		});
+
+		//CHECK GRID
+		this.checkGrid();
+
+		this.render();
+
+		//CHECK ENEMIES
+		this.checkEnemies((actor: Actor) => {
+			// setTimeout(() => {
+			this.explode();
+			// }, 0);
+			actor.setAgro(this.owner);
+			actor.damage(this.damage);
+		});
+	};
 
 	destroy() {
 		// console.log("destroy");

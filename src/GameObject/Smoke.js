@@ -9,7 +9,7 @@ import GameObject from "GameObject";
 import RGBA from "Utility/RGBA";
 
 import * as PIXI from "pixi.js";
-import log from "loglevel";
+// import log from "loglevel";
 
 export default class Smoke extends GameObject {
 	time: number; //life
@@ -22,20 +22,7 @@ export default class Smoke extends GameObject {
 	position: Point;
 	container: PIXI.Container;
 
-	update = () => {
-		let timePc = this.time / this.duration;
-		this.positionSprite();
-		this.time -= this.engine.deltaTime;
 
-		let w = 20;
-		let h = 20;
-		h *= timePc;
-		w *= timePc;
-
-		if (this.time < 0) {
-			this.destroy();
-		}
-	};
 
 	constructor(params: { container: PIXI.Container }) {
 		super();
@@ -65,6 +52,22 @@ export default class Smoke extends GameObject {
 	exit() {
 		this.container.removeChild(this.sprite);
 	}
+
+	update = () => {
+		// let timePc = this.time / this.duration;
+		this.positionSprite();
+		this.time -= this.engine.deltaTime;
+
+		// let w = 20;
+		// let h = 20;
+		// h *= timePc;
+		// w *= timePc;
+
+		if (this.time < 0) {
+			this.destroy();
+		}
+	};
+
 
 	positionSprite() {
 		let timePc = this.time / this.duration;

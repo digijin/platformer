@@ -1,4 +1,6 @@
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
+
+import type Point from 'Utility/Point';
 
 import Filter from "Filter/Explosion/Filter";
 import FilterUpdater from "Filter/Updater";

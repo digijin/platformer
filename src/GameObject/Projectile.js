@@ -1,6 +1,6 @@
 //@flow
 
-import type Engine from "Engine";
+// import type Engine from "Engine";
 import type Point from "Utility/Point";
 import type Actor from "Level/Actor";
 import type Decor from "Level/Grid/Decor";

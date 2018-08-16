@@ -50,7 +50,7 @@ export default class Explosion extends GameObject {
     	} else {
     		this.time -= this.engine.deltaTime * 2;
 
-    		let scale = Math.cos((1 - this.time) * Math.PI / 2);
+    		// let scale = Math.cos((1 - this.time) * Math.PI / 2);
 
     		if (this.time < 0) {
     			this.destroy();

@@ -1,7 +1,7 @@
 //@flow
 
 import Smoke from "GameObject/Smoke";
-import ExplosionRadial from "GameObject/ExplosionRadial";
+// import ExplosionRadial from "GameObject/ExplosionRadial";
 import Rect from "Utility/Rect";
 import type Actor from "Level/Actor";
 
@@ -14,7 +14,7 @@ import type Engine from "Engine";
 import GameObject from "GameObject";
 import Projectile from "GameObject/Projectile";
 
-import log from "loglevel";
+// import log from "loglevel";
 
 import * as PIXI from "pixi.js";
 
@@ -22,6 +22,30 @@ import * as PIXI from "pixi.js";
 import FilterSprite from "Sprite/Explosion";
 
 export default class Missile extends Projectile {
+	
+
+	guided: boolean;
+
+	maxSpeed: number = 40;
+	minSpeed: number = 1;
+	acceleration: number = 20;
+	container: PIXI.Container;
+	remoteControl: boolean;
+	trajectory: Line;
+
+	constructor(params: { container: PIXI.Container }) {
+		super(params);
+
+		this.guided = true;
+		this.remoteControl = false;
+		this.container = params.container;
+		this.tag("missile");
+	}
+
+	init(engine: Engine) {
+		super.init(engine);
+	}
+
 	update = () => {
 		this.move();
 
@@ -101,28 +125,6 @@ export default class Missile extends Projectile {
 		}
 	};
 
-	guided: boolean;
-
-	maxSpeed: number = 40;
-	minSpeed: number = 1;
-	acceleration: number = 20;
-	container: PIXI.Container;
-	remoteControl: boolean;
-	trajectory: Line;
-
-	constructor(params: { container: PIXI.Container }) {
-		super(params);
-
-		this.guided = true;
-		this.remoteControl = false;
-		this.container = params.container;
-		this.tag("missile");
-	}
-
-	init(engine: Engine) {
-		super.init(engine);
-	}
-
 	explode() {
 		super.explode();
 		// this.engine.register(
@@ -176,4 +178,5 @@ export default class Missile extends Projectile {
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
 	}
+	
 }
