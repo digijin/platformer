@@ -18,6 +18,8 @@ import log from "loglevel";
 
 import * as PIXI from "pixi.js";
 
+import FilterSprite from "GameObject/FilterSprite";
+
 export default class Missile extends Projectile {
 	update = () => {
 		this.move();
@@ -123,10 +125,10 @@ export default class Missile extends Projectile {
 	explode() {
 		super.explode();
 		this.engine.register(
-			new ExplosionRadial({
+			new FilterSprite({
 				parent: this.container,
 				position: this.position,
-				rotation: 0,
+				// rotation: 0,
 				delay: 0
 			})
 		);

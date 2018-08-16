@@ -28,7 +28,7 @@ uniform vec4 filterArea;
 
 #define PI 3.1415926535897932384626433832795
 
-const int MAX_MARCHING_STEPS = 255;
+const int MAX_MARCHING_STEPS = 64;
 const float MIN_DIST = 0.0;
 const float MAX_DIST = 200.0;
 const float EPSILON = 0.0001;
@@ -81,7 +81,7 @@ mat3 rotAxis(vec3 axis, float a) {
  * Sign indicates whether the point is inside or outside the surface,
  * negative indicating inside.
  */
-const int NUM_SPHERES = 16;
+const int NUM_SPHERES = 26;
 const int NUM_FRAGS = 6;
 float sceneSDF(vec3 samplePoint) {
 	float sphereDist = MAX_DIST;
@@ -93,7 +93,7 @@ float sceneSDF(vec3 samplePoint) {
 	// float sphereDist = sphere1;
 	// sphereDist = sdCone((samplePoint+ vec3(0.,0.,2.))*rot, vec3(1.,1.,1.));
 	//+ vec3(0.,0.,0.)
-	float pc = fract(iTime/8.);
+	float pc = fract(iTime/1.);
 
 	for(int i = 0; i<NUM_FRAGS; i++){
 		float angle = PHI * float(i+1);
@@ -139,7 +139,8 @@ float sceneSDF(vec3 samplePoint) {
 void main( )
 {
 
-	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
+	// vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
+	vec3 viewDir = rayDirection(45.0, vec2(1.), vTextureCoord.xy);
 	vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
     vec3 eye = vec3(40.0* sin(pos.x), pos.y, 40.0*cos(pos.x));
     mat4 viewToWorld = lookAtMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
@@ -156,7 +157,7 @@ void main( )
 
 	vec3 normal = estimateNormal(p);
 
-	float pc = fract(iTime/8.);
+	float pc = fract(iTime/1.);
 	float a = 1.8;
 	float b = 1.99;
 	float c = mix(a, b, smoothstep(0.1, 0.3, pc));
