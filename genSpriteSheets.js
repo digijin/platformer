@@ -7,7 +7,7 @@ fs.readdirSync("src/assets/animation").forEach(dir => {
 		format: "pixi.js",
 		path: "dist/assets",
 		trim: true,
-		name: dir
+		name: dir,
 	};
 
 	spritesheet("src/assets/animation/" + dir + "/*.png", options, function(
@@ -18,12 +18,12 @@ fs.readdirSync("src/assets/animation").forEach(dir => {
 });
 
 spritesheet(
-	"src/Grid/Block/images/*.png",
+	"src/Level/Grid/Block/images/*.png",
 	{
 		format: "pixi.js",
 		path: "dist/assets",
 		trim: true,
-		name: "sprites"
+		name: "sprites",
 	},
 	function(err) {
 		if (err) throw err;
@@ -31,12 +31,12 @@ spritesheet(
 );
 
 spritesheet(
-	"src/Grid/Decor/images/*.png",
+	"src/Level/Grid/Decor/images/*.png",
 	{
 		format: "pixi.js",
 		path: "dist/assets",
 		trim: true,
-		name: "decorsprites"
+		name: "decorsprites",
 	},
 	function(err) {
 		if (err) throw err;
