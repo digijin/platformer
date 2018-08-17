@@ -41,7 +41,7 @@ const primaryParams: Array<PrimaryParams> = [
 		reloadTime: 0.04,
 		energyCost: 4,
 		power: 100,
-		projectile: BasicBullet
+		projectile: BasicBullet,
 	},
 	{
 		name: "Laser Cannon",
@@ -50,7 +50,7 @@ const primaryParams: Array<PrimaryParams> = [
 		reloadTime: 0,
 		energyCost: 4,
 		power: 500,
-		projectile: LaserBullet
+		projectile: LaserBullet,
 	},
 	{
 		name: "FlameThrower",
@@ -59,7 +59,7 @@ const primaryParams: Array<PrimaryParams> = [
 		reloadTime: 0.5,
 		energyCost: 10,
 		power: 500,
-		projectile: FlameBullet
+		projectile: FlameBullet,
 	},
 
 	{
@@ -69,8 +69,8 @@ const primaryParams: Array<PrimaryParams> = [
 		reloadTime: 0.8,
 		energyCost: 10,
 		power: 1000,
-		projectile: GaussBullet
-	}
+		projectile: GaussBullet,
+	},
 ];
 
 export const Primarys: Array<Primary> = primaryParams.map(params => {

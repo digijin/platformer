@@ -13,19 +13,19 @@ export default class Context {
 		h: number
 	} = {
     		w: 20,
-    		h: 20
+    		h: 20,
     	}, rotation: number = 0, registration: {
 		x: number,
 		y: number
 	} = {
     	x: 0.5,
-    	y: 0.5
+    	y: 0.5,
     }, scale: {
 		x: number,
 		y: number
 	} = {
     	x: 1,
-    	y: 1
+    	y: 1,
     }, screen: boolean = false) {
     	let im: HTMLImageElement = (image: any);
     	if (!screen) {
@@ -61,7 +61,7 @@ export default class Context {
     			moveTo: () => {},
     			lineTo: () => {},
     			stroke: () => {},
-    			setLineDash: () => {}
+    			setLineDash: () => {},
     		};
     	}
     	this.engine = Engine.getInstance();

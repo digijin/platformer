@@ -35,7 +35,7 @@ export default class MainMenu extends GameObject {
 		);
 		this.hero.anchor = {
 			x: 0.5,
-			y: 0.5
+			y: 0.5,
 		};
 		this.fadein = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.fadein.tint = 0x000000;
@@ -85,7 +85,7 @@ export default class MainMenu extends GameObject {
 							fontFamily: "HeadingFont",
 							fontSize: 92,
 							fill: 0xe38696,
-							align: "center"
+							align: "center",
 						}}
 						anchor={{ x: 0.5, y: 0.15 }}
 						x={window.innerWidth / 2}
@@ -98,7 +98,7 @@ export default class MainMenu extends GameObject {
 							fontFamily: "Lazer84",
 							fontSize: 36,
 							fill: 0xf162dc,
-							align: "center"
+							align: "center",
 						}}
 						anchor={{ x: 0.5, y: 0.5 }}
 						x={window.innerWidth / 2}

@@ -18,7 +18,7 @@ export default class Rect {
 			l: params.x,
 			t: params.y,
 			r: params.x + params.w,
-			b: params.y + params.h
+			b: params.y + params.h,
 		});
 	}
 
@@ -33,7 +33,7 @@ export default class Rect {
 			t: t,
 			l: l,
 			r: l + size.w,
-			b: t + size.h
+			b: t + size.h,
 		});
 	}
 
@@ -45,7 +45,7 @@ export default class Rect {
 			l: Math.min(pt1.x, pt2.x),
 			r: Math.max(pt1.x, pt2.x),
 			t: Math.min(pt1.y, pt2.y),
-			b: Math.max(pt1.y, pt2.y)
+			b: Math.max(pt1.y, pt2.y),
 		});
 	}
 
@@ -100,7 +100,7 @@ export default class Rect {
 	centerPoint() {
 		return new Point({
 			x: this.l + this.width() / 2,
-			y: this.t + this.height() / 2
+			y: this.t + this.height() / 2,
 		});
 	}
 
@@ -112,7 +112,7 @@ export default class Rect {
 			t: this.t + amount.y,
 			r: this.r + amount.x,
 			b: this.b + amount.y,
-			l: this.l + amount.x
+			l: this.l + amount.x,
 		});
 	}
 
@@ -127,7 +127,7 @@ export default class Rect {
 			t: Math.floor(this.t / config.grid.width),
 			r: Math.ceil(this.r / config.grid.width),
 			b: Math.ceil(this.b / config.grid.width),
-			l: Math.floor(this.l / config.grid.width)
+			l: Math.floor(this.l / config.grid.width),
 		});
 	}
 
@@ -153,7 +153,7 @@ export default class Rect {
 			t: this.t + rect.t,
 			r: this.r + rect.r,
 			b: this.b + rect.b,
-			l: this.l + rect.l
+			l: this.l + rect.l,
 		});
 	}
 }

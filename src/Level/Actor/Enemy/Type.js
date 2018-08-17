@@ -59,15 +59,15 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		hp: 50,
 		size: {
 			w: 50,
-			h: 50
+			h: 50,
 		},
 		registration: {
 			x: 0.5,
-			y: 1
+			y: 1,
 		},
 		idle: "rabbit",
 		agro: "agro",
-		image: mech
+		image: mech,
 	},
 	{
 		id: "2",
@@ -78,15 +78,15 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		hp: 1,
 		size: {
 			w: 20,
-			h: 20
+			h: 20,
 		},
 		registration: {
 			x: 0.5,
-			y: 1
+			y: 1,
 		},
 		idle: "bounce",
 		agro: "suicideBomber",
-		image: mech
+		image: mech,
 	},
 	{
 		id: "3",
@@ -97,15 +97,15 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		hp: 100,
 		size: {
 			w: 60,
-			h: 60
+			h: 60,
 		},
 		registration: {
 			x: 0.5,
-			y: 1
+			y: 1,
 		},
 		idle: "patrol",
 		agro: "agro",
-		image: mech
+		image: mech,
 	},
 	{
 		id: "4",
@@ -116,16 +116,16 @@ let enemyTypeConfig: Array<EnemyTypeParams> = [
 		hp: 100,
 		size: {
 			w: 124,
-			h: 36
+			h: 36,
 		},
 		registration: {
 			x: 0.5,
-			y: 1
+			y: 1,
 		},
 		idle: "hover",
 		agro: "heligun",
-		image: heli
-	}
+		image: heli,
+	},
 ];
 
 export const EnemyTypes: Array<EnemyType> = enemyTypeConfig.map(

@@ -17,7 +17,7 @@ export default class FireRadialTransition extends AnimateOnce {
 					resource: "FireRadialTransition",
 					prefix: "Fire 044 Radial Transition_",
 					suffix: ".png",
-					pad: 5
+					pad: 5,
 				},
 				params
 			)

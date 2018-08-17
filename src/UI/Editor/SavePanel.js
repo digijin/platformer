@@ -36,7 +36,7 @@ class Main extends React.Component {
     	this.storage = new Storage();
     	this.state = {
     		expanded: false,
-    		savename: ""
+    		savename: "",
     	};
     }
 

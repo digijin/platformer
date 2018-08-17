@@ -26,7 +26,7 @@ export default class ResultsManager extends GameObject {
 			parent: this.container,
 			position: new Point({ x: 0, y: 0 }),
 			rotation: 0,
-			delay: 0
+			delay: 0,
 		});
 		this.engine.register(this.background);
 
@@ -42,7 +42,7 @@ export default class ResultsManager extends GameObject {
 			fontFamily: "HeadingFont",
 			fontSize: 72,
 			fill: 0xffffff,
-			align: "center"
+			align: "center",
 		});
 		this.container.addChild(this.heading);
 

@@ -16,7 +16,7 @@ export default class Editor extends Base {
 
 		let grid = new Grid({
 			size: { w: 100, h: 100 },
-			parent: engine.stage
+			parent: engine.stage,
 		});
 
 		engine.stage.position.x = 0;
@@ -24,7 +24,7 @@ export default class Editor extends Base {
 
 		engine.view.offset = new Point({
 			x: 0,
-			y: 0
+			y: 0,
 		});
 		// grid.makeTest();
 		grid.generate(1);

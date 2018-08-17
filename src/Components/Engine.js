@@ -26,36 +26,36 @@ const engineParams: Array<EngineParams> = [
 		id: "StarterEngine",
 		weight: 1,
 		maxPower: 100,
-		regenSpeed: 100
+		regenSpeed: 100,
 	},
 	{
 		name: "KR-VPx Mark 1",
 		id: "en2",
 		weight: 1,
 		maxPower: 200,
-		regenSpeed: 100
+		regenSpeed: 100,
 	},
 	{
 		name: "KR-VPx Mark 2",
 		id: "en3",
 		weight: 1,
 		maxPower: 300,
-		regenSpeed: 100
+		regenSpeed: 100,
 	},
 	{
 		name: "KR-VPx Mark 3",
 		id: "en4",
 		weight: 1,
 		maxPower: 500,
-		regenSpeed: 100
+		regenSpeed: 100,
 	},
 	{
 		name: "Pocket ColdFusion",
 		id: "enx",
 		weight: 1,
 		maxPower: 10000,
-		regenSpeed: 1000
-	}
+		regenSpeed: 1000,
+	},
 ];
 
 export const Engines: Array<Engine> = engineParams.map(params => {

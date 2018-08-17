@@ -17,7 +17,7 @@ export default class FireBackground extends AnimateOnce {
 					prefix: "Fire 048 Up HD loop Transition_",
 					suffix: ".png",
 					pad: 5,
-					speed: 0.5
+					speed: 0.5,
 				},
 				params
 			)

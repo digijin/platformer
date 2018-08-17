@@ -8,7 +8,7 @@ import { Missions } from "Mission";
 
 export default class SideMenu extends Component {
 	state = {
-		selected: -1
+		selected: -1,
 	};
 
 	render() {
@@ -47,7 +47,7 @@ export default class SideMenu extends Component {
 						fontFamily: "RobotoBold",
 						fontSize: 30,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={288}
 					y={30}
@@ -58,7 +58,7 @@ export default class SideMenu extends Component {
 						onClick={() => {
 							this.setState(state => ({
 								...state,
-								selected: index
+								selected: index,
 							}));
 						}}
 						selected={index === this.state.selected}

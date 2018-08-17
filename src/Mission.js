@@ -18,7 +18,7 @@ Missions.push(
 		reward: 0,
 		rank: 1,
 		description: "FOR DEV TESTING",
-		objectives: [{ text: "TEST OBJECTIVE" }]
+		objectives: [{ text: "TEST OBJECTIVE" }],
 	}),
 
 	new Mission({
@@ -31,8 +31,8 @@ Missions.push(
 			{ text: "Go To X" },
 			{ text: "Kill Y" },
 			{ text: "Obtain z" },
-			{ text: "clear everything" }
-		]
+			{ text: "clear everything" },
+		],
 	}),
 
 	new Mission({
@@ -41,7 +41,7 @@ Missions.push(
 		reward: 1000,
 		rank: 2,
 		description: "different design",
-		objectives: [{ text: "more killing shit" }]
+		objectives: [{ text: "more killing shit" }],
 	}),
 
 	new Mission({
@@ -52,8 +52,8 @@ Missions.push(
 		description: "Exactly the same as first mission. here for testing",
 		objectives: [
 			{ text: "dont kill everything" },
-			{ text: "just joking, kill everything" }
-		]
+			{ text: "just joking, kill everything" },
+		],
 	}),
 
 	new Mission({
@@ -62,6 +62,6 @@ Missions.push(
 		reward: 123456,
 		rank: 4,
 		description: "for automated testing. very basic level",
-		objectives: [{ text: "kill one thing" }]
+		objectives: [{ text: "kill one thing" }],
 	})
 );

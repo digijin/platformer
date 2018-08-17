@@ -63,9 +63,9 @@ export default class Grid extends GameObject {
         } = {
     		size: {
     			w: 10,
-    			h: 10
+    			h: 10,
     		},
-    		parent: new PIXI.Container()
+    		parent: new PIXI.Container(),
     	}
     ) {
     	super();
@@ -184,7 +184,7 @@ export default class Grid extends GameObject {
     		t: 0,
     		l: 0,
     		r: window.innerWidth,
-    		b: window.innerHeight
+    		b: window.innerHeight,
     	}).move(this.engine.view.offset);
     }
 
@@ -202,7 +202,7 @@ export default class Grid extends GameObject {
     			return new Block({
     				position: new Point({ x: x, y: y }),
     				type: row[x],
-    				grid: this
+    				grid: this,
     			});
     		});
     	});
@@ -220,7 +220,7 @@ export default class Grid extends GameObject {
     						new Block({
     							position: new Point({ x, y }),
     							type: "0",
-    							grid: this
+    							grid: this,
     						})
     				)
     		);
@@ -274,7 +274,7 @@ export default class Grid extends GameObject {
     		let pos = {
     			x: Math.floor(block.position.x * config.grid.width),
 
-    			y: Math.floor(block.position.y * config.grid.width)
+    			y: Math.floor(block.position.y * config.grid.width),
     		};
 
     		if (block) {
@@ -368,7 +368,7 @@ export default class Grid extends GameObject {
     	return new Block({
     		position: new Point({ x, y }),
     		type: "1",
-    		grid: this
+    		grid: this,
     	});
     }
 
@@ -381,7 +381,7 @@ export default class Grid extends GameObject {
     renderDebugBlockPixelLine() {
     	let line = new Line({
     		a: new Point({ x: 10.5, y: 10.5 }),
-    		b: this.engine.mouse.point.multiply(1 / config.grid.width)
+    		b: this.engine.mouse.point.multiply(1 / config.grid.width),
     	});
     	this.highlightLine(line);
     }
@@ -433,12 +433,12 @@ export default class Grid extends GameObject {
     						return {
     							t: block.type,
     							b: block.backgroundType,
-    							i: block.tint
+    							i: block.tint,
     						};
     					});
-    				})
-    			}
-    		]
+    				}),
+    			},
+    		],
     	});
     }
 
@@ -476,7 +476,7 @@ export default class Grid extends GameObject {
     				type: block.t,
     				backgroundType: block.b,
     				tint: block.i,
-    				grid: this
+    				grid: this,
     			});
     		});
     	});
@@ -489,7 +489,7 @@ export default class Grid extends GameObject {
     			}
     			this.addEnemy({
     				position: new Point(e.p),
-    				type: type
+    				type: type,
     			});
     		});
     	}

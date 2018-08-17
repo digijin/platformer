@@ -34,7 +34,7 @@ export const behavior = {
 						fontFamily: "RobotoBold",
 						fontSize: 18,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={74}
 					y={28}
@@ -45,7 +45,7 @@ export const behavior = {
 						fontFamily: "Roboto",
 						fontSize: 14,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={74}
 					y={47}
@@ -54,6 +54,6 @@ export const behavior = {
 			instance
 		);
 		// this.cacheAsBitmap = true;
-	}
+	},
 };
 export default CustomPIXIComponent(behavior, TYPE);

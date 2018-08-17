@@ -17,7 +17,7 @@ class MissionDetail extends Component {
 						fontFamily: "RobotoBold",
 						fontSize: 30,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={593}
 					y={30}
@@ -28,7 +28,7 @@ class MissionDetail extends Component {
 						fontFamily: "RobotoBold",
 						fontSize: 18,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={593}
 					y={86}
@@ -39,7 +39,7 @@ class MissionDetail extends Component {
 						fontFamily: "RobotoBold",
 						fontSize: 18,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={593}
 					y={112}
@@ -50,7 +50,7 @@ class MissionDetail extends Component {
 						fontFamily: "Roboto",
 						fontSize: 18,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={593}
 					y={180}

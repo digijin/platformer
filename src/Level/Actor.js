@@ -23,7 +23,7 @@ export default class Actor extends Renderable {
 		for (let i = 0; i < 20; i++) {
 			let point: Point = new Point({
 				x: rect.l + rect.width() * Math.random(),
-				y: rect.t + rect.height() * Math.random()
+				y: rect.t + rect.height() * Math.random(),
 			});
 			//direction from center
 			let diff = point.subtract(center);
@@ -33,7 +33,7 @@ export default class Actor extends Renderable {
 				new Explosion({
 					position: point,
 					rotation: dir,
-					delay: Math.random() / 8
+					delay: Math.random() / 8,
 				})
 			);
 		}

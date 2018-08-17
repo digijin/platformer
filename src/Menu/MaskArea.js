@@ -38,7 +38,7 @@ export const behavior = {
 	},
 	customWillDetach: instance => {
 		instance.engine.canvas.removeEventListener("wheel", instance.onWheel);
-	}
+	},
 
 	// customDidAttach: instance => {
 	// 	// instance.buttonMode = true;

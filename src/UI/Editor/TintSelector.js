@@ -28,7 +28,7 @@ class TintSelector extends React.Component {
     constructor() {
     	super();
     	this.state = {
-    		expanded: false
+    		expanded: false,
     	};
     }
 

@@ -25,14 +25,14 @@ const LegParamsList: Array<LegParams> = [
 		id: "StarterLegs",
 		weight: 1,
 		speed: 500,
-		jumpPower: 10
+		jumpPower: 10,
 	},
 	{
 		name: "Chicken Brand Leg",
 		id: "leg2",
 		weight: 1,
 		speed: 600,
-		jumpPower: 50
+		jumpPower: 50,
 	},
 
 	{
@@ -40,8 +40,8 @@ const LegParamsList: Array<LegParams> = [
 		id: "legx",
 		weight: 1,
 		speed: 1000,
-		jumpPower: 100
-	}
+		jumpPower: 100,
+	},
 ];
 
 export const Legs: Array<Leg> = LegParamsList.map(params => {

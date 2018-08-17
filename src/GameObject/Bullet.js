@@ -69,7 +69,7 @@ export default class Bullet extends Projectile {
 		}
 		this.graph = new PIXI.Graphics();
 		this.graph.filters = [
-			new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY)
+			new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY),
 		];
 		this.container.addChild(this.graph);
 		// console.log("init");
@@ -131,7 +131,7 @@ export default class Bullet extends Projectile {
 			let dist = Math.random() * 2;
 			let offset = {
 				x: Math.cos(dir) * dist,
-				y: Math.sin(dir) * dist
+				y: Math.sin(dir) * dist,
 			};
 			// this.engine.register(
 			//     new Explosion({
@@ -148,7 +148,7 @@ export default class Bullet extends Projectile {
 					color: 0xffff00,
 					h: (Math.random() - 0.5) * 5,
 					v: (Math.random() - 0.5) * 5,
-					time: 0.5
+					time: 0.5,
 				})
 			);
 		}

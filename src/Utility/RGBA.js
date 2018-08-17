@@ -22,7 +22,7 @@ export default class RGBA {
 			r: p.r * ipc + n.r * pc,
 			g: p.g * ipc + n.g * pc,
 			b: p.b * ipc + n.b * pc,
-			a: p.a * ipc + n.a * pc
+			a: p.a * ipc + n.a * pc,
 		});
 	}
 
@@ -32,7 +32,7 @@ export default class RGBA {
 			r: parseInt(str.substr(0, 2), 16) / 255,
 			g: parseInt(str.substr(2, 2), 16) / 255,
 			b: parseInt(str.substr(4, 2), 16) / 255,
-			a: 1
+			a: 1,
 		});
 	}
 
@@ -41,7 +41,7 @@ export default class RGBA {
 			r: ((num >> 16) % 256) / 255,
 			g: ((num >> 8) % 256) / 255,
 			b: (num % 256) / 255,
-			a: 1
+			a: 1,
 		});
 	}
 
@@ -98,7 +98,7 @@ export default class RGBA {
     		r: this.r * inverse + rgba.r * percent,
     		g: this.g * inverse + rgba.g * percent,
     		b: this.b * inverse + rgba.b * percent,
-    		a: this.a * inverse + rgba.a * percent
+    		a: this.a * inverse + rgba.a * percent,
     	});
     }
 }

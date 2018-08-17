@@ -22,21 +22,21 @@ const BodyParamsList: Array<BodyParams> = [
 		name: "A Normal Body",
 		id: "StarterBody",
 		weight: 1,
-		power: 100
+		power: 100,
 	},
 	{
 		name: "Another Normal Body",
 		id: "Body2",
 		weight: 1,
-		power: 500
+		power: 500,
 	},
 
 	{
 		name: "it's all the same shit",
 		id: "Bodyx",
 		weight: 1,
-		power: 10000
-	}
+		power: 10000,
+	},
 ];
 
 export const Bodys: Array<Body> = BodyParamsList.map(params => {

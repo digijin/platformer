@@ -41,7 +41,7 @@ export default class AnimateOnce extends GameObject {
     	this.movie.animationSpeed = this.speed;
     	this.movie.anchor = {
     		x: 0.5,
-    		y: 0.5
+    		y: 0.5,
     	};
     }
 

@@ -33,9 +33,9 @@ export default function* agro(
 						speed: 10,
 						position: enemy.position.add({
 							x: 0,
-							y: -enemy.size.h
+							y: -enemy.size.h,
 						}),
-						target: player.position.clone()
+						target: player.position.clone(),
 					})
 				);
 			}

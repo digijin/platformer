@@ -37,7 +37,7 @@ const SecondaryParamsList: Array<SecondaryParams> = [
 		reloadTime: 0.05,
 		energyCost: 10,
 		power: 100,
-		projectile: Missile
+		projectile: Missile,
 	},
 	{
 		name: "Guided Missile Pod",
@@ -46,7 +46,7 @@ const SecondaryParamsList: Array<SecondaryParams> = [
 		reloadTime: 0.5,
 		energyCost: 10,
 		power: 500,
-		projectile: GuidedMissile
+		projectile: GuidedMissile,
 	},
 	{
 		name: "homing mines",
@@ -55,7 +55,7 @@ const SecondaryParamsList: Array<SecondaryParams> = [
 		reloadTime: 0.5,
 		energyCost: 10,
 		power: 500,
-		projectile: Missile
+		projectile: Missile,
 	},
 
 	{
@@ -65,8 +65,8 @@ const SecondaryParamsList: Array<SecondaryParams> = [
 		reloadTime: 0.5,
 		energyCost: 10,
 		power: 1000,
-		projectile: Missile
-	}
+		projectile: Missile,
+	},
 ];
 
 export const Secondarys: Array<Secondary> = SecondaryParamsList.map(params => {

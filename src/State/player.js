@@ -1,7 +1,7 @@
 export default function player(state, action) {
 	if (!state) {
 		state = {
-			money: 1000
+			money: 1000,
 		};
 	}
 

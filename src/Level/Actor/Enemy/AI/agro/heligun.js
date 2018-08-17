@@ -32,7 +32,7 @@ export default function* agro(
 			t: enemy.position.y,
 			b: enemy.position.y + 100,
 			l: enemy.position.x - 100,
-			r: enemy.position.x + 100
+			r: enemy.position.x + 100,
 		});
 		let blocks = engine.grid.getBlocksOverlappingRect(rect);
 		let empty = blocks.every(block => {
@@ -75,9 +75,9 @@ export default function* agro(
 						speed: 10,
 						position: enemy.position.add({
 							x: 0,
-							y: -enemy.size.h
+							y: -enemy.size.h,
 						}),
-						target: player.position.clone()
+						target: player.position.clone(),
 					})
 				);
 			}

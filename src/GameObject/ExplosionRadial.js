@@ -17,7 +17,7 @@ export default class ExplosionRadial extends AnimateOnce {
 					prefix: "Explosion 004 Radial_",
 					suffix: ".png",
 					pad: 5,
-					speed: 0.5
+					speed: 0.5,
 				},
 				params
 			)

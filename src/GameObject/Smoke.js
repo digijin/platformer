@@ -40,7 +40,7 @@ export default class Smoke extends GameObject {
 		this.sprite = new PIXI.Sprite(this.texture);
 		this.sprite.anchor = {
 			x: 0.5,
-			y: 0.5
+			y: 0.5,
 		};
 		this.container.addChild(this.sprite);
 
@@ -84,7 +84,7 @@ export default class Smoke extends GameObject {
 			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
 			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
 			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
-			{ r: 0.3, g: 0.3, b: 0.3, a: 1 }
+			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
 			// { r: 0.3, g: 0.3, b: 0.3, a: 0.4 },
 			// { r: 0.3, g: 0.3, b: 0.3, a: 0.3 },
 			// { r: 0.3, g: 0.3, b: 0.3, a: 0.2 },

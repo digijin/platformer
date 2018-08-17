@@ -19,6 +19,6 @@ export const behavior = {
 		instance.lineStyle(lineWidth, color);
 		instance.moveTo(x, y);
 		instance.lineTo(x + width, y + height);
-	}
+	},
 };
 export default CustomPIXIComponent(behavior, TYPE);

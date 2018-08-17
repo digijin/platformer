@@ -35,25 +35,25 @@ export default class FolderButton extends BaseButton {
 					onMouseOver={() => {
 						this.setState(state => ({
 							...state,
-							over: true
+							over: true,
 						}));
 					}}
 					onMouseOut={() => {
 						this.setState(state => ({
 							...state,
-							over: false
+							over: false,
 						}));
 					}}
 					onMouseDown={() => {
 						this.setState(state => ({
 							...state,
-							down: true
+							down: true,
 						}));
 					}}
 					onMouseUp={() => {
 						this.setState(state => ({
 							...state,
-							down: false
+							down: false,
 						}));
 					}}
 					onClick={this.props.onClick}
@@ -67,7 +67,7 @@ export default class FolderButton extends BaseButton {
 							this.state.over || this.props.selected
 								? 0x0
 								: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={90}
 					y={13}

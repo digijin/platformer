@@ -14,7 +14,7 @@ let options = [
 	[base0, base1],
 	[blinds0, blinds1, null],
 	[frame],
-	[detail0, null]
+	[detail0, null],
 ];
 export default class WindowDecor extends Abstract {
 	constructor() {
@@ -29,7 +29,7 @@ export default class WindowDecor extends Abstract {
 			destructable: false,
 			obstacle: false,
 			category: "smart",
-			hp: 1
+			hp: 1,
 		});
 	}
 

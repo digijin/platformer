@@ -6,7 +6,7 @@ import PrimitiveTab from "../../../Tab";
 export default class Tab extends React.Component {
 	state = {
 		over: false,
-		down: false
+		down: false,
 	};
 
 	render() {
@@ -32,25 +32,25 @@ export default class Tab extends React.Component {
 						// console.log(this);
 						this.setState(state => ({
 							...state,
-							over: true
+							over: true,
 						}));
 					}}
 					onMouseOut={() => {
 						this.setState(state => ({
 							...state,
-							over: false
+							over: false,
 						}));
 					}}
 					onMouseDown={() => {
 						this.setState(state => ({
 							...state,
-							down: true
+							down: true,
 						}));
 					}}
 					onMouseUp={() => {
 						this.setState(state => ({
 							...state,
-							down: false
+							down: false,
 						}));
 					}}
 					onClick={this.props.onClick}
@@ -64,7 +64,7 @@ export default class Tab extends React.Component {
 							this.props.active || this.state.over
 								? 0xffffff
 								: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={this.props.x + 24}
 					y={this.props.y - 21}

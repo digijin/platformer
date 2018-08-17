@@ -2,36 +2,36 @@
 export default {
 	game: {
 		width: 800,
-		height: 800
+		height: 800,
 	},
 	grid: {
 		width: 32,
 		// height: 20,
 		tile: {
 			width: 8,
-			height: 8
-		}
+			height: 8,
+		},
 	},
 	player: {
 		size: {
 			w: 40,
-			h: 50
+			h: 50,
 		},
 		legspeed: 20,
 		speed: 500,
 		jump: {
-			power: 10
-		}
+			power: 10,
+		},
 	},
 	gravity: 30,
 	debug: {
 		fpsmeter: true,
 		player: {
-			boundingBox: false
-		}
+			boundingBox: false,
+		},
 	},
 	missile: {
-		guidedDist: 50
+		guidedDist: 50,
 	},
 	fpsmeter: {
 		graph: 1,
@@ -40,18 +40,18 @@ export default {
 		history: 20,
 		left: "auto",
 		right: "5px",
-		show: "ms"
+		show: "ms",
 	},
 	enemy: {
 		walkSpeed: 50,
 		size: {
 			w: 50,
-			h: 50
+			h: 50,
 		},
 		registration: {
 			x: 0.5,
-			y: 1
-		}
+			y: 1,
+		},
 	},
 	input: {
 		keyboardMapping: {
@@ -69,150 +69,150 @@ export default {
 			enter: 13,
 			ctrl: 17,
 			escape: 27,
-			space: 32
+			space: 32,
 		},
 		axes: {
 			horizontal: [
 				{
 					type: "keyboard",
 					positive: "d",
-					negative: "a"
+					negative: "a",
 				},
 				{
 					type: "keyboard",
 					positive: "right",
-					negative: "left"
+					negative: "left",
 				},
 				{
 					type: "gamepad",
-					axis: 0
-				}
+					axis: 0,
+				},
 			],
 			vertical: [
 				{
 					type: "keyboard",
 					positive: "s",
-					negative: "w"
+					negative: "w",
 				},
 				{
 					type: "gamepad",
-					axis: 1
-				}
+					axis: 1,
+				},
 			],
 			ascent: [
 				{
 					type: "keyboard",
 					positive: "r",
-					negative: "f"
-				}
+					negative: "f",
+				},
 			],
 			wheel: [
 				{
-					type: "mouse"
-				}
-			]
+					type: "mouse",
+				},
+			],
 		},
 		buttons: {
 			boost: [
 				{
 					type: "keyboard",
-					key: "shift"
-				}
+					key: "shift",
+				},
 			],
 			down: [
 				{
 					type: "keyboard",
-					key: "down"
+					key: "down",
 				},
 				{
 					type: "keyboard",
-					key: "s"
-				}
+					key: "s",
+				},
 			],
 			jump: [
 				{
 					type: "gamepad",
-					button: 0
+					button: 0,
 				},
 				{
 					type: "keyboard",
-					key: "space"
-				}
+					key: "space",
+				},
 			],
 			special: [
 				{
 					type: "gamepad",
-					button: 1
+					button: 1,
 				},
 				{
 					type: "gamepad",
-					button: "lt"
+					button: "lt",
 				},
 				{
 					type: "mouse",
-					button: 2
-				}
+					button: 2,
+				},
 			],
 			fire: [
 				{
 					type: "gamepad",
-					button: 2
+					button: 2,
 				},
 				{
 					type: "gamepad",
-					button: "rt"
+					button: "rt",
 				},
 				{
 					type: "keyboard",
-					key: "ctrl"
+					key: "ctrl",
 				},
 				{
 					type: "mouse",
-					button: 0
-				}
+					button: 0,
+				},
 			],
 			editor_add: [
 				{
 					type: "mouse",
-					button: 0
-				}
+					button: 0,
+				},
 			],
 			editor_remove: [
 				{
 					type: "mouse",
-					button: 2
-				}
+					button: 2,
+				},
 			],
 			editor_speed: [
 				{
 					type: "keyboard",
-					key: "shift"
-				}
+					key: "shift",
+				},
 			],
 			editor_modifier: [
 				{
 					type: "keyboard",
-					key: "ctrl"
-				}
+					key: "ctrl",
+				},
 			],
 			editor_drag: [
 				{
 					type: "mouse",
-					button: 1
-				}
+					button: 1,
+				},
 			],
 			pause: [
 				{
 					type: "keyboard",
-					key: "escape"
-				}
+					key: "escape",
+				},
 			],
 			stand: [
 				{
 					type: "gamepad",
-					button: 5
-				}
-			]
-		}
-	}
+					button: 5,
+				},
+			],
+		},
+	},
 };

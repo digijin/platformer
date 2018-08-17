@@ -6,15 +6,15 @@ const uniforms = {};
 
 uniforms.time = {
 	type: "f",
-	value: -1
+	value: -1,
 };
 uniforms.resolution = {
 	type: "v2",
-	value: [window.innerWidth, window.innerHeight]
+	value: [window.innerWidth, window.innerHeight],
 };
 uniforms.iChannel0 = {
 	type: "sampler2D",
-	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
+	value: new PIXI.Texture(new PIXI.BaseTexture(texture)),
 };
 
 export default class MenuBackgroundFilter extends PIXI.Filter {

@@ -4,7 +4,7 @@ import MaskArea from "./MaskArea";
 
 export default class ScrollArea extends React.Component {
 	state = {
-		offset: 0
+		offset: 0,
 	};
 
 	container: Container;
@@ -24,7 +24,7 @@ export default class ScrollArea extends React.Component {
 		// console.log(this.container.height, this.props.height);
 		this.setState(state => ({
 			...state,
-			offset: newOffset
+			offset: newOffset,
 		}));
 	};
 

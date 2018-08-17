@@ -63,20 +63,20 @@ const stylesCalc = theme => ({
 		width: "360px",
 		marginTop: theme.spacing.unit * 3,
 		marginLeft: theme.spacing.unit * 3,
-		backgroundColor: theme.palette.background.paper
+		backgroundColor: theme.palette.background.paper,
 	},
 	tab: {
-		minWidth: "40px"
+		minWidth: "40px",
 	},
 	drawModeSelect: {
-		backgroundColor: "#cef8ff"
+		backgroundColor: "#cef8ff",
 	},
 	drawModeTab: {
 		minWidth: "32px",
-		height: "32px"
+		height: "32px",
 	},
 	drawModeTabs: {
-		minHeight: "32px"
+		minHeight: "32px",
 	},
 	// card: {
 	// 	maxWidth: 200,
@@ -86,8 +86,8 @@ const stylesCalc = theme => ({
 	labelContainer: {
 		// border: "1px solid red",
 		paddingLeft: "12px",
-		paddingRight: "12px"
-	}
+		paddingRight: "12px",
+	},
 	// header: {
 	// 	height: 24
 	// },
@@ -146,7 +146,7 @@ class EditorPanel extends React.Component {
 			expanded: { main: false, block: true, save: false, enemy: false },
 			savename: "",
 			tab: 0,
-			drawMode: 0
+			drawMode: 0,
 		};
 		this.tabs = ["menu", "block", "decor", "tint", "enemy", "save"];
 		this.drawModes = ["point", "paint", "dragrect"];
@@ -159,7 +159,7 @@ class EditorPanel extends React.Component {
 		}
 		this.setState({
 			drawMode: this.drawModes.indexOf(this.watcher.drawMode),
-			tab: this.tabs.indexOf(this.watcher.mode)
+			tab: this.tabs.indexOf(this.watcher.mode),
 		});
 	}
 
@@ -183,7 +183,7 @@ class EditorPanel extends React.Component {
 							return (
 								<Tab
 									classes={{
-										labelContainer: classes.labelContainer
+										labelContainer: classes.labelContainer,
 									}}
 									className={classnames(
 										"editorTab-" + t,

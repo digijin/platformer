@@ -31,7 +31,7 @@ export const behavior = {
 			alpha,
 			buttonMode,
 			interactive,
-			testingId
+			testingId,
 		} = newProps;
 		// this.cacheAsBitmap = false;
 		if (alpha == undefined) {
@@ -53,6 +53,6 @@ export const behavior = {
 		// 	console.log("yolo");
 		// };
 		// this.cacheAsBitmap = true;
-	}
+	},
 };
 export default CustomPIXIComponent(behavior, TYPE);

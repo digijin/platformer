@@ -38,27 +38,27 @@ let missile = {
 	regenBaseSpeed: 150,
 	regenSpeedIncrease: 150, //per second
 	energy: 700,
-	cost: 10
+	cost: 10,
 };
 
 const HAND_STATE = {
 	ARMED: 0,
 	FIRED: 1,
 	GRIPPED: 2,
-	RELEASED: 3
+	RELEASED: 3,
 };
 let hand = {
 	speed: 2000,
 	reelSpeed: 400,
 	offset: new Point({
 		x: -config.player.size.w / 2,
-		y: -config.player.size.h / 2
+		y: -config.player.size.h / 2,
 	}),
 	position: new Point({ x: 0, y: 0 }),
 	direction: 0,
 	distance: 500,
 	// firing: false,
-	state: HAND_STATE.ARMED
+	state: HAND_STATE.ARMED,
 };
 
 import Leg from "Mech/Leg";
@@ -82,7 +82,7 @@ export default class Player extends Actor {
 		this.v = 0;
 		this.registration = {
 			x: 0.5,
-			y: 1
+			y: 1,
 		};
 
 		this.leg = new Leg({ parent: this, container: this.container });
@@ -170,11 +170,11 @@ export default class Player extends Actor {
 					container: this.container,
 					position: this.position.subtract({
 						x: 0,
-						y: config.player.size.h / 2
+						y: config.player.size.h / 2,
 					}),
 					h: this.h,
 					v: 0.5,
-					time: 0.2
+					time: 0.2,
 				})
 			);
 		}
@@ -201,11 +201,11 @@ export default class Player extends Actor {
 					container: this.container,
 					position: this.position.subtract({
 						x: 0,
-						y: config.player.size.h / 2
+						y: config.player.size.h / 2,
 					}),
 					h: Math.random() - 0.5,
 					v: 5 + Math.random() * 2,
-					time: 0.2
+					time: 0.2,
 				})
 			);
 		} else {
@@ -320,12 +320,12 @@ export default class Player extends Actor {
 							container: this.container,
 							position: this.position.add({
 								x: 0,
-								y: -this.size.h / 2
+								y: -this.size.h / 2,
 							}),
 							// x: this.position.x,
 							// y: this.position.y - (this.size.h/2),
 							h: Math.random() - 0.5,
-							v: -Math.random()
+							v: -Math.random(),
 						})
 					);
 				}
@@ -343,7 +343,7 @@ export default class Player extends Actor {
 							owner: this,
 							time: 8,
 							h: Math.cos(dir) * 10,
-							v: Math.sin(dir) * 10
+							v: Math.sin(dir) * 10,
 						})
 					);
 				}
@@ -376,9 +376,9 @@ export default class Player extends Actor {
 						target: this.getTargetPoint().add(
 							new Point({
 								x: (Math.random() - 0.5) * 20,
-								y: (Math.random() - 0.5) * 20
+								y: (Math.random() - 0.5) * 20,
 							})
-						)
+						),
 					})
 				);
 			}
@@ -409,11 +409,11 @@ export default class Player extends Actor {
 			this.engine.mouse.point = this.position
 				.add({
 					x: 0,
-					y: -this.size.h / 2
+					y: -this.size.h / 2,
 				})
 				.add({
 					x: gp.axes[0] * 300,
-					y: gp.axes[1] * 300
+					y: gp.axes[1] * 300,
 				});
 		}
 		return gp;
@@ -451,7 +451,7 @@ export default class Player extends Actor {
 	focusCameraOnSelf() {
 		let viewTarget = this.position.subtract({
 			x: config.game.width / 2,
-			y: config.game.height / 2
+			y: config.game.height / 2,
 		});
 		// .subtract(this.viewTargetOffset);
 		this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
@@ -465,11 +465,11 @@ export default class Player extends Actor {
 					position: this.position.subtract({
 						x: (Math.random() - 0.5) * 15 * speed,
 						// y: config.player.size.h / 2
-						y: 0
+						y: 0,
 					}),
 					h: (Math.random() - 0.5) / 10,
 					v: (-Math.random() * speed) / 4,
-					time: 0.1 + Math.random()
+					time: 0.1 + Math.random(),
 				})
 			);
 		}

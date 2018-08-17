@@ -28,7 +28,7 @@ const boosterParams: Array<BoosterParams> = [
 		weight: 1,
 		power: 10,
 		energyDrain: 300,
-		energyCost: 20
+		energyCost: 20,
 	},
 	{
 		name: "Chicken Brand Booster",
@@ -36,7 +36,7 @@ const boosterParams: Array<BoosterParams> = [
 		weight: 1,
 		power: 20,
 		energyDrain: 300,
-		energyCost: 20
+		energyCost: 20,
 	},
 
 	{
@@ -45,8 +45,8 @@ const boosterParams: Array<BoosterParams> = [
 		weight: 1,
 		power: 100,
 		energyDrain: 300,
-		energyCost: 20
-	}
+		energyCost: 20,
+	},
 ];
 
 export const Boosters: Array<Booster> = boosterParams.map(params => {

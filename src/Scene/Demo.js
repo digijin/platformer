@@ -27,7 +27,7 @@ class Runner extends GameObject {
 			position: new Point({ x: window.innerWidth, y: 0 }),
 			rotation: 0,
 			delay: 0,
-			speed: 0.5
+			speed: 0.5,
 		});
 
 		this.obj.movie.width = window.innerWidth;

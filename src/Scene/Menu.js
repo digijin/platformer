@@ -15,7 +15,7 @@ export default class Menu extends Base {
 
 		engine.view.offset = new Point({
 			x: 0,
-			y: 0
+			y: 0,
 		});
 
 		engine.register(new Manager());

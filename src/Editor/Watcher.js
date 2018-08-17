@@ -64,11 +64,11 @@ export default class Watcher extends GameObject {
     		this.engine.mouse.point,
     		{
     			w: this.size,
-    			h: this.size
+    			h: this.size,
     		},
     		{
     			x: 0.5,
-    			y: 0.5
+    			y: 0.5,
     		}
     	);
     	let blocks: Array<Block> = [];
@@ -78,7 +78,7 @@ export default class Watcher extends GameObject {
     	switch (this.drawMode) {
     	case "point":
     		blocks = [
-    			this.engine.grid.getBlockAtPoint(this.engine.mouse.point)
+    			this.engine.grid.getBlockAtPoint(this.engine.mouse.point),
     		];
 
     		if (this.engine.input.getButtonUp("editor_add")) {
@@ -182,7 +182,7 @@ export default class Watcher extends GameObject {
     		blocks.forEach(b => {
     			this.engine.grid.addEnemy({
     				position: b.center,
-    				type: this.enemyType
+    				type: this.enemyType,
     			});
     		});
     	}

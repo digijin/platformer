@@ -23,21 +23,21 @@ const SidekickParamsList: Array<SidekickParams> = [
 		name: "Fisher-Pryce My First Sidekick",
 		id: "Sidekick1",
 		weight: 1,
-		power: 100
+		power: 100,
 	},
 	{
 		name: "Chicken Brand Sidekick",
 		id: "Sidekick2",
 		weight: 1,
-		power: 500
+		power: 500,
 	},
 
 	{
 		name: "Rocket Sidekick",
 		id: "Sidekickx",
 		weight: 1,
-		power: 10000
-	}
+		power: 10000,
+	},
 ];
 
 export const Sidekicks: Array<Sidekick> = SidekickParamsList.map(params => {

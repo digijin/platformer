@@ -17,7 +17,7 @@ export default class ExplosionUp5 extends AnimateOnce {
 					prefix: "Explosion 009 Up MIX_",
 					suffix: ".png",
 					pad: 5,
-					speed: 0.5
+					speed: 0.5,
 				},
 				params
 			)

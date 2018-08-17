@@ -92,7 +92,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		textureId: "",
 		destructable: false,
 		empty: true,
-		hp: 0
+		hp: 0,
 	},
 	{
 		name: "dirt",
@@ -100,7 +100,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/dirt.png"),
 		textureId: "dirt.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "brick",
@@ -108,7 +108,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/brick_tile.png"),
 		textureId: "brick_tile.png",
 		destructable: true,
-		hp: 400
+		hp: 400,
 	},
 	{
 		name: "metal",
@@ -116,7 +116,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/metal_tile.png"),
 		textureId: "metal_tile.png",
 		destructable: false,
-		hp: 0
+		hp: 0,
 	},
 	{
 		name: "wood",
@@ -124,7 +124,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/wood_tile.png"),
 		textureId: "wood_tile.png",
 		destructable: true,
-		hp: 10
+		hp: 10,
 	},
 	{
 		name: "grass",
@@ -132,7 +132,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/grass.png"),
 		textureId: "grass.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "stone",
@@ -140,7 +140,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/stone.png"),
 		textureId: "stone.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "tiles",
@@ -148,7 +148,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/tiles.png"),
 		textureId: "tiles.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "brick2",
@@ -156,7 +156,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/brick2.png"),
 		textureId: "brick2.png",
 		destructable: false,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "brick3",
@@ -164,7 +164,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/brick3.png"),
 		textureId: "brick3.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "moon",
@@ -172,7 +172,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/moon.png"),
 		textureId: "moon.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "volcanic",
@@ -180,7 +180,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/volcanic.png"),
 		textureId: "volcanic.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "pillar",
@@ -188,7 +188,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/pillar.png"),
 		textureId: "pillar.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "servicestation_cover",
@@ -196,7 +196,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/servicestation_cover.png"),
 		textureId: "servicestation_cover.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "window3x3",
@@ -204,7 +204,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/window3x3.png"),
 		textureId: "window3x3.png",
 		destructable: true,
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "grate",
@@ -212,7 +212,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/grate.png"),
 		textureId: "grate.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "concrete",
@@ -220,7 +220,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/concrete.png"),
 		textureId: "concrete.png",
 		destructable: false,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "chainlink",
@@ -228,7 +228,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/chainlink.png"),
 		textureId: "chainlink.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "flat",
@@ -236,7 +236,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/flat.png"),
 		textureId: "flat.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "awning",
@@ -244,7 +244,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/awning.png"),
 		textureId: "awning.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "block",
@@ -252,7 +252,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/bevelledBlock.png"),
 		textureId: "bevelledBlock.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "tiles",
@@ -260,7 +260,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/squaretiles.png"),
 		textureId: "squaretiles.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "storepanel1",
@@ -268,7 +268,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/storepanel1.png"),
 		textureId: "storepanel1.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "storepanel2",
@@ -276,7 +276,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/storepanel2.png"),
 		textureId: "storepanel2.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "storepanel3",
@@ -284,7 +284,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/storepanel3.png"),
 		textureId: "storepanel3.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "struts",
@@ -292,7 +292,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/struts.png"),
 		textureId: "struts.png",
 		destructable: true,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "flatgrey",
@@ -300,7 +300,7 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/flatgrey.png"),
 		textureId: "flatgrey.png",
 		destructable: false,
-		hp: 100
+		hp: 100,
 	},
 	{
 		name: "platform",
@@ -309,8 +309,8 @@ let blockTypeConfig: Array<BlockTypeParams> = [
 		textureId: "struts.png",
 		destructable: false,
 		platform: true,
-		hp: 100
-	}
+		hp: 100,
+	},
 ];
 
 export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
@@ -336,7 +336,7 @@ if (PIXI.loader.resources["blocks"]) {
 					image: require("./images/error.png"),
 					textureId: key,
 					destructable: false,
-					hp: 100
+					hp: 100,
 				})
 			);
 			//pop in a new block type

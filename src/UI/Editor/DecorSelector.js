@@ -26,7 +26,7 @@ class DecorSelector extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			expanded: false
+			expanded: false,
 		};
 	}
 
@@ -67,7 +67,7 @@ class DecorSelector extends React.Component {
 										<img
 											style={{
 												width: "32px",
-												height: "32px"
+												height: "32px",
 											}}
 											src={b.image.src}
 										/>

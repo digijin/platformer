@@ -41,7 +41,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: true,
 		obstacle: true,
 		category: "general",
-		hp: 5
+		hp: 5,
 	},
 	{
 		name: "window",
@@ -53,7 +53,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "general",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "cabinet",
@@ -65,7 +65,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "office",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "copier",
@@ -77,7 +77,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "office",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "desk",
@@ -89,7 +89,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "office",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "plant",
@@ -101,7 +101,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "office",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "waterfountain",
@@ -113,7 +113,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "office",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "light",
@@ -126,7 +126,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "light",
 		hp: 1,
-		mode: PIXI.BLEND_MODES.ADD
+		mode: PIXI.BLEND_MODES.ADD,
 	},
 	{
 		name: "toplit",
@@ -139,7 +139,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		obstacle: false,
 		category: "light",
 		hp: 1,
-		mode: PIXI.BLEND_MODES.ADD
+		mode: PIXI.BLEND_MODES.ADD,
 	},
 	{
 		name: "fuelsign",
@@ -151,7 +151,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "servo",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "petrolbowser",
@@ -163,7 +163,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "servo",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "poster1",
@@ -175,7 +175,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "poster",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "poster2",
@@ -187,7 +187,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "poster",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "poster3",
@@ -199,7 +199,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "poster",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "poster4",
@@ -211,7 +211,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "poster",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "poster5",
@@ -223,7 +223,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "poster",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "dumpster",
@@ -235,7 +235,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "general",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "door",
@@ -247,7 +247,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "general",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "door",
@@ -259,7 +259,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "general",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "storefront",
@@ -271,7 +271,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "general",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "shadow",
@@ -283,7 +283,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "shadow",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "shadow",
@@ -295,7 +295,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "shadow",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "shadow",
@@ -307,7 +307,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "shadow",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "shadow",
@@ -319,7 +319,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "shadow",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "streetlight",
@@ -331,7 +331,7 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "light",
-		hp: 1
+		hp: 1,
 	},
 	{
 		name: "neonlight.png",
@@ -343,8 +343,8 @@ let blockTypeConfig: Array<DecorTypeParams> = [
 		destructable: false,
 		obstacle: false,
 		category: "light",
-		hp: 1
-	}
+		hp: 1,
+	},
 ];
 
 export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
@@ -381,7 +381,7 @@ if (PIXI.loader.resources["decor"]) {
 					destructable: false,
 					obstacle: false,
 					category: "stray",
-					hp: 1
+					hp: 1,
 				})
 			);
 		}

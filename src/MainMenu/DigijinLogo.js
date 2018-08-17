@@ -11,127 +11,127 @@ let lettersConfig = [
 		points: [
 			{
 				x: 2,
-				y: 1
+				y: 1,
 			},
 			{
 				x: 2,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 1,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 1,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 2,
-				y: 2
-			}
-		]
+				y: 2,
+			},
+		],
 	},
 	{
 		color: "#00ff00",
 		points: [
 			{
 				x: 3,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 3,
-				y: 3
-			}
-		]
+				y: 3,
+			},
+		],
 	},
 	{
 		color: "#00ff00",
 		points: [
 			{
 				x: 5,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 4,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 4,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 5,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 5,
-				y: 4
+				y: 4,
 			},
 			{
 				x: 4,
-				y: 4
-			}
-		]
+				y: 4,
+			},
+		],
 	},
 	{
 		color: "#00ff00",
 		points: [
 			{
 				x: 6,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 6,
-				y: 3
-			}
-		]
+				y: 3,
+			},
+		],
 	},
 	{
 		color: "#00b7ff",
 		points: [
 			{
 				x: 7,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 7,
-				y: 4
-			}
-		]
+				y: 4,
+			},
+		],
 	},
 	{
 		color: "#00b7ff",
 		points: [
 			{
 				x: 8,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 8,
-				y: 3
-			}
-		]
+				y: 3,
+			},
+		],
 	},
 	{
 		color: "#00b7ff",
 		points: [
 			{
 				x: 9,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 9,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 10,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 10,
-				y: 3
-			}
-		]
+				y: 3,
+			},
+		],
 	},
 	{
 		color: "#00b7ff",
@@ -140,18 +140,18 @@ let lettersConfig = [
 			// { x: 11, y: 4 },
 			{
 				x: 11,
-				y: 3
+				y: 3,
 			},
 			{
 				x: 11,
-				y: 1
+				y: 1,
 			},
 			{
 				x: 7,
-				y: 1
-			}
+				y: 1,
+			},
 			// { x: 3, y: 1 }
-		]
+		],
 	},
 	{
 		color: "#00ff00",
@@ -160,18 +160,18 @@ let lettersConfig = [
 			// { x: 0, y: 1 },
 			{
 				x: 0,
-				y: 2
+				y: 2,
 			},
 			{
 				x: 0,
-				y: 4
+				y: 4,
 			},
 			{
 				x: 3,
-				y: 4
-			}
-		]
-	}
+				y: 4,
+			},
+		],
+	},
 ];
 
 type letterData = {
@@ -203,7 +203,7 @@ let height = size * 5;
 
 let offset = {
 	x: (window.innerWidth - width) / 2,
-	y: (window.innerHeight - height) / 2
+	y: (window.innerHeight - height) / 2,
 };
 export default class DigijinLogo extends GameObject {
     time: number;
@@ -365,7 +365,7 @@ export default class DigijinLogo extends GameObject {
     				position: mid,
     				direction: dir,
     				ctx: this.ctx,
-    				color: l.color
+    				color: l.color,
     			})
     		);
     	}
@@ -414,7 +414,7 @@ class Spike extends GameObject {
                             this.direction +
                             Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1),
     					ctx: this.ctx,
-    					color: this.color
+    					color: this.color,
     				})
     			);
     		} else {

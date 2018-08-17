@@ -7,7 +7,7 @@ import OutfittingDetail from "./Outfitting/Detail";
 
 export default class OutfittingMenu extends Component {
 	state = {
-		selected: -1
+		selected: -1,
 	};
 
 	render() {
@@ -18,7 +18,7 @@ export default class OutfittingMenu extends Component {
 			{ id: "secondary", text: "Secondary", sub: "Secondary weapon" },
 			{ id: "body", text: "Body", sub: "Chassis and armour" },
 			{ id: "booster", text: "Booster", sub: "Aerial maneuverability" },
-			{ id: "sidekick", text: "Sidekick", sub: "Companion" }
+			{ id: "sidekick", text: "Sidekick", sub: "Companion" },
 		];
 		return (
 			<Container testingId={"OutfittingContainer"}>
@@ -28,7 +28,7 @@ export default class OutfittingMenu extends Component {
 						fontFamily: "RobotoBold",
 						fontSize: 30,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={288}
 					y={30}
@@ -38,7 +38,7 @@ export default class OutfittingMenu extends Component {
 						onClick={() => {
 							this.setState(state => ({
 								...state,
-								selected: index
+								selected: index,
 							}));
 						}}
 						selected={index === this.state.selected}

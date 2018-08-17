@@ -11,15 +11,15 @@ import * as PIXI from "pixi.js";
 const uniforms = {};
 uniforms.mouse = {
 	type: "v2",
-	value: { x: 0, y: 0 }
+	value: { x: 0, y: 0 },
 };
 uniforms.time = {
 	type: "f",
-	value: 0
+	value: 0,
 };
 uniforms.resolution = {
 	type: "v2",
-	value: { x: window.innerWidth, y: window.innerHeight }
+	value: { x: window.innerWidth, y: window.innerHeight },
 };
 const TestFilter = new PIXI.Filter(
 	"",

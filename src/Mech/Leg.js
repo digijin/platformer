@@ -65,7 +65,7 @@ export default class Leg extends GameObject {
     	this.cockpit = new PIXI.Sprite(cockpitTex);
     	this.cockpit.anchor = {
     		x: 0.5,
-    		y: 0.5
+    		y: 0.5,
     	};
     	this.foot = new PIXI.Sprite(footTex);
     	this.upperleg = new PIXI.Sprite(upperlegTex);
@@ -82,7 +82,7 @@ export default class Leg extends GameObject {
     		this.gun,
     		this.rearfoot,
     		this.rearupperleg,
-    		this.rearlowerleg
+    		this.rearlowerleg,
     	].forEach(spr => {
     		this.container.addChild(spr);
     	});
@@ -97,7 +97,7 @@ export default class Leg extends GameObject {
     		this.gun,
     		this.rearupperleg,
     		this.rearlowerleg,
-    		this.rearfoot
+    		this.rearfoot,
     	].forEach(spr => {
     		this.container.removeChild(spr);
     	});
@@ -135,11 +135,11 @@ export default class Leg extends GameObject {
 
     			frontFootPosTarget = new Point({
     				x: Math.cos(this.stride) * 30,
-    				y: Math.sin(this.stride) * 20
+    				y: Math.sin(this.stride) * 20,
     			}).add(this.parent.position);
     			rearFootPosTarget = new Point({
     				x: Math.cos(this.stride + Math.PI) * 30,
-    				y: Math.sin(this.stride + Math.PI) * 20
+    				y: Math.sin(this.stride + Math.PI) * 20,
     			}).add(this.parent.position);
     			torsoOffsetTarget.y += Math.sin(this.stride * 2) * 10;
     		}
@@ -160,19 +160,19 @@ export default class Leg extends GameObject {
     	this.ik(this.frontFootPos, facing, {
     		upper: this.upperleg,
     		lower: this.lowerleg,
-    		foot: this.foot
+    		foot: this.foot,
     	});
     	this.head(this.position, facing);
     	this.ik(this.rearFootPos, facing, {
     		upper: this.rearupperleg,
     		lower: this.rearlowerleg,
-    		foot: this.rearfoot
+    		foot: this.rearfoot,
     	});
 
     	this.gunPosition(
     		this.position.add({
     			x: facing * 20,
-    			y: 20
+    			y: 20,
     		}),
     		facing
     	);
@@ -191,7 +191,7 @@ export default class Leg extends GameObject {
     	this.gun.scale.y = facing;
     	this.gun.anchor = {
     		x: 0.25,
-    		y: 0.5
+    		y: 0.5,
     	};
 
     	this.gunBarrelPos = pos
@@ -202,7 +202,7 @@ export default class Leg extends GameObject {
     head(pos: Point, facing: Facing = FACING_LEFT) {
     	this.missileBarrelPos = this.position.subtract({
     		x: 16 * facing,
-    		y: 16
+    		y: 16,
     	});
 
     	this.cockpit.position = pos;
@@ -247,7 +247,7 @@ export default class Leg extends GameObject {
     	sprites.upper.position = this.position;
     	sprites.upper.anchor = {
     		x: 0.5,
-    		y: 0.25
+    		y: 0.25,
     	};
     	sprites.upper.scale.x = facing;
     	sprites.upper.rotation = upperlegdirection;
@@ -258,7 +258,7 @@ export default class Leg extends GameObject {
     	sprites.lower.position = joint;
     	sprites.lower.anchor = {
     		x: 0.5,
-    		y: 0.25
+    		y: 0.25,
     	};
     	sprites.lower.scale.x = facing;
     	sprites.lower.rotation = lowerlegdirection;
@@ -266,7 +266,7 @@ export default class Leg extends GameObject {
     	sprites.foot.position = endpoint;
     	sprites.foot.anchor = {
     		x: 0.5,
-    		y: 1
+    		y: 1,
     	};
     }
 }

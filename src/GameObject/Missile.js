@@ -65,13 +65,13 @@ export default class Missile extends Projectile {
 		this.engine.register(
 			new Smoke({
 				container: this.container,
-				position: this.position.clone()
+				position: this.position.clone(),
 			})
 		);
 		this.engine.register(
 			new Smoke({
 				container: this.container,
-				position: this.trajectory.percent(0.5)
+				position: this.trajectory.percent(0.5),
 			})
 		);
 
@@ -172,7 +172,7 @@ export default class Missile extends Projectile {
 				t: this.position.y - r,
 				r: this.position.x + r,
 				b: this.position.y + r,
-				l: this.position.x - r
+				l: this.position.x - r,
 			});
 			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));

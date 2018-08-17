@@ -11,7 +11,7 @@ const styles = () => ({
 		right: 0,
 		top: 0,
 		bottom: 0,
-		backgroundColor: "rgba(0,0,0,0.5)"
+		backgroundColor: "rgba(0,0,0,0.5)",
 	},
 	panel: {
 		backgroundColor: "white",
@@ -19,12 +19,12 @@ const styles = () => ({
 		width: "50%",
 		height: "100%",
 		margin: "0 auto",
-		textAlign: "center"
+		textAlign: "center",
 	},
 	title: {
 		fontFamily: "HeadingFont",
-		fontSize: "30px"
-	}
+		fontSize: "30px",
+	},
 });
 export class Pause extends React.Component {
 	render() {
@@ -54,7 +54,7 @@ export class Pause extends React.Component {
 							this.props.engine.paused = false;
 							this.props.engine.ui.dispatch({
 								type: "START_SCENE",
-								scene: "level"
+								scene: "level",
 							});
 						}}
 					>

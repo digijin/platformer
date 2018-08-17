@@ -5,11 +5,11 @@ const uniforms = {};
 
 uniforms.time = {
 	type: "f",
-	value: -1
+	value: -1,
 };
 uniforms.resolution = {
 	type: "v2",
-	value: [window.innerWidth, window.innerHeight]
+	value: [window.innerWidth, window.innerHeight],
 };
 
 export default class MenuBackgroundFilter extends PIXI.Filter {

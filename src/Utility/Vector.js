@@ -17,18 +17,18 @@ Vector.prototype = {
 			[
 				oc * axis.x * axis.x + c,
 				oc * axis.x * axis.y - axis.z * s,
-				oc * axis.z * axis.x + axis.y * s
+				oc * axis.z * axis.x + axis.y * s,
 			],
 			[
 				oc * axis.x * axis.y + axis.z * s,
 				oc * axis.y * axis.y + c,
-				oc * axis.y * axis.z - axis.x * s
+				oc * axis.y * axis.z - axis.x * s,
 			],
 			[
 				oc * axis.z * axis.x - axis.y * s,
 				oc * axis.y * axis.z + axis.x * s,
-				oc * axis.z * axis.z + c
-			]
+				oc * axis.z * axis.z + c,
+			],
 		];
 		return new Vector(
 			this.x * mat[0][0] + this.y * mat[0][1] + this.z * mat[0][2],
@@ -87,7 +87,7 @@ Vector.prototype = {
 	toAngles: function() {
 		return {
 			theta: Math.atan2(this.z, this.x),
-			phi: Math.asin(this.y / this.length())
+			phi: Math.asin(this.y / this.length()),
 		};
 	},
 	angleTo: function(a) {
@@ -104,7 +104,7 @@ Vector.prototype = {
 		this.y = y;
 		this.z = z;
 		return this;
-	}
+	},
 };
 
 Vector.negative = function(a, b) {

@@ -13,7 +13,7 @@ let defaults = {
 	windowHeight: 3,
 	windowWidth: 3,
 	windowMargin: 1,
-	sideWidth: 10
+	sideWidth: 10,
 };
 
 export default class Building {
@@ -23,7 +23,7 @@ export default class Building {
 				r: 1,
 				g: 0.5 + Math.random() * 0.5,
 				b: 0.5 + Math.random() * 0.5,
-				a: 1
+				a: 1,
 			}).toHex(),
 			width: 10 + Math.floor(Math.random() * 40),
 			floors: 20 + Math.floor(Math.random() * 40),
@@ -31,7 +31,7 @@ export default class Building {
 			windowHeight: 2 + Math.floor(Math.random() * 4),
 			windowWidth: 2 + Math.floor(Math.random() * 3),
 			windowMargin: Math.floor(Math.random() * 2),
-			sideWidth: 10 + Math.floor(Math.random() * 20)
+			sideWidth: 10 + Math.floor(Math.random() * 20),
 		});
 	}
 

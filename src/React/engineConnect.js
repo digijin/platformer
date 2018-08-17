@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const engineConnect = ComponentToWrap => {
 	return class EngineComponent extends Component {
 		static contextTypes = {
-			engine: PropTypes.object.isRequired
+			engine: PropTypes.object.isRequired,
 		};
 
 		render() {

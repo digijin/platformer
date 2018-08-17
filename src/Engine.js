@@ -120,7 +120,7 @@ export default class Engine {
 		instance = this;
 		this.paused = false;
 		this.view = {
-			offset: new Point({ x: 120, y: 0 })
+			offset: new Point({ x: 120, y: 0 }),
 		};
 
 		// this.objects = [];
@@ -157,7 +157,7 @@ export default class Engine {
 			{
 				view: this.pixicanvas,
 				transparent: true,
-				antialias: true
+				antialias: true,
 			}
 		);
 		// this.backgroundStage.filters = [

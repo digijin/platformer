@@ -20,7 +20,7 @@ export default class MainMenu extends Base {
 
 		engine.view.offset = new Point({
 			x: 0,
-			y: 0
+			y: 0,
 		});
 
 		engine.register(new BackgroundBuildings());

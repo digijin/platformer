@@ -66,10 +66,10 @@ export default class Background extends GameObject {
 		this.buildingStage.filters = [
 			new ReflectionFilter({
 				alpha: [1, 0],
-				time: 1
+				time: 1,
 				// amplitude: [50, 50],
 				// wavelength: [10, 200]
-			})
+			}),
 			// new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
 		];
 		// this.buildingStage.filters.push(new GlitchFilter());
@@ -127,7 +127,7 @@ export default class Background extends GameObject {
 		this.cloudFilter = new StormCloudsFilter();
 		this.cloudFilter.size = {
 			x: window.innerWidth,
-			y: window.innerHeight / 2
+			y: window.innerHeight / 2,
 		};
 		this.clouds.filters = [this.cloudFilter];
 	}

@@ -33,7 +33,7 @@ import FilterUpdater from "Filter/Updater";
 
 class SideMenu extends Component {
 	state = {
-		selected: "MISSIONS"
+		selected: "MISSIONS",
 	};
 
 	bgFilter = new MenuBackgroundFilter();
@@ -44,7 +44,7 @@ class SideMenu extends Component {
 		}
 		this.setState(state => ({
 			...state,
-			selected: section
+			selected: section,
 		}));
 	};
 

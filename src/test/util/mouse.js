@@ -34,7 +34,7 @@ function clickCheckbox(selector: string) {
 const mouse = {
 	mouseEvent,
 	clickSelector,
-	clickCheckbox
+	clickCheckbox,
 };
 
 export default mouse;

@@ -121,14 +121,14 @@ export default class Block {
 	get center(): Point {
 		return new Point({
 			x: (this.position.x + 0.5) * config.grid.width,
-			y: (this.position.y + 0.5) * config.grid.width
+			y: (this.position.y + 0.5) * config.grid.width,
 		});
 	}
 
 	get point(): Point {
 		return new Point({
 			x: this.position.x * config.grid.width,
-			y: this.position.y * config.grid.width
+			y: this.position.y * config.grid.width,
 		});
 	}
 
@@ -144,7 +144,7 @@ export default class Block {
 			t: this.position.y * config.grid.width,
 			r: (this.position.x + 1) * config.grid.width,
 			b: (this.position.y + 1) * config.grid.width,
-			l: this.position.x * config.grid.width
+			l: this.position.x * config.grid.width,
 		});
 	}
 }

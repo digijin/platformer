@@ -5,13 +5,13 @@ export default class BaseButton extends Component {
     	over: false,
     	down: false,
     	glitch: 6,
-    	visible: false
+    	visible: false,
     };
 
     show = () => {
     	this.setState(state => ({
     		...state,
-    		visible: true
+    		visible: true,
     	}));
     	this.timeout = setTimeout(this.glitch, 100 * Math.random());
     };
@@ -20,7 +20,7 @@ export default class BaseButton extends Component {
     	if (this.state.glitch > 0) {
     		this.setState(state => ({
     			...state,
-    			glitch: this.state.glitch - 1
+    			glitch: this.state.glitch - 1,
     		}));
     		this.timeout = setTimeout(this.glitch, 100 * Math.random());
     	} else {
@@ -34,7 +34,7 @@ export default class BaseButton extends Component {
     reglitch = () => {
     	this.setState(state => ({
     		...state,
-    		glitch: Math.ceil(Math.random() * 10)
+    		glitch: Math.ceil(Math.random() * 10),
     	}));
     	this.timeout = setTimeout(this.glitch, 100 * Math.random());
     };

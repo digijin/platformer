@@ -17,7 +17,7 @@ export default function mech(state: MechState, action: Object){
 			arm: "starter",
 			booster: "starter",
 			ultimate: "starter",
-			weapons: {}
+			weapons: {},
 		};
 	}
 	switch(action){

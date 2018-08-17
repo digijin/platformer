@@ -32,7 +32,7 @@ export default class Point {
 			y: number
 		} = {
 			x: 0,
-			y: 0
+			y: 0,
 		}
 	): void {
 		this.x = pos.x;
@@ -49,7 +49,7 @@ export default class Point {
 	clone() {
 		return new Point({
 			x: this.x,
-			y: this.y
+			y: this.y,
 		});
 	}
 
@@ -60,21 +60,21 @@ export default class Point {
 	add(diff: { x: number, y: number }): Point {
 		return new Point({
 			x: this.x + diff.x,
-			y: this.y + diff.y
+			y: this.y + diff.y,
 		});
 	}
 
 	subtract(diff: { x: number, y: number }) {
 		return new Point({
 			x: this.x - diff.x,
-			y: this.y - diff.y
+			y: this.y - diff.y,
 		});
 	}
 
 	multiply(num: number) {
 		return new Point({
 			x: this.x * num,
-			y: this.y * num
+			y: this.y * num,
 		});
 	}
 
@@ -97,7 +97,7 @@ export default class Point {
 	move(direction: number, distance: number): Point {
 		return new Point({
 			x: this.x + Math.cos(direction) * distance,
-			y: this.y + Math.sin(direction) * distance
+			y: this.y + Math.sin(direction) * distance,
 		});
 	}
 
@@ -107,7 +107,7 @@ export default class Point {
 		} {
 		return {
 			x: Math.floor(this.x / config.grid.width),
-			y: Math.floor(this.y / config.grid.width)
+			y: Math.floor(this.y / config.grid.width),
 		};
 	}
 
@@ -117,7 +117,7 @@ export default class Point {
 		}
 		return new Point({
 			x: this.x + (point.x - this.x) / divisor,
-			y: this.y + (point.y - this.y) / divisor
+			y: this.y + (point.y - this.y) / divisor,
 		});
 	}
 
@@ -125,7 +125,7 @@ export default class Point {
 		let inverse = 1 - percent;
 		return new Point({
 			x: this.x * inverse + point.x * percent,
-			y: this.y * inverse + point.y * percent
+			y: this.y * inverse + point.y * percent,
 		});
 	}
 
@@ -152,28 +152,28 @@ export default class Point {
 	get rounded(): Point {
 		return new Point({
 			x: Math.round(this.x),
-			y: Math.round(this.y)
+			y: Math.round(this.y),
 		});
 	}
 
 	round(): Point {
 		return new Point({
 			x: Math.round(this.x),
-			y: Math.round(this.y)
+			y: Math.round(this.y),
 		});
 	}
 
 	floor(): Point {
 		return new Point({
 			x: Math.floor(this.x),
-			y: Math.floor(this.y)
+			y: Math.floor(this.y),
 		});
 	}
 
 	ceil(): Point {
 		return new Point({
 			x: Math.ceil(this.x),
-			y: Math.ceil(this.y)
+			y: Math.ceil(this.y),
 		});
 	}
 }

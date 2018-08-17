@@ -33,7 +33,7 @@ export default class Explosion extends GameObject {
     	this.sprite = new PIXI.Sprite(this.texture);
     	this.sprite.anchor = {
     		x: 0.5,
-    		y: 0.5
+    		y: 0.5,
     	};
     	this.engine.grid.parent.addChild(this.sprite);
     	this.positionSprite();

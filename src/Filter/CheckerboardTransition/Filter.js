@@ -20,11 +20,11 @@ const uniforms = {};
 // };
 uniforms.percent = {
 	type: "f",
-	value: 0
+	value: 0,
 };
 uniforms.resolution = {
 	type: "v2",
-	value: [window.innerWidth, window.innerHeight]
+	value: [window.innerWidth, window.innerHeight],
 };
 
 class CheckerboardTransitionFilter extends PIXI.Filter {

@@ -20,9 +20,9 @@ export default class StoryTeller extends GameObject {
 		let grid = new Grid({
 			size: {
 				w: 200,
-				h: 50
+				h: 50,
 			},
-			parent: this.container
+			parent: this.container,
 		});
 		// grid.makeTest();
 		// grid.generate(1);
@@ -35,9 +35,9 @@ export default class StoryTeller extends GameObject {
 		let player = new Player({
 			position: new Point({
 				x: 450,
-				y: 100
+				y: 100,
 			}),
-			container: this.container
+			container: this.container,
 		});
 
 		this.energyBar = new EnergyBar({ player: player });

@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 class EngineProvider extends Component {
 	static propTypes = {
-		engine: PropTypes.object.isRequired
+		engine: PropTypes.object.isRequired,
 	};
 
 	// you must specify what you’re adding to the context
 	static childContextTypes = {
-		engine: PropTypes.object.isRequired
+		engine: PropTypes.object.isRequired,
 	};
 
 	getChildContext() {

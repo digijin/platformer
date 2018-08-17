@@ -36,25 +36,25 @@ export default class MissionsButton extends BaseButton {
 					onMouseOver={() => {
 						this.setState(state => ({
 							...state,
-							over: true
+							over: true,
 						}));
 					}}
 					onMouseOut={() => {
 						this.setState(state => ({
 							...state,
-							over: false
+							over: false,
 						}));
 					}}
 					onMouseDown={() => {
 						this.setState(state => ({
 							...state,
-							down: true
+							down: true,
 						}));
 					}}
 					onMouseUp={() => {
 						this.setState(state => ({
 							...state,
-							down: false
+							down: false,
 						}));
 					}}
 					onClick={this.props.onClick}
@@ -68,7 +68,7 @@ export default class MissionsButton extends BaseButton {
 							this.state.over || this.props.selected
 								? 0x0
 								: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={14}
 					y={14}
@@ -82,7 +82,7 @@ export default class MissionsButton extends BaseButton {
 							this.state.over || this.props.selected
 								? 0x0
 								: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={14}
 					y={40}
@@ -97,7 +97,7 @@ export default class MissionsButton extends BaseButton {
 							this.state.over || this.props.selected
 								? 0x0
 								: UICOLOUR,
-						align: "right"
+						align: "right",
 					}}
 					x={185}
 					y={45}

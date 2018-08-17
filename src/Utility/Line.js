@@ -28,7 +28,7 @@ export default class Line {
 	multiply(num: number): Line {
 		return new Line({
 			a: this.a.multiply(num),
-			b: this.b.multiply(num)
+			b: this.b.multiply(num),
 		});
 	}
 
@@ -93,7 +93,7 @@ export default class Line {
 				t: neighbour.y,
 				l: neighbour.x,
 				b: neighbour.y + 1,
-				r: neighbour.x + 1
+				r: neighbour.x + 1,
 			};
 			if (this.intersectsRect(rect).result) {
 				next = neighbour;
@@ -103,7 +103,7 @@ export default class Line {
 					t: neighbour.y,
 					l: neighbour.x,
 					b: neighbour.y + 1,
-					r: neighbour.x + 1
+					r: neighbour.x + 1,
 				};
 				if (this.intersectsRect(rect).result) {
 					next = neighbour;
@@ -134,7 +134,7 @@ export default class Line {
 		let b = this.b.floor();
 		let delta = {
 			x: b.x - a.x,
-			y: b.y - a.y
+			y: b.y - a.y,
 		};
 		let deltaErr = Math.abs(delta.y / delta.x);
 		if (deltaErr == Infinity) {

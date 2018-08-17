@@ -41,25 +41,25 @@ export default class MenuButton extends BaseButton {
 					onMouseOver={() => {
 						this.setState(state => ({
 							...state,
-							over: true
+							over: true,
 						}));
 					}}
 					onMouseOut={() => {
 						this.setState(state => ({
 							...state,
-							over: false
+							over: false,
 						}));
 					}}
 					onMouseDown={() => {
 						this.setState(state => ({
 							...state,
-							down: true
+							down: true,
 						}));
 					}}
 					onMouseUp={() => {
 						this.setState(state => ({
 							...state,
-							down: false
+							down: false,
 						}));
 					}}
 					onClick={this.props.onClick}
@@ -70,7 +70,7 @@ export default class MenuButton extends BaseButton {
 						fontFamily: "RobotoBold",
 						fontSize: 20,
 						fill: this.state.over ? LOCOLOUR : HICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={width / 2}
 					y={14}

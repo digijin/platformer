@@ -15,7 +15,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "RobotoBold",
 						fontSize: 30,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={593}
 					y={30}
@@ -36,7 +36,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "RobotoBold",
 						fontSize: 18,
 						fill: 0xffffff,
-						align: "center"
+						align: "center",
 					}}
 					x={606}
 					y={101}
@@ -55,7 +55,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "Roboto",
 						fontSize: 16,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					alpha={0.5}
 					x={606}
@@ -67,7 +67,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "Roboto",
 						fontSize: 16,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={799}
 					y={138}
@@ -86,7 +86,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "Roboto",
 						fontSize: 16,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					alpha={0.5}
 					x={606}
@@ -98,7 +98,7 @@ export default class OutfittingPanel extends React.Component {
 						fontFamily: "Roboto",
 						fontSize: 16,
 						fill: UICOLOUR,
-						align: "center"
+						align: "center",
 					}}
 					x={799}
 					y={138 + 29}

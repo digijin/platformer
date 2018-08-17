@@ -40,7 +40,7 @@ export default function* suicideBomber(
 			t: enemy.position.y - 10,
 			r: enemy.position.x + enemy.direction * 20 + 10,
 			l: enemy.position.x + enemy.direction * -20 - 10,
-			b: enemy.position.y - 1
+			b: enemy.position.y - 1,
 		});
 		if (
 			engine.grid

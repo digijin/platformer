@@ -34,7 +34,7 @@ export const behavior = {
 			sideWidth,
 			bottom,
 			leftCorner,
-			rightCorner
+			rightCorner,
 		} = newProps;
 		// this.cacheAsBitmap = false;
 		if (alpha == undefined) {
@@ -80,6 +80,6 @@ export const behavior = {
 		// 	console.log("yolo");
 		// };
 		// this.cacheAsBitmap = true;
-	}
+	},
 };
 export default CustomPIXIComponent(behavior, TYPE);
