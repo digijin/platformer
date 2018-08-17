@@ -27,7 +27,7 @@ export default class Context {
     	x: 1,
     	y: 1,
     }, screen: boolean = false) {
-    	let im: HTMLImageElement = (image: any);
+    	const im: HTMLImageElement = (image: any);
     	if (!screen) {
     		position = position.subtract(this.engine.view.offset);
     	}
@@ -38,7 +38,7 @@ export default class Context {
     	if (scale.x !== 1 || scale.y !== 1) {
     		this.context.scale(scale.x, scale.y);
     	}
-    	let imageParams = [im, 0, 0, im.width, im.height];
+    	const imageParams = [im, 0, 0, im.width, im.height];
     	this.context.drawImage(...imageParams, -size.w * registration.x, -size.h * registration.y, size.w, size.h);
     	this.resetTransform();
     };
@@ -76,7 +76,7 @@ export default class Context {
     	this.context.strokeStyle = style;
     	this.context.lineWidth = width;
     	if (!screen) {
-    		let o = this.engine.view.offset;
+    		const o = this.engine.view.offset;
     		from = from.subtract(o);
     		to = to.subtract(o);
     	}
@@ -97,7 +97,7 @@ export default class Context {
     }
 
     strokeRect(x: number, y: number, w: number, h: number) {
-    	let o = this.engine.view.offset;
+    	const o = this.engine.view.offset;
     	this.context.strokeRect(x - o.x, y - o.y, w, h);
     }
 
@@ -145,7 +145,7 @@ export default class Context {
     }
 
     arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean) {
-    	let o = this.engine.view.offset;
+    	const o = this.engine.view.offset;
     	this.context.arc(x - o.x, y - o.y, radius, startAngle, endAngle, anticlockwise);
     }
 

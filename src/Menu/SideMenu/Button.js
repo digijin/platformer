@@ -33,7 +33,7 @@ export default class MenuButton extends BaseButton {
 	// };
 
 	render() {
-		let { text, x, y } = this.props;
+		const { text, x, y } = this.props;
 		return (
 			<Container
 				x={x}

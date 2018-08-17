@@ -45,7 +45,7 @@ export default class Particle extends GameObject {
 
     update() {
     	this.time -= this.engine.deltaTime;
-    	let old: Point = this.position.clone();
+    	const old: Point = this.position.clone();
     	this.position.x += this.h;
     	this.position.y += this.v;
     	this.v *= 1 - this.engine.deltaTime;

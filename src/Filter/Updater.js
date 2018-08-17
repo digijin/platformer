@@ -14,7 +14,7 @@ export default class FilterUpdater extends GameObject {
 	}
 
 	update() {
-		let mp = this.engine.input.mouse.position;
+		const mp = this.engine.input.mouse.position;
 		// console.log(mp);
 		if (this.engine.input.getButtonDown("fire")) {
 			//update rotation
@@ -22,7 +22,7 @@ export default class FilterUpdater extends GameObject {
 		}
 		if (this.engine.input.getButton("fire")) {
 			//update rotation
-			let diff = mp.subtract(this.lastMouse);
+			const diff = mp.subtract(this.lastMouse);
 			this.rotation = this.rotation.rotateAround(UP, diff.x / 1000);
 			const side = UP.cross(this.rotation);
 			this.rotation = this.rotation.rotateAround(side, -diff.y / 1000);

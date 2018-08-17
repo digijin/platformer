@@ -13,7 +13,7 @@ export default class OutfittingButton extends BaseButton {
 	// };
 
 	render() {
-		let { text, sub, x, y } = this.props;
+		const { text, sub, x, y } = this.props;
 		return (
 			<Container
 				x={x}

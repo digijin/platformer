@@ -2,7 +2,7 @@
 
 import RGBA from "Utility/RGBA";
 
-let defaults = {
+const defaults = {
 	frontColor: "#172125",
 	sideColor: "#2b353b",
 	windowColor: "#171619",
@@ -51,7 +51,7 @@ export default class Building {
     constructor(params: {} = {}) {
     	Object.assign(this, defaults, params);
     	this.canvas = document.createElement("canvas");
-    	let height = this.floors * this.floorHeight;
+    	const height = this.floors * this.floorHeight;
 
     	this.canvas.height = height;
     	this.canvas.width = this.width + this.sideWidth;
@@ -64,7 +64,7 @@ export default class Building {
     		this.context.fillRect(this.width, 0, this.sideWidth, height);
 
     		for (let y = 0; y < this.floors; y++) {
-    			let litFloor = Math.random() < 0.3;
+    			const litFloor = Math.random() < 0.3;
     			for (
     				let x = 0;
     				x < this.width - this.windowWidth;
@@ -73,9 +73,9 @@ export default class Building {
     				this.context.fillStyle = this.windowColor;
     				this.context.shadowBlur = 0;
     				if (litFloor && Math.random() < 0.2) {
-    					let unlit = RGBA.fromString(this.windowColor);
-    					let lit = RGBA.fromString(this.windowLitColor);
-    					let pc = Math.random();
+    					const unlit = RGBA.fromString(this.windowColor);
+    					const lit = RGBA.fromString(this.windowLitColor);
+    					const pc = Math.random();
 
     					this.context.shadowColor = this.windowLitColor;
     					this.context.shadowBlur = pc * 5;
@@ -93,9 +93,9 @@ export default class Building {
     				//and on side
 
     				if (litFloor && Math.random() < 0.2) {
-    					let unlit = RGBA.fromString(this.windowColor);
-    					let lit = RGBA.fromString(this.windowLitColor);
-    					let pc = Math.random();
+    					const unlit = RGBA.fromString(this.windowColor);
+    					const lit = RGBA.fromString(this.windowLitColor);
+    					const pc = Math.random();
 
     					this.context.shadowColor = this.windowLitColor;
     					this.context.shadowBlur = pc * 5;
@@ -105,7 +105,7 @@ export default class Building {
     						.toHex();
     				}
 
-    				let ratio = this.sideWidth / this.width;
+    				const ratio = this.sideWidth / this.width;
 
     				this.context.fillRect(
     					this.width + x * ratio,
@@ -117,7 +117,7 @@ export default class Building {
     		}
 
     		//faded overlay
-    		let gradient = this.context.createLinearGradient(0, 0, 0, height);
+    		const gradient = this.context.createLinearGradient(0, 0, 0, height);
     		gradient.addColorStop(0, "rgba(0,0,0,0)");
     		gradient.addColorStop(1, "rgba(23,24,25,1)");
     		this.context.shadowBlur = 0;

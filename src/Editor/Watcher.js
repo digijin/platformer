@@ -60,7 +60,7 @@ export default class Watcher extends GameObject {
 
     update() {
     	this.size += this.engine.input.getAxis("wheel") / 50;
-    	let rect = Rect.fromPosSizeRego(
+    	const rect = Rect.fromPosSizeRego(
     		this.engine.mouse.point,
     		{
     			w: this.size,
@@ -103,7 +103,7 @@ export default class Watcher extends GameObject {
     		break;
     	case "dragrect":
     		if (this.rectStart) {
-    			let dragrect = new Rect.fromPoints(
+    			const dragrect = new Rect.fromPoints(
     				this.rectStart,
     				this.engine.mouse.point
     			);
@@ -150,7 +150,7 @@ export default class Watcher extends GameObject {
     		});
     	}
     	//scrolling
-    	let speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
+    	const speed = this.engine.input.getButton("editor_speed") ? 500 : 200;
     	this.engine.view.offset.x +=
             this.engine.input.getAxis("horizontal") *
             this.engine.deltaTime *
@@ -187,7 +187,7 @@ export default class Watcher extends GameObject {
     		});
     	}
     	if (action == "remove") {
-    		let enemies = this.engine.objectsTagged("enemy");
+    		const enemies = this.engine.objectsTagged("enemy");
     		blocks.forEach(b => {
     			enemies.forEach(e => {
     				if (e.position.insideRect(b.rect)) {
@@ -234,7 +234,7 @@ export default class Watcher extends GameObject {
     }
 
     drawTint(blocks: Array<Block>, action: string) {
-    	let tint = RGBA.fromString(this.tint).toNumber();
+    	const tint = RGBA.fromString(this.tint).toNumber();
     	if (action == "add") {
     		// block.add();
     		blocks.forEach(b => {

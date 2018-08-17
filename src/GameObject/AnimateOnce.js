@@ -25,9 +25,9 @@ export default class AnimateOnce extends GameObject {
 
     	Object.assign(this, params);
 
-    	let frames = [];
+    	const frames = [];
     	for (let i = 0; i < this.numFrames; i++) {
-    		let framenum = i.toString().padStart(params.pad, "0");
+    		const framenum = i.toString().padStart(params.pad, "0");
     		frames.push(
     			PIXI.loader.resources[params.resource].textures[
     				params.prefix + framenum + params.suffix

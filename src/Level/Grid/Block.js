@@ -87,7 +87,7 @@ export default class Block {
 	}
 
 	damage(amount: number) {
-		let type = this.getType();
+		const type = this.getType();
 		if (type && type.destructable) {
 			this.hp -= amount;
 			if (this.hp <= 0) {

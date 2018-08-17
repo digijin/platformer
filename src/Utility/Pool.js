@@ -25,7 +25,7 @@ export default class Pool {
 
 	get() {
 		if (this.index >= this.pool.length) {
-			let instance = this.create();
+			const instance = this.create();
 			if (this.onCreate) {
 				this.onCreate(instance);
 			}

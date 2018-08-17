@@ -112,9 +112,9 @@ class EditorPanel extends React.Component {
 	savename: string;
 
 	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
 		watcher.mode = target;
-		let newstate = { expanded: {} };
+		const newstate = { expanded: {} };
 		newstate.expanded[target] = !this.state.expanded[target];
 		this.setState(newstate);
 	};
@@ -165,7 +165,7 @@ class EditorPanel extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		let watcher = this.watcher;
+		const watcher = this.watcher;
 		//this.props.engine.objectsTagged("editor-watcher")[0];
 		if (!watcher) {
 			throw new Error("no watcher");

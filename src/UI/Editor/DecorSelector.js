@@ -16,9 +16,9 @@ import Button from "material-ui/Button";
 import { CardContent } from "material-ui/Card";
 class DecorSelector extends React.Component {
 	handleExpandClick = target => {
-		let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
 		watcher.mode = target;
-		let newstate = { expanded: {} };
+		const newstate = { expanded: {} };
 		newstate.expanded = !this.state.expanded;
 		this.setState(newstate);
 	};
@@ -32,7 +32,7 @@ class DecorSelector extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		let decor = {};
+		const decor = {};
 		DecorTypes.forEach(dt => {
 			if (!decor[dt.category]) {
 				decor[dt.category] = [];

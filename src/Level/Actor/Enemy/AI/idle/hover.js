@@ -5,7 +5,7 @@ export default function* hover(
 	enemy: Enemy,
 	engine: Engine
 ): Generator<*, *, *> {
-	let pos = enemy.position;
+	const pos = enemy.position;
 	let time = 1;
 	while (time > 0) {
 		time -= engine.deltaTime;

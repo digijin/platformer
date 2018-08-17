@@ -29,7 +29,7 @@ import type ComponentEngine from "Components/Engine";
 import * as PIXI from "pixi.js";
 
 // let firing = false;
-let missile = {
+const missile = {
 	firing: false,
 	maxEnergy: 800,
 	reloadTime: 0.05,
@@ -47,7 +47,7 @@ const HAND_STATE = {
 	GRIPPED: 2,
 	RELEASED: 3,
 };
-let hand = {
+const hand = {
 	speed: 2000,
 	reelSpeed: 400,
 	offset: new Point({
@@ -104,7 +104,7 @@ export default class Player extends Actor {
 		this.focusCameraOnSelf();
 
 		//GAMEPAD HACK
-		let gp = this.getGamePad();
+		const gp = this.getGamePad();
 
 		//constantly regen
 		this.regenEnergy();
@@ -127,8 +127,8 @@ export default class Player extends Actor {
 	}
 
 	updateMovement(gp: any) {
-		let booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
-		let legs = LegMap[this.engine.currentPlayer.legs];
+		const booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
+		const legs = LegMap[this.engine.currentPlayer.legs];
 
 		// let boundingRect = this.getBoundingRect();
 
@@ -215,7 +215,7 @@ export default class Player extends Actor {
 		const onGround = this.v > 0 && !this.canMoveVert(this.v);
 		this.airborne = !onGround;
 
-		let vertObjects = this.vertObstacles(this.v);
+		const vertObjects = this.vertObstacles(this.v);
 
 		if (vertObjects.length > 0) {
 			//LAND ON GROUND
@@ -223,7 +223,7 @@ export default class Player extends Actor {
 			if (this.v > 0) {
 				this.position.y = vertObjects[0].position.y * config.grid.width;
 			}
-			let allPlatform =
+			const allPlatform =
 				vertObjects.find(o => {
 					return o.isPlatform() == false;
 				}) == undefined;
@@ -241,8 +241,8 @@ export default class Player extends Actor {
 
 		if (hand.state == HAND_STATE.GRIPPED) {
 			//REEL IN
-			let diff = this.position.add(hand.offset).subtract(hand.position);
-			let dir = Math.atan2(diff.y, diff.x);
+			const diff = this.position.add(hand.offset).subtract(hand.position);
+			const dir = Math.atan2(diff.y, diff.x);
 			this.h = -Math.cos(dir); //* deltaTime*hSpeed
 			this.v = -Math.sin(dir) * this.engine.deltaTime * hand.reelSpeed;
 			hDelta = this.h * this.engine.deltaTime * hand.reelSpeed;
@@ -270,8 +270,8 @@ export default class Player extends Actor {
 			//FIRE HAND
 			if (hand.state == HAND_STATE.ARMED) {
 				hand.state = HAND_STATE.FIRED;
-				let diff = this.getTargetPoint().subtract(hand.position);
-				let dir = Math.atan2(diff.y, diff.x);
+				const diff = this.getTargetPoint().subtract(hand.position);
+				const dir = Math.atan2(diff.y, diff.x);
 				hand.direction = dir;
 			}
 		} else {
@@ -293,15 +293,15 @@ export default class Player extends Actor {
 			}
 		}
 		if (hand.state == HAND_STATE.RELEASED) {
-			let target = this.position.add(hand.offset);
-			let diff = target.subtract(hand.position);
-			let dist = hand.position.distanceTo(target);
-			let speed = this.engine.deltaTime * hand.speed;
+			const target = this.position.add(hand.offset);
+			const diff = target.subtract(hand.position);
+			const dist = hand.position.distanceTo(target);
+			const speed = this.engine.deltaTime * hand.speed;
 			if (speed > dist) {
 				hand.position = target;
 				hand.state = HAND_STATE.ARMED;
 			} else {
-				let dir = Math.atan2(diff.y, diff.x);
+				const dir = Math.atan2(diff.y, diff.x);
 				hand.position.x += Math.cos(dir) * speed;
 				hand.position.y += Math.sin(dir) * speed;
 			}
@@ -313,7 +313,7 @@ export default class Player extends Actor {
 			this.primaryReload -= this.engine.deltaTime;
 		} else {
 			if (this.engine.input.getButton("fire")) {
-				let primary = PrimaryMap[this.engine.currentPlayer.primary];
+				const primary = PrimaryMap[this.engine.currentPlayer.primary];
 				if (Math.random() < 0.25) {
 					this.engine.register(
 						new Shell({
@@ -329,9 +329,9 @@ export default class Player extends Actor {
 						})
 					);
 				}
-				let gunPoint = this.leg.gunBarrelPos;
-				let diff = this.getTargetPoint().subtract(gunPoint);
-				let dir = Math.atan2(diff.y, diff.x);
+				const gunPoint = this.leg.gunBarrelPos;
+				const diff = this.getTargetPoint().subtract(gunPoint);
+				const dir = Math.atan2(diff.y, diff.x);
 				if (this.spendEnergy(primary.energyCost)) {
 					this.primaryReload = primary.reloadTime;
 					this.engine.register(
@@ -352,7 +352,7 @@ export default class Player extends Actor {
 	}
 
 	updateMissile() {
-		let secondary = SecondaryMap[this.engine.currentPlayer.secondary];
+		const secondary = SecondaryMap[this.engine.currentPlayer.secondary];
 		if (missile.reload > 0) {
 			missile.reload -= this.engine.deltaTime;
 		} else {
@@ -398,13 +398,13 @@ export default class Player extends Actor {
 	}
 
 	getEnergyPercent(): number {
-		let engine: ComponentEngine =
+		const engine: ComponentEngine =
 			EngineMap[this.engine.currentPlayer.engine];
 		return this.energy / engine.maxPower;
 	}
 
 	getGamePad() {
-		let gp = this.engine.input.gamepad.getGamePad();
+		const gp = this.engine.input.gamepad.getGamePad();
 		if (this.engine.input.getDevice() == "gamepad") {
 			this.engine.mouse.point = this.position
 				.add({
@@ -436,7 +436,7 @@ export default class Player extends Actor {
 	}
 
 	regenEnergy() {
-		let engine: ComponentEngine =
+		const engine: ComponentEngine =
 			EngineMap[this.engine.currentPlayer.engine];
 
 		this.energy += this.engine.deltaTime * engine.regenSpeed;
@@ -449,7 +449,7 @@ export default class Player extends Actor {
 
 	// viewTargetOffset: Point = new Point();
 	focusCameraOnSelf() {
-		let viewTarget = this.position.subtract({
+		const viewTarget = this.position.subtract({
 			x: config.game.width / 2,
 			y: config.game.height / 2,
 		});

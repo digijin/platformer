@@ -8,7 +8,7 @@ export default function* patrol(
 // ): Generator<*, *, *> {
 	// const dontFall = true;
 
-	let result = walk(enemy, engine);
+	const result = walk(enemy, engine);
 	if (result.status !== "ok") {
 		enemy.direction = -enemy.direction;
 	}

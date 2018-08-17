@@ -19,9 +19,9 @@ import Divider from "material-ui/Divider";
 import  {  CardContent } from "material-ui/Card";
 class Main extends React.Component {
     handleExpandClick = target => {
-    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
     	watcher.mode = target;
-    	let newstate = { expanded: {} };
+    	const newstate = { expanded: {} };
     	newstate.expanded = !this.state.expanded;
     	this.setState(newstate);
     };
@@ -42,7 +42,7 @@ class Main extends React.Component {
 
     render() {
     	const { classes } = this.props;
-    	let saves = this.storage.list();
+    	const saves = this.storage.list();
     	return (
     		<CardContent>
     			<div className={classes.loadPanel}>

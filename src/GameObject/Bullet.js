@@ -127,9 +127,9 @@ export default class Bullet extends Projectile {
 		for (let i = 0; i < 1; i++) {
 			//we want red outlines to be on the outside
 			//pick a direction
-			let dir = Math.random() * Math.PI * 2;
-			let dist = Math.random() * 2;
-			let offset = {
+			const dir = Math.random() * Math.PI * 2;
+			const dist = Math.random() * 2;
+			const offset = {
 				x: Math.cos(dir) * dist,
 				y: Math.sin(dir) * dist,
 			};
@@ -157,7 +157,7 @@ export default class Bullet extends Projectile {
 	checkEnemies(func: (actor: Actor) => {}) {
 		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
+				const a: Actor = ((o: any): Actor); //RECAST
 				if (this.cheapCheck(a) || this.expensiveCheck(a)) {
 					// a.damage(2);
 					func(a);

@@ -13,7 +13,7 @@ export default class MissionLaunchButton extends BaseButton {
 	// };
 
 	render() {
-		let { x, y } = this.props;
+		const { x, y } = this.props;
 		return (
 			<Container
 				x={x}

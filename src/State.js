@@ -23,7 +23,7 @@ export default class State {
 	}
 
 	load() {
-		let data = localStorage.getItem("save");
+		const data = localStorage.getItem("save");
 		if (data) {
 			this.state = JSON.parse(data);
 		}

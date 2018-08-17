@@ -23,7 +23,7 @@ export default class Mouse {
 	}
 
 	update() {
-		let newPoint = this.engine.view.offset.add(this.position);
+		const newPoint = this.engine.view.offset.add(this.position);
 		this.delta = newPoint.subtract(this.point);
 		this.point = newPoint;
 	}

@@ -18,9 +18,9 @@ import ColorPicker from "material-ui-color-picker";
 import  {  CardContent } from "material-ui/Card";
 class TintSelector extends React.Component {
     handleExpandClick = target => {
-    	let watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+    	const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
     	watcher.mode = target;
-    	let newstate = { expanded: {} };
+    	const newstate = { expanded: {} };
     	newstate.expanded = !this.state.expanded;
     	this.setState(newstate);
     };
@@ -34,7 +34,7 @@ class TintSelector extends React.Component {
 
     render() {
     	const { classes } = this.props;
-    	let decor = {};
+    	const decor = {};
     	DecorTypes.forEach(dt => {
     		if (!decor[dt.category]) {
     			decor[dt.category] = [];

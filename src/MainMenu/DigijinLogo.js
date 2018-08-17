@@ -5,7 +5,7 @@ import MainMenu from "Scene/MainMenu";
 
 import type Engine from "Engine";
 
-let lettersConfig = [
+const lettersConfig = [
 	{
 		color: "#00ff00",
 		points: [
@@ -180,7 +180,7 @@ type letterData = {
     dist: number
 };
 //add dists
-let letters: Array<letterData> = lettersConfig.map((l: letterData) => {
+const letters: Array<letterData> = lettersConfig.map((l: letterData) => {
 	let dist = 0;
 	l.points = l.points.map(p => new Point(p));
 	for (let p = 1; p < l.points.length; p++) {
@@ -197,11 +197,11 @@ const HOLDTIME = 2 * SPEED;
 const FADETIME = 1.5 * SPEED;
 const SPAWNCHANCE = 0.2;
 const SPIKE_SPEED = 8;
-let size = 40;
-let width = size * 11;
-let height = size * 5;
+const size = 40;
+const width = size * 11;
+const height = size * 5;
 
-let offset = {
+const offset = {
 	x: (window.innerWidth - width) / 2,
 	y: (window.innerHeight - height) / 2,
 };
@@ -256,7 +256,7 @@ export default class DigijinLogo extends GameObject {
     	// }
     	// this.ctx.putImageData(imageData, 0, 0);
 
-    	let ctx = this.ctx;
+    	const ctx = this.ctx;
 
     	if (this.time > RENDERTIME + HOLDTIME) {
     		// ctx.globalAlpha = (FADETIME - (this.time - RENDERTIME)) / FADETIME;
@@ -310,7 +310,7 @@ export default class DigijinLogo extends GameObject {
     		let to;
     		for (let p = 1; p < l.points.length; p++) {
     			to = l.points[p];
-    			let dist = from.distanceTo(to);
+    			const dist = from.distanceTo(to);
     			if (progress > dist) {
     				this.drawLine(ctx, to, size, offset);
     			} else if (progress > 0) {
@@ -356,7 +356,7 @@ export default class DigijinLogo extends GameObject {
     	size,
     	offset
     ) {
-    	let mid = from.percentTo(to, progress / dist);
+    	const mid = from.percentTo(to, progress / dist);
     	if (Math.random() < SPAWNCHANCE) {
     		let dir = to.subtract(from).direction();
     		dir += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
@@ -403,7 +403,7 @@ class Spike extends GameObject {
 
     update() {
     	if (Math.random() < 0.1) {
-    		let r = Math.random();
+    		const r = Math.random();
     		if (r < 0.3) {
     			this.direction += Math.PI / 2 * (Math.random() > 0.5 ? 1 : -1);
     		} else if (r < 0.6) {
@@ -422,7 +422,7 @@ class Spike extends GameObject {
     		}
     	}
 
-    	let to = this.position.move(
+    	const to = this.position.move(
     		this.direction,
     		this.engine.deltaTime * SPIKE_SPEED
     	);

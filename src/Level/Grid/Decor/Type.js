@@ -27,10 +27,10 @@ export type DecorTypeParams = {
 	hp: number
 };
 
-let DecorType = Abstract;
+const DecorType = Abstract;
 export default DecorType;
 
-let blockTypeConfig: Array<DecorTypeParams> = [
+const blockTypeConfig: Array<DecorTypeParams> = [
 	{
 		name: "door",
 		id: "1",
@@ -354,7 +354,7 @@ export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
 DecorTypes.push(new WindowDecor());
 
 if (PIXI.loader.resources["decor"]) {
-	let renderer = PIXI.autoDetectRenderer(32, 32);
+	const renderer = PIXI.autoDetectRenderer(32, 32);
 	// export function findStrays() {
 	Object.keys(PIXI.loader.resources["decor"].textures).filter(key => {
 		// console.log("check", key);
@@ -364,11 +364,11 @@ if (PIXI.loader.resources["decor"]) {
 				return dt.textureId !== key;
 			})
 		) {
-			let texture = PIXI.loader.resources["decor"].textures[key];
-			let sprite = new PIXI.Sprite(texture);
-			let container = new PIXI.Container();
+			const texture = PIXI.loader.resources["decor"].textures[key];
+			const sprite = new PIXI.Sprite(texture);
+			const container = new PIXI.Container();
 			container.addChild(sprite);
-			let img = { src: renderer.extract.base64(container) };
+			const img = { src: renderer.extract.base64(container) };
 
 			DecorTypes.push(
 				new DecorType({

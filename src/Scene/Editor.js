@@ -11,10 +11,10 @@ export default class Editor extends Base {
 	start(engine) {
 		super.start(engine);
 
-		let watcher = new EditorWatcher();
+		const watcher = new EditorWatcher();
 		engine.register(watcher);
 
-		let grid = new Grid({
+		const grid = new Grid({
 			size: { w: 100, h: 100 },
 			parent: engine.stage,
 		});
@@ -31,7 +31,7 @@ export default class Editor extends Base {
 		engine.register(grid);
 
 		document.body.style.backgroundColor = "#87efff";
-		let bg = new Background();
+		const bg = new Background();
 		bg.spawnExplosion = () => {};
 		engine.register(bg);
 

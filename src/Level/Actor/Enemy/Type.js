@@ -49,7 +49,7 @@ export default class EnemyType {
     }
 }
 
-let enemyTypeConfig: Array<EnemyTypeParams> = [
+const enemyTypeConfig: Array<EnemyTypeParams> = [
 	{
 		id: "1",
 		name: "hopper",

@@ -15,19 +15,19 @@ export default function* suicideBomber(
 	// let direction = 1;
 	// let firingCooldown = 0;
 
-	let tryJump = () => {
+	const tryJump = () => {
 		if (enemy.v == 0) {
 			enemy.v = -(0.5 + Math.random() / 2) * enemy.type.jumpPower;
 		}
 	};
 	while (true) {
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
-		let distance = player.position.distanceTo(enemy.position);
+		const distance = player.position.distanceTo(enemy.position);
 		if (enemy.v == 0) {
 			//on ground
 			enemy.h = enemy.walkSpeed * enemy.direction;
 		}
-		let hDelta = engine.deltaTime * enemy.h;
+		const hDelta = engine.deltaTime * enemy.h;
 		if (distance < DETONATE_DISTANCE) {
 			enemy.explode();
 		}
@@ -36,7 +36,7 @@ export default function* suicideBomber(
 		}
 
 		//upcoming obstacle
-		let rect = new Rect({
+		const rect = new Rect({
 			t: enemy.position.y - 10,
 			r: enemy.position.x + enemy.direction * 20 + 10,
 			l: enemy.position.x + enemy.direction * -20 - 10,
@@ -61,9 +61,9 @@ export default function* suicideBomber(
 			enemy.position.x += hDelta;
 		}
 		if (dontFall) {
-			let rect = enemy.getBoundingRect();
+			const rect = enemy.getBoundingRect();
 
-			let check = { y: rect.b + 4, x: rect.r + 1 };
+			const check = { y: rect.b + 4, x: rect.r + 1 };
 			if (enemy.direction == -1) {
 				check.x = rect.l - 1;
 			}

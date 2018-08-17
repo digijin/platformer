@@ -5,7 +5,7 @@ export default function recurseSearch(id, node) {
 		// console.log('it is', node.testingId);
 		return node;
 	}
-	let direct = node.children.find(child => {
+	const direct = node.children.find(child => {
 		return child.testingId == id;
 	});
 	if (direct) {

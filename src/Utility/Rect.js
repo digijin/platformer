@@ -27,8 +27,8 @@ export default class Rect {
 		size: { w: number, h: number },
 		rego: { x: number, y: number }
 	) {
-		let t = pos.y - size.h * rego.y;
-		let l = pos.x - size.w * rego.x;
+		const t = pos.y - size.h * rego.y;
+		const l = pos.x - size.w * rego.x;
 		return new Rect({
 			t: t,
 			l: l,
@@ -61,7 +61,7 @@ export default class Rect {
 	 */
 	constructor(params: { t: number, r: number, b: number, l: number }) {
 		if (arguments.length === 1) {
-			let a = params;
+			const a = params;
 			if (a.t !== undefined) {
 				extend(this, a);
 			} else if (a.x !== undefined) {
@@ -117,8 +117,8 @@ export default class Rect {
 	}
 
 	overlaps(rect: Rect): boolean {
-		let outsideH = this.b <= rect.t || rect.b <= this.t;
-		let outsideV = this.r <= rect.l || rect.r <= this.l;
+		const outsideH = this.b <= rect.t || rect.b <= this.t;
+		const outsideV = this.r <= rect.l || rect.r <= this.l;
 		return !outsideV && !outsideH;
 	}
 

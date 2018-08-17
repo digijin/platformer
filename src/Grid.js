@@ -98,7 +98,7 @@ export default class Grid extends GameObject {
     update = () => {
     	// console.group("Grid");
 
-    	let screenRect = this.screenRect();
+    	const screenRect = this.screenRect();
     	this.renderBlocksPixi(screenRect);
     	// console.groupEnd("Grid");
 
@@ -109,8 +109,8 @@ export default class Grid extends GameObject {
     };
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
-    	let x = Math.floor(pos.x / config.grid.width);
-    	let y = Math.floor(pos.y / config.grid.width);
+    	const x = Math.floor(pos.x / config.grid.width);
+    	const y = Math.floor(pos.y / config.grid.width);
     	if (this.blocks[x]) {
     		if (this.blocks[x][y]) {
     			// this.grid[x][y] = "0";
@@ -131,8 +131,8 @@ export default class Grid extends GameObject {
 
     addDecorSprite(decor: Decor) {
     	if (this.decorStage) {
-    		let type = decor.getType();
-    		let sprite = type.getSprite();
+    		const type = decor.getType();
+    		const sprite = type.getSprite();
     		if (type.mode) {
     			sprite.blendMode = type.mode;
     		}
@@ -151,7 +151,7 @@ export default class Grid extends GameObject {
 
     removeDecor(position: Point) {
     	this.decor = this.decor.filter(d => {
-    		let isDecor = d.position.is(position);
+    		const isDecor = d.position.is(position);
     		if (isDecor) {
     			this.removeDecorSprite(d);
     		}
@@ -166,7 +166,7 @@ export default class Grid extends GameObject {
     }
 
     generate(seed: number) {
-    	let noise = new Noise(seed);
+    	const noise = new Noise(seed);
     	this.blocks.forEach((col, x) => {
     		col.forEach((block, y) => {
     			let value = noise.simplex2(x / 50, y / 50);
@@ -196,7 +196,7 @@ export default class Grid extends GameObject {
     }
 
     fromTestStrings(strings: Array<string>): Grid {
-    	let testdata = strings.map(a => a.split(""));
+    	const testdata = strings.map(a => a.split(""));
     	this.blocks = testdata[0].map(function(col, x) {
     		return testdata.map(function(row, y) {
     			return new Block({
@@ -239,7 +239,7 @@ export default class Grid extends GameObject {
     highlightBlock(block: Block) {
     	// console.log("highlight");
     	if (block) {
-    		let rect = block.rect;
+    		const rect = block.rect;
 
     		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
     		this.graph.beginFill(0x00ff00, 0.5);
@@ -271,7 +271,7 @@ export default class Grid extends GameObject {
     		spr.visible = false;
     	});
     	this.getBlocksOverlappingRect(screenRect).forEach(block => {
-    		let pos = {
+    		const pos = {
     			x: Math.floor(block.position.x * config.grid.width),
 
     			y: Math.floor(block.position.y * config.grid.width),
@@ -279,8 +279,8 @@ export default class Grid extends GameObject {
 
     		if (block) {
     			if (!block.isBackgroundEmpty()) {
-    				let btype = block.getBackgroundType();
-    				let backgroundSprite: PIXI.Sprite = this.spritePool.get();
+    				const btype = block.getBackgroundType();
+    				const backgroundSprite: PIXI.Sprite = this.spritePool.get();
     				backgroundSprite.position.x = pos.x;
     				backgroundSprite.position.y = pos.y;
     				backgroundSprite.tint = 0x444444;
@@ -288,8 +288,8 @@ export default class Grid extends GameObject {
     				backgroundSprite.texture = btype.texture;
     			}
     			if (!block.isEmpty()) {
-    				let type = block.getType();
-    				let sprite: PIXI.Sprite = this.spritePool.get();
+    				const type = block.getType();
+    				const sprite: PIXI.Sprite = this.spritePool.get();
     				sprite.position.x = pos.x;
     				sprite.position.y = pos.y;
     				// sprite.tint = 0xffffff;
@@ -303,15 +303,15 @@ export default class Grid extends GameObject {
     }
 
     isPositionBlocked(pos: { x: number, y: number }) {
-    	let block = this.getBlockAtPoint(pos);
+    	const block = this.getBlockAtPoint(pos);
     	return block && block.type != "0";
     }
 
     getBlocksInRect(rect: Rect): Array<Block> {
-    	let firstCol = Math.ceil(rect.l / config.grid.width);
-    	let lastCol = Math.floor(rect.r / config.grid.width);
-    	let firstRow = Math.ceil(rect.t / config.grid.width);
-    	let lastRow = Math.floor(rect.b / config.grid.width);
+    	const firstCol = Math.ceil(rect.l / config.grid.width);
+    	const lastCol = Math.floor(rect.r / config.grid.width);
+    	const firstRow = Math.ceil(rect.t / config.grid.width);
+    	const lastRow = Math.floor(rect.b / config.grid.width);
 
     	if (lastCol < firstCol || lastRow < firstRow) {
     		//return early
@@ -327,10 +327,10 @@ export default class Grid extends GameObject {
     	firstRow: number,
     	lastRow: number
     ) {
-    	let out = [];
+    	const out = [];
     	for (let x = firstCol; x < lastCol; x++) {
     		for (let y = firstRow; y < lastRow; y++) {
-    			let b = this.getBlock({ x, y });
+    			const b = this.getBlock({ x, y });
     			if (b !== undefined) {
     				out.push(b);
     			}
@@ -340,15 +340,15 @@ export default class Grid extends GameObject {
     }
 
     getBlocksOverlappingRect(rect: Rect): Array<Block> {
-    	let firstCol = Math.floor(rect.l / config.grid.width);
-    	let lastCol = Math.ceil(rect.r / config.grid.width);
-    	let firstRow = Math.floor(rect.t / config.grid.width);
-    	let lastRow = Math.ceil(rect.b / config.grid.width);
+    	const firstCol = Math.floor(rect.l / config.grid.width);
+    	const lastCol = Math.ceil(rect.r / config.grid.width);
+    	const firstRow = Math.floor(rect.t / config.grid.width);
+    	const lastRow = Math.ceil(rect.b / config.grid.width);
     	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
     }
 
     blockAtPosition(pos: { x: number, y: number }): Block | void {
-    	let x = Math.floor(pos.x / config.grid.width);
+    	const x = Math.floor(pos.x / config.grid.width);
     	let y = Math.floor(pos.y / config.grid.width);
     	//because y goes positive downwards, if an object is flat on the top
     	//of a tile it will register as th e dtile below
@@ -360,7 +360,7 @@ export default class Grid extends GameObject {
     	if (this.blocks[x]) {
     		// return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
     		if (this.blocks[x][y]) {
-    			let block = this.blocks[x][y];
+    			const block = this.blocks[x][y];
     			return block;
     		}
     	}
@@ -379,7 +379,7 @@ export default class Grid extends GameObject {
     }
 
     renderDebugBlockPixelLine() {
-    	let line = new Line({
+    	const line = new Line({
     		a: new Point({ x: 10.5, y: 10.5 }),
     		b: this.engine.mouse.point.multiply(1 / config.grid.width),
     	});
@@ -387,9 +387,9 @@ export default class Grid extends GameObject {
     }
 
     highlightLine(line: Line) {
-    	let pixels = line.pixels();
+    	const pixels = line.pixels();
     	pixels.forEach(p => {
-    		let block = this.getBlock(p);
+    		const block = this.getBlock(p);
     		if (block) {
     			this.highlightBlock(block);
     		}
@@ -449,7 +449,7 @@ export default class Grid extends GameObject {
     	}
 
     	this.tileCache = {};
-    	let data = JSON.parse(str);
+    	const data = JSON.parse(str);
     	if (data.decor) {
     		data.decor.forEach(decor => {
     			// return new Decor({
@@ -461,7 +461,7 @@ export default class Grid extends GameObject {
     		});
     	}
 
-    	let blocks = data.blocks;
+    	const blocks = data.blocks;
     	// if (!Array.isArray(blocks)) {
     	// blocks = [blocks];
     	// }
@@ -483,7 +483,7 @@ export default class Grid extends GameObject {
     	if (data.enemies) {
     		log.info("loading", data.enemies.length, "enemies");
     		data.enemies.forEach(e => {
-    			let type = EnemyTypesMap[e.t];
+    			const type = EnemyTypesMap[e.t];
     			if (!type) {
     				throw new Error("could not look up enemy " + e.t);
     			}

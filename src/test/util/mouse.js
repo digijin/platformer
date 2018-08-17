@@ -4,7 +4,7 @@ import { extend } from "lodash";
 import ReactTestUtils from "react-dom/test-utils";
 import sizzle from "sizzle";
 
-let mouseEvent = function (
+const mouseEvent = function (
 	eventName: string,
 	params: Object,
 	target: any = document
@@ -17,8 +17,8 @@ let mouseEvent = function (
 	target.dispatchEvent(event); //was document
 };
 
-let clickSelector = function (selector: string): boolean {
-	let elements = sizzle(selector);
+const clickSelector = function (selector: string): boolean {
+	const elements = sizzle(selector);
 	if (elements.length > 0) {
 		ReactTestUtils.Simulate.click(elements[0]);
 		return true;
@@ -27,7 +27,7 @@ let clickSelector = function (selector: string): boolean {
 };
 
 function clickCheckbox(selector: string) {
-	let el = sizzle(selector)[0];
+	const el = sizzle(selector)[0];
 	ReactTestUtils.Simulate.change(el, { target: el });
 }
 

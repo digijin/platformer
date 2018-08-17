@@ -9,7 +9,7 @@ import * as PIXI from "pixi.js";
 export default class FilterSprite extends FilterUpdater {
 	position: Point;
 	constructor(params) {
-		let filter = new Filter();
+		const filter = new Filter();
 		super(filter);
 		Object.assign(this, params);
 		this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);

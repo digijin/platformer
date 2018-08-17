@@ -12,7 +12,7 @@ export default function* rabbit(
 	// let direction = 1;
 	// while (true) {
 	// debugger;
-	let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
+	const hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 	if (!enemy.canMoveHori(hDelta)) {
 		enemy.direction = -enemy.direction;
 	} else {

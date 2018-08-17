@@ -11,23 +11,23 @@ export default class Shader extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 		document.body.style.backgroundColor = "grey";
-		let sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
 		sprite.width = window.innerWidth;
 		sprite.height = window.innerHeight;
-		let filter = new Filter();
+		const filter = new Filter();
 		// let aaFilter = new AntiAlias();
 		sprite.filters = [filter];
 		this.engine.stage.addChild(sprite);
 		this.engine.register(new FilterUpdater(filter));
 
-		let bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+		const bg = new PIXI.Sprite(PIXI.Texture.WHITE);
 		bg.width = 120;
 		bg.height = 120;
 		bg.position.x = 10;
 		bg.position.y = 10;
 		this.engine.stage.addChild(bg);
 
-		let smaller = new PIXI.Sprite(PIXI.Texture.WHITE);
+		const smaller = new PIXI.Sprite(PIXI.Texture.WHITE);
 		smaller.width = 100;
 		smaller.height = 100;
 		smaller.position.x = 20;

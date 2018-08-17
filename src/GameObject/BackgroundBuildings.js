@@ -51,7 +51,7 @@ export default class Background extends GameObject {
 		// this.el.appendChild(new Building().canvas);
 		this.buildings = [];
 		for (let i = 0; i < NUM_BUILDINGS; i++) {
-			let building = this.makeBuilding();
+			const building = this.makeBuilding();
 			building.x = Math.random() * window.innerWidth;
 			building.offset = building.x;
 			building.z = Math.random();
@@ -133,10 +133,10 @@ export default class Background extends GameObject {
 	}
 
 	makeBuilding() {
-		let texture = new PIXI.Texture(
+		const texture = new PIXI.Texture(
 			new PIXI.BaseTexture(Building.random().canvas)
 		);
-		let sprite = new PIXI.Sprite(texture);
+		const sprite = new PIXI.Sprite(texture);
 		sprite.anchor = { x: 0.5, y: 1 };
 		return sprite;
 	}

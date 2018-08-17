@@ -19,7 +19,7 @@ export default class Level extends Base {
 
 		// FLOWHACK
 		document.body.style.backgroundColor = "#ddaaee";
-		let bg = new Background();
+		const bg = new Background();
 		// bg.spawnExplosion = () => {};
 		bg.explosions = false;
 		engine.register(bg);

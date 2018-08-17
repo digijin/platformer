@@ -17,7 +17,7 @@ export default class StoryTeller extends GameObject {
 		this.container = new LevelContainer();
 		this.engine.stage.addChild(this.container);
 
-		let grid = new Grid({
+		const grid = new Grid({
 			size: {
 				w: 200,
 				h: 50,
@@ -27,12 +27,12 @@ export default class StoryTeller extends GameObject {
 		// grid.makeTest();
 		// grid.generate(1);
 		// FLOWHACK
-		let gridData = this.engine.mission.level;
+		const gridData = this.engine.mission.level;
 		// let gridData = require("levels/level.txt");
 		this.engine.register(grid);
 		grid.load(gridData);
 
-		let player = new Player({
+		const player = new Player({
 			position: new Point({
 				x: 450,
 				y: 100,

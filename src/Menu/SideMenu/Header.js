@@ -9,7 +9,7 @@ const TYPE = "SideMenuHeader";
 export const behavior = {
 	customDisplayObject: () => new PIXI.Container(),
 	customApplyProps: function(instance, oldProps, newProps) {
-		let { text } = newProps;
+		const { text } = newProps;
 		// this.cacheAsBitmap = false;
 		render(
 			<Container>

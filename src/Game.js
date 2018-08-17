@@ -53,7 +53,7 @@ export default class Game {
 		//Engine.getInstance();
 		this.engine.init(this.container);
 
-		let query = window.location.href.substr(
+		const query = window.location.href.substr(
 			window.location.href.indexOf("?") + 1
 		);
 		switch (query) {

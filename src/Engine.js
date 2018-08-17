@@ -137,7 +137,7 @@ export default class Engine {
 		// eslint-disable-next-line no-undef
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 
-		let pixicanvas: HTMLCanvasElement = document.createElement("canvas");
+		const pixicanvas: HTMLCanvasElement = document.createElement("canvas");
 		pixicanvas.id = "pixiCanvas";
 		pixicanvas.width = config.game.width;
 		pixicanvas.height = config.game.height;
@@ -174,7 +174,7 @@ export default class Engine {
 		//     new ShockwaveFilter([0.5, 0.5], { radius: -1 })
 		// ];
 
-		let uiDiv: HTMLDivElement = document.createElement("div");
+		const uiDiv: HTMLDivElement = document.createElement("div");
 		uiDiv.id = "ui";
 		container.appendChild(uiDiv);
 		this.ui = new UI(uiDiv, this);
@@ -196,7 +196,7 @@ export default class Engine {
 	update = () => {
 		this.fpsmeter.tickStart();
 		//handle time
-		let nowTime = new Date().getTime();
+		const nowTime = new Date().getTime();
 		let diff = nowTime - this.lastTime;
 		this.lastTime = nowTime;
 		if (diff > 1000) {
@@ -272,7 +272,7 @@ export default class Engine {
 	}
 
 	destroy(obj: GameObject) {
-		let i = this.objects.indexOf(obj);
+		const i = this.objects.indexOf(obj);
 		if (i > -1) {
 			obj.exit();
 			this.objects.splice(i, 1);

@@ -70,7 +70,7 @@ export default class Smoke extends GameObject {
 
 
 	positionSprite() {
-		let timePc = this.time / this.duration;
+		const timePc = this.time / this.duration;
 		this.position.x += this.engine.deltaTime * this.h;
 		this.position.y += this.engine.deltaTime * this.v;
 		this.sprite.rotation = this.rotation;
@@ -78,7 +78,7 @@ export default class Smoke extends GameObject {
 		this.sprite.position.y = this.position.y;
 		this.sprite.width = this.sprite.height = 10 + timePc * 10;
 		// this.sprite.alpha = timePc;
-		let stops = [
+		const stops = [
 			{ r: 1, g: 0, b: 0, a: 1 },
 			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },
 			{ r: 0.3, g: 0.3, b: 0.3, a: 1 },

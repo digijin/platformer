@@ -16,7 +16,7 @@ export default function* agro(
 	while (true) {
 		firingCooldown -= engine.deltaTime;
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
-		let distance = player.position.distanceTo(enemy.position);
+		const distance = player.position.distanceTo(enemy.position);
 		let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 		if (distance < CLOSEST_DISTANCE) {
 			hDelta = -hDelta;
@@ -49,9 +49,9 @@ export default function* agro(
 			enemy.position.x += hDelta;
 		}
 		if (dontFall) {
-			let rect = enemy.getBoundingRect();
+			const rect = enemy.getBoundingRect();
 
-			let check = { y: rect.b + 1, x: rect.r + 1 };
+			const check = { y: rect.b + 1, x: rect.r + 1 };
 			if (enemy.direction == -1) {
 				check.x = rect.l - 1;
 			}

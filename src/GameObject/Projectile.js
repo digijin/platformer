@@ -36,7 +36,7 @@ export default class Projectile extends GameObject {
     }
 
     move() {
-    	let old = this.position.clone();
+    	const old = this.position.clone();
     	this.position.x += this.h * this.engine.deltaTime * this.speed;
     	this.position.y += this.v * this.engine.deltaTime * this.speed;
     	this.trajectory = new Line({ a: old, b: this.position });
@@ -55,16 +55,16 @@ export default class Projectile extends GameObject {
     // }
 
     checkGrid() {
-    	let blocks = this.trajectory.blockPixels();
-    	let empty = blocks.every(b => {
-    		let block = this.engine.grid.getBlock(b);
+    	const blocks = this.trajectory.blockPixels();
+    	const empty = blocks.every(b => {
+    		const block = this.engine.grid.getBlock(b);
     		if (!block) {
     			return false;
     		}
     		if (block.isEmpty()) {
     			return true;
     		} else {
-    			let hitTest = this.trajectory.intersectsRect(block.rect);
+    			const hitTest = this.trajectory.intersectsRect(block.rect);
     			if (hitTest.result && hitTest.collision) {
     				this.position.x = hitTest.collision.x;
     				this.position.y = hitTest.collision.y;
@@ -79,11 +79,11 @@ export default class Projectile extends GameObject {
     }
 
     checkDecor(onHit: (decor: Decor, hitTest: {}) => {}) {
-    	let missDecor = this.engine.grid.decor.every(d => {
+    	const missDecor = this.engine.grid.decor.every(d => {
     		if (d.getType().obstacle == false) {
     			return true;
     		}
-    		let hitTest = this.trajectory.intersectsRect(d.rect);
+    		const hitTest = this.trajectory.intersectsRect(d.rect);
     		if (hitTest.result && hitTest.collision) {
     			onHit(d, hitTest);
     			return false;

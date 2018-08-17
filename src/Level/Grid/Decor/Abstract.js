@@ -27,7 +27,7 @@ export default class DecorType {
 		this.texture = PIXI.Texture.WHITE;
 
 		this.image.onload = () => {
-			let context = document.createElement("canvas").getContext("2d");
+			const context = document.createElement("canvas").getContext("2d");
 			if (context) {
 				this.pattern = context.createPattern(this.image, "no-repeat");
 				// console.log("made pattern", context, this.pattern);

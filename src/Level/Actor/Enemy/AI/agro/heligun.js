@@ -20,22 +20,22 @@ export default function* agro(
 	while (true) {
 		firingCooldown -= engine.deltaTime;
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
-		let distance = player.position.distanceTo(enemy.position);
-		let direction = enemy.position.directionTo(player.position);
+		const distance = player.position.distanceTo(enemy.position);
+		const direction = enemy.position.directionTo(player.position);
 		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 
 		enemy.sprite.scale.x = player.position.x < enemy.position.x ? 1 : -1;
 
 		//check below
 		// engine.grid.blocksOverlappingRect();
-		let rect = new Rect({
+		const rect = new Rect({
 			t: enemy.position.y,
 			b: enemy.position.y + 100,
 			l: enemy.position.x - 100,
 			r: enemy.position.x + 100,
 		});
-		let blocks = engine.grid.getBlocksOverlappingRect(rect);
-		let empty = blocks.every(block => {
+		const blocks = engine.grid.getBlocksOverlappingRect(rect);
+		const empty = blocks.every(block => {
 			{
 				return block.isEmpty();
 			}

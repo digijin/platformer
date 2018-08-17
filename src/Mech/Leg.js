@@ -57,11 +57,11 @@ export default class Leg extends GameObject {
 
     init(engine: Engine) {
     	super.init(engine);
-    	let cockpitTex = new PIXI.Texture(new PIXI.BaseTexture(cockpit));
-    	let footTex = new PIXI.Texture(new PIXI.BaseTexture(foot));
-    	let upperlegTex = new PIXI.Texture(new PIXI.BaseTexture(upperleg));
-    	let lowerlegTex = new PIXI.Texture(new PIXI.BaseTexture(lowerleg));
-    	let gunTex = new PIXI.Texture(new PIXI.BaseTexture(gun));
+    	const cockpitTex = new PIXI.Texture(new PIXI.BaseTexture(cockpit));
+    	const footTex = new PIXI.Texture(new PIXI.BaseTexture(foot));
+    	const upperlegTex = new PIXI.Texture(new PIXI.BaseTexture(upperleg));
+    	const lowerlegTex = new PIXI.Texture(new PIXI.BaseTexture(lowerleg));
+    	const gunTex = new PIXI.Texture(new PIXI.BaseTexture(gun));
     	this.cockpit = new PIXI.Sprite(cockpitTex);
     	this.cockpit.anchor = {
     		x: 0.5,
@@ -111,7 +111,7 @@ export default class Leg extends GameObject {
     		offsetTarget = new Point({ x: 0, y: -50 });
     	}
     	this.offset = this.offset.easeTo(offsetTarget, 5);
-    	let torsoOffsetTarget = new Point();
+    	const torsoOffsetTarget = new Point();
     	//default standing targets
     	let frontFootPosTarget = new Point({ x: 10, y: 0 }).add(
     		this.parent.position
@@ -151,7 +151,7 @@ export default class Leg extends GameObject {
     	this.position = this.parent.position
     		.add(this.offset)
     		.add(this.torsoOffset);
-    	let facing =
+    	const facing =
             this.engine.input.mouse.position.x > this.engine.renderer.width / 2
             	? FACING_RIGHT
             	: FACING_LEFT;
@@ -179,7 +179,7 @@ export default class Leg extends GameObject {
     }
 
     gunPosition(pos: Point, facing: Facing = FACING_LEFT) {
-    	let dir = this.parent
+    	const dir = this.parent
     		.getTargetPoint()
     		.subtract(pos)
     		.direction();
@@ -218,7 +218,7 @@ export default class Leg extends GameObject {
             foot: any
         }
     ) {
-    	let floor = this.parent.position.y;
+    	const floor = this.parent.position.y;
 
     	let dist = this.position.distanceTo(target);
 
@@ -229,19 +229,19 @@ export default class Leg extends GameObject {
     	let endpoint = this.position.move(dir, dist);
 
     	if (endpoint.y > floor) {
-    		let ratio =
+    		const ratio =
                 (floor - this.position.y) / (endpoint.y - this.position.y);
     		dist *= ratio;
     		endpoint = this.position.move(dir, dist);
     	}
-    	let midpoint = this.position.move(dir, dist / 2);
-    	let b = Math.sqrt(Math.pow(branchLength, 2) - Math.pow(dist / 2, 2));
+    	const midpoint = this.position.move(dir, dist / 2);
+    	const b = Math.sqrt(Math.pow(branchLength, 2) - Math.pow(dist / 2, 2));
 
     	dir += Math.PI / 2;
-    	let joint = midpoint.move(dir, b * facing);
+    	const joint = midpoint.move(dir, b * facing);
 
     	// upperleg 20x40
-    	let upperlegdirection =
+    	const upperlegdirection =
             joint.subtract(this.position).direction() - Math.PI / 2;
 
     	sprites.upper.position = this.position;
@@ -252,7 +252,7 @@ export default class Leg extends GameObject {
     	sprites.upper.scale.x = facing;
     	sprites.upper.rotation = upperlegdirection;
 
-    	let lowerlegdirection =
+    	const lowerlegdirection =
             endpoint.subtract(joint).direction() - Math.PI / 2;
 
     	sprites.lower.position = joint;

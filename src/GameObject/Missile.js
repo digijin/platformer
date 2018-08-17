@@ -81,8 +81,8 @@ export default class Missile extends Projectile {
 				// this.target = this.engine.mouse.point;
 				this.target = this.owner.getTargetPoint();
 			}
-			let diff = this.target.subtract(this.position);
-			let dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
+			const diff = this.target.subtract(this.position);
+			const dist = Math.pow(diff.x, 2) + Math.pow(diff.y, 2);
 			if (dist < config.missile.guidedDist) {
 				this.guided = false;
 			}
@@ -135,13 +135,13 @@ export default class Missile extends Projectile {
 		// 		delay: 0
 		// 	})
 		// );
-		let sprite = new FilterSprite();
+		const sprite = new FilterSprite();
 		sprite.position = this.position;
 		this.container.addChild(sprite);
 	}
 
 	move() {
-		let old = this.position.clone();
+		const old = this.position.clone();
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
 		this.trajectory = new Line({ a: old, b: this.position });
@@ -150,7 +150,7 @@ export default class Missile extends Projectile {
 	checkActors() {
 		this.engine.objectsTagged("actor").every((o: GameObject) => {
 			if (o !== this.owner) {
-				let a: Actor = ((o: any): Actor); //RECAST
+				const a: Actor = ((o: any): Actor); //RECAST
 				if (a.getBoundingRect().contains(this.position)) {
 					this.explode();
 					// a.explode();
@@ -164,17 +164,17 @@ export default class Missile extends Projectile {
 	}
 
 	checkGrid() {
-		let block = this.engine.grid.getBlockAtPoint(this.position);
+		const block = this.engine.grid.getBlockAtPoint(this.position);
 		if (block && !block.isEmpty()) {
 			this.explode();
-			let r = 15;
-			let rect = new Rect({
+			const r = 15;
+			const rect = new Rect({
 				t: this.position.y - r,
 				r: this.position.x + r,
 				b: this.position.y + r,
 				l: this.position.x - r,
 			});
-			let blocks = this.engine.grid.getBlocksOverlappingRect(rect);
+			const blocks = this.engine.grid.getBlocksOverlappingRect(rect);
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
 	}

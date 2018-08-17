@@ -41,7 +41,7 @@ export default class Decor {
 	}
 
 	damage(amount: number) {
-		let type = this.getType();
+		const type = this.getType();
 		if (type && type.destructable) {
 			this.hp -= amount;
 			if (this.hp <= 0) {
@@ -80,7 +80,7 @@ export default class Decor {
 	}
 
 	get rect(): Rect {
-		let type = this.getType();
+		const type = this.getType();
 		return new Rect({
 			t: this.position.y * config.grid.width,
 			r: (this.position.x + type.width) * config.grid.width,

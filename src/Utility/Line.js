@@ -47,18 +47,18 @@ export default class Line {
 
 	//my line algorithm
 	digijinPixels(): Array<{ x: number, y: number }> {
-		let src = this.a.floor();
-		let dest = this.b.floor();
-		let out = [];
+		const src = this.a.floor();
+		const dest = this.b.floor();
+		const out = [];
 		// let diff = this.b.subtract(this.a);
-		let hdir = src.x < dest.x ? 1 : -1;
-		let vdir = src.y < dest.y ? 1 : -1;
+		const hdir = src.x < dest.x ? 1 : -1;
+		const vdir = src.y < dest.y ? 1 : -1;
 		//return early use cases
 		//eliminate vertical first
 		let step;
 		if (src.x == dest.x) {
 			let a = src.y;
-			let b = dest.y;
+			const b = dest.y;
 			for (step = a > b ? -1 : +1; a != b + step; a += step) {
 				out.push({ x: src.x, y: a });
 			}
@@ -66,7 +66,7 @@ export default class Line {
 		}
 		if (src.y == dest.y) {
 			let a = src.x;
-			let b = dest.x;
+			const b = dest.x;
 			for (step = a > b ? -1 : +1; a != b + step; a += step) {
 				out.push({ x: a, y: src.y });
 			}
@@ -84,7 +84,7 @@ export default class Line {
 		let next = src;
 		//START LOOP
 		while (next !== null) {
-			let curr = next;
+			const curr = next;
 			out.push(next);
 			next = null;
 			//check sides
@@ -121,18 +121,18 @@ export default class Line {
 		// let diff = this.a.subtract(this.b);
 		// let m = diff.y / diff.x;
 		// let b = diff.y - m * diff.x;
-		let m = (this.a.y - this.b.y) / (this.a.x - this.b.x);
-		let b = this.a.y - m * this.a.x;
+		const m = (this.a.y - this.b.y) / (this.a.x - this.b.x);
+		const b = this.a.y - m * this.a.x;
 		return { m, b };
 	}
 
 	//Bresenham's line algorithm
 	bresenham(): Array<{ x: number, y: number }> {
-		let out = [];
+		const out = [];
 		// let delta = this.b.subtract(this.a);
-		let a = this.a.floor();
-		let b = this.b.floor();
-		let delta = {
+		const a = this.a.floor();
+		const b = this.b.floor();
+		const delta = {
 			x: b.x - a.x,
 			y: b.y - a.y,
 		};
@@ -183,18 +183,18 @@ export default class Line {
 		b: number,
 		l: number
 	}): { result: boolean, collision?: { x: number, y: number } } {
-		let x = this.a.x;
-		let y = this.a.y;
-		let vx = this.b.x - this.a.x;
-		let vy = this.b.y - this.a.y;
+		const x = this.a.x;
+		const y = this.a.y;
+		const vx = this.b.x - this.a.x;
+		const vy = this.b.y - this.a.y;
 
-		let left = rect.l;
-		let right = rect.r;
-		let top = rect.t;
-		let bottom = rect.b;
+		const left = rect.l;
+		const right = rect.r;
+		const top = rect.t;
+		const bottom = rect.b;
 
-		let p = [-vx, vx, -vy, vy];
-		let q = [x - left, right - x, y - top, bottom - y];
+		const p = [-vx, vx, -vy, vy];
+		const q = [x - left, right - x, y - top, bottom - y];
 		let u1 = -Infinity;
 		let u2 = Infinity;
 		for (let i = 0; i <= 4; i++) {
@@ -214,7 +214,7 @@ export default class Line {
 
 		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
 
-		let collision = {};
+		const collision = {};
 		collision.x = x + u1 * vx;
 		collision.y = y + u1 * vy;
 		// console.log(collision);

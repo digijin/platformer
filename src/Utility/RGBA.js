@@ -11,13 +11,13 @@ type rgbaParams = {
 
 export default class RGBA {
 	static fromStops(stops: Array<rgbaParams>, pc: number) {
-		let l = stops.length - 1;
-		let prevStop = Math.floor(pc * l);
-		let nextStop = Math.ceil(pc * l);
+		const l = stops.length - 1;
+		const prevStop = Math.floor(pc * l);
+		const nextStop = Math.ceil(pc * l);
 		pc = (l * pc) % 1;
-		let ipc = 1 - pc;
-		let p = stops[prevStop];
-		let n = stops[nextStop];
+		const ipc = 1 - pc;
+		const p = stops[prevStop];
+		const n = stops[nextStop];
 		return new RGBA({
 			r: p.r * ipc + n.r * pc,
 			g: p.g * ipc + n.g * pc,
@@ -93,7 +93,7 @@ export default class RGBA {
     }
 
     percentTo(rgba: RGBA, percent: number): RGBA {
-    	let inverse = 1 - percent;
+    	const inverse = 1 - percent;
     	return new RGBA({
     		r: this.r * inverse + rgba.r * percent,
     		g: this.g * inverse + rgba.g * percent,

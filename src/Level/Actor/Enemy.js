@@ -64,7 +64,7 @@ export default class Enemy extends Actor {
 
 	init(engine: Engine) {
 		super.init(engine);
-		let texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
+		const texture = new PIXI.Texture(new PIXI.BaseTexture(this.type.image));
 		this.sprite = new EnemySprite(texture);
 		this.sprite.anchor = this.registration;
 		this.sprite.width = this.size.w;
@@ -82,7 +82,7 @@ export default class Enemy extends Actor {
 
 	update() {
 		this.sprite.position = this.position;
-		let player = this.engine.objectsTagged("player").pop();
+		const player = this.engine.objectsTagged("player").pop();
 		if (!player) {
 			// this.gravity();
 			this.render();
@@ -109,7 +109,7 @@ export default class Enemy extends Actor {
 	}
 
 	newAction() {
-		let player = this.engine.objectsTagged("player").pop();
+		const player = this.engine.objectsTagged("player").pop();
 		if (this.agro) {
 			//falloff distance
 			if (

@@ -27,7 +27,7 @@ window.onload = () => {
 
 		setTimeout(() => {
 			// console.log("boop", new Date().getTime());
-			let Game = require("Game").default;
+			const Game = require("Game").default;
 			window.game = new Game(document.getElementById("container"));
 		}, 1);
 	});

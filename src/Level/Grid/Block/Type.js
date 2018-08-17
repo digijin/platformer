@@ -49,7 +49,7 @@ export default class BlockType {
 
 		if (this.image) {
 			this.image.onload = () => {
-				let canvas = document.createElement("canvas");
+				const canvas = document.createElement("canvas");
 				canvas.width = this.image.width;
 				canvas.height = this.image.height;
 
@@ -60,7 +60,7 @@ export default class BlockType {
 				// this.textureId = "BlockType" + this.id;
 				// PIXI.Texture.addToCache(this.texture, this.textureId);
 
-				let context = canvas.getContext("2d");
+				const context = canvas.getContext("2d");
 				if (context) {
 					context.drawImage(this.image, 0, 0);
 					// this.imageData = context.getImageData(
@@ -84,7 +84,7 @@ export default class BlockType {
 	}
 }
 
-let blockTypeConfig: Array<BlockTypeParams> = [
+const blockTypeConfig: Array<BlockTypeParams> = [
 	{
 		name: "empty",
 		id: "0",

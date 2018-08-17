@@ -79,7 +79,7 @@ export default class Point {
 	}
 
 	distanceTo(point: Point): number {
-		let diff = this.subtract(point);
+		const diff = this.subtract(point);
 		return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2));
 	}
 
@@ -89,7 +89,7 @@ export default class Point {
 	}
 
 	directionTo(point: Point): number {
-		let diff = this.subtract(point);
+		const diff = this.subtract(point);
 		return Math.atan2(diff.y, diff.x);
 	}
 
@@ -122,7 +122,7 @@ export default class Point {
 	}
 
 	percentTo(point: Point, percent: number): Point {
-		let inverse = 1 - percent;
+		const inverse = 1 - percent;
 		return new Point({
 			x: this.x * inverse + point.x * percent,
 			y: this.y * inverse + point.y * percent,
