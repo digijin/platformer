@@ -10,10 +10,10 @@ module.exports = function(config) {
 			test: /\.js$|\.jsx$/,
 			use: {
 				loader: "istanbul-instrumenter-loader",
-				options: { esModules: true }
+				options: { esModules: true },
 			},
 			enforce: "post",
-			exclude: /node_modules|\.(spec|karma)\.js$/
+			exclude: /node_modules|\.(spec|karma)\.js$/,
 		});
 	}
 	config.set({
@@ -28,11 +28,11 @@ module.exports = function(config) {
 				pattern: "dist/assets/*.*",
 				watched: false,
 				included: false,
-				served: true
-			}
+				served: true,
+			},
 		],
 		proxies: {
-			"/assets/": "/base/dist/assets/"
+			"/assets/": "/base/dist/assets/",
 		},
 		// urlRoot: "/karma/",
 		browser: { fs: false },
@@ -41,7 +41,7 @@ module.exports = function(config) {
 			// "src/worker/*worker.js": ["webpack", "sourcemap"],
 			"src/**/!(*.spec|*.karma|worker).js": ["electron", "coverage"],
 			"**/*karma.js": ["webpack"], //, "sourcemap"],
-			"**/*spec.js": ["webpack"] //, "sourcemap"]
+			"**/*spec.js": ["webpack"], //, "sourcemap"]
 		},
 		webpack: webpackConf[0],
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -49,7 +49,7 @@ module.exports = function(config) {
 		reporters: ["coverage-istanbul"],
 		specReporter: {
 			suppressSkipped: true,
-			showSpecTiming: true
+			showSpecTiming: true,
 		},
 		coverageIstanbulReporter: {
 			reports: ["html", "lcov"],
@@ -58,19 +58,19 @@ module.exports = function(config) {
 			skipFilesWithNoCoverage: true,
 			"report-config": {
 				html: { subdir: "html" },
-				lcov: { subdir: "lcov" }
-			}
+				lcov: { subdir: "lcov" },
+			},
 		},
 		client: {
 			//use iframe if not electron
-			useIframe: config.browsers[0] !== "Electron"
+			useIframe: config.browsers[0] !== "Electron",
 		},
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
 		autoWatch: true,
 		singleRun: false,
-		browserNoActivityTimeout: 10 * 1000,
-		browserDisconnectTimeout: 10 * 1000
+		browserNoActivityTimeout: 30 * 1000,
+		browserDisconnectTimeout: 30 * 1000,
 	});
 };
