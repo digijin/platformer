@@ -79,7 +79,7 @@ describe("Scene/Level.karma.js", () => {
 				for (let i = 0; i < 50; i++) {
 					let target = {
 						clientX: window.innerWidth / 2 + 200,
-						clientY: window.innerHeight / 2 - 200 + i * 4
+						clientY: window.innerHeight / 2 - 300 + i * 4
 					};
 					mouseUtil.mouseEvent(
 						"mousemove",
