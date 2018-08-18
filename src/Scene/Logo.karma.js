@@ -9,7 +9,7 @@ import recurseSearch from "test/util/recurseSearch";
 describe("Scene/Logo.karma.js", () => {
 	let container;
 	let game;
-	let getByTestingId = id => {
+	const getByTestingId = id => {
 		return recurseSearch(id, game.engine.stage);
 	};
 

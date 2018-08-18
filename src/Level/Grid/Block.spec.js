@@ -2,10 +2,10 @@ import Block from "Level/Grid/Block";
 import Point from "Utility/Point";
 describe("Grid/Block", () => {
 	it("should stringify", () => {
-		let block = new Block({
+		const block = new Block({
 			position: new Point({ x: 1, y: 2 }),
 			type: "0",
-			grid: { abc: 123 }
+			grid: { abc: 123 },
 		});
 		expect(
 			JSON.stringify(block, (name, val) => {

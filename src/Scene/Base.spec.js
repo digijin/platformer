@@ -13,12 +13,12 @@ describe("Scene/Base.spec.js", () => {
 		// 	expect(base.engine.objects[0].id).toBe(2);
 		// });
 		it("should call destroyAllExceptTagged", () => {
-			let base = new SceneBase();
-			let eng = {destroyAllExceptTagged: () => {},  ui: { dispatch: () => {} }}
+			const base = new SceneBase();
+			const eng = { destroyAllExceptTagged: () => {},  ui: { dispatch: () => {} } };
 			spyOn(eng, "destroyAllExceptTagged");
 			base.engine = eng;
 			base.end() ;
 			expect(eng.destroyAllExceptTagged).toHaveBeenCalled();
-		})
+		});
 	});
 });

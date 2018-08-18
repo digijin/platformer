@@ -14,7 +14,7 @@ function sleep(ms) {
 }
 
 function clickId(id) {
-	let button = document.getElementById(id);
+	const button = document.getElementById(id);
 	expect(button).not.toBe(null);
 	mouseUtil.clickSelector("#" + id);
 }
@@ -22,7 +22,7 @@ function clickId(id) {
 describe("Scene/Level.karma.js", () => {
 	let container;
 	let game;
-	let getByTestingId = id => {
+	const getByTestingId = id => {
 		return recurseSearch(id, game.engine.stage);
 	};
 
@@ -56,9 +56,9 @@ describe("Scene/Level.karma.js", () => {
 
 	describe("weapons check", () => {
 		it("should aim", () => {
-			let target = {
+			const target = {
 				clientX: window.innerWidth / 2 + 200,
-				clientY: window.innerHeight / 2 - 200
+				clientY: window.innerHeight / 2 - 200,
 			};
 			mouseUtil.mouseEvent("mousemove", target, game.engine.canvas);
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
@@ -67,7 +67,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mousedown",
 				{
-					button: 0
+					button: 0,
 				},
 				game.engine.canvas
 			);
@@ -77,9 +77,9 @@ describe("Scene/Level.karma.js", () => {
 			"should move cursor",
 			testGen(function*() {
 				for (let i = 0; i < 50; i++) {
-					let target = {
+					const target = {
 						clientX: window.innerWidth / 2 + 200,
-						clientY: window.innerHeight / 2 - 300 + i * 4
+						clientY: window.innerHeight / 2 - 300 + i * 4,
 					};
 					mouseUtil.mouseEvent(
 						"mousemove",
@@ -102,7 +102,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mouseup",
 				{
-					button: 0
+					button: 0,
 				},
 				game.engine.canvas
 			);
@@ -114,7 +114,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mousedown",
 				{
-					button: 2
+					button: 2,
 				},
 				game.engine.canvas
 			);
@@ -131,7 +131,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mouseup",
 				{
-					button: 2
+					button: 2,
 				},
 				game.engine.canvas
 			);
@@ -161,9 +161,9 @@ describe("Scene/Level.karma.js", () => {
 		});
 
 		it("should aim", () => {
-			let target = {
+			const target = {
 				clientX: window.innerWidth / 2 - 200,
-				clientY: window.innerHeight / 2 + 200
+				clientY: window.innerHeight / 2 + 200,
 			};
 			mouseUtil.mouseEvent("mousemove", target, game.engine.canvas);
 			expect(game.engine.input.mouse.position.x).toBe(target.clientX);
@@ -172,7 +172,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mousedown",
 				{
-					button: 2
+					button: 2,
 				},
 				game.engine.canvas
 			);
@@ -185,7 +185,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mouseup",
 				{
-					button: 2
+					button: 2,
 				},
 				game.engine.canvas
 			);
@@ -194,7 +194,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mousedown",
 				{
-					button: 0
+					button: 0,
 				},
 				game.engine.canvas
 			);
@@ -206,7 +206,7 @@ describe("Scene/Level.karma.js", () => {
 			mouseUtil.mouseEvent(
 				"mouseup",
 				{
-					button: 0
+					button: 0,
 				},
 				game.engine.canvas
 			);

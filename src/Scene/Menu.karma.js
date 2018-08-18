@@ -9,7 +9,7 @@ import recurseSearch from "test/util/recurseSearch";
 describe("scene/menu.karma.js", () => {
 	let container;
 	let game;
-	let getByTestingId = id => {
+	const getByTestingId = id => {
 		return recurseSearch(id, game.engine.stage);
 	};
 
@@ -69,10 +69,10 @@ describe("scene/menu.karma.js", () => {
 			setTimeout(done, 100);
 		});
 		it("should click all children", done => {
-			let cont = getByTestingId("OutfittingContainer");
+			const cont = getByTestingId("OutfittingContainer");
 			cont.children.forEach((o, i) => {
 				setTimeout(() => {
-					let btn = recurseSearch("OutfittingButton", o);
+					const btn = recurseSearch("OutfittingButton", o);
 					if (btn) {
 						btn.onClick();
 					}

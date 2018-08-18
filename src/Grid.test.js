@@ -7,12 +7,12 @@ describe("grid jest", () => {
 		it("should return a strugn from save", () => {
 			
 
-			let grid = new Grid({ size: { w: 10, h: 10 } });
+			const grid = new Grid({ size: { w: 10, h: 10 } });
 
 			expect(typeof grid.save()).toBe("string");
 		});
 		it("save snapshot", () => {
-			let grid = new Grid({ size: { w: 2, h: 2 } });
+			const grid = new Grid({ size: { w: 2, h: 2 } });
 			// FLOWHACK
 			expect(grid.save()).toMatchSnapshot();
 		});

@@ -67,7 +67,7 @@ xdescribe("editor.karma functional", () => {
 		});
 	});
 	describe("add tiles", () => {
-		let pt = { x: 500, y: 500 };
+		const pt = { x: 500, y: 500 };
 		it("should add tiles under cursor", done => {
 			mouseUtil.mouseEvent(
 				"mousemove",
@@ -80,7 +80,7 @@ xdescribe("editor.karma functional", () => {
 				game.engine.canvas
 			);
 			setTimeout(() => {
-				let block = game.engine.grid.getBlockAtPoint(
+				const block = game.engine.grid.getBlockAtPoint(
 					game.engine.mouse.point
 				);
 				expect(block.isEmpty()).toBe(false);

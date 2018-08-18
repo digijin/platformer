@@ -2,7 +2,7 @@ import RGBA from "./RGBA";
 
 describe("Utility/RGBA", () => {
 	it("should be a class with r g b a", () => {
-		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
+		const rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
 		expect(rgba.r).toBe(0.1);
 		expect(rgba.g).toBe(0.2);
 		expect(rgba.b).toBe(0.3);
@@ -17,14 +17,14 @@ describe("Utility/RGBA", () => {
 
 	describe("fromString", () => {
 		it("removes hashes and reads nuimber correct", () => {
-			let rgba = RGBA.fromString("#010203");
+			const rgba = RGBA.fromString("#010203");
 			expect(rgba.r).toBe(1 / 255);
 			expect(rgba.g).toBe(2 / 255);
 			expect(rgba.b).toBe(3 / 255);
 		});
 		it("back to hex", () => {
-			let hex = "#badb01";
-			let rgba = RGBA.fromString(hex);
+			const hex = "#badb01";
+			const rgba = RGBA.fromString(hex);
 			expect(rgba.toHex()).toBe(hex);
 		});
 	});
@@ -56,11 +56,11 @@ describe("Utility/RGBA", () => {
 		});
 	});
 	it("should toString", () => {
-		let rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
+		const rgba = new RGBA({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 });
 		expect(rgba.toString()).toBe("rgba(26,51,77,0.4)");
 	});
 	it("should toNumber", () => {
-		let rgba = new RGBA({ r: 0, g: 1, b: 0, a: 1 });
+		const rgba = new RGBA({ r: 0, g: 1, b: 0, a: 1 });
 		expect(rgba.toNumber()).toBe(0x00ff00);
 	});
 
@@ -102,40 +102,40 @@ describe("Utility/RGBA", () => {
 		});
 		describe("R to G to B", () => {
 			// let rgba;
-			let stops = [
+			const stops = [
 				{ r: 1, g: 0, b: 0 },
 				{ r: 0, g: 1, b: 0 },
-				{ r: 0, g: 0, b: 1 }
+				{ r: 0, g: 0, b: 1 },
 			];
 
 			// beforeAll(() => {
 			// });
 			it("stop 1", () => {
-				let rgba = RGBA.fromStops(stops, 0);
+				const rgba = RGBA.fromStops(stops, 0);
 				expect(rgba.r).toBe(1);
 				expect(rgba.g).toBe(0);
 				expect(rgba.b).toBe(0);
 			});
 			it("midpoint 1", () => {
-				let rgba = RGBA.fromStops(stops, 0.25);
+				const rgba = RGBA.fromStops(stops, 0.25);
 				expect(rgba.r).toBe(0.5);
 				expect(rgba.g).toBe(0.5);
 				expect(rgba.b).toBe(0);
 			});
 			it("stop 2", () => {
-				let rgba = RGBA.fromStops(stops, 0.5);
+				const rgba = RGBA.fromStops(stops, 0.5);
 				expect(rgba.r).toBe(0);
 				expect(rgba.g).toBe(1);
 				expect(rgba.b).toBe(0);
 			});
 			it("midpoint 2", () => {
-				let rgba = RGBA.fromStops(stops, 0.75);
+				const rgba = RGBA.fromStops(stops, 0.75);
 				expect(rgba.r).toBe(0);
 				expect(rgba.g).toBe(0.5);
 				expect(rgba.b).toBe(0.5);
 			});
 			it("stop 3", () => {
-				let rgba = RGBA.fromStops(stops, 1);
+				const rgba = RGBA.fromStops(stops, 1);
 				expect(rgba.r).toBe(0);
 				expect(rgba.g).toBe(0);
 				expect(rgba.b).toBe(1);

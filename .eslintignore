@@ -1,6 +1,4 @@
-**/*.spec.js
-**/*.karma.js
-**/*.test.js
+
 dist
 temp
 flow-typed

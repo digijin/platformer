@@ -3,20 +3,20 @@ import Point from "./Point";
 
 describe("Utility/Rect", () => {
 	describe("fromXYWH", () => {
-		it('should work', () => {
-			let rect = Rect.fromXYWH({x:10, y:20, w:30, h:40});
-			expect(rect.t).toBe(20)
-			expect(rect.r).toBe(40)
-			expect(rect.b).toBe(60)
-			expect(rect.l).toBe(10)
-		})
-	})
+		it("should work", () => {
+			const rect = Rect.fromXYWH({ x: 10, y: 20, w: 30, h: 40 });
+			expect(rect.t).toBe(20);
+			expect(rect.r).toBe(40);
+			expect(rect.b).toBe(60);
+			expect(rect.l).toBe(10);
+		});
+	});
 	describe("fromPosSizeRego", () => {
 		it("should work", () => {
-			let pos = { x: 100, y: 200 };
-			let size = { w: 50, h: 50 };
-			let rego = { x: 0.5, y: 1 };
-			let output = Rect.fromPosSizeRego(pos, size, rego);
+			const pos = { x: 100, y: 200 };
+			const size = { w: 50, h: 50 };
+			const rego = { x: 0.5, y: 1 };
+			const output = Rect.fromPosSizeRego(pos, size, rego);
 			expect(output.t).toBe(150);
 			expect(output.r).toBe(125);
 			expect(output.b).toBe(200);
@@ -25,13 +25,13 @@ describe("Utility/Rect", () => {
 	});
 	describe("overlaps", () => {
 		it("true case", () => {
-			let r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });
-			let r2 = new Rect({ t: 5, r: 15, b: 15, l: 5 });
+			const r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });
+			const r2 = new Rect({ t: 5, r: 15, b: 15, l: 5 });
 			expect(r1.overlaps(r2)).toBe(true);
 		});
 		it("false case", () => {
-			let r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });
-			let r2 = new Rect({ t: 15, r: 25, b: 25, l: 15 });
+			const r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });
+			const r2 = new Rect({ t: 15, r: 25, b: 25, l: 15 });
 			expect(r1.overlaps(r2)).toBe(false);
 		});
 	});

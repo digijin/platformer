@@ -9,12 +9,12 @@ class Thing {
 
 describe("Utility/Pool.spec.js", () => {
 	it("should take and return the same type", () => {
-		let pool = new Pool(Thing);
-		let str = pool.get();
+		const pool = new Pool(Thing);
+		const str = pool.get();
 		expect(str.name).toBe("thingy");
 	});
 	it("should return objects in right order afer reset", () => {
-		let pool = new Pool(Thing);
+		const pool = new Pool(Thing);
 		let str = pool.get();
 
 		str.name = "first";
@@ -25,7 +25,7 @@ describe("Utility/Pool.spec.js", () => {
 		expect(pool.get().name).toBe("second");
 	});
 	it("should pass args into constructor", () => {
-		let pool = new Pool(Thing, "Bob");
+		const pool = new Pool(Thing, "Bob");
 		expect(pool.get().name).toBe("Bob");
 	});
 });
