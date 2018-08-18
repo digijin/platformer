@@ -1,6 +1,5 @@
 
 import Grid3 from "./Grid3";
-import Grid from "../Grid";
 
 class Obj {
 	constructor(params) {
@@ -10,9 +9,9 @@ class Obj {
 }
 
 describe("Utility/Grid3", () => {
-	it("shoule be an array", () => {
-		expect(Array.isArray(new Grid3())).toBe(true);
-	});
+	// it("shoule be an array", () => {
+	// 	expect(Array.isArray(new Grid3())).toBe(true);
+	// });
 	describe("constructor", () => {
 		it("width", () => {
 			const grid = new Grid3(3, 1, 1, Obj);
@@ -32,5 +31,20 @@ describe("Utility/Grid3", () => {
 		expect(grid[1][2][3].x).toBe(1);
 		expect(grid[1][2][3].y).toBe(2);
 		expect(grid[1][2][3].z).toBe(3);
+	});
+	describe("size", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(3, 4, 5, Obj);
+		});
+		it("should have width", () => {
+			expect(grid.width).toBe(3);
+		});
+		it("should have height", () => {
+			expect(grid.height).toBe(4);
+		});
+		it("should have depth", () => {
+			expect(grid.depth).toBe(5);
+		});
 	});
 });

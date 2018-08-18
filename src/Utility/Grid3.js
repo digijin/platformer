@@ -1,17 +1,29 @@
 // 3d grid
 
 
-export default class Grid3 extends Array{
+export default class Grid3{
 	constructor(width, height, depth, klass){
-		super(width);
-		for(let x= 0;x<width;x++){
+		this.length = width;
+		for(let x = 0; x < width; x++){
 			this[x] = new Array(height);
-			for(let y= 0;y<height;y++){
+			for(let y = 0; y < height; y++){
 				this[x][y] = new Array(depth);
-				for(let z= 0;z<depth;z++){
+				for(let z = 0; z < depth; z++){
 					this[x][y][z] = new klass({ x, y, z });
 				}
 			}
 		}
+	}
+
+	get width(){
+		return this.length;
+	}
+
+	get height(){
+		return this[0].length;
+	}
+
+	get depth(){
+		return this[0][0].length;
 	}
 }

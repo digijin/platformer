@@ -7,6 +7,11 @@ import Grid3 from "Utility/Grid3";
 
 
 const WIDTH = 10;
+
+class Block{
+
+}
+
 export default class GeneratorManager extends Base {
 	start(engine: Engine) {
 		super.start(engine);
@@ -15,7 +20,7 @@ export default class GeneratorManager extends Base {
 	}
 
 	draw(){
-		const grid = new Grid3();
+		const grid = new Grid3(10, 10, 1, Block);
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
 		sprite.position.x = WIDTH;
 		sprite.position.y = WIDTH;
