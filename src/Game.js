@@ -12,6 +12,7 @@ import Results from "Scene/Results";
 import Demo from "Scene/Demo";
 import Menu from "Scene/Menu";
 import Shader from "Scene/Shader";
+import Generator from "Scene/Generator";
 
 //textures
 import { BlockTypes } from "Level/Grid/Block/Type";
@@ -77,6 +78,9 @@ export default class Game {
 			break;
 		case "shader":
 			this.engine.startScene(new Shader());
+			break;
+		case "generator":
+			this.engine.startScene(new Generator());
 			break;
 		default:
 			this.engine.startScene(new Logo());
