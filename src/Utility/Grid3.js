@@ -15,6 +15,14 @@ export default class Grid3{
 		}
 	}
 
+	row(num:number){
+		const arr = [];
+		for(let x = 0; x < this.width; x++){
+			arr.push(this[x][num][0]);
+		}
+		return arr;
+	}
+
 	get width(){
 		return this.length;
 	}
