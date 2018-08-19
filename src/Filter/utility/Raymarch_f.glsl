@@ -1,6 +1,6 @@
 
 const float EPSILON = 0.0001;
-const int MAX_MARCHING_STEPS = 255;
+const int MAX_MARCHING_STEPS = 64;
 
 /**
  * Return the shortest distance from the eyepoint to the scene surface along

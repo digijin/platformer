@@ -81,18 +81,19 @@ mat3 rotAxis(vec3 axis, float a) {
  * Sign indicates whether the point is inside or outside the surface,
  * negative indicating inside.
  */
-const int NUM_SPHERES = 26;
-const int NUM_FRAGS = 6;
+const int NUM_SPHERES = 8;
+const int NUM_FRAGS = 0;
 float sceneSDF(vec3 samplePoint) {
 	float sphereDist = MAX_DIST;
 	// float sphere1 = sphereSDF(samplePoint, vec3(0.), 1.);
 	// float sphere2 = sphereSDF(samplePoint, vec3(sin(iTime*.75), cos(iTime*.98), sin(iTime*1.2)), 1.+cos(iTime*2.8)/4.);
 
 	// float sphereDist = smin(sphere1, sphere2, 0.1);// + snoise4(vec4(samplePoint, iTime))*0.1;
-	mat3 rot = rotAxis(normalize(vec3(1.,1.6,0.)), iTime);
+	// mat3 rot = rotAxis(normalize(vec3(1.,1.6,0.)), iTime);
 	// float sphereDist = sphere1;
 	// sphereDist = sdCone((samplePoint+ vec3(0.,0.,2.))*rot, vec3(1.,1.,1.));
 	//+ vec3(0.,0.,0.)
+
 	float pc = fract(iTime/1.);
 
 	for(int i = 0; i<NUM_FRAGS; i++){
@@ -114,21 +115,21 @@ float sceneSDF(vec3 samplePoint) {
 		float angle = PHI * n;
 
 		// float sphere = sphereSDF(samplePoint, vec3(sin(iTime*.75+float(i)), cos(iTime*.98+float(i)), sin(iTime*1.2+float(i))), 1.);// + bumps*.1;
-		vec3 pos = vec3(sin(angle)*n/8., cos(angle)*n/8., n/8.);
+		vec3 pos = vec3(sin(angle)*n/4., cos(angle)*n/4., 0);
 		float size = 1. + sin(n)/2.;// + n/10.;
 		// size *= fract(iTime/10.);
 		float phase = ease(smoothstep(n/40., 1., pc*2.));
-		float outphase = ease(smoothstep(n/10., 2., pc*2.));
+		float outphase = (smoothstep(1., 2., pc*2.));
 		// size *= phase;
 		// pos *=phase;
 		float sphere = sphereSDF(samplePoint, pos*phase, size*phase);
-		float outsphere = sphereSDF(samplePoint, pos*phase, size*outphase*1.2);
+		float outsphere = sphereSDF(samplePoint, pos*outphase, size*outphase*1.25);
 		// sphere = min(sphere,outsphere);
 		sphere = max(sphere,-outsphere);
-		sphereDist = min(sphereDist, sphere);
+		sphereDist = smin(sphereDist, sphere, 0.1);
 	}
 
-	return sphereDist - abs(0.1*snoise3(samplePoint+vec3(0., iTime/2., 0.)));
+	return sphereDist - abs(0.2*snoise3((samplePoint/2.)-vec3(0., iTime/2., 0.)));
 }
 
 #pragma glslify: shortestDistanceToSurface = require(../utility/Raymarch_f.glsl,sceneSDF=sceneSDF)
@@ -141,8 +142,9 @@ void main( )
 
 	// vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
 	vec3 viewDir = rayDirection(45.0, vec2(1.), vTextureCoord.xy);
-	vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
-    vec3 eye = vec3(40.0* sin(pos.x), pos.y, 40.0*cos(pos.x));
+	// vec2 pos =  ((iMouse/iResolution.xy) - .5)*8.;
+	vec2 pos = vec2(0.);
+    vec3 eye = vec3(30.0* sin(pos.x), pos.y, 30.0*cos(pos.x));
     mat4 viewToWorld = lookAtMatrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     float dist = shortestDistanceToSurface(eye, worldDir, MIN_DIST, MAX_DIST);
@@ -158,20 +160,25 @@ void main( )
 	vec3 normal = estimateNormal(p);
 
 	float pc = fract(iTime/1.);
-	float a = 1.8;
+	float a = 1.7;
 	float b = 1.99;
 	float c = mix(a, b, smoothstep(0.1, 0.3, pc));
-	if(length(worldDir-normal)<a){
-		gl_FragColor = vec4(vec3(.4), 1.);
-	}else if(length(worldDir-normal)<c){
-		// gl_FragColor = vec4(vec3(.8), 1.);
-		// gl_FragColor.b = smoothstep(0.,.3, pc)*.8;
-		gl_FragColor = vec4(vec3(.8), 1.);
-	}else if(length(worldDir-normal)<b){
-		gl_FragColor = vec4(1.,1.,0., 1.);
-		// gl_FragColor = smoothste
+
+	vec3 aCol = vec3(.4);
+	vec3 bCol = vec3(.8);
+	vec3 cCol = vec3(1., 1., 0.);
+	vec3 dCol = vec3(1., 0., 0.);
+	//range 0 - 2;
+	float len = length(worldDir-normal);
+	if(len<a){
+		gl_FragColor = vec4(aCol, 1.);
+	}else if(len<c){
+		vec3 col = mix(aCol, bCol, vec3(smoothstep(1.7, 1.8, len)));
+		gl_FragColor = vec4(col, 1.);
+	}else if(len<b){
+		gl_FragColor = vec4(cCol, 1.);
 	}else{
-		gl_FragColor = vec4(1.,0.,0., 1.);
+		gl_FragColor = vec4(dCol, 1.);
 	}
 
 	// float power = light(
