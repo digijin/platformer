@@ -13,7 +13,7 @@ export default class Mission {
 export const Missions = [];
 Missions.push(
 	new Mission({
-		level: require("levels/test1.txt"),
+		level: require("levels/deadcells.txt"),
 		title: "TEST MISSION",
 		reward: 0,
 		rank: 1,

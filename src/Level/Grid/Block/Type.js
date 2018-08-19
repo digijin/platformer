@@ -311,6 +311,15 @@ const blockTypeConfig: Array<BlockTypeParams> = [
 		platform: true,
 		hp: 100,
 	},
+	{
+		name: "ladder",
+		id: "ladder",
+		image: require("./images/chainlink.png"),
+		textureId: "chainlink.png",
+		destructable: true,
+		ladder: true,
+		hp: 100,
+	},
 ];
 
 export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
