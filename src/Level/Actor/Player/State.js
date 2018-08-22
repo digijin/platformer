@@ -6,7 +6,7 @@ export const DASH = "dashing";
 export const SLAM = "slamming";
 
 
-const State = { GROUNDED, AIRBORNE, CLIMB, DASH };
+const State = { GROUNDED, AIRBORNE, CLIMB, DASH, SLAM };
 
 export default State;
 

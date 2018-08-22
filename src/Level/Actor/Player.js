@@ -4,7 +4,6 @@ import Point from "Utility/Point";
 // import Missile from "GameObject/Missile";
 // import Bullet from "GameObject/Bullet";
 import Shell from "GameObject/Shell";
-import BoosterParticle from "GameObject/Particle/BoosterParticle";
 // import mech from "assets/mech.png";
 
 import Actor from "Level/Actor";
@@ -148,54 +147,16 @@ export default class Player extends Actor {
 		const booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
 		const legs = LegMap[this.engine.currentPlayer.legs];
 
-		// let boundingRect = this.getBoundingRect();
 
-		//CHANGE THIS SHIT
-		// conserve momentum in the air
-
-		if (this.airborne) {
-			this.h +=
-				this.engine.input.getAxis("horizontal") *
-				this.engine.deltaTime *
-				5;
-			this.h = clamp(this.h, -1, 1);
-			// this.h *= 0.7;
-		} else {
-			this.h = this.engine.input.getAxis("horizontal");
-		}
 		if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
 			this.h = gp.axes[0];
 		}
 		if (this.engine.input.getButton("stand")) {
 			this.h = 0;
 		}
-		//check walls
-
-		//DOWNWARD BOOSTERS
-		if (this.airborne) {
-			if (this.engine.input.getButtonDown("down")) {
-				this.v = booster.power;
-				this.h = 0;
-			}
-		}
 
 		//BOOSTERS
-		if (this.engine.input.getButton("boost")) {
-			// console.log(this.engine.input.getAxis("horizontal"));
-			this.h *= 2;
-			this.engine.register(
-				new BoosterParticle({
-					container: this.container,
-					position: this.position.subtract({
-						x: 0,
-						y: config.player.size.h / 2,
-					}),
-					h: this.h,
-					v: 0.5,
-					time: 0.2,
-				})
-			);
-		}
+
 
 		let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
@@ -404,6 +365,10 @@ export default class Player extends Actor {
 	}
 
 	changeState(newstate: PlayerStateType){
+		// if(this.state !== newstate){
+		// 	console.log("changing to ", newstate);
+		// }
+
 		this.state = newstate;
 	}
 
