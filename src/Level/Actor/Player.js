@@ -24,9 +24,18 @@ import type Booster from "Components/Booster";
 
 import { clamp } from "lodash-es";
 
+import PlayerState from "Level/Actor/Player/State";
+import type { PlayerStateType } from "Level/Actor/Player/State";
+
 import type ComponentEngine from "Components/Engine";
 
 import * as PIXI from "pixi.js";
+
+// import BehaviourBoost from "./Player/Behaviour/Boost";
+// import BehaviourJump from "./Player/Behaviour/Jump";
+// import BehaviourDoubleJump from "./Player/Behaviour/DoubleJump";
+// import BehaviourWalk from "./Player/Behaviour/Walk";
+import Behaviour from "./Player/Behaviour";
 
 // let firing = false;
 const missile = {
@@ -71,9 +80,13 @@ export default class Player extends Actor {
 	container: PIXI.Container;
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
+	state: PlayerStateType;
 
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);
+		
+
+		this.state = PlayerState.AIRBORNE;
 		this.tag("player");
 		this.z = 10;
 		Object.assign(this, params);
@@ -88,8 +101,10 @@ export default class Player extends Actor {
 		this.leg = new Leg({ parent: this, container: this.container });
 	}
 
+
 	init(engine: Engine) {
 		super.init(engine);
+		this.behaviours = Behaviour.map(b => new b(this, engine));
 		engine.register(this.leg);
 		this.graph = new PIXI.Graphics();
 		this.container.addChild(this.graph);
@@ -100,6 +115,9 @@ export default class Player extends Actor {
 	}
 
 	update() {
+		this.behaviours.forEach(b=>b.run());
+		// console.log(this.behaviours[0].run);
+
 		//adjust camera
 		this.focusCameraOnSelf();
 
@@ -182,36 +200,36 @@ export default class Player extends Actor {
 		let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
 		//VERTICAL MOVEMENT
-		if (this.engine.input.getButtonDown("jump")) {
-			if (!this.airborne) {
-				this.v = -legs.jumpPower; //jump
-			} else {
-				if (
-					this.spendEnergy(
-						booster.energyDrain * this.engine.deltaTime
-					)
-				) {
-					this.v = -booster.power; //BOOSTERS
-					// this.v -= this.engine.deltaTime * 4; //BOOSTERS
-				}
-			}
+		// if (this.engine.input.getButtonDown("jump")) {
+		// 	if (!this.airborne) {
+		// 		this.v = -legs.jumpPower; //jump
+		// 	} else {
+		// 		if (
+		// 			this.spendEnergy(
+		// 				booster.energyDrain * this.engine.deltaTime
+		// 			)
+		// 		) {
+		// 			this.v = -booster.power; //BOOSTERS
+		// 			// this.v -= this.engine.deltaTime * 4; //BOOSTERS
+		// 		}
+		// 	}
 
-			this.engine.register(
-				new BoosterParticle({
-					container: this.container,
-					position: this.position.subtract({
-						x: 0,
-						y: config.player.size.h / 2,
-					}),
-					h: Math.random() - 0.5,
-					v: 5 + Math.random() * 2,
-					time: 0.2,
-				})
-			);
-		} else {
-			this.v += this.engine.deltaTime * config.gravity; //GRAVITY
-		}
-
+		// 	this.engine.register(
+		// 		new BoosterParticle({
+		// 			container: this.container,
+		// 			position: this.position.subtract({
+		// 				x: 0,
+		// 				y: config.player.size.h / 2,
+		// 			}),
+		// 			h: Math.random() - 0.5,
+		// 			v: 5 + Math.random() * 2,
+		// 			time: 0.2,
+		// 		})
+		// 	);
+		// } else {
+		// }
+		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
+		
 		const onGround = this.v > 0 && !this.canMoveVert(this.v);
 		this.airborne = !onGround;
 
@@ -385,6 +403,10 @@ export default class Player extends Actor {
 		}
 	}
 
+	changeState(newstate: PlayerStateType){
+		this.state = newstate;
+	}
+
 	spendEnergy(amount: number): boolean {
 		if (this.energy >= amount) {
 			this.energy -= amount;
@@ -458,6 +480,7 @@ export default class Player extends Actor {
 	}
 
 	handleLanding(speed: number) {
+		this.changeState(PlayerState.GROUNDED);
 		for (let i = 0; i < speed * 4; i++) {
 			this.engine.register(
 				new Shell({
