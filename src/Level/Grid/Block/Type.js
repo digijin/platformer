@@ -46,6 +46,7 @@ export default class BlockType {
 		this.image = params.image;
 		this.textureId = params.textureId;
 		this.platform = params.platform || false;
+		this.ladder = params.ladder || false;
 
 		if (this.image) {
 			this.image.onload = () => {

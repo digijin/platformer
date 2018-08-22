@@ -63,12 +63,17 @@ export default class Block {
 	}
 
 	isVacant(): boolean {
-		return this.isPlatform() || this.type == "0";
+		return this.isPlatform() || this.isLadder() || this.type == "0";
 	}
 
 	isPlatform(): boolean {
 		// return this.type == "platform";
-		return this.getType().platform;
+		return this.getType().platform || this.getType().ladder;
+	}
+
+	isLadder(): boolean {
+		// return this.type == "platform";
+		return this.getType().ladder;
 	}
 
 	// get key():string{
