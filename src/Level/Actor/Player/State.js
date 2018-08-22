@@ -10,4 +10,6 @@ const State = { GROUNDED, AIRBORNE, CLIMB, DASH, SLAM };
 
 export default State;
 
+export const ALL = [GROUNDED, AIRBORNE, CLIMB, DASH, SLAM];
+
 export type PlayerStateType = "grounded"|"airborne"|"climing"|"dashing"|"slamming";

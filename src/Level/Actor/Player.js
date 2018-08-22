@@ -3,9 +3,9 @@
 import Point from "Utility/Point";
 // import Missile from "GameObject/Missile";
 // import Bullet from "GameObject/Bullet";
-import Shell from "GameObject/Shell";
 // import mech from "assets/mech.png";
 
+import Shell from "GameObject/Shell";
 import Actor from "Level/Actor";
 
 import config from "config";
@@ -21,7 +21,6 @@ import { BoosterMap } from "Components/Booster";
 import { EngineMap } from "Components/Engine";
 import type Booster from "Components/Booster";
 
-import { clamp } from "lodash-es";
 
 import PlayerState from "Level/Actor/Player/State";
 import type { PlayerStateType } from "Level/Actor/Player/State";
@@ -74,7 +73,6 @@ export default class Player extends Actor {
 	//this stuff basically to hack in equip panel
 	targetOffset: Point = new Point();
 	leg: Leg;
-	airborne: boolean = false;
 	energy: number = 0;
 	container: PIXI.Container;
 	primaryReload: number = 0;
@@ -160,63 +158,6 @@ export default class Player extends Actor {
 
 		let hDelta = this.h * this.engine.deltaTime * legs.speed;
 
-		//VERTICAL MOVEMENT
-		// if (this.engine.input.getButtonDown("jump")) {
-		// 	if (!this.airborne) {
-		// 		this.v = -legs.jumpPower; //jump
-		// 	} else {
-		// 		if (
-		// 			this.spendEnergy(
-		// 				booster.energyDrain * this.engine.deltaTime
-		// 			)
-		// 		) {
-		// 			this.v = -booster.power; //BOOSTERS
-		// 			// this.v -= this.engine.deltaTime * 4; //BOOSTERS
-		// 		}
-		// 	}
-
-		// 	this.engine.register(
-		// 		new BoosterParticle({
-		// 			container: this.container,
-		// 			position: this.position.subtract({
-		// 				x: 0,
-		// 				y: config.player.size.h / 2,
-		// 			}),
-		// 			h: Math.random() - 0.5,
-		// 			v: 5 + Math.random() * 2,
-		// 			time: 0.2,
-		// 		})
-		// 	);
-		// } else {
-		// }
-		this.v += this.engine.deltaTime * config.gravity; //GRAVITY
-		
-		const onGround = this.v > 0 && !this.canMoveVert(this.v);
-		this.airborne = !onGround;
-
-		const vertObjects = this.vertObstacles(this.v);
-
-		if (vertObjects.length > 0) {
-			//LAND ON GROUND
-			const isLanding = this.position.y % config.grid.width !== 0;
-			if (this.v > 0) {
-				this.position.y = vertObjects[0].position.y * config.grid.width;
-			}
-			const allPlatform =
-				vertObjects.find(o => {
-					return o.isPlatform() == false;
-				}) == undefined;
-			if (allPlatform && this.engine.input.getButton("down")) {
-				//jump through platform
-			} else {
-				if (isLanding) {
-					// console.log("yoloooo", this.v);
-					this.handleLanding(this.v);
-				}
-				this.v = 0;
-			}
-		}
-		// END VERTICAL
 
 		if (hand.state == HAND_STATE.GRIPPED) {
 			//REEL IN
@@ -444,22 +385,5 @@ export default class Player extends Actor {
 		this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
 	}
 
-	handleLanding(speed: number) {
-		this.changeState(PlayerState.GROUNDED);
-		for (let i = 0; i < speed * 4; i++) {
-			this.engine.register(
-				new Shell({
-					container: this.container,
-					position: this.position.subtract({
-						x: (Math.random() - 0.5) * 15 * speed,
-						// y: config.player.size.h / 2
-						y: 0,
-					}),
-					h: (Math.random() - 0.5) / 10,
-					v: (-Math.random() * speed) / 4,
-					time: 0.1 + Math.random(),
-				})
-			);
-		}
-	}
+
 }
