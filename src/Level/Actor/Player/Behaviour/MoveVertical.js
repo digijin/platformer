@@ -29,6 +29,7 @@ export default class MoveVertical extends Base{
     			this.player.v = 0;
     		}
     	}
+    	this.player.position.y += this.player.v;
     }
 
     handleLanding(speed: number) {

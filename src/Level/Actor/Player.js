@@ -44,7 +44,7 @@ const missile = {
 	cost: 10,
 };
 
-const HAND_STATE = {
+export const HAND_STATE = {
 	ARMED: 0,
 	FIRED: 1,
 	GRIPPED: 2,
@@ -74,6 +74,7 @@ export default class Player extends Actor {
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
 	state: PlayerStateType;
+	hand = hand;
 
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);
@@ -118,16 +119,16 @@ export default class Player extends Actor {
 		const gp = this.getGamePad();
 
 		//constantly regen
-		this.regenEnergy();
+		// this.regenEnergy();
 
 		/////////////////MISSILE MECHANICS
-		this.updateMissile();
+		// this.updateMissile();
 
 		////////////////////BULLET FIRING
-		this.updateGuns();
+		// this.updateGuns();
 
 		////////////////////////////HAND MECHANICS
-		this.updateGrapple();
+		// this.updateGrapple();
 
 		///////////////////////MOVEMENT
 		this.updateMovement(gp);
@@ -138,159 +139,16 @@ export default class Player extends Actor {
 	}
 
 	updateMovement(gp: any) {
-		const booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
-		const legs = LegMap[this.engine.currentPlayer.legs];
-
-
+		// const booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
+		// const legs = LegMap[this.engine.currentPlayer.legs];
 		if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
 			this.h = gp.axes[0];
 		}
 		if (this.engine.input.getButton("stand")) {
 			this.h = 0;
 		}
-
-		//BOOSTERS
-
-
-		let hDelta = this.h * this.engine.deltaTime * legs.speed;
-
-
-		if (hand.state == HAND_STATE.GRIPPED) {
-			//REEL IN
-			const diff = this.position.add(hand.offset).subtract(hand.position);
-			const dir = Math.atan2(diff.y, diff.x);
-			this.h = -Math.cos(dir); //* deltaTime*hSpeed
-			this.v = -Math.sin(dir) * this.engine.deltaTime * hand.reelSpeed;
-			hDelta = this.h * this.engine.deltaTime * hand.reelSpeed;
-		}
-
-
-		this.position.y += this.v;
-		this.position.x += hDelta;
 	}
 
-	updateGrapple() {
-		if (hand.state == HAND_STATE.ARMED) {
-			hand.position = this.position.add(hand.offset);
-		}
-		if (this.engine.input.getKey(69)) {
-			//FIRE HAND
-			if (hand.state == HAND_STATE.ARMED) {
-				hand.state = HAND_STATE.FIRED;
-				const diff = this.getTargetPoint().subtract(hand.position);
-				const dir = Math.atan2(diff.y, diff.x);
-				hand.direction = dir;
-			}
-		} else {
-			if (hand.state == HAND_STATE.GRIPPED) {
-				hand.state = HAND_STATE.RELEASED;
-			}
-		}
-		if (hand.state == HAND_STATE.FIRED) {
-			hand.position.x +=
-				Math.cos(hand.direction) * this.engine.deltaTime * hand.speed;
-			hand.position.y +=
-				Math.sin(hand.direction) * this.engine.deltaTime * hand.speed;
-			if (this.position.distanceTo(hand.position) > hand.distance) {
-				hand.state = HAND_STATE.RELEASED;
-			}
-			if (this.engine.grid.isPositionBlocked(hand.position)) {
-				// if(grid.blockAtPosition(hand.position).block !== "0"){
-				hand.state = HAND_STATE.GRIPPED;
-			}
-		}
-		if (hand.state == HAND_STATE.RELEASED) {
-			const target = this.position.add(hand.offset);
-			const diff = target.subtract(hand.position);
-			const dist = hand.position.distanceTo(target);
-			const speed = this.engine.deltaTime * hand.speed;
-			if (speed > dist) {
-				hand.position = target;
-				hand.state = HAND_STATE.ARMED;
-			} else {
-				const dir = Math.atan2(diff.y, diff.x);
-				hand.position.x += Math.cos(dir) * speed;
-				hand.position.y += Math.sin(dir) * speed;
-			}
-		}
-	}
-
-	updateGuns() {
-		if (this.primaryReload > 0) {
-			this.primaryReload -= this.engine.deltaTime;
-		} else {
-			if (this.engine.input.getButton("fire")) {
-				const primary = PrimaryMap[this.engine.currentPlayer.primary];
-				if (Math.random() < 0.25) {
-					this.engine.register(
-						new Shell({
-							container: this.container,
-							position: this.position.add({
-								x: 0,
-								y: -this.size.h / 2,
-							}),
-							// x: this.position.x,
-							// y: this.position.y - (this.size.h/2),
-							h: Math.random() - 0.5,
-							v: -Math.random(),
-						})
-					);
-				}
-				const gunPoint = this.leg.gunBarrelPos;
-				const diff = this.getTargetPoint().subtract(gunPoint);
-				const dir = Math.atan2(diff.y, diff.x);
-				if (this.spendEnergy(primary.energyCost)) {
-					this.primaryReload = primary.reloadTime;
-					this.engine.register(
-						// new Bullet({
-						new primary.projectile({
-							dir: dir,
-							container: this.container,
-							position: gunPoint,
-							owner: this,
-							time: 8,
-							h: Math.cos(dir) * 10,
-							v: Math.sin(dir) * 10,
-						})
-					);
-				}
-			}
-		}
-	}
-
-	updateMissile() {
-		const secondary = SecondaryMap[this.engine.currentPlayer.secondary];
-		if (missile.reload > 0) {
-			missile.reload -= this.engine.deltaTime;
-		} else {
-			if (
-				this.engine.input.getButton("special") &&
-				this.spendEnergy(secondary.energyCost)
-			) {
-				missile.reload = secondary.reloadTime;
-
-				// missile = false;
-				this.engine.register(
-					new secondary.projectile({
-						container: this.container,
-						owner: this,
-						direction:
-							-Math.PI / 2 +
-							(Math.random() - 0.5) +
-							this.leg.facing,
-						speed: 10 + Math.random() * 5,
-						position: this.leg.missileBarrelPos,
-						target: this.getTargetPoint().add(
-							new Point({
-								x: (Math.random() - 0.5) * 20,
-								y: (Math.random() - 0.5) * 20,
-							})
-						),
-					})
-				);
-			}
-		}
-	}
 
 	changeState(newstate: PlayerStateType){
 		// if(this.state !== newstate){
@@ -350,13 +208,13 @@ export default class Player extends Actor {
 			);
 	}
 
-	regenEnergy() {
-		const engine: ComponentEngine =
-			EngineMap[this.engine.currentPlayer.engine];
+	// regenEnergy() {
+	// 	const engine: ComponentEngine =
+	// 		EngineMap[this.engine.currentPlayer.engine];
 
-		this.energy += this.engine.deltaTime * engine.regenSpeed;
-		this.energy = Math.min(this.energy, engine.maxPower);
-	}
+	// 	this.energy += this.engine.deltaTime * engine.regenSpeed;
+	// 	this.energy = Math.min(this.energy, engine.maxPower);
+	// }
 
 	getTargetPoint(): Point {
 		return this.engine.mouse.point.subtract(this.targetOffset);
