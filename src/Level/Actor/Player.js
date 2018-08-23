@@ -79,7 +79,6 @@ export default class Player extends Actor {
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);
 		
-
 		this.state = PlayerState.AIRBORNE;
 		this.tag("player");
 		this.z = 10;
@@ -110,51 +109,9 @@ export default class Player extends Actor {
 
 	update() {
 		this.behaviours.forEach(b=>b.run());
-		// console.log(this.behaviours[0].run);
-
-		//adjust camera
-		this.focusCameraOnSelf();
-
-		//GAMEPAD HACK
-		const gp = this.getGamePad();
-
-		//constantly regen
-		// this.regenEnergy();
-
-		/////////////////MISSILE MECHANICS
-		// this.updateMissile();
-
-		////////////////////BULLET FIRING
-		// this.updateGuns();
-
-		////////////////////////////HAND MECHANICS
-		// this.updateGrapple();
-
-		///////////////////////MOVEMENT
-		this.updateMovement(gp);
-		//LANDING
-
-		// UI MISSILE
-		this.render();
 	}
-
-	updateMovement(gp: any) {
-		// const booster: Booster = BoosterMap[this.engine.currentPlayer.booster];
-		// const legs = LegMap[this.engine.currentPlayer.legs];
-		if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
-			this.h = gp.axes[0];
-		}
-		if (this.engine.input.getButton("stand")) {
-			this.h = 0;
-		}
-	}
-
 
 	changeState(newstate: PlayerStateType){
-		// if(this.state !== newstate){
-		// 	console.log("changing to ", newstate);
-		// }
-
 		this.state = newstate;
 	}
 
@@ -192,43 +149,8 @@ export default class Player extends Actor {
 		return gp;
 	}
 
-	render() {
-		//HAND
-		// ctx.fillStyle = '#aaaaaa'
-		// let pos = hand.offset.add(this.position);
-
-		this.graph.clear();
-		this.graph.position.set(hand.position.x, hand.position.y);
-		this.graph
-			.lineStyle(5, 0xff0000)
-			.moveTo(0, 0)
-			.lineTo(
-				this.position.add(hand.offset).x - hand.position.x,
-				this.position.add(hand.offset).y - hand.position.y
-			);
-	}
-
-	// regenEnergy() {
-	// 	const engine: ComponentEngine =
-	// 		EngineMap[this.engine.currentPlayer.engine];
-
-	// 	this.energy += this.engine.deltaTime * engine.regenSpeed;
-	// 	this.energy = Math.min(this.energy, engine.maxPower);
-	// }
-
 	getTargetPoint(): Point {
 		return this.engine.mouse.point.subtract(this.targetOffset);
 	}
-
-	// viewTargetOffset: Point = new Point();
-	focusCameraOnSelf() {
-		const viewTarget = this.position.subtract({
-			x: config.game.width / 2,
-			y: config.game.height / 2,
-		});
-		// .subtract(this.viewTargetOffset);
-		this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
-	}
-
 
 }

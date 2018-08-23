@@ -11,6 +11,8 @@ import RegenEnergy from "./RegenEnergy";
 import UpdateMissile from "./UpdateMissile";
 import UpdateGuns from "./UpdateGuns";
 import UpdateGrapple from "./UpdateGrapple";
+import RenderGrapple from "./RenderGrapple";
+import FocusCamera from "./FocusCamera";
 
 //Order matters. not yet but it will.
 export default [
@@ -27,4 +29,6 @@ export default [
 	MoveHorizontal,
 	MoveVertical,
 	UpdateGrapple,
+	RenderGrapple,
+	FocusCamera,
 ];

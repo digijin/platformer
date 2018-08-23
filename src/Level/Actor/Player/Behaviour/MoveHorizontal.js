@@ -10,6 +10,14 @@ export default class MoveHorizontal extends Base{
 
     states = ALL
     update(){
+    	const gp = this.player.getGamePad();
+    	if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
+    		this.h = gp.axes[0];
+    	}
+    	if (this.engine.input.getButton("stand")) {
+    		this.h = 0;
+    	}
+
     	let hDelta = this.player.h * this.engine.deltaTime * 500;//legs.speed;
         
     	if (this.player.hand.state == HAND_STATE.GRIPPED) {
