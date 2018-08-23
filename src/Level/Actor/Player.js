@@ -29,10 +29,6 @@ import type ComponentEngine from "Components/Engine";
 
 import * as PIXI from "pixi.js";
 
-// import BehaviourBoost from "./Player/Behaviour/Boost";
-// import BehaviourJump from "./Player/Behaviour/Jump";
-// import BehaviourDoubleJump from "./Player/Behaviour/DoubleJump";
-// import BehaviourWalk from "./Player/Behaviour/Walk";
 import Behaviour from "./Player/Behaviour";
 
 // let firing = false;
@@ -168,15 +164,6 @@ export default class Player extends Actor {
 			hDelta = this.h * this.engine.deltaTime * hand.reelSpeed;
 		}
 
-		if (!this.canMoveHori(hDelta)) {
-			if (this.canStep(hDelta)) {
-				//step up and keep going
-				this.position.y -= config.grid.width;
-			} else {
-				this.h = 0;
-				hDelta = 0;
-			}
-		}
 
 		this.position.y += this.v;
 		this.position.x += hDelta;
