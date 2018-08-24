@@ -16,8 +16,8 @@ class Block{
 }
 
 const GROUND = 50;
-const MIN_BUILDING_SPACING = 6;
-const MAX_BUILDING_SPACING = 20;
+const MIN_BUILDING_SPACING = 2;
+const MAX_BUILDING_SPACING = 8;
 const MIN_BUILDING_WIDTH = 6;
 const MAX_BUILDING_WIDTH = 20;
 const MAX_FLOORS = 8;
@@ -39,6 +39,8 @@ export default class GeneratorManager extends Base {
 		while(x < GRID_WIDTH){
 			const spacing = MIN_BUILDING_SPACING + Math.ceil((MAX_BUILDING_SPACING - MIN_BUILDING_SPACING) * Math.random());
 			x += spacing;
+			this.genTunnel(x, GROUND);
+			x += spacing;
 			x += this.genBuilding(x, GROUND);
 
 		}
@@ -48,6 +50,15 @@ export default class GeneratorManager extends Base {
 		for(let y = GROUND; y < GRID_HEIGHT; y++){
 			this.grid.row(y).forEach(cell => cell.type = 1);
 		}
+	}
+
+	genTunnel(xOff, yOff){
+		const x = xOff;
+		for(let y = yOff; y < yOff + 10; y++){
+
+			this.grid[x][y][0].type = 0;
+		}
+		// this.grid[xOff][yOff + 10][0].type = 0;
 	}
 
 	genBuilding(xOff, yOff){
