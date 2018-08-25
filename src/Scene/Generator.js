@@ -26,7 +26,7 @@ const FLOOR_HEIGHT = 5;
 
 
 const TILE_SIZE = 10;
-const NUM_CHILDREN = 20;
+const NUM_CHILDREN = 50;
 class Generator extends GameObject {
 	init(engine){
 		super.init(engine);
@@ -46,12 +46,12 @@ const generateDungeon = function*(engine){
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
 	// container.position.x = window.innerWidth / 2;
-	container.position.y = window.innerHeight / 2;
+	// container.position.y = window.innerHeight / 2;
 	// const children = [];
 	for(let i = 0; i < NUM_CHILDREN; i++){
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = Math.ceil(Math.random() * 10) * TILE_SIZE;
-		sprite.height = Math.ceil(Math.random() * 10) * TILE_SIZE;
+		sprite.width = (Math.ceil(Math.random() * 10) + 3) * TILE_SIZE;
+		sprite.height = (Math.ceil(Math.random() * 10) + 3) * TILE_SIZE;
 		sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
 		sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
 		sprite.tint = Math.ceil(Math.random() * 0xffffff);
@@ -100,11 +100,19 @@ const generateDungeon = function*(engine){
 			const bOver = childRect.b > otherRect.t;
 			const tOver = childRect.t < otherRect.b;
 			const lOver = childRect.l < otherRect.r;
-			if(rOver && bOver){
-				if(rOver ){
-					other.position.x += childRect.r - otherRect.l;
-				}else if(bOver ){
-					other.position.y += childRect.b - otherRect.t;
+			if(rOver && bOver && tOver && lOver){
+				if(other.position.x - child.position.x > other.position.y - child.position.y){
+					if(rOver && lOver){
+						other.position.x += childRect.r - otherRect.l;
+					}else if(bOver && tOver){
+						other.position.y += childRect.b - otherRect.t;
+					}
+				}else{
+					if(bOver && tOver){
+						other.position.y += childRect.b - otherRect.t;
+					}else if(rOver && lOver){
+						other.position.x += childRect.r - otherRect.l;
+					}
 				}
 			}
 			// if(rOver && bOver  && tOver && lOver){
