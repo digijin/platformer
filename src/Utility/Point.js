@@ -180,4 +180,8 @@ export default class Point {
 	length(): number{
 		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
+
+	normalize(): Point{
+		return this.multiply(1 / this.length());
+	}
 }

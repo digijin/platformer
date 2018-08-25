@@ -1,6 +1,6 @@
 import Point from "./Point";
 
-import config from "config";
+// import config from "config";
 
 describe("Utility/Point.spec.js", () => {
 	beforeEach(() => {});
@@ -89,5 +89,19 @@ describe("Utility/Point.spec.js", () => {
 			const point = new Point({ x: 3, y: 4 });
 			expect(point.length()).toBe(5);
 		});
+	});
+
+	describe("normalize", () => {
+		it("should normalize planar x", () =>{
+			const point = new Point({ x: 5, y: 0 });
+			expect(point.normalize().x).toBe(1);
+
+		});
+		it("should 1 / sqrt 2", () => {
+			const point = new Point({ x: 1, y: 1 });
+			expect(point.normalize().x).toBe(1 / Math.sqrt(2));
+			expect(point.normalize().y).toBe(1 / Math.sqrt(2));
+		});
+
 	});
 });
