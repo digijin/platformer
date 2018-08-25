@@ -1,4 +1,5 @@
 import Base from "./Base";
+import Point from "Utility/Point";
 
 import * as PIXI from "pixi.js";
 import type Engine from "Engine";
@@ -26,7 +27,10 @@ const FLOOR_HEIGHT = 5;
 
 
 const TILE_SIZE = 10;
-const NUM_CHILDREN = 50;
+const NUM_CHILDREN = 40;
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 class Generator extends GameObject {
 	init(engine){
 		super.init(engine);
@@ -36,7 +40,7 @@ class Generator extends GameObject {
 	update(){
 		// console.log(this.gen.next());
 		const result = this.gen.next();
-		console.log("generator", result.value);
+		// console.log("generator", result.value);
 		if(result.done){
 			this.destroy();
 		}
@@ -45,13 +49,13 @@ class Generator extends GameObject {
 const generateDungeon = function*(engine){
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
-	// container.position.x = window.innerWidth / 2;
-	// container.position.y = window.innerHeight / 2;
+	container.position.x = window.innerWidth / 2;
+	container.position.y = window.innerHeight / 2;
 	// const children = [];
 	for(let i = 0; i < NUM_CHILDREN; i++){
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = (Math.ceil(Math.random() * 10) + 3) * TILE_SIZE;
-		sprite.height = (Math.ceil(Math.random() * 10) + 3) * TILE_SIZE;
+		sprite.width = (Math.ceil(Math.random() * 6) + 3) * TILE_SIZE;
+		sprite.height = (Math.ceil(Math.random() * 6) + 3) * TILE_SIZE;
 		sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
 		sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
 		sprite.tint = Math.ceil(Math.random() * 0xffffff);
@@ -76,56 +80,74 @@ const generateDungeon = function*(engine){
 		return   distBsq - distAsq;
 	});
 
+	
 	const children = container.children.slice(0).reverse();
+	
+	let moved = 1;
+	// for(let step = 0; step < 1000; step++){
+	while(moved > 0){
 
-	for(let i = 0; i < children.length; i++){
-		const child = children[i];
-		//move all other overlapping away
-		const childRect = {
-			t: child.position.y,
-			l: child.position.x,
-			b: child.position.y + child.height,
-			r: child.position.x + child.width,
-		};
-		for(let j = i + 1; j < children.length; j++){
-			const other = children[j];
-			const otherRect = {
-				t: other.position.y,
-				l: other.position.x,
-				b: other.position.y + other.height,
-				r: other.position.x + other.width,
+		moved = 0;
+		container.children.forEach(c => c.forces = []); //reset forces
+		for(let i = 0; i < children.length; i++){
+			const child = children[i];
+			//move all other overlapping away
+			const childRect = {
+				t: child.position.y,
+				l: child.position.x,
+				b: child.position.y + child.height,
+				r: child.position.x + child.width,
 			};
+			for(let j = i + 1; j < children.length; j++){
+				const other = children[j];
+				const otherRect = {
+					t: other.position.y,
+					l: other.position.x,
+					b: other.position.y + other.height,
+					r: other.position.x + other.width,
+				};
 
-			const rOver = childRect.r > otherRect.l;
-			const bOver = childRect.b > otherRect.t;
-			const tOver = childRect.t < otherRect.b;
-			const lOver = childRect.l < otherRect.r;
-			if(rOver && bOver && tOver && lOver){
-				if(other.position.x - child.position.x > other.position.y - child.position.y){
-					if(rOver && lOver){
-						other.position.x += childRect.r - otherRect.l;
-					}else if(bOver && tOver){
-						other.position.y += childRect.b - otherRect.t;
-					}
-				}else{
-					if(bOver && tOver){
-						other.position.y += childRect.b - otherRect.t;
-					}else if(rOver && lOver){
-						other.position.x += childRect.r - otherRect.l;
-					}
+				const rOver = childRect.r > otherRect.l;
+				const bOver = childRect.b > otherRect.t;
+				const tOver = childRect.t < otherRect.b;
+				const lOver = childRect.l < otherRect.r;
+				if(rOver && bOver && tOver && lOver){
+					// child.tint = 0x0;
+					//find intersection rect
+					// const width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
+					// const height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
+
+					const force = new Point({
+						x: child.position.x - other.position.x,
+						y: child.position.y - other.position.y,
+						// x: width,
+						// y: height,
+					}).normalize();
+					// }).multiply(0.2);
+					child.forces.push(force);
+					other.forces.push(force.multiply(-1));
 				}
 			}
-			// if(rOver && bOver  && tOver && lOver){
-			// 	if(rOver && !lOver){
-			// 		other.position.x += childRect.r - otherRect.l;
-			// 	}
-			// 	if(bOver && !tOver){
-			// 		other.position.y += childRect.b - otherRect.t;
-			// 	}
-			// }
-			yield [i, j];
-
 		}
+		for(let i = 0; i < children.length; i++){
+			const child = children[i];
+			if(child.forces.length > 0){
+				const force = child.forces
+					.reduce((a, b) => a.add(b))
+					.multiply(1 / child.forces.length);
+				
+				child.position.x += Math.floor(force.x) * TILE_SIZE;
+				child.position.y += Math.floor(force.y) * TILE_SIZE;
+				moved++;
+				yield i;
+			}
+		}
+		
+	}
+	for(let i = 0; i < children.length; i++){
+		const child = children[i];
+		child.tint = 0x0;
+		yield i;
 	}
 };
 
