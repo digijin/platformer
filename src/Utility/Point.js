@@ -176,4 +176,8 @@ export default class Point {
 			y: Math.ceil(this.y),
 		});
 	}
+
+	length(): number{
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
 }

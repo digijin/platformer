@@ -75,4 +75,19 @@ describe("Utility/Point.spec.js", () => {
 			expect(mid.y).toBe(2);
 		});
 	});
+
+	describe("length", () => {
+		it("should return y 1", () => {
+			const point = new Point({ x: 0, y: 1 });
+			expect(point.length()).toBe(1);
+		});
+		it("should return x 1", () => {
+			const point = new Point({ x: 1, y: 0 });
+			expect(point.length()).toBe(1);
+		});
+		it("should return pythag standard", () => {
+			const point = new Point({ x: 3, y: 4 });
+			expect(point.length()).toBe(5);
+		});
+	});
 });
