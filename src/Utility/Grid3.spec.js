@@ -47,4 +47,11 @@ describe("Utility/Grid3", () => {
 			expect(grid.depth).toBe(5);
 		});
 	});
+
+	describe("params", () => {
+		it("should be applied", () => {
+			const grid = new Grid3(1, 1, 1, Obj, { test: "val" });
+			expect(grid[0][0][0].test).toBe("val");
+		});
+	});
 });

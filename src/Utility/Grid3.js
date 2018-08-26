@@ -2,14 +2,14 @@
 
 
 export default class Grid3{
-	constructor(width, height, depth, klass){
+	constructor(width, height, depth, klass, params = {}){
 		this.length = width;
 		for(let x = 0; x < width; x++){
 			this[x] = new Array(height);
 			for(let y = 0; y < height; y++){
 				this[x][y] = new Array(depth);
 				for(let z = 0; z < depth; z++){
-					this[x][y][z] = new klass({ x, y, z });
+					this[x][y][z] = new klass(Object.assign({ x, y, z }, params));
 				}
 			}
 		}
