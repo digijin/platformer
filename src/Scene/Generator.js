@@ -14,6 +14,9 @@ const GRID_HEIGHT = 100;
 
 class Block{
 	type = 0;
+	constructor({ type }){
+		this.type = type;
+	}
 
 }
 
@@ -27,7 +30,7 @@ const FLOOR_HEIGHT = 5;
 
 
 const TILE_SIZE = 10;
-const NUM_CHILDREN = 50;
+const NUM_CHILDREN = 20;
 // function sleep(ms) {
 // 	return new Promise(resolve => setTimeout(resolve, ms));
 // }
@@ -59,8 +62,8 @@ const generateDungeon = function*(engine, manager){
 	// const children = [];
 	for(let i = 0; i < NUM_CHILDREN; i++){
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = (Math.ceil(Math.random() * Math.random() * 10) + 2) * TILE_SIZE;
-		sprite.height = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+		sprite.width = (Math.ceil(Math.random() * Math.random() * 12) + 2) * TILE_SIZE;
+		sprite.height = (Math.ceil(Math.random() * Math.random() * 12) + 2) * TILE_SIZE;
 		sprite.position.x = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
 		sprite.position.y = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
 		sprite.tint = Math.ceil(Math.random() * 0xffffff);
@@ -154,9 +157,10 @@ const generateDungeon = function*(engine, manager){
 				child.position.x += Math.round(force.x) * TILE_SIZE;
 				child.position.y += Math.round(force.y) * TILE_SIZE;
 				moved++;
-				yield i;
+				// yield i;
 			}
 		}
+		yield "loop";
 		
 	}
 	for(let i = 0; i < children.length; i++){
@@ -165,21 +169,49 @@ const generateDungeon = function*(engine, manager){
 		yield i;
 	}
 	//calculate grid;
-	const left = children.reduce((a, b) => a.position.x < b.position.x ? a : b).x / TILE_SIZE;
-	const top = children.reduce((a, b) => a.position.y < b.position.y ? a : b).y / TILE_SIZE;
-	const right = children.reduce((a, b) => a.position.x + a.width > b.position.x + b.width ? a : b).x / TILE_SIZE;
-	const bottom = children.reduce((a, b) => a.position.y + a.height > b.position.y + b.height ? a : b).y / TILE_SIZE;
+	// const left = children.reduce((a, b) => a.position.x < b.position.x ? a : b).x / TILE_SIZE;
+	// const top = children.reduce((a, b) => a.position.y < b.position.y ? a : b).y / TILE_SIZE;
+	// const right = children.reduce((a, b) => a.position.x + a.width > b.position.x + b.width ? a : b).x / TILE_SIZE;
+	// const bottom = children.reduce((a, b) => a.position.y + a.height > b.position.y + b.height ? a : b).y / TILE_SIZE;
 
-	console.log(top, right, bottom, left);
-	manager.grid = new Grid3(right - left, bottom - top, 1, Block);
+	let left = Infinity;
+	let top = Infinity;
+	let right = -Infinity;
+	let bottom = -Infinity;
+	children.forEach(c => {
+		// console.log(top, right, bottom, left, c.position);
+		if(!isNaN(c.position.x)){
+			left = Math.min(left, c.position.x);
+			top = Math.min(top, c.position.y);
+			right = Math.max(right, c.position.x + c.width);
+			bottom = Math.max(bottom, c.position.y + c.height);
+		}
+	});
+	// console.log(top, right, bottom, left);
+	left *= 1 / TILE_SIZE;
+	top *= 1 / TILE_SIZE;
+	right *= 1 / TILE_SIZE;
+	bottom *= 1 / TILE_SIZE;
+
+	
+	console.log(top, right, bottom, left, right - left, bottom - top);
+	manager.grid = new Grid3(right - left, bottom - top, 1, Block, { type: 1 });
 	manager.draw();
+	// console.log(manager.grid);
+	// console.log(manager.grid[0]);
+	// console.log(manager.grid[0][0]);
+	// console.log(manager.grid[0][0][0]);
+
 
 	for(let i = 0; i < children.length; i++){
 		const c = children[i];
 		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
-			// console.log(x - left);
-			manager.grid[x - left][0][0].type = 1;
-			yield i;
+			for(let y = c.position.y / TILE_SIZE; y < c.position.y / TILE_SIZE + c.height / TILE_SIZE; y++){
+			// console.log(x, left, x - left);
+				manager.grid[x - left][y - top][0].type = 0;
+			}
+			manager.draw();
+			yield x;
 		}
 	}
 
