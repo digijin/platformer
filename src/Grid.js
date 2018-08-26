@@ -418,11 +418,14 @@ export default class Grid extends GameObject {
     				layer: "main",
     				blocks: this.blocks.raw().map(col => {
     					return col.map(block => {
-    						return {
+    						
+    						const out = {
     							t: block[0].type,
     							b: block[0].backgroundType,
     							i: block[0].tint,
     						};
+    						// console.log("BLOCK", block[0], "OUT", out);
+    						return out;
     					});
     				}),
     			},

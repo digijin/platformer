@@ -106,6 +106,9 @@ export default class Actor extends Renderable {
 	canStep = (amount: number): boolean => {
 		const boundingRect = this.getBoundingRect();
 		const targetRect = boundingRect.move({ x: amount, y: 0 });
+		if(!this.engine){
+			throw new Error("canStep doesnt have an engine");
+		}
 		const blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
 		const obstacles = blocks.filter(block => {
 			return !block.isEmpty();

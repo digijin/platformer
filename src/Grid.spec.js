@@ -63,7 +63,7 @@ describe("Grid.spec.js", () => {
 			expect(Array.isArray(grid.blocks[0])).toBe(true);
 		});
 	});
-	describe("getBlock", () => {
+	fdescribe("getBlock", () => {
 		it("should return a block if in range", () => {
 			const grid = new Grid({ size: { w: 3, h: 3 } });
 			const block = grid.getBlock({ x: 0, y: 0 });
@@ -80,32 +80,6 @@ describe("Grid.spec.js", () => {
 			block = grid.getBlockAtPoint({ x: 25, y: 25 });
 			expect(block.position.x).toBe(2);
 			expect(block.position.y).toBe(2);
-		});
-	});
-	describe("getBlocksInRect", () => {
-		describe("should return", () => {
-			let grid, rect, blocks;
-
-			beforeEach(() => {
-				config.grid.width = 10;
-
-				grid = new Grid({ size: { w: 10, h: 10 } });
-				rect = new Rect({ t: 15, r: 45, b: 45, l: 15 });
-				blocks = grid.getBlocksInRect(rect);
-			});
-			it("should return array", () => {
-				expect(Array.isArray(blocks)).toBe(true);
-			});
-			it("should have right number of elements", () => {
-				expect(blocks.length).toBe(4);
-			});
-			it("sohuld have correct elements", () => {
-				expect(blocks[0].position.x).toBe(2);
-				expect(blocks[0].position.y).toBe(2);
-
-				expect(blocks[3].position.x).toBe(3);
-				expect(blocks[3].position.y).toBe(3);
-			});
 		});
 	});
 	describe("getBlocksOverlappingRect", () => {
