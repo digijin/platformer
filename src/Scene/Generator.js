@@ -27,14 +27,19 @@ const FLOOR_HEIGHT = 5;
 
 
 const TILE_SIZE = 10;
-const NUM_CHILDREN = 40;
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
+const NUM_CHILDREN = 50;
+// function sleep(ms) {
+// 	return new Promise(resolve => setTimeout(resolve, ms));
+// }
 class Generator extends GameObject {
+	constructor(manager){
+		super();
+		this.manager = manager;
+	}
+
 	init(engine){
 		super.init(engine);
-		this.gen = generateDungeon(engine);
+		this.gen = generateDungeon(engine, this.manager);
 	}
 
 	update(){
@@ -46,7 +51,7 @@ class Generator extends GameObject {
 		}
 	}
 }
-const generateDungeon = function*(engine){
+const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
 	container.position.x = window.innerWidth / 2;
@@ -54,31 +59,31 @@ const generateDungeon = function*(engine){
 	// const children = [];
 	for(let i = 0; i < NUM_CHILDREN; i++){
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = (Math.ceil(Math.random() * 6) + 3) * TILE_SIZE;
-		sprite.height = (Math.ceil(Math.random() * 6) + 3) * TILE_SIZE;
-		sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
-		sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
+		sprite.width = (Math.ceil(Math.random() * Math.random() * 10) + 2) * TILE_SIZE;
+		sprite.height = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+		sprite.position.x = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
+		sprite.position.y = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
 		sprite.tint = Math.ceil(Math.random() * 0xffffff);
 		container.addChild(sprite);
 		// children.push(sprite);
 		yield i;
 	}
-	container.children.sort((a, b) => {
-		//centers
-		const cA = {
-			x: a.position.x + (a.width / 2),
-			y: a.position.y + (a.height / 2),
-		};
-		const cB = {
-			x: b.position.x + (b.width / 2),
-			y: b.position.y + (b.height / 2),
-		};
-		//a2+b2=c2
-		const distAsq = (cA.x * cA.x) + (cA.y * cA.y);
-		const distBsq = (cB.x * cB.x) + (cB.y * cB.y);
+	// container.children.sort((a, b) => {
+	// 	//centers
+	// 	const cA = {
+	// 		x: a.position.x + (a.width / 2),
+	// 		y: a.position.y + (a.height / 2),
+	// 	};
+	// 	const cB = {
+	// 		x: b.position.x + (b.width / 2),
+	// 		y: b.position.y + (b.height / 2),
+	// 	};
+	// 	//a2+b2=c2
+	// 	const distAsq = (cA.x * cA.x) + (cA.y * cA.y);
+	// 	const distBsq = (cB.x * cB.x) + (cB.y * cB.y);
 
-		return   distBsq - distAsq;
-	});
+	// 	return   distBsq - distAsq;
+	// });
 
 	
 	const children = container.children.slice(0).reverse();
@@ -114,16 +119,26 @@ const generateDungeon = function*(engine){
 				if(rOver && bOver && tOver && lOver){
 					// child.tint = 0x0;
 					//find intersection rect
-					// const width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
-					// const height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
+					// let width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
+					// let height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
+
+					// // console.log(width, height);
+					// if((childRect.l + childRect.r) / 2 < (otherRect.l + otherRect.r) / 2){
+					// 	width = -width;
+					// }
+					// if((childRect.t + childRect.b) / 2 < (otherRect.t + otherRect.b) / 2){
+					// 	height = -height;
+					// }
+
+					// const x1 = childRect.
 
 					const force = new Point({
-						x: child.position.x - other.position.x,
-						y: child.position.y - other.position.y,
+						x: (childRect.l + childRect.r) / 2 - (otherRect.l + otherRect.r) / 2,
+						y: (childRect.t + childRect.b) / 2 - (otherRect.t + otherRect.b) / 2,
 						// x: width,
 						// y: height,
-					}).normalize();
-					// }).multiply(0.2);
+					})
+						.normalize();
 					child.forces.push(force);
 					other.forces.push(force.multiply(-1));
 				}
@@ -136,8 +151,8 @@ const generateDungeon = function*(engine){
 					.reduce((a, b) => a.add(b))
 					.multiply(1 / child.forces.length);
 				
-				child.position.x += Math.floor(force.x) * TILE_SIZE;
-				child.position.y += Math.floor(force.y) * TILE_SIZE;
+				child.position.x += Math.round(force.x) * TILE_SIZE;
+				child.position.y += Math.round(force.y) * TILE_SIZE;
 				moved++;
 				yield i;
 			}
@@ -149,6 +164,25 @@ const generateDungeon = function*(engine){
 		child.tint = 0x0;
 		yield i;
 	}
+	//calculate grid;
+	const left = children.reduce((a, b) => a.position.x < b.position.x ? a : b).x / TILE_SIZE;
+	const top = children.reduce((a, b) => a.position.y < b.position.y ? a : b).y / TILE_SIZE;
+	const right = children.reduce((a, b) => a.position.x + a.width > b.position.x + b.width ? a : b).x / TILE_SIZE;
+	const bottom = children.reduce((a, b) => a.position.y + a.height > b.position.y + b.height ? a : b).y / TILE_SIZE;
+
+	console.log(top, right, bottom, left);
+	manager.grid = new Grid3(right - left, bottom - top, 1, Block);
+	manager.draw();
+
+	for(let i = 0; i < children.length; i++){
+		const c = children[i];
+		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
+			// console.log(x - left);
+			manager.grid[x - left][0][0].type = 1;
+			yield i;
+		}
+	}
+
 };
 
 export default class GeneratorManager extends Base {
@@ -156,10 +190,12 @@ export default class GeneratorManager extends Base {
 		super.start(engine);
 		document.body.style.backgroundColor = "grey";
 		this.grid = new Grid3(GRID_WIDTH, GRID_HEIGHT, 1, Block);
+		this.container = new PIXI.Container();
+		this.engine.stage.addChild(this.container);
 		this.generate();
 		this.draw();
 		// this.gen = generateDungeon();
-		engine.register(new Generator());
+		engine.register(new Generator(this));
 	}
 
 
@@ -206,7 +242,7 @@ export default class GeneratorManager extends Base {
 	}
 
 	draw(){
-
+		this.container.children.splice(0).forEach(c => this.container.removeChild(c));
 		for(let x = 0; x < this.grid.width; x++){
 			for(let y = 0; y < this.grid.height; y++){
 				// if(Math.random() > 0.5){
@@ -220,7 +256,7 @@ export default class GeneratorManager extends Base {
 				if(this.grid[x][y][0].type == 1){
 					sprite.tint = 0xff0000;
 				}
-				this.engine.stage.addChild(sprite);
+				this.container.addChild(sprite);
 
 			}
 		}
