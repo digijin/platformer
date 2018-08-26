@@ -34,4 +34,12 @@ export default class Grid3{
 	get depth(){
 		return this[0][0].length;
 	}
+
+	raw(){
+		const out = [];
+		for(let x = 0; x < this.length; x++){
+			out.push(this[x]);
+		}
+		return out;
+	}
 }

@@ -1,5 +1,6 @@
 
 import Grid3 from "./Grid3";
+import { Grid } from "material-ui";
 
 class Obj {
 	constructor(params) {
@@ -52,6 +53,21 @@ describe("Utility/Grid3", () => {
 		it("should be applied", () => {
 			const grid = new Grid3(1, 1, 1, Obj, { test: "val" });
 			expect(grid[0][0][0].test).toBe("val");
+		});
+	});
+	describe("raw", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should return an array", () => {
+			expect(Array.isArray(grid.raw())).toBe(true);
+		});
+		it("should return a 2d array", () => {
+			expect(Array.isArray(grid.raw()[0])).toBe(true);
+		});
+		it("should return a 3d array", () => {
+			expect(Array.isArray(grid.raw()[0][0])).toBe(true);
 		});
 	});
 });
