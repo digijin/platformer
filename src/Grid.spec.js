@@ -177,19 +177,31 @@ describe("Grid.spec.js", () => {
 			const block = grid.getBlock({ x: 0, y: 0 });
 			expect(block.grid).toBeDefined();
 		});
-		it("should let blocks destroy", () => {
-			const grid = new Grid({ size: { w: 10, h: 10 } });
-			const block = grid.getBlock({ x: 0, y: 0 });
-			expect(block).toBeDefined();
-			expect(block.destroy).toBeDefined();
-			expect(block.grid).toBeDefined();
-			block.type = "1";
-			block.destroy();
-			expect(block.isEmpty()).toBe(true);
+		describe("destroy", () => {
+			let grid;
+			let block;
+			beforeEach(() => {
+				grid = new Grid({ size: { w: 10, h: 10 } });
+				block = grid.getBlock({ x: 0, y: 0 });
+			});
+			it("block defined", () => {
+				expect(block).toBeDefined();
+			});
+			it("destroy defined", () => {
+				expect(block.destroy).toBeDefined();
+			});
+			it("block grid defined", () => {
+				expect(block.grid).toBeDefined();
+			});
+			it("should let blocks destroy", () => {
+				block.type = "1";
+				block.destroy();
+				expect(block.isEmpty()).toBe(true);
+			});
 		});
 	});
 
-	describe("addRow", () => {
+	xdescribe("addRow", () => {
 		it("should add above", () => {
 			const grid = new Grid({ size: { w: 2, h: 2 } });
 			grid.addRowAbove();

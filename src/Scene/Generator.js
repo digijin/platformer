@@ -194,25 +194,24 @@ const generateDungeon = function*(engine, manager){
 	bottom *= 1 / TILE_SIZE;
 
 	
-	console.log(top, right, bottom, left, right - left, bottom - top);
-	manager.grid = new Grid3(right - left, bottom - top, 1, Block, { type: 1 });
-	manager.draw();
-	// console.log(manager.grid);
-	// console.log(manager.grid[0]);
-	// console.log(manager.grid[0][0]);
-	// console.log(manager.grid[0][0][0]);
+	// console.log(top, right, bottom, left, right - left, bottom - top);
+	// manager.grid = new Grid3(right - left, bottom - top, 1, Block, { type: 1 });
+	// manager.draw();
 
 
 	for(let i = 0; i < children.length; i++){
 		const c = children[i];
+		c.tint = 0xffff00;
 		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
 			for(let y = c.position.y / TILE_SIZE; y < c.position.y / TILE_SIZE + c.height / TILE_SIZE; y++){
 			// console.log(x, left, x - left);
-				manager.grid[x - left][y - top][0].type = 0;
+				manager.grid[x - left + 20][y - top + GROUND][0].type = 0;
 			}
 			manager.draw();
 			yield x;
 		}
+		// c.tint = 0xffffff;
+		container.removeChild(c);
 	}
 
 };

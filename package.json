@@ -6,7 +6,7 @@
 	"scripts": {
 		"clean": "rm -rf coverage dist",
 		"test": "jest",
-		"dev:unit": "jest -o --watch",
+		"test:watch": "jest -o --watch",
 		"dev": "webpack-dev-server --hot --inline",
 		"build": "webpack",
 		"build:sprites": "node genSpriteSheets.js",

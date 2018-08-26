@@ -23,9 +23,14 @@ export default class Block {
 		type: string,
 		grid: Grid,
 		// tint?: any,
-		backgroundType?: string
+		backgroundType?: string,
+		x: number,
+		y: number,
 	}) {
 		this.position = params.position;
+		if(!this.position){
+			this.position = new Point({ x: params.x, y: params.y });
+		}
 		this.type = params.type;
 		this.grid = params.grid;
 		if (params.tint) {

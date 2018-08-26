@@ -19,6 +19,7 @@ import Decor from "Level/Grid/Decor";
 // import type DecorType from "Level/Grid/Decor/Type";
 
 import Pool from "Utility/Pool";
+import Grid3 from "Utility/Grid3";
 
 import log from "loglevel";
 //for console tools
@@ -27,7 +28,7 @@ class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
     getBlocksFlattened = (): Array<Block> => {
-    	return this.blocks.reduce((a: Array<Block>, b: Array<Block>) => {
+    	return this.blocks.raw().reduce((a: Array<Block>, b: Array<Block>) => {
     		// return a.splice(0, 0, ...b);
     		return [].concat(a, b);
     	}, []);
@@ -50,8 +51,7 @@ export default class Grid extends GameObject {
     height: number;
 
 
-
-    blocks: Array<Array<Block>>;
+    blocks: Grid3;
 
     constructor(
     	params: {
@@ -96,16 +96,8 @@ export default class Grid extends GameObject {
     }
 
     update = () => {
-    	// console.group("Grid");
-
     	const screenRect = this.screenRect();
     	this.renderBlocksPixi(screenRect);
-    	// console.groupEnd("Grid");
-
-    	// this.decorStage.position.x = -this.engine.view.offset.x;
-    	// this.renderDecor();
-    	// this.decorStage.position.y = -this.engine.view.offset.y;
-    	// this.renderDebugBlockPixelLine();
     };
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
@@ -113,8 +105,7 @@ export default class Grid extends GameObject {
     	const y = Math.floor(pos.y / config.grid.width);
     	if (this.blocks[x]) {
     		if (this.blocks[x][y]) {
-    			// this.grid[x][y] = "0";
-    			this.blocks[x][y].type = "0";
+    			this.blocks[x][y][0].type = "0";
     		}
     	}
     }
@@ -167,7 +158,7 @@ export default class Grid extends GameObject {
 
     generate(seed: number) {
     	const noise = new Noise(seed);
-    	this.blocks.forEach((col, x) => {
+    	this.blocks.raw().forEach((col, x) => {
     		col.forEach((block, y) => {
     			let value = noise.simplex2(x / 50, y / 50);
     			// console.log(x, y, value);
@@ -190,14 +181,14 @@ export default class Grid extends GameObject {
 
     rebuildBlocks() {
     	this.tileCache = {};
-    	this.blocks.forEach((col, x) =>
+    	this.blocks.raw().forEach((col, x) =>
     		col.forEach((block, y) => (block.position = new Point({ x, y })))
     	);
     }
 
     fromTestStrings(strings: Array<string>): Grid {
     	const testdata = strings.map(a => a.split(""));
-    	this.blocks = testdata[0].map(function(col, x) {
+    	const blocks = testdata[0].map(function(col, x) {
     		return testdata.map(function(row, y) {
     			return new Block({
     				position: new Point({ x: x, y: y }),
@@ -206,29 +197,34 @@ export default class Grid extends GameObject {
     			});
     		});
     	});
+    	this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block);
+    	for(let x = 0; x < this.blocks.length; x++){
+    		this.blocks[x] = blocks[x];
+    	}
     	return this;
     }
 
     makeEmptyGrid(size: { w: number, h: number }) {
-    	this.blocks = Array(size.w)
-    		.fill(0)
-    		.map((i, x) =>
-    			Array(size.h)
-    				.fill(0)
-    				.map(
-    					(j, y) =>
-    						new Block({
-    							position: new Point({ x, y }),
-    							type: "0",
-    							grid: this,
-    						})
-    				)
-    		);
+    	// this.blocks = Array(size.w)
+    	// 	.fill(0)
+    	// 	.map((i, x) =>
+    	// 		Array(size.h)
+    	// 			.fill(0)
+    	// 			.map(
+    	// 				(j, y) =>
+    	// 					new Block({
+    	// 						position: new Point({ x, y }),
+    	// 						type: "0",
+    	// 						grid: this,
+    	// 					})
+    	// 			)
+    	// 	);
+    	this.blocks = new Grid3(size.w, size.h, 2, Block, { type: "0", grid: this });
     }
 
     getBlock(pos: { x: number, y: number }): Block | void {
     	if (this.blocks[pos.x]) {
-    		return this.blocks[pos.x][pos.y];
+    		return this.blocks[pos.x][pos.y][0];
     	}
     }
 
@@ -403,20 +399,12 @@ export default class Grid extends GameObject {
     	// );
     }
 
-    // bustCache(block: Block) {
-    // 	// do nothing
-    // 	//this.tileCache[this.tileKey(this.tileForBlock(block))] = null;
-    // }
-
     save(): string {
-    	// return JSON.stringify({ blocks: this.blocks }, (name, val) => {
-    	// 	if (name !== "grid") return val;
-    	// });
+ 
     	let enemies = [];
     	if (this.engine) {
     		enemies = this.engine.objectsTagged("enemy");
     	}
-    	// console.log(enemies);
     	return JSON.stringify({
     		// FLOWHACK
     		enemies: enemies.map((e: Enemy) => {
@@ -428,12 +416,12 @@ export default class Grid extends GameObject {
     		blocks: [
     			{
     				layer: "main",
-    				blocks: this.blocks.map(col => {
+    				blocks: this.blocks.raw().map(col => {
     					return col.map(block => {
     						return {
-    							t: block.type,
-    							b: block.backgroundType,
-    							i: block.tint,
+    							t: block[0].type,
+    							b: block[0].backgroundType,
+    							i: block[0].tint,
     						};
     					});
     				}),
@@ -462,9 +450,6 @@ export default class Grid extends GameObject {
     	}
 
     	const blocks = data.blocks;
-    	// if (!Array.isArray(blocks)) {
-    	// blocks = [blocks];
-    	// }
     	let mainlayer = blocks[0];
     	if (!Array.isArray(mainlayer)) {
     		mainlayer = mainlayer.blocks;
@@ -493,8 +478,6 @@ export default class Grid extends GameObject {
     			});
     		});
     	}
-
-    	// this.initDecor();
     }
 
     addEnemy(params: { position: Point, type: any }) {
@@ -504,7 +487,7 @@ export default class Grid extends GameObject {
 
     addRowAbove() {
     	this.height++;
-    	this.blocks.forEach(col => {
+    	this.blocks.raw().forEach(col => {
     		col.unshift(new Block(col[0]));
     	});
     	this.rebuildBlocks();
@@ -512,7 +495,7 @@ export default class Grid extends GameObject {
 
     addRowBelow() {
     	this.height++;
-    	this.blocks.forEach(col => {
+    	this.blocks.raw().forEach(col => {
     		col.push(new Block(col[col.length - 1]));
     	});
     	this.rebuildBlocks();
@@ -520,7 +503,7 @@ export default class Grid extends GameObject {
 
     addColLeft() {
     	this.width++;
-    	this.blocks.unshift(this.blocks[0].map((b: Block) => new Block(b)));
+    	this.blocks.raw().unshift(this.blocks[0].map((b: Block) => new Block(b)));
     	this.decor.forEach(d => {
     		d.position.x++;
     		d.sprite.position.x += config.grid.width;
