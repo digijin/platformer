@@ -61,6 +61,35 @@ export default class Grid3{
 
 	get depth(){
 		return this[0][0].length;
+		// return this._depth;
+	}
+	
+	set depth(d){
+		// console.log("d", d, this.depth, this.width, this.height);
+		const dep  = this.depth;
+		if(d > dep){
+			for(let x = 0; x < this.width; x++){
+				// console.log("x", x);
+				for(let y = 0; y < this.height; y++){
+					// console.log("y", y);
+					// console.log("all",  dep, d);
+					for(let z = dep; z < d; z++){
+						// console.log("z", z);
+						// console.log("making", x, y, z);
+						this[x][y][z] = this.makeObj(x, y, z);
+					}
+				}
+			}
+		}else if(d < dep){
+			for(let x = 0; x < this.width; x++){
+				for(let y = 0; y < this.height; y++){
+					for(let z = dep - 1; z > d - 1; z--){
+						this[x][y].splice(-1, 1);
+					}
+				}
+			}
+		}
+		this._depth = d;
 	}
 
 	raw(){

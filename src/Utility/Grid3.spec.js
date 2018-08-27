@@ -119,4 +119,31 @@ describe("Utility/Grid3", () => {
 			expect(grid.get(1)).not.toBeDefined();
 		});
 	});
+	
+	describe("depth", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.depth).toBe(4);
+		});
+		
+		it("should expand", ()=> {
+			grid.depth = 5;
+			expect(grid.depth).toBe(5);
+			expect(() => {grid.get(4);}).not.toThrow();
+			expect(grid.get(0, 0, 4)).toBeDefined();
+		});
+		describe("contract", () => {
+			it("should contract", ()=> {
+				grid.depth = 3;
+				expect(grid.depth).toBe(3);
+				expect(() => {grid.get(3);}).not.toThrow();
+				expect(grid.get(0, 0, 2)).toBeDefined();
+				expect(grid.get(0, 0, 3)).not.toBeDefined();
+			});
+
+		});
+	});
 });
