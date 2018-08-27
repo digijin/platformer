@@ -59,6 +59,36 @@ export default class Grid3{
 		return this[0].length;
 	}
 
+	set height(h){
+		// console.log("d", d, this.depth, this.width, this.height);
+		const hi  = this.height;
+		if(h > hi){
+			for(let x = 0; x < this.width; x++){
+				// console.log("x", x);
+				for(let y = hi; y < h; y++){
+					this[x][y] = new Array(this.depth);
+					// console.log("y", y);
+					// console.log("all",  dep, d);
+					for(let z = 0; z < this.depth; z++){
+						// console.log("z", z);
+						// console.log("making", x, y, z);
+						this[x][y][z] = this.makeObj(x, y, z);
+					}
+				}
+			}
+		}else if(h < hi){
+			for(let x = 0; x < this.width; x++){
+				for(let y = hi; y < h; y++){
+					// for(let z = hi - 1; z > h - 1; z--){
+					this[x].splice(-1, 1);
+					// }
+				}
+			}
+		}
+		//else whatever do nothing
+		this._height = h;
+	}
+
 	get depth(){
 		return this[0][0].length;
 		// return this._depth;

@@ -120,6 +120,33 @@ describe("Utility/Grid3", () => {
 		});
 	});
 	
+	
+	describe("height", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.height).toBe(3);
+		});
+		
+		it("should expand", ()=> {
+			grid.height = 4;
+			expect(grid.height).toBe(4);
+			expect(() => {grid.get(3);}).not.toThrow();
+			expect(grid.get(0, 0, 3)).toBeDefined();
+		});
+		xdescribe("contract", () => { //too lazy
+			it("should contract", ()=> {
+				grid.height = 2;
+				expect(grid.height).toBe(2);
+				expect(() => {grid.get(0, 2);}).not.toThrow();
+				expect(grid.get(0, 1)).toBeDefined();
+				expect(grid.get(0, 2)).not.toBeDefined();
+			});
+
+		});
+	});
 	describe("depth", () => {
 		let grid;
 		beforeEach(() => {
