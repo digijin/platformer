@@ -27,6 +27,11 @@ export default class Grid3{
 		return this.length;
 	}
 
+	set width(w){
+
+		this.length = w;
+	}
+
 	get height(){
 		return this[0].length;
 	}
@@ -41,5 +46,9 @@ export default class Grid3{
 			out.push(this[x]);
 		}
 		return out;
+	}
+
+	get(x = 0, y = 0, z = 0){
+		return (this[x][y][z]);
 	}
 }

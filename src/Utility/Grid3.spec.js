@@ -70,4 +70,46 @@ describe("Utility/Grid3", () => {
 			expect(Array.isArray(grid.raw()[0][0])).toBe(true);
 		});
 	});
+	describe("get", () => {
+		
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("no param", () => {
+			expect(grid.get()).toBeDefined();
+		});
+		
+		it("1 param", () => {
+			expect(grid.get(1)).toBeDefined();
+		});
+		
+		it("2 param", () => {
+			expect(grid.get(1, 2)).toBeDefined();
+		});
+		
+		it("3 param", () => {
+			expect(grid.get(1, 2, 3)).toBeDefined();
+		});
+	});
+	describe("width", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.width).toBe(2);
+		});
+		
+		it("should expand", ()=> {
+			grid.width = 3;
+			expect(grid.width).toBe(3);
+			
+		});
+		
+		it("should contract", ()=> {
+			grid.width = 1;
+			expect(grid.width).toBe(1);
+		});
+	});
 });
