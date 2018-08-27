@@ -91,6 +91,9 @@ describe("Utility/Grid3", () => {
 		it("3 param", () => {
 			expect(grid.get(1, 2, 3)).toBeDefined();
 		});
+		it("return undefined", () => {
+			expect(grid.get(10, 32, 541)).toBeFalsy();
+		});
 	});
 	describe("width", () => {
 		let grid;
@@ -104,12 +107,16 @@ describe("Utility/Grid3", () => {
 		it("should expand", ()=> {
 			grid.width = 3;
 			expect(grid.width).toBe(3);
-			
+			expect(() => {grid.get(2);}).not.toThrow();
+			expect(grid.get(2)).toBeDefined();
 		});
 		
 		it("should contract", ()=> {
 			grid.width = 1;
 			expect(grid.width).toBe(1);
+			expect(() => {grid.get(1);}).not.toThrow();
+			expect(grid.get(0)).toBeDefined();
+			expect(grid.get(1)).not.toBeDefined();
 		});
 	});
 });
