@@ -70,4 +70,107 @@ describe("Utility/Grid3", () => {
 			expect(Array.isArray(grid.raw()[0][0])).toBe(true);
 		});
 	});
+	describe("get", () => {
+		
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("no param", () => {
+			expect(grid.get()).toBeDefined();
+		});
+		
+		it("1 param", () => {
+			expect(grid.get(1)).toBeDefined();
+		});
+		
+		it("2 param", () => {
+			expect(grid.get(1, 2)).toBeDefined();
+		});
+		
+		it("3 param", () => {
+			expect(grid.get(1, 2, 3)).toBeDefined();
+		});
+		it("return undefined", () => {
+			expect(grid.get(10, 32, 541)).toBeFalsy();
+		});
+	});
+	describe("width", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.width).toBe(2);
+		});
+		
+		it("should expand", ()=> {
+			grid.width = 3;
+			expect(grid.width).toBe(3);
+			expect(() => {grid.get(2);}).not.toThrow();
+			expect(grid.get(2)).toBeDefined();
+		});
+		
+		it("should contract", ()=> {
+			grid.width = 1;
+			expect(grid.width).toBe(1);
+			expect(() => {grid.get(1);}).not.toThrow();
+			expect(grid.get(0)).toBeDefined();
+			expect(grid.get(1)).not.toBeDefined();
+		});
+	});
+	
+	
+	describe("height", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.height).toBe(3);
+		});
+		
+		it("should expand", ()=> {
+			grid.height = 4;
+			expect(grid.height).toBe(4);
+			expect(() => {grid.get(3);}).not.toThrow();
+			expect(grid.get(0, 0, 3)).toBeDefined();
+		});
+		xdescribe("contract", () => { //too lazy
+			it("should contract", ()=> {
+				grid.height = 2;
+				expect(grid.height).toBe(2);
+				expect(() => {grid.get(0, 2);}).not.toThrow();
+				expect(grid.get(0, 1)).toBeDefined();
+				expect(grid.get(0, 2)).not.toBeDefined();
+			});
+
+		});
+	});
+	describe("depth", () => {
+		let grid;
+		beforeEach(() => {
+			grid = new Grid3(2, 3, 4, Obj);
+		});
+		it("should get", ()=> {
+			expect(grid.depth).toBe(4);
+		});
+		
+		it("should expand", ()=> {
+			grid.depth = 5;
+			expect(grid.depth).toBe(5);
+			expect(() => {grid.get(4);}).not.toThrow();
+			expect(grid.get(0, 0, 4)).toBeDefined();
+		});
+		describe("contract", () => {
+			it("should contract", ()=> {
+				grid.depth = 3;
+				expect(grid.depth).toBe(3);
+				expect(() => {grid.get(3);}).not.toThrow();
+				expect(grid.get(0, 0, 2)).toBeDefined();
+				expect(grid.get(0, 0, 3)).not.toBeDefined();
+			});
+
+		});
+	});
 });
