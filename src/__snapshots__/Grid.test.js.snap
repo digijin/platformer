@@ -1,3 +1,1 @@
-exports[`Grid.test.js jest only save save snapshot 1`] = `"{"enemies":[],"decor":[],"blocks":[{"layer":"main","blocks":[[{},{}],[{},{}]]}]}"`;
-
-exports[`grid jest save save snapshot 1`] = `"{"enemies":[],"decor":[],"blocks":[{"layer":"main","blocks":[[{"t":"0","b":"0","i":16777215},{"t":"0","b":"0","i":16777215}],[{"t":"0","b":"0","i":16777215},{"t":"0","b":"0","i":16777215}]]}]}"`;
+exports[`Grid.test.js jest only save save snapshot 1`] = `"{\"enemies\":[],\"decor\":[],\"blocks\":[{\"layer\":\"main\",\"blocks\":[[{\"t\":\"0\",\"b\":\"0\",\"i\":16777215},{\"t\":\"0\",\"b\":\"0\",\"i\":16777215}],[{\"t\":\"0\",\"b\":\"0\",\"i\":16777215},{\"t\":\"0\",\"b\":\"0\",\"i\":16777215}]]}]}"`;
