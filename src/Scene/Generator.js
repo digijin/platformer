@@ -4,7 +4,10 @@ import Point from "Utility/Point";
 import * as PIXI from "pixi.js";
 import type Engine from "Engine";
 
+import Grid from "Grid";
+import Block from "Level/Grid/Block";
 import Grid3 from "Utility/Grid3";
+import Level from "Scene/Level";
 
 import GameObject from "GameObject";
 
@@ -12,13 +15,13 @@ const GRIDSIZE = 4;
 const GRID_WIDTH = 200;
 const GRID_HEIGHT = 100;
 
-class Block{
-	type = 0;
-	constructor({ type }){
-		this.type = type;
-	}
+// class Block{
+// 	type = 0;
+// 	constructor({ type }){
+// 		this.type = type;
+// 	}
 
-}
+// }
 
 const GROUND = 50;
 const MIN_BUILDING_SPACING = 2;
@@ -31,9 +34,6 @@ const FLOOR_HEIGHT = 5;
 
 const TILE_SIZE = 10;
 const NUM_CHILDREN = 20;
-// function sleep(ms) {
-// 	return new Promise(resolve => setTimeout(resolve, ms));
-// }
 class Generator extends GameObject {
 	constructor(manager){
 		super();
@@ -46,11 +46,11 @@ class Generator extends GameObject {
 	}
 
 	update(){
-		// console.log(this.gen.next());
 		const result = this.gen.next();
-		// console.log("generator", result.value);
 		if(result.done){
 			this.destroy();
+			this.engine.stage.removeChild(this.manager.container);
+			this.engine.startScene(new Level());
 		}
 	}
 }
@@ -205,14 +205,24 @@ const generateDungeon = function*(engine, manager){
 		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
 			for(let y = c.position.y / TILE_SIZE; y < c.position.y / TILE_SIZE + c.height / TILE_SIZE; y++){
 			// console.log(x, left, x - left);
-				manager.grid[x - left + 20][y - top + GROUND][0].type = 0;
+				manager.grid[x - left + 20][y - top + GROUND][0].type = "0";
 			}
 			manager.draw();
 			yield x;
 		}
 		// c.tint = 0xffffff;
+
 		container.removeChild(c);
 	}
+
+	//save it into a grid;
+	const grid = new Grid();
+	grid.blocks = manager.grid;
+
+	//add an enemy
+	// grid.addEnemy({ position: new Point({ x: 100, y: 100 }), type: { id: "0" } });
+
+	engine.mission.level = grid.save();
 
 };
 
@@ -220,7 +230,7 @@ export default class GeneratorManager extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 		document.body.style.backgroundColor = "grey";
-		this.grid = new Grid3(GRID_WIDTH, GRID_HEIGHT, 1, Block);
+		this.grid = new Grid3(GRID_WIDTH, GRID_HEIGHT, 1, Block, { type: "0" });
 		this.container = new PIXI.Container();
 		this.engine.stage.addChild(this.container);
 		this.generate();
@@ -246,14 +256,14 @@ export default class GeneratorManager extends Base {
 
 	genGround(){
 		for(let y = GROUND; y < GRID_HEIGHT; y++){
-			this.grid.row(y).forEach(cell => cell.type = 1);
+			this.grid.row(y).forEach(cell => cell.type = "1");
 		}
 	}
 
 	genTunnel(xOff, yOff){
 		const x = xOff;
 		for(let y = yOff; y < yOff + 10; y++){
-			this.grid[x][y][0].type = 0;
+			this.grid[x][y][0].type = "0";
 		}
 		// this.grid[xOff][yOff + 10][0].type = 0;
 	}
@@ -265,7 +275,7 @@ export default class GeneratorManager extends Base {
 			for(let f = 1; f <= floors; f++){
 				const y = yOff - (FLOOR_HEIGHT * f);
 				if(this.grid[x] && this.grid[x][y]){
-					this.grid[x][y][0].type = 1;
+					this.grid[x][y][0].type = "1";
 				}
 			}
 		}
@@ -284,7 +294,7 @@ export default class GeneratorManager extends Base {
 				sprite.position.y = GRIDSIZE * y;
 				sprite.width = GRIDSIZE;
 				sprite.height = GRIDSIZE;
-				if(this.grid[x][y][0].type == 1){
+				if(this.grid[x][y][0].type == "1"){
 					sprite.tint = 0xff0000;
 				}
 				this.container.addChild(sprite);

@@ -84,16 +84,15 @@ export default class Grid extends GameObject {
 
     update = () => {
     	const screenRect = this.screenRect();
-    	this.renderBlocksPixi(screenRect);
+    	this.renderBlocks(screenRect);
     };
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
     	const x = Math.floor(pos.x / config.grid.width);
     	const y = Math.floor(pos.y / config.grid.width);
-    	if (this.blocks[x]) {
-    		if (this.blocks[x][y]) {
-    			this.blocks[x][y][0].type = "0";
-    		}
+    	const block  = this.blocks.get(x, y);
+    	if(block){
+    		block.type = "0";
     	}
     }
 
@@ -177,9 +176,6 @@ export default class Grid extends GameObject {
 
     getBlock(pos: { x: number, y: number }): Block | void {
     	return this.blocks.get(pos.x, pos.y);
-    	// if (this.blocks[pos.x]) {
-    	// 	return this.blocks[pos.x][pos.y][0];
-    	// }
     }
 
     getBlockAtPoint(point: { x: number, y: number }): Block | void {
@@ -187,10 +183,8 @@ export default class Grid extends GameObject {
     }
 
     highlightBlock(block: Block) {
-    	// console.log("highlight");
     	if (block) {
     		const rect = block.rect;
-
     		//DOESNT WORK IF CALLED MORE THAN ONCE PER FRAME?
     		this.graph.beginFill(0x00ff00, 0.5);
     		this.graph.drawRect(
@@ -199,37 +193,23 @@ export default class Grid extends GameObject {
     			rect.r - rect.l,
     			rect.b - rect.t
     		);
-
-    		// TODO: RE ADD THIS IN PIXI
-    		// this.engine.ctx.context.strokeStyle = "#888";
-    		// this.engine.ctx.strokeRect(
-    		//     rect.l,
-    		//     rect.t,
-    		//     rect.r - rect.l,
-    		//     rect.b - rect.t
-    		// );
     	}
     }
 
-    renderBlocksPixi(screenRect: Rect) {
+    renderBlocks(screenRect: Rect) {
     	setTimeout(() => {
     		this.graph.clear();
     	}, 0);
-    	// screenRect = new Rect({ t: 0, r: 200, b: 200, l: 0 });
     	this.spritePool.reset();
     	this.spritePool.pool.forEach((spr: PIXI.Sprite) => {
     		spr.visible = false;
     	});
-    	// console.log("render blocks", this.getBlocksOverlappingRect(screenRect).length);
     	this.getBlocksOverlappingRect(screenRect).forEach(block => {
     		const pos = {
     			x: Math.floor(block.position.x * config.grid.width),
-
     			y: Math.floor(block.position.y * config.grid.width),
     		};
-
     		if (block) {
-    			// console.log("block", block.isEmpty());
     			if (!block.isBackgroundEmpty()) {
     				const btype = block.getBackgroundType();
     				const backgroundSprite: PIXI.Sprite = this.spritePool.get();
@@ -251,12 +231,11 @@ export default class Grid extends GameObject {
     			}
     		}
     	});
-    	// this.engine.renderer.render(this.stage);
     }
 
     isPositionBlocked(pos: { x: number, y: number }) {
     	const block = this.getBlockAtPoint(pos);
-    	return block && block.type != "0";
+    	return block && !block.isEmpty();
     }
 
     getBlocksInRect(rect: Rect): Array<Block> {
@@ -264,15 +243,21 @@ export default class Grid extends GameObject {
     	const lastCol = Math.floor(rect.r / config.grid.width);
     	const firstRow = Math.ceil(rect.t / config.grid.width);
     	const lastRow = Math.floor(rect.b / config.grid.width);
-
     	if (lastCol < firstCol || lastRow < firstRow) {
     		//return early
     		return [];
     	}
     	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
-    	// return out.filter(b => b !== undefined);
     }
-
+	
+    getBlocksOverlappingRect(rect: Rect): Array<Block> {
+    	const firstCol = Math.floor(rect.l / config.grid.width);
+    	const lastCol = Math.ceil(rect.r / config.grid.width);
+    	const firstRow = Math.floor(rect.t / config.grid.width);
+    	const lastRow = Math.ceil(rect.b / config.grid.width);
+    	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
+    }
+	
     getBlockRect(
     	firstCol: number,
     	lastCol: number,
@@ -291,30 +276,17 @@ export default class Grid extends GameObject {
     	return out;
     }
 
-    getBlocksOverlappingRect(rect: Rect): Array<Block> {
-    	const firstCol = Math.floor(rect.l / config.grid.width);
-    	const lastCol = Math.ceil(rect.r / config.grid.width);
-    	const firstRow = Math.floor(rect.t / config.grid.width);
-    	const lastRow = Math.ceil(rect.b / config.grid.width);
-    	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
-    }
-
     blockAtPosition(pos: { x: number, y: number }): Block | void {
     	const x = Math.floor(pos.x / config.grid.width);
     	let y = Math.floor(pos.y / config.grid.width);
     	//because y goes positive downwards, if an object is flat on the top
     	//of a tile it will register as th e dtile below
-    	// console.log(pos.y, config.graid.waidth);
     	if (pos.y % config.grid.width == 0) {
     		y -= 1;
     	}
-
-    	if (this.blocks[x]) {
-    		// return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
-    		if (this.blocks[x][y]) {
-    			const block = this.blocks[x][y][0];
-    			return block;
-    		}
+    	const block = this.blocks.get(x, y);
+    	if(block){
+    		return block;
     	}
     	//TODO: remove this dummy
     	return new Block({
@@ -366,19 +338,16 @@ export default class Grid extends GameObject {
     			layer: "main",
     			blocks: this.blocks.raw().map(col => {
     				return col.map(block => {
-    					// console.log(block[0].type);
     					const out = {
     						t: block[0].type,
     						b: block[0].backgroundType,
     						i: block[0].tint,
     					};
-    					// console.log("BLOCK", block[0], "OUT", out);
     					return out;
     				});
     			}),
     		},
     	];
-    	// console.log(JSON.stringify(blocks));
     	const out = JSON.stringify({
     		// FLOWHACK
     		enemies: enemies.map((e: Enemy) => {
@@ -398,16 +367,9 @@ export default class Grid extends GameObject {
     	if (this.engine) {
     		this.engine.objectsTagged("enemy").forEach(e => e.destroy());
     	}
-
-    	// this.tileCache = {};
     	const data = JSON.parse(str);
     	if (data.decor) {
     		data.decor.forEach(decor => {
-    			// return new Decor({
-    			// 	position: new Point(decor.p),
-    			// 	type: decor.t,
-    			// 	grid: this
-    			// });
     			this.addDecor(new Point(decor.p), decor.t);
     		});
     	}
@@ -452,7 +414,6 @@ export default class Grid extends GameObject {
     	this.blocks.raw().forEach(col => {
     		col.unshift(new Block(col[0]));
     	});
-    	// this.rebuildBlocks();
     }
 
     addRowBelow() {
@@ -460,7 +421,6 @@ export default class Grid extends GameObject {
     	this.blocks.raw().forEach(col => {
     		col.push(new Block(col[col.length - 1]));
     	});
-    	// this.rebuildBlocks();
     }
 
     addColLeft() {
@@ -470,7 +430,6 @@ export default class Grid extends GameObject {
     		d.position.x++;
     		d.sprite.position.x += config.grid.width;
     	});
-    	// this.rebuildBlocks();
     }
 
     addColRight() {
@@ -478,7 +437,6 @@ export default class Grid extends GameObject {
     	this.blocks.push(
     		this.blocks[this.blocks.length - 1].map(b => new Block(b))
     	);
-    	// this.rebuildBlocks();
     }
 
     pixiInit() {

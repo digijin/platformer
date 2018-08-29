@@ -85,17 +85,6 @@ export default class Block {
 		return this.getType().ladder;
 	}
 
-	// get key():string{
-	//   return makeKey(this.x, this.y);
-	// }
-
-	// static fromPoint(point: Point) {
-	// 	return new Block({
-	// 		x: Math.floor(point.x / config.grid.width),
-	// 		y: Math.floor(point.y / config.grid.width)
-	// 	});
-	// }
-
 	isBackgroundEmpty(): boolean {
 		return this.backgroundType == "0";
 	}
@@ -112,24 +101,20 @@ export default class Block {
 
 	destroy() {
 		this.type = "0";
-		// this.grid.bustCache(this);
 	}
 
 	//for editor
 	add(blockId: string) {
 		this.type = blockId;
-		// this.grid.bustCache(this);
 	}
 
 	addBackground(blockId: string) {
 		this.backgroundType = blockId;
-		// this.grid.bustCache(this);
 	}
 
 	//for editor
 	remove() {
 		this.type = "0";
-		// this.grid.bustCache(this);
 	}
 
 	get center(): Point {
