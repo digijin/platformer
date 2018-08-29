@@ -10,48 +10,35 @@ import Point from "Utility/Point";
 import Rect from "Utility/Rect";
 import Line from "Utility/Line";
 import type Engine from "Engine";
-
-// import { BlockTypes } from "Level/Grid/Block/Type";
-
 import * as PIXI from "pixi.js";
-
 import Decor from "Level/Grid/Decor";
-// import type DecorType from "Level/Grid/Decor/Type";
-
 import Pool from "Utility/Pool";
 import Grid3 from "Utility/Grid3";
-
 import log from "loglevel";
+
 //for console tools
 class GridBlockContainer extends PIXI.Container {}
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
-    getBlocksFlattened = (): Array<Block> => {
-    	return this.blocks.raw().reduce((a: Array<Block>, b: Array<Block>) => {
-    		// return a.splice(0, 0, ...b);
-    		return [].concat(a, b);
-    	}, []);
-    };
-
-    width: number;
-
-    z: number;
-    spritePool: Pool;
-    parent: PIXI.Container;
-
-    blockStage: PIXI.Container;
-    decorStage: PIXI.Container;
-
-    tileCache: {};
-    graph: PIXI.Graphics = new PIXI.Graphics();
-
-    decor: Array<Decor>;
-
-    height: number;
-
+    // getBlocksFlattened = (): Array<Block> => {
+    // 	return this.blocks.raw().reduce((a: Array<Block>, b: Array<Block>) => {
+    // 		// return a.splice(0, 0, ...b);
+    // 		return [].concat(a, b);
+    // 	}, []);
+    // };
 
     blocks: Grid3;
+    blockStage: PIXI.Container;
+    decor: Array<Decor>;
+    decorStage: PIXI.Container;
+    graph: PIXI.Graphics = new PIXI.Graphics();
+    height: number;
+    parent: PIXI.Container;
+    spritePool: Pool;
+    // tileCache: {};
+    width: number;
+    z: number;
 
     constructor(
     	params: {
@@ -69,7 +56,7 @@ export default class Grid extends GameObject {
     	}
     ) {
     	super();
-    	this.tileCache = {};
+    	// this.tileCache = {};
     	this.height = params.size.h;
     	this.width = params.size.w;
     	this.parent = params.parent;
@@ -156,19 +143,19 @@ export default class Grid extends GameObject {
     	}
     }
 
-    generate(seed: number) {
-    	const noise = new Noise(seed);
-    	this.blocks.raw().forEach((col, x) => {
-    		col.forEach((block, y) => {
-    			let value = noise.simplex2(x / 50, y / 50);
-    			// console.log(x, y, value);
-    			value += y / col.length * 2 - 1;
-    			if (value > 0) {
-    				block.type = "1";
-    			}
-    		});
-    	});
-    }
+    // generate(seed: number) {
+    // 	const noise = new Noise(seed);
+    // 	this.blocks.raw().forEach((col, x) => {
+    // 		col.forEach((block, y) => {
+    // 			let value = noise.simplex2(x / 50, y / 50);
+    // 			// console.log(x, y, value);
+    // 			value += y / col.length * 2 - 1;
+    // 			if (value > 0) {
+    // 				block.type = "1";
+    // 			}
+    // 		});
+    // 	});
+    // }
 
     screenRect(): Rect {
     	return new Rect({
@@ -179,12 +166,12 @@ export default class Grid extends GameObject {
     	}).move(this.engine.view.offset);
     }
 
-    rebuildBlocks() {
-    	this.tileCache = {};
-    	this.blocks.raw().forEach((col, x) =>
-    		col.forEach((block, y) => (block.position = new Point({ x, y })))
-    	);
-    }
+    // rebuildBlocks() {
+    // 	// this.tileCache = {};
+    // 	this.blocks.raw().forEach((col, x) =>
+    // 		col.forEach((block, y) => (block.position = new Point({ x, y })))
+    // 	);
+    // }
 
     fromTestStrings(strings: Array<string>): Grid {
     	const testdata = strings.map(a => a.split(""));
@@ -197,7 +184,7 @@ export default class Grid extends GameObject {
     			});
     		});
     	});
-    	this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block);
+    	this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block, { type: "0", grid: this });
     	for(let x = 0; x < this.blocks.length; x++){
     		this.blocks[x] = blocks[x];
     	}
@@ -223,9 +210,10 @@ export default class Grid extends GameObject {
     }
 
     getBlock(pos: { x: number, y: number }): Block | void {
-    	if (this.blocks[pos.x]) {
-    		return this.blocks[pos.x][pos.y][0];
-    	}
+    	return this.blocks.get(pos.x, pos.y);
+    	// if (this.blocks[pos.x]) {
+    	// 	return this.blocks[pos.x][pos.y][0];
+    	// }
     }
 
     getBlockAtPoint(point: { x: number, y: number }): Block | void {
@@ -266,6 +254,7 @@ export default class Grid extends GameObject {
     	this.spritePool.pool.forEach((spr: PIXI.Sprite) => {
     		spr.visible = false;
     	});
+    	// console.log("render blocks", this.getBlocksOverlappingRect(screenRect).length);
     	this.getBlocksOverlappingRect(screenRect).forEach(block => {
     		const pos = {
     			x: Math.floor(block.position.x * config.grid.width),
@@ -274,6 +263,7 @@ export default class Grid extends GameObject {
     		};
 
     		if (block) {
+    			// console.log("block", block.isEmpty());
     			if (!block.isBackgroundEmpty()) {
     				const btype = block.getBackgroundType();
     				const backgroundSprite: PIXI.Sprite = this.spritePool.get();
@@ -356,7 +346,7 @@ export default class Grid extends GameObject {
     	if (this.blocks[x]) {
     		// return { block: this.grid[x][y], l: x * blocksize, t: y * blocksize };
     		if (this.blocks[x][y]) {
-    			const block = this.blocks[x][y];
+    			const block = this.blocks[x][y][0];
     			return block;
     		}
     	}
@@ -405,7 +395,25 @@ export default class Grid extends GameObject {
     	if (this.engine) {
     		enemies = this.engine.objectsTagged("enemy");
     	}
-    	return JSON.stringify({
+    	const blocks = [
+    		{
+    			layer: "main",
+    			blocks: this.blocks.raw().map(col => {
+    				return col.map(block => {
+    					// console.log(block[0].type);
+    					const out = {
+    						t: block[0].type,
+    						b: block[0].backgroundType,
+    						i: block[0].tint,
+    					};
+    					// console.log("BLOCK", block[0], "OUT", out);
+    					return out;
+    				});
+    			}),
+    		},
+    	];
+    	// console.log(JSON.stringify(blocks));
+    	const out = JSON.stringify({
     		// FLOWHACK
     		enemies: enemies.map((e: Enemy) => {
     			return { t: e.type.id, p: e.position };
@@ -413,24 +421,10 @@ export default class Grid extends GameObject {
     		decor: this.decor.map(d => {
     			return { t: d.type, p: d.position };
     		}),
-    		blocks: [
-    			{
-    				layer: "main",
-    				blocks: this.blocks.raw().map(col => {
-    					return col.map(block => {
-    						
-    						const out = {
-    							t: block[0].type,
-    							b: block[0].backgroundType,
-    							i: block[0].tint,
-    						};
-    						// console.log("BLOCK", block[0], "OUT", out);
-    						return out;
-    					});
-    				}),
-    			},
-    		],
+    		blocks: blocks,
     	});
+    	// console.log(out);
+    	return out;
     }
 
     load(str: string) {
@@ -439,7 +433,7 @@ export default class Grid extends GameObject {
     		this.engine.objectsTagged("enemy").forEach(e => e.destroy());
     	}
 
-    	this.tileCache = {};
+    	// this.tileCache = {};
     	const data = JSON.parse(str);
     	if (data.decor) {
     		data.decor.forEach(decor => {
@@ -457,17 +451,39 @@ export default class Grid extends GameObject {
     	if (!Array.isArray(mainlayer)) {
     		mainlayer = mainlayer.blocks;
     	}
-    	this.blocks = mainlayer.map((d, x) => {
-    		return d.map((block, y) => {
-    			return new Block({
-    				position: new Point({ x, y }),
-    				type: block.t,
-    				backgroundType: block.b,
-    				tint: block.i,
-    				grid: this,
-    			});
+    	// const blocksMap = mainlayer.map((d, x) => {
+    	// 	return d.map((block, y) => {
+    	// 		return new Block({
+    	// 			position: new Point({ x, y }),
+    	// 			type: block.t,
+    	// 			backgroundType: block.b,
+    	// 			tint: block.i,
+    	// 			grid: this,
+    	// 		});
+    	// 	});
+    	// });
+    	//BRING THIS INTO GRID3
+    	this.blocks = new Grid3(mainlayer.length, mainlayer[0].length, 2, Block, { type: "0", grid: this });
+    	mainlayer.forEach((d, x) => {
+    		return d.forEach((block, y) => {
+    			const b = this.blocks.get(x, y);
+    			b.type = block.t;
+    			b.backgroundType = block.b;
+    			b.tint = block.i;
+    			// return new Block({
+    			// 	position: new Point({ x, y }),
+    			// 	type: block.t,
+    			// 	backgroundType: block.b,
+    			// 	tint: block.i,
+    			// 	grid: this,
+    			// });
     		});
     	});
+    	// blocks.forEach((col, i) => {
+    	// 	this.blocks[i] = col;
+    	// });
+    	// debugger;
+    	//END BRING IN
     	if (data.enemies) {
     		log.info("loading", data.enemies.length, "enemies");
     		data.enemies.forEach(e => {
@@ -493,7 +509,7 @@ export default class Grid extends GameObject {
     	this.blocks.raw().forEach(col => {
     		col.unshift(new Block(col[0]));
     	});
-    	this.rebuildBlocks();
+    	// this.rebuildBlocks();
     }
 
     addRowBelow() {
@@ -501,7 +517,7 @@ export default class Grid extends GameObject {
     	this.blocks.raw().forEach(col => {
     		col.push(new Block(col[col.length - 1]));
     	});
-    	this.rebuildBlocks();
+    	// this.rebuildBlocks();
     }
 
     addColLeft() {
@@ -511,7 +527,7 @@ export default class Grid extends GameObject {
     		d.position.x++;
     		d.sprite.position.x += config.grid.width;
     	});
-    	this.rebuildBlocks();
+    	// this.rebuildBlocks();
     }
 
     addColRight() {
@@ -519,7 +535,7 @@ export default class Grid extends GameObject {
     	this.blocks.push(
     		this.blocks[this.blocks.length - 1].map(b => new Block(b))
     	);
-    	this.rebuildBlocks();
+    	// this.rebuildBlocks();
     }
 
     pixiInit() {

@@ -27,7 +27,7 @@ export default class Editor extends Base {
 			y: 0,
 		});
 		// grid.makeTest();
-		grid.generate(1);
+		// grid.generate(1);
 		engine.register(grid);
 
 		document.body.style.backgroundColor = "#87efff";

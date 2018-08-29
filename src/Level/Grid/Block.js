@@ -47,7 +47,11 @@ export default class Block {
 		this.backgroundType = params.backgroundType;
 
 		if (this.type !== "0") {
-			this.hp = this.getType().hp;
+			const type = this.getType();
+			if(!type){
+				throw new Error("Block.constructor cannot find type " + this.type);
+			}
+			this.hp = type.hp;
 		}
 	}
 
