@@ -27,6 +27,7 @@ describe("Level/Actor", () => {
 	});
 	describe("canmovehori", () => {
 		it("should return true if there's space", () => {
+			debugger;
 			expect(actor.canMoveHori(5)).toBe(true);
 		});
 		it("should return false if there's no space", () => {

@@ -175,19 +175,28 @@ export default class Grid extends GameObject {
 
     fromTestStrings(strings: Array<string>): Grid {
     	const testdata = strings.map(a => a.split(""));
-    	const blocks = testdata[0].map(function(col, x) {
-    		return testdata.map(function(row, y) {
-    			return new Block({
-    				position: new Point({ x: x, y: y }),
-    				type: row[x],
-    				grid: this,
-    			});
+    	// const blocks = testdata[0].map(function(col, x) {
+    	// 	return testdata.map(function(row, y) {
+    	// 		return new Block({
+    	// 			position: new Point({ x: x, y: y }),
+    	// 			type: row[x],
+    	// 			grid: this,
+    	// 		});
+    	// 	});
+    	// });
+    	// this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block, { type: "0", grid: this });
+    	// for(let x = 0; x < this.blocks.length; x++){
+    	// 	this.blocks[x] = blocks[x];
+    	// }
+		
+    	//NOTE: flip X and Y
+    	this.blocks = new Grid3(testdata[0].length, testdata.length, 2, Block, { type: "0", grid: this });
+    	testdata.forEach((d, y) => {
+    		return d.forEach((block, x) => {
+    			const b = this.blocks.get(x, y);
+    			b.type = block;
     		});
     	});
-    	this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block, { type: "0", grid: this });
-    	for(let x = 0; x < this.blocks.length; x++){
-    		this.blocks[x] = blocks[x];
-    	}
     	return this;
     }
 
