@@ -33,7 +33,7 @@ describe("getBlocksInRect", () => {
 describe("Grid.test.js jest only", () => {
 	describe("save", () => {
 		it("should return a strugn from save", () => {
-			const grid = new Grid({ size: { w: 10, h: 10 } });
+			const grid = new Grid({ size: { w: 2, h: 2 } });
 			expect(typeof grid.save()).toBe("string");
 		});
 		it("save snapshot", () => {
