@@ -1,6 +1,5 @@
 
 import Grid3 from "./Grid3";
-import { Grid } from "material-ui";
 
 class Obj {
 	constructor(params) {

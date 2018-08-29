@@ -1,7 +1,7 @@
 //@flow
 
 import { EnemyTypesMap } from "Level/Actor/Enemy/Type";
-import { Noise } from "noisejs";
+// import { Noise } from "noisejs";
 import Block from "Level/Grid/Block";
 import config from "config";
 import Enemy from "Level/Actor/Enemy";
@@ -142,21 +142,7 @@ export default class Grid extends GameObject {
     		this.decorStage.removeChild(decor.sprite);
     	}
     }
-
-    // generate(seed: number) {
-    // 	const noise = new Noise(seed);
-    // 	this.blocks.raw().forEach((col, x) => {
-    // 		col.forEach((block, y) => {
-    // 			let value = noise.simplex2(x / 50, y / 50);
-    // 			// console.log(x, y, value);
-    // 			value += y / col.length * 2 - 1;
-    // 			if (value > 0) {
-    // 				block.type = "1";
-    // 			}
-    // 		});
-    // 	});
-    // }
-
+	
     screenRect(): Rect {
     	return new Rect({
     		t: 0,
@@ -166,31 +152,16 @@ export default class Grid extends GameObject {
     	}).move(this.engine.view.offset);
     }
 
-    // rebuildBlocks() {
-    // 	// this.tileCache = {};
-    // 	this.blocks.raw().forEach((col, x) =>
-    // 		col.forEach((block, y) => (block.position = new Point({ x, y })))
-    // 	);
-    // }
-
+	/**
+	 * only used for unit testing
+	 * @param {*} strings
+	 */
     fromTestStrings(strings: Array<string>): Grid {
     	const testdata = strings.map(a => a.split(""));
-    	// const blocks = testdata[0].map(function(col, x) {
-    	// 	return testdata.map(function(row, y) {
-    	// 		return new Block({
-    	// 			position: new Point({ x: x, y: y }),
-    	// 			type: row[x],
-    	// 			grid: this,
-    	// 		});
-    	// 	});
-    	// });
-    	// this.blocks = new Grid3(blocks.length, blocks[0].length, 2, Block, { type: "0", grid: this });
-    	// for(let x = 0; x < this.blocks.length; x++){
-    	// 	this.blocks[x] = blocks[x];
-    	// }
-		
+
     	//NOTE: flip X and Y
-    	this.blocks = new Grid3(testdata[0].length, testdata.length, 2, Block, { type: "0", grid: this });
+    	// this.blocks = new Grid3(testdata[0].length, testdata.length, 2, Block, { type: "0", grid: this });
+    	this.makeEmptyGrid({ w: testdata[0].length, h: testdata.length });
     	testdata.forEach((d, y) => {
     		return d.forEach((block, x) => {
     			const b = this.blocks.get(x, y);
@@ -201,20 +172,6 @@ export default class Grid extends GameObject {
     }
 
     makeEmptyGrid(size: { w: number, h: number }) {
-    	// this.blocks = Array(size.w)
-    	// 	.fill(0)
-    	// 	.map((i, x) =>
-    	// 		Array(size.h)
-    	// 			.fill(0)
-    	// 			.map(
-    	// 				(j, y) =>
-    	// 					new Block({
-    	// 						position: new Point({ x, y }),
-    	// 						type: "0",
-    	// 						grid: this,
-    	// 					})
-    	// 			)
-    	// 	);
     	this.blocks = new Grid3(size.w, size.h, 2, Block, { type: "0", grid: this });
     }
 
@@ -460,39 +417,16 @@ export default class Grid extends GameObject {
     	if (!Array.isArray(mainlayer)) {
     		mainlayer = mainlayer.blocks;
     	}
-    	// const blocksMap = mainlayer.map((d, x) => {
-    	// 	return d.map((block, y) => {
-    	// 		return new Block({
-    	// 			position: new Point({ x, y }),
-    	// 			type: block.t,
-    	// 			backgroundType: block.b,
-    	// 			tint: block.i,
-    	// 			grid: this,
-    	// 		});
-    	// 	});
-    	// });
-    	//BRING THIS INTO GRID3
-    	this.blocks = new Grid3(mainlayer.length, mainlayer[0].length, 2, Block, { type: "0", grid: this });
+
+    	this.makeEmptyGrid({ w: mainlayer.length, h: mainlayer[0].length });
     	mainlayer.forEach((d, x) => {
     		return d.forEach((block, y) => {
     			const b = this.blocks.get(x, y);
     			b.type = block.t;
     			b.backgroundType = block.b;
     			b.tint = block.i;
-    			// return new Block({
-    			// 	position: new Point({ x, y }),
-    			// 	type: block.t,
-    			// 	backgroundType: block.b,
-    			// 	tint: block.i,
-    			// 	grid: this,
-    			// });
     		});
     	});
-    	// blocks.forEach((col, i) => {
-    	// 	this.blocks[i] = col;
-    	// });
-    	// debugger;
-    	//END BRING IN
     	if (data.enemies) {
     		log.info("loading", data.enemies.length, "enemies");
     		data.enemies.forEach(e => {
