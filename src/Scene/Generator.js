@@ -33,7 +33,7 @@ const FLOOR_HEIGHT = 5;
 
 
 const TILE_SIZE = 10;
-const NUM_CHILDREN = 20;
+const NUM_CHILDREN = 30;
 class Generator extends GameObject {
 	constructor(manager){
 		super();
@@ -62,10 +62,10 @@ const generateDungeon = function*(engine, manager){
 	// const children = [];
 	for(let i = 0; i < NUM_CHILDREN; i++){
 		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = (Math.ceil(Math.random() * Math.random() * 12) + 2) * TILE_SIZE;
-		sprite.height = (Math.ceil(Math.random() * Math.random() * 12) + 2) * TILE_SIZE;
-		sprite.position.x = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
-		sprite.position.y = Math.ceil(Math.random() * 20 ) * TILE_SIZE;
+		sprite.width = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+		sprite.height = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+		sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
+		sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
 		sprite.tint = Math.ceil(Math.random() * 0xffffff);
 		container.addChild(sprite);
 		// children.push(sprite);
@@ -121,11 +121,11 @@ const generateDungeon = function*(engine, manager){
 				const lOver = childRect.l < otherRect.r;
 				if(rOver && bOver && tOver && lOver){
 					// child.tint = 0x0;
-					//find intersection rect
+					// find intersection rect
 					// let width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
 					// let height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
 
-					// // console.log(width, height);
+					// // // console.log(width, height);
 					// if((childRect.l + childRect.r) / 2 < (otherRect.l + otherRect.r) / 2){
 					// 	width = -width;
 					// }
@@ -156,8 +156,12 @@ const generateDungeon = function*(engine, manager){
 				
 				child.position.x += Math.round(force.x) * TILE_SIZE;
 				child.position.y += Math.round(force.y) * TILE_SIZE;
+				// //clip into place
+				// child.position.x -= child.position.x % TILE_SIZE;
+				// child.position.y -= child.position.y % TILE_SIZE;
+
 				moved++;
-				// yield i;
+				yield i;
 			}
 		}
 		yield "loop";

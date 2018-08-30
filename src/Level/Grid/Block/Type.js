@@ -96,12 +96,12 @@ const blockTypeConfig: Array<BlockTypeParams> = [
 		hp: 0,
 	},
 	{
-		name: "dirt",
+		name: "flatgrey",
 		id: "1",
-		image: require("./images/dirt.png"),
-		textureId: "dirt.png",
+		image: require("./images/flatgrey.png"),
+		textureId: "flatgrey.png",
 		destructable: true,
-		hp: 100,
+		hp: 10,
 	},
 	{
 		name: "brick",
