@@ -1,7 +1,6 @@
 // @flow
 
 
-
 import Engine from "Engine";
 
 import MainMenu from "Scene/MainMenu";
@@ -13,6 +12,7 @@ import Demo from "Scene/Demo";
 import Menu from "Scene/Menu";
 import Shader from "Scene/Shader";
 import Generator from "Scene/Generator";
+import Playground from "Scene/Playground";
 
 //textures
 import { BlockTypes } from "Level/Grid/Block/Type";
@@ -82,6 +82,9 @@ export default class Game {
 		case "generator":
 			this.engine.startScene(new Generator());
 			break;
+		case "playground":
+			this.engine.startScene(new Playground());
+			break;
 		default:
 			this.engine.startScene(new Logo());
 		}
@@ -90,7 +93,6 @@ export default class Game {
 
 		this.engine.update(); //starts
 	};
-
 	
 
 	destroy() {
