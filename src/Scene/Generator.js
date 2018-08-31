@@ -11,6 +11,8 @@ import Level from "Scene/Level";
 
 import GameObject from "GameObject";
 
+// import "Generator/AABBPhysics";
+
 const GRIDSIZE = 4;
 const GRID_WIDTH = 200;
 const GRID_HEIGHT = 100;
@@ -153,9 +155,12 @@ const generateDungeon = function*(engine, manager){
 				const force = child.forces
 					.reduce((a, b) => a.add(b))
 					.multiply(1 / child.forces.length);
-				
-				child.position.x += Math.round(force.x) * TILE_SIZE;
-				child.position.y += Math.round(force.y) * TILE_SIZE;
+					
+				if(Math.abs(force.x) > Math.abs(force.y)){
+					child.position.x += Math.round(force.x) * TILE_SIZE;
+				}else{
+					child.position.y += Math.round(force.y) * TILE_SIZE;
+				}
 				// //clip into place
 				// child.position.x -= child.position.x % TILE_SIZE;
 				// child.position.y -= child.position.y % TILE_SIZE;
