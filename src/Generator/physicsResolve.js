@@ -77,7 +77,7 @@ export default function*(children){
 				// child.position.y -= child.position.y % TILE_SIZE;
 
 				moved++;
-				yield i;
+				// yield i;
 			}
 		}
 		yield "loop";

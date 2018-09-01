@@ -1,5 +1,5 @@
 
-import Point from "Utility/Point";
+// import Point from "Utility/Point";
 
 import * as PIXI from "pixi.js";
 
@@ -73,11 +73,11 @@ const generateDungeon = function*(engine, manager){
 				// console.log(x - left + 20, y - top + GROUND, y, top, GROUND, block);
 				// manager.grid[x - left + 20][y - top + GROUND][0].type = "0";
 			}
-			manager.draw();
-			yield x;
+			// yield x;
 		}
 		// c.tint = 0xffffff;
-
+		manager.draw();
+		yield i;
 		container.removeChild(c);
 	}
 

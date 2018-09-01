@@ -1,15 +1,15 @@
 import Base from "./Base";
-import Point from "Utility/Point";
+// import Point from "Utility/Point";
 
 import * as PIXI from "pixi.js";
 import type Engine from "Engine";
 
-import Grid from "Grid";
+// import Grid from "Grid";
 import Block from "Level/Grid/Block";
 import Grid3 from "Utility/Grid3";
-import Level from "Scene/Level";
+// import Level from "Scene/Level";
 
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
 
 // import "Generator/AABBPhysics";
 
@@ -17,7 +17,7 @@ import GeneratorManager from "Generator/Manager";
 
 const GRIDSIZE = 4;
 const GRID_WIDTH = 200;
-const GRID_HEIGHT = 100;
+const GRID_HEIGHT = 200;
 
 // class Block{
 // 	type = 0;
@@ -91,7 +91,7 @@ export default class GeneratorScene extends Base {
 			for(let f = 1; f <= floors; f++){
 				const y = yOff - (FLOOR_HEIGHT * f);
 				if(this.grid[x] && this.grid[x][y]){
-					this.grid[x][y][0].type = "1";
+					this.grid[x][y][0].type = "platform";
 				}
 			}
 		}
@@ -112,6 +112,9 @@ export default class GeneratorScene extends Base {
 				sprite.height = GRIDSIZE;
 				if(this.grid[x][y][0].type == "1"){
 					sprite.tint = 0xff0000;
+				}
+				if(this.grid[x][y][0].type == "platform"){
+					sprite.tint = 0x00ff00;
 				}
 				this.container.addChild(sprite);
 

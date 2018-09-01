@@ -27,9 +27,9 @@ class Looper extends GameObject {
 
 		engine.stage.addChild(this.container);
 		this.boxes = [];
-		for(let i = 0; i < 10; i++){
+		for(let i = 0; i < 4; i++){
 			const obj = new Physics.Box(
-				Math.random() * 100,
+				Math.random() * 200,
 				Math.random() * 100,
 				Math.random() * 100,
 				Math.random() * 100,
