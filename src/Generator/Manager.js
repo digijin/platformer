@@ -1,7 +1,7 @@
 
 import GameObject from "GameObject";
 import Level from "Scene/Level";
-import generateDungeon from "./GenerateDungeon";
+import generateDungeon from "./generateDungeon";
 
 class GeneratorManager extends GameObject {
 	constructor(manager){

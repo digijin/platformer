@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 
 import Grid from "Grid";
 
-import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants.js";
+import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -140,7 +140,7 @@ const generateDungeon = function*(engine, manager){
 	let bottom = -Infinity;
 	children.forEach(c => {
 		// console.log(top, right, bottom, left, c.position);
-		if(!isNaN(c.position.x)){
+		if(!isNaN(c.position.x) && !isNaN(c.position.y)){
 			left = Math.min(left, c.position.x);
 			top = Math.min(top, c.position.y);
 			right = Math.max(right, c.position.x + c.width);
@@ -158,14 +158,20 @@ const generateDungeon = function*(engine, manager){
 	// manager.grid = new Grid3(right - left, bottom - top, 1, Block, { type: 1 });
 	// manager.draw();
 
+	// console.log("manager", manager);
+	// console.log("manager grid", manager.grid);
+
 
 	for(let i = 0; i < children.length; i++){
 		const c = children[i];
 		c.tint = 0xffff00;
 		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
 			for(let y = c.position.y / TILE_SIZE; y < c.position.y / TILE_SIZE + c.height / TILE_SIZE; y++){
-			// console.log(x, left, x - left);
-				manager.grid[x - left + 20][y - top + GROUND][0].type = "0";
+				// console.log(x, left, x - left);
+				const block = manager.grid.get(x - left + 20, y - top + GROUND);
+				block.type = "0";
+				// console.log(x - left + 20, y - top + GROUND, y, top, GROUND, block);
+				// manager.grid[x - left + 20][y - top + GROUND][0].type = "0";
 			}
 			manager.draw();
 			yield x;
