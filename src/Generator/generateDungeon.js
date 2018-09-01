@@ -7,40 +7,27 @@ import Grid from "Grid";
 
 import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 
+import spawnRooms from "./spawnRooms";
+
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
 	container.position.x = window.innerWidth / 2;
 	container.position.y = window.innerHeight / 2;
 	// const children = [];
-	for(let i = 0; i < NUM_CHILDREN; i++){
-		const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-		sprite.width = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
-		sprite.height = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
-		sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
-		sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
-		sprite.tint = Math.ceil(Math.random() * 0xffffff);
-		container.addChild(sprite);
-		// children.push(sprite);
-		yield i;
-	}
-	// container.children.sort((a, b) => {
-	// 	//centers
-	// 	const cA = {
-	// 		x: a.position.x + (a.width / 2),
-	// 		y: a.position.y + (a.height / 2),
-	// 	};
-	// 	const cB = {
-	// 		x: b.position.x + (b.width / 2),
-	// 		y: b.position.y + (b.height / 2),
-	// 	};
-	// 	//a2+b2=c2
-	// 	const distAsq = (cA.x * cA.x) + (cA.y * cA.y);
-	// 	const distBsq = (cB.x * cB.x) + (cB.y * cB.y);
+	// for(let i = 0; i < NUM_CHILDREN; i++){
+	// 	const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+	// 	sprite.width = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+	// 	sprite.height = (Math.ceil(Math.random() * Math.random() * 6) + 2) * TILE_SIZE;
+	// 	sprite.position.x = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
+	// 	sprite.position.y = Math.ceil(Math.random() * 10 ) * TILE_SIZE;
+	// 	sprite.tint = Math.ceil(Math.random() * 0xffffff);
+	// 	container.addChild(sprite);
+	// 	// children.push(sprite);
+	// 	yield i;
+	// }
 
-	// 	return   distBsq - distAsq;
-	// });
-
+	yield* spawnRooms(container, NUM_CHILDREN);
 	
 	const children = container.children.slice(0).reverse();
 	
