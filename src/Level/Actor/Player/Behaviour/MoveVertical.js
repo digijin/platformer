@@ -9,6 +9,9 @@ export default class MoveVertical extends Base{
 
     states = ALL
     update(){
+    	// TODO: use player.state to determine in airborne and set grounded to airborne
+
+    	// console.log(this.player.state);
     	const vertObjects = this.player.vertObstacles(this.player.v);
     	if (vertObjects.length > 0) {
     		//LAND ON GROUND
