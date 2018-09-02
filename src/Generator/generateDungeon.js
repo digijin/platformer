@@ -24,12 +24,11 @@ const generateDungeon = function*(engine, manager){
 	const children = container.children.slice(0).reverse();
 
 	yield* physicsResolve(children);
-	yield* compress(children);
-	yield* physicsResolve(children);
-	yield* compress(children);
-	yield* physicsResolve(children);
-	yield* compress(children);
-	yield* physicsResolve(children);
+
+	for(let i = 0; i < 30; i++){
+		yield* compress(children);
+		yield* physicsResolve(children);
+	}
 	
 	for(let i = 0; i < children.length; i++){
 		const child = children[i];
