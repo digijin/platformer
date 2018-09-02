@@ -10,6 +10,7 @@ import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
 import compress from "./compress";
+import getTRBL from "./getTRBL";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -41,19 +42,20 @@ const generateDungeon = function*(engine, manager){
 	// const right = children.reduce((a, b) => a.position.x + a.width > b.position.x + b.width ? a : b).x / TILE_SIZE;
 	// const bottom = children.reduce((a, b) => a.position.y + a.height > b.position.y + b.height ? a : b).y / TILE_SIZE;
 
-	let left = Infinity;
-	let top = Infinity;
-	let right = -Infinity;
-	let bottom = -Infinity;
-	children.forEach(c => {
-		// console.log(top, right, bottom, left, c.position);
-		if(!isNaN(c.position.x) && !isNaN(c.position.y)){
-			left = Math.min(left, c.position.x);
-			top = Math.min(top, c.position.y);
-			right = Math.max(right, c.position.x + c.width);
-			bottom = Math.max(bottom, c.position.y + c.height);
-		}
-	});
+	// let left = Infinity;
+	// let top = Infinity;
+	// let right = -Infinity;
+	// let bottom = -Infinity;
+	// children.forEach(c => {
+	// 	// console.log(top, right, bottom, left, c.position);
+	// 	if(!isNaN(c.position.x) && !isNaN(c.position.y)){
+	// 		left = Math.min(left, c.position.x);
+	// 		top = Math.min(top, c.position.y);
+	// 		right = Math.max(right, c.position.x + c.width);
+	// 		bottom = Math.max(bottom, c.position.y + c.height);
+	// 	}
+	// });
+	let { top, left, right, bottom } = getTRBL(children);
 	// console.log(top, right, bottom, left);
 	left *= 1 / TILE_SIZE;
 	top *= 1 / TILE_SIZE;
