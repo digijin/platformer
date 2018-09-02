@@ -12,6 +12,7 @@ import physicsResolve from "./physicsResolve";
 import compress from "./compress";
 import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
+import removeSillyPlatforms from "./removeSillyPlatforms";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -68,6 +69,8 @@ const generateDungeon = function*(engine, manager){
 		yield i;
 		container.removeChild(c);
 	}
+
+	yield* removeSillyPlatforms(manager);
 
 	//save it into a grid;
 	const grid = new Grid();
