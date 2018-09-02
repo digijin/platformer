@@ -52,7 +52,7 @@ export const HAND_STATE = {
 };
 const hand = {
 	speed: 2000,
-	reelSpeed: 400,
+	reelSpeed: 1200,
 	offset: new Point({
 		x: -config.player.size.w / 2,
 		y: -config.player.size.h / 2,

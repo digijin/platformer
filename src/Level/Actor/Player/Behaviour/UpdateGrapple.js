@@ -11,7 +11,7 @@ export default class UpdateGrapple extends Base{
     	if (this.player.hand.state == HAND_STATE.ARMED) {
     		this.player.hand.position = this.player.position.add(this.player.hand.offset);
     	}
-    	if (this.engine.input.getKey(69)) {
+    	if (this.engine.input.getKeyDown(69)) {
     		//FIRE HAND
     		if (this.player.hand.state == HAND_STATE.ARMED) {
     			this.player.hand.state = HAND_STATE.FIRED;
@@ -51,6 +51,15 @@ export default class UpdateGrapple extends Base{
     			this.player.hand.position.y += Math.sin(dir) * speed;
     		}
     	}
+    	if(this.player.hand.state == HAND_STATE.GRIPPED){
+    		const spaceLeft = this.player.position.subtract(this.player.hand.position).length();
+    		// console.log(spaceLeft);
+    		if(spaceLeft < 100){
+    			this.player.hand.state = HAND_STATE.RELEASED;
+    		}
+    	}
+		
+    	// console.log("hand state", this.player.hand.state);
     }
 
 }
