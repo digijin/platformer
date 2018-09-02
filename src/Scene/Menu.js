@@ -24,5 +24,8 @@ export default class Menu extends Base {
 		// engine.ui.dispatch({ type: "START_SCENE", scene: "briefing" });
 
 		window.dispatchEvent(new Event("menu-start"));
+
+		// const sound = new Audio("/assets/Free%20To%20Use%20Music%20%20Chill%20Instrumental%20%20Blue.mp3");
+		// sound.play();
 	}
 }

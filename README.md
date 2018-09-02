@@ -52,3 +52,6 @@ if using vscode hit f5 with chrome debugger installed
 
 download validator https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/tools/glslang/Install/Windows/
 put in root
+
+
+music from https://www.youtube.com/watch?v=OyuMmnRW8-A&feature=youtu.be
