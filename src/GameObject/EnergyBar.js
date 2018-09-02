@@ -20,9 +20,19 @@ export default class EnergyBar extends GameObject {
 		this.container = new EnergyBarContainer();
 		this.graph = new PIXI.Graphics();
 		this.container.addChild(this.graph);
+
+		this.text = new PIXI.Text("player.state", {
+			fontFamily: "Roboto",
+			fontSize: 24,
+			fill: 0xff1010,
+			align: "center",
+		});
+		this.text.position.y = 50;
+		this.container.addChild(this.text);
 	}
 
 	update() {
+		this.text.text = this.player.state;
 		this.graph.clear();
 		this.graph
 			.beginFill(0xdddddd)
