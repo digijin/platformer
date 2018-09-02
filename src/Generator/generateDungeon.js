@@ -9,6 +9,7 @@ import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
+import compress from "./compress";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -21,6 +22,12 @@ const generateDungeon = function*(engine, manager){
 
 	const children = container.children.slice(0).reverse();
 
+	yield* physicsResolve(children);
+	yield* compress(children);
+	yield* physicsResolve(children);
+	yield* compress(children);
+	yield* physicsResolve(children);
+	yield* compress(children);
 	yield* physicsResolve(children);
 	
 	for(let i = 0; i < children.length; i++){
