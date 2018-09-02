@@ -21,7 +21,8 @@ export default function* (children){
 				c.position.y += TILE_SIZE;
 			}
 		}
-		yield i;
 		// });
+		// yield i;
 	}
+	yield 0;
 }

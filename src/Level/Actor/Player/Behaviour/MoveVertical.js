@@ -13,36 +13,50 @@ export default class MoveVertical extends Base{
 
     	// console.log(this.player.state);
     	const vertObjects = this.player.vertObstacles(this.player.v);
-		
-    	//walk off a cliff...
-    	if(this.player.state == PlayerState.GROUNDED
-		&& vertObjects.length == 0){
-    		this.player.changeState(PlayerState.AIRBORNE);
-    	}
-
+    
     	if (vertObjects.length > 0) {
     		//LAND ON GROUND
-    		const isLanding = this.player.position.y % config.grid.width !== 0;
-    		if (this.player.v > 0) {
-    			this.player.position.y = vertObjects[0].position.y * config.grid.width;
-    		}
+			
+    		// console.log(vertObjects.length);
+			
     		const allPlatform =
 				vertObjects.find(o => {
 					return o.isPlatform() == false;
 				}) == undefined;
-    		if (allPlatform && this.engine.input.getButton("down")) {
-    			//jump through platform
-    		} else {
-    			if (isLanding) {
+
+    		switch(this.player.state){
+    		case PlayerState.GROUNDED:
+    			if (allPlatform && this.engine.input.getButtonDown("down")) {
+    				this.player.v = 1;
+    			}else{
+    				this.player.v = 0;
+    			}
+    			break;
+    		case PlayerState.AIRBORNE:
+    		case PlayerState.SLAM:
+    			//set y to ground
+    			// console.log("player v is ", this.player.v);
+    			if (this.player.v > 0) {
+    				this.player.position.y = vertObjects[0].position.y * config.grid.width;
     				this.handleLanding(this.player.v);
     			}
     			this.player.v = 0;
+
+    			break;
+    		}
+    		
+    		
+    	}else{
+    		//walk off a cliff...
+    		if(this.player.state == PlayerState.GROUNDED){
+    			this.player.changeState(PlayerState.AIRBORNE);
     		}
     	}
     	this.player.position.y += this.player.v;
     }
 
     handleLanding(speed: number) {
+    	// console.log("land");
     	this.player.changeState(PlayerState.GROUNDED);
     	for (let i = 0; i < speed * 4; i++) {
     		this.engine.register(
