@@ -13,6 +13,13 @@ export default class MoveVertical extends Base{
 
     	// console.log(this.player.state);
     	const vertObjects = this.player.vertObstacles(this.player.v);
+		
+    	//walk off a cliff...
+    	if(this.player.state == PlayerState.GROUNDED
+		&& vertObjects.length == 0){
+    		this.player.changeState(PlayerState.AIRBORNE);
+    	}
+
     	if (vertObjects.length > 0) {
     		//LAND ON GROUND
     		const isLanding = this.player.position.y % config.grid.width !== 0;
