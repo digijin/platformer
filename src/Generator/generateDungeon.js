@@ -11,6 +11,7 @@ import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
 import compress from "./compress";
 import getTRBL from "./getTRBL";
+import generateBuildings from "./generateBuildings";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -18,14 +19,14 @@ const generateDungeon = function*(engine, manager){
 	container.position.x = window.innerWidth / 2;
 	container.position.y = window.innerHeight / 2;
 
+	yield* generateBuildings(manager);
+
 	yield* spawnRooms(container, NUM_CHILDREN);
-	
 
 	const children = container.children.slice(0).reverse();
 
 	yield* physicsResolve(children);
-
-	for(let i = 0; i < 30; i++){
+	for(let i = 0; i < 20; i++){
 		yield* compress(children);
 		yield* physicsResolve(children);
 	}
@@ -35,25 +36,7 @@ const generateDungeon = function*(engine, manager){
 		child.tint = 0x0;
 		yield i;
 	}
-	//calculate grid;
-	// const left = children.reduce((a, b) => a.position.x < b.position.x ? a : b).x / TILE_SIZE;
-	// const top = children.reduce((a, b) => a.position.y < b.position.y ? a : b).y / TILE_SIZE;
-	// const right = children.reduce((a, b) => a.position.x + a.width > b.position.x + b.width ? a : b).x / TILE_SIZE;
-	// const bottom = children.reduce((a, b) => a.position.y + a.height > b.position.y + b.height ? a : b).y / TILE_SIZE;
 
-	// let left = Infinity;
-	// let top = Infinity;
-	// let right = -Infinity;
-	// let bottom = -Infinity;
-	// children.forEach(c => {
-	// 	// console.log(top, right, bottom, left, c.position);
-	// 	if(!isNaN(c.position.x) && !isNaN(c.position.y)){
-	// 		left = Math.min(left, c.position.x);
-	// 		top = Math.min(top, c.position.y);
-	// 		right = Math.max(right, c.position.x + c.width);
-	// 		bottom = Math.max(bottom, c.position.y + c.height);
-	// 	}
-	// });
 	let { top, left, right, bottom } = getTRBL(children);
 	// console.log(top, right, bottom, left);
 	left *= 1 / TILE_SIZE;
@@ -61,15 +44,7 @@ const generateDungeon = function*(engine, manager){
 	right *= 1 / TILE_SIZE;
 	bottom *= 1 / TILE_SIZE;
 
-	
-	// console.log(top, right, bottom, left, right - left, bottom - top);
-	// manager.grid = new Grid3(right - left, bottom - top, 1, Block, { type: 1 });
-	// manager.draw();
-
-	// console.log("manager", manager);
-	// console.log("manager grid", manager.grid);
-
-
+	//persist to map
 	for(let i = 0; i < children.length; i++){
 		const c = children[i];
 		c.tint = 0xffff00;
@@ -85,8 +60,6 @@ const generateDungeon = function*(engine, manager){
 				}else{
 					block.type = "0";
 				}
-				// console.log(x - left + 20, y - top + GROUND, y, top, GROUND, block);
-				// manager.grid[x - left + 20][y - top + GROUND][0].type = "0";
 			}
 			// yield x;
 		}
