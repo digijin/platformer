@@ -66,16 +66,16 @@ const generateDungeon = function*(engine, manager){
 		const c = children[i];
 		c.tint = 0xffff00;
 		const roomBottom = c.position.y / TILE_SIZE + c.height / TILE_SIZE;
+		const roomTop = c.position.y / TILE_SIZE;
 		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
 
 			for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
 				// console.log(x, left, x - left);
 				const block = manager.grid.get(x - left + 20, y - top + GROUND);
-				if(y == roomBottom - 1){
+				if(y == roomTop){
 					block.type = "platform";
 				}else{
 					block.type = "0";
-
 				}
 				// console.log(x - left + 20, y - top + GROUND, y, top, GROUND, block);
 				// manager.grid[x - left + 20][y - top + GROUND][0].type = "0";

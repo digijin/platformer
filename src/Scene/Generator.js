@@ -72,7 +72,10 @@ export default class GeneratorScene extends Base {
 
 	genGround(){
 		for(let y = GROUND; y < GRID_HEIGHT; y++){
-			this.grid.row(y).forEach(cell => cell.type = "1");
+			this.grid.row(y).forEach(cell => {
+				cell.type = "1";
+				cell.backgroundType = "1";
+			});
 		}
 	}
 
@@ -90,10 +93,23 @@ export default class GeneratorScene extends Base {
 		for(let x = xOff; x < xOff + width; x++){
 			for(let f = 1; f <= floors; f++){
 				const y = yOff - (FLOOR_HEIGHT * f);
-				if(this.grid[x] && this.grid[x][y]){
-					this.grid[x][y][0].type = "platform";
+				const block  = this.grid.get(x, y);
+				if(block){
+					block.type = "platform";
+				}
+				// if(this.grid[x] && this.grid[x][y]){
+				// 	this.grid[x][y][0].type = "platform";
+				// }
+			}
+			//paint background
+			// console.log("bg", yOff, FLOOR_HEIGHT, floors.length);
+			for(let y = yOff - (FLOOR_HEIGHT * floors); y < yOff; y++){
+				const block  = this.grid.get(x, y);
+				if(block){
+					block.backgroundType = "1";
 				}
 			}
+
 		}
 		return width;
 	}
@@ -110,11 +126,18 @@ export default class GeneratorScene extends Base {
 				sprite.position.y = GRIDSIZE * y;
 				sprite.width = GRIDSIZE;
 				sprite.height = GRIDSIZE;
-				if(this.grid[x][y][0].type == "1"){
+				const block = this.grid[x][y][0];
+				if(block.type == "1"){
 					sprite.tint = 0xff0000;
-				}
-				if(this.grid[x][y][0].type == "platform"){
+				}else if(block.type == "platform"){
 					sprite.tint = 0x00ff00;
+				}else{
+					//background
+					if(block.backgroundType != "0"){
+						// console.log(typeof block.backgroundType);
+
+						sprite.tint = 0x0000ff;
+					}
 				}
 				this.container.addChild(sprite);
 
