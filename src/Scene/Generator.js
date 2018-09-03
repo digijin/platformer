@@ -27,13 +27,15 @@ const GRID_HEIGHT = 200;
 
 // }
 
-const GROUND = 50;
-const MIN_BUILDING_SPACING = 2;
-const MAX_BUILDING_SPACING = 8;
-const MIN_BUILDING_WIDTH = 6;
-const MAX_BUILDING_WIDTH = 20;
-const MAX_FLOORS = 8;
-const FLOOR_HEIGHT = 5;
+import { GROUND } from "Generator/constants";
+
+// const GROUND = 50;
+// const MIN_BUILDING_SPACING = 2;
+// const MAX_BUILDING_SPACING = 8;
+// const MIN_BUILDING_WIDTH = 6;
+// const MAX_BUILDING_WIDTH = 20;
+// const MAX_FLOORS = 8;
+// const FLOOR_HEIGHT = 5;
 
 
 // const TILE_SIZE = 10;
