@@ -10,6 +10,7 @@ import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
 import compress from "./compress";
+import compressPhysics from "./compressPhysics";
 import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
 import removeSillyPlatforms from "./removeSillyPlatforms";
@@ -27,8 +28,8 @@ const generateDungeon = function*(engine, manager){
 	const children = container.children.slice(0).reverse();
 
 	yield* physicsResolve(children);
-	for(let i = 0; i < 20; i++){
-		yield* compress(children);
+	for(let i = 0; i < 4; i++){
+		yield* compressPhysics(children);
 		yield* physicsResolve(children);
 	}
 	
