@@ -1,7 +1,7 @@
 
 export const GRIDSIZE = 4;
-export const GRID_WIDTH = 200;
-export const GRID_HEIGHT = 100;
+export const GRID_WIDTH = 300;
+export const GRID_HEIGHT = 200;
 
 
 export const GROUND = 100;

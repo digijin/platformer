@@ -20,9 +20,9 @@ export default class UpdateGrapple extends Base{
     			this.player.hand.direction = dir;
     		}
     	} else {
-    		if (this.player.hand.state == HAND_STATE.GRIPPED) {
-    			this.player.hand.state = HAND_STATE.RELEASED;
-    		}
+    		// if (this.player.hand.state == HAND_STATE.GRIPPED) {
+    		// 	this.player.hand.state = HAND_STATE.RELEASED;
+    		// }
     	}
     	if (this.player.hand.state == HAND_STATE.FIRED) {
     		this.player.hand.position.x +=

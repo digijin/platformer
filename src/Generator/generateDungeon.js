@@ -23,52 +23,57 @@ const generateDungeon = function*(engine, manager){
 
 	yield* generateBuildings(manager);
 
-	yield* spawnRooms(container, NUM_CHILDREN);
+	let dungOffset = 20;
+	for(let d = 0; d < 2; d++){
 
-	const children = container.children.slice(0).reverse();
+		yield* spawnRooms(container, NUM_CHILDREN);
 
-	yield* physicsResolve(children);
-	for(let i = 0; i < 4; i++){
-		yield* compressPhysics(children);
+		const children = container.children.slice(0).reverse();
+
 		yield* physicsResolve(children);
-	}
-	
-	for(let i = 0; i < children.length; i++){
-		const child = children[i];
-		child.tint = 0x0;
-		yield i;
-	}
-
-	let { top, left, right, bottom } = getTRBL(children);
-	// console.log(top, right, bottom, left);
-	left *= 1 / TILE_SIZE;
-	top *= 1 / TILE_SIZE;
-	right *= 1 / TILE_SIZE;
-	bottom *= 1 / TILE_SIZE;
-
-	//persist to map
-	for(let i = 0; i < children.length; i++){
-		const c = children[i];
-		c.tint = 0xffff00;
-		const roomBottom = c.position.y / TILE_SIZE + c.height / TILE_SIZE;
-		const roomTop = c.position.y / TILE_SIZE;
-		for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
-
-			for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
-				// console.log(x, left, x - left);
-				const block = manager.grid.get(x - left + 20, y - top + GROUND);
-				if(y == roomTop){
-					block.type = "platform";
-				}else{
-					block.type = "0";
-				}
-			}
-			// yield x;
+		for(let i = 0; i < 10; i++){
+			yield* compressPhysics(children);
+			yield* physicsResolve(children);
 		}
-		// c.tint = 0xffffff;
-		manager.draw();
-		yield i;
-		container.removeChild(c);
+	
+		for(let i = 0; i < children.length; i++){
+			const child = children[i];
+			child.tint = 0x0;
+			yield i;
+		}
+
+		let { top, left, right, bottom } = getTRBL(children);
+		// console.log(top, right, bottom, left);
+		left *= 1 / TILE_SIZE;
+		top *= 1 / TILE_SIZE;
+		right *= 1 / TILE_SIZE;
+		bottom *= 1 / TILE_SIZE;
+
+		//persist to map
+		for(let i = 0; i < children.length; i++){
+			const c = children[i];
+			c.tint = 0xffff00;
+			const roomBottom = c.position.y / TILE_SIZE + c.height / TILE_SIZE;
+			const roomTop = c.position.y / TILE_SIZE;
+			for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
+
+				for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
+				// console.log(x, left, x - left);
+					const block = manager.grid.get(x - left + dungOffset, y - top + GROUND);
+					if(y == roomTop){
+						block.type = "platform";
+					}else{
+						block.type = "0";
+					}
+				}
+			// yield x;
+			}
+			// c.tint = 0xffffff;
+			manager.draw();
+			yield i;
+			container.removeChild(c);
+		}
+		dungOffset += right - left + 10;
 	}
 
 	yield* removeSillyPlatforms(manager);
