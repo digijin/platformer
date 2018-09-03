@@ -3,6 +3,8 @@
 import { TILE_SIZE } from "./constants";
 import Point from "Utility/Point";
 
+import Rect from "Utility/Rect";
+
 export default function*(children){
 	let moved = 1;
 	// for(let step = 0; step < 1000; step++){
@@ -13,48 +15,16 @@ export default function*(children){
 		for(let i = 0; i < children.length; i++){
 			const child = children[i];
 			//move all other overlapping away
-			const childRect = {
-				t: child.position.y,
-				l: child.position.x,
-				b: child.position.y + child.height,
-				r: child.position.x + child.width,
-			};
+			const childRect = Rect.fromSprite(child);
 			for(let j = i + 1; j < children.length; j++){
 				const other = children[j];
-				const otherRect = {
-					t: other.position.y,
-					l: other.position.x,
-					b: other.position.y + other.height,
-					r: other.position.x + other.width,
-				};
+				const otherRect = Rect.fromSprite(other);
 
-				const rOver = childRect.r > otherRect.l;
-				const bOver = childRect.b > otherRect.t;
-				const tOver = childRect.t < otherRect.b;
-				const lOver = childRect.l < otherRect.r;
-				if(rOver && bOver && tOver && lOver){
-					// child.tint = 0x0;
-					// find intersection rect
-					// let width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
-					// let height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
-
-					// // // console.log(width, height);
-					// if((childRect.l + childRect.r) / 2 < (otherRect.l + otherRect.r) / 2){
-					// 	width = -width;
-					// }
-					// if((childRect.t + childRect.b) / 2 < (otherRect.t + otherRect.b) / 2){
-					// 	height = -height;
-					// }
-
-					// const x1 = childRect.
-
+				if(childRect.overlaps(otherRect)){
 					const force = new Point({
 						x: (childRect.l + childRect.r) / 2 - (otherRect.l + otherRect.r) / 2,
 						y: (childRect.t + childRect.b) / 2 - (otherRect.t + otherRect.b) / 2,
-						// x: width,
-						// y: height,
-					})
-						.normalize();
+					}).normalize();
 					child.forces.push(force);
 					other.forces.push(force.multiply(-1));
 				}

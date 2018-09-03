@@ -126,9 +126,32 @@ export default class Rect {
 	}
 
 	overlaps(rect: Rect): boolean {
-		const outsideH = this.b <= rect.t || rect.b <= this.t;
-		const outsideV = this.r <= rect.l || rect.r <= this.l;
-		return !outsideV && !outsideH;
+		// const outsideH = this.b <= rect.t || rect.b <= this.t;
+		// const outsideV = this.r <= rect.l || rect.r <= this.l;
+		// return !outsideV && !outsideH;
+		
+		const rOver = rect.r > this.l;
+		const bOver = rect.b > this.t;
+		const tOver = rect.t < this.b;
+		const lOver = rect.l < this.r;
+		return rOver && bOver && tOver && lOver;
+	}
+
+	intersectionRect(rect: Rect){
+		//NOT IMPLEMENTED
+		// find intersection rect
+		// let width = Math.min(childRect.r, otherRect.r) - Math.max(childRect.l, otherRect.l);
+		// let height = Math.min(childRect.b, otherRect.b) - Math.max(childRect.t, otherRect.t);
+
+		// // // console.log(width, height);
+		// if((childRect.l + childRect.r) / 2 < (otherRect.l + otherRect.r) / 2){
+		// 	width = -width;
+		// }
+		// if((childRect.t + childRect.b) / 2 < (otherRect.t + otherRect.b) / 2){
+		// 	height = -height;
+		// }
+		return rect;
+
 	}
 
 	blockRect(): Rect {
