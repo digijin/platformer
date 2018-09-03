@@ -9,7 +9,7 @@ import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
-import compress from "./compress";
+// import compress from "./compress";
 import compressPhysics from "./compressPhysics";
 import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
