@@ -74,9 +74,9 @@ const generateDungeon = function*(engine, manager){
 			container.removeChild(c);
 		}
 		dungOffset += right - left + 10;
+		yield* removeSillyPlatforms(manager);
 	}
 
-	yield* removeSillyPlatforms(manager);
 
 	//save it into a grid;
 	const grid = new Grid();

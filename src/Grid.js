@@ -38,9 +38,10 @@ export default class Grid extends GameObject {
     spritePool: Pool;
     // tileCache: {};
     width: number;
-    z: number;
+	z: number;
+	enemyData = [];
 
-    constructor(
+	constructor(
     	params: {
             size: {
                 w: number,
@@ -54,7 +55,7 @@ export default class Grid extends GameObject {
     		},
     		parent: new PIXI.Container(),
     	}
-    ) {
+	) {
     	super();
     	// this.tileCache = {};
     	this.height = params.size.h;
@@ -64,9 +65,9 @@ export default class Grid extends GameObject {
     	this.z = -10;
     	//make empty grid
     	this.makeEmptyGrid(params.size);
-    }
+	}
 
-    init(engine: Engine) {
+	init(engine: Engine) {
     	super.init(engine);
     	engine.grid = this;
     	this.pixiInit();
@@ -74,13 +75,13 @@ export default class Grid extends GameObject {
     	this.parent.addChild(this.blockStage);
     	this.parent.addChild(this.decorStage);
     	this.parent.addChild(this.graph);
-    }
+	}
 
-    exit() {
+	exit() {
     	this.parent.removeChild(this.blockStage);
     	this.parent.removeChild(this.decorStage);
     	this.parent.removeChild(this.graph);
-    }
+	}
 
     update = () => {
     	const screenRect = this.screenRect();
@@ -352,7 +353,9 @@ export default class Grid extends GameObject {
     		// FLOWHACK
     		enemies: enemies.map((e: Enemy) => {
     			return { t: e.type.id, p: e.position };
-    		}),
+    		}).concat(this.enemyData.map((e: {}) => {
+    			return { t: e.type, p: e.positoin };
+    		})),
     		decor: this.decor.map(d => {
     			return { t: d.type, p: d.position };
     		}),
@@ -407,6 +410,11 @@ export default class Grid extends GameObject {
     addEnemy(params: { position: Point, type: any }) {
     	params.parent = this.parent;
     	this.engine.register(new Enemy(params));
+    }
+
+	
+    addEnemyData(data){
+    	this.enemyData.push(data);
     }
 
     addRowAbove() {
