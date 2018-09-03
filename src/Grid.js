@@ -354,7 +354,7 @@ export default class Grid extends GameObject {
     		enemies: enemies.map((e: Enemy) => {
     			return { t: e.type.id, p: e.position };
     		}).concat(this.enemyData.map((e: {}) => {
-    			return { t: e.type, p: e.positoin };
+    			return { t: e.type.id, p: e.position };
     		})),
     		decor: this.decor.map(d => {
     			return { t: d.type, p: d.position };

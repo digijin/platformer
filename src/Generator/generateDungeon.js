@@ -14,6 +14,7 @@ import compressPhysics from "./compressPhysics";
 import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
 import removeSillyPlatforms from "./removeSillyPlatforms";
+import Point from "Utility/Point";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -83,7 +84,7 @@ const generateDungeon = function*(engine, manager){
 	grid.blocks = manager.grid;
 
 	//add an enemy
-	// grid.addEnemy({ position: new Point({ x: 100, y: 100 }), type: { id: "0" } });
+	grid.addEnemyData({ position: new Point({ x: 100, y: 100 }), type: { id: "1" } });
 
 	engine.mission.level = grid.save();
 

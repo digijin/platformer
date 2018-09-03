@@ -16,11 +16,11 @@ describe("Grid.spec.js", () => {
 			grid = new Grid({ size: { w: 2, h: 2 } });
 		});
 		it("should add to some list", () => {
-			grid.addEnemyData({ position: new Point(), type: "1" });
+			grid.addEnemyData({ position: new Point(), type: { id: "1" } });
 			expect(grid.enemyData.length).toBe(1);
 		});
 		it("should turn up in save", () => {
-			grid.addEnemyData({ position: new Point(), type: "1" });
+			grid.addEnemyData({ position: new Point(), type: { id: "1" } });
 			const data = JSON.parse(grid.save());
 			expect(data.enemies.length).toBe(1);
 		});
