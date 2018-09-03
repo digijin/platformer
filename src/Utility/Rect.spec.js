@@ -23,6 +23,23 @@ describe("Utility/Rect", () => {
 			expect(output.l).toBe(75);
 		});
 	});
+	describe("fromSprite", () => {
+		it("should work", () => {
+			const sprite = {
+				position: {
+					x: 10,
+					y: 20,
+				},
+				width: 30,
+				height: 40,
+			};
+			const output = Rect.fromSprite(sprite);
+			expect(output.t).toBe(20);
+			expect(output.r).toBe(40);
+			expect(output.b).toBe(60);
+			expect(output.l).toBe(10);
+		});
+	});
 	describe("overlaps", () => {
 		it("true case", () => {
 			const r1 = new Rect({ t: 0, r: 10, b: 10, l: 0 });

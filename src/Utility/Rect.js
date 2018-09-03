@@ -36,6 +36,15 @@ export default class Rect {
 			b: t + size.h,
 		});
 	}
+	
+	static fromSprite(sprite: {position: {x: number, y: number}}){
+		return new Rect({
+			t: sprite.position.y,
+			l: sprite.position.x,
+			b: sprite.position.y + sprite.height,
+			r: sprite.position.x + sprite.width,
+		});
+	}
 
 	static fromPoints(
 		pt1: { x: number, y: number },
