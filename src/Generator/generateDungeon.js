@@ -9,12 +9,13 @@ import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
 
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
-// import compress from "./compress";
+import compress from "./compress";
 import compressPhysics from "./compressPhysics";
 import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
 import removeSillyPlatforms from "./removeSillyPlatforms";
 import Point from "Utility/Point";
+import config from "config";
 
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
@@ -23,7 +24,7 @@ const generateDungeon = function*(engine, manager){
 	container.position.y = window.innerHeight / 2;
 
 	yield* generateBuildings(manager);
-
+	const grid = new Grid();
 	let dungOffset = 20;
 	for(let d = 0; d < 2; d++){
 
@@ -32,7 +33,11 @@ const generateDungeon = function*(engine, manager){
 		const children = container.children.slice(0).reverse();
 
 		yield* physicsResolve(children);
-		for(let i = 0; i < 10; i++){
+		yield* compress(children);
+		yield* compress(children);
+		yield* compress(children);
+		yield* compress(children);
+		for(let i = 0; i < 30; i++){
 			yield* compressPhysics(children);
 			yield* physicsResolve(children);
 		}
@@ -50,8 +55,24 @@ const generateDungeon = function*(engine, manager){
 		right *= 1 / TILE_SIZE;
 		bottom *= 1 / TILE_SIZE;
 
+		// const center = { x: (right - left) / 2, y: (bottom - top) / 2 };
+
+		children.sort((a, b) => {
+			return a.position.y - b.position.y;
+		});
+
+		//DONT FORGET ADD ENEMIES
+		children.forEach((c) => {
+			const center = new Point(c.position)
+				.multiply(config.grid.width / TILE_SIZE)
+				.add({ x: config.grid.width, y: config.grid.width });
+			grid.addEnemyData({ position: center, type: { id: "2" } });
+
+		});
+
 		//persist to map
 		for(let i = 0; i < children.length; i++){
+			// grid.addEnemyData({ position: new Point({ x: 100, y: 100 }), type: { id: "1" } });
 			const c = children[i];
 			c.tint = 0xffff00;
 			const roomBottom = c.position.y / TILE_SIZE + c.height / TILE_SIZE;
@@ -80,7 +101,7 @@ const generateDungeon = function*(engine, manager){
 
 
 	//save it into a grid;
-	const grid = new Grid();
+	
 	grid.blocks = manager.grid;
 
 	//add an enemy
