@@ -20,6 +20,7 @@ export default class EnergyBar extends GameObject {
 		this.container = new EnergyBarContainer();
 		this.graph = new PIXI.Graphics();
 		this.container.addChild(this.graph);
+		
 
 		this.text = new PIXI.Text("player.state", {
 			fontFamily: "Roboto",
@@ -32,7 +33,10 @@ export default class EnergyBar extends GameObject {
 	}
 
 	update() {
-		this.text.text = this.player.state;
+		this.text.text = this.player.state
+		+ "\n" + this.engine.objectsTagged("enemy").length
+		+ "\n x " + this.player.position.x
+		+ "\n y " + this.player.position.y;
 		this.graph.clear();
 		this.graph
 			.beginFill(0xdddddd)

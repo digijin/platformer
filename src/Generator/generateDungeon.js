@@ -17,6 +17,8 @@ import removeSillyPlatforms from "./removeSillyPlatforms";
 import Point from "Utility/Point";
 import config from "config";
 
+const NUM_DUNGEONS = 1;
+
 const generateDungeon = function*(engine, manager){
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
@@ -26,7 +28,7 @@ const generateDungeon = function*(engine, manager){
 	yield* generateBuildings(manager);
 	const grid = new Grid();
 	let dungOffset = 20;
-	for(let d = 0; d < 2; d++){
+	for(let d = 0; d < NUM_DUNGEONS; d++){
 
 		yield* spawnRooms(container, NUM_CHILDREN);
 
@@ -62,13 +64,26 @@ const generateDungeon = function*(engine, manager){
 		});
 
 		//DONT FORGET ADD ENEMIES
-		children.forEach((c) => {
-			const center = new Point(c.position)
-				.multiply(config.grid.width / TILE_SIZE)
-				.add({ x: config.grid.width, y: config.grid.width });
-			grid.addEnemyData({ position: center, type: { id: "2" } });
+		// children.forEach((c) => {
+		// 	const rect = getTRBL([c]);
+		// 	const center = new Point({
+		// 		x: (rect.right - rect.left) / 2,
+		// 		y: (rect.bottom - rect.top) / 2,
+		// 	}).divide(TILE_SIZE)
+		// 		.subtract({ x: left, y: top })
+		// 		.add({ x: dungOffset, y: GROUND })
+		// 		// .add({ x: 1, y: 1 })
+		// 		.multiply(config.grid.width);
+		// 	console.log(center);
+			
+		// 	// const center = new Point(c.position)
+		// 	// 	.divide(TILE_SIZE)
+		// 	// 		.multiply(config.grid.width)
+		// 	// 		.add({ x: config.grid.width, y: config.grid.width })//move away from wall
+		// 	// 		;
+		// 	grid.addEnemyData({ position: center, type: { id: "3" } });
 
-		});
+		// });
 
 		//persist to map
 		for(let i = 0; i < children.length; i++){
@@ -77,11 +92,23 @@ const generateDungeon = function*(engine, manager){
 			c.tint = 0xffff00;
 			const roomBottom = c.position.y / TILE_SIZE + c.height / TILE_SIZE;
 			const roomTop = c.position.y / TILE_SIZE;
-			for(let x = c.position.x / TILE_SIZE; x < c.position.x / TILE_SIZE + c.width / TILE_SIZE; x++){
+			const roomLeft = c.position.x / TILE_SIZE;
+			const roomRight = roomLeft + c.width / TILE_SIZE;
+			// const center = new Point({
+			// 	x: (roomLeft - roomRight) / 2,
+			// 	y: (roomBottom - roomTop) / 2,
+			// })
+			// 	.subtract({ x: left, y: top })
+			// 	.add({ x: dungOffset, y: GROUND })
+			// 	.multiply(config.grid.width);
+			// console.log(center);
+			// grid.addEnemyData({ position: center, type: { id: "3" } });
+			let block;
+			for(let x = roomLeft; x < roomRight; x++){
 
 				for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
 				// console.log(x, left, x - left);
-					const block = manager.grid.get(x - left + dungOffset, y - top + GROUND);
+					block = manager.grid.get(x - left + dungOffset, y - top + GROUND);
 					if(y == roomTop){
 						block.type = "platform";
 					}else{
@@ -90,6 +117,12 @@ const generateDungeon = function*(engine, manager){
 				}
 			// yield x;
 			}
+			grid.addEnemyData({ position: new Point(block.position).multiply(config.grid.width), type: { id: "3" } });
+			// console.log((roomLeft - roomRight) / 2, "subtractleft", left, "addoffset", dungOffset, "multiply", config.grid.width, "equal", block.position);
+			// console.log(block, {
+			// 	x: (roomLeft - roomRight) / 2,
+			// 	y: (roomBottom - roomTop) / 2,
+			// }, center, left, top);
 			// c.tint = 0xffffff;
 			manager.draw();
 			yield i;

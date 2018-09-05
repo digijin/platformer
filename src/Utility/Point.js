@@ -78,6 +78,13 @@ export default class Point {
 		});
 	}
 
+	divide(num: number) {
+		return new Point({
+			x: this.x / num,
+			y: this.y / num,
+		});
+	}
+
 	distanceTo(point: Point): number {
 		const diff = this.subtract(point);
 		return Math.sqrt(Math.pow(diff.x, 2) + Math.pow(diff.y, 2));
