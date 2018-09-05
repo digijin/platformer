@@ -20,7 +20,7 @@ import type EnemyType from "Level/Actor/Enemy/Type";
 
 import * as PIXI from "pixi.js";
 
-const AGRO_DISTANCE = 500;
+const AGRO_DISTANCE = 100;
 const DEAGRO_DISTANCE = 1000;
 
 class EnemySprite extends PIXI.Sprite {}

@@ -117,7 +117,9 @@ const generateDungeon = function*(engine, manager){
 				}
 			// yield x;
 			}
-			grid.addEnemyData({ position: new Point(block.position).multiply(config.grid.width), type: { id: "3" } });
+			
+			const enId = Math.ceil(Math.random() * 3).toString();
+			grid.addEnemyData({ position: new Point(block.position).multiply(config.grid.width), type: { id: enId } });
 			// console.log((roomLeft - roomRight) / 2, "subtractleft", left, "addoffset", dungOffset, "multiply", config.grid.width, "equal", block.position);
 			// console.log(block, {
 			// 	x: (roomLeft - roomRight) / 2,

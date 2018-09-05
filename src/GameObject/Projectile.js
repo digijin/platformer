@@ -61,7 +61,7 @@ export default class Projectile extends GameObject {
     		if (!block) {
     			return false;
     		}
-    		if (block.isEmpty()) {
+    		if (block.isVacant()) {
     			return true;
     		} else {
     			const hitTest = this.trajectory.intersectsRect(block.rect);

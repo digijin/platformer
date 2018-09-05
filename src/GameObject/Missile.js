@@ -165,7 +165,7 @@ export default class Missile extends Projectile {
 
 	checkGrid() {
 		const block = this.engine.grid.getBlockAtPoint(this.position);
-		if (block && !block.isEmpty()) {
+		if (block && !block.isVacant()) {
 			this.explode();
 			const r = 15;
 			const rect = new Rect({
