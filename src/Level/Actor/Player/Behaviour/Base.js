@@ -15,6 +15,10 @@ export default class BasePlayerBehaviour{
 
     }
 
+    begin(){
+
+    }
+
     run(){
     	// console.log(this.states, this.player.state);
     	if(this.states.indexOf(this.player.state) > -1){
