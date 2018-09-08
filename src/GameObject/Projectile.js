@@ -68,6 +68,7 @@ export default class Projectile extends GameObject {
     			if (hitTest.result && hitTest.collision) {
     				this.position.x = hitTest.collision.x;
     				this.position.y = hitTest.collision.y;
+    				console.log("damage block");
     				block.damage(1);
     				return false;
     			}

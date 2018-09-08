@@ -18,6 +18,7 @@ export default class Block {
 	sprite: PIXI.Sprite;
 	type: string;
 	backgroundType: string | void;
+	_type: string;
 	constructor(params: {
 		position: Point,
 		type: string,
@@ -46,13 +47,23 @@ export default class Block {
 		}
 		this.backgroundType = params.backgroundType;
 
-		if (this.type !== "0") {
-			const type = this.getType();
+		
+	}
+
+	get type(){
+		return this._type;
+	}
+
+	set type(value){
+		if (value !== "0") {
+			const type = BlockTypeMap[value];
 			if(!type){
-				throw new Error("Block.constructor cannot find type " + this.type);
+				throw new Error("Block.type setter cannot find type " + this.type);
 			}
+			// console.log("setting hp", type.hp);
 			this.hp = type.hp;
 		}
+		this._type = value;
 	}
 
 	toString() {
@@ -91,6 +102,7 @@ export default class Block {
 
 	damage(amount: number) {
 		const type = this.getType();
+		console.log(amount, this.hp, type);
 		if (type && type.destructable) {
 			this.hp -= amount;
 			if (this.hp <= 0) {

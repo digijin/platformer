@@ -32,17 +32,17 @@ import * as PIXI from "pixi.js";
 import Behaviour from "./Player/Behaviour";
 
 // let firing = false;
-const missile = {
-	firing: false,
-	maxEnergy: 800,
-	reloadTime: 0.05,
-	reload: 0,
-	regenSpeed: 10,
-	regenBaseSpeed: 150,
-	regenSpeedIncrease: 150, //per second
-	energy: 700,
-	cost: 10,
-};
+// const missile = {
+// 	firing: false,
+// 	maxEnergy: 800,
+// 	reloadTime: 0.05,
+// 	reload: 0,
+// 	regenSpeed: 10,
+// 	regenBaseSpeed: 150,
+// 	regenSpeedIncrease: 150, //per second
+// 	energy: 700,
+// 	cost: 10,
+// };
 
 export const HAND_STATE = {
 	ARMED: 0,
