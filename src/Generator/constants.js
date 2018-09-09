@@ -12,4 +12,4 @@ export const MAX_BUILDING_WIDTH = 32;
 export const MAX_FLOORS = 8;
 export const FLOOR_HEIGHT = 5;
 export const TILE_SIZE = 4;
-export const NUM_CHILDREN = 50;
+export const NUM_CHILDREN = 30;
