@@ -12,6 +12,8 @@
 // import moon from "Level/Grid/moon.jpg";
 // import volcanic from "Level/Grid/volcanic.jpg";
 
+import TileFilter from "Filter/Tile/Filter";
+
 import * as PIXI from "pixi.js";
 PIXI.utils.skipHello();
 
@@ -25,7 +27,8 @@ export type BlockTypeParams = {
 	image: any,
 	destructable: boolean,
 	hp: number,
-	textureId: string
+	textureId: string,
+	filter?: Array<PIXI.Filter>,
 };
 
 export default class BlockType {
@@ -47,7 +50,10 @@ export default class BlockType {
 		this.textureId = params.textureId;
 		this.platform = params.platform || false;
 		this.ladder = params.ladder || false;
-
+		this.filters = [];
+		if(params.filters){
+			this.filters = params.filters.map(f => new f());
+		}
 		if (this.image) {
 			this.image.onload = () => {
 				const canvas = document.createElement("canvas");
@@ -101,7 +107,8 @@ const blockTypeConfig: Array<BlockTypeParams> = [
 		image: require("./images/flatgrey.png"),
 		textureId: "flatgrey.png",
 		destructable: true,
-		hp: 10,
+		filters: [TileFilter],
+		hp: 200,
 	},
 	{
 		name: "brick",

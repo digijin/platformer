@@ -229,6 +229,7 @@ export default class Grid extends GameObject {
     				sprite.tint = block.tint;
     				sprite.visible = true;
     				sprite.texture = type.texture;
+    				// sprite.filters = type.filters;
     			}
     		}
     	});
