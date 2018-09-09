@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 
-import Filter from "Filter/Explosion/Filter";
+import Filter from "Filter/Tile/Filter";
 import FilterUpdater from "Filter/Updater";
 // import AntiAlias from "Filter/Antialias/Filter";
 
@@ -27,12 +27,15 @@ export default class Shader extends Base {
 		bg.position.y = 10;
 		this.engine.stage.addChild(bg);
 
+		
+		const smallerFilter = new Filter();
 		const smaller = new PIXI.Sprite(PIXI.Texture.WHITE);
 		smaller.width = 100;
 		smaller.height = 100;
 		smaller.position.x = 20;
 		smaller.position.y = 20;
-		smaller.filters = [filter];
+		smaller.filters = [smallerFilter];
+		this.engine.register(new FilterUpdater(smallerFilter));
 
 		this.engine.stage.addChild(smaller);
 	}
