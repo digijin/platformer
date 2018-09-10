@@ -22,6 +22,16 @@ Missions.push(
 	}),
 
 	new Mission({
+		level: require("levels/deadcells.txt"),
+		title: "Generator",
+		generator: true,
+		reward: 0,
+		rank: 1,
+		description: "generated level",
+		objectives: [{ text: "TEST OBJECTIVE" }],
+	}),
+
+	new Mission({
 		level: require("levels/level.txt"),
 		title: "First Mission",
 		reward: 0,

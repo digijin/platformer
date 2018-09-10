@@ -5,6 +5,7 @@ import { UICOLOUR } from "../constants";
 import MissionLaunchButton from "./LaunchButton";
 import engineConnect from "React/engineConnect";
 import Level from "Scene/Level";
+import Generator from "Scene/Generator";
 
 class MissionDetail extends Component {
 	render() {
@@ -60,7 +61,11 @@ class MissionDetail extends Component {
 					y={693}
 					onClick={() => {
 						this.props.engine.mission = this.props.mission;
-						this.props.engine.startScene(new Level());
+						if(this.props.mission.generator){
+							this.props.engine.startScene(new Generator());
+						}else{
+							this.props.engine.startScene(new Level());
+						}
 					}}
 				/>
 			</Container>
