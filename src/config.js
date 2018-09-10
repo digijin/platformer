@@ -61,6 +61,7 @@ export default {
 			s: 83,
 			r: 82,
 			f: 70,
+			e: 69,
 			left: 37,
 			up: 38,
 			right: 39,
@@ -170,6 +171,14 @@ export default {
 					type: "mouse",
 					button: 0,
 				},
+			],
+			grapple: [
+				
+				{
+					type: "keyboard",
+					key: "e",
+				},
+				
 			],
 			editor_add: [
 				{

@@ -11,7 +11,7 @@ export default class UpdateGrapple extends Base{
     	if (this.player.hand.state == HAND_STATE.ARMED) {
     		this.player.hand.position = this.player.position.add(this.player.hand.offset);
     	}
-    	if (this.engine.input.getKeyDown(69)) {
+    	if (this.engine.input.getButtonDown("grapple")) {
     		//FIRE HAND
     		if (this.player.hand.state == HAND_STATE.ARMED) {
     			this.player.hand.state = HAND_STATE.FIRED;
