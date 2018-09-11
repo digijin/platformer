@@ -79,7 +79,7 @@ export default class MainMenu extends GameObject {
 			<EngineProvider engine={this.engine}>
 				<Container>
 					<Text
-						text="ghost claw"
+						text="i dont even"
 						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
@@ -92,7 +92,7 @@ export default class MainMenu extends GameObject {
 						y={window.innerHeight / 2}
 					/>
 					<Text
-						text={"codename"}
+						text={"what is this"}
 						filters={[new BevelFilter()]}
 						style={{
 							fontFamily: "Lazer84",
