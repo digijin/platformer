@@ -21,7 +21,7 @@ export default function* (children){
 			});
             
 		};
-		if(Math.abs(c.position.x) < Math.abs(c.position.y)){
+		if(Math.abs(c.position.x - midx) > Math.abs(c.position.y - midy)){
 		//move x
 			if(c.position.x > midx){
 				if(!rectOverlapping(rect.move({ x: -TILE_SIZE, y: 0 }))){

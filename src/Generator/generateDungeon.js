@@ -37,11 +37,11 @@ const generateDungeon = function*(engine, manager){
 		yield* physicsResolve(children);
 		yield* compress(children);
 		yield* compress(children);
-		yield* compress(children);
-		yield* compress(children);
+		// yield* compress(children);
+		// yield* compress(children);
+		yield* physicsResolve(children);
 		for(let i = 0; i < 30; i++){
 			yield* compressPhysics(children);
-			yield* physicsResolve(children);
 		}
 	
 		for(let i = 0; i < children.length; i++){
