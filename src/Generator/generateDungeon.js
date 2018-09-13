@@ -63,27 +63,6 @@ const generateDungeon = function*(engine, manager){
 			return a.position.y - b.position.y;
 		});
 
-		//DONT FORGET ADD ENEMIES
-		// children.forEach((c) => {
-		// 	const rect = getTRBL([c]);
-		// 	const center = new Point({
-		// 		x: (rect.right - rect.left) / 2,
-		// 		y: (rect.bottom - rect.top) / 2,
-		// 	}).divide(TILE_SIZE)
-		// 		.subtract({ x: left, y: top })
-		// 		.add({ x: dungOffset, y: GROUND })
-		// 		// .add({ x: 1, y: 1 })
-		// 		.multiply(config.grid.width);
-		// 	console.log(center);
-			
-		// 	// const center = new Point(c.position)
-		// 	// 	.divide(TILE_SIZE)
-		// 	// 		.multiply(config.grid.width)
-		// 	// 		.add({ x: config.grid.width, y: config.grid.width })//move away from wall
-		// 	// 		;
-		// 	grid.addEnemyData({ position: center, type: { id: "3" } });
-
-		// });
 
 		//persist to map
 		for(let i = 0; i < children.length; i++){
