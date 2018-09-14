@@ -415,6 +415,9 @@ export default class Grid extends GameObject {
 
 	
     addEnemyData(data){
+    	if(data.block && !data.position){
+    		data.position = new Point(data.block.position).multiply(config.grid.width);
+    	}
     	this.enemyData.push(data);
     }
 
