@@ -25,8 +25,8 @@ const generateDungeon = function*(engine, manager){
 	container.position.x = window.innerWidth / 2;
 	container.position.y = window.innerHeight / 2;
 
-	yield* generateBuildings(manager);
 	const grid = new Grid();
+	yield* generateBuildings(manager, grid);
 	let dungOffset = 20;
 	for(let d = 0; d < NUM_DUNGEONS; d++){
 
