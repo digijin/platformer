@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Rectangle from "./Rectangle";
 import Header from "./SideMenu/Header";
 import Missions from "./Missions";
+import Options from "./Options";
 import OutfittingMenu from "./Outfitting";
 import { UICOLOUR } from "./constants";
 import Button from "./SideMenu/Button";
@@ -52,6 +53,8 @@ class SideMenu extends Component {
 		switch (section) {
 		case "MISSIONS":
 			return <Missions />;
+		case "OPTIONS":
+			return <Options />;
 		case "OUTFITTING":
 			return <OutfittingMenu />;
 		}
