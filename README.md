@@ -1,6 +1,6 @@
 # Platformer game (title pending)
 
-[![Build Status](https://travis-ci.org/digijin/platformer.svg?branch=master)](https://travis-ci.org/digijin/platformer) [![Coverage Status](https://coveralls.io/repos/github/digijin/platformer/badge.svg?branch=master)](https://coveralls.io/github/digijin/platformer?branch=master) [![Code Climate](https://codeclimate.com/github/digijin/platformer.svg)](https://codeclimate.com/github/digijin/platformer) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digijin/platformer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digijin/platformer/?branch=master) [![CircleCI](https://circleci.com/gh/digijin/platformer.svg?style=svg)](https://circleci.com/gh/digijin/platformer)
+[![Build Status](https://travis-ci.org/digijin/platformer.svg?branch=master)](https://travis-ci.org/digijin/platformer) [![Coverage Status](https://coveralls.io/repos/github/digijin/platformer/badge.svg?branch=master)](https://coveralls.io/github/digijin/platformer?branch=master) [![Code Climate](https://codeclimate.com/github/digijin/platformer.svg)](https://codeclimate.com/github/digijin/platformer) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digijin/platformer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digijin/platformer/?branch=master) 
 
 ## latest release
 
