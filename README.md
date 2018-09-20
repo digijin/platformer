@@ -28,10 +28,16 @@ Karma single run:
 npm run karma:ci
 ```
 
+Karma watch:
+
+```
+npm run karma:watch
+```
+
 jest watcher:
 
 ```
-npm run dev:unit
+npm run test:watch
 ```
 
 jest single run:
