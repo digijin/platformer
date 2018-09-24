@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
 // import Rectangle from "./Rectangle";
-// import { UICOLOUR } from "./constants";
+import { UICOLOUR } from "./constants";
+
+import Slider from "./Options/Slider";
 
 export default class OptionsMenu extends Component {
 	state = {
@@ -22,6 +24,22 @@ export default class OptionsMenu extends Component {
 					}}
 					x={288}
 					y={30}
+				/>
+				<Text
+					text={"SOUND"}
+					style={{
+						fontFamily: "RobotoBold",
+						fontSize: 24,
+						fill: UICOLOUR,
+						align: "center",
+					}}
+					x={288}
+					y={100}
+				/>
+				<Slider
+					label={"SOUND"}
+					x={300}
+					y={100}
 				/>
 				
 			</Container>
