@@ -25,17 +25,6 @@ export default class OptionsMenu extends Component {
 					x={288}
 					y={30}
 				/>
-				<Text
-					text={"SOUND"}
-					style={{
-						fontFamily: "RobotoBold",
-						fontSize: 24,
-						fill: UICOLOUR,
-						align: "center",
-					}}
-					x={288}
-					y={100}
-				/>
 				<Slider
 					label={"SOUND"}
 					x={300}

@@ -25,10 +25,26 @@ export default class Slider extends React.Component{
 			/>
 
 			<Rectangle
-				x={20}
+				x={100}
 				y={20}
 				width={100}
 				height={4}
+			/>
+			<Rectangle
+				x={100}
+				y={0}
+				fill={UICOLOUR}
+				width={10}
+				height={40}
+				buttonMode={true}
+				interactive={true}
+				onMouseDown={function(e) {
+					console.log("md", e, this.getGlobalPosition());
+					// this.setState(state => ({
+					// 	...state,
+					// 	down: true,
+					// }));
+				}}
 			/>
     
 		</Container>;

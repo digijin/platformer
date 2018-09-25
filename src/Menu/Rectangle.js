@@ -8,11 +8,24 @@ export const behavior = {
 	customDidAttach: instance => {
 		// instance.buttonMode = true;
 		// instance.interactive = true;
-		instance.on("mouseover", instance.onMouseOver);
-		instance.on("mouseout", instance.onMouseOut);
-		instance.on("mouseup", instance.onMouseUp);
-		instance.on("mousedown", instance.onMouseDown);
-		instance.on("click", instance.onClick);
+		if(instance.onMouseOver){
+			instance.on("mouseover", instance.onMouseOver.bind(instance));
+		}
+		if(instance.onMouseOut){
+			instance.on("mouseout", instance.onMouseOut.bind(instance));
+		}
+		if(instance.onMouseUp){
+			instance.on("mouseup", instance.onMouseUp.bind(instance));
+		}
+		if(instance.onMouseDown){
+			instance.on("mousedown", instance.onMouseDown.bind(instance));
+		}
+		if(instance.onClick){
+			instance.on("click", instance.onClick.bind(instance));
+		}
+		instance.getGlobalPosition = function(){
+			return this.x;
+		}.bind(instance);
 	},
 	customApplyProps: function(instance, oldProps, newProps) {
 		instance.onMouseOver = newProps.onMouseOver;
