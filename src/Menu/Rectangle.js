@@ -20,18 +20,31 @@ export const behavior = {
 		if(instance.onMouseDown){
 			instance.on("mousedown", instance.onMouseDown.bind(instance));
 		}
+		if(instance.onMouseMove){
+			instance.on("mousemove", instance.onMouseMove.bind(instance));
+		}
 		if(instance.onClick){
 			instance.on("click", instance.onClick.bind(instance));
 		}
-		instance.getGlobalPosition = function(){
-			return this.x;
-		}.bind(instance);
+		// instance.getGlobalPosition = function(){
+		// 	let { x, y } = this.position;
+		// 	let parent = this.parent;
+		// 	while(parent){
+		// 		console.log(parent, parent.x, parent.y);
+		// 		x += parent.x;
+		// 		y += parent.y;
+		// 		parent = parent.parent;
+		// 	}
+		// 	return { x, y };
+		// 	// return this.x;
+		// }.bind(instance);
 	},
 	customApplyProps: function(instance, oldProps, newProps) {
 		instance.onMouseOver = newProps.onMouseOver;
 		instance.onMouseOut = newProps.onMouseOut;
 		instance.onMouseDown = newProps.onMouseDown;
 		instance.onMouseUp = newProps.onMouseUp;
+		instance.onMouseMove = newProps.onMouseMove;
 		instance.onClick = newProps.onClick;
 		let {
 			fill,
