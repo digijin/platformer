@@ -14,6 +14,9 @@ import Shader from "Scene/Shader";
 import Generator from "Scene/Generator";
 import Playground from "Scene/Playground";
 
+//polyfills
+import Utility from "Utility";
+
 //textures
 import { BlockTypes } from "Level/Grid/Block/Type";
 import { DecorTypes } from "Level/Grid/Decor/Type";
