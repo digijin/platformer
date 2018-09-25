@@ -18,7 +18,7 @@ export class Slider extends React.Component{
     	const self = this;
         
     	const SLIDER_X_OFFSET = 100;
-    	const SLIDER_WIDTH = 100;
+    	const SLIDER_WIDTH = 200;
     	return <Container
     		x={x}
     		y={y}>
@@ -42,10 +42,10 @@ export class Slider extends React.Component{
     		/>
     		<Rectangle
     			x={SLIDER_X_OFFSET + (this.state.pc * SLIDER_WIDTH) - 5}
-    			y={0}
-    			fill={UICOLOUR}
     			width={10}
+    			y={0}
     			height={40}
+    			fill={UICOLOUR}
     			buttonMode={true}
     			interactive={true}
     			onMouseDown={(e) => {
