@@ -30,6 +30,11 @@ export default class OptionsMenu extends Component {
 					x={300}
 					y={100}
 				/>
+				<Slider
+					label={"MUSIC"}
+					x={300}
+					y={150}
+				/>
 				
 			</Container>
 		);
