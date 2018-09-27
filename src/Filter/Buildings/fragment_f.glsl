@@ -43,11 +43,12 @@ const float PHI = 137.5 * PI / 180.;
 const float GRIDSIZE = 8.;
 
 float sceneSDF(vec3 samplePoint) {
+	vec2 block = floor(samplePoint.xz / GRIDSIZE);
 	samplePoint.x = mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.);
 	samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
-	vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
+	// vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
 	float n = abs(snoise2(block));
-	float building = boxSDF(samplePoint, vec3(1.,1.,1.));
+	float building = boxSDF(samplePoint, vec3(3.,1.+(n*6.),3.));
 	// building +=
 
 	return building;
@@ -90,14 +91,16 @@ void main( )
 	vec3 normal = estimateNormal(p);
 
 	vec3 lightpos = vec3(0., 10., 0.);
+	
+    gl_FragColor = vec4(normal, 1.0);
 
-	float power = light(
-		normalize(lightpos-p),
-		normalize(worldDir),
-		normal,
-		0.5
-		);
-	gl_FragColor = vec4(vec3(power), 1.);
+	// float power = light(
+	// 	normalize(lightpos-p),
+	// 	normalize(worldDir),
+	// 	normal,
+	// 	0.5
+	// 	);
+	// gl_FragColor = vec4(vec3(power), 1.);
 
     // gl_FragColor = vec4(data.rgb, 1.0);
 
