@@ -40,12 +40,14 @@ const float EPSILON = 0.0001;
 //golden ratio angle
 const float PHI = 137.5 * PI / 180.;
 
+const float GRIDSIZE = 8.;
 
 float sceneSDF(vec3 samplePoint) {
-	samplePoint.x = mod(samplePoint.x, 8.)-4.;
-	samplePoint.z = mod(samplePoint.z, 8.)-4.;
-
-	float building = boxSDF(samplePoint, vec3(1.));
+	samplePoint.x = mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.);
+	samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
+	vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
+	float n = abs(snoise2(block));
+	float building = boxSDF(samplePoint, vec3(1.,1.,1.));
 	// building +=
 
 	return building;
@@ -53,17 +55,19 @@ float sceneSDF(vec3 samplePoint) {
 }
 float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
     float depth = start;
+	float dist = 0.;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-		float dist = sceneSDF(eye + depth * marchingDirection);
-        if (dist < EPSILON) {
-			return depth;
-        }
-        depth += min(dist, 4.);
+		dist = sceneSDF(eye + depth * marchingDirection);
+        depth += min(dist*.9, 4.);
         if (depth >= end) {
 			return end;
         }
     }
-    return end;
+	if (dist < EPSILON) {
+		return depth;
+	}else{
+    	return end;
+	}
 }
 #pragma glslify: estimateNormal = require(../utility/estimateNormal_f.glsl,sceneSDF=sceneSDF)
 

@@ -3,7 +3,7 @@ import Base from "./Base";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 
-import Filter from "Filter/Tile/Filter";
+import Filter from "Filter/Buildings/Filter";
 import FilterUpdater from "Filter/Updater";
 // import AntiAlias from "Filter/Antialias/Filter";
 
