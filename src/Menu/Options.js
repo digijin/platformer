@@ -4,8 +4,9 @@ import { Text, Container } from "react-pixi-fiber";
 import { UICOLOUR } from "./constants";
 
 import Slider from "./Options/Slider";
+import engineConnect from "React/engineConnect";
 
-export default class OptionsMenu extends Component {
+class OptionsMenu extends Component {
 	state = {
 		selected: -1,
 	};
@@ -40,3 +41,6 @@ export default class OptionsMenu extends Component {
 		);
 	}
 }
+
+
+export default engineConnect(OptionsMenu);
