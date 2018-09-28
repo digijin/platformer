@@ -47,11 +47,18 @@ float sceneSDF(vec3 samplePoint) {
 	samplePoint.x = mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.);
 	samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
 	// vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
-	float n = abs(snoise2(block));
-	float building = boxSDF(samplePoint, vec3(3.,1.+(n*6.),3.));
+	float buildings = MAX_DIST;
+	for(int x = -1; x<1; x++){
+		for(int y = -1; y<1; y++){
+			vec3 offset = vec3(float(x), 0., float(y));
+			float n = abs(snoise2(block + offset.xz));
+			float building = boxSDF(samplePoint+(offset*GRIDSIZE), vec3(3.,1.+(n*6.),3.));
+			buildings = min(buildings,building);
+		}
+	}
 	// building +=
 
-	return building;
+	return buildings;
 	// return length(samplePoint)-1.;
 }
 float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
@@ -59,7 +66,10 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
 	float dist = 0.;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
 		dist = sceneSDF(eye + depth * marchingDirection);
-        depth += min(dist*.9, 4.);
+		if (dist < EPSILON) {
+		return depth;
+		}
+        depth += dist * .3;
         if (depth >= end) {
 			return end;
         }
