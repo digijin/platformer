@@ -48,17 +48,19 @@ float sceneSDF(vec3 samplePoint) {
 	samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
 	// vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
 	float buildings = MAX_DIST;
-	for(int x = -1; x<1; x++){
-		for(int y = -1; y<1; y++){
-			vec3 offset = vec3(float(x), 0., float(y));
-			float n = abs(snoise2(block + offset.xz));
-			float building = boxSDF(samplePoint+(offset*GRIDSIZE), vec3(3.,1.+(n*6.),3.));
-			buildings = min(buildings,building);
-		}
-	}
+	// for(int x = -1; x<1; x++){
+	// 	for(int y = -1; y<1; y++){
+			// vec3 offset = vec3(float(x), 0., float(y));
+			// vec3 offset = vec3(0.);
+			float n = abs(snoise2(block));
+			samplePoint.y = samplePoint.y - n*6.;
+			float building = boxSDF(samplePoint, vec3(3.,1.+(n*6.),3.));
+			// buildings = min(buildings,building);
+	// 	}
+	// }
 	// building +=
 
-	return buildings;
+	return building;
 	// return length(samplePoint)-1.;
 }
 float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
@@ -85,7 +87,7 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
 void main( )
 {
 
-	vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
+	vec3 viewDir = rayDirection(90.0, iResolution.xy, gl_FragCoord.xy);
 	vec3 eye = iPosition*10.;
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
@@ -102,7 +104,13 @@ void main( )
 
 	vec3 lightpos = vec3(0., 10., 0.);
 	
-    gl_FragColor = vec4(normal, 1.0);
+	vec3 tint = vec3(255., 147., 98.) /255.;
+    // gl_FragColor = vec4(normal, 1.0);
+	float degree = (normal.x/2.) + (normal.y/4.) + (normal.z/8.);
+	gl_FragColor = vec4(degree*tint, 1.0);
+	
+	
+
 
 	// float power = light(
 	// 	normalize(lightpos-p),
