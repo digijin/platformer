@@ -32,7 +32,7 @@ uniform vec4 filterArea;
 
 #define PI 3.1415926535897932384626433832795
 
-const int MAX_MARCHING_STEPS = 1023;
+const int MAX_MARCHING_STEPS = 512;
 const float MIN_DIST = 0.0;
 const float MAX_DIST = 1000.0;
 const float DELTA_DIST = 0.01;
@@ -52,9 +52,9 @@ float sceneSDF(vec3 samplePoint) {
 	// 	for(int y = -1; y<1; y++){
 			// vec3 offset = vec3(float(x), 0., float(y));
 			// vec3 offset = vec3(0.);
-			float n = abs(snoise2(block));
-			samplePoint.y = samplePoint.y - n*6.;
-			float building = boxSDF(samplePoint, vec3(3.,1.+(n*6.),3.));
+			float n = abs(snoise2(block)) * 10.;
+			samplePoint.y = samplePoint.y - n;
+			float building = boxSDF(samplePoint, vec3(3.,1.+(n),3.));
 			// buildings = min(buildings,building);
 	// 	}
 	// }
@@ -71,7 +71,7 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
 		if (dist < EPSILON) {
 		return depth;
 		}
-        depth += dist * .3;
+        depth += min(dist * .3, 1.);
         if (depth >= end) {
 			return end;
         }
@@ -87,14 +87,15 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
 void main( )
 {
 
-	vec3 viewDir = rayDirection(90.0, iResolution.xy, gl_FragCoord.xy);
+	vec3 viewDir = rayDirection(110.0, iResolution.xy, gl_FragCoord.xy);
 	vec3 eye = iPosition*10.;
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
 	float dist = raymarch(eye, worldDir, MIN_DIST, MAX_DIST);
     if (dist > MAX_DIST - EPSILON) {
         // Didn't hit anything
-        gl_FragColor = vec4(worldDir, 0.0);
+        // gl_FragColor = vec4(worldDir, 0.0);
+		gl_FragColor = vec4(vec3(0.),1.);
 		return;
     }
 

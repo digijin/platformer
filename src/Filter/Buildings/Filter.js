@@ -10,6 +10,7 @@ import fragment from "./fragment_f.glsl";
 
 // import texture from "./texture.png";
 import texture from "assets/mech.png";
+import Vector from "Utility/Vector";
 
 const uniforms = {};
 
@@ -53,6 +54,7 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 		super("", fragment, uniforms);
 	}
 
+
 	get time() {
 		return this.uniforms.iTime;
 	}
@@ -64,9 +66,18 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 	set mouse(point: { x: number, y: number }) {
 		this.uniforms.iMouse = [point.x, point.y];
 	}
+	
+	get position(){
+		return new Vector(-4, 10, 0);
+	}
 
 	set position(point: { x: number, y: number, z: number }) {
 		this.uniforms.iPosition = [point.x, point.y, point.z];
+	}
+
+
+	get rotation(){
+		return new Vector(-4, 10, 0);
 	}
 
 	set rotation(point: { x: number, y: number, z: number }) {
