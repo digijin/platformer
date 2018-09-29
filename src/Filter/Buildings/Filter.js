@@ -16,7 +16,7 @@ const uniforms = {};
 
 uniforms.iTime = {
 	type: "f",
-	value: -1,
+	value: 0,
 };
 uniforms.iMouse = {
 	type: "v2",
