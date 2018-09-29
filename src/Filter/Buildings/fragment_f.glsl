@@ -88,7 +88,7 @@ void main( )
 {
 
 	vec3 viewDir = rayDirection(110.0, iResolution.xy, gl_FragCoord.xy);
-	vec3 eye = iPosition*10.;
+	vec3 eye = iPosition*10. + (vec3(2.,0.,-1.)*iTime*2.);
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
 	float dist = raymarch(eye, worldDir, MIN_DIST, MAX_DIST);

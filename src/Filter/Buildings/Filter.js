@@ -68,7 +68,7 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 	}
 	
 	get position(){
-		return new Vector(-4, 10, 0);
+		return new Vector(-4, 2, 0);
 	}
 
 	set position(point: { x: number, y: number, z: number }) {
@@ -77,7 +77,7 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 
 
 	get rotation(){
-		return new Vector(-4, 10, 0);
+		return new Vector(1, -1, -1).unit();
 	}
 
 	set rotation(point: { x: number, y: number, z: number }) {

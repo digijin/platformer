@@ -14,11 +14,12 @@ export default class FilterUpdater extends GameObject {
 		}else{
 			this.position = new Vector(-4, 0, 0);
 		}
-		// if(filter.rotation){
-		// 	this.rotation = filter.rotation;
-		// }else{
-		this.rotation = new Vector(1, 0, 0);
-		// }
+		if(filter.rotation){
+			this.rotation = filter.rotation;
+		}else{
+			this.rotation = new Vector(1, 0, 0);
+		}
+		// console.log(filter.rotation, this.rotation);
 	}
 
 	update() {
