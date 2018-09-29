@@ -16,8 +16,8 @@ import MainMenu from "../Scene/MainMenu";
 // }
 // import GameObject from "GameObject";
 
-// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
-import MenuBackgroundFilter from "Filter/Background/Filter";
+import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
+import MenuBackgroundFilter from "Filter/Buildings/Filter";
 
 import FilterUpdater from "Filter/Updater";
 // class FilterUpdater extends GameObject {
@@ -71,7 +71,7 @@ class SideMenu extends Component {
 			<Container
 				filters={
 					[
-						//new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 })
+						// new AdvancedBloomFilter({ bloomScale: 0.3, quality: 10 }),
 					]
 				}
 			>
