@@ -32,7 +32,7 @@ uniform vec4 filterArea;
 
 #define PI 3.1415926535897932384626433832795
 
-const int MAX_MARCHING_STEPS = 512;
+const int MAX_MARCHING_STEPS = 256;
 const float MIN_DIST = 0.0;
 const float MAX_DIST = 1000.0;
 const float DELTA_DIST = 0.01;
@@ -44,33 +44,50 @@ const float GRIDSIZE = 8.;
 
 float sceneSDF(vec3 samplePoint) {
 	vec2 block = floor(samplePoint.xz / GRIDSIZE);
-	samplePoint.x = mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.);
-	samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
+	float n = ceil(pow(abs(snoise2(block)), 2.) * 10.);
+	vec3 point = vec3(
+		mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.),
+		samplePoint.y - n,
+		mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.)
+	);
+	// samplePoint.x = mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.);
+	// samplePoint.z = mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.);
 	// vec2 block = vec2(floor(samplePoint.x/GRIDSIZE), floor(samplePoint.y/GRIDSIZE));
-	float buildings = MAX_DIST;
-	// for(int x = -1; x<1; x++){
-	// 	for(int y = -1; y<1; y++){
-			// vec3 offset = vec3(float(x), 0., float(y));
-			// vec3 offset = vec3(0.);
-			float n = ceil(pow(abs(snoise2(block)), 2.) * 10.);
-			samplePoint.y = samplePoint.y - n;
-			float building = boxSDF(samplePoint, vec3(3.,1.+(n),3.));
-			// buildings = min(buildings,building);
-	// 	}
+	// float buildings = MAX_DIST;
+	// samplePoint.y = samplePoint.y - n;
+	float building = boxSDF(point, vec3(3.,1.+(n),3.));
+
+	//find distance from outer bounds;
+
+	// float outer = boxSDF(samplePoint, vec3(4.,12.,4.));
+	// if(outer<0.){
+	// 	building = min(building, -outer);
 	// }
-	// building +=
 
 	return building;
 	// return length(samplePoint)-1.;
+}
+float outerSDF(vec3 samplePoint){
+	vec3 point = vec3(
+		mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.),
+		samplePoint.y,
+		mod(samplePoint.z, GRIDSIZE)-(GRIDSIZE/2.)
+	);
+	return -boxSDF(point, vec3(4.,10.,4.));
 }
 float raymarch(vec3 eye, vec3 marchingDirection, float start, float end) {
     float depth = start;
 	float dist = 0.;
     for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-		dist = sceneSDF(eye + depth * marchingDirection);
+		vec3 point = eye + depth * marchingDirection;
+		dist = sceneSDF(point);
 		if (dist < EPSILON) {
-		return depth;
+			return depth;
 		}
+		// float outer = outerSDF(point);
+		// if(outer < 0.){
+		// 	outer = 10.;
+		// }
         depth += min(dist * .3, 1.);
         if (depth >= end) {
 			return end;
@@ -107,7 +124,7 @@ void main( )
 	
 	vec3 tint = vec3(255., 147., 98.) /255.;
     // gl_FragColor = vec4(normal, 1.0);
-	float degree = (normal.x/2.) + (normal.y/4.) + (normal.z/8.);
+	float degree = (normal.x/2.) + (normal.y/4.) + (normal.z/8.) + (1./8.);
 	// gl_FragColor = vec4(degree*tint, 1.0);
 	gl_FragColor = vec4(vec3(0.), degree);
 
