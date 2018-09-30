@@ -5,7 +5,8 @@
 
 #pragma glslify: smin = require(glsl-smooth-min)
 #pragma glslify: combineChamfer = require(glsl-combine-chamfer)
-#pragma glslify: noise = require(glsl-noise/simplex/2d)
+#pragma glslify: noise2 = require(../utility/noise2_f.glsl)
+#pragma glslify: noise3 = require(../utility/noise3_f.glsl)
 #pragma glslify: unionSDF = require(../utility/unionSDF.glsl)
 #pragma glslify: sphereSDF = require(../utility/sphereSDF_f.glsl)
 #pragma glslify: boxSDF = require(../utility/sdBox_f.glsl)
@@ -48,7 +49,7 @@ const float GRIDSIZE = 8.;
 
 float sceneSDF(vec3 samplePoint) {
 	vec2 block = floor(samplePoint.xz / GRIDSIZE);
-	float n = ceil(pow(abs(snoise2(block)), 2.) * 10.);
+	float n = ceil(pow(abs(noise2(block)), 2.) * 10.);
 	vec3 point = vec3(
 		mod(samplePoint.x, GRIDSIZE)-(GRIDSIZE/2.),
 		samplePoint.y - n,
@@ -83,10 +84,21 @@ float outerSDF(vec3 samplePoint){
 const float DEPTH_RATIO = .5;
 const float DEPTH_MAX_STEP = 1.;
 
-float cloudnoise(vec3 point){
+float fbmnoise3(vec3 point){
+	// return noise3(point);
+	float n = 0.;
+	n += noise3(point) / 2.;
+	n += noise3(point*2.) / 4.;
+	n += noise3(point*4.) / 8.;
+	// n += snoise3(point*8.) / 16.;
+	return n;
+}
 
+float cloudnoise(vec3 point){
+	// vec3 offset = vec3(iTime, 0., 0.);
 	float topfadeout = smoothstep(10.,5., point.y);
-	float noise = max(snoise3(point/5.), 0.);
+	float noise = max(noise3((point)/4.), 0.);
+	noise = smoothstep(.5,1.,noise);
 	
 	// if(point.y>5.){
 	// 	return 0.;
@@ -135,7 +147,7 @@ void main( )
 {
 
 	vec3 viewDir = rayDirection(90.0, iResolution.xy, gl_FragCoord.xy);
-	vec3 eye = iPosition*10. + (vec3(2.,0.,-1.)*iTime*1.);
+	vec3 eye = iPosition*10. + (vec3(-1.,0.,-2.)*iTime*1.);
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
 	vec2 result = raymarch(eye, worldDir, MIN_DIST, MAX_DIST); 

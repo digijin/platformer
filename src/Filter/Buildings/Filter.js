@@ -77,7 +77,7 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 
 
 	get rotation(){
-		return new Vector(1, -1, -1).unit();
+		return new Vector(-1, -.8, -1).unit();
 	}
 
 	set rotation(point: { x: number, y: number, z: number }) {
