@@ -95,9 +95,9 @@ float fbmnoise3(vec3 point){
 }
 
 float cloudnoise(vec3 point){
-	// vec3 offset = vec3(iTime, 0., 0.);
+	vec3 offset = vec3(iTime, 0., 0.);
 	float topfadeout = smoothstep(10.,5., point.y);
-	float noise = max(noise3((point)/4.), 0.);
+	float noise = max(noise3((point+offset)/4.), 0.);
 	noise = smoothstep(.5,1.,noise);
 	
 	// if(point.y>5.){

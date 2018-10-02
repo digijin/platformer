@@ -68,7 +68,7 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 	}
 	
 	get position(){
-		return new Vector(-4, 2, 0);
+		return new Vector(-4, 3, 0);
 	}
 
 	set position(point: { x: number, y: number, z: number }) {
