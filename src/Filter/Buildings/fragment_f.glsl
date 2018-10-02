@@ -95,7 +95,7 @@ float fbmnoise3(vec3 point){
 }
 
 float cloudnoise(vec3 point){
-	vec3 offset = vec3(iTime, 0., 0.);
+	vec3 offset = vec3(-iTime, 0., 0.);
 	float topfadeout = smoothstep(10.,5., point.y);
 	float noise = max(noise3((point+offset)/4.), 0.);
 	noise = smoothstep(.5,1.,noise);
@@ -147,7 +147,7 @@ void main( )
 {
 
 	vec3 viewDir = rayDirection(90.0, iResolution.xy, gl_FragCoord.xy);
-	vec3 eye = iPosition*10. + (vec3(-1.,0.,-2.)*iTime*1.);
+	vec3 eye = iPosition*10. + (vec3(-1.,0.,0.)*iTime*1.);
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
 	vec2 result = raymarch(eye, worldDir, MIN_DIST, MAX_DIST); 
