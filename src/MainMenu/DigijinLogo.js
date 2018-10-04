@@ -5,6 +5,18 @@ import MainMenu from "Scene/MainMenu";
 
 import type Engine from "Engine";
 
+const INITDELAY = 6;
+const SPEED = 12;
+const RENDERTIME = 12;
+const HOLDTIME = 4 * SPEED;
+const FADETIME = .1 * SPEED;
+const SPAWNCHANCE = 0.2;
+const SPIKE_SPEED = 8;
+const size = 40;
+const width = size * 11;
+const height = size * 5;
+
+
 const lettersConfig = [
 	{
 		color: "#00ff00",
@@ -190,16 +202,7 @@ const letters: Array<letterData> = lettersConfig.map((l: letterData) => {
 	l.dist = dist;
 	return l;
 });
-const INITDELAY = 6;
-const SPEED = 12;
-const RENDERTIME = 12;
-const HOLDTIME = 2 * SPEED;
-const FADETIME = 1.5 * SPEED;
-const SPAWNCHANCE = 0.2;
-const SPIKE_SPEED = 8;
-const size = 40;
-const width = size * 11;
-const height = size * 5;
+
 
 const offset = {
 	x: (window.innerWidth - width) / 2,
