@@ -36,6 +36,10 @@ class Global{
     	}
     }
 
+    remove(key){
+    	delete this.values[key];
+    }
+
     clear(){
     	this.values = {};
     	this.valuePromises = {};

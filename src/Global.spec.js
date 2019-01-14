@@ -34,5 +34,14 @@ describe("Global", () => {
         
 
 	});
+    
+	describe("remove", () => {
+		it("shoulds remove", () => {
+			Global.values = { key: "abc" };
+			Global.remove("key");
+			expect(Global.values["key"]).not.toBeDefined();
+
+		});
+	});
 	describe("clear", () => {});
 });
