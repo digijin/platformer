@@ -19,6 +19,8 @@ import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
+import Global from "./Global";
+
 import * as PIXI from "pixi.js";
 
 // import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
@@ -34,7 +36,8 @@ import { Missions } from "Mission";
 
 import Fpsmeter from "fpsmeter";
 
-class Stage extends PIXI.Container {}
+import Stage from "./Stage";
+// class Stage extends PIXI.Container {}
 class StageContainer extends PIXI.Container {}
 
 let instance;
@@ -71,7 +74,7 @@ export default class Engine {
 	input: Input;
 	container: HTMLElement;
 	paused: boolean;
-	stage: PIXI.Container;
+	stage: Stage;
 	ctx: Context;
 	transitionStage: PIXI.Container;
 	backgroundStage: PIXI.Container;
@@ -188,6 +191,8 @@ export default class Engine {
 
 		//HACK
 		this.canvas = this.pixicanvas;
+
+		Global.set("stage", this.stage);
 
 		return this;
 	}
