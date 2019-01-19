@@ -30,7 +30,7 @@ export default [
 	// UpdateGuns,
 	MoveHorizontal,
 	MoveVertical,
-	// UpdateGrapple,
-	// RenderGrapple,
+	UpdateGrapple,
+	RenderGrapple,
 	FocusCamera,
 ];

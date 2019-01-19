@@ -70,6 +70,7 @@ export default class PlayerCharacter extends Rigidbody{
     }
 
     update() {
+    	// this.position = new Point(this.position);
     	this.behaviours.forEach(b=>b.run());
     }
 

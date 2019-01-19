@@ -4,12 +4,15 @@ import { ALL } from "Level/Actor/Player/State";
 
 import { HAND_STATE } from "../../Player";
 
+import log from "loglevel";
+import Point from "Utility/Point";
+
 export default class UpdateGrapple extends Base{
 
-    states = []//ALL
+    states = ALL
     update(){
     	if (this.player.hand.state == HAND_STATE.ARMED) {
-    		this.player.hand.position = this.player.position.add(this.player.hand.offset);
+    		this.player.hand.position = new Point(this.player.position).add(this.player.hand.offset);
     	}
     	if (this.engine.input.getButtonDown("grapple")) {
     		//FIRE HAND
@@ -29,7 +32,7 @@ export default class UpdateGrapple extends Base{
 				Math.cos(this.player.hand.direction) * this.engine.deltaTime * this.player.hand.speed;
     		this.player.hand.position.y +=
 				Math.sin(this.player.hand.direction) * this.engine.deltaTime * this.player.hand.speed;
-    		if (this.player.position.distanceTo(this.player.hand.position) > this.player.hand.distance) {
+    		if (new Point(this.player.position).distanceTo(this.player.hand.position) > this.player.hand.distance) {
     			this.player.hand.state = HAND_STATE.RELEASED;
     		}
     		if (this.engine.grid.isPositionBlocked(this.player.hand.position)) {
@@ -38,7 +41,7 @@ export default class UpdateGrapple extends Base{
     		}
     	}
     	if (this.player.hand.state == HAND_STATE.RELEASED) {
-    		const target = this.player.position.add(this.player.hand.offset);
+    		const target = new Point(this.player.position).add(this.player.hand.offset);
     		const diff = target.subtract(this.player.hand.position);
     		const dist = this.player.hand.position.distanceTo(target);
     		const speed = this.engine.deltaTime * this.player.hand.speed;
@@ -52,7 +55,7 @@ export default class UpdateGrapple extends Base{
     		}
     	}
     	if(this.player.hand.state == HAND_STATE.GRIPPED){
-    		const spaceLeft = this.player.position.subtract(this.player.hand.position).length();
+    		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
     		// console.log(spaceLeft);
     		if(spaceLeft < 100){
     			this.player.hand.state = HAND_STATE.RELEASED;
