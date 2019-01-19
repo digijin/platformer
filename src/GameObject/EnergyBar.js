@@ -34,7 +34,6 @@ export default class EnergyBar extends GameObject {
 
 	update() {
 		this.text.text = this.player.state
-		+ "\n" + this.engine.objectsTagged("enemy").length
 		+ "\n x " + Math.round(this.player.position.x)
 		+ "\n y " + Math.round(this.player.position.y);
 		this.graph.clear();

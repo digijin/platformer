@@ -21,65 +21,29 @@ const GLOWSTRENGTH = 2;
 const GLOWQUALITY = 0.5;
 
 export default class Bullet extends Projectile {
-	graph: PIXI.Graphics;
-	style: string;
-	time: number;
-	owner: Actor;
-	speed: number;
-	trajectory: Line;
-	container: PIXI.Container;
-	v: number; //momentum
-	color: number;
-	lineWidth: number;
-	dir: number;
-	h: number; //momentum
+    // x: number; position
+    // y: number; position
+    position: Point;
 
-	// x: number; position
-	// y: number; position
-	position: Point;
-	
 
-	damage: number = 2;
+    graph: PIXI.Graphics;
+    time: number;
+    owner: Actor;
+    speed: number;
+    trajectory: Line;
+    container: PIXI.Container;
+    v: number; //momentum
+    color: number;
+    lineWidth: number;
+    dir: number;
+    h: number; //momentum
 
-	constructor(params: {
-		position: Point,
-		h: number,
-		v: number,
-		time: number,
-		direction: number,
-		target: Point,
-		owner: Actor
-	}) {
-		super(params);
-		this.tag("bullet");
-		this.speed = 200;
-		Object.assign(this, params);
-		this.time = 1;
-		this.color = COLOR;
-		this.lineWidth = 3;
-		this.h = Math.cos(this.dir);
-		this.v = Math.sin(this.dir);
-	}
+    style: string;
 
-	init(engine: Engine) {
-		super.init(engine);
 
-		if (!this.container) {
-			this.container = this.engine.stage;
-		}
-		this.graph = new PIXI.Graphics();
-		this.graph.filters = [
-			new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY),
-		];
-		this.container.addChild(this.graph);
-		// console.log("init");
-	}
+    damage: number = 2;
 
-	exit() {
-		this.container.removeChild(this.graph);
-	}
-
-	update = () => {
+    update = () => {
 		// console.log("update");
 		this.time -= this.engine.deltaTime;
 
@@ -112,7 +76,45 @@ export default class Bullet extends Projectile {
 		});
 	};
 
-	destroy() {
+    constructor(params: {
+		position: Point,
+		h: number,
+		v: number,
+		time: number,
+		direction: number,
+		target: Point,
+		owner: Actor
+	}) {
+		super(params);
+		this.tag("bullet");
+		this.speed = 200;
+		Object.assign(this, params);
+		this.time = 1;
+		this.color = COLOR;
+		this.lineWidth = 3;
+		this.h = Math.cos(this.dir);
+		this.v = Math.sin(this.dir);
+	}
+
+    init(engine: Engine) {
+		super.init(engine);
+
+		if (!this.container) {
+			this.container = this.engine.stage;
+		}
+		this.graph = new PIXI.Graphics();
+		this.graph.filters = [
+			new GlowFilter(GLOWDIST, GLOWSTRENGTH, 0, this.color, GLOWQUALITY),
+		];
+		this.container.addChild(this.graph);
+		// console.log("init");
+	}
+
+    exit() {
+		this.container.removeChild(this.graph);
+	}
+
+    destroy() {
 		// console.log("destroy");
 		setTimeout(() => {
 			super.destroy();
@@ -120,7 +122,7 @@ export default class Bullet extends Projectile {
 		}, 0);
 	}
 
-	explode() {
+    explode() {
 		this.destroy();
 		// super.explode();
 
@@ -154,7 +156,7 @@ export default class Bullet extends Projectile {
 		}
 	}
 
-	checkEnemies(func: (actor: Actor) => {}) {
+    checkEnemies(func: (actor: Actor) => {}) {
 		this.engine.objectsTagged("actor").forEach((o: GameObject) => {
 			if (o !== this.owner) {
 				const a: Actor = ((o: any): Actor); //RECAST
@@ -168,15 +170,15 @@ export default class Bullet extends Projectile {
 		});
 	}
 
-	cheapCheck(actor: Actor) {
+    cheapCheck(actor: Actor) {
 		return actor.getBoundingRect().contains(this.position);
 	}
 
-	expensiveCheck(actor: Actor) {
+    expensiveCheck(actor: Actor) {
 		return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
 	}
 
-	render() {
+    render() {
 		this.graph.clear();
 		this.graph.position.set(this.trajectory.a.x, this.trajectory.a.y);
 		this.graph

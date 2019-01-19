@@ -85,7 +85,7 @@ export default class Enemy extends Actor {
 
 	update() {
 		this.sprite.position = this.position;
-		// const player = this.engine.objectsTagged("player").pop();
+		// const player = this.engine.getPlayer();
 		if (!this.player) {
 			// this.gravity();
 			this.render();
@@ -112,7 +112,7 @@ export default class Enemy extends Actor {
 	}
 
 	newAction() {
-		const player = this.engine.objectsTagged("player").pop();
+		const player = this.engine.getPlayer();
 		if (this.agro) {
 			//falloff distance
 			if (

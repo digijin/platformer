@@ -42,7 +42,7 @@ export default class Projectile extends GameObject {
     	this.trajectory = new Line({ a: old, b: this.position });
     }
     // checkEnemy() {
-    // 	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
+    // 	this.engine.getActors().forEach((o: GameObject) => {
     // 		if (o !== this.owner) {
     // 			let a: Actor = ((o: any): Actor); RECAST
     // 			if (a.getBoundingRect().contains(this.position)) {

@@ -58,11 +58,11 @@ export default class StoryTeller extends GameObject {
 		this.container.position.x = Math.floor(-this.engine.view.offset.x);
 		this.container.position.y = Math.floor(-this.engine.view.offset.y);
 
-		if (this.engine.objectsTagged("enemy").length == 0) {
-			log.debug("StoryTeller ran out of enemies");
-			this.engine.startSceneTransition(new Results(), new Transition());
-			//my job here is done
-			this.destroy();
-		}
+		// if (this.engine.getEnemies().length == 0) {
+		// 	log.debug("StoryTeller ran out of enemies");
+		// 	this.engine.startSceneTransition(new Results(), new Transition());
+		// 	//my job here is done
+		// 	this.destroy();
+		// }
 	}
 }
