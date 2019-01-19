@@ -109,15 +109,10 @@ const stylesCalc = theme => ({
 });
 
 class EditorPanel extends React.Component {
-	savename: string;
+	// state = { expanded: { main: false } };
+    storage: Storage;
 
-	handleExpandClick = target => {
-		const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
-		watcher.mode = target;
-		const newstate = { expanded: {} };
-		newstate.expanded[target] = !this.state.expanded[target];
-		this.setState(newstate);
-	};
+	savename: string;
 
 	props: Props;
 	handleDrawModeChange = (event, value) => {
@@ -126,8 +121,13 @@ class EditorPanel extends React.Component {
 	};
 
 	tabs: Array<string>;
-	// state = { expanded: { main: false } };
-	storage: Storage;
+	handleExpandClick = target => {
+		const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
+		watcher.mode = target;
+		const newstate = { expanded: {} };
+		newstate.expanded[target] = !this.state.expanded[target];
+		this.setState(newstate);
+	};
 
 	handleTabChange = (event, value) => {
 		this.setState({ tab: value });

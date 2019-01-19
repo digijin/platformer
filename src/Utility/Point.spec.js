@@ -56,7 +56,7 @@ describe("Utility/Point.spec.js", () => {
 			// set config grid size
 			const rounded = new Point({ x: 12, y: 43 }).getBlock();
 			expect(rounded.x).toBe(0);
-			expect(rounded.y).toBe(1);
+			expect(rounded.y).toBe(2);
 		});
 	});
 	describe("percentTo", () => {

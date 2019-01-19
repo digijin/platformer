@@ -19,8 +19,10 @@ export default class Grid3{
 		}
 	}
 
-	makeObj(x, y, z) {
-		return new this.klass(Object.assign({ x, y, z }, this.params));
+	get(x = 0, y = 0, z = 0){
+		if(this[x] && this[x][y]){
+			return this[x][y][z];
+		}
 	}
 
 
@@ -55,8 +57,8 @@ export default class Grid3{
 		this.length = w;
 	}
 
-	get height(){
-		return this[0].length;
+	makeObj(x, y, z) {
+		return new this.klass(Object.assign({ x, y, z }, this.params));
 	}
 
 	set height(h){
@@ -130,9 +132,7 @@ export default class Grid3{
 		return out;
 	}
 
-	get(x = 0, y = 0, z = 0){
-		if(this[x] && this[x][y]){
-			return this[x][y][z];
-		}
+	get height(){
+		return this[0].length;
 	}
 }

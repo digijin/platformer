@@ -23,9 +23,12 @@ export type EnemyTypeParams = {
 };
 
 export default class EnemyType {
-    name: string;
+    registration: {
+        x: number,
+        y: number
+    };
 
-    walkSpeed: number;
+    name: string;
 
     jumpSpeed: number;
     jumpPower: number;
@@ -35,10 +38,7 @@ export default class EnemyType {
         h: number
     };
 
-    registration: {
-        x: number,
-        y: number
-    };
+    walkSpeed: number;
 
     idle: string;
     agro: string;

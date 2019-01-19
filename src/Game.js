@@ -32,21 +32,13 @@ import "./style.styl";
 // import MainMenu from 'MainMenu/Menu';
 
 export default class Game {
-	container: HTMLElement;
-	ctx: Object;
-	shells: Array<Object>;
-	engine: Engine;
-	inited: boolean;
-	constructor(container: HTMLElement) {
-		this.container = container;
-		window.game = this;
-		PIXI.loader.load(this.init);
-		// console.log("game constructed");
-		// this.init();
-		this.inited = false;
-	}
+    container: HTMLElement;
+    ctx: Object;
+    shells: Array<Object>;
+    engine: Engine;
+    inited: boolean;
 
-	init = () => {
+    init = () => {
 		this.inited = true;
 		//init textures that were just loaded
 		BlockTypes.forEach(t => t.init());
@@ -96,9 +88,19 @@ export default class Game {
 
 		this.engine.update(); //starts
 	};
-	
 
-	destroy() {
+
+    constructor(container: HTMLElement) {
+		this.container = container;
+		window.game = this;
+		PIXI.loader.load(this.init);
+		// console.log("game constructed");
+		// this.init();
+		this.inited = false;
+	}
+
+
+    destroy() {
 		this.engine.kill();
 	}
 }

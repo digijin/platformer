@@ -7,13 +7,13 @@ import GameObject from "GameObject";
 import * as PIXI from "pixi.js";
 
 export default class Particle extends GameObject {
+    v: number = 0; //momentum
     graph: PIXI.Graphics;
-    position: Point;
     time: number = 1;
     color: string = 0xffffff;
     container: PIXI.Container;
     h: number = 0; //momentum
-    v: number = 0; //momentum
+    position: Point;
     lineWidth: number = 1;
     constructor(params: {
         container: PIXI.Container,

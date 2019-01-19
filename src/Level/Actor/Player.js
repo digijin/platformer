@@ -5,7 +5,6 @@ import Point from "Utility/Point";
 // import Bullet from "GameObject/Bullet";
 // import mech from "assets/mech.png";
 
-import Shell from "GameObject/Shell";
 import Actor from "Level/Actor";
 
 import config from "config";
@@ -14,12 +13,9 @@ import config from "config";
 // import Rect from "Utility/Rect";
 import type Engine from "Engine";
 
-import { PrimaryMap } from "Components/Primary";
-import { SecondaryMap } from "Components/Secondary";
-import { LegMap } from "Components/Legs";
-import { BoosterMap } from "Components/Booster";
 import { EngineMap } from "Components/Engine";
-import type Booster from "Components/Booster";
+
+import Global from "../../Global";
 
 
 import PlayerState from "Level/Actor/Player/State";
@@ -68,13 +64,13 @@ import Leg from "Mech/Leg";
 export default class Player extends Actor {
 	//this stuff basically to hack in equip panel
 	targetOffset: Point = new Point();
-	leg: Leg;
 	energy: number = 0;
 	container: PIXI.Container;
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
 	state: PlayerStateType;
 	hand = hand;
+	leg: Leg;
 
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);
@@ -92,6 +88,7 @@ export default class Player extends Actor {
 		};
 
 		this.leg = new Leg({ parent: this, container: this.container });
+		Global.set("player", this);
 	}
 
 

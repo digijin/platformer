@@ -24,8 +24,8 @@ export const FACING_RIGHT: Facing = 1;
 export const FACING_LEFT: Facing = -1;
 
 export default class Leg extends GameObject {
+    parent: Player;
     offset: Point;
-    rearupperleg: PIXI.Sprite;
     position: Point;
     stride: number;
     torsoOffset: Point;
@@ -38,7 +38,7 @@ export default class Leg extends GameObject {
     lowerleg: PIXI.Sprite;
     foot: PIXI.Sprite;
     gun: PIXI.Sprite;
-    parent: Player;
+    rearupperleg: PIXI.Sprite;
     rearlowerleg: PIXI.Sprite;
     rearfoot: PIXI.Sprite;
     container: PIXI.Container;

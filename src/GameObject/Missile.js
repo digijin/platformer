@@ -22,31 +22,17 @@ import * as PIXI from "pixi.js";
 import FilterSprite from "Sprite/Explosion";
 
 export default class Missile extends Projectile {
-	
+    guided: boolean;
 
-	guided: boolean;
+    minSpeed: number = 1;
+    acceleration: number = 20;
+    container: PIXI.Container;
+    remoteControl: boolean;
+    trajectory: Line;
 
-	maxSpeed: number = 40;
-	minSpeed: number = 1;
-	acceleration: number = 20;
-	container: PIXI.Container;
-	remoteControl: boolean;
-	trajectory: Line;
+    maxSpeed: number = 40;
 
-	constructor(params: { container: PIXI.Container }) {
-		super(params);
-
-		this.guided = true;
-		this.remoteControl = false;
-		this.container = params.container;
-		this.tag("missile");
-	}
-
-	init(engine: Engine) {
-		super.init(engine);
-	}
-
-	update = () => {
+    update = () => {
 		this.move();
 
 		//CHECK GRID
@@ -125,7 +111,20 @@ export default class Missile extends Projectile {
 		}
 	};
 
-	explode() {
+    constructor(params: { container: PIXI.Container }) {
+		super(params);
+
+		this.guided = true;
+		this.remoteControl = false;
+		this.container = params.container;
+		this.tag("missile");
+	}
+
+    init(engine: Engine) {
+		super.init(engine);
+	}
+
+    explode() {
 		super.explode();
 		// this.engine.register(
 		// 	new FilterSprite({
@@ -140,14 +139,14 @@ export default class Missile extends Projectile {
 		this.container.addChild(sprite);
 	}
 
-	move() {
+    move() {
 		const old = this.position.clone();
 		this.position.y += Math.sin(this.direction) * this.speed;
 		this.position.x += Math.cos(this.direction) * this.speed;
 		this.trajectory = new Line({ a: old, b: this.position });
 	}
 
-	checkActors() {
+    checkActors() {
 		this.engine.objectsTagged("actor").every((o: GameObject) => {
 			if (o !== this.owner) {
 				const a: Actor = ((o: any): Actor); //RECAST
@@ -163,7 +162,7 @@ export default class Missile extends Projectile {
 		});
 	}
 
-	checkGrid() {
+    checkGrid() {
 		const block = this.engine.grid.getBlockAtPoint(this.position);
 		if (block && !block.isVacant()) {
 			this.explode();
@@ -178,5 +177,4 @@ export default class Missile extends Projectile {
 			blocks.forEach(b => b.damage(10 + Math.random() * 100));
 		}
 	}
-	
 }

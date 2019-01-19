@@ -22,6 +22,27 @@ export default class Rect {
 		});
 	}
 
+	static fromSprite(sprite: {position: {x: number, y: number}}){
+		return new Rect({
+			t: sprite.position.y,
+			l: sprite.position.x,
+			b: sprite.position.y + sprite.height,
+			r: sprite.position.x + sprite.width,
+		});
+	}
+	
+	static fromPoints(
+		pt1: { x: number, y: number },
+		pt2: { x: number, y: number }
+	) {
+		return new Rect({
+			l: Math.min(pt1.x, pt2.x),
+			r: Math.max(pt1.x, pt2.x),
+			t: Math.min(pt1.y, pt2.y),
+			b: Math.max(pt1.y, pt2.y),
+		});
+	}
+
 	static fromPosSizeRego(
 		pos: Point,
 		size: { w: number, h: number },
@@ -34,27 +55,6 @@ export default class Rect {
 			l: l,
 			r: l + size.w,
 			b: t + size.h,
-		});
-	}
-	
-	static fromSprite(sprite: {position: {x: number, y: number}}){
-		return new Rect({
-			t: sprite.position.y,
-			l: sprite.position.x,
-			b: sprite.position.y + sprite.height,
-			r: sprite.position.x + sprite.width,
-		});
-	}
-
-	static fromPoints(
-		pt1: { x: number, y: number },
-		pt2: { x: number, y: number }
-	) {
-		return new Rect({
-			l: Math.min(pt1.x, pt2.x),
-			r: Math.max(pt1.x, pt2.x),
-			t: Math.min(pt1.y, pt2.y),
-			b: Math.max(pt1.y, pt2.y),
 		});
 	}
 
@@ -102,8 +102,13 @@ export default class Rect {
 		return this.r - this.l;
 	}
 
-	height() {
-		return this.b - this.t;
+	add(rect: { t: number, r: number, b: number, l: number }): Rect {
+		return new Rect({
+			t: this.t + rect.t,
+			r: this.r + rect.r,
+			b: this.b + rect.b,
+			l: this.l + rect.l,
+		});
 	}
 
 	centerPoint() {
@@ -180,12 +185,7 @@ export default class Rect {
 		return new Point({ x: this.r, y: this.b });
 	}
 
-	add(rect: { t: number, r: number, b: number, l: number }): Rect {
-		return new Rect({
-			t: this.t + rect.t,
-			r: this.r + rect.r,
-			b: this.b + rect.b,
-			l: this.l + rect.l,
-		});
+	height() {
+		return this.b - this.t;
 	}
 }

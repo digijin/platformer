@@ -21,6 +21,8 @@ class GridBlockContainer extends PIXI.Container {}
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
+    // tileCache: {};
+    width: number;
     // getBlocksFlattened = (): Array<Block> => {
     // 	return this.blocks.raw().reduce((a: Array<Block>, b: Array<Block>) => {
     // 		// return a.splice(0, 0, ...b);
@@ -29,19 +31,23 @@ export default class Grid extends GameObject {
     // };
 
     blocks: Grid3;
-    blockStage: PIXI.Container;
-    decor: Array<Decor>;
     decorStage: PIXI.Container;
     graph: PIXI.Graphics = new PIXI.Graphics();
     height: number;
     parent: PIXI.Container;
     spritePool: Pool;
-    // tileCache: {};
-    width: number;
-	z: number;
-	enemyData = [];
+    decor: Array<Decor>;
+    z: number;
+    enemyData = [];
 
-	constructor(
+    update = () => {
+    	const screenRect = this.screenRect();
+    	this.renderBlocks(screenRect);
+    };
+
+    blockStage: PIXI.Container;
+
+    constructor(
     	params: {
             size: {
                 w: number,
@@ -67,7 +73,7 @@ export default class Grid extends GameObject {
     	this.makeEmptyGrid(params.size);
 	}
 
-	init(engine: Engine) {
+    init(engine: Engine) {
     	super.init(engine);
     	engine.grid = this;
     	this.pixiInit();
@@ -77,16 +83,11 @@ export default class Grid extends GameObject {
     	this.parent.addChild(this.graph);
 	}
 
-	exit() {
+    exit() {
     	this.parent.removeChild(this.blockStage);
     	this.parent.removeChild(this.decorStage);
     	this.parent.removeChild(this.graph);
 	}
-
-    update = () => {
-    	const screenRect = this.screenRect();
-    	this.renderBlocks(screenRect);
-    };
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
     	const x = Math.floor(pos.x / config.grid.width);
@@ -142,7 +143,7 @@ export default class Grid extends GameObject {
     		this.decorStage.removeChild(decor.sprite);
     	}
     }
-	
+
     screenRect(): Rect {
     	return new Rect({
     		t: 0,
@@ -152,23 +153,21 @@ export default class Grid extends GameObject {
     	}).move(this.engine.view.offset);
     }
 
-	/**
-	 * only used for unit testing
-	 * @param {*} strings
-	 */
-    fromTestStrings(strings: Array<string>): Grid {
-    	const testdata = strings.map(a => a.split(""));
+    pixiInit() {
+    	this.blockStage = new GridBlockContainer();
+    	this.blockStage.interactiveChildren = false;
+    	this.decorStage = new GridDecorContainer();
+    	this.decorStage.interactiveChildren = false;
+    	this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
+    	this.spritePool.onCreate = spr => {
+    		this.blockStage.addChild(spr);
 
-    	//NOTE: flip X and Y
-    	// this.blocks = new Grid3(testdata[0].length, testdata.length, 2, Block, { type: "0", grid: this });
-    	this.makeEmptyGrid({ w: testdata[0].length, h: testdata.length });
-    	testdata.forEach((d, y) => {
-    		return d.forEach((block, x) => {
-    			const b = this.blocks.get(x, y);
-    			b.type = block;
-    		});
-    	});
-    	return this;
+    		spr.width = config.grid.width;
+    		spr.height = config.grid.width;
+    	};
+    	this.spritePool.onRemove = spr => {
+    		this.blockStage.removeChild(spr);
+    	};
     }
 
     makeEmptyGrid(size: { w: number, h: number }) {
@@ -251,7 +250,7 @@ export default class Grid extends GameObject {
     	}
     	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
     }
-	
+
     getBlocksOverlappingRect(rect: Rect): Array<Block> {
     	const firstCol = Math.floor(rect.l / config.grid.width);
     	const lastCol = Math.ceil(rect.r / config.grid.width);
@@ -259,7 +258,7 @@ export default class Grid extends GameObject {
     	const lastRow = Math.ceil(rect.b / config.grid.width);
     	return this.getBlockRect(firstCol, lastCol, firstRow, lastRow);
     }
-	
+
     getBlockRect(
     	firstCol: number,
     	lastCol: number,
@@ -413,7 +412,7 @@ export default class Grid extends GameObject {
     	this.engine.register(new Enemy(params));
     }
 
-	
+
     addEnemyData(data){
     	if(data.block && !data.position){
     		data.position = new Point(data.block.position).multiply(config.grid.width);
@@ -451,20 +450,22 @@ export default class Grid extends GameObject {
     	);
     }
 
-    pixiInit() {
-    	this.blockStage = new GridBlockContainer();
-    	this.blockStage.interactiveChildren = false;
-    	this.decorStage = new GridDecorContainer();
-    	this.decorStage.interactiveChildren = false;
-    	this.spritePool = new Pool(PIXI.Sprite, PIXI.Texture.WHITE);
-    	this.spritePool.onCreate = spr => {
-    		this.blockStage.addChild(spr);
+    /**
+	 * only used for unit testing
+	 * @param {*} strings
+	 */
+    fromTestStrings(strings: Array<string>): Grid {
+    	const testdata = strings.map(a => a.split(""));
 
-    		spr.width = config.grid.width;
-    		spr.height = config.grid.width;
-    	};
-    	this.spritePool.onRemove = spr => {
-    		this.blockStage.removeChild(spr);
-    	};
+    	//NOTE: flip X and Y
+    	// this.blocks = new Grid3(testdata[0].length, testdata.length, 2, Block, { type: "0", grid: this });
+    	this.makeEmptyGrid({ w: testdata[0].length, h: testdata.length });
+    	testdata.forEach((d, y) => {
+    		return d.forEach((block, x) => {
+    			const b = this.blocks.get(x, y);
+    			b.type = block;
+    		});
+    	});
+    	return this;
     }
 }

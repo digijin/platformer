@@ -42,48 +42,48 @@ class StageContainer extends PIXI.Container {}
 
 let instance;
 export default class Engine {
-	static getInstance(): Engine {
+    static getInstance(): Engine {
 		if (!instance) {
 			instance = new Engine();
 		}
 		return instance;
 	}
 
-	static mock(container: HTMLElement = document.createElement("DIV")) {
+    static mock(container: HTMLElement = document.createElement("DIV")) {
 		return new Engine().init(container);
 	}
 
-	stageContainer: PIXI.Container;
-	mouse: Mouse;
-	currentPlayer: Player;
-	mission: Mission = Missions[0];
-	// keyboard: Input.Keyboard;
+    stageContainer: PIXI.Container;
+    mouse: Mouse;
+    currentPlayer: Player;
+    mission: Mission = Missions[0];
+    // keyboard: Input.Keyboard;
 
-	transitioning: boolean;
-	deltaTime: number = 0;
-	state: State;
-	currentScene: SceneBase;
-	ui: UI;
-	grid: Grid;
-	pixicanvas: HTMLCanvasElement;
-	fpsmeter: Fpsmeter;
-	view: {
+    transitioning: boolean;
+    deltaTime: number = 0;
+    state: State;
+    currentScene: SceneBase;
+    ui: UI;
+    grid: Grid;
+    pixicanvas: HTMLCanvasElement;
+    fpsmeter: Fpsmeter;
+    view: {
 		offset: Point
 	};
 
-	input: Input;
-	container: HTMLElement;
-	paused: boolean;
-	stage: Stage;
-	ctx: Context;
-	transitionStage: PIXI.Container;
-	backgroundStage: PIXI.Container;
-	renderer: any;
-	lastTime: number;
-	updateId: number;
-	// objects: Array<GameObject>;
+    input: Input;
+    container: HTMLElement;
+    paused: boolean;
+    stage: Stage;
+    ctx: Context;
+    transitionStage: PIXI.Container;
+    backgroundStage: PIXI.Container;
+    renderer: any;
+    lastTime: number;
+    updateId: number;
+    // objects: Array<GameObject>;
 
-	resize = () => {
+    resize = () => {
 		this.pixicanvas.width = window.innerWidth;
 		this.pixicanvas.height = window.innerHeight;
 		config.game.width = window.innerWidth;
@@ -93,18 +93,18 @@ export default class Engine {
 		}
 	};
 
-	objectsTagged = (tag: string): Array<GameObject> => {
+    objectsTagged = (tag: string): Array<GameObject> => {
 		return this.objects.filter(o => {
 			return o && o.hasTag(tag);
 		});
 	};
 
-	register = (obj: GameObject) => {
+    register = (obj: GameObject) => {
 		obj.init(this);
 		this.objects.push(obj);
 	};
 
-	kill = () => {
+    kill = () => {
 		cancelAnimationFrame(this.updateId);
 		this.container.removeChild(this.canvas);
 		this.container.removeChild(this.pixicanvas);
@@ -117,9 +117,51 @@ export default class Engine {
 		});
 	};
 
-	_objects: Array<GameObject> = [];
-	//init
-	constructor() {
+    _objects: Array<GameObject> = [];
+
+    //main game loop
+    update = () => {
+		this.fpsmeter.tickStart();
+		//handle time
+		const nowTime = new Date().getTime();
+		let diff = nowTime - this.lastTime;
+		this.lastTime = nowTime;
+		if (diff > 1000) {
+			//window probably lost focus or switched tabs
+			diff = 1;
+		}
+		this.deltaTime = diff / 1000;
+		this.mouse.update();
+		if (!this.paused) {
+			//sort objects on z
+			this._objects.sort((a, b) => {
+				let az = 0;
+				if (a && a.z) az = a.z;
+				let bz = 0;
+				if (b && b.z) bz = b.z;
+				return az - bz;
+			});
+
+			//update clone list of all object so I can delete from original
+			this._objects.slice(0).forEach(o => {
+				if (o) {
+					o.update(this);
+				}
+			});
+		}
+		//check pixi objects for update
+		this.recurseFindUpdate(this.stage);
+
+		// this.objects = this.objects.filter(o => o);
+		this.render();
+		//wait for next frame
+		this.updateId = requestAnimationFrame(this.update);
+		this.input.endTick();
+		this.fpsmeter.tick();
+	};
+
+    //init
+    constructor() {
 		instance = this;
 		this.paused = false;
 		this.view = {
@@ -133,7 +175,7 @@ export default class Engine {
 		this.currentPlayer = Player.getCurrentPlayer(); //here for now...
 	}
 
-	init(container: HTMLElement) {
+    init(container: HTMLElement) {
 		this.container = container;
 		this.mouse = new Mouse().init(this);
 		// FLOWHACK
@@ -197,67 +239,26 @@ export default class Engine {
 		return this;
 	}
 
-	//main game loop
-	update = () => {
-		this.fpsmeter.tickStart();
-		//handle time
-		const nowTime = new Date().getTime();
-		let diff = nowTime - this.lastTime;
-		this.lastTime = nowTime;
-		if (diff > 1000) {
-			//window probably lost focus or switched tabs
-			diff = 1;
-		}
-		this.deltaTime = diff / 1000;
-		this.mouse.update();
-		if (!this.paused) {
-			//sort objects on z
-			this._objects.sort((a, b) => {
-				let az = 0;
-				if (a && a.z) az = a.z;
-				let bz = 0;
-				if (b && b.z) bz = b.z;
-				return az - bz;
-			});
-
-			//update clone list of all object so I can delete from original
-			this._objects.slice(0).forEach(o => {
-				if (o) {
-					o.update(this);
-				}
-			});
-		}
-		//check pixi objects for update
-		this.recurseFindUpdate(this.stage);
-
-		// this.objects = this.objects.filter(o => o);
-		this.render();
-		//wait for next frame
-		this.updateId = requestAnimationFrame(this.update);
-		this.input.endTick();
-		this.fpsmeter.tick();
-	};
-
-	recurseFindUpdate(node) {
+    recurseFindUpdate(node) {
 		if (node.update) {
 			node.update(this);
 		}
 		node.children.forEach(c => this.recurseFindUpdate(c));
 	}
 
-	get objects(): Array<GameObject> {
+    get objects(): Array<GameObject> {
 		return this._objects;
 	}
 
-	set objects(value) {
+    set objects(value) {
 		throw new Error(
 			"dont set engine objects directly. use register and destroy"
 		);
 	}
 
-	//add new objects to be tracked by engine
+    //add new objects to be tracked by engine
 
-	startSceneTransition(scene: SceneBase, transition: Transition) {
+    startSceneTransition(scene: SceneBase, transition: Transition) {
 		// trnasition.on
 		if (!this.transitioning) {
 			this.transitioning = true;
@@ -276,7 +277,7 @@ export default class Engine {
 		}
 	}
 
-	destroy(obj: GameObject) {
+    destroy(obj: GameObject) {
 		const i = this.objects.indexOf(obj);
 		if (i > -1) {
 			obj.exit();
@@ -290,7 +291,7 @@ export default class Engine {
 		}
 	}
 
-	destroyAllExceptTagged(tag: string) {
+    destroyAllExceptTagged(tag: string) {
 		this._objects.slice(0).forEach(o => {
 			if (!o.hasTag(tag)) {
 				this.destroy(o);
@@ -298,13 +299,13 @@ export default class Engine {
 		});
 	}
 
-	startScene(scene: SceneBase) {
+    startScene(scene: SceneBase) {
 		if (this.currentScene) this.currentScene.end();
 		this.currentScene = scene;
 		this.currentScene.start(this);
 	}
 
-	render() {
+    render() {
 		// console.log("render");
 		this.renderer.render(this.stageContainer);
 	}
