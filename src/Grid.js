@@ -61,7 +61,7 @@ export default class Grid extends GameObject {
     		},
     		parent: new PIXI.Container(),
     	}
-	) {
+    ) {
     	super();
     	// this.tileCache = {};
     	this.height = params.size.h;
@@ -71,7 +71,7 @@ export default class Grid extends GameObject {
     	this.z = -10;
     	//make empty grid
     	this.makeEmptyGrid(params.size);
-	}
+    }
 
     init(engine: Engine) {
     	super.init(engine);
@@ -81,13 +81,13 @@ export default class Grid extends GameObject {
     	this.parent.addChild(this.blockStage);
     	this.parent.addChild(this.decorStage);
     	this.parent.addChild(this.graph);
-	}
+    }
 
     exit() {
     	this.parent.removeChild(this.blockStage);
     	this.parent.removeChild(this.decorStage);
     	this.parent.removeChild(this.graph);
-	}
+    }
 
     destroyBlockAtPosition(pos: { x: number, y: number }) {
     	const x = Math.floor(pos.x / config.grid.width);
@@ -332,7 +332,7 @@ export default class Grid extends GameObject {
  
     	let enemies = [];
     	if (this.engine) {
-    		enemies = this.engine.objectsTagged("enemy");
+    		enemies = this.engine.getEnemies();
     	}
     	const blocks = [
     		{
@@ -368,7 +368,7 @@ export default class Grid extends GameObject {
     load(str: string) {
     	//wipe enemies
     	if (this.engine) {
-    		this.engine.objectsTagged("enemy").forEach(e => e.destroy());
+    		this.engine.getEnemies().forEach(e => e.destroy());
     	}
     	const data = JSON.parse(str);
     	if (data.decor) {
