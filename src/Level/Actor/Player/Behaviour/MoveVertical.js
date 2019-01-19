@@ -61,7 +61,8 @@ export default class MoveVertical extends Base{
     	for (let i = 0; i < speed * 4; i++) {
     		this.engine.register(
     			new Shell({
-    				container: this.player.container,
+    				// container: this.player.container,
+    				container: this.player.parent,
     				position: new Point(this.player.position).subtract({
     					x: (Math.random() - 0.5) * 15 * speed,
     					// y: config.player.size.h / 2
