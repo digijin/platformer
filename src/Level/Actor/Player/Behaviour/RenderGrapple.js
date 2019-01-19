@@ -4,7 +4,7 @@ import { ALL } from "Level/Actor/Player/State";
 
 export default class RenderGrapple extends Base{
 
-    states = ALL
+    states = []//ALL
     update(){
     	this.player.graph.clear();
     	this.player.graph.position.set(this.player.hand.position.x, this.player.hand.position.y);

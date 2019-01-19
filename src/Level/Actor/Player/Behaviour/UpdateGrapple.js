@@ -6,7 +6,7 @@ import { HAND_STATE } from "../../Player";
 
 export default class UpdateGrapple extends Base{
 
-    states = ALL
+    states = []//ALL
     update(){
     	if (this.player.hand.state == HAND_STATE.ARMED) {
     		this.player.hand.position = this.player.position.add(this.player.hand.offset);

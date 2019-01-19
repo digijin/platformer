@@ -3,7 +3,7 @@ import Base from "./Base";
 import PlayerState, { ALL } from "Level/Actor/Player/State";
 import config from "config";
 import Shell from "GameObject/Shell";
-
+import Point from "Utility/Point";
 
 export default class MoveVertical extends Base{
 
@@ -62,7 +62,7 @@ export default class MoveVertical extends Base{
     		this.engine.register(
     			new Shell({
     				container: this.player.container,
-    				position: this.player.position.subtract({
+    				position: new Point(this.player.position).subtract({
     					x: (Math.random() - 0.5) * 15 * speed,
     					// y: config.player.size.h / 2
     					y: 0,

@@ -5,7 +5,7 @@ export default {
 		height: 800,
 	},
 	grid: {
-		width: 32,
+		width: 16,
 		// height: 20,
 		tile: {
 			width: 8,
@@ -14,8 +14,8 @@ export default {
 	},
 	player: {
 		size: {
-			w: 40,
-			h: 50,
+			w: 20,
+			h: 30,
 		},
 		legspeed: 20,
 		speed: 500,
@@ -27,7 +27,7 @@ export default {
 	debug: {
 		fpsmeter: true,
 		player: {
-			boundingBox: false,
+			boundingBox: true,
 		},
 	},
 	missile: {
