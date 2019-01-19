@@ -20,7 +20,7 @@ export default class BasePlayerBehaviour{
     }
 
     run(){
-    	console.log(this.player);
+    	// console.log(this.player);
     	// console.log(this.states, this.player.state);
     	if(this.states.indexOf(this.player.state) > -1){
     		// console.log("boop", this.player.state);

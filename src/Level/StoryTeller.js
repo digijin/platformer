@@ -63,7 +63,7 @@ export default class StoryTeller extends GameObject {
 
 	exit() {
 		this.engine.stage.removeChild(this.container);
-		this.engine.stage.removeChild(this.energyBar.container);
+		// this.engine.stage.removeChild(this.energyBar.container);
 	}
 
 	update() {
