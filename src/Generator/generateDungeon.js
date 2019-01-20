@@ -15,7 +15,7 @@ import getTRBL from "./getTRBL";
 import generateBuildings from "./generateBuildings";
 import removeSillyPlatforms from "./removeSillyPlatforms";
 import Point from "Utility/Point";
-import config from "config";
+// import config from "config";
 
 const NUM_DUNGEONS = 1;
 
@@ -43,7 +43,7 @@ const generateDungeon = function*(engine, manager){
 		for(let i = 0; i < 30; i++){
 			yield* compressPhysics(children);
 		}
-	
+
 		for(let i = 0; i < children.length; i++){
 			const child = children[i];
 			child.tint = 0x0;
@@ -55,7 +55,7 @@ const generateDungeon = function*(engine, manager){
 		left *= 1 / TILE_SIZE;
 		top *= 1 / TILE_SIZE;
 		right *= 1 / TILE_SIZE;
-		bottom *= 1 / TILE_SIZE;
+		// bottom *= 1 / TILE_SIZE;
 
 		// const center = { x: (right - left) / 2, y: (bottom - top) / 2 };
 
@@ -88,7 +88,7 @@ const generateDungeon = function*(engine, manager){
 				for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
 				// console.log(x, left, x - left);
 					block = manager.grid.get(x - left + dungOffset, y - top + GROUND);
-					if(y == roomTop){
+					if(y === roomTop){
 						block.type = "platform";
 					}else{
 						block.type = "0";
@@ -96,7 +96,7 @@ const generateDungeon = function*(engine, manager){
 				}
 			// yield x;
 			}
-			
+
 			const enId = Math.ceil(Math.random() * 3).toString();
 			grid.addEnemyData({ block, type: { id: enId } });
 			// console.log((roomLeft - roomRight) / 2, "subtractleft", left, "addoffset", dungOffset, "multiply", config.grid.width, "equal", block.position);
@@ -105,7 +105,7 @@ const generateDungeon = function*(engine, manager){
 			// 	y: (roomBottom - roomTop) / 2,
 			// }, center, left, top);
 			// c.tint = 0xffffff;
-			manager.draw();
+			// manager.draw();
 			yield i;
 			container.removeChild(c);
 		}
@@ -115,7 +115,7 @@ const generateDungeon = function*(engine, manager){
 
 
 	//save it into a grid;
-	
+
 	grid.blocks = manager.grid;
 
 	//add an enemy
