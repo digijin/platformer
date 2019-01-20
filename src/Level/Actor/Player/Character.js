@@ -20,8 +20,9 @@ const hand = {
 	speed: 2000,
 	reelSpeed: 1200,
 	offset: new Point({
-		x: -config.player.size.w / 2,
-		y: -config.player.size.h / 2,
+		// x: -config.player.size.w / 2,
+		// y: -config.player.size.h / 2,
+		x: 0, y: 0,
 	}),
 	position: new Point({ x: 0, y: 0 }),
 	direction: 0,
@@ -53,20 +54,20 @@ export default class PlayerCharacter extends Rigidbody{
     		x: 0.5,
     		y: 1,
     	};
-        
+
     	this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
     	this.sprite.anchor = this.registration;
     	this.sprite.width = this.size.w;
     	this.sprite.height = this.size.h;
     	this.addChild(this.sprite);
     	this.behaviours = Behaviour.map(b => new b(this, params.engine));
-		
+
     	this.graph = new PIXI.Graphics();
     	this.addChild(this.graph);
     	Globals.set("player", this);
 
     }
-    
+
 
     exit() {
     	this.container.removeChild(this.graph);
@@ -119,5 +120,5 @@ export default class PlayerCharacter extends Rigidbody{
     	return this.engine.mouse.point.subtract(this.targetOffset);
     }
 
-    
+
 }
