@@ -7,7 +7,7 @@ import Point from "Utility/Point";
 
 export default class MoveVertical extends Base{
 
-    states = ALL
+    states = ALL;
     update(){
     	// TODO: use player.state to determine in airborne and set grounded to airborne
 
@@ -19,10 +19,12 @@ export default class MoveVertical extends Base{
 
     		// console.log(vertObjects.length);
 
+    		//Figure out if all the blocks below are of "platform" type
+    		//because I can drop through platforms
     		const allPlatform =
 				vertObjects.find(o => {
-					return o.isPlatform() == false;
-				}) == undefined;
+					return o.isPlatform() === false;
+				}) === undefined;
 
     		switch(this.player.state){
     		case PlayerState.GROUNDED:
@@ -33,6 +35,9 @@ export default class MoveVertical extends Base{
     			}
     			break;
     		case PlayerState.AIRBORNE:
+    			if (allPlatform && this.engine.input.getButton("down")) {
+    				break;
+    			}
     		case PlayerState.SLAM:
     			//set y to ground
     			// console.log("player v is ", this.player.v);
