@@ -26,7 +26,7 @@ export default [
 	Slam,
 	Float,
 	RegenEnergy,
-	// UpdateMissile,
+	UpdateMissile,
 	UpdateGuns,
 	MoveHorizontal,
 	MoveVertical,

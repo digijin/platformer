@@ -33,14 +33,15 @@ export default class UpdateMissile extends Base{
     			// missile = false;
     			this.engine.register(
     				new secondary.projectile({
-    					container: this.player.container,
+    					container: this.player.parent,
     					owner: this.player,
     					direction:
 							-Math.PI / 2 +
-							(Math.random() - 0.5) +
-							this.player.leg.facing,
+							(Math.random() - 0.5)
+							//this.player.leg.facing
+    					,
     					speed: 10 + Math.random() * 5,
-    					position: this.player.leg.missileBarrelPos,
+    					position: new Point(this.player.position),
     					target: this.player.getTargetPoint().add(
     						new Point({
     							x: (Math.random() - 0.5) * 20,
