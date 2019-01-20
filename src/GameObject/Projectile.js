@@ -81,7 +81,7 @@ export default class Projectile extends GameObject {
 
     checkDecor(onHit: (decor: Decor, hitTest: {}) => {}) {
     	const missDecor = this.engine.grid.decor.every(d => {
-    		if (d.getType().obstacle == false) {
+    		if (d.getType().obstacle === false) {
     			return true;
     		}
     		const hitTest = this.trajectory.intersectsRect(d.rect);

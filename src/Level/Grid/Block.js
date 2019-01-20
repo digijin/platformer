@@ -47,7 +47,7 @@ export default class Block {
 		}
 		this.backgroundType = params.backgroundType;
 
-		
+
 	}
 
 	get type(){
@@ -79,11 +79,15 @@ export default class Block {
 	}
 
 	isEmpty(): boolean {
-		return this.type == "0";
+		return this.type === "0";
 	}
 
 	isVacant(): boolean {
-		return this.isPlatform() || this.isLadder() || this.type == "0";
+		return this.isPlatform() || this.isLadder() || this.isEmpty();
+	}
+
+	isGrappleable():boolean {
+		return this.isEmpty();
 	}
 
 	isPlatform(): boolean {

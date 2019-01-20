@@ -14,6 +14,7 @@ export default class Dash extends Base{
     	if(this.player.h == 0){
     		this.player.h = 1;
     	}
+    	//todo: unhardcode
     	const hDelta = this.player.h * this.engine.deltaTime * 500;//legs.speed;
     	this.dist += hDelta;
     	if (this.player.canMoveHori(hDelta) && Math.abs(this.dist) < DASH_DIST) {
@@ -22,7 +23,7 @@ export default class Dash extends Base{
     		this.dist = 0;
     		this.player.changeState(PlayerState.GROUNDED);
     	}
-        
+
     	this.engine.register(
     		new BoosterParticle({
     			container: this.player.container,
