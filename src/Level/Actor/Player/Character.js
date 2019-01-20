@@ -8,6 +8,7 @@ import Point from "Utility/Point";
 import PlayerState from "Level/Actor/Player/State";
 import type { PlayerStateType } from "Level/Actor/Player/State";
 
+import Globals from "../../../Globals";
 
 export const HAND_STATE = {
 	ARMED: 0,
@@ -62,6 +63,8 @@ export default class PlayerCharacter extends Rigidbody{
 		
     	this.graph = new PIXI.Graphics();
     	this.addChild(this.graph);
+    	Globals.set("player", this);
+
     }
     
 

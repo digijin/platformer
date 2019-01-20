@@ -26,7 +26,7 @@ export const behavior = {
 		if(instance.onClick){
 			instance.on("click", instance.onClick.bind(instance));
 		}
-		// instance.getGlobalPosition = function(){
+		// instance.getGlobalsPosition = function(){
 		// 	let { x, y } = this.position;
 		// 	let parent = this.parent;
 		// 	while(parent){

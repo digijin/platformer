@@ -15,7 +15,7 @@ import type Engine from "Engine";
 
 import { EngineMap } from "Components/Engine";
 
-import Global from "../../Global";
+import Globals from "../../Globals";
 
 
 import PlayerState from "Level/Actor/Player/State";
@@ -88,7 +88,8 @@ export default class Player extends Actor {
 		};
 
 		this.leg = new Leg({ parent: this, container: this.container });
-		Global.set("player", this);
+		// console.log("set player");
+		Globals.set("player", this);
 	}
 
 

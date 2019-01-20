@@ -1,6 +1,6 @@
 
 
-class Global{
+class Globals{
 
     values = {}
     valuePromises = {}
@@ -47,4 +47,4 @@ class Global{
 }
 
 
-export default new Global();
+export default new Globals();

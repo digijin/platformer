@@ -2,7 +2,7 @@
 import Base from "./Base";
 import PlayerState from "Level/Actor/Player/State";
 import BoosterParticle from "GameObject/Particle/BoosterParticle";
-
+import Point from "Utility/Point";
 import config from "config";
 const DASH_DIST = 200;
 export default class Dash extends Base{
@@ -26,7 +26,7 @@ export default class Dash extends Base{
     	this.engine.register(
     		new BoosterParticle({
     			container: this.player.container,
-    			position: this.player.position.subtract({
+    			position: new Point(this.player.position).subtract({
     				x: 0,
     				y: config.player.size.h / 2,
     			}),

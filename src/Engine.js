@@ -19,7 +19,7 @@ import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
 
-import Global from "./Global";
+import Globals from "./Globals";
 
 import * as PIXI from "pixi.js";
 
@@ -246,7 +246,7 @@ export default class Engine {
     	//HACK
     	this.canvas = this.pixicanvas;
 
-    	Global.set("stage", this.stage);
+    	Globals.set("stage", this.stage);
 
     	return this;
     }

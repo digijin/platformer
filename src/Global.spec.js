@@ -1,17 +1,17 @@
 
-import Global from "./Global";
+import Globals from "./Globals";
 
-describe("Global", () => {
+describe("Globals", () => {
 	beforeEach(() => {
-		Global.clear();
+		Globals.clear();
 	});
 	describe("get", () => {
 		it("should return a promise", () => {
-			expect(Global.get("key").toString()).toBe("[object Promise]");
+			expect(Globals.get("key").toString()).toBe("[object Promise]");
 		});
 		it("should instantly return thenable if value exists", (done) => {
-			Global.values = { key: "abc" };
-			Global.get("key").then((val)=>{
+			Globals.values = { key: "abc" };
+			Globals.get("key").then((val)=>{
 				// output = val;
 				expect(val).toBe("abc");
 				done();
@@ -21,15 +21,15 @@ describe("Global", () => {
 	});
 	describe("set", () => {
 		it("should set a key", () =>{
-			Global.set("key", "123");
-			expect(Global.values["key"]).toBe("123");
+			Globals.set("key", "123");
+			expect(Globals.values["key"]).toBe("123");
 		});
 		it("should notify other promises", (done) => {
-			Global.get("key").then((val) => {
+			Globals.get("key").then((val) => {
 				expect(val).toBe("abc123");
 				done();
 			});
-			Global.set("key", "abc123");
+			Globals.set("key", "abc123");
 		});
         
 
@@ -37,9 +37,9 @@ describe("Global", () => {
     
 	describe("remove", () => {
 		it("shoulds remove", () => {
-			Global.values = { key: "abc" };
-			Global.remove("key");
-			expect(Global.values["key"]).not.toBeDefined();
+			Globals.values = { key: "abc" };
+			Globals.remove("key");
+			expect(Globals.values["key"]).not.toBeDefined();
 
 		});
 	});
