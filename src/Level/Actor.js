@@ -14,6 +14,7 @@ import type Block from "Level/Grid/Block";
 // import * as PIXI from "pixi.js";
 
 export default class Actor extends Renderable {
+	agro: ?Actor;
 	explode = () => {
 		this.destroy();
 		//fill rect with explosions

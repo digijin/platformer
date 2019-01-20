@@ -13,12 +13,12 @@ export default class MoveVertical extends Base{
 
     	// console.log(this.player.state);
     	const vertObjects = this.player.vertObstacles(this.player.v);
-    
+
     	if (vertObjects.length > 0) {
     		//LAND ON GROUND
-			
+
     		// console.log(vertObjects.length);
-			
+
     		const allPlatform =
 				vertObjects.find(o => {
 					return o.isPlatform() == false;
@@ -44,11 +44,11 @@ export default class MoveVertical extends Base{
 
     			break;
     		}
-    		
-    		
+
+
     	}else{
     		//walk off a cliff...
-    		if(this.player.state == PlayerState.GROUNDED){
+    		if(this.player.state === PlayerState.GROUNDED){
     			this.player.changeState(PlayerState.AIRBORNE);
     		}
     	}

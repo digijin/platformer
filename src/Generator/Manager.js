@@ -2,9 +2,10 @@
 import GameObject from "GameObject";
 import Level from "Scene/Level";
 import generateDungeon from "./generateDungeon";
+import type GeneratorScene from "Scene/Generator";
 
 class GeneratorManager extends GameObject {
-	constructor(manager){
+	constructor(manager: GeneratorScene){
 		super();
 		this.manager = manager;
 	}
@@ -17,6 +18,7 @@ class GeneratorManager extends GameObject {
 	update(){
 		let result = this.gen.next();
 		// let start = new Date().getTime();
+		//todo: speedup better with time stuff
 		for(let x = 0; x < 10; x++){
 			if(result.done){
 				this.destroy();
@@ -25,6 +27,7 @@ class GeneratorManager extends GameObject {
 			}
 			result = this.gen.next();
 		}
+		this.manager.draw();
 	}
 }
 
