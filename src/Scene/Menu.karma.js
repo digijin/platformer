@@ -1,6 +1,6 @@
 import Game from "Game";
 import Menu from "Scene/Menu";
-import MainMenu from "Scene/MainMenu";
+// import MainMenu from "Scene/MainMenu";
 import * as PIXI from "pixi.js";
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");

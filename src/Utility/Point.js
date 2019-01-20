@@ -95,8 +95,9 @@ export default class Point {
 		return Math.atan2(this.y, this.x);
 	}
 
-	normalize(): Point{
-		return this.multiply(1 / this.length());
+	directionTo(point: Point): number {
+		const diff = this.subtract(point);
+		return Math.atan2(diff.y, diff.x);
 	}
 
 	/** Moves point along a direction in radians */
@@ -187,8 +188,7 @@ export default class Point {
 		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
 
-	directionTo(point: Point): number {
-		const diff = this.subtract(point);
-		return Math.atan2(diff.y, diff.x);
+	normalize(): Point{
+		return this.multiply(1 / this.length());
 	}
 }

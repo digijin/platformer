@@ -64,13 +64,13 @@ import Leg from "Mech/Leg";
 export default class Player extends Actor {
 	//this stuff basically to hack in equip panel
 	targetOffset: Point = new Point();
-	energy: number = 0;
 	container: PIXI.Container;
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
 	state: PlayerStateType;
 	hand = hand;
 	leg: Leg;
+	energy: number = 0;
 
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);

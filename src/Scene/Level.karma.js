@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");
 import recurseSearch from "test/util/recurseSearch";
-
+import Promise from "promise";
 import testGen from "jasmine-es6-generator";
 import mouseUtil from "test/util/mouse";
 

@@ -1,14 +1,14 @@
 import * as PIXI from "pixi.js";
 
 export default class DecorType {
+	textureId: string;
 	name: string;
-	id: string;
 	destructable: boolean;
 	image: any;
 	height: number;
 	width: number;
 	hp: number;
-	textureId: string;
+	id: string;
 	pattern: CanvasPattern;
 	category: string;
 	constructor(params) {

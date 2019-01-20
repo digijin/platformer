@@ -16,9 +16,12 @@ export default class Mouse {
 
 	init(engine: Engine): Mouse {
 		this.engine = engine;
-		document.addEventListener("mousemove", (e: MouseEvent): void => {
-			this.position = new Point({ x: e.clientX, y: e.clientY });
-		});
+		document.addEventListener(
+			"mousemove",
+			(e: MouseEvent): void => {
+				this.position = new Point({ x: e.clientX, y: e.clientY });
+			}
+		);
 		return this;
 	}
 

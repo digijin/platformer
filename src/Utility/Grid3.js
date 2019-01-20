@@ -19,12 +19,6 @@ export default class Grid3{
 		}
 	}
 
-	get(x = 0, y = 0, z = 0){
-		if(this[x] && this[x][y]){
-			return this[x][y][z];
-		}
-	}
-
 
 	row(num:number){
 		const arr = [];
@@ -57,8 +51,14 @@ export default class Grid3{
 		this.length = w;
 	}
 
-	makeObj(x, y, z) {
-		return new this.klass(Object.assign({ x, y, z }, this.params));
+	get(x = 0, y = 0, z = 0){
+		if(this[x] && this[x][y]){
+			return this[x][y][z];
+		}
+	}
+
+	get height(){
+		return this[0].length;
 	}
 
 	set height(h){
@@ -95,7 +95,7 @@ export default class Grid3{
 		return this[0][0].length;
 		// return this._depth;
 	}
-	
+
 	set depth(d){
 		// console.log("d", d, this.depth, this.width, this.height);
 		const dep  = this.depth;
@@ -132,7 +132,7 @@ export default class Grid3{
 		return out;
 	}
 
-	get height(){
-		return this[0].length;
+	makeObj(x, y, z) {
+		return new this.klass(Object.assign({ x, y, z }, this.params));
 	}
 }

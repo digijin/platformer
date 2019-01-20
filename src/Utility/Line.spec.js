@@ -119,7 +119,7 @@ describe("Utility/Line", () => {
 				p: [[1, 1], [2, 1], [2, 2], [3, 2], [3, 3]],
 			},
 		];
-		testcases.forEach((tc, i) => {
+		testcases.forEach((tc) => {
 			it("should test case " + tc.t, () => {
 				const pta = new Point({ x: tc.a[0], y: tc.a[1] });
 				const ptb = new Point({ x: tc.b[0], y: tc.b[1] });

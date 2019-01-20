@@ -34,14 +34,14 @@ const hand = {
 export default class PlayerCharacter extends Rigidbody{
 
 	targetOffset: Point = new Point();
-	energy: number = 0;
 	container: PIXI.Container;
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
 	state: PlayerStateType = PlayerState.AIRBORNE;
 	hand = hand;
-    leg: Leg;
+	leg: Leg;
     z:number = 10;
+    energy: number = 0;
     constructor(params){
     	super(params);
     	this.position = params.position;

@@ -1,6 +1,5 @@
 // @flow
 
-
 import Engine from "Engine";
 
 import MainMenu from "Scene/MainMenu";
@@ -15,7 +14,7 @@ import Generator from "Scene/Generator";
 import Playground from "Scene/Playground";
 
 //polyfills
-import Utility from "Utility";
+// import Utility from "Utility";
 
 //textures
 import { BlockTypes } from "Level/Grid/Block/Type";
@@ -32,13 +31,21 @@ import "./style.styl";
 // import MainMenu from 'MainMenu/Menu';
 
 export default class Game {
-    container: HTMLElement;
-    ctx: Object;
-    shells: Array<Object>;
-    engine: Engine;
-    inited: boolean;
+	container: HTMLElement;
+	ctx: Object;
+	shells: Array<Object>;
+	engine: Engine;
+	inited: boolean;
+	constructor(container: HTMLElement) {
+		this.container = container;
+		window.game = this;
+		PIXI.loader.load(this.init);
+		// console.log("game constructed");
+		// this.init();
+		this.inited = false;
+	}
 
-    init = () => {
+	init = () => {
 		this.inited = true;
 		//init textures that were just loaded
 		BlockTypes.forEach(t => t.init());
@@ -89,18 +96,7 @@ export default class Game {
 		this.engine.update(); //starts
 	};
 
-
-    constructor(container: HTMLElement) {
-		this.container = container;
-		window.game = this;
-		PIXI.loader.load(this.init);
-		// console.log("game constructed");
-		// this.init();
-		this.inited = false;
-	}
-
-
-    destroy() {
+	destroy() {
 		this.engine.kill();
 	}
 }

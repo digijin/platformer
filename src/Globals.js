@@ -1,50 +1,42 @@
+import Promise from "promise";
 
+class Globals {
+	values = {};
+	valuePromises = {};
 
-class Globals{
+	get(key) {
+		const value = this.values[key];
+		return new Promise(resolve => {
+			if (value) {
+				resolve(value);
+			} else {
+				if (!this.valuePromises[key]) {
+					this.valuePromises[key] = [];
+				}
+				this.valuePromises[key].push(resolve);
+			}
+		});
+	}
 
-    values = {}
-    valuePromises = {}
+	set(key, value) {
+		this.values[key] = value;
+		if (this.valuePromises[key]) {
+			this.valuePromises[key].forEach(resolve => {
+				resolve(value);
+			});
 
-    get(key){
-    	const value = this.values[key];
-    	const prom = new Promise((resolve, reject)=>{
-    		if(value){
-    			resolve(value);
-    		}else{
+			this.valuePromises[key] = [];
+		}
+	}
 
-    			if (!this.valuePromises[key]){
-    				this.valuePromises[key] = [];
-    			}
-    			this.valuePromises[key].push(resolve);
-    		}
-            
-    	});
-    	
-    	return prom;
-        
-    }
+	remove(key) {
+		delete this.values[key];
+	}
 
-    set(key, value){
-    	this.values[key] = value;
-    	if(this.valuePromises[key]){
-    		this.valuePromises[key].forEach(resolve => {
-    			resolve(value);
-    		});
-
-
-    		this.valuePromises[key] = [];
-    	}
-    }
-
-    remove(key){
-    	delete this.values[key];
-    }
-
-    clear(){
-    	this.values = {};
-    	this.valuePromises = {};
-    }
+	clear() {
+		this.values = {};
+		this.valuePromises = {};
+	}
 }
-
 
 export default new Globals();

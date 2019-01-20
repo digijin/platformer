@@ -22,16 +22,6 @@ import * as PIXI from "pixi.js";
 import FilterSprite from "Sprite/Explosion";
 
 export default class Missile extends Projectile {
-    guided: boolean;
-
-    minSpeed: number = 1;
-    acceleration: number = 20;
-    container: PIXI.Container;
-    remoteControl: boolean;
-    trajectory: Line;
-
-    maxSpeed: number = 40;
-
     update = () => {
     	this.move();
 
@@ -110,6 +100,16 @@ export default class Missile extends Projectile {
     		}
     	}
     };
+
+    guided: boolean;
+    acceleration: number = 20;
+    container: PIXI.Container;
+    remoteControl: boolean;
+    trajectory: Line;
+
+    maxSpeed: number = 40;
+
+    minSpeed: number = 1;
 
     constructor(params: { container: PIXI.Container }) {
     	super(params);

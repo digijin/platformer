@@ -1,12 +1,12 @@
 import GameObject from "GameObject";
-import Player from "Level/Actor/Player";
+// import Player from "Level/Actor/Player";
 import Point from "Utility/Point";
-import EnergyBar from "../GameObject/EnergyBar";
+// import EnergyBar from "../GameObject/EnergyBar";
 
 // import Transition from "Transition/CheckerboardOut";
 // import Results from "Scene/Results";
 import Grid from "Grid";
-import log from "loglevel";
+// import log from "loglevel";
 import * as PIXI from "pixi.js";
 import type Engine from "../Engine";
 
