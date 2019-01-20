@@ -14,47 +14,7 @@ import type Block from "Level/Grid/Block";
 // import * as PIXI from "pixi.js";
 
 export default class Actor extends Renderable {
-	canMoveHori = (amount: number): boolean => {
-		const boundingRect = this.getBoundingRect();
-		const targetRect = boundingRect.move({ x: amount, y: 0 });
-		const blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
-		const obstacles = blocks.filter(block => {
-			return !block.isVacant();
-		});
-		return obstacles.length == 0;
-	};
-
-	v: number;
-
-	z: number;
-	hp: number;
-	maxhp: number;
-	vertObstacles = (amount: number): Array<Block> => {
-		const boundingRect = this.getBoundingRect();
-		const targetRect = boundingRect.move({ x: 0, y: amount });
-		const nowBlocks = this.engine.grid.getBlocksOverlappingRect(
-			boundingRect
-		);
-		const nextBlocks = this.engine.grid.getBlocksOverlappingRect(
-			targetRect
-		);
-		//dont check in blocks we are already in
-		const blocks = nextBlocks.filter(b => nowBlocks.indexOf(b) == -1);
-		const obstacles = blocks.filter(block => {
-			//heading downwards onto platform
-			if (amount > 0 && block.isPlatform()) {
-				return true;
-			}
-
-			return !block.isVacant();
-		});
-		return obstacles;
-	};
-
-	canMoveVert = (amount: number): boolean => {
-		return this.vertObstacles(amount).length == 0;
-	};
-
+	agro: ?Actor;
 	explode = () => {
 		this.destroy();
 		//fill rect with explosions
@@ -79,6 +39,47 @@ export default class Actor extends Renderable {
 			);
 		}
 	};
+
+	canMoveHori = (amount: number): boolean => {
+		const boundingRect = this.getBoundingRect();
+		const targetRect = boundingRect.move({ x: amount, y: 0 });
+		const blocks = this.engine.grid.getBlocksOverlappingRect(targetRect);
+		const obstacles = blocks.filter(block => {
+			return !block.isVacant();
+		});
+		return obstacles.length === 0;
+	};
+
+	z: number;
+	hp: number;
+	maxhp: number;
+	vertObstacles = (amount: number): Array<Block> => {
+		const boundingRect = this.getBoundingRect();
+		const targetRect = boundingRect.move({ x: 0, y: amount });
+		const nowBlocks = this.engine.grid.getBlocksOverlappingRect(
+			boundingRect
+		);
+		const nextBlocks = this.engine.grid.getBlocksOverlappingRect(
+			targetRect
+		);
+		//dont check in blocks we are already in
+		const blocks = nextBlocks.filter(b => nowBlocks.indexOf(b) === -1);
+		return blocks.filter(block => {
+			//heading downwards onto platform
+			if (amount > 0 && block.isPlatform()) {
+				return true;
+			}
+
+			return !block.isVacant();
+		});
+
+	};
+
+	canMoveVert = (amount: number): boolean => {
+		return this.vertObstacles(amount).length === 0;
+	};
+
+	v: number;
 
 	h: number;
 
@@ -119,7 +120,7 @@ export default class Actor extends Renderable {
 		});
 		//if only one block is an obstacle, and it is in lower corner
 		let step: ?Block;
-		if (obstacles.length == 1) {
+		if (obstacles.length === 1) {
 			if (amount > 0) {
 				//moving right
 				if (!blocks[blocks.length - 1].isEmpty()) {

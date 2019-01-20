@@ -18,7 +18,7 @@ import heligun from "Level/Actor/Enemy/AI/agro/heligun";
 import suicideBomber from "Level/Actor/Enemy/AI/agro/suicideBomber";
 import type EnemyType from "Level/Actor/Enemy/Type";
 
-import Global from "../../Global";
+import Globals from "../../Globals";
 
 import * as PIXI from "pixi.js";
 
@@ -29,7 +29,6 @@ class EnemySprite extends PIXI.Sprite {}
 
 export default class Enemy extends Actor {
 	sprite: PIXI.Sprite;
-	walkSpeed: number;
 	type: EnemyType;
 	agro: Player | null;
 	direction: number;
@@ -38,6 +37,7 @@ export default class Enemy extends Actor {
 	v: number;
 	graph: PIXI.Graphics;
 	action: ?Generator<*, *, *>;
+	walkSpeed: number;
 
 	constructor(params: { position: Point, type: EnemyType }) {
 		super(params);
@@ -75,7 +75,7 @@ export default class Enemy extends Actor {
 
 		this.graph = new PIXI.Graphics();
 		this.parent.addChild(this.graph);
-		Global.get("player").then((player) => {this.player = player;});
+		Globals.get("player").then((player) => {this.player = player;});
 	}
 
 	exit() {
@@ -87,6 +87,7 @@ export default class Enemy extends Actor {
 		this.sprite.position = this.position;
 		// const player = this.engine.getPlayer();
 		if (!this.player) {
+			// console.log("no player");
 			// this.gravity();
 			this.render();
 			return;
@@ -112,7 +113,7 @@ export default class Enemy extends Actor {
 	}
 
 	newAction() {
-		const player = this.engine.getPlayer();
+		// const player = this.engine.getPlayer();
 		if (this.agro) {
 			//falloff distance
 			if (
@@ -120,12 +121,12 @@ export default class Enemy extends Actor {
 			) {
 				this.startIdle();
 			} else {
-				this.startAgro(player);
+				this.startAgro(this.player);
 			}
 		} else {
 			//pickup distance
-			if (this.position.distanceTo(player.position) < AGRO_DISTANCE) {
-				this.startAgro(player);
+			if (this.position.distanceTo(this.player.position) < AGRO_DISTANCE) {
+				this.startAgro(this.player);
 			} else {
 				this.startIdle();
 			}

@@ -3,6 +3,8 @@ import Base from "./Base";
 import { ALL } from "Level/Actor/Player/State";
 import config from "config";
 
+import Point from "Utility/Point";
+
 import { HAND_STATE } from "../../Player";
 
 
@@ -23,7 +25,7 @@ export default class MoveHorizontal extends Base{
     	if (this.player.hand.state == HAND_STATE.GRIPPED) {
     		// console.log("yoloswag");
     		//REEL IN
-    		const diff = this.player.position.add(this.player.hand.offset).subtract(this.player.hand.position);
+    		const diff = new Point(this.player.position).add(this.player.hand.offset).subtract(this.player.hand.position);
     		const dir = Math.atan2(diff.y, diff.x);
     		this.player.h = -Math.cos(dir); //* deltaTime*hSpeed
     		this.player.v = -Math.sin(dir) * this.engine.deltaTime * this.player.hand.reelSpeed;

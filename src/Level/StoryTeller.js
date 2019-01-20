@@ -1,12 +1,12 @@
 import GameObject from "GameObject";
-import Player from "Level/Actor/Player";
+// import Player from "Level/Actor/Player";
 import Point from "Utility/Point";
-import EnergyBar from "../GameObject/EnergyBar";
+// import EnergyBar from "../GameObject/EnergyBar";
 
 // import Transition from "Transition/CheckerboardOut";
 // import Results from "Scene/Results";
 import Grid from "Grid";
-import log from "loglevel";
+// import log from "loglevel";
 import * as PIXI from "pixi.js";
 import type Engine from "../Engine";
 
@@ -34,33 +34,36 @@ export default class StoryTeller extends GameObject {
 		this.engine.register(grid);
 		grid.load(gridData);
 
-		const player = new Player({
-			position: new Point({
-				x: 450,
-				y: 100,
-			}),
-			container: this.container,
-		});
+		// const player = new Player({
+		// 	position: new Point({
+		// 		x: 450,
+		// 		y: 100,
+		// 	}),
+		// 	container: this.container,
+		// });
 
 		const pc = new PlayerCharacter(
-			{ position: new Point({
-				x: 450,
-				y: 100,
-			}) }
+			{
+				position: new Point({
+					x: 300,
+					y: 50,
+				}),
+				engine: engine,
+			}
 		);
 		this.container.addChild(pc);
 
 
-		this.energyBar = new EnergyBar({ player: player });
-		this.engine.register(this.energyBar);
-		this.engine.stage.addChild(this.energyBar.container);
+		// this.energyBar = new EnergyBar({ player: player });
+		// this.engine.register(this.energyBar);
+		// this.engine.stage.addChild(this.energyBar.container);
 
-		engine.register(player);
+		// engine.register(player);
 	}
 
 	exit() {
 		this.engine.stage.removeChild(this.container);
-		this.engine.stage.removeChild(this.energyBar.container);
+		// this.engine.stage.removeChild(this.energyBar.container);
 	}
 
 	update() {

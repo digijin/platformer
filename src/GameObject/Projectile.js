@@ -1,21 +1,21 @@
 //@flow
 
 // import type Engine from "Engine";
-import type Point from "Utility/Point";
+import Point from "Utility/Point";
 import type Actor from "Level/Actor";
 import type Decor from "Level/Grid/Decor";
 import GameObject from "GameObject";
 import Line from "Utility/Line";
 
 export default class Projectile extends GameObject {
+    h: number;
     position: Point;
-    direction: number;
     target: Point;
     owner: Actor;
     speed: number;
     guided: boolean;
     trajectory: Line;
-    h: number;
+    direction: number;
     v: number;
     constructor(params: {
         position: Point,
@@ -24,7 +24,7 @@ export default class Projectile extends GameObject {
         owner: Actor
     }) {
     	super();
-
+    	// console.log(params.position.constructor.name);
     	Object.assign(this, params);
     }
 
@@ -36,7 +36,7 @@ export default class Projectile extends GameObject {
     }
 
     move() {
-    	const old = this.position.clone();
+    	const old = new Point(this.position);
     	this.position.x += this.h * this.engine.deltaTime * this.speed;
     	this.position.y += this.v * this.engine.deltaTime * this.speed;
     	this.trajectory = new Line({ a: old, b: this.position });
@@ -81,7 +81,7 @@ export default class Projectile extends GameObject {
 
     checkDecor(onHit: (decor: Decor, hitTest: {}) => {}) {
     	const missDecor = this.engine.grid.decor.every(d => {
-    		if (d.getType().obstacle == false) {
+    		if (d.getType().obstacle === false) {
     			return true;
     		}
     		const hitTest = this.trajectory.intersectsRect(d.rect);

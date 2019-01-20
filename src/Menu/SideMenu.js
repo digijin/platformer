@@ -16,7 +16,7 @@ import MainMenu from "../Scene/MainMenu";
 // }
 // import GameObject from "GameObject";
 
-import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
+// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import MenuBackgroundFilter from "Filter/Buildings/Filter";
 
 import FilterUpdater from "Filter/Updater";

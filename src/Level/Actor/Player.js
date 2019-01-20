@@ -15,7 +15,7 @@ import type Engine from "Engine";
 
 import { EngineMap } from "Components/Engine";
 
-import Global from "../../Global";
+import Globals from "../../Globals";
 
 
 import PlayerState from "Level/Actor/Player/State";
@@ -64,13 +64,13 @@ import Leg from "Mech/Leg";
 export default class Player extends Actor {
 	//this stuff basically to hack in equip panel
 	targetOffset: Point = new Point();
-	energy: number = 0;
 	container: PIXI.Container;
 	primaryReload: number = 0;
 	graph: PIXI.Graphics;
 	state: PlayerStateType;
 	hand = hand;
 	leg: Leg;
+	energy: number = 0;
 
 	constructor(params: { position: Point, container: PIXI.Container }) {
 		super(params);
@@ -88,7 +88,8 @@ export default class Player extends Actor {
 		};
 
 		this.leg = new Leg({ parent: this, container: this.container });
-		Global.set("player", this);
+		// console.log("set player");
+		Globals.set("player", this);
 	}
 
 

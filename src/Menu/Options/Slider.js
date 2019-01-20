@@ -49,7 +49,7 @@ export class Slider extends React.Component{
     			buttonMode={true}
     			interactive={true}
     			onMouseDown={(e) => {
-    				// console.log("md", e, this.getGlobalPosition());
+    				// console.log("md", e, this.getGlobalsPosition());
     				// console.log(e.data.global, e.data.originalEvent);
     				self.setState(state => ({
     					...state,
@@ -73,7 +73,7 @@ export class Slider extends React.Component{
     				// const diff = e.data.global.x - self.state.x;
     				// console.log(diff);
     				if(self.state.down){
-    					let pc = e.data.global.x - this.getGlobalPosition().x - SLIDER_X_OFFSET;
+    					let pc = e.data.global.x - this.getGlobalsPosition().x - SLIDER_X_OFFSET;
     					pc = (pc.clamp(0, SLIDER_WIDTH) / SLIDER_WIDTH);
     					// console.log(pc);
                         

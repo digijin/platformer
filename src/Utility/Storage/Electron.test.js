@@ -1,7 +1,7 @@
 import ElectronAdapter from "./Electron";
 import rimraf from "rimraf";
-import path from "path";
-import fs from "fs";
+// import path from "path";
+// import fs from "fs";
 const SAVEDIR = "testsave";
 describe("electron adapter", () => {
 	let adapter;

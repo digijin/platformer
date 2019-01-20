@@ -28,19 +28,20 @@ export type BlockTypeParams = {
 	destructable: boolean,
 	hp: number,
 	textureId: string,
-	filter?: Array<PIXI.Filter>,
+	filters?: Array<PIXI.Filter>,
 };
 
 export default class BlockType {
+	textureId: string;
 	name: string;
-	id: string;
 	destructable: boolean;
 	image: any;
 	hp: number;
-	textureId: string;
+	id: string;
 	texture: PIXI.Texture;
 	textureId: string;
 	pattern: CanvasPattern;
+	filters: Array<PIXI.Filter>;
 	constructor(params: BlockTypeParams) {
 		this.name = params.name;
 		this.id = params.id;

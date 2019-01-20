@@ -4,6 +4,8 @@ import PlayerState from "Level/Actor/Player/State";
 import BoosterParticle from "GameObject/Particle/BoosterParticle";
 import config from "config";
 
+import Point from "Utility/Point";
+
 export default class Boost extends Base{
 
     states = [PlayerState.GROUNDED, PlayerState.AIRBORNE]
@@ -19,7 +21,7 @@ export default class Boost extends Base{
     		this.engine.register(
     			new BoosterParticle({
     				container: this.player.container,
-    				position: this.player.position.subtract({
+    				position: new Point(this.player.position).subtract({
     					x: 0,
     					y: config.player.size.h / 2,
     				}),

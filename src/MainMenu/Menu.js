@@ -79,7 +79,7 @@ export default class MainMenu extends GameObject {
 			<EngineProvider engine={this.engine}>
 				<Container>
 					<Text
-						text="Has no name yet"
+						text="Has  no  name  yet"
 						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",

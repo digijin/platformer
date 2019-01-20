@@ -205,6 +205,4 @@ describe("Grid.spec.js", () => {
 			expect(grid.blocks[0].length).toBe(3);
 		});
 	});
-
-
 });

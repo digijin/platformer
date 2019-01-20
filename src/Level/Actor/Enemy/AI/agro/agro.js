@@ -2,6 +2,7 @@ import type Player from "Level/Actor/Player";
 import Missile from "GameObject/Missile";
 import type Engine from "Engine";
 import type Enemy from "Level/Actor/Enemy";
+import Point from "Utility/Point";
 const CLOSEST_DISTANCE = 100;
 const FARTHEST_DISTANCE = 400;
 export default function* agro(
@@ -16,7 +17,7 @@ export default function* agro(
 	while (true) {
 		firingCooldown -= engine.deltaTime;
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
-		const distance = player.position.distanceTo(enemy.position);
+		const distance = new Point(player.position).distanceTo(enemy.position);
 		let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 		if (distance < CLOSEST_DISTANCE) {
 			hDelta = -hDelta;
@@ -35,7 +36,7 @@ export default function* agro(
 							x: 0,
 							y: -enemy.size.h,
 						}),
-						target: player.position.clone(),
+						target: new Point(player.position),
 					})
 				);
 			}

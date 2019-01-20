@@ -57,8 +57,7 @@ describe("Game/Engine.spec.js", () => {
 		expect(go.init).toHaveBeenCalled();
 	});
 
-	describe("destroy", () =>{
-
+	describe("destroy", () => {
 		it("should remove from list of objects", () => {
 			const go = new GameObject();
 			expect(engine.objects.length).toBe(0);
@@ -75,7 +74,6 @@ describe("Game/Engine.spec.js", () => {
 			engine.destroy(go);
 			expect(go.exit).toHaveBeenCalled();
 		});
-
 	});
 
 	describe("transitions", () => {

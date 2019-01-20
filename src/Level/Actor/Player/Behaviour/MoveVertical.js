@@ -3,26 +3,28 @@ import Base from "./Base";
 import PlayerState, { ALL } from "Level/Actor/Player/State";
 import config from "config";
 import Shell from "GameObject/Shell";
-
+import Point from "Utility/Point";
 
 export default class MoveVertical extends Base{
 
-    states = ALL
+    states = ALL;
     update(){
     	// TODO: use player.state to determine in airborne and set grounded to airborne
 
     	// console.log(this.player.state);
     	const vertObjects = this.player.vertObstacles(this.player.v);
-    
+
     	if (vertObjects.length > 0) {
     		//LAND ON GROUND
-			
+
     		// console.log(vertObjects.length);
-			
+
+    		//Figure out if all the blocks below are of "platform" type
+    		//because I can drop through platforms
     		const allPlatform =
 				vertObjects.find(o => {
-					return o.isPlatform() == false;
-				}) == undefined;
+					return o.isPlatform() === false;
+				}) === undefined;
 
     		switch(this.player.state){
     		case PlayerState.GROUNDED:
@@ -33,6 +35,9 @@ export default class MoveVertical extends Base{
     			}
     			break;
     		case PlayerState.AIRBORNE:
+    			if (allPlatform && this.engine.input.getButton("down")) {
+    				break;
+    			}
     		case PlayerState.SLAM:
     			//set y to ground
     			// console.log("player v is ", this.player.v);
@@ -44,11 +49,11 @@ export default class MoveVertical extends Base{
 
     			break;
     		}
-    		
-    		
+
+
     	}else{
     		//walk off a cliff...
-    		if(this.player.state == PlayerState.GROUNDED){
+    		if(this.player.state === PlayerState.GROUNDED){
     			this.player.changeState(PlayerState.AIRBORNE);
     		}
     	}
@@ -61,8 +66,9 @@ export default class MoveVertical extends Base{
     	for (let i = 0; i < speed * 4; i++) {
     		this.engine.register(
     			new Shell({
-    				container: this.player.container,
-    				position: this.player.position.subtract({
+    				// container: this.player.container,
+    				container: this.player.parent,
+    				position: new Point(this.player.position).subtract({
     					x: (Math.random() - 0.5) * 15 * speed,
     					// y: config.player.size.h / 2
     					y: 0,

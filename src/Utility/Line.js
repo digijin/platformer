@@ -13,6 +13,13 @@ export default class Line {
 		if (arguments.length !== 1) {
 			throw new Error("wrong arguments length passed to Line");
 		}
+		if(!( params.a instanceof Point)){
+			throw new Error("Line params 'a' is not point");
+		}
+		if(!( params.b instanceof Point)){
+			debugger;
+			throw new Error("Line params 'b' is not point");
+		}
 		this.a = params.a;
 		this.b = params.b;
 	}
@@ -32,51 +39,8 @@ export default class Line {
 		});
 	}
 
-	//Liang-Barsky algorithm
-    //https://gist.github.com/ChickenProp/3194723
-    intersectsRect(rect: {
-		t: number,
-		r: number,
-		b: number,
-		l: number
-	}): { result: boolean, collision?: { x: number, y: number } } {
-		const x = this.a.x;
-		const y = this.a.y;
-		const vx = this.b.x - this.a.x;
-		const vy = this.b.y - this.a.y;
-
-		const left = rect.l;
-		const right = rect.r;
-		const top = rect.t;
-		const bottom = rect.b;
-
-		const p = [-vx, vx, -vy, vy];
-		const q = [x - left, right - x, y - top, bottom - y];
-		let u1 = -Infinity;
-		let u2 = Infinity;
-		for (let i = 0; i <= 4; i++) {
-			if (p[i] == 0) {
-				if (q[i] < 0) {
-					return { result: false };
-				}
-			} else {
-				var t = q[i] / p[i];
-				if (p[i] < 0 && u1 < t) {
-					u1 = t;
-				} else if (p[i] > 0 && u2 > t) {
-					u2 = t;
-				}
-			}
-		}
-
-		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
-
-		const collision = {};
-		collision.x = x + u1 * vx;
-		collision.y = y + u1 * vy;
-		// console.log(collision);
-
-		return { result: true, collision: collision };
+	percent(pc: number): Point {
+		return this.a.percentTo(this.b, pc);
 	}
 
 	//returns all blocks the line travels through
@@ -218,7 +182,50 @@ export default class Line {
 		return out;
 	}
 
-	percent(pc: number): Point {
-		return this.a.percentTo(this.b, pc);
+	//Liang-Barsky algorithm
+	//https://gist.github.com/ChickenProp/3194723
+	intersectsRect(rect: {
+		t: number,
+		r: number,
+		b: number,
+		l: number
+	}): { result: boolean, collision?: { x: number, y: number } } {
+		const x = this.a.x;
+		const y = this.a.y;
+		const vx = this.b.x - this.a.x;
+		const vy = this.b.y - this.a.y;
+
+		const left = rect.l;
+		const right = rect.r;
+		const top = rect.t;
+		const bottom = rect.b;
+
+		const p = [-vx, vx, -vy, vy];
+		const q = [x - left, right - x, y - top, bottom - y];
+		let u1 = -Infinity;
+		let u2 = Infinity;
+		for (let i = 0; i <= 4; i++) {
+			if (p[i] == 0) {
+				if (q[i] < 0) {
+					return { result: false };
+				}
+			} else {
+				var t = q[i] / p[i];
+				if (p[i] < 0 && u1 < t) {
+					u1 = t;
+				} else if (p[i] > 0 && u2 > t) {
+					u2 = t;
+				}
+			}
+		}
+
+		if (u1 > u2 || u1 > 1 || u1 < 0) return { result: false };
+
+		const collision = {};
+		collision.x = x + u1 * vx;
+		collision.y = y + u1 * vy;
+		// console.log(collision);
+
+		return { result: true, collision: collision };
 	}
 }

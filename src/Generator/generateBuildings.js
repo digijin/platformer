@@ -11,8 +11,8 @@ export default function* (manager, grid){
 		// this.genTunnel(x, GROUND);
 		x += spacing;
 		x += yield* genBuilding(x, GROUND, manager, grid);
-		manager.draw();
-		yield x;
+		// manager.draw();
+		// yield x;
 	}
 }
 

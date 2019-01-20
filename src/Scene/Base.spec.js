@@ -17,7 +17,7 @@ describe("Scene/Base.spec.js", () => {
 			const eng = { destroyAllExceptTagged: () => {},  ui: { dispatch: () => {} } };
 			spyOn(eng, "destroyAllExceptTagged");
 			base.engine = eng;
-			base.end() ;
+			base.end();
 			expect(eng.destroyAllExceptTagged).toHaveBeenCalled();
 		});
 	});

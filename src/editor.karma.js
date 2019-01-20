@@ -1,14 +1,14 @@
 import Game from "Game";
 
-import testGen from "jasmine-es6-generator";
+// import testGen from "jasmine-es6-generator";
 import mouseUtil from "test/util/mouse";
 // let Game = require("./Game");
 // let mouseUtil = require("./test/util/mouse");
 
 // const tg: (Generator<*,*,*>)=>null = testGen
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function sleep(ms) {
+// 	return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 const DELAY = 500;
 
@@ -56,11 +56,7 @@ xdescribe("editor.karma functional", () => {
 		});
 		it("should hear stuff", () => {
 			expect(game.engine.input.getMouseButton(0)).toBe(0);
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 0 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", { button: 0 }, game.engine.canvas);
 			expect(game.engine.input.getMouseButton(0)).toBe(1);
 			mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
 			expect(game.engine.input.getMouseButton(0)).toBe(0);
@@ -74,21 +70,11 @@ xdescribe("editor.karma functional", () => {
 				{ clientX: pt.x, clientY: pt.y },
 				game.engine.canvas
 			);
-			mouseUtil.mouseEvent(
-				"mousedown",
-				{ button: 0 },
-				game.engine.canvas
-			);
+			mouseUtil.mouseEvent("mousedown", { button: 0 }, game.engine.canvas);
 			setTimeout(() => {
-				const block = game.engine.grid.getBlockAtPoint(
-					game.engine.mouse.point
-				);
+				const block = game.engine.grid.getBlockAtPoint(game.engine.mouse.point);
 				expect(block.isEmpty()).toBe(false);
-				mouseUtil.mouseEvent(
-					"mouseup",
-					{ button: 0 },
-					game.engine.canvas
-				);
+				mouseUtil.mouseEvent("mouseup", { button: 0 }, game.engine.canvas);
 				done();
 			}, DELAY);
 		});

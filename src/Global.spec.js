@@ -1,46 +1,41 @@
+import Globals from "./Globals";
 
-import Global from "./Global";
-
-describe("Global", () => {
+describe("Globals", () => {
 	beforeEach(() => {
-		Global.clear();
+		Globals.clear();
 	});
 	describe("get", () => {
 		it("should return a promise", () => {
-			expect(Global.get("key").toString()).toBe("[object Promise]");
+			expect(Globals.get("key").toString()).toBe("[object Object]"); //was Promise until I polyfilled
 		});
-		it("should instantly return thenable if value exists", (done) => {
-			Global.values = { key: "abc" };
-			Global.get("key").then((val)=>{
+		it("should instantly return thenable if value exists", done => {
+			Globals.values = { key: "abc" };
+			Globals.get("key").then(val => {
 				// output = val;
 				expect(val).toBe("abc");
 				done();
 			});
 		});
-
 	});
 	describe("set", () => {
-		it("should set a key", () =>{
-			Global.set("key", "123");
-			expect(Global.values["key"]).toBe("123");
+		it("should set a key", () => {
+			Globals.set("key", "123");
+			expect(Globals.values["key"]).toBe("123");
 		});
-		it("should notify other promises", (done) => {
-			Global.get("key").then((val) => {
+		it("should notify other promises", done => {
+			Globals.get("key").then(val => {
 				expect(val).toBe("abc123");
 				done();
 			});
-			Global.set("key", "abc123");
+			Globals.set("key", "abc123");
 		});
-        
-
 	});
-    
+
 	describe("remove", () => {
 		it("shoulds remove", () => {
-			Global.values = { key: "abc" };
-			Global.remove("key");
-			expect(Global.values["key"]).not.toBeDefined();
-
+			Globals.values = { key: "abc" };
+			Globals.remove("key");
+			expect(Globals.values["key"]).not.toBeDefined();
 		});
 	});
 	describe("clear", () => {});

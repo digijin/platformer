@@ -21,8 +21,8 @@ class BackgroundStage extends PIXI.Container {}
 class BackgroundBuildingStage extends PIXI.Container {}
 
 export default class Background extends GameObject {
+	buildings: Array<PIXI.Sprite>;
 	el: HTMLDivElement;
-	top: HTMLDivElement;
 	bottom: HTMLDivElement;
 	top2: HTMLDivElement;
 	bottom2: HTMLDivElement;
@@ -30,7 +30,7 @@ export default class Background extends GameObject {
 	buildingStage: PIXI.Container;
 	bg: PIXI.Sprite;
 	ground: PIXI.Sprite;
-	buildings: Array<PIXI.Sprite>;
+	top: HTMLDivElement;
 	explosions: boolean = true;
 	constructor() {
 		super();
