@@ -1,7 +1,7 @@
 //@flow
 
 // import type Engine from "Engine";
-import type Point from "Utility/Point";
+import Point from "Utility/Point";
 import type Actor from "Level/Actor";
 import type Decor from "Level/Grid/Decor";
 import GameObject from "GameObject";
@@ -24,7 +24,7 @@ export default class Projectile extends GameObject {
         owner: Actor
     }) {
     	super();
-
+    	// console.log(params.position.constructor.name);
     	Object.assign(this, params);
     }
 
@@ -36,7 +36,7 @@ export default class Projectile extends GameObject {
     }
 
     move() {
-    	const old = this.position.clone();
+    	const old = new Point(this.position);
     	this.position.x += this.h * this.engine.deltaTime * this.speed;
     	this.position.y += this.v * this.engine.deltaTime * this.speed;
     	this.trajectory = new Line({ a: old, b: this.position });

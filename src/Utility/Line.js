@@ -13,6 +13,13 @@ export default class Line {
 		if (arguments.length !== 1) {
 			throw new Error("wrong arguments length passed to Line");
 		}
+		if(!( params.a instanceof Point)){
+			throw new Error("Line params 'a' is not point");
+		}
+		if(!( params.b instanceof Point)){
+			debugger;
+			throw new Error("Line params 'b' is not point");
+		}
 		this.a = params.a;
 		this.b = params.b;
 	}
@@ -33,8 +40,8 @@ export default class Line {
 	}
 
 	//Liang-Barsky algorithm
-    //https://gist.github.com/ChickenProp/3194723
-    intersectsRect(rect: {
+	//https://gist.github.com/ChickenProp/3194723
+	intersectsRect(rect: {
 		t: number,
 		r: number,
 		b: number,

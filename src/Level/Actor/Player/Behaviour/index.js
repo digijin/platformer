@@ -27,7 +27,7 @@ export default [
 	Float,
 	RegenEnergy,
 	// UpdateMissile,
-	// UpdateGuns,
+	UpdateGuns,
 	MoveHorizontal,
 	MoveVertical,
 	UpdateGrapple,

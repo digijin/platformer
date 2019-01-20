@@ -3,7 +3,8 @@ import Base from "./Base";
 import { ALL } from "Level/Actor/Player/State";
 import { PrimaryMap } from "Components/Primary";
 import Shell from "GameObject/Shell";
-
+import Point from "Utility/Point";
+import config from "config";
 
 export default class UpdateGuns extends Base{
 
@@ -18,7 +19,7 @@ export default class UpdateGuns extends Base{
     				this.engine.register(
     					new Shell({
     						container: this.player.container,
-    						position: this.player.position.add({
+    						position: new Point(this.player.position).add({
     							x: 0,
     							y: -this.player.size.h / 2,
     						}),
@@ -29,7 +30,8 @@ export default class UpdateGuns extends Base{
     					})
     				);
     			}
-    			const gunPoint = this.player.leg.gunBarrelPos;
+    			// const gunPoint = this.player.leg.gunBarrelPos;
+    			const gunPoint = new Point(this.player.position).subtract({ x: 0, y: config.player.size.h / 2 });
     			const diff = this.player.getTargetPoint().subtract(gunPoint);
     			const dir = Math.atan2(diff.y, diff.x);
     			if (this.player.spendEnergy(primary.energyCost)) {
@@ -38,7 +40,7 @@ export default class UpdateGuns extends Base{
     					// new Bullet({
     					new primary.projectile({
     						dir: dir,
-    						container: this.player.container,
+    						container: this.player.parent,
     						position: gunPoint,
     						owner: this.player,
     						time: 8,
