@@ -173,12 +173,10 @@ export default {
 				},
 			],
 			grapple: [
-				
 				{
 					type: "keyboard",
 					key: "e",
 				},
-				
 			],
 			editor_add: [
 				{

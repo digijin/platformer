@@ -20,9 +20,10 @@ const hand = {
 	speed: 2000,
 	reelSpeed: 1200,
 	offset: new Point({
+		x:0,
 		// x: -config.player.size.w / 2,
-		// y: -config.player.size.h / 2,
-		x: 0, y: 0,
+		y: -config.player.size.h / 2,
+		// x: 0, y: 10,
 	}),
 	position: new Point({ x: 0, y: 0 }),
 	direction: 0,
