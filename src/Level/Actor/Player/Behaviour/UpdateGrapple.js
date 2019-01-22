@@ -1,13 +1,13 @@
 import Base from "./Base";
 import { ALL } from "Level/Actor/Player/State";
-
+import config from "config";
 import { HAND_STATE } from "../../Player";
 import Point from "Utility/Point";
 import Line from "../../../../Utility/Line";
 
 export default class UpdateGrapple extends Base{
 
-    states = ALL
+    states = ALL;
     update(){
     	if (this.player.hand.state === HAND_STATE.ARMED) {
     		this.player.hand.position = new Point(this.player.position).add(this.player.hand.offset);
@@ -82,7 +82,12 @@ export default class UpdateGrapple extends Base{
     	if(this.player.hand.state === HAND_STATE.GRIPPED){
     		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
     		// console.log(spaceLeft);
-    		if(spaceLeft < 100){
+    		if(spaceLeft < config.player.size.h / 1.5){
+    			this.player.hand.state = HAND_STATE.RELEASED;
+    		}
+
+    		// TODO JUMP ESCAPE CLAUSE
+    		if(this.engine.input.getButtonDown("jump")){
     			this.player.hand.state = HAND_STATE.RELEASED;
     		}
     	}
