@@ -4,6 +4,7 @@ import config from "config";
 import { HAND_STATE } from "../../Player";
 import Point from "Utility/Point";
 import Line from "../../../../Utility/Line";
+import Enemy from "../../Enemy";
 
 export default class UpdateGrapple extends Base{
 
@@ -36,6 +37,14 @@ export default class UpdateGrapple extends Base{
     		}
     		//todo unify this with projectile.js, maybe make grapple a projectile
     		const trajectory = new Line({ a: old, b: curr });
+    		//CHECK ENEMIES
+    		this.engine.getEnemies().forEach((en:Enemy) => {
+    			if(en.getBoundingRect().contains(curr)){
+    				this.player.hand.state = HAND_STATE.GRIPPED;
+    			}
+    		});
+
+    		//CHECK GRID
     		const blocks = trajectory.blockPixels();
     		// console.log(blocks.length, "blocks");
     		const empty = blocks.every(b => {
