@@ -24,6 +24,7 @@ class GeneratorManager extends GameObject {
 				this.destroy();
 				this.engine.stage.removeChild(this.manager.container);
 				this.engine.startScene(new Level());
+				return;
 			}
 			result = this.gen.next();
 		}

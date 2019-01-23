@@ -5,6 +5,7 @@ const CLOSEST_DISTANCE = 50;
 const DETONATE_DISTANCE = 20;
 import type Engine from "Engine";
 import type Enemy from "Level/Actor/Enemy";
+import Point from "Utility/Point";
 export default function* suicideBomber(
 	enemy: Enemy,
 	engine: Engine,
@@ -22,7 +23,7 @@ export default function* suicideBomber(
 	};
 	while (true) {
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
-		const distance = player.position.distanceTo(enemy.position);
+		const distance = new Point(player.position).distanceTo(enemy.position);
 		if (enemy.v == 0) {
 			//on ground
 			enemy.h = enemy.walkSpeed * enemy.direction;

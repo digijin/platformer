@@ -24,6 +24,7 @@ export default function* agro(
 		const distance = new Point(player.position).distanceTo(enemy.position);
 		const direction = enemy.position.directionTo(player.position);
 		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
+		// console.log( player)
 
 		enemy.sprite.scale.x = player.position.x < enemy.position.x ? 1 : -1;
 

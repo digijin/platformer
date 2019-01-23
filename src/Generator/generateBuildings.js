@@ -22,8 +22,12 @@ function *genBuilding(xOff, yOff, manager, grid){
 	const width = MIN_BUILDING_WIDTH + Math.ceil((MAX_BUILDING_WIDTH - MIN_BUILDING_WIDTH) * Math.random());
 	const floors = Math.ceil(MAX_FLOORS * Math.random());
 
-	const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * (floors + 2)));
-	grid.addEnemyData({ block, type: { id: "4" } });
+	//hovering helicopters
+	for(let i = 0; i < 3; i++){
+		const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * (floors + 2 + (i * 2))));
+		grid.addEnemyData({ block, type: { id: "4" } });
+
+	}
 
 	for(let x = xOff; x < xOff + width; x++){
 		for(let f = 1; f <= floors; f++){
