@@ -4,7 +4,7 @@ export const GRID_WIDTH = 500;
 export const GRID_HEIGHT = 400;
 
 
-export const GROUND = 100;
+export const GROUND = 200;
 export const MIN_BUILDING_SPACING = 2;
 export const MAX_BUILDING_SPACING = 8;
 export const MIN_BUILDING_WIDTH = 12;

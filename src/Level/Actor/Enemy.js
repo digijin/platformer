@@ -22,7 +22,7 @@ import Globals from "../../Globals";
 
 import * as PIXI from "pixi.js";
 
-const AGRO_DISTANCE = 100;
+const AGRO_DISTANCE = 400;
 const DEAGRO_DISTANCE = 1000;
 
 class EnemySprite extends PIXI.Sprite {}

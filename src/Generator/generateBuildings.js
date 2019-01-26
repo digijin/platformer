@@ -28,6 +28,13 @@ function *genBuilding(xOff, yOff, manager, grid){
 		grid.addEnemyData({ block, type: { id: "4" } });
 
 	}
+	//plant some dudes on the floors
+	for(let i = 0; i < floors; i++){
+		if(Math.random() > 0.5){
+			const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * i));
+			grid.addEnemyData({ block, type: { id: "3" } });
+		}
+	}
 
 	for(let x = xOff; x < xOff + width; x++){
 		for(let f = 1; f <= floors; f++){
