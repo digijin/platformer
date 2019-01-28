@@ -5,11 +5,17 @@ import { HAND_STATE } from "../../Player";
 import Point from "Utility/Point";
 import Line from "../../../../Utility/Line";
 import Enemy from "../../Enemy";
+import type Block from "Grid/Block";
 
 export default class UpdateGrapple extends Base{
 
-    states = ALL;
-    update(){
+
+	states = ALL;
+	
+	grippedObject;
+	grippedObjectType:string;
+
+	update(){
     	if (this.player.hand.state === HAND_STATE.ARMED) {
     		this.player.hand.position = new Point(this.player.position).add(this.player.hand.offset);
     	}
@@ -40,7 +46,9 @@ export default class UpdateGrapple extends Base{
     		//CHECK ENEMIES
     		this.engine.getEnemies().forEach((en:Enemy) => {
     			if(en.getBoundingRect().contains(curr)){
-    				this.player.hand.state = HAND_STATE.GRIPPED;
+					this.player.hand.state = HAND_STATE.GRIPPED;
+					this.grippedObject = en;
+					this.grippedObjectType = "Enemy";
     			}
     		});
 
@@ -61,12 +69,14 @@ export default class UpdateGrapple extends Base{
     					this.player.hand.position.x = hitTest.collision.x;
     					// console.log("damage block");
     					// block.damage(1);
+						this.grippedObject = block;
+						this.grippedObjectType = "Block";
     					return false;
     				}
     			}
     		});
     		if (!empty) {
-    			this.player.hand.state = HAND_STATE.GRIPPED;
+				this.player.hand.state = HAND_STATE.GRIPPED;
     		}
 
     		// if (this.engine.grid.isPositionBlocked(this.player.hand.position)) {
@@ -102,6 +112,6 @@ export default class UpdateGrapple extends Base{
     	}
 
     	// console.log("hand state", this.player.hand.state);
-    }
+	}
 
 }
