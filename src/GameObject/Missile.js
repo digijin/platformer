@@ -18,6 +18,10 @@ import Projectile from "GameObject/Projectile";
 
 import * as PIXI from "pixi.js";
 
+import Globals from "../Globals";
+
+import Enemy from "Level/Actor/Enemy";
+
 // import FilterSprite from "GameObject/FilterSprite";
 import FilterSprite from "Sprite/Explosion";
 
@@ -118,6 +122,7 @@ export default class Missile extends Projectile {
     	this.remoteControl = false;
     	this.container = params.container;
     	this.tag("missile");
+    	Globals.get("player", (player) => {this.player = player;});
     }
 
     init(engine: Engine) {
@@ -147,19 +152,29 @@ export default class Missile extends Projectile {
     }
 
     checkActors() {
-    	this.engine.getActors().every((o: GameObject) => {
-    		if (o !== this.owner) {
-    			const a: Actor = ((o: any): Actor); //RECAST
-    			if (a.getBoundingRect().contains(this.position)) {
-    				this.explode();
-    				// a.explode();
-    				a.setAgro(this.owner);
-    				a.damage(30 + Math.random() * 75);
-    				return false;
-    			}
+    	if(this.owner instanceof Enemy){
+    		//hit player
+    		if(this.player && this.player.getBoundingRect().contains(this.position)){
+    			this.explode();
+    			return false;
     		}
-    		return true;
-    	});
+    	}else{
+    		//hit enemy
+    		this.engine.getActors().every((o: GameObject) => {
+    			if (o !== this.owner) {
+    				const a: Actor = ((o: any): Actor); //RECAST
+    				if (a.getBoundingRect().contains(this.position)) {
+    					this.explode();
+    					// a.explode();
+    					a.setAgro(this.owner);
+    					a.damage(30 + Math.random() * 75);
+    					return false;
+    				}
+    			}
+    			return true;
+    		});
+    	}
+    	
     }
 
     checkGrid() {
