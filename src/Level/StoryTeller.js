@@ -26,21 +26,12 @@ export default class StoryTeller extends GameObject {
 			},
 			parent: this.container,
 		});
-		// grid.makeTest();
-		// grid.generate(1);
+
 		// FLOWHACK
 		const gridData = this.engine.mission.level;
 		// let gridData = require("levels/level.txt");
 		this.engine.register(grid);
 		grid.load(gridData);
-
-		// const player = new Player({
-		// 	position: new Point({
-		// 		x: 450,
-		// 		y: 100,
-		// 	}),
-		// 	container: this.container,
-		// });
 
 		const pc = new PlayerCharacter(
 			{
@@ -53,22 +44,13 @@ export default class StoryTeller extends GameObject {
 		);
 		this.container.addChild(pc);
 
-
-		// this.energyBar = new EnergyBar({ player: player });
-		// this.engine.register(this.energyBar);
-		// this.engine.stage.addChild(this.energyBar.container);
-
-		// engine.register(player);
 	}
 
 	exit() {
 		this.engine.stage.removeChild(this.container);
-		// this.engine.stage.removeChild(this.energyBar.container);
 	}
 
 	update() {
-		// console.log(this.engine.stage.position, this.engine.view.offset)
-		// this.engine.stage.position = this.engine.view.offset.multiply(-1)
 		this.container.position.x = Math.floor(-this.engine.view.offset.x);
 		this.container.position.y = Math.floor(-this.engine.view.offset.y);
 

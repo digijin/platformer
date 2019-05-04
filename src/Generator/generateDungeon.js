@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js";
 
 import Grid from "Grid";
 
-import { TILE_SIZE, NUM_CHILDREN, GROUND } from "./constants";
+import { TILE_SIZE, NUM_CHILDREN, GROUND, ENEMIES } from "./constants";
 
 import spawnRooms from "./spawnRooms";
 import physicsResolve from "./physicsResolve";
@@ -19,7 +19,7 @@ import Point from "Utility/Point";
 
 const NUM_DUNGEONS = 1;
 
-const generateDungeon = function*(engine, manager){
+const generateDungeon = function* (engine, manager) {
 	const container = new PIXI.Container();
 	engine.stage.addChild(container);
 	container.position.x = window.innerWidth / 2;
@@ -28,7 +28,7 @@ const generateDungeon = function*(engine, manager){
 	const grid = new Grid();
 	yield* generateBuildings(manager, grid);
 	let dungOffset = 20;
-	for(let d = 0; d < NUM_DUNGEONS; d++){
+	for (let d = 0; d < NUM_DUNGEONS; d++) {
 
 		yield* spawnRooms(container, NUM_CHILDREN);
 
@@ -40,11 +40,11 @@ const generateDungeon = function*(engine, manager){
 		// yield* compress(children);
 		// yield* compress(children);
 		yield* physicsResolve(children);
-		for(let i = 0; i < 30; i++){
+		for (let i = 0; i < 30; i++) {
 			yield* compressPhysics(children);
 		}
 
-		for(let i = 0; i < children.length; i++){
+		for (let i = 0; i < children.length; i++) {
 			const child = children[i];
 			child.tint = 0x0;
 			yield i;
@@ -65,7 +65,7 @@ const generateDungeon = function*(engine, manager){
 
 
 		//persist to map
-		for(let i = 0; i < children.length; i++){
+		for (let i = 0; i < children.length; i++) {
 			// grid.addEnemyData({ position: new Point({ x: 100, y: 100 }), type: { id: "1" } });
 			const c = children[i];
 			c.tint = 0xffff00;
@@ -83,22 +83,24 @@ const generateDungeon = function*(engine, manager){
 			// console.log(center);
 			// grid.addEnemyData({ position: center, type: { id: "3" } });
 			let block;
-			for(let x = roomLeft; x < roomRight; x++){
+			for (let x = roomLeft; x < roomRight; x++) {
 
-				for(let y = c.position.y / TILE_SIZE; y < roomBottom; y++){
-				// console.log(x, left, x - left);
+				for (let y = c.position.y / TILE_SIZE; y < roomBottom; y++) {
+					// console.log(x, left, x - left);
 					block = manager.grid.get(x - left + dungOffset, y - top + GROUND);
-					if(y === roomTop){
+					if (y === roomTop) {
 						block.type = "platform";
-					}else{
+					} else {
 						block.type = "0";
 					}
 				}
-			// yield x;
+				// yield x;
 			}
 
 			const enId = Math.ceil(Math.random() * 3).toString();
-			grid.addEnemyData({ block, type: { id: enId } });
+			if (ENEMIES) {
+				grid.addEnemyData({ block, type: { id: enId } });
+			}
 			// console.log((roomLeft - roomRight) / 2, "subtractleft", left, "addoffset", dungOffset, "multiply", config.grid.width, "equal", block.position);
 			// console.log(block, {
 			// 	x: (roomLeft - roomRight) / 2,
@@ -119,7 +121,9 @@ const generateDungeon = function*(engine, manager){
 	grid.blocks = manager.grid;
 
 	//add an enemy
-	grid.addEnemyData({ position: new Point({ x: 100, y: 100 }), type: { id: "1" } });
+	if(ENEMIES){
+		grid.addEnemyData({ position: new Point({ x: 100, y: 100 }), type: { id: "1" } });
+	}
 
 	engine.mission.level = grid.save();
 

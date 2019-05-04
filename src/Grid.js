@@ -15,6 +15,7 @@ import Decor from "Level/Grid/Decor";
 import Pool from "Utility/Pool";
 import Grid3 from "Utility/Grid3";
 import log from "loglevel";
+import EnemyCharacter from "Level/Actor/Enemy/Character";
 
 //for console tools
 class GridBlockContainer extends PIXI.Container {}
@@ -408,7 +409,10 @@ export default class Grid extends GameObject {
 
 	addEnemy(params: { position: Point, type: any }) {
 		params.parent = this.parent;
+		params.engine = this.engine;
 		this.engine.register(new Enemy(params));
+		const en = new EnemyCharacter(params);
+		this.parent.addChild(en);
 	}
 
 	addEnemyData(data) {

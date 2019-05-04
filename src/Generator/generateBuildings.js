@@ -1,5 +1,5 @@
 
-import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH } from "./constants";
+import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH, ENEMIES } from "./constants";
 
 
 export default function* (manager, grid){
@@ -25,14 +25,18 @@ function *genBuilding(xOff, yOff, manager, grid){
 	//hovering helicopters
 	for(let i = 0; i < 3; i++){
 		const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * (floors + 2 + (i * 2))));
-		grid.addEnemyData({ block, type: { id: "4" } });
+		if(ENEMIES){
+			grid.addEnemyData({ block, type: { id: "4" } });
+		}
 
 	}
 	//plant some dudes on the floors
 	for(let i = 0; i < floors; i++){
 		if(Math.random() > 0.5){
 			const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * i));
-			grid.addEnemyData({ block, type: { id: "3" } });
+			if(ENEMIES){
+				grid.addEnemyData({ block, type: { id: "3" } });
+			}
 		}
 	}
 
