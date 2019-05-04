@@ -41,9 +41,9 @@ export default class EnemyCharacter extends Rigidbody{
 		if (!this.registration) {
 			throw new Error("no rewgistration in enemy init");
 		}
-		if (!this.parent) {
-			throw new Error("no parent in enemy init");
-		}
+		// if (!this.parent) {
+		// 	throw new Error("no parent in enemy init");
+		// }
 		// this.size = config.enemy.size;
 		// this.registration = config.enemy.registration;
 
@@ -64,26 +64,27 @@ export default class EnemyCharacter extends Rigidbody{
 	}
 
 	update() {
+		// console.log("update")s;
 		// this.sprite.position = this.position;
 		// const player = this.engine.getPlayer();
-		// if (!this.player) {
-		// 	// console.log("no player");
-		// 	// this.gravity();
-		// 	this.render();
-		// 	return;
-		// } //do not movefor edit mode
-		// //check if out of bounds
-		// this.unstuck();
-		// //check agro
-		// // this.checkAgro(player);
-		// if (!this.action) {
-		// 	// switch(this.type.)
-		// 	this.newAction();
-		// } else {
-		// 	if (this.action.next().done) {
-		// 		this.action = null;
-		// 	}
-		// }
+		if (!this.player) {
+			// console.log("no player");
+			// this.gravity();
+			this.render();
+			return;
+		} //do not movefor edit mode
+		//check if out of bounds
+		this.unstuck();
+		//check agro
+		// this.checkAgro(player);
+		if (!this.action) {
+			// switch(this.type.)
+			this.newAction();
+		} else {
+			if (this.action.next().done) {
+				this.action = null;
+			}
+		}
 		this.render();
 	}
 
@@ -94,6 +95,7 @@ export default class EnemyCharacter extends Rigidbody{
 
 	newAction() {
 		// const player = this.engine.getPlayer();
+		
 		const pos = new Point(this.position);
 		if (this.agro) {
 			//falloff distance

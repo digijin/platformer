@@ -32,7 +32,7 @@ export default function* agro(
 						owner: enemy,
 						direction: -Math.PI / 2,
 						speed: 10,
-						position: enemy.position.add({
+						position: new Point(enemy.position).add({
 							x: 0,
 							y: -enemy.size.h,
 						}),

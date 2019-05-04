@@ -15,7 +15,7 @@ export default class Editor extends Base {
 		engine.register(watcher);
 
 		const grid = new Grid({
-			size: { w: 100, h: 100 },
+			size: { w: 50, h: 50 },
 			parent: engine.stage,
 		});
 
