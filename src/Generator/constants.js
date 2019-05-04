@@ -13,4 +13,4 @@ export const MAX_FLOORS = 16;
 export const FLOOR_HEIGHT = 5;
 export const TILE_SIZE = 4;
 export const NUM_CHILDREN = 30;
-export const ENEMIES = false;
+export const ENEMIES = true;

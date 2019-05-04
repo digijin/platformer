@@ -51,32 +51,39 @@ export default class EnemyCharacter extends Rigidbody{
         
         
 		this.graph = new PIXI.Graphics();
-		this.parent.addChild(this.graph);
+		this.addChild(this.graph);
 		Globals.get("player").then((player) => {this.player = player;});
+
+		this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+		this.sprite.width = this.size.w;
+		this.sprite.height = this.size.h;
+		this.sprite.position.x = -this.size.w * this.registration.x;
+		this.sprite.position.y = -this.size.h * this.registration.y;
+		this.addChild(this.sprite);
 
 	}
 
 	update() {
 		// this.sprite.position = this.position;
 		// const player = this.engine.getPlayer();
-		if (!this.player) {
-			// console.log("no player");
-			// this.gravity();
-			this.render();
-			return;
-		} //do not movefor edit mode
-		//check if out of bounds
-		this.unstuck();
-		//check agro
-		// this.checkAgro(player);
-		if (!this.action) {
-			// switch(this.type.)
-			this.newAction();
-		} else {
-			if (this.action.next().done) {
-				this.action = null;
-			}
-		}
+		// if (!this.player) {
+		// 	// console.log("no player");
+		// 	// this.gravity();
+		// 	this.render();
+		// 	return;
+		// } //do not movefor edit mode
+		// //check if out of bounds
+		// this.unstuck();
+		// //check agro
+		// // this.checkAgro(player);
+		// if (!this.action) {
+		// 	// switch(this.type.)
+		// 	this.newAction();
+		// } else {
+		// 	if (this.action.next().done) {
+		// 		this.action = null;
+		// 	}
+		// }
 		this.render();
 	}
 
@@ -123,7 +130,7 @@ export default class EnemyCharacter extends Rigidbody{
 
 	render() {
 		this.graph.clear();
-		this.graph.position.set(this.position.x, this.position.y);
+		this.graph.position.set(-10, 0);
 		this.graph
 			.lineStyle(5, 0xffffff)
 			.moveTo(0, 0)

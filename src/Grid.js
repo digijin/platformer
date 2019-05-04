@@ -410,7 +410,7 @@ export default class Grid extends GameObject {
 	addEnemy(params: { position: Point, type: any }) {
 		params.parent = this.parent;
 		params.engine = this.engine;
-		this.engine.register(new Enemy(params));
+		// this.engine.register(new Enemy(params));
 		const en = new EnemyCharacter(params);
 		this.parent.addChild(en);
 	}

@@ -79,26 +79,26 @@ export default class Rigidbody extends PIXI.Container {
 	explode = () => {
 		this.destroy();
 		//fill rect with explosions
-		const rect: Rect = this.getBoundingRect();
-		const center: Point = rect.centerPoint();
-		//find random points
-		for (let i = 0; i < 20; i++) {
-			const point: Point = new Point({
-				x: rect.l + rect.width() * Math.random(),
-				y: rect.t + rect.height() * Math.random(),
-			});
-			//direction from center
-			const diff = point.subtract(center);
-			const dir = Math.atan2(diff.y, diff.x);
+		// const rect: Rect = this.getBoundingRect();
+		// const center: Point = rect.centerPoint();
+		// //find random points
+		// for (let i = 0; i < 20; i++) {
+		// 	const point: Point = new Point({
+		// 		x: rect.l + rect.width() * Math.random(),
+		// 		y: rect.t + rect.height() * Math.random(),
+		// 	});
+		// 	//direction from center
+		// 	const diff = point.subtract(center);
+		// 	const dir = Math.atan2(diff.y, diff.x);
 
-			this.engine.register(
-				new Explosion({
-					position: point,
-					rotation: dir,
-					delay: Math.random() / 8,
-				})
-			);
-		}
+		// 	this.engine.register(
+		// 		new Explosion({
+		// 			position: point,
+		// 			rotation: dir,
+		// 			delay: Math.random() / 8,
+		// 		})
+		// 	);
+		// }
 	};
 
 	z: number;
