@@ -23,10 +23,9 @@ export default function* agro(
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
 		const distance = new Point(player.position).distanceTo(enemy.position);
 		const direction = new Point(enemy.position).directionTo(player.position);
-		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
-		// console.log( player)
-
-		enemy.sprite.scale.x = player.position.x < enemy.position.x ? 1 : -1;
+		
+		//TODO: redo flip
+		// enemy.sprite.scale.x = player.position.x < enemy.position.x ? 1 : -1;
 
 		//check below
 		// engine.grid.blocksOverlappingRect();
