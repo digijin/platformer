@@ -22,7 +22,7 @@ export default function* agro(
 		firingCooldown -= engine.deltaTime;
 		enemy.direction = player.position.x < enemy.position.x ? -1 : 1;
 		const distance = new Point(player.position).distanceTo(enemy.position);
-		const direction = enemy.position.directionTo(player.position);
+		const direction = new Point(enemy.position).directionTo(player.position);
 		// let hDelta = engine.deltaTime * enemy.walkSpeed * enemy.direction;
 		// console.log( player)
 
@@ -75,7 +75,7 @@ export default function* agro(
 						owner: enemy,
 						direction: enemy.direction == 1 ? 0 : Math.PI, //-Math.PI / 2,
 						speed: 10,
-						position: enemy.position.add({
+						position: new Point(enemy.position).add({
 							x: 0,
 							y: -enemy.size.h,
 						}),

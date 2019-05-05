@@ -23,7 +23,7 @@ function *genBuilding(xOff, yOff, manager, grid){
 	const floors = Math.ceil(MAX_FLOORS * Math.random());
 
 	//hovering helicopters
-	for(let i = 0; i < 3; i++){
+	for(let i = 0; i < 1; i++){
 		const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * (floors + 2 + (i * 2))));
 		if(ENEMIES){
 			grid.addEnemyData({ block, type: { id: "4" } });
@@ -32,7 +32,7 @@ function *genBuilding(xOff, yOff, manager, grid){
 	}
 	//plant some dudes on the floors
 	for(let i = 0; i < floors; i++){
-		if(Math.random() > 0.5){
+		if(Math.random() > 0.9){
 			const block = manager.grid.get(xOff + Math.floor(Math.random() * width), yOff - ((FLOOR_HEIGHT) * i));
 			if(ENEMIES){
 				grid.addEnemyData({ block, type: { id: "3" } });
