@@ -6,7 +6,7 @@ export default class SceneBase {
 	engine: Engine;
 	start(engine: Engine) {
 		this.engine = engine;
-		// this.engine.currentScene = this
+		this.engine.currentScene = this;
 		log.debug("starting scene", this.constructor.name);
 	}
 

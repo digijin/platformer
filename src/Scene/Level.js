@@ -12,7 +12,8 @@ export default class Level extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 
-		engine.register(new StoryTeller());
+		this.manager = new StoryTeller();
+		engine.register(this.manager);
 
 		// engine.register(new Skyline());
 		engine.register(new PauseMenu());
@@ -24,7 +25,6 @@ export default class Level extends Base {
 		bg.explosions = false;
 		engine.register(bg);
 
-		engine.enemies = [];
 
 		// engine.ui.dispatch({
 		// 	type: "START_SCENE",

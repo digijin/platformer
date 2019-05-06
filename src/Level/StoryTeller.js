@@ -46,6 +46,12 @@ export default class StoryTeller extends GameObject {
 
 	}
 
+	getEnemies() {
+		this.container.children.forEach(child => {
+			console.log(child);
+		});
+	}
+
 	exit() {
 		this.engine.stage.removeChild(this.container);
 	}

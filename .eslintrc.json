@@ -44,7 +44,7 @@
 			"always",
 			{ "exceptAfterSingleLine": true }
 		],
-		"sort-class-members/sort-class-members": [
+		"REMOVED sort-class-members/sort-class-members": [
 			2,
 			{
 				"order": [
