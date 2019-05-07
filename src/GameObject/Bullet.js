@@ -5,7 +5,7 @@ import type Point from "Utility/Point";
 import type Actor from "Level/Actor";
 // import type Block from "Level/Grid/Block";
 import Line from "Utility/Line";
-import GameObject from "GameObject";
+// import GameObject from "GameObject";
 // import Explosion from "GameObject/Explosion";
 import { GlowFilter } from "@pixi/filter-glow";
 import Projectile from "GameObject/Projectile";
@@ -63,16 +63,13 @@ export default class Bullet extends Projectile {
 
     	//CHECK GRID
     	this.checkGrid();
-
     	this.render();
 
     	//CHECK ENEMIES
-    	this.checkEnemies((actor: Actor) => {
-    		// setTimeout(() => {
+    	this.ifHitsEnemyThen(enemy => {
     		this.explode();
-    		// }, 0);
-    		actor.setAgro(this.owner);
-    		actor.damage(this.damage);
+    		enemy.setAgro(this.owner);
+    		enemy.damage(this.damage);
     	});
     };
 
@@ -154,28 +151,6 @@ export default class Bullet extends Projectile {
     			})
     		);
     	}
-    }
-
-    checkEnemies(func: (actor: Actor) => {}) {
-    	this.engine.objectsTagged("actor").forEach((o: GameObject) => {
-    		if (o !== this.owner) {
-    			const a: Actor = ((o: any): Actor); //RECAST
-    			if (this.cheapCheck(a) || this.expensiveCheck(a)) {
-    				// a.damage(2);
-    				func(a);
-    			} else {
-    				//ELSE USE EVEN MORE EXPENSIVE CHECK
-    			}
-    		}
-    	});
-    }
-
-    cheapCheck(actor: Actor) {
-    	return actor.getBoundingRect().contains(this.position);
-    }
-
-    expensiveCheck(actor: Actor) {
-    	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
     }
 
     render() {

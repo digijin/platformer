@@ -41,18 +41,22 @@ export default class Projectile extends GameObject {
     	this.position.y += this.v * this.engine.deltaTime * this.speed;
     	this.trajectory = new Line({ a: old, b: this.position });
     }
-    // checkEnemy() {
-    // 	this.engine.getActors().forEach((o: GameObject) => {
-    // 		if (o !== this.owner) {
-    // 			let a: Actor = ((o: any): Actor); RECAST
-    // 			if (a.getBoundingRect().contains(this.position)) {
-    // 				this.explode();
-    // 			  this.destroy();
-    // 				a.damage(2);
-    // 			}
-    // 		}
-    // 	});
-    // }
+
+    ifHitsEnemyThen(doThis: (actor: Actor) => {}) {
+    	this.engine.manager.getEnemies().forEach( en => {
+    		if (this.cheapCheck(en) || this.expensiveCheck(en)) {
+    			doThis(en);
+    		}
+    	});
+    }
+	
+    cheapCheck(actor: Actor) {
+    	return actor.getBoundingRect().contains(this.position);
+    }
+
+    expensiveCheck(actor: Actor) {
+    	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
+    }
 
     checkGrid() {
     	const blocks = this.trajectory.blockPixels();

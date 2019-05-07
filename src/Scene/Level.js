@@ -13,6 +13,7 @@ export default class Level extends Base {
 		super.start(engine);
 
 		this.manager = new StoryTeller();
+		engine.manager = this.manager;
 		engine.register(this.manager);
 
 		// engine.register(new Skyline());

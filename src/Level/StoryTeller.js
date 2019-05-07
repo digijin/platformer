@@ -11,6 +11,7 @@ import * as PIXI from "pixi.js";
 import type Engine from "../Engine";
 
 import PlayerCharacter from "Level/Actor/Player/Character";
+import EnemyCharacter from "Level/Actor/Enemy/Character";
 
 class LevelContainer extends PIXI.Container {}
 export default class StoryTeller extends GameObject {
@@ -47,8 +48,8 @@ export default class StoryTeller extends GameObject {
 	}
 
 	getEnemies() {
-		this.container.children.forEach(child => {
-			console.log(child);
+		return this.container.children.filter(child => {
+			return child instanceof EnemyCharacter;
 		});
 	}
 
