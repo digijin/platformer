@@ -6,6 +6,7 @@ import type Actor from "Level/Actor";
 import type Decor from "Level/Grid/Decor";
 import GameObject from "GameObject";
 import Line from "Utility/Line";
+import Globals from "../Globals";
 
 export default class Projectile extends GameObject {
     h: number;
@@ -24,6 +25,7 @@ export default class Projectile extends GameObject {
         owner: Actor
     }) {
     	super();
+    	Globals.get("player", (player) => {this.player = player;});
     	// console.log(params.position.constructor.name);
     	Object.assign(this, params);
     }
@@ -43,11 +45,24 @@ export default class Projectile extends GameObject {
     }
 
     ifHitsEnemyThen(doThis: (actor: Actor) => {}) {
-    	this.engine.manager.getEnemies().forEach( en => {
-    		if (this.cheapCheck(en) || this.expensiveCheck(en)) {
-    			doThis(en);
+    	//using every so a missile doesnt blow up twice
+    	this.engine.manager.getEnemies().every( en => {
+    		if(en !== this.owner){
+    			if (this.cheapCheck(en) || this.expensiveCheck(en)) {
+    				doThis(en);
+    				return false;
+    			}
     		}
+    		return true;
     	});
+    }
+
+    ifHitsPlayerThen(doThis: (actor: Actor) => {}) {
+    	const player = this.engine.manager.player;
+    	if (this.cheapCheck(player) || this.expensiveCheck(player)) {
+    		doThis(player);
+    	}
+
     }
 	
     cheapCheck(actor: Actor) {

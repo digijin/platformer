@@ -11,16 +11,13 @@ import config from "config";
 
 import type Engine from "Engine";
 
-import GameObject from "GameObject";
 import Projectile from "GameObject/Projectile";
 
 // import log from "loglevel";
 
 import * as PIXI from "pixi.js";
 
-import Globals from "../Globals";
-
-import Enemy from "Level/Actor/Enemy";
+import EnemyCharacter from "Level/Actor/Enemy/Character";
 
 // import FilterSprite from "GameObject/FilterSprite";
 import FilterSprite from "Sprite/Explosion";
@@ -38,7 +35,6 @@ export default class Missile extends Projectile {
     		decor.damage(1);
     	});
     	//CHECK ENEMIES
-    	//USING EVERY SO I DONT EXPLODE MULTIPLE TIMES
     	this.checkActors();
 
     	//smoke trail
@@ -122,7 +118,7 @@ export default class Missile extends Projectile {
     	this.remoteControl = false;
     	this.container = params.container;
     	this.tag("missile");
-    	Globals.get("player", (player) => {this.player = player;});
+    	
     }
 
     init(engine: Engine) {
@@ -152,29 +148,20 @@ export default class Missile extends Projectile {
     }
 
     checkActors() {
-    	if(this.owner instanceof Enemy){
-    		//hit player
-    		if(this.player && this.player.getBoundingRect().contains(this.position)){
+    	// console.log(this.owner, this.owner instanceof EnemyCharacter);
+    	if(this.owner instanceof EnemyCharacter){
+    		this.ifHitsPlayerThen(() => {
     			this.explode();
-    			return false;
-    		}
+    		});
     	}else{
     		//hit enemy
-    		this.engine.getActors().every((o: GameObject) => {
-    			if (o !== this.owner) {
-    				const a: Actor = ((o: any): Actor); //RECAST
-    				if (a.getBoundingRect().contains(this.position)) {
-    					this.explode();
-    					// a.explode();
-    					a.setAgro(this.owner);
-    					a.damage(30 + Math.random() * 75);
-    					return false;
-    				}
-    			}
-    			return true;
+    		this.ifHitsEnemyThen(enemy => {
+    			this.explode();
+    			enemy.setAgro(this.owner);
+    			enemy.damage(30 + Math.random() * 75);
+    			return false;
     		});
     	}
-    	
     }
 
     checkGrid() {

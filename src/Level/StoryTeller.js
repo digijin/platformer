@@ -34,7 +34,7 @@ export default class StoryTeller extends GameObject {
 		this.engine.register(grid);
 		grid.load(gridData);
 
-		const pc = new PlayerCharacter(
+		this.player = new PlayerCharacter(
 			{
 				position: new Point({
 					x: 300,
@@ -43,7 +43,8 @@ export default class StoryTeller extends GameObject {
 				engine: engine,
 			}
 		);
-		this.container.addChild(pc);
+		this.container.addChild(this.player);
+		
 
 	}
 
