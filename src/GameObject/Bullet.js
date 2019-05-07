@@ -55,14 +55,21 @@ export default class Bullet extends Projectile {
     		this.destroy();
     	}
     	//check decor
-    	this.checkDecor((decor, hitTest) => {
+    	this.ifHitsDecorThen((decor, hitTest) => {
     		this.position.x = hitTest.collision.x;
     		this.position.y = hitTest.collision.y;
     		decor.damage(1);
+    		this.explode();
     	});
 
     	//CHECK GRID
-    	this.checkGrid();
+    	// this.checkGrid();
+    	this.ifHitsGridThen((block, hitTest) => {
+    		this.position.x = hitTest.collision.x;
+    		this.position.y = hitTest.collision.y;
+    		block.damage(1);
+    		this.explode();
+    	});
     	this.render();
 
     	//CHECK ENEMIES

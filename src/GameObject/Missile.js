@@ -27,12 +27,20 @@ export default class Missile extends Projectile {
     	this.move();
 
     	//CHECK GRID
-    	this.checkGrid();
+    	// this.checkGrid();
+		
+    	this.ifHitsGridThen((block, hitTest) => {
+    		this.position.x = hitTest.collision.x;
+    		this.position.y = hitTest.collision.y;
+    		block.damage(1);
+    		this.explode();
+    	});
     	//check decor
-    	this.checkDecor((decor, hitTest) => {
+    	this.ifHitsDecorThen((decor, hitTest) => {
     		this.position.x = hitTest.collision.x;
     		this.position.y = hitTest.collision.y;
     		decor.damage(1);
+    		this.explode();
     	});
     	//CHECK ENEMIES
     	this.checkActors();
@@ -164,19 +172,4 @@ export default class Missile extends Projectile {
     	}
     }
 
-    checkGrid() {
-    	const block = this.engine.grid.getBlockAtPoint(this.position);
-    	if (block && !block.isVacant()) {
-    		this.explode();
-    		const r = 15;
-    		const rect = new Rect({
-    			t: this.position.y - r,
-    			r: this.position.x + r,
-    			b: this.position.y + r,
-    			l: this.position.x - r,
-    		});
-    		const blocks = this.engine.grid.getBlocksOverlappingRect(rect);
-    		blocks.forEach(b => b.damage(10 + Math.random() * 100));
-    	}
-    }
 }

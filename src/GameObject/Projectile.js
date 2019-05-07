@@ -26,7 +26,6 @@ export default class Projectile extends GameObject {
     }) {
     	super();
     	Globals.get("player", (player) => {this.player = player;});
-    	// console.log(params.position.constructor.name);
     	Object.assign(this, params);
     }
 
@@ -73,7 +72,7 @@ export default class Projectile extends GameObject {
     	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
     }
 
-    checkGrid() {
+    ifHitsGridThen(onHit: (block: Block, hitTest: {})=>{}) {
     	const blocks = this.trajectory.blockPixels();
     	const empty = blocks.every(b => {
     		const block = this.engine.grid.getBlock(b);
@@ -85,10 +84,11 @@ export default class Projectile extends GameObject {
     		} else {
     			const hitTest = this.trajectory.intersectsRect(block.rect);
     			if (hitTest.result && hitTest.collision) {
-    				this.position.x = hitTest.collision.x;
-    				this.position.y = hitTest.collision.y;
-    				// console.log("damage block");
-    				block.damage(1);
+    				// this.position.x = hitTest.collision.x;
+    				// this.position.y = hitTest.collision.y;
+    				// // console.log("damage block");
+    				// block.damage(1);
+    				onHit(block, hitTest);
     				return false;
     			}
     		}
@@ -98,7 +98,7 @@ export default class Projectile extends GameObject {
     	}
     }
 
-    checkDecor(onHit: (decor: Decor, hitTest: {}) => {}) {
+    ifHitsDecorThen(onHit: (decor: Decor, hitTest: {}) => {}) {
     	const missDecor = this.engine.grid.decor.every(d => {
     		if (d.getType().obstacle === false) {
     			return true;

@@ -41,7 +41,7 @@ export default class UpdateMissile extends Base{
 							//this.player.leg.facing
     					,
     					speed: 10 + Math.random() * 5,
-    					position: new Point(this.player.position),
+    					position: new Point(this.player.position).add({ x: 0, y: -10 }),
     					target: this.player.getTargetPoint().add(
     						new Point({
     							x: (Math.random() - 0.5) * 20,
