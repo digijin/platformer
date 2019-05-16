@@ -11,6 +11,12 @@ import RGBA from "Utility/RGBA";
 import * as PIXI from "pixi.js";
 // import log from "loglevel";
 
+// TODO: error below
+// Smoke.js:60 Uncaught TypeError: Cannot read property 'addChild' of null
+//     at Smoke.init (Smoke.js:60)
+//     at Engine.register (Engine.js:135)
+//     at Missile._this.update (Missile.js:128)
+
 export default class Smoke extends GameObject {
     v: number;
     position: Point;
