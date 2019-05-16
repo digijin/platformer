@@ -7,6 +7,9 @@ import Line from "../../../../Utility/Line";
 import Enemy from "../../Enemy";
 import type Block from "Grid/Block";
 
+import PlayerState from "Level/Actor/Player/State";
+
+
 export default class UpdateGrapple extends Base{
 
 
@@ -101,13 +104,15 @@ export default class UpdateGrapple extends Base{
     	if(this.player.hand.state === HAND_STATE.GRIPPED){
     		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
     		// console.log(spaceLeft);
-    		if(spaceLeft < config.player.size.h / 1.5){
-    			this.player.hand.state = HAND_STATE.RELEASED;
+    		if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
+				this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.changeState(PlayerState.AIRBORNE);
     		}
 
     		// TODO JUMP ESCAPE CLAUSE
     		if(this.engine.input.getButtonDown("jump")){
-    			this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.changeState(PlayerState.AIRBORNE);
     		}
     	}
 
