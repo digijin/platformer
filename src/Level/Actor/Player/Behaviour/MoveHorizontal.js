@@ -22,15 +22,6 @@ export default class MoveHorizontal extends Base{
 
     	let hDelta = this.player.h * this.engine.deltaTime * 500;//legs.speed;
         
-    	if (this.player.hand.state == HAND_STATE.GRIPPED) {
-    		// console.log("yoloswag");
-    		//REEL IN
-    		const diff = new Point(this.player.position).add(this.player.hand.offset).subtract(this.player.hand.position);
-    		const dir = Math.atan2(diff.y, diff.x);
-    		this.player.h = -Math.cos(dir); //* deltaTime*hSpeed
-    		this.player.v = -Math.sin(dir) * this.engine.deltaTime * this.player.hand.reelSpeed;
-    		hDelta = this.player.h * this.engine.deltaTime * this.player.hand.reelSpeed;
-    	}
         
     	if (!this.player.canMoveHori(hDelta)) {
     		if (this.player.canStep(hDelta)) {

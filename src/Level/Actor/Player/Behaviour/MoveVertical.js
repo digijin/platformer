@@ -1,13 +1,13 @@
 
 import Base from "./Base";
-import PlayerState, { ALL } from "Level/Actor/Player/State";
+import PlayerState, { AllExcept } from "Level/Actor/Player/State";
 import config from "config";
 import Shell from "GameObject/Shell";
 import Point from "Utility/Point";
 
 export default class MoveVertical extends Base{
 
-    states = ALL;
+    states = AllExcept(PlayerState.GRAPPLE);;
     update(){
     	// TODO: use player.state to determine in airborne and set grounded to airborne
 
