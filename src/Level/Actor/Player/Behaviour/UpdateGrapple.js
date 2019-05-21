@@ -106,22 +106,38 @@ export default class UpdateGrapple extends Base{
 			//APPLY
 			// const vertObjects = this.player.vertObstacles(this.player.v);
 			
+			////////////////////////MOVEMENT CODE
+
     		//REEL IN
     		const diff = new Point(this.player.position).add(this.player.hand.offset).subtract(this.player.hand.position);
     		const dir = Math.atan2(diff.y, diff.x);
     		this.player.h = -Math.cos(dir); //* deltaTime*hSpeed
     		this.player.v = -Math.sin(dir) * this.engine.deltaTime * this.player.hand.reelSpeed;
 			const hDelta = this.player.h * this.engine.deltaTime * this.player.hand.reelSpeed;
-			
-			this.player.position.x += hDelta;
-			this.player.position.y += this.player.v;
+			const vertObjects = this.player.vertObstacles(this.player.v);
 
-    		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
-    		// console.log(spaceLeft);
-    		if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
+			if (vertObjects.length === 0) {
+				this.player.position.y += this.player.v;
+			}else{
 				this.player.hand.state = HAND_STATE.RELEASED;
 				this.player.changeState(PlayerState.AIRBORNE);
-    		}
+			}
+			if (this.player.canMoveHori(hDelta)) {
+				this.player.position.x += hDelta;
+			}else{
+				this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.changeState(PlayerState.AIRBORNE);
+			}
+
+
+			////////////////////END MOVEMENT CODE
+
+    		// const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
+    		// // console.log(spaceLeft);
+    		// if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
+			// 	this.player.hand.state = HAND_STATE.RELEASED;
+			// 	this.player.changeState(PlayerState.AIRBORNE);
+    		// }
 
     		// TODO JUMP ESCAPE CLAUSE
     		if(this.engine.input.getButtonDown("jump")){
