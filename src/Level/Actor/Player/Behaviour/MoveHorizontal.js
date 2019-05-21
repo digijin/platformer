@@ -1,6 +1,6 @@
-
 import Base from "./Base";
-import { ALL } from "Level/Actor/Player/State";
+import { AllExcept } from "Level/Actor/Player/State";
+import PlayerState from "Level/Actor/Player/State";
 import config from "config";
 
 import Point from "Utility/Point";
@@ -10,8 +10,8 @@ import { HAND_STATE } from "../../Player";
 
 export default class MoveHorizontal extends Base{
 
-    states = ALL
-    update(){
+	states = AllExcept(PlayerState.GRAPPLE);
+	update(){
     	const gp = this.player.getGamePad();
     	if (gp && this.engine.input.getLastActivityDevice() == "gamepad") {
     		this.h = gp.axes[0];
@@ -42,6 +42,6 @@ export default class MoveHorizontal extends Base{
     		}
     	}
     	this.player.position.x += hDelta;
-    }
+	}
 
 }
