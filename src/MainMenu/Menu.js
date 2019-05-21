@@ -30,13 +30,13 @@ export default class MainMenu extends GameObject {
 	constructor() {
 		super();
 
-		this.hero = new PIXI.Sprite(
-			new PIXI.Texture(new PIXI.BaseTexture(mechHero))
-		);
-		this.hero.anchor = {
-			x: 0.5,
-			y: 0.5,
-		};
+		// this.hero = new PIXI.Sprite(
+		// 	new PIXI.Texture(new PIXI.BaseTexture(mechHero))
+		// );
+		// this.hero.anchor = {
+		// 	x: 0.5,
+		// 	y: 0.5,
+		// };
 		this.fadein = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.fadein.tint = 0x000000;
 	}
@@ -57,8 +57,8 @@ export default class MainMenu extends GameObject {
 	
 	update() {
 		this.time += this.engine.deltaTime;
-		this.hero.position.x = window.innerWidth / 2;
-		this.hero.position.y = window.innerHeight / 2;
+		// this.hero.position.x = window.innerWidth / 2;
+		// this.hero.position.y = window.innerHeight / 2;
 
 		this.fadein.width = window.innerWidth;
 		this.fadein.height = window.innerHeight;
