@@ -132,12 +132,12 @@ export default class UpdateGrapple extends Base{
 
 			////////////////////END MOVEMENT CODE
 
-    		// const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
-    		// // console.log(spaceLeft);
-    		// if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
-			// 	this.player.hand.state = HAND_STATE.RELEASED;
-			// 	this.player.changeState(PlayerState.AIRBORNE);
-    		// }
+    		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
+    		// console.log(spaceLeft);
+    		if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
+				this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.changeState(PlayerState.AIRBORNE);
+    		}
 
     		// TODO JUMP ESCAPE CLAUSE
     		if(this.engine.input.getButtonDown("jump")){
