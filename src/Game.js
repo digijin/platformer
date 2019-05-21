@@ -93,7 +93,7 @@ export default class Game {
 
 		// this.engine.startScene(new Level());
 
-		this.engine.update(); //starts
+		this.engine.begin(); //starts
 	};
 
 	destroy() {
