@@ -42,7 +42,8 @@ export default class UpdateGrapple extends Base{
 				Math.sin(this.player.hand.direction) * this.engine.deltaTime * this.player.hand.speed;
     		const curr = new Point(this.player.hand.position);
     		if (curr.distanceTo(this.player.position) > this.player.hand.distance) {
-    			this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.hand.state = HAND_STATE.RELEASED;
+				this.player.changeState(PlayerState.AIRBORNE);
     		}
     		//todo unify this with projectile.js, maybe make grapple a projectile
     		const trajectory = new Line({ a: old, b: curr });
