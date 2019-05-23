@@ -120,14 +120,12 @@ export default class UpdateGrapple extends Base{
 			if (vertObjects.length === 0) {
 				this.player.position.y += this.player.v;
 			}else{
-				this.player.hand.state = HAND_STATE.RELEASED;
-				this.player.changeState(PlayerState.AIRBORNE);
+				this.land();
 			}
 			if (this.player.canMoveHori(hDelta)) {
 				this.player.position.x += hDelta;
 			}else{
-				this.player.hand.state = HAND_STATE.RELEASED;
-				this.player.changeState(PlayerState.AIRBORNE);
+				this.land();
 			}
 
 
@@ -136,8 +134,7 @@ export default class UpdateGrapple extends Base{
     		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
     		// console.log(spaceLeft);
     		if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
-				this.player.hand.state = HAND_STATE.RELEASED;
-				this.player.changeState(PlayerState.AIRBORNE);
+				this.land();
     		}
 
     		// TODO JUMP ESCAPE CLAUSE
@@ -148,6 +145,37 @@ export default class UpdateGrapple extends Base{
     	}
 
     	// console.log("hand state", this.player.hand.state);
+	}
+
+	land(){
+		if(this.grippedObjectType === "Block"){
+			//check if top block
+			let block:Block;
+			// const above = this.engine.grid.getBlock({ x: block.position.x, y: block.position.y - 1 });
+			const above = new Array(3).fill(0).map((o, i) => {
+				return this.engine.grid.getBlock({
+					x: this.grippedObject.position.x,
+					y: this.grippedObject.position.y - i,
+				});
+			});
+
+			if(above[1].isVacant()){
+				block = above[0];
+			}else if(above[2].isVacant()){
+				block = above[1];
+			}
+			
+			if(block){
+				const rect = block.rect;
+				this.player.position.x = rect.l;
+				this.player.position.y = rect.t;
+				this.player.v = 0;
+				this.player.h = 0;
+			}
+		}
+
+		this.player.hand.state = HAND_STATE.RELEASED;
+		this.player.changeState(PlayerState.AIRBORNE);
 	}
 
 }
