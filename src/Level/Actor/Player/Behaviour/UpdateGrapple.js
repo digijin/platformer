@@ -17,6 +17,7 @@ export default class UpdateGrapple extends Base{
 	
 	grippedObject;
 	grippedObjectType:string;
+	targetPosition:Point;
 
 	update(){
     	if (this.player.hand.state === HAND_STATE.ARMED) {
@@ -75,6 +76,7 @@ export default class UpdateGrapple extends Base{
     					// block.damage(1);
 						this.grippedObject = block;
 						this.grippedObjectType = "Block";
+						this.targetPosition = this.findTargetPositionOnBlock();
     					return false;
     				}
     			}
@@ -110,7 +112,10 @@ export default class UpdateGrapple extends Base{
 			////////////////////////MOVEMENT CODE
 
     		//REEL IN
-    		const diff = new Point(this.player.position).add(this.player.hand.offset).subtract(this.player.hand.position);
+			let diff = new Point(this.player.position).add(this.player.hand.offset).subtract(this.player.hand.position);
+			if(this.targetPosition){
+				diff = new Point(this.player.position).subtract(this.targetPosition);
+			}
     		const dir = Math.atan2(diff.y, diff.x);
     		this.player.h = -Math.cos(dir); //* deltaTime*hSpeed
     		this.player.v = -Math.sin(dir) * this.engine.deltaTime * this.player.hand.reelSpeed;
@@ -176,6 +181,30 @@ export default class UpdateGrapple extends Base{
 
 		this.player.hand.state = HAND_STATE.RELEASED;
 		this.player.changeState(PlayerState.AIRBORNE);
+	}
+
+	findTargetPositionOnBlock(){
+		let block:Block;
+		// const above = this.engine.grid.getBlock({ x: block.position.x, y: block.position.y - 1 });
+		const above = new Array(3).fill(0).map((o, i) => {
+			return this.engine.grid.getBlock({
+				x: this.grippedObject.position.x,
+				y: this.grippedObject.position.y - i,
+			});
+		});
+
+		if(above[1].isVacant()){
+			block = above[0];
+		}else if(above[2].isVacant()){
+			block = above[1];
+		}
+			
+		if(block){
+			const rect = block.rect;
+			// this.player.position.x = rect.l;
+			// this.player.position.y = rect.t;
+			return new Point({ x: rect.l, y: rect.t });
+		}
 	}
 
 }
