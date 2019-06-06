@@ -142,6 +142,8 @@ export default class UpdateGrapple extends Base{
 			const hDelta = this.player.h * this.engine.deltaTime * this.player.hand.reelSpeed;
 			const vertObjects = this.player.vertObstacles(this.player.v);
 
+			const spaceMoving = new Point({ x: this.player.v, y: hDelta }).length();
+			
 			if (vertObjects.length === 0) {
 				this.player.position.y += this.player.v;
 			}else{
@@ -152,13 +154,13 @@ export default class UpdateGrapple extends Base{
 			}else{
 				this.land();
 			}
-
-
+			
+			
 			////////////////////END MOVEMENT CODE
-
-    		const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
-    		// console.log(spaceLeft);
-    		if(spaceLeft < config.player.size.h * 2){ //TODO: unfuck this
+			
+			const spaceLeft = new Point(this.player.position).subtract(this.player.hand.position).length();
+    		// console.log(spaceLeft, spaceMoving);
+    		if(spaceLeft < spaceMoving){ //TODO: unfuck this
 				this.land();
     		}
 
