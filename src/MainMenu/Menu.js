@@ -17,7 +17,8 @@ import CheckerboardOut from "Transition/CheckerboardOut";
 import ChromeFilter from "Filter/Chrome/Filter";
 import { BevelFilter } from "@pixi/filter-bevel";
 
-const FADETIME = 2;
+const FADEDELAY = .5;
+const FADETIME = 4;
 
 // import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
@@ -62,8 +63,10 @@ export default class MainMenu extends GameObject {
 
 		this.fadein.width = window.innerWidth;
 		this.fadein.height = window.innerHeight;
-		if (this.time < FADETIME) {
-			this.fadein.alpha = (FADETIME - this.time) / FADETIME;
+		if (this.time < FADEDELAY) {
+			this.fadein.alpha = 1;
+		}else if (this.time < FADETIME + FADEDELAY) {
+			this.fadein.alpha = (FADETIME - (this.time - FADEDELAY)) / FADETIME;
 		} else {
 			this.fadein.visible = false;
 		}
