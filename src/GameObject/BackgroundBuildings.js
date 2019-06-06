@@ -52,8 +52,8 @@ export default class Background extends GameObject {
 		this.buildings = [];
 		for (let i = 0; i < NUM_BUILDINGS; i++) {
 			const building = this.makeBuilding();
-			building.x = Math.random() * window.innerWidth;
-			building.offset = building.x;
+			building.offset = Math.random();
+			building.x =  building.offset * window.innerWidth;
 			building.z = Math.random();
 			this.buildingStage.addChild(building);
 			this.buildings.push(building);
@@ -76,10 +76,22 @@ export default class Background extends GameObject {
 
 		this.buildingStage.addChild(this.ground);
 		this.engine.backgroundStage.addChild(this.stage);
+		window.addEventListener("resize", this.onResize);
 	}
 
 	exit() {
+		window.removeEventListener("resize", this.onResize);
 		this.engine.backgroundStage.removeChild(this.stage);
+	}
+
+	onResize = (event) => {
+		// console.log(event.target.innerWidth);
+		this.clouds.width = window.innerWidth;
+		this.clouds.height = window.innerHeight / 2;
+		this.clouds.y = -window.innerHeight / 2;
+		// this.buildings.forEach(building => {
+		// 	building.offset = Math.random() * window.innerWidth;
+		// });
 	}
 
 	update() {
@@ -101,7 +113,7 @@ export default class Background extends GameObject {
 			// }
 
 			b.position.x =
-				(b.offset - this.engine.view.offset.x * (1 + b.z) * 0.1) %
+				((b.offset * window.innerWidth) - this.engine.view.offset.x * (1 + b.z) * 0.1) %
 				(window.innerWidth + b.width + b.width);
 			if (b.position.x < -b.width) {
 				b.position.x += window.innerWidth + b.width + b.width;
