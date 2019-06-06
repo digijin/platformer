@@ -1,5 +1,5 @@
 
-import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH, ENEMIES, BUILDING_WALL_CHANCE } from "./constants";
+import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH, ENEMIES, BUILDING_WALL_CHANCE, MIN_BUILDING_SHAFT_WIDTH, MAX_BUILDING_SHAFT_WIDTH,  BUILDING_SHAFT_CHANCE } from "./constants";
 
 
 export default function* (manager, grid){
@@ -43,9 +43,10 @@ function *genBuilding(xOff, yOff, manager, grid){
 	//////////////////END ENEMIES
 
 	// actual buildings
-	for(let x = xOff; x < xOff + width; x++){
+	for(let f = 1; f <= floors; f++){
 		let block;
-		for(let f = 1; f <= floors; f++){
+		let shaft = 0;
+		for(let x = xOff; x < xOff + width; x++){
 		// console.log(wall);
 			
 			const wall = Math.random() < BUILDING_WALL_CHANCE;
@@ -64,19 +65,32 @@ function *genBuilding(xOff, yOff, manager, grid){
 			}
 
 			//FLOOR
+			if(shaft == 0){
+				if(Math.random() < BUILDING_SHAFT_CHANCE){
+					shaft = MIN_BUILDING_SHAFT_WIDTH + Math.ceil(Math.random() * (MAX_BUILDING_SHAFT_WIDTH - MIN_BUILDING_SHAFT_WIDTH));
+				}
+			}
+
 			block = manager.grid.get(x, y);
 			if(block){
-				block.type = "platform";
+				if(shaft > 0){
+
+					block.type = "platform";
+					shaft --;
+				}else{
+					block.type = "1";
+				}
+
 			}
 		}
 
 		
-		for(let y = yOff - (FLOOR_HEIGHT * floors); y < yOff; y++){
-			const block  = manager.grid.get(x, y);
-			if(block){
-				block.backgroundType = "1";
-			}
-		}
+		// for(let y = yOff - (FLOOR_HEIGHT * floors); y < yOff; y++){
+		// 	const block  = manager.grid.get(x, y);
+		// 	if(block){
+		// 		block.backgroundType = "1";
+		// 	}
+		// }
 	}
 	yield 0;
 	return width;
