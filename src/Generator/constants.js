@@ -9,6 +9,7 @@ export const MIN_BUILDING_SPACING = 2;
 export const MAX_BUILDING_SPACING = 8;
 export const MIN_BUILDING_WIDTH = 12;
 export const MAX_BUILDING_WIDTH = 40;
+export const BUILDING_WALL_CHANCE = .05;
 export const MAX_FLOORS = 16;
 export const FLOOR_HEIGHT = 5;
 export const TILE_SIZE = 4;
