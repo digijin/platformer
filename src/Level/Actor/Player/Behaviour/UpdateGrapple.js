@@ -19,6 +19,15 @@ export default class UpdateGrapple extends Base{
 	grippedObjectType:string;
 	targetPosition:Point;
 
+	fireHand(){
+		this.player.hand.state = HAND_STATE.FIRED;
+		const diff = this.player.getTargetPoint().subtract(this.player.hand.position);
+		this.player.hand.direction = Math.atan2(diff.y, diff.x);
+		this.grippedObject = null;
+		this.grippedObjectType = null;
+
+	}
+
 	update(){
     	if (this.player.hand.state === HAND_STATE.ARMED) {
     		this.player.hand.position = new Point(this.player.position).add(this.player.hand.offset);
@@ -26,14 +35,8 @@ export default class UpdateGrapple extends Base{
     	if (this.engine.input.getButtonDown("grapple")) {
     		//FIRE HAND
     		if (this.player.hand.state === HAND_STATE.ARMED) {
-    			this.player.hand.state = HAND_STATE.FIRED;
-    			const diff = this.player.getTargetPoint().subtract(this.player.hand.position);
-    			this.player.hand.direction = Math.atan2(diff.y, diff.x);
+				this.fireHand();
     		}
-    	} else {
-    		// if (this.player.hand.state == HAND_STATE.GRIPPED) {
-    		// 	this.player.hand.state = HAND_STATE.RELEASED;
-    		// }
     	}
     	if (this.player.hand.state === HAND_STATE.FIRED) {
     		const old = new Point(this.player.hand.position);
