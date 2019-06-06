@@ -1,5 +1,5 @@
 
-import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH, ENEMIES, BUILDING_WALL_CHANCE, MIN_BUILDING_SHAFT_WIDTH, MAX_BUILDING_SHAFT_WIDTH,  BUILDING_SHAFT_CHANCE } from "./constants";
+import { MAX_FLOORS, GRID_WIDTH, FLOOR_HEIGHT, MIN_BUILDING_SPACING, MAX_BUILDING_SPACING, GROUND, MAX_BUILDING_WIDTH, MIN_BUILDING_WIDTH, ENEMIES, BUILDING_WALL_CHANCE, MIN_BUILDING_SHAFT_WIDTH, MAX_BUILDING_SHAFT_WIDTH,  BUILDING_SHAFT_CHANCE, BUILDING_SIDE_WALL_CHANCE } from "./constants";
 
 
 export default function* (manager, grid){
@@ -49,9 +49,13 @@ function *genBuilding(xOff, yOff, manager, grid){
 		for(let x = xOff; x < xOff + width; x++){
 		// console.log(wall);
 			
-			const wall = Math.random() < BUILDING_WALL_CHANCE;
+			let wall = Math.random() < BUILDING_WALL_CHANCE;
 			const y = yOff - (FLOOR_HEIGHT * f);
 
+			//SIDES
+			if(x == xOff || x == xOff + width - 1){
+				wall = wall || Math.random() < BUILDING_SIDE_WALL_CHANCE;
+			}
 			//WALL
 			if(wall){
 				// console.log("triggers", FLOOR_HEIGHT);

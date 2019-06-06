@@ -20,7 +20,7 @@ export default {
 		legspeed: 20,
 		speed: 500,
 		jump: {
-			power: 10,
+			power: 11,
 		},
 	},
 	gravity: 30,
