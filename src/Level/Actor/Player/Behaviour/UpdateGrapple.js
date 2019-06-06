@@ -12,31 +12,53 @@ import PlayerState from "Level/Actor/Player/State";
 
 export default class UpdateGrapple extends Base{
 
-
 	states = ALL;
 	
 	grippedObject;
 	grippedObjectType:string;
 	targetPosition:Point;
-
+	trajectory;//hack
+	
 	fireHand(){
 		this.player.hand.state = HAND_STATE.FIRED;
 		const diff = this.player.getTargetPoint().subtract(this.player.hand.position);
 		this.player.hand.direction = Math.atan2(diff.y, diff.x);
+		this.targetPosition = null;
 		this.grippedObject = null;
 		this.grippedObjectType = null;
 
 	}
 
+	ifHitsEnemyThen(doThis: (actor: Actor) => {}) {
+		//using every so a missile doesnt blow up twice
+    	this.engine.manager.getEnemies().every( en => {
+    		if(en !== this.owner){
+    			if (this.cheapCheck(en) || this.expensiveCheck(en)) {
+    				doThis(en);
+    				return false;
+    			}
+    		}
+    		return true;
+    	});
+	}
+
+	cheapCheck(actor: Actor) {
+    	return actor.getBoundingRect().contains(this.trajectory.b);
+	}
+
+	expensiveCheck(actor: Actor) {
+    	return this.trajectory.intersectsRect(actor.getBoundingRect()).result;
+	}
+
 	update(){
     	if (this.player.hand.state === HAND_STATE.ARMED) {
     		this.player.hand.position = new Point(this.player.position).add(this.player.hand.offset);
-    	}
-    	if (this.engine.input.getButtonDown("grapple")) {
-    		//FIRE HAND
-    		if (this.player.hand.state === HAND_STATE.ARMED) {
-				this.fireHand();
-    		}
+			if (this.engine.input.getButtonDown("grapple")) {
+				//FIRE HAND
+				if (this.player.hand.state === HAND_STATE.ARMED) {
+					this.fireHand();
+				}
+			}
     	}
     	if (this.player.hand.state === HAND_STATE.FIRED) {
     		const old = new Point(this.player.hand.position);
@@ -50,18 +72,18 @@ export default class UpdateGrapple extends Base{
 				this.player.changeState(PlayerState.AIRBORNE);
     		}
     		//todo unify this with projectile.js, maybe make grapple a projectile
-    		const trajectory = new Line({ a: old, b: curr });
-    		//CHECK ENEMIES
-    		this.engine.getEnemies().forEach((en:Enemy) => {
-    			if(en.getBoundingRect().contains(curr)){
-					this.player.hand.state = HAND_STATE.GRIPPED;
-					this.grippedObject = en;
-					this.grippedObjectType = "Enemy";
-    			}
-    		});
+    		this.trajectory = new Line({ a: old, b: curr });
+			//CHECK ENEMIES
+			this.ifHitsEnemyThen(enemy => {
+				// console.log(enemy);
+				this.player.hand.state = HAND_STATE.GRIPPED;
+				this.grippedObject = enemy;
+				this.grippedObjectType = "Enemy";
+			});
+
 
     		//CHECK GRID
-    		const blocks = trajectory.blockPixels();
+    		const blocks = this.trajectory.blockPixels();
     		// console.log(blocks.length, "blocks");
     		const empty = blocks.every(b => {
     			const block = this.engine.grid.getBlock(b);
@@ -71,7 +93,7 @@ export default class UpdateGrapple extends Base{
     			if (block.isVacant() && !block.isPlatform()) {
     				return true;
     			} else {
-    				const hitTest = trajectory.intersectsRect(block.rect);
+    				const hitTest = this.trajectory.intersectsRect(block.rect);
     				if (hitTest.result && hitTest.collision) {
     					this.player.hand.position.y = hitTest.collision.y;
     					this.player.hand.position.x = hitTest.collision.x;
@@ -85,13 +107,12 @@ export default class UpdateGrapple extends Base{
     			}
     		});
     		if (!empty) {
+				
 				this.player.hand.state = HAND_STATE.GRIPPED;
-    		}
-
-    		// if (this.engine.grid.isPositionBlocked(this.player.hand.position)) {
-    		// 	// if(grid.blockAtPosition(this.player.hand.position).block !== "0"){
-    		// 	this.player.hand.state = HAND_STATE.GRIPPED;
-    		// }
+			}
+			// if(this.player.hand.state == HAND_STATE.GRIPPED){
+			// 	console.log(this.grippedObject, this.grippedObjectType);
+			// }
     	}
     	if (this.player.hand.state === HAND_STATE.RELEASED) {
     		const target = new Point(this.player.position).add(this.player.hand.offset);
@@ -108,10 +129,6 @@ export default class UpdateGrapple extends Base{
     		}
     	}
     	if(this.player.hand.state === HAND_STATE.GRIPPED){
-
-			//APPLY
-			// const vertObjects = this.player.vertObstacles(this.player.v);
-			
 			////////////////////////MOVEMENT CODE
 
     		//REEL IN
