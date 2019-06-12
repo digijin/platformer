@@ -6,6 +6,8 @@ import type Engine from "Engine";
 import Rect from "Utility/Rect";
 import Point from "Utility/Point";
 import RGBA from "Utility/RGBA";
+import Grid from "Grid";
+import Background from "GameObject/BackgroundBuildings";
 
 import type Block from "Level/Grid/Block";
 
@@ -15,6 +17,7 @@ import type EnemyType from "Level/Actor/Enemy/Type";
 
 import * as PIXI from "pixi.js";
 
+class EditorContainer extends PIXI.Container {}
 export default class Watcher extends GameObject {
     lastMouse: Point;
     el: HTMLDivElement;
@@ -46,12 +49,37 @@ export default class Watcher extends GameObject {
 
     init(engine: Engine) {
     	super.init(engine);
+    	this.container = new EditorContainer();
+    	this.engine.stage.addChild(this.container);
     	// let el = document.createElement("DIV");
     	// el.innerHTML = "I'm a div";
     	// engine.ui.container.appendChild(el);
     	this.lastMouse = this.engine.mouse.position;
     	this.cursor = new PIXI.Sprite(PIXI.Texture.WHITE);
     	this.engine.stage.addChild(this.cursor);
+		
+
+    	const grid = new Grid({
+    		size: { w: 50, h: 50 },
+    		parent: this.container,
+    	});
+
+    	this.engine.stage.position.x = 0;
+    	this.engine.stage.position.y = 0;
+
+    	this.engine.view.offset = new Point({
+    		x: 0,
+    		y: 0,
+    	});
+    	// grid.makeTest();
+    	// grid.generate(1);
+    	this.engine.register(grid);
+
+    	document.body.style.backgroundColor = "#87efff";
+    	const bg = new Background();
+    	bg.spawnExplosion = () => {};
+    	this.engine.register(bg);
+
     }
 
     exit() {
