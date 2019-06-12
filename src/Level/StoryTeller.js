@@ -24,35 +24,33 @@ export default class StoryTeller extends GameObject {
 
 		const grid = new Grid({
 			size: {
-				w: 200,
+				w: 50,
 				h: 50,
 			},
 			parent: this.container,
 		});
+		this.engine.register(grid);
+		
+		document.body.style.backgroundColor = "#ddaaee";
+		const bg = new Background();
+		engine.register(bg);
+		
 
 		// FLOWHACK
 		const gridData = this.engine.mission.level;
-		// let gridData = require("levels/level.txt");
-		this.engine.register(grid);
 		grid.load(gridData);
 
-		this.player = new PlayerCharacter(
-			{
-				position: new Point({
-					x: 300,
-					y: 50,
-				}),
-				engine: engine,
-			}
-		);
+		this.player = new PlayerCharacter({
+			position: new Point({
+				x: 300,
+				y: 50,
+			}),
+			engine: engine,
+		});
 		this.container.addChild(this.player);
 		this.engine.register(new PauseMenu());
-		
+
 		// FLOWHACK
-		document.body.style.backgroundColor = "#ddaaee";
-		const bg = new Background();
-		bg.explosions = false;
-		engine.register(bg);
 
 
 	}

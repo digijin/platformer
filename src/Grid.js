@@ -333,6 +333,7 @@ export default class Grid extends GameObject {
 		if (this.engine) {
 			enemies = this.engine.getEnemies();
 		}
+		console.log("saving enemies count", enemies.length);
 		const blocks = [
 			{
 				layer: "main",
