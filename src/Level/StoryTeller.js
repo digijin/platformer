@@ -9,9 +9,11 @@ import Grid from "Grid";
 // import log from "loglevel";
 import * as PIXI from "pixi.js";
 import type Engine from "../Engine";
+import Background from "GameObject/BackgroundBuildings";
 
 import PlayerCharacter from "Level/Actor/Player/Character";
 import EnemyCharacter from "Level/Actor/Enemy/Character";
+import PauseMenu from "GameObject/PauseMenu";
 
 class LevelContainer extends PIXI.Container {}
 export default class StoryTeller extends GameObject {
@@ -44,7 +46,14 @@ export default class StoryTeller extends GameObject {
 			}
 		);
 		this.container.addChild(this.player);
+		this.engine.register(new PauseMenu());
 		
+		// FLOWHACK
+		document.body.style.backgroundColor = "#ddaaee";
+		const bg = new Background();
+		bg.explosions = false;
+		engine.register(bg);
+
 
 	}
 

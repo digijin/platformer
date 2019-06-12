@@ -1,12 +1,11 @@
 // @flow
 
 import Base from "./Base";
-import Background from "GameObject/BackgroundBuildings";
 
 import StoryTeller from "Level/StoryTeller";
 import type Engine from "Engine";
 
-import PauseMenu from "GameObject/PauseMenu";
+// import PauseMenu from "GameObject/PauseMenu";
 
 export default class Level extends Base {
 	start(engine: Engine) {
@@ -16,21 +15,7 @@ export default class Level extends Base {
 		engine.manager = this.manager;
 		engine.register(this.manager);
 
-		// engine.register(new Skyline());
-		engine.register(new PauseMenu());
-
-		// FLOWHACK
-		document.body.style.backgroundColor = "#ddaaee";
-		const bg = new Background();
-		// bg.spawnExplosion = () => {};
-		bg.explosions = false;
-		engine.register(bg);
-
-
-		// engine.ui.dispatch({
-		// 	type: "START_SCENE",
-		// 	scene: "level"
-		// });
+		// engine.register(new PauseMenu());
 
 		window.dispatchEvent(new Event("level-start"));
 	}
