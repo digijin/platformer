@@ -331,9 +331,8 @@ export default class Grid extends GameObject {
 	save(): string {
 		let enemies = [];
 		if (this.engine) {
-			enemies = this.engine.getEnemies();
+			enemies = this.engine.manager.getEnemies();
 		}
-		console.log("saving enemies count", enemies.length);
 		const blocks = [
 			{
 				layer: "main",
@@ -352,11 +351,11 @@ export default class Grid extends GameObject {
 			// FLOWHACK
 			enemies: enemies
 				.map((e: Enemy) => {
-					return { t: e.type.id, p: e.position };
+					return { t: e.type.id, p: new Point(e.position) };
 				})
 				.concat(
 					this.enemyData.map((e: Enemy) => {
-						return { t: e.type.id, p: e.position };
+						return { t: e.type.id, p: new Point(e.position) };
 					})
 				),
 			decor: this.decor.map(d => {

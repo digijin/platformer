@@ -8,6 +8,7 @@ import Point from "Utility/Point";
 import RGBA from "Utility/RGBA";
 import Grid from "Grid";
 import Background from "GameObject/BackgroundBuildings";
+import EnemyCharacter from "Level/Actor/Enemy/Character";
 
 import type Block from "Level/Grid/Block";
 
@@ -78,6 +79,12 @@ export default class Watcher extends GameObject {
 		});
 
 
+	}
+
+	getEnemies() {
+		return this.container.children.filter(child => {
+			return child instanceof EnemyCharacter;
+		});
 	}
 
 	exit() {
