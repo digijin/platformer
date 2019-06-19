@@ -1,6 +1,6 @@
 {
 	"parser": "babel-eslint",
-	"plugins": ["flowtype", "sort-class-members"],
+	"plugins": ["flowtype"],
 	"extends": [
 		"eslint:recommended",
 		"plugin:flowtype/recommended",
@@ -43,30 +43,6 @@
 			2,
 			"always",
 			{ "exceptAfterSingleLine": true }
-		],
-		"REMOVED sort-class-members/sort-class-members": [
-			2,
-			{
-				"order": [
-					"[static-properties]",
-					"[static-methods]",
-					"[properties]",
-					"[conventional-private-properties]",
-					"constructor",
-					"init",
-					"exit",
-					"update",
-					"[update-handlers]",
-					"[methods]",
-					"[conventional-private-methods]"
-				],
-				"groups": {
-					"update-handlers": [
-						{ "name": "/update.+/", "type": "method" }
-					]
-				},
-				"accessorPairPositioning": "getThenSet"
-			}
 		]
 	},
 	"env": {
