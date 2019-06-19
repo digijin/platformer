@@ -2,7 +2,7 @@
 import GameObject from "GameObject";
 // import Level from "Scene/Level";
 // import Point from "Utility/Point";
-import mechHero from "./mech_hero.png";
+// import mechHero from "./mech_hero.png";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 // import log from "loglevel";

@@ -1,5 +1,5 @@
 import { EnemyTypes } from "./Type";
-import EnemyType from "./Type";
+// import EnemyType from "./Type";
 
 describe("Level/Actor/Enemy/Type", () => {
 	describe("EnemyTypes array", () => {

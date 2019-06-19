@@ -9,6 +9,8 @@ import PlayerState from "Level/Actor/Player/State";
 import type { PlayerStateType } from "Level/Actor/Player/State";
 
 import Globals from "../../../Globals";
+import { EngineMap } from "Components/Engine";
+import type ComponentEngine from "Components/Engine";
 
 export const HAND_STATE = {
 	ARMED: 0,
@@ -41,7 +43,7 @@ export default class PlayerCharacter extends Rigidbody{
 	graph: PIXI.Graphics;
 	state: PlayerStateType = PlayerState.AIRBORNE;
 	hand = hand;
-	leg: Leg;
+	// leg: Leg;
     z:number = 10;
     energy: number = 0;
     constructor(params){

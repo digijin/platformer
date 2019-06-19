@@ -1,3 +1,5 @@
+// @flow
+
 import GameObject from "GameObject";
 // import Player from "Level/Actor/Player";
 import Point from "Utility/Point";

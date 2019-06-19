@@ -1,4 +1,4 @@
-
+// @flow
 import Base from "./Base";
 import PlayerState from "Level/Actor/Player/State";
 import BoosterParticle from "GameObject/Particle/BoosterParticle";

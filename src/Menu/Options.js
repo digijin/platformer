@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, Container } from "react-pixi-fiber";
 // import Rectangle from "./Rectangle";
-import { UICOLOUR } from "./constants";
+// import { UICOLOUR } from "./constants";
 
 import Slider from "./Options/Slider";
 import engineConnect from "React/engineConnect";

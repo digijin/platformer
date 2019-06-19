@@ -1,11 +1,12 @@
 import Base from "./Base";
 import { ALL } from "Level/Actor/Player/State";
-import config from "config";
+// import config from "config";
 import { HAND_STATE } from "../../Player";
 import Point from "Utility/Point";
 import Line from "../../../../Utility/Line";
-import Enemy from "../../Enemy";
+// import Enemy from "../../Enemy";
 import type Block from "Grid/Block";
+import type Actor from "Level/Actor";
 
 import PlayerState from "Level/Actor/Player/State";
 

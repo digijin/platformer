@@ -86,7 +86,7 @@ export default class Block {
 		return this.isPlatform() || this.isLadder() || this.isEmpty();
 	}
 
-	isGrappleable():boolean {
+	isGrappleable(): boolean {
 		return this.isEmpty();
 	}
 

@@ -4,7 +4,7 @@ import Game from "Game";
 import * as PIXI from "pixi.js";
 PIXI.loader.add("blocks", "assets/sprites.json");
 PIXI.loader.add("decor", "assets/decorsprites.json");
-import recurseSearch from "test/util/recurseSearch";
+// import recurseSearch from "test/util/recurseSearch";
 
 describe("Scene/Logo.karma.js", () => {
 	let container;

@@ -1,3 +1,4 @@
+// @flow
 
 import Base from "./Base";
 import PlayerState, { AllExcept } from "Level/Actor/Player/State";
@@ -7,7 +8,7 @@ import Point from "Utility/Point";
 
 export default class MoveVertical extends Base{
 
-    states = AllExcept(PlayerState.GRAPPLE);;
+    states = AllExcept(PlayerState.GRAPPLE);
     update(){
     	// TODO: use player.state to determine in airborne and set grounded to airborne
 
@@ -38,9 +39,9 @@ export default class MoveVertical extends Base{
     			if (allPlatform && this.engine.input.getButton("down")) {
     				break;
     			}
+    			// eslint-disable-next-line no-fallthrough
     		case PlayerState.SLAM:
     			//set y to ground
-    			// console.log("player v is ", this.player.v);
     			if (this.player.v > 0) {
     				this.player.position.y = vertObjects[0].position.y * config.grid.width;
     				this.handleLanding(this.player.v);

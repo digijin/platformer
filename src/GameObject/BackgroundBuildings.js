@@ -84,7 +84,7 @@ export default class Background extends GameObject {
 		this.engine.backgroundStage.removeChild(this.stage);
 	}
 
-	onResize = (event) => {
+	onResize = () => {
 		// console.log(event.target.innerWidth);
 		this.clouds.width = window.innerWidth;
 		this.clouds.height = window.innerHeight / 2;

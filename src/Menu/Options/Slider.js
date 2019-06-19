@@ -3,8 +3,7 @@ import React from "react";
 import { Text, Container } from "react-pixi-fiber";
 import Rectangle from "../Rectangle";
 import { UICOLOUR } from "../constants";
-import engineConnect from "React/engineConnect";
-
+// import engineConnect from "React/engineConnect";
 export class Slider extends React.Component{
     state = {
     	down: false,

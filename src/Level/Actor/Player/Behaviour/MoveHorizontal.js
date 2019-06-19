@@ -1,11 +1,11 @@
+// @flow
 import Base from "./Base";
 import { AllExcept } from "Level/Actor/Player/State";
 import PlayerState from "Level/Actor/Player/State";
 import config from "config";
 
-import Point from "Utility/Point";
-
-import { HAND_STATE } from "../../Player";
+// import Point from "Utility/Point";
+// import { HAND_STATE } from "../../Player";
 
 
 export default class MoveHorizontal extends Base{

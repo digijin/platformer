@@ -5,7 +5,7 @@ import config from "config";
 
 import Rect from "Utility/Rect";
 // import type Engine from "Engine";
-import Explosion from "GameObject/Explosion";
+// import Explosion from "GameObject/Explosion";
 import type Block from "Level/Grid/Block";
 
 import type Actor from "Level/Actor";

@@ -50,7 +50,7 @@ const generateDungeon = function* (engine, manager) {
 			yield i;
 		}
 
-		let { top, left, right, bottom } = getTRBL(children);
+		let { top, left, right } = getTRBL(children);
 		// console.log(top, right, bottom, left);
 		left *= 1 / TILE_SIZE;
 		top *= 1 / TILE_SIZE;
