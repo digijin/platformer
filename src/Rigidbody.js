@@ -77,9 +77,12 @@ export default class Rigidbody extends PIXI.Container {
 	v: number;
 
 	explode = () => {
-		// console.log("destroying", this.destroy);
-		// this.destroy();
-		this.parent.removeChild(this);
+		if(!this.parent){
+			// throw new Error("exploding something without a parent");
+		}else{
+			this.parent.removeChild(this);
+
+		}
 		//fill rect with explosions
 		// const rect: Rect = this.getBoundingRect();
 		// const center: Point = rect.centerPoint();
