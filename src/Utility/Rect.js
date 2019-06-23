@@ -33,7 +33,7 @@ export default class Rect {
 			b: Math.max(pt1.y, pt2.y),
 		});
 	}
-	
+
 	static fromPosSizeRego(
 		pos: Point,
 		size: { w: number, h: number },
@@ -49,7 +49,7 @@ export default class Rect {
 		});
 	}
 
-	static fromSprite(sprite: {position: {x: number, y: number}}){
+	static fromSprite(sprite: {position: {x: number, y: number}, width:number, height:number}){
 		return new Rect({
 			t: sprite.position.y,
 			l: sprite.position.x,
@@ -129,7 +129,7 @@ export default class Rect {
 		// const outsideH = this.b <= rect.t || rect.b <= this.t;
 		// const outsideV = this.r <= rect.l || rect.r <= this.l;
 		// return !outsideV && !outsideH;
-		
+
 		const rOver = rect.r > this.l;
 		const bOver = rect.b > this.t;
 		const tOver = rect.t < this.b;
