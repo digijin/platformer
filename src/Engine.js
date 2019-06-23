@@ -221,22 +221,22 @@ export default class Engine {
 		});
 		this.stageContainer.addChild(this.textTest);
 		this.checkLoad();
-	}
-	
+	};
+
 	checkLoad = () => {
 		//TODO: Cycle through all fonts to load because this only
 		//loads the font being tested
 		this.textTest.style = this.textTest.style;
-		if(this.textTest.width < 100){
+		if (this.textTest.width < 100) {
 			requestAnimationFrame(this.checkLoad);
-		}else{
+		} else {
 			// setTimeout(() => {
 			this.stageContainer.removeChild(this.textTest);
 			requestAnimationFrame(this.update);
 			// }, 1000);
 		}
 		this.render();
-	}
+	};
 
 	//main game loop
 	update = () => {

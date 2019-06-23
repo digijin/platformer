@@ -1,8 +1,9 @@
 {
 	"javascript.validate.enable": false,
-	"editor.formatOnSave": false,
-	"prettier.eslintIntegration": true,
-	"prettier.useTabs": true,
+	"editor.formatOnSave": true,
+	"flow.pathToFlow": "${workspaceFolder}/node_modules/.bin/flow",
+	// "prettier.eslintIntegration": true,
+	// "prettier.useTabs": true,
 	"files.exclude": {
 		"**/.vscode/**": true
 	},

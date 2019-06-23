@@ -31,12 +31,12 @@ export default class GeneratorScene extends Base {
 		// this.gen = generateDungeon();
 		// engine.register(new Generator(this));
 		engine.register(new GeneratorManager(this));
-		
+
 	}
 
 
 	generate(){
-
+		
 		this.genGround();
 
 	}
@@ -64,13 +64,13 @@ export default class GeneratorScene extends Base {
 				sprite.width = GRIDSIZE;
 				sprite.height = GRIDSIZE;
 				const block = this.grid[x][y][0];
-				if(block.type == "1"){
+				if(block.type === "1"){
 					sprite.tint = 0xff0000;
-				}else if(block.type == "platform"){
+				}else if(block.type === "platform"){
 					sprite.tint = 0x00ff00;
 				}else{
 					//background
-					if(block.backgroundType != "0"){
+					if(block.backgroundType !== "0"){
 						// console.log(typeof block.backgroundType);
 
 						sprite.tint = 0x0000ff;
@@ -80,7 +80,7 @@ export default class GeneratorScene extends Base {
 
 			}
 		}
-        
+
 	}
 }
 

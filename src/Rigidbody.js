@@ -77,11 +77,10 @@ export default class Rigidbody extends PIXI.Container {
 	v: number;
 
 	explode = () => {
-		if(!this.parent){
+		if (!this.parent) {
 			// throw new Error("exploding something without a parent");
-		}else{
+		} else {
 			this.parent.removeChild(this);
-
 		}
 		//fill rect with explosions
 		// const rect: Rect = this.getBoundingRect();

@@ -1,4 +1,4 @@
-//@flow
+// @flow
 
 // import type Engine from "Engine";
 import Point from "Utility/Point";
@@ -27,6 +27,7 @@ export default class Projectile extends GameObject {
     	super();
     	Globals.get("player", (player) => {this.player = player;});
     	Object.assign(this, params);
+		
     }
 
     explode() {
@@ -45,6 +46,7 @@ export default class Projectile extends GameObject {
 
     ifHitsEnemyThen(doThis: (actor: Actor) => {}) {
     	//using every so a missile doesnt blow up twice
+
     	this.engine.manager.getEnemies().every( en => {
     		if(en !== this.owner){
     			if (this.cheapCheck(en) || this.expensiveCheck(en)) {
@@ -63,7 +65,7 @@ export default class Projectile extends GameObject {
     	}
 
     }
-	
+
     cheapCheck(actor: Actor) {
     	return actor.getBoundingRect().contains(this.position);
     }

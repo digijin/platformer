@@ -13,7 +13,7 @@
 		"functional": "karma start",
 		"electron": "echo 'works in conemu not atom'&&electron dist/index.html",
 		"flow:check": "flow check",
-		"flow:suggest": "flow suggest src/Explosion.js",
+		"flow:suggest": "flow suggest src/Engine.js",
 		"flow:watch": "flow-watch",
 		"coverage": "jest --coverage --watch",
 		"deploy": "npm version patch && git push && git push --tags",
