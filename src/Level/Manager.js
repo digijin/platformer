@@ -18,11 +18,14 @@ import EnemyCharacter from "Level/Actor/Enemy/Character";
 import PauseMenu from "GameObject/PauseMenu";
 
 class LevelContainer extends PIXI.Container {}
-export default class StoryTeller extends GameObject {
-	init(engine: Engine) {
-		super.init(engine);
+export default class LevelManager extends PIXI.Container {
+	constructor(engine: Engine) {
+		// super.init(engine);
+		super();
+		this.engine = engine
 		this.container = new LevelContainer();
-		this.engine.stage.addChild(this.container);
+		// this.engine.stage.addChild(this.container);
+		this.addChild(this.container);
 
 		const grid = new Grid({
 			size: {
@@ -32,11 +35,11 @@ export default class StoryTeller extends GameObject {
 			parent: this.container,
 		});
 		this.engine.register(grid);
-		
+
 		document.body.style.backgroundColor = "#ddaaee";
 		const bg = new Background();
 		engine.register(bg);
-		
+
 
 		// FLOWHACK
 		const gridData = this.engine.mission.level;
