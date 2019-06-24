@@ -19,6 +19,14 @@ export default class FocusCamera extends Base{
     		y: config.game.height / 2,
     	});
     	// .subtract(this.viewTargetOffset);
+
+		if(viewTarget.x < 0){
+			viewTarget.x = 0;
+		}
+		if(viewTarget.y < 0){
+			viewTarget.y = 0;
+		}
+
     	this.engine.view.offset = this.engine.view.offset.easeTo(viewTarget, 5);
     }
 
