@@ -39,6 +39,8 @@ import Fpsmeter from "fpsmeter";
 import Stage from "./Stage";
 // class Stage extends PIXI.Container {}
 class StageContainer extends PIXI.Container {}
+class BackgroundStage extends PIXI.Container {}
+class TransitionStage extends PIXI.Container {}
 
 let instance;
 export default class Engine {
@@ -164,8 +166,8 @@ export default class Engine {
 
 		this.stageContainer = new StageContainer();
 		this.stage = new Stage();
-		this.transitionStage = new PIXI.Container();
-		this.backgroundStage = new PIXI.Container();
+		this.transitionStage = new TransitionStage();
+		this.backgroundStage = new BackgroundStage();
 		this.stageContainer.addChild(this.backgroundStage);
 		this.stageContainer.addChild(this.stage);
 		this.stageContainer.addChild(this.transitionStage);

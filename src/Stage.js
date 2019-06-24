@@ -1,11 +1,11 @@
 import * as PIXI from "pixi.js";
 
-export default class Stage extends PIXI.Container{
+export default class MainStage extends PIXI.Container{
 	getInstancesOfType(type){
 		//recurse
 		return this.recurseSearchType(this, type);
 	}
-    
+
 	recurseSearchType(node, type){
 		let out = [];
 		node.children.forEach(child => {
