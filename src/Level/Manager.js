@@ -17,8 +17,10 @@ import PlayerCharacter from "Level/Actor/Player/Character";
 import EnemyCharacter from "Level/Actor/Enemy/Character";
 import PauseMenu from "GameObject/PauseMenu";
 
+import SceneManager from 'Common/Base/SceneManager'
+
 class LevelContainer extends PIXI.Container {}
-export default class LevelManager extends PIXI.Container {
+export default class LevelManager extends SceneManager {
 	constructor(engine: Engine) {
 		// super.init(engine);
 		super();
