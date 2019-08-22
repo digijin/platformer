@@ -45,7 +45,7 @@ export default class Rigidbody extends PIXI.Container {
 		});
 		//if only one block is an obstacle, and it is in lower corner
 		let step: ?Block;
-		if (obstacles.length == 1) {
+		if (obstacles.length === 1) {
 			if (amount > 0) {
 				//moving right
 				if (!blocks[blocks.length - 1].isEmpty()) {
@@ -111,7 +111,7 @@ export default class Rigidbody extends PIXI.Container {
 	position: Point;
 
 	canMoveVert = (amount: number): boolean => {
-		return this.vertObstacles(amount).length == 0;
+		return this.vertObstacles(amount).length === 0;
 	};
 
 	canMoveHori = (amount: number): boolean => {
@@ -121,7 +121,7 @@ export default class Rigidbody extends PIXI.Container {
 		const obstacles = blocks.filter(block => {
 			return !block.isVacant();
 		});
-		return obstacles.length == 0;
+		return obstacles.length === 0;
 	};
 
 	h: number;

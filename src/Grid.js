@@ -19,6 +19,7 @@ import EnemyCharacter from "Level/Actor/Enemy/Character";
 
 //for console tools
 class GridBlockContainer extends PIXI.Container {}
+
 class GridDecorContainer extends PIXI.Container {}
 
 export default class Grid extends GameObject {
@@ -282,7 +283,7 @@ export default class Grid extends GameObject {
 		let y = Math.floor(pos.y / config.grid.width);
 		//because y goes positive downwards, if an object is flat on the top
 		//of a tile it will register as th e dtile below
-		if (pos.y % config.grid.width == 0) {
+		if (pos.y % config.grid.width === 0) {
 			y -= 1;
 		}
 		const block = this.blocks.get(x, y);
