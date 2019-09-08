@@ -7,7 +7,7 @@ import type Engine from "Engine";
 import * as PIXI from "pixi.js";
 // import log from "loglevel";
 import EngineProvider from "../React/EngineProvider";
-import { render, Text, Container } from "react-pixi-fiber";
+import { Container, render, Text } from "react-pixi-fiber";
 import React from "react";
 import Button from "./Button";
 
@@ -55,7 +55,7 @@ export default class MainMenu extends GameObject {
 		this.engine.stage.removeChild(this.fadein);
 		this.engine.stage.removeChild(this.ui);
 	}
-	
+
 	update() {
 		this.time += this.engine.deltaTime;
 		// this.hero.position.x = window.innerWidth / 2;
@@ -65,7 +65,7 @@ export default class MainMenu extends GameObject {
 		this.fadein.height = window.innerHeight;
 		if (this.time < FADEDELAY) {
 			this.fadein.alpha = 1;
-		}else if (this.time < FADETIME + FADEDELAY) {
+		} else if (this.time < FADETIME + FADEDELAY) {
 			this.fadein.alpha = (FADETIME - (this.time - FADEDELAY)) / FADETIME;
 		} else {
 			this.fadein.visible = false;
@@ -73,7 +73,7 @@ export default class MainMenu extends GameObject {
 
 		this.engine.view.offset.x += 400 * this.engine.deltaTime;
 	}
-	
+
 
 	render() {
 		render(
@@ -82,7 +82,7 @@ export default class MainMenu extends GameObject {
 			<EngineProvider engine={this.engine}>
 				<Container>
 					<Text
-						text="lumina"
+						text="extrata"
 						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
@@ -112,7 +112,7 @@ export default class MainMenu extends GameObject {
 						onClick={() => {
 							this.engine.startSceneTransition(
 								new Menu(),
-								new CheckerboardOut()
+								new CheckerboardOut(),
 							);
 						}}
 						text={"Play"}
@@ -125,7 +125,7 @@ export default class MainMenu extends GameObject {
 						onClick={() => {
 							this.engine.startSceneTransition(
 								new Editor(),
-								new CheckerboardOut()
+								new CheckerboardOut(),
 							);
 						}}
 						text={"Editor"}
@@ -138,7 +138,7 @@ export default class MainMenu extends GameObject {
 						onClick={() => {
 							this.engine.startSceneTransition(
 								new Editor(),
-								new CheckerboardOut()
+								new CheckerboardOut(),
 							);
 						}}
 						text={"Load"}
@@ -149,7 +149,7 @@ export default class MainMenu extends GameObject {
 					/>
 				</Container>
 			</EngineProvider>,
-			this.ui
+			this.ui,
 		);
 	}
 
