@@ -14,7 +14,9 @@ export default class MoveVertical extends Base {
 		// TODO: use player.state to determine in airborne and set grounded to airborne
 		// console.log(this.player.h, this.player.v);
 		// console.log(this.player.state);
+		//TODO: check why deltatime is so huge
 		let vDelta = this.player.v * this.engine.deltaTime * 60;
+		vDelta = Math.min(vDelta, 100);
 		const vertObjects = this.player.vertObstacles(vDelta);
 
 		if (vertObjects.length > 0) {

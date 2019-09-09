@@ -22,6 +22,12 @@ import UI from "UI";
 import Globals from "./Globals";
 
 import * as PIXI from "pixi.js";
+import type Mission from "Mission";
+import { Missions } from "Mission";
+
+import Fpsmeter from "fpsmeter";
+
+import Stage from "./Stage";
 
 // import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 // import { GlitchFilter } from "@pixi/filter-glitch";
@@ -30,16 +36,11 @@ import * as PIXI from "pixi.js";
 // import { PixelateFilter } from "@pixi/filter-pixelate";
 // import { ReflectionFilter } from "@pixi/filter-reflection";
 // import { ShockwaveFilter } from "@pixi/filter-shockwave";
-
-import type Mission from "Mission";
-import { Missions } from "Mission";
-
-import Fpsmeter from "fpsmeter";
-
-import Stage from "./Stage";
 // class Stage extends PIXI.Container {}
 class StageContainer extends PIXI.Container {}
+
 class BackgroundStage extends PIXI.Container {}
+
 class TransitionStage extends PIXI.Container {}
 
 let instance;
@@ -227,7 +228,7 @@ export default class Engine {
 
 	checkLoad = () => {
 		//TODO: Cycle through all fonts to load because this only
-		//loads the font being tested
+		// loads the font being tested
 		this.textTest.style = this.textTest.style;
 		if (this.textTest.width < 100) {
 			requestAnimationFrame(this.checkLoad);
@@ -247,9 +248,10 @@ export default class Engine {
 		const nowTime = new Date().getTime();
 		let diff = nowTime - this.lastTime;
 		this.lastTime = nowTime;
-		if (diff > 1000) {
+		const minFPS = 1000 / 20; //20 MIN FPS
+		if (diff > minFPS) {
 			//window probably lost focus or switched tabs
-			diff = 1;
+			diff = minFPS;
 		}
 		this.deltaTime = diff / 1000;
 		this.mouse.update();

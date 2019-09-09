@@ -60,35 +60,35 @@ export default class Game {
 			window.location.href.indexOf("?") + 1
 		);
 		switch (query) {
-		case "editor":
-			this.engine.startScene(new Editor());
-			break;
-		case "mainmenu":
-			this.engine.startScene(new MainMenu());
-			break;
-		case "results":
-			this.engine.startScene(new Results());
-			break;
-		case "level":
-			this.engine.startScene(new Level());
-			break;
-		case "demo":
-			this.engine.startScene(new Demo());
-			break;
-		case "menu":
-			this.engine.startScene(new Menu());
-			break;
-		case "shader":
-			this.engine.startScene(new Shader());
-			break;
-		case "generator":
-			this.engine.startScene(new Generator());
-			break;
-		case "playground":
-			this.engine.startScene(new Playground());
-			break;
-		default:
-			this.engine.startScene(new Logo());
+			case "editor":
+				this.engine.startScene(new Editor());
+				break;
+			case "mainmenu":
+				this.engine.startScene(new MainMenu());
+				break;
+			case "results":
+				this.engine.startScene(new Results());
+				break;
+			case "level":
+				this.engine.startScene(new Level());
+				break;
+			case "demo":
+				this.engine.startScene(new Demo());
+				break;
+			case "menu":
+				this.engine.startScene(new Menu());
+				break;
+			case "shader":
+				this.engine.startScene(new Shader());
+				break;
+			case "generator":
+				this.engine.startScene(new Generator());
+				break;
+			case "playground":
+				this.engine.startScene(new Playground());
+				break;
+			default:
+				this.engine.startScene(new Logo());
 		}
 
 		// this.engine.startScene(new Level());

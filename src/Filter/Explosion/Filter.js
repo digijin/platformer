@@ -1,19 +1,15 @@
 import * as PIXI from "pixi.js";
 import fragment from "./fragment_f.glsl";
-
-// import glsl from "glslify";
-
-// console.log(glsl);
-// let src = glsl(fragment);
-// console.log(src);
-// console.log(fragment);
-
 // import texture from "./texture.png";
 import texture from "assets/mech.png";
 
 const uniforms = {};
 
 uniforms.iTime = {
+	type: "f",
+	value: 0,
+};
+uniforms.iSeed = {
 	type: "f",
 	value: 0,
 };
@@ -29,18 +25,8 @@ uniforms.iChannel0 = {
 	type: "sampler2D",
 	value: new PIXI.Texture(new PIXI.BaseTexture(texture)),
 };
-// uniforms.iChannel0 = {
-// 	type: "sampler2D",
-// 	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
-// };
-// uniforms.seeds = {
-// 	type: "v2v",
-// 	// value: [0.123, 0.321, 0.456, 0.654, 0.789, 0.987]
-// 	value: new Array(16).fill(0).map(() => {
-// 		return Math.random();
-// 	})
-// };
-export default class MenuBackgroundFilter extends PIXI.Filter {
+
+export default class ExplosionFilter extends PIXI.Filter {
 	constructor() {
 		super("", fragment, uniforms);
 	}
@@ -51,6 +37,14 @@ export default class MenuBackgroundFilter extends PIXI.Filter {
 
 	set time(val: number) {
 		this.uniforms.iTime = val;
+	}
+
+	get seed() {
+		return this.uniforms.iSeed;
+	}
+
+	set seed(val: number) {
+		this.uniforms.iSeed = val;
 	}
 
 	set mouse(point: { x: number, y: number }) {
