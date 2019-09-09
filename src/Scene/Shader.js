@@ -2,8 +2,8 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
-
-import Filter from "Filter/Buildings/Filter";
+// import Filter from "Filter/Buildings/Filter";
+import Filter from "Filter/Explosion/Filter";
 import FilterUpdater from "Filter/Updater";
 // import AntiAlias from "Filter/Antialias/Filter";
 
@@ -27,7 +27,7 @@ export default class Shader extends Base {
 		bg.position.y = 10;
 		this.engine.stage.addChild(bg);
 
-		
+
 		const smallerFilter = new Filter();
 		const smaller = new PIXI.Sprite(PIXI.Texture.WHITE);
 		smaller.width = 100;
