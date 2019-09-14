@@ -5,7 +5,6 @@ import GameObject from "GameObject";
 // import mechHero from "./mech_hero.png";
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
-// import log from "loglevel";
 import EngineProvider from "../React/EngineProvider";
 import { Container, render, Text } from "react-pixi-fiber";
 import React from "react";
@@ -110,6 +109,7 @@ export default class MainMenu extends GameObject {
 
 					<Button
 						onClick={() => {
+							log.trace("clicked Play button");
 							this.engine.startSceneTransition(
 								new Menu(),
 								new CheckerboardOut(),

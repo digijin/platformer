@@ -128,7 +128,7 @@ float sceneSDF(vec3 samplePoint) {
         sphereDist = smin(sphereDist, sphere, 0.1);
     }
 
-    return sphereDist - abs(0.2*snoise3((samplePoint/2.)-vec3(0., iTime/2., 0.)));
+    return sphereDist - abs(0.2*snoise3((samplePoint/2.)-vec3(0., (iTime/2.)+iSeed, 0.)));
 }
 
     #pragma glslify: shortestDistanceToSurface = require(../utility/Raymarch_f.glsl,sceneSDF=sceneSDF)

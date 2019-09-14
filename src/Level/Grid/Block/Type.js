@@ -15,6 +15,7 @@
 import TileFilter from "Filter/Tile/Filter";
 
 import * as PIXI from "pixi.js";
+
 PIXI.utils.skipHello();
 
 // require("./sprites.json");
@@ -42,6 +43,7 @@ export default class BlockType {
 	textureId: string;
 	pattern: CanvasPattern;
 	filters: Array<PIXI.Filter>;
+
 	constructor(params: BlockTypeParams) {
 		this.name = params.name;
 		this.id = params.id;
@@ -52,7 +54,7 @@ export default class BlockType {
 		this.platform = params.platform || false;
 		this.ladder = params.ladder || false;
 		this.filters = [];
-		if(params.filters){
+		if (params.filters) {
 			this.filters = params.filters.map(f => new f());
 		}
 		if (this.image) {
@@ -85,9 +87,9 @@ export default class BlockType {
 	}
 
 	init() {
-		if (PIXI.loader.resources["blocks"].textures) {
+		if (PIXI.Loader.shared.resources["blocks"].textures) {
 			this.texture =
-				PIXI.loader.resources["blocks"].textures[this.textureId];
+				PIXI.Loader.shared.resources["blocks"].textures[this.textureId];
 		}
 	}
 }
@@ -332,14 +334,14 @@ const blockTypeConfig: Array<BlockTypeParams> = [
 ];
 
 export const BlockTypes: Array<BlockType> = blockTypeConfig.map(
-	c => new BlockType(c)
+	c => new BlockType(c),
 );
 
 //look for any stray types
 //doesnt exist in tests.
-if (PIXI.loader.resources["blocks"]) {
+if (PIXI.Loader.shared.resources["blocks"]) {
 	// export function findStrays() {
-	Object.keys(PIXI.loader.resources["blocks"].textures).filter(key => {
+	Object.keys(PIXI.Loader.shared.resources["blocks"].textures).filter(key => {
 		// console.log("check", key);
 		//if every blocktype doesnt match that key
 		if (
@@ -355,7 +357,7 @@ if (PIXI.loader.resources["blocks"]) {
 					textureId: key,
 					destructable: false,
 					hp: 100,
-				})
+				}),
 			);
 			//pop in a new block type
 			// console.log("pippedy poppedy into the hippedy hoppity");
@@ -373,5 +375,5 @@ export const BlockTypeMap: Object = BlockTypes.reduce(
 		output[type.id] = type;
 		return output;
 	},
-	{}
+	{},
 );

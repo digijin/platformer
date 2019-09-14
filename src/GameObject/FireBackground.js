@@ -1,11 +1,10 @@
 import * as PIXI from "pixi.js";
-
-PIXI.loader.add(
-	"FireUpLoopTransition",
-	"assets/Fire 048 Up HD loop Transition.json"
-);
-
 import AnimateOnce from "./AnimateOnce";
+
+PIXI.Loader.shared.add(
+	"FireUpLoopTransition",
+	"assets/Fire 048 Up HD loop Transition.json",
+);
 
 export default class FireBackground extends AnimateOnce {
 	constructor(params) {
@@ -19,8 +18,8 @@ export default class FireBackground extends AnimateOnce {
 					pad: 5,
 					speed: 0.5,
 				},
-				params
-			)
+				params,
+			),
 		);
 		this.once = false;
 		this.movie.anchor = { x: 0, y: 0 };

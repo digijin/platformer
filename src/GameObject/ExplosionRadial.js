@@ -1,11 +1,10 @@
 import * as PIXI from "pixi.js";
+import AnimateOnce from "./AnimateOnce";
 
-PIXI.loader.add("ExplosionRadial", "assets/ExplosionRadial.json");
+PIXI.Loader.shared.add("ExplosionRadial", "assets/ExplosionRadial.json");
 // import GameObject from "GameObject";
 
 // import Point from "Utility/Point";
-
-import AnimateOnce from "./AnimateOnce";
 
 export default class ExplosionRadial extends AnimateOnce {
 	constructor(params) {
@@ -19,8 +18,8 @@ export default class ExplosionRadial extends AnimateOnce {
 					pad: 5,
 					speed: 0.5,
 				},
-				params
-			)
+				params,
+			),
 		);
 		this.movie.rotation = Math.random() * Math.PI;
 		this.movie.width = this.movie.height = 100;

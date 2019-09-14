@@ -9,16 +9,19 @@
 // }
 
 import * as PIXI from "pixi.js";
-PIXI.utils.skipHello();
 
-PIXI.loader.add("blocks", "assets/sprites.json");
-PIXI.loader.add("decor", "assets/decorsprites.json");
+// PIXI.utils.skipHello();
+
+const loader = PIXI.Loader.shared;
+
+loader.add("blocks", "assets/sprites.json");
+loader.add("decor", "assets/decorsprites.json");
 
 window.onload = () => {
 	//load more shit
 	// console.log("window loaded");
 
-	PIXI.loader.load(() => {
+	loader.load(() => {
 		// console.log("pixi loaded n shit");
 		// load pixi assets before we even parse Game
 		// so that any references to pixi can be referenced as they are parsed

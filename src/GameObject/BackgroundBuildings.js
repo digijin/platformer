@@ -1,7 +1,6 @@
 //@flow
 import GameObject from "GameObject";
 import type Engine from "Engine";
-import { ReflectionFilter } from "@pixi/filter-reflection";
 import StormCloudsFilter from "Filter/StormClouds/Filter";
 import Building from "GameObject/Background/Building";
 import * as PIXI from "pixi.js";
@@ -17,8 +16,11 @@ const NUM_BUILDINGS = 150;
 // const PAN_SPEED = 100;
 // const OVERLAP = 50;
 
-class BackgroundStage extends PIXI.Container {}
-class BackgroundBuildingStage extends PIXI.Container {}
+class BackgroundStage extends PIXI.Container {
+}
+
+class BackgroundBuildingStage extends PIXI.Container {
+}
 
 export default class Background extends GameObject {
 	buildings: Array<PIXI.Sprite>;
@@ -32,6 +34,7 @@ export default class Background extends GameObject {
 	ground: PIXI.Sprite;
 	top: HTMLDivElement;
 	explosions: boolean = true;
+
 	constructor() {
 		super();
 		this.stage = new BackgroundStage();
@@ -53,7 +56,7 @@ export default class Background extends GameObject {
 		for (let i = 0; i < NUM_BUILDINGS; i++) {
 			const building = this.makeBuilding();
 			building.offset = Math.random();
-			building.x =  building.offset * window.innerWidth;
+			building.x = building.offset * window.innerWidth;
 			building.z = Math.random();
 			this.buildingStage.addChild(building);
 			this.buildings.push(building);
@@ -64,13 +67,10 @@ export default class Background extends GameObject {
 		this.stage.addChild(this.bg);
 		this.stage.addChild(this.buildingStage);
 		this.buildingStage.filters = [
-			new ReflectionFilter({
-				alpha: [1, 0],
-				time: 1,
-				// amplitude: [50, 50],
-				// wavelength: [10, 200]
-			}),
-			// new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
+			// new ReflectionFilter({
+			// 	alpha: [1, 0],
+			// 	time: 1,
+			// }),
 		];
 		// this.buildingStage.filters.push(new GlitchFilter());
 
@@ -92,11 +92,11 @@ export default class Background extends GameObject {
 		// this.buildings.forEach(building => {
 		// 	building.offset = Math.random() * window.innerWidth;
 		// });
-	}
+	};
 
 	update() {
 		//hack ReflectionFilter
-		this.buildingStage.filters[0].time += this.engine.deltaTime;
+		// this.buildingStage.filters[0].time += this.engine.deltaTime;
 		this.cloudFilter.time += this.engine.deltaTime;
 
 		this.stage.position.y = window.innerHeight / 2;
@@ -106,11 +106,6 @@ export default class Background extends GameObject {
 				throw new Error("yolo no z on child ");
 			}
 
-			// b.position.x +=
-			// 	(PAN_SPEED / 2 + b.z * PAN_SPEED / 2) * this.engine.deltaTime;
-			// if (b.position.x > window.innerWidth + OVERLAP) {
-			// 	b.position.x -= window.innerWidth + OVERLAP * 2;
-			// }
 
 			b.position.x =
 				((b.offset * window.innerWidth) - this.engine.view.offset.x * (1 + b.z) * 0.1) %
@@ -119,9 +114,6 @@ export default class Background extends GameObject {
 				b.position.x += window.innerWidth + b.width + b.width;
 			}
 		});
-		// if (Math.random() > 0.99) {
-		// 	this.spawnExplosion();
-		// }
 		this.sort();
 		this.bg.x = 0;
 		this.bg.width = window.innerWidth;
@@ -146,7 +138,7 @@ export default class Background extends GameObject {
 
 	makeBuilding() {
 		const texture = new PIXI.Texture(
-			new PIXI.BaseTexture(Building.random().canvas)
+			new PIXI.BaseTexture(Building.random().canvas),
 		);
 		const sprite = new PIXI.Sprite(texture);
 		sprite.anchor = { x: 0.5, y: 1 };

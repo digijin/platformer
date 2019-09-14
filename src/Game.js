@@ -12,22 +12,21 @@ import Menu from "Scene/Menu";
 import Shader from "Scene/Shader";
 import Generator from "Scene/Generator";
 import Playground from "Scene/Playground";
-
-//polyfills
-// import Utility from "Utility";
-
 //textures
 import { BlockTypes } from "Level/Grid/Block/Type";
 import { DecorTypes } from "Level/Grid/Decor/Type";
 
 import log from "loglevel";
-log.setLevel("info", true);
-
 import * as PIXI from "pixi.js";
-PIXI.utils.skipHello();
-
 // FLOWHACK
 import "./style.styl";
+
+//polyfills
+// import Utility from "Utility";
+log.setLevel("info", true);
+
+PIXI.utils.skipHello();
+
 // import MainMenu from 'MainMenu/Menu';
 
 export default class Game {
@@ -36,12 +35,11 @@ export default class Game {
 	shells: Array<Object>;
 	engine: Engine;
 	inited: boolean;
+
 	constructor(container: HTMLElement) {
 		this.container = container;
 		window.game = this;
-		PIXI.loader.load(this.init);
-		// console.log("game constructed");
-		// this.init();
+		PIXI.Loader.shared.load(this.init);
 		this.inited = false;
 	}
 
@@ -51,9 +49,7 @@ export default class Game {
 		BlockTypes.forEach(t => t.init());
 		DecorTypes.forEach(t => t.init());
 
-		// let engine:Engine = new Engine(container);
 		this.engine = new Engine();
-		//Engine.getInstance();
 		this.engine.init(this.container);
 
 		const query = window.location.href.substr(

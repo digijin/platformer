@@ -2,9 +2,10 @@ import Game from "Game";
 import Menu from "Scene/Menu";
 // import MainMenu from "Scene/MainMenu";
 import * as PIXI from "pixi.js";
-PIXI.loader.add("blocks", "assets/sprites.json");
-PIXI.loader.add("decor", "assets/decorsprites.json");
 import recurseSearch from "test/util/recurseSearch";
+
+PIXI.Loader.shared.add("blocks", "assets/sprites.json");
+PIXI.Loader.shared.add("decor", "assets/decorsprites.json");
 
 describe("scene/menu.karma.js", () => {
 	let container;
@@ -13,7 +14,7 @@ describe("scene/menu.karma.js", () => {
 		return recurseSearch(id, game.engine.stage);
 	};
 
-	beforeAll(function() {
+	beforeAll(function () {
 		// FLOWHACK
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 15 * 1000;
 		container = document.createElement("div");
@@ -22,7 +23,7 @@ describe("scene/menu.karma.js", () => {
 		document.body.appendChild(container);
 		game = new Game(container);
 	});
-	afterAll(function() {
+	afterAll(function () {
 		game.destroy();
 
 		// FLOWHACK

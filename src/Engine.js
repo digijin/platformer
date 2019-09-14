@@ -172,28 +172,23 @@ export default class Engine {
 		this.stageContainer.addChild(this.backgroundStage);
 		this.stageContainer.addChild(this.stage);
 		this.stageContainer.addChild(this.transitionStage);
-		this.renderer = PIXI.autoDetectRenderer(
-			window.innerWidth,
-			window.innerHeight,
-			{
-				view: this.pixicanvas,
-				transparent: true,
-				antialias: true,
-			}
-		);
-		// this.backgroundStage.filters = [
-		//     new ReflectionFilter({ alpha: [1, 0] })
-		// ];
+		// this.renderer = PIXI.autoDetectRenderer(
+		// 	window.innerWidth,
+		// 	window.innerHeight,
+		// 	{
+		// 		view: this.pixicanvas,
+		// 		transparent: true,
+		// 		antialias: true,
+		// 	}
+		// );
 
-		// this.stageContainer.filters = [new AdvancedBloomFilter()];
-		// this.stageContainer.filters = [new GlitchFilter()];
-		// this.stageContainer.filters = [new GlowFilter()];
-		// this.stageContainer.filters = [new GodrayFilter()];
-		// this.stageContainer.filters = [new PixelateFilter()];
-		// this.stageContainer.filters = [new ReflectionFilter()];
-		// this.stageContainer.filters = [
-		//     new ShockwaveFilter([0.5, 0.5], { radius: -1 })
-		// ];
+		this.renderer = new PIXI.Renderer({
+			width: window.innerWidth,
+			height: window.innerHeight,
+			view: this.pixicanvas,
+			transparent: true,
+			antialias: true,
+		});
 
 		const uiDiv: HTMLDivElement = document.createElement("div");
 		uiDiv.id = "ui";

@@ -1,11 +1,10 @@
 import * as PIXI from "pixi.js";
+import AnimateOnce from "./AnimateOnce";
 
-PIXI.loader.add("FireRadialTransition", "assets/FireRadialTransition.json");
+PIXI.Loader.shared.add("FireRadialTransition", "assets/FireRadialTransition.json");
 // import GameObject from "GameObject";
 
 // import Point from "Utility/Point";
-
-import AnimateOnce from "./AnimateOnce";
 
 export default class FireRadialTransition extends AnimateOnce {
 	constructor(params) {
@@ -19,8 +18,8 @@ export default class FireRadialTransition extends AnimateOnce {
 					suffix: ".png",
 					pad: 5,
 				},
-				params
-			)
+				params,
+			),
 		);
 		// this.movie.rotation = Math.random() * Math.PI;
 		// this.movie.blendMode = PIXI.BLEND_MODES.MULTIPLY;

@@ -11,6 +11,7 @@ export default class DecorType {
 	id: string;
 	pattern: CanvasPattern;
 	category: string;
+
 	constructor(params) {
 		this.name = params.name;
 		this.id = params.id;
@@ -36,9 +37,9 @@ export default class DecorType {
 	}
 
 	init() {
-		if (PIXI.loader.resources["decor"].textures) {
+		if (PIXI.Loader.shared.resources["decor"].textures) {
 			this.texture =
-				PIXI.loader.resources["decor"].textures[this.textureId];
+				PIXI.Loader.shared.resources["decor"].textures[this.textureId];
 		}
 	}
 

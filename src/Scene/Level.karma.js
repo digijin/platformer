@@ -2,12 +2,13 @@ import Game from "Game";
 import Level from "Scene/Level";
 
 import * as PIXI from "pixi.js";
-PIXI.loader.add("blocks", "assets/sprites.json");
-PIXI.loader.add("decor", "assets/decorsprites.json");
 // import recurseSearch from "test/util/recurseSearch";
 import Promise from "promise";
 import testGen from "jasmine-es6-generator";
 import mouseUtil from "test/util/mouse";
+
+PIXI.Loader.shared.add("blocks", "assets/sprites.json");
+PIXI.Loader.shared.add("decor", "assets/decorsprites.json");
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,7 +27,7 @@ describe("Scene/Level.karma.js", () => {
 	// 	return recurseSearch(id, game.engine.stage);
 	// };
 
-	beforeAll(function() {
+	beforeAll(function () {
 		// FLOWHACK
 		jasmine.DEFAULT_TIMEOUT_INTERVAL = 15 * 1000;
 		container = document.createElement("div");
@@ -34,7 +35,7 @@ describe("Scene/Level.karma.js", () => {
 		document.body.appendChild(container);
 		game = new Game(container);
 	});
-	afterAll(function() {
+	afterAll(function () {
 		game.destroy();
 		// FLOWHACK
 		document.body.removeChild(container);
@@ -69,13 +70,13 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 0,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 			expect(game.engine.input.getButton("fire")).toBe(1);
 		});
 		it(
 			"should move cursor",
-			testGen(function*() {
+			testGen(function* () {
 				for (let i = 0; i < 50; i++) {
 					const target = {
 						clientX: window.innerWidth / 2 + 200,
@@ -84,18 +85,18 @@ describe("Scene/Level.karma.js", () => {
 					mouseUtil.mouseEvent(
 						"mousemove",
 						target,
-						game.engine.canvas
+						game.engine.canvas,
 					);
 					expect(game.engine.input.mouse.position.y).toBe(
-						target.clientY
+						target.clientY,
 					);
 					yield sleep(10);
 				}
-			})
+			}),
 		);
 		xit("should have bullets in the air", () => {
 			expect(game.engine.objectsTagged("bullet").length).toBeGreaterThan(
-				0
+				0,
 			);
 		});
 		it("should end firing", () => {
@@ -104,7 +105,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 0,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should wait for a while", done => {
@@ -116,7 +117,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 2,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should wait for a while", done => {
@@ -124,7 +125,7 @@ describe("Scene/Level.karma.js", () => {
 		});
 		xit("should have missiles in flight", () => {
 			expect(game.engine.objectsTagged("missile").length).toBeGreaterThan(
-				0
+				0,
 			);
 		});
 		it("should end firing misiles", () => {
@@ -133,7 +134,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 2,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should wait for a while", done => {
@@ -174,7 +175,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 2,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 
@@ -187,7 +188,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 2,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should begin firing", () => {
@@ -196,7 +197,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 0,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should wait for a while", done => {
@@ -208,7 +209,7 @@ describe("Scene/Level.karma.js", () => {
 				{
 					button: 0,
 				},
-				game.engine.canvas
+				game.engine.canvas,
 			);
 		});
 		it("should wait for a while", done => {

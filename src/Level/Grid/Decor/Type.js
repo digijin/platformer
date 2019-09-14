@@ -7,14 +7,14 @@
 // import windowDecor from "Level/Grid/window.png";
 
 import * as PIXI from "pixi.js";
+import WindowDecor from "./Window";
+
+import Abstract from "./Abstract";
+
 PIXI.utils.skipHello();
 
 // require("./decorsprites.json");
 // require("./decorsprites.png");
-
-import WindowDecor from "./Window";
-
-import Abstract from "./Abstract";
 
 export type DecorTypeParams = {
 	// hp: name,
@@ -348,15 +348,15 @@ const blockTypeConfig: Array<DecorTypeParams> = [
 ];
 
 export const DecorTypes: Array<DecorType> = blockTypeConfig.map(
-	c => new DecorType(c)
+	c => new DecorType(c),
 );
 //add custom decor
 DecorTypes.push(new WindowDecor());
 
-if (PIXI.loader.resources["decor"]) {
+if (PIXI.Loader.shared.resources["decor"]) {
 	const renderer = PIXI.autoDetectRenderer(32, 32);
 	// export function findStrays() {
-	Object.keys(PIXI.loader.resources["decor"].textures).filter(key => {
+	Object.keys(PIXI.Loader.shared.resources["decor"].textures).filter(key => {
 		// console.log("check", key);
 		//if every blocktype doesnt match that key
 		if (
@@ -364,7 +364,7 @@ if (PIXI.loader.resources["decor"]) {
 				return dt.textureId !== key;
 			})
 		) {
-			const texture = PIXI.loader.resources["decor"].textures[key];
+			const texture = PIXI.Loader.shared.resources["decor"].textures[key];
 			const sprite = new PIXI.Sprite(texture);
 			const container = new PIXI.Container();
 			container.addChild(sprite);
@@ -382,7 +382,7 @@ if (PIXI.loader.resources["decor"]) {
 					obstacle: false,
 					category: "stray",
 					hp: 1,
-				})
+				}),
 			);
 		}
 	});
@@ -397,5 +397,5 @@ export const DecorTypeMap: Object = DecorTypes.reduce(
 		output[type.id] = type;
 		return output;
 	},
-	{}
+	{},
 );
