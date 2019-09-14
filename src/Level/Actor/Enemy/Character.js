@@ -1,4 +1,3 @@
-
 import Rigidbody from "Rigidbody";
 
 import type Player from "Level/Actor/Player";
@@ -23,8 +22,8 @@ import * as PIXI from "pixi.js";
 const AGRO_DISTANCE = 400;
 const DEAGRO_DISTANCE = 1000;
 
-export default class EnemyCharacter extends Rigidbody{
-    
+export default class EnemyCharacter extends Rigidbody {
+
 	constructor(params: { position: Point, type: EnemyType }) {
 		super(params);
 		this.hp = params.type.hp;
@@ -48,11 +47,13 @@ export default class EnemyCharacter extends Rigidbody{
 		// this.registration = config.enemy.registration;
 
 		Object.assign(this, params);
-        
-        
+
+
 		this.graph = new PIXI.Graphics();
 		this.addChild(this.graph);
-		Globals.get("player").then((player) => {this.player = player;});
+		Globals.get("player").then((player) => {
+			this.player = player;
+		});
 
 		this.sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.sprite.width = this.size.w;
@@ -70,7 +71,7 @@ export default class EnemyCharacter extends Rigidbody{
 		if (!this.player) {
 			// console.log("no player");
 			// this.gravity();
-			this.render();
+			this.renderGraph();
 			return;
 		} //do not movefor edit mode
 		//check if out of bounds
@@ -85,7 +86,7 @@ export default class EnemyCharacter extends Rigidbody{
 				this.action = null;
 			}
 		}
-		this.render();
+		this.renderGraph();
 	}
 
 	destroy() {
@@ -95,7 +96,7 @@ export default class EnemyCharacter extends Rigidbody{
 
 	newAction() {
 		// const player = this.engine.getPlayer();
-		
+
 		const pos = new Point(this.position);
 		if (this.agro) {
 			//falloff distance
@@ -130,7 +131,7 @@ export default class EnemyCharacter extends Rigidbody{
 		}
 	}
 
-	render() {
+	renderGraph() {
 		this.graph.clear();
 		this.graph.position.set(-10, 0);
 		this.graph
@@ -146,20 +147,20 @@ export default class EnemyCharacter extends Rigidbody{
 	startIdle() {
 		this.agro = null;
 		switch (this.type.idle) {
-		case "rabbit":
-			this.action = rabbit(this, this.engine);
-			break;
-		case "patrol":
-			this.action = patrol(this, this.engine);
-			break;
-		case "bounce":
-			this.action = bounce(this, this.engine);
-			break;
-		case "hover":
-			this.action = hover(this, this.engine);
-			break;
-		default:
-			throw new Error("no idle for Enemy");
+			case "rabbit":
+				this.action = rabbit(this, this.engine);
+				break;
+			case "patrol":
+				this.action = patrol(this, this.engine);
+				break;
+			case "bounce":
+				this.action = bounce(this, this.engine);
+				break;
+			case "hover":
+				this.action = hover(this, this.engine);
+				break;
+			default:
+				throw new Error("no idle for Enemy");
 		}
 	}
 
@@ -167,18 +168,18 @@ export default class EnemyCharacter extends Rigidbody{
 		this.agro = player;
 
 		switch (this.type.agro) {
-		case "agro":
-			this.action = agro(this, this.engine, player);
-			break;
-		case "heligun":
-			this.action = heligun(this, this.engine, player);
-			break;
-		case "suicideBomber":
-			this.action = suicideBomber(this, this.engine, player);
-			break;
-		default:
-			throw new Error("no agro for Enemy");
+			case "agro":
+				this.action = agro(this, this.engine, player);
+				break;
+			case "heligun":
+				this.action = heligun(this, this.engine, player);
+				break;
+			case "suicideBomber":
+				this.action = suicideBomber(this, this.engine, player);
+				break;
+			default:
+				throw new Error("no agro for Enemy");
 		}
 	}
-    
+
 }
