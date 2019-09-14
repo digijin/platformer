@@ -22,6 +22,8 @@ const FADETIME = 4;
 
 // import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
+import BackgroundBuildings from "../Common/Object/Background/Buildings";
+
 export default class StartMenu extends PIXI.Container {
 	ui: PIXI.Container;
 	time: number = 0;
@@ -30,15 +32,19 @@ export default class StartMenu extends PIXI.Container {
 	constructor(params: { engine: Engine }) {
 
 		super();
-		
+
 		this.engine = params.engine;
 		this.fadein = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.fadein.tint = 0x000000;
 		// this.update();
 		this.ui = new PIXI.Container();
+
+		this.addChild(new BackgroundBuildings({ engine: this.engine }));
+
 		this.addChild(this.ui);
 		this.addChild(this.fadein);
 		this.renderUI();
+
 	}
 
 

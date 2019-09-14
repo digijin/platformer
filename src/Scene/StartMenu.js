@@ -6,8 +6,6 @@ import Menu from "StartMenu/Menu";
 
 import Point from "Utility/Point";
 import log from "loglevel";
-import BackgroundBuildings from "../GameObject/BackgroundBuildings";
-// import BackgroundBuildings from "../Common/Object/Background/Buildings";
 
 export default class StartMenu extends Base {
 	start(engine: Engine) {
@@ -22,9 +20,6 @@ export default class StartMenu extends Base {
 			y: 0,
 		});
 
-		engine.register(new BackgroundBuildings());
-
-		// engine.register(new Menu());
 		this.container = new Menu({ engine: engine });
 		engine.stage.addChild(this.container);
 
