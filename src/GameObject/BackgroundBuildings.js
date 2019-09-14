@@ -5,16 +5,8 @@ import StormCloudsFilter from "Filter/StormClouds/Filter";
 import Building from "GameObject/Background/Building";
 import * as PIXI from "pixi.js";
 
-// import ExplosionUp1 from "GameObject/ExplosionUp1";
-// import ExplosionUp2 from "GameObject/ExplosionUp2";
-// import ExplosionUp3 from "GameObject/ExplosionUp3";
-// import ExplosionUp4 from "GameObject/ExplosionUp4";
-// import ExplosionUp5 from "GameObject/ExplosionUp5";
-// import ExplosionUp6 from "GameObject/ExplosionUp6";
-
 const NUM_BUILDINGS = 150;
-// const PAN_SPEED = 100;
-// const OVERLAP = 50;
+
 
 class BackgroundStage extends PIXI.Container {
 }
@@ -101,7 +93,7 @@ export default class Background extends GameObject {
 
 		this.stage.position.y = window.innerHeight / 2;
 		this.buildingStage.children.forEach(b => {
-			if (b.z == undefined) {
+			if (b.z === undefined) {
 				// debugger;
 				throw new Error("yolo no z on child ");
 			}
