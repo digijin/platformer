@@ -29,19 +29,11 @@ import Fpsmeter from "fpsmeter";
 
 import Stage from "./Stage";
 
-// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
-// import { GlitchFilter } from "@pixi/filter-glitch";
-// import { GlowFilter } from "@pixi/filter-glow";
-// import { GodrayFilter } from "@pixi/filter-godray";
-// import { PixelateFilter } from "@pixi/filter-pixelate";
-// import { ReflectionFilter } from "@pixi/filter-reflection";
-// import { ShockwaveFilter } from "@pixi/filter-shockwave";
-// class Stage extends PIXI.Container {}
-class StageContainer extends PIXI.Container {}
+class StageContainer extends PIXI.Container { }
 
-class BackgroundStage extends PIXI.Container {}
+class BackgroundStage extends PIXI.Container { }
 
-class TransitionStage extends PIXI.Container {}
+class TransitionStage extends PIXI.Container { }
 
 let instance;
 export default class Engine {

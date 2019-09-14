@@ -16,6 +16,8 @@ import Playground from "Scene/Playground";
 import { BlockTypes } from "Level/Grid/Block/Type";
 import { DecorTypes } from "Level/Grid/Decor/Type";
 
+import config from "./config";
+
 import log from "loglevel";
 import * as PIXI from "pixi.js";
 // FLOWHACK
@@ -23,7 +25,7 @@ import "./style.styl";
 
 //polyfills
 // import Utility from "Utility";
-log.setLevel("info", true);
+log.setLevel(config.loglevel, true);
 
 PIXI.utils.skipHello();
 

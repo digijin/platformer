@@ -4,7 +4,7 @@ import type Engine from "Engine";
 
 import DigijinLogo from "MainMenu/DigijinLogo";
 
-export default class MainMenu extends Base {
+export default class Logo extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 

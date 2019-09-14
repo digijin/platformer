@@ -111,7 +111,7 @@ export default class MainMenu extends GameObject {
 
 					<Button
 						onClick={() => {
-							log.trace("clicked Play button");
+							log.debug("clicked Play button");
 							this.engine.startSceneTransition(
 								new Menu(),
 								new CheckerboardOut(),

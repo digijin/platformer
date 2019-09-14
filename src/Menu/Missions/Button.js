@@ -1,10 +1,10 @@
-import {  Container, Text } from "react-pixi-fiber";
+import { Container, Text } from "react-pixi-fiber";
 // import * as PIXI from "pixi.js";
 import Rectangle from "../Rectangle";
 import React from "react";
 import { UICOLOUR } from "../constants";
 import BaseButton from "../Base/Button";
-import { GlitchFilter } from "@pixi/filter-glitch";
+// import { GlitchFilter } from "@pixi/filter-glitch";
 
 export default class MissionsButton extends BaseButton {
 	// state = {
@@ -19,7 +19,7 @@ export default class MissionsButton extends BaseButton {
 				x={x}
 				y={y}
 				visible={this.state.visible}
-				filters={this.state.glitch > 0 ? [new GlitchFilter()] : []}
+				filters={this.state.glitch > 0 ? [/*new GlitchFilter()*/] : []}
 			>
 				<Rectangle
 					testingId={"MissionsButton"}

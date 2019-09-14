@@ -1,10 +1,10 @@
-import {  Container, Text } from "react-pixi-fiber";
+import { Container, Text } from "react-pixi-fiber";
 // import * as PIXI from "pixi.js";
 import Rectangle from "../Rectangle";
 import React from "react";
 import { UICOLOUR } from "../constants";
 
-import { GlitchFilter } from "@pixi/filter-glitch";
+// import { GlitchFilter } from "@pixi/filter-glitch";
 import BaseButton from "../Base/Button";
 
 export default class MenuButton extends BaseButton {
@@ -40,7 +40,7 @@ export default class MenuButton extends BaseButton {
 				y={y}
 				filters={
 					this.state.glitch > 0
-						? [new GlitchFilter({ slices: 3 })]
+						? [/*new GlitchFilter({ slices: 3 })*/]
 						: []
 				}
 			>

@@ -1,5 +1,6 @@
 //@flow
 export default {
+	loglevel: "trace",
 	game: {
 		width: 800,
 		height: 800,

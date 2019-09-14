@@ -9,28 +9,11 @@ import { UICOLOUR } from "./constants";
 import Button from "./SideMenu/Button";
 import engineConnect from "React/engineConnect";
 import MainMenu from "../Scene/MainMenu";
-// export default class SideMenu extends Container {
-// 	render() {
-// 		return <Text text="Peanut Butter Jelly Time" x={200} y={200} />;
-// 	}
-// }
-// import GameObject from "GameObject";
 
-// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import MenuBackgroundFilter from "Filter/Buildings/Filter";
 
 import FilterUpdater from "Filter/Updater";
-// class FilterUpdater extends GameObject {
-// 	constructor(filter) {
-// 		super();
-// 		this.filter = filter;
-// 	}
 
-// 	update() {
-// 		this.filter.time += this.engine.deltaTime;
-// 		this.filter.mouse = this.engine.mouse.position;
-// 	}
-// }
 
 class SideMenu extends Component {
 	state = {
@@ -51,12 +34,12 @@ class SideMenu extends Component {
 
 	getSectionMenu(section: String) {
 		switch (section) {
-		case "MISSIONS":
-			return <Missions />;
-		case "OPTIONS":
-			return <Options />;
-		case "OUTFITTING":
-			return <OutfittingMenu />;
+			case "MISSIONS":
+				return <Missions />;
+			case "OPTIONS":
+				return <Options />;
+			case "OUTFITTING":
+				return <OutfittingMenu />;
 		}
 	}
 
