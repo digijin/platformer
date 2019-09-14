@@ -81,7 +81,7 @@ module.exports = [
 		plugins: [
 			new CopyWebpackPlugin([
 				{ from: path.resolve(__dirname, "html") }, // to: output.path
-				{ from: path.resolve(__dirname, "assets"), to: "assets" }
+				// { from: path.resolve(__dirname, "assets"), to: "assets" }
 			]),
 			new StatsWriterPlugin({
 				// transform: function(data) {
