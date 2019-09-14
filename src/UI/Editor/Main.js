@@ -11,9 +11,10 @@ import KeyboardArrowDown from "material-ui-icons/KeyboardArrowDown";
 // import classnames from "classnames";
 // import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 // import Collapse from "material-ui/transitions/Collapse";
-import MainMenu from "Scene/MainMenu";
+import StartMenu from "Scene/StartMenu";
 
 import { CardContent } from "material-ui/Card";
+
 class Main extends React.Component {
 	handleExpandClick = target => {
 		const watcher = this.props.engine.objectsTagged("editor-watcher")[0];
@@ -40,19 +41,19 @@ class Main extends React.Component {
 						raised
 						className={classes.iconButton}
 						onClick={() => {
-							this.props.engine.startScene(new MainMenu());
+							this.props.engine.startScene(new StartMenu());
 						}}
 					>
-						go back to menu<KeyboardArrowDown />
+						go back to menu<KeyboardArrowDown/>
 					</Button>
 				</Tooltip>
-				<br />
-				drawmode (click|paint|rect)<br />
-				Left mouse to draw<br />
-				Right mouse to erase<br />
-				WASD to navigate<br />
-				Shift to speed up scrolling<br />
-				Click below to expand the map size:<br />
+				<br/>
+				drawmode (click|paint|rect)<br/>
+				Left mouse to draw<br/>
+				Right mouse to erase<br/>
+				WASD to navigate<br/>
+				Shift to speed up scrolling<br/>
+				Click below to expand the map size:<br/>
 				<Tooltip title="Add Row Above" placement="bottom">
 					<Button
 						raised
@@ -61,7 +62,7 @@ class Main extends React.Component {
 							this.props.engine.grid.addRowAbove();
 						}}
 					>
-						<KeyboardArrowUp />
+						<KeyboardArrowUp/>
 					</Button>
 				</Tooltip>
 				<Tooltip title="Add Row Below" placement="bottom">
@@ -72,7 +73,7 @@ class Main extends React.Component {
 							this.props.engine.grid.addRowBelow();
 						}}
 					>
-						<KeyboardArrowDown />
+						<KeyboardArrowDown/>
 					</Button>
 				</Tooltip>
 				<Tooltip title="Add Column to Left" placement="bottom">
@@ -83,7 +84,7 @@ class Main extends React.Component {
 							this.props.engine.grid.addColLeft();
 						}}
 					>
-						<KeyboardArrowLeft />
+						<KeyboardArrowLeft/>
 					</Button>
 				</Tooltip>
 				<Tooltip title="Add Column to Right" placement="bottom">
@@ -94,7 +95,7 @@ class Main extends React.Component {
 							this.props.engine.grid.addColRight();
 						}}
 					>
-						<KeyboardArrowRight />
+						<KeyboardArrowRight/>
 					</Button>
 				</Tooltip>
 			</CardContent>

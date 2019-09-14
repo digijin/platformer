@@ -2,7 +2,7 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 
-import DigijinLogo from "MainMenu/DigijinLogo";
+import DigijinLogo from "StartMenu/DigijinLogo";
 
 export default class Logo extends Base {
 	start(engine: Engine) {

@@ -2,58 +2,39 @@
 // import Keyboard from "Keyboard";
 import Mouse from "Mouse";
 import State from "State";
-import Context from "Context";
-
 import Input from "unityinput";
-
 import Point from "Utility/Point";
-
 import config from "config";
-
 import Player from "Level/Player";
-
 import type GameObject from "GameObject";
 import type Transition from "Transition/Base";
-
 import type SceneBase from "Scene/Base";
 import type Grid from "Grid";
 import UI from "UI";
-
 import Globals from "./Globals";
-
 import * as PIXI from "pixi.js";
 import type Mission from "Mission";
 import { Missions } from "Mission";
-
 import Fpsmeter from "fpsmeter";
-
 import Stage from "./Stage";
 
-class StageContainer extends PIXI.Container { }
+class StageContainer extends PIXI.Container {}
 
-class BackgroundStage extends PIXI.Container { }
+class BackgroundStage extends PIXI.Container {}
 
-class TransitionStage extends PIXI.Container { }
+class TransitionStage extends PIXI.Container {}
 
-let instance;
+/**
+ * Engine.
+ * Workhorse of the game, contains all references to major objects
+ * instance of this is passed around a lot
+ * responsible for update loops
+ */
 export default class Engine {
-	static getInstance(): Engine {
-		if (!instance) {
-			instance = new Engine();
-		}
-		return instance;
-	}
-
-	static mock(container: HTMLElement = document.createElement("DIV")) {
-		return new Engine().init(container);
-	}
-
 	stageContainer: PIXI.Container;
 	mouse: Mouse;
 	currentPlayer: Player;
 	mission: Mission = Missions[0];
-	// keyboard: Input.Keyboard;
-
 	transitioning: boolean;
 	deltaTime: number = 0;
 	state: State;
@@ -62,23 +43,30 @@ export default class Engine {
 	grid: Grid;
 	pixicanvas: HTMLCanvasElement;
 	fpsmeter: Fpsmeter;
-	view: {
-		offset: Point,
-	};
-
+	view: { offset: Point };
 	input: Input;
 	container: HTMLElement;
 	paused: boolean;
 	stage: Stage;
-	ctx: Context;
 	transitionStage: PIXI.Container;
 	backgroundStage: PIXI.Container;
 	renderer: any;
 	lastTime: number;
 	updateId: number;
 	canvas: HTMLCanvasElement;
-	// objects: Array<GameObject>;
 
+	/**
+	 * creates mock for testing
+	 * @param container
+	 * @returns Engine
+	 */
+	static mock(container: HTMLElement = document.createElement("DIV")): Engine {
+		return new Engine().init(container);
+	}
+
+	/**
+	 * called on window resize
+	 */
 	resize = () => {
 		this.pixicanvas.width = window.innerWidth;
 		this.pixicanvas.height = window.innerHeight;
@@ -128,7 +116,6 @@ export default class Engine {
 	_objects: Array<GameObject> = [];
 
 	constructor() {
-		instance = this;
 		this.paused = false;
 		this.view = {
 			offset: new Point({ x: 120, y: 0 }),
@@ -164,16 +151,6 @@ export default class Engine {
 		this.stageContainer.addChild(this.backgroundStage);
 		this.stageContainer.addChild(this.stage);
 		this.stageContainer.addChild(this.transitionStage);
-		// this.renderer = PIXI.autoDetectRenderer(
-		// 	window.innerWidth,
-		// 	window.innerHeight,
-		// 	{
-		// 		view: this.pixicanvas,
-		// 		transparent: true,
-		// 		antialias: true,
-		// 	}
-		// );
-
 		this.renderer = new PIXI.Renderer({
 			width: window.innerWidth,
 			height: window.innerHeight,

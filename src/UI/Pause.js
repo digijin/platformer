@@ -2,8 +2,9 @@
 import React from "react";
 import Button from "material-ui/Button";
 import { withStyles } from "material-ui/styles";
-import MainMenu from "Scene/MainMenu";
+import StartMenu from "Scene/StartMenu";
 import engineConnect from "React/engineConnect";
+
 const styles = () => ({
 	container: {
 		position: "fixed",
@@ -26,6 +27,7 @@ const styles = () => ({
 		fontSize: "30px",
 	},
 });
+
 export class Pause extends React.Component {
 	render() {
 		const { classes } = this.props;
@@ -33,19 +35,19 @@ export class Pause extends React.Component {
 			<div className={classes.container}>
 				<div className={classes.panel}>
 					<div className={classes.title}>GAME - PAUSED</div>
-					<hr />
+					<hr/>
 					<Button
 						id="mainMenuButton"
 						raised
 						className={classes.button}
 						onClick={() => {
 							this.props.engine.paused = false;
-							this.props.engine.startScene(new MainMenu());
+							this.props.engine.startScene(new StartMenu());
 						}}
 					>
 						go back to main menu
 					</Button>
-					<hr />
+					<hr/>
 					<Button
 						raised
 						className={classes.button}
@@ -65,4 +67,5 @@ export class Pause extends React.Component {
 		);
 	}
 }
+
 export default engineConnect(withStyles(styles)(Pause));

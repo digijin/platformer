@@ -11,7 +11,7 @@ export default class MenuButton extends BaseButton {
 	render() {
 		let { text, x, y, width, testingId } = this.props;
 		if (!testingId) {
-			testingId = "MainMenu-" + text;
+			testingId = "StartMenu-" + text;
 		}
 		return (
 			<Container

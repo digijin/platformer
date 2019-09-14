@@ -8,7 +8,7 @@ import OutfittingMenu from "./Outfitting";
 import { UICOLOUR } from "./constants";
 import Button from "./SideMenu/Button";
 import engineConnect from "React/engineConnect";
-import MainMenu from "../Scene/MainMenu";
+import StartMenu from "../Scene/StartMenu";
 
 import MenuBackgroundFilter from "Filter/Buildings/Filter";
 
@@ -23,8 +23,8 @@ class SideMenu extends Component {
 	bgFilter = new MenuBackgroundFilter();
 
 	onSectionClick = section => {
-		if (section == "QUIT") {
-			this.props.engine.startScene(new MainMenu());
+		if (section === "QUIT") {
+			this.props.engine.startScene(new StartMenu());
 		}
 		this.setState(state => ({
 			...state,
@@ -35,11 +35,11 @@ class SideMenu extends Component {
 	getSectionMenu(section: String) {
 		switch (section) {
 			case "MISSIONS":
-				return <Missions />;
+				return <Missions/>;
 			case "OPTIONS":
-				return <Options />;
+				return <Options/>;
 			case "OUTFITTING":
-				return <OutfittingMenu />;
+				return <OutfittingMenu/>;
 		}
 	}
 
@@ -76,7 +76,7 @@ class SideMenu extends Component {
 					border={1}
 					borderColor={UICOLOUR}
 				/>
-				<Header text={"header text"} />
+				<Header text={"header text"}/>
 				{sections.map((s, i) => (
 					<Button
 						onClick={() => {
@@ -94,4 +94,5 @@ class SideMenu extends Component {
 		);
 	}
 }
+
 export default engineConnect(SideMenu);

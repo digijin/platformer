@@ -2,12 +2,12 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 
-import Menu from "MainMenu/Menu";
+import Menu from "StartMenu/Menu";
 import BackgroundBuildings from "GameObject/BackgroundBuildings";
 
 import Point from "Utility/Point";
 
-export default class MainMenu extends Base {
+export default class StartMenu extends Base {
 	start(engine: Engine) {
 		super.start(engine);
 		// setTimeout(() => {

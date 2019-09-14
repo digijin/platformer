@@ -1,17 +1,11 @@
 import React from "react";
-// import { connect } from "react-redux";
-
 import Storage from "Utility/Storage";
-
 // import { BlockTypes } from "Level/Grid/Block/Type";
 import type Engine from "Engine";
 
 import AppBar from "material-ui/AppBar";
 import Tabs, { Tab } from "material-ui/Tabs";
-
-// import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
-
-// import MainMenu from "Scene/MainMenu";
+// import StartMenu from "Scene/StartMenu";
 import { withStyles } from "material-ui/styles";
 
 import classnames from "classnames";
@@ -32,17 +26,19 @@ import DragRectIcon from "material-ui-icons/Texture";
 // import Save from "material-ui-icons/Save";
 // import Tooltip from "material-ui/Tooltip";
 import engineConnect from "React/engineConnect";
-
-// import { EnemyTypes } from "Level/Actor/Enemy/Type";
-
-// import avatar from "assets/mech.png";
-
 import Main from "./Main";
 import BlockSelector from "./BlockSelector";
 import DecorSelector from "./DecorSelector";
 import TintSelector from "./TintSelector";
 import EnemySelector from "./EnemySelector";
 import SavePanel from "./SavePanel";
+// import { connect } from "react-redux";
+
+// import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
+
+// import { EnemyTypes } from "Level/Actor/Enemy/Type";
+
+// import avatar from "assets/mech.png";
 
 type Props = {
 	engine: Engine
@@ -118,7 +114,7 @@ class EditorPanel extends React.Component {
 	};
 
 	// state = { expanded: { main: false } };
-    storage: Storage;
+	storage: Storage;
 
 	props: Props;
 	handleDrawModeChange = (event, value) => {
@@ -187,7 +183,7 @@ class EditorPanel extends React.Component {
 									}}
 									className={classnames(
 										"editorTab-" + t,
-										classes.tab
+										classes.tab,
 									)}
 									key={t}
 									label={t}
@@ -197,22 +193,22 @@ class EditorPanel extends React.Component {
 					</Tabs>
 				</AppBar>
 				{this.state.tab === 0 && (
-					<Main watcher={watcher} classes={classes} />
+					<Main watcher={watcher} classes={classes}/>
 				)}
 				{this.state.tab === 1 && (
-					<BlockSelector watcher={watcher} classes={classes} />
+					<BlockSelector watcher={watcher} classes={classes}/>
 				)}
 				{this.state.tab === 2 && (
-					<DecorSelector watcher={watcher} classes={classes} />
+					<DecorSelector watcher={watcher} classes={classes}/>
 				)}
 				{this.state.tab === 3 && (
-					<TintSelector watcher={watcher} classes={classes} />
+					<TintSelector watcher={watcher} classes={classes}/>
 				)}
 				{this.state.tab === 4 && (
-					<EnemySelector watcher={watcher} classes={classes} />
+					<EnemySelector watcher={watcher} classes={classes}/>
 				)}
 				{this.state.tab === 5 && (
-					<SavePanel watcher={watcher} classes={classes} />
+					<SavePanel watcher={watcher} classes={classes}/>
 				)}
 				<div className={classes.drawModeSelect}>
 					<Tabs
@@ -224,16 +220,16 @@ class EditorPanel extends React.Component {
 					>
 						<Tab
 							className={classes.drawModeTab}
-							icon={<PointIcon />}
+							icon={<PointIcon/>}
 						/>
 
 						<Tab
 							className={classes.drawModeTab}
-							icon={<PaintIcon />}
+							icon={<PaintIcon/>}
 						/>
 						<Tab
 							className={classes.drawModeTab}
-							icon={<DragRectIcon />}
+							icon={<DragRectIcon/>}
 						/>
 					</Tabs>
 				</div>

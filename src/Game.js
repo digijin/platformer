@@ -2,7 +2,7 @@
 
 import Engine from "Engine";
 
-import MainMenu from "Scene/MainMenu";
+import StartMenu from "Scene/StartMenu";
 import Level from "Scene/Level";
 import Editor from "Scene/Editor";
 import Logo from "Scene/Logo";
@@ -19,34 +19,26 @@ import { DecorTypes } from "Level/Grid/Decor/Type";
 import config from "./config";
 
 import log from "loglevel";
-import * as PIXI from "pixi.js";
 // FLOWHACK
 import "./style.styl";
 
-//polyfills
-// import Utility from "Utility";
 log.setLevel(config.loglevel, true);
 
-PIXI.utils.skipHello();
-
-// import MainMenu from 'MainMenu/Menu';
-
+/**
+ * Game main class
+ * responsible for engine initialization and beginning first scene
+ */
 export default class Game {
 	container: HTMLElement;
-	ctx: Object;
-	shells: Array<Object>;
 	engine: Engine;
-	inited: boolean;
 
 	constructor(container: HTMLElement) {
 		this.container = container;
 		window.game = this;
-		PIXI.Loader.shared.load(this.init);
-		this.inited = false;
+		this.init();
 	}
 
 	init = () => {
-		this.inited = true;
 		//init textures that were just loaded
 		BlockTypes.forEach(t => t.init());
 		DecorTypes.forEach(t => t.init());
@@ -62,7 +54,7 @@ export default class Game {
 				this.engine.startScene(new Editor());
 				break;
 			case "mainmenu":
-				this.engine.startScene(new MainMenu());
+				this.engine.startScene(new StartMenu());
 				break;
 			case "results":
 				this.engine.startScene(new Results());
@@ -88,8 +80,6 @@ export default class Game {
 			default:
 				this.engine.startScene(new Logo());
 		}
-
-		// this.engine.startScene(new Level());
 
 		this.engine.begin(); //starts
 	};

@@ -1,5 +1,3 @@
-// import Game from "Game";
-
 //electron
 // try {
 // 	const { BrowserWindow } = require("electron");
@@ -16,6 +14,10 @@ const loader = PIXI.Loader.shared;
 
 loader.add("blocks", "assets/sprites.json");
 loader.add("decor", "assets/decorsprites.json");
+/**
+ * Bootstrap file
+ * responsible for preloading everything and kicking off Game
+ */
 
 window.onload = () => {
 	//load more shit
@@ -26,10 +28,8 @@ window.onload = () => {
 		// load pixi assets before we even parse Game
 		// so that any references to pixi can be referenced as they are parsed
 		// and not have init checks and shit everywhere
-		// console.log("beep", new Date().getTime());
 
 		setTimeout(() => {
-			// console.log("boop", new Date().getTime());
 			const Game = require("Game").default;
 			window.game = new Game(document.getElementById("container"));
 		}, 1);

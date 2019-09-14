@@ -1,6 +1,6 @@
 import Game from "Game";
 import Menu from "Scene/Menu";
-// import MainMenu from "Scene/MainMenu";
+// import StartMenu from "Scene/StartMenu";
 import * as PIXI from "pixi.js";
 import recurseSearch from "test/util/recurseSearch";
 
@@ -39,7 +39,7 @@ describe("scene/menu.karma.js", () => {
 			expect(game.inited).toBe(true);
 		});
 		// it('should open mainmenu', done => {
-		// 	game.engine.startScene(new MainMenu());
+		// 	game.engine.startScene(new StartMenu());
 		// 	setTimeout(done, 1000)
 		// })
 		it("should open menu scene", done => {
