@@ -41,7 +41,6 @@ export default class Engine {
 	currentScene: SceneBase;
 	ui: UI;
 	grid: Grid;
-	pixicanvas: HTMLCanvasElement;
 	fpsmeter: Fpsmeter;
 	view: { offset: Point };
 	input: Input;
@@ -68,12 +67,12 @@ export default class Engine {
 	 * called on window resize
 	 */
 	resize = () => {
-		this.pixicanvas.width = window.innerWidth;
-		this.pixicanvas.height = window.innerHeight;
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
 		config.game.width = window.innerWidth;
 		config.game.height = window.innerHeight;
 		if (this.renderer) {
-			this.renderer.resize(this.pixicanvas.width, this.pixicanvas.height);
+			this.renderer.resize(this.canvas.width, this.canvas.height);
 		}
 	};
 
@@ -103,7 +102,6 @@ export default class Engine {
 	kill = () => {
 		cancelAnimationFrame(this.updateId);
 		this.container.removeChild(this.canvas);
-		this.container.removeChild(this.pixicanvas);
 		this.container.removeChild(this.ui.container);
 		this.fpsmeter.destroy();
 		this.objects.forEach(o => {
@@ -120,11 +118,8 @@ export default class Engine {
 		this.view = {
 			offset: new Point({ x: 120, y: 0 }),
 		};
-
-		// this.objects = [];
 		this.lastTime = new Date().getTime();
 		this.state = new State();
-		// this.keyboard = this.input.keyboard;
 		this.currentPlayer = Player.getCurrentPlayer(); //here for now...
 	}
 
@@ -137,12 +132,12 @@ export default class Engine {
 		// eslint-disable-next-line no-undef
 		this.fpsmeter = new FPSMeter(null, config.fpsmeter);
 
-		const pixicanvas: HTMLCanvasElement = document.createElement("canvas");
-		pixicanvas.id = "pixiCanvas";
-		pixicanvas.width = config.game.width;
-		pixicanvas.height = config.game.height;
-		container.appendChild(pixicanvas);
-		this.pixicanvas = pixicanvas;
+		const canvas: HTMLCanvasElement = document.createElement("canvas");
+		canvas.id = "pixiCanvas";
+		canvas.width = config.game.width;
+		canvas.height = config.game.height;
+		container.appendChild(canvas);
+		this.canvas = canvas;
 
 		this.stageContainer = new StageContainer();
 		this.stage = new Stage();
@@ -154,7 +149,7 @@ export default class Engine {
 		this.renderer = new PIXI.Renderer({
 			width: window.innerWidth,
 			height: window.innerHeight,
-			view: this.pixicanvas,
+			view: this.canvas,
 			transparent: true,
 			antialias: true,
 		});
@@ -167,12 +162,7 @@ export default class Engine {
 		this.resize();
 		window.addEventListener("resize", this.resize);
 
-		this.input = new Input(
-			Object.assign({}, config.input, { target: pixicanvas })
-		);
-
-		//HACK
-		this.canvas = this.pixicanvas;
+		this.input = new Input(Object.assign({}, config.input, { target: canvas }));
 
 		Globals.set("stage", this.stage);
 
@@ -267,7 +257,6 @@ export default class Engine {
 	//add new objects to be tracked by engine
 
 	startSceneTransition(scene: SceneBase, transition: Transition) {
-		// trnasition.on
 		if (!this.transitioning) {
 			this.transitioning = true;
 			transition.onEndLastScene(() => {
@@ -291,11 +280,6 @@ export default class Engine {
 			obj.exit();
 			this.objects.splice(i, 1);
 		} else {
-			// throw new Error("destroying non existant object");
-			// console.warn(
-			// 	"destroying non existant object",
-			// 	obj.constructor.name
-			// );
 		}
 	}
 
@@ -314,7 +298,6 @@ export default class Engine {
 	}
 
 	render() {
-		// console.log("render");
 		this.renderer.render(this.stageContainer);
 	}
 }
