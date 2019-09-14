@@ -10,6 +10,8 @@ import { Container, render, Text } from "react-pixi-fiber";
 import React from "react";
 import Button from "./Button";
 
+import log from "loglevel";
+
 import Menu from "Scene/Menu";
 import Editor from "Scene/Editor";
 import CheckerboardOut from "Transition/CheckerboardOut";
