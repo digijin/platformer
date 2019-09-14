@@ -5,19 +5,20 @@
 // } catch (err) {
 // 	console.log("not electron");
 // }
+/**
+ * Bootstrap file
+ * responsible for preloading everything and kicking off Game
+ */
 
 import * as PIXI from "pixi.js";
 
+window.PIXI = PIXI; //to get inspector to work
 // PIXI.utils.skipHello();
 
 const loader = PIXI.Loader.shared;
 
 loader.add("blocks", "assets/sprites.json");
 loader.add("decor", "assets/decorsprites.json");
-/**
- * Bootstrap file
- * responsible for preloading everything and kicking off Game
- */
 
 window.onload = () => {
 	//load more shit

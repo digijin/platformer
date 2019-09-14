@@ -2,10 +2,10 @@
 import GameObject from "GameObject";
 import type Engine from "Engine";
 import StormCloudsFilter from "Filter/StormClouds/Filter";
-import Building from "GameObject/Background/Building";
+import Building from "Common/Object/Background/Buildings/Building";
 import * as PIXI from "pixi.js";
 
-const NUM_BUILDINGS = 150;
+const NUM_BUILDINGS = 100;
 
 
 class BackgroundStage extends PIXI.Container {
@@ -14,7 +14,7 @@ class BackgroundStage extends PIXI.Container {
 class BackgroundBuildingStage extends PIXI.Container {
 }
 
-export default class Background extends GameObject {
+export default class BackgroundBuildings extends GameObject {
 	buildings: Array<PIXI.Sprite>;
 	el: HTMLDivElement;
 	bottom: HTMLDivElement;
@@ -64,7 +64,6 @@ export default class Background extends GameObject {
 			// 	time: 1,
 			// }),
 		];
-		// this.buildingStage.filters.push(new GlitchFilter());
 
 		this.buildingStage.addChild(this.ground);
 		this.engine.backgroundStage.addChild(this.stage);
@@ -137,33 +136,6 @@ export default class Background extends GameObject {
 		return sprite;
 	}
 
-	glitch() {
-		// let filters = this.buildingStage.filters;
-		// // this.buildingStage.filters = [
-		// //
-		// // 	this.buildingStage.filters[0],
-		// // 	new GlitchFilter({ slices: 10, offset: 10, seed: Math.random() })
-		// // ];
-		// // glitch;
-		// // this.buildingStage.filters[0].seed = Math.random();
-		// if (Math.random() < 0.01) {
-		//     filters.push(
-		//         new GlitchFilter({
-		//             slices: 5,
-		//             offset: 10,
-		//             seed: Math.random()
-		//         })
-		//     );
-		// } else {
-		//     if (Math.random() < 0.1) {
-		//         if (filters.length > 1) {
-		//             filters.pop();
-		//         }
-		//     }
-		// }
-		// this.buildingStage.filters = filters;
-	}
-
 	sort() {
 		this.buildingStage.children.sort((a, b) => {
 			a = a.z || 0;
@@ -172,31 +144,4 @@ export default class Background extends GameObject {
 		});
 	}
 
-	// spawnExplosion() {
-	// 	if (!this.explosions) {
-	// 		return;
-	// 	}
-	// 	let types = [
-	// 		ExplosionUp1,
-	// 		ExplosionUp2,
-	// 		ExplosionUp3,
-	// 		ExplosionUp4,
-	// 		ExplosionUp5,
-	// 		ExplosionUp6
-	// 	];
-	// 	let type = types[Math.floor(types.length * Math.random())];
-	// 	let exp = new type({
-	// 		parent: this.buildingStage,
-	// 		speed: 0.2
-	// 	});
-	// 	exp.position.x = window.innerWidth * Math.random();
-	// 	exp.movie.offset = exp.position.x;
-	// 	exp.movie.z = Math.random();
-	// 	// exp.positionSprite();
-	// 	exp.movie.anchor = { x: 0.5, y: 0.9 };
-	// 	// exp.speed = 0.2;
-	// 	this.engine.register(exp);
-	// 	exp.positionSprite = () => {};
-	// 	// this.sort();
-	// }
 }

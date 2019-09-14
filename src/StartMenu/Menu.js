@@ -1,5 +1,4 @@
 // @flow
-import GameObject from "GameObject";
 // import Level from "Scene/Level";
 // import Point from "Utility/Point";
 // import mechHero from "./mech_hero.png";
@@ -23,44 +22,28 @@ const FADETIME = 4;
 
 // import CheckerboardTransition from "Filter/CheckerboardTransition/CheckerboardTransition";
 
-export default class MainMenu extends GameObject {
-	hero: PIXI.Sprite;
+export default class StartMenu extends PIXI.Container {
 	ui: PIXI.Container;
 	time: number = 0;
 	fadein: PIXI.Sprite;
 
-	constructor() {
-		super();
+	constructor(params: { engine: Engine }) {
 
-		// this.hero = new PIXI.Sprite(
-		// 	new PIXI.Texture(new PIXI.BaseTexture(mechHero))
-		// );
-		// this.hero.anchor = {
-		// 	x: 0.5,
-		// 	y: 0.5,
-		// };
+		super();
+		
+		this.engine = params.engine;
 		this.fadein = new PIXI.Sprite(PIXI.Texture.WHITE);
 		this.fadein.tint = 0x000000;
-	}
-
-	init(engine: Engine) {
-		super.init(engine);
-		this.update();
+		// this.update();
 		this.ui = new PIXI.Container();
-		this.engine.stage.addChild(this.ui);
-		this.engine.stage.addChild(this.fadein);
-		this.render();
+		this.addChild(this.ui);
+		this.addChild(this.fadein);
+		this.renderUI();
 	}
 
-	exit() {
-		this.engine.stage.removeChild(this.fadein);
-		this.engine.stage.removeChild(this.ui);
-	}
 
 	update() {
 		this.time += this.engine.deltaTime;
-		// this.hero.position.x = window.innerWidth / 2;
-		// this.hero.position.y = window.innerHeight / 2;
 
 		this.fadein.width = window.innerWidth;
 		this.fadein.height = window.innerHeight;
@@ -75,15 +58,12 @@ export default class MainMenu extends GameObject {
 		this.engine.view.offset.x += 400 * this.engine.deltaTime;
 	}
 
-
-	render() {
+	renderUI() {
 		render(
-			// <Text text="Hello World!" x={200} y={200} />,
-
 			<EngineProvider engine={this.engine}>
 				<Container>
 					<Text
-						text="extrata"
+						text="platformer"
 						filters={[new ChromeFilter(), new BevelFilter()]}
 						style={{
 							fontFamily: "HeadingFont",
@@ -95,20 +75,6 @@ export default class MainMenu extends GameObject {
 						x={window.innerWidth / 2}
 						y={window.innerHeight / 2}
 					/>
-					{/* <Text
-						text={"timothen"}
-						filters={[new BevelFilter()]}
-						style={{
-							fontFamily: "Lazer84",
-							fontSize: 36,
-							fill: 0xf162dc,
-							align: "center",
-						}}
-						anchor={{ x: 0.5, y: 0.5 }}
-						x={window.innerWidth / 2}
-						y={window.innerHeight / 2 - 10}
-					/> */}
-
 					<Button
 						onClick={() => {
 							log.debug("clicked Play button");

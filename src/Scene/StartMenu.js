@@ -3,17 +3,16 @@ import Base from "./Base";
 import type Engine from "Engine";
 
 import Menu from "StartMenu/Menu";
-import BackgroundBuildings from "GameObject/BackgroundBuildings";
 
 import Point from "Utility/Point";
+import log from "loglevel";
+import BackgroundBuildings from "../GameObject/BackgroundBuildings";
+// import BackgroundBuildings from "../Common/Object/Background/Buildings";
 
 export default class StartMenu extends Base {
 	start(engine: Engine) {
 		super.start(engine);
-		// setTimeout(() => {
-		// 	engine.ui.dispatch({ type: "START_SCENE", scene: "menu" });
 		window.dispatchEvent(new Event("mainmenu-ready"));
-		// }, 500);
 
 		engine.stage.position.x = 0;
 		engine.stage.position.y = 0;
@@ -24,8 +23,17 @@ export default class StartMenu extends Base {
 		});
 
 		engine.register(new BackgroundBuildings());
-		engine.register(new Menu());
+
+		// engine.register(new Menu());
+		this.container = new Menu({ engine: engine });
+		engine.stage.addChild(this.container);
 
 		document.body.style.backgroundColor = "#223337";
+	}
+
+	end() {
+		log.debug("StartMenu.end()");
+		this.engine.stage.removeChild(this.container);
+		super.end();
 	}
 }
