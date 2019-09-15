@@ -52,7 +52,7 @@ float fbmnoise3(vec3 point){
 
 float terrainHeight(vec2 coord){
     // return sin(coord.x)*sin(coord.y);
-    return -abs(fbmnoise3(vec3(coord/8., iTime/100.)))*TERRAIN_MAX_HEIGHT;
+    return -abs(fbmnoise3(vec3(coord/8., iTime/50.)))*TERRAIN_MAX_HEIGHT;
 }
 vec3 getNormal(vec3 p)
 {
@@ -73,12 +73,12 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end, float d
     float ydiff = eye.y-(-TERRAIN_MAX_HEIGHT);//10 - - 1.5 = +8.5
     t = ydiff / marchingDirection.y;
 
-    for (int i=0; i<64; i++)
+    for (int i=0; i<32; i++)
     {
         vec3 pos = eye + t*marchingDirection;
         float h =  terrainHeight(pos.xz) - pos.y;
         if (h<(0.002*t) || t>end) break;
-        t += 0.5*h;
+        t += 0.9*h;
     }
     return t;
 }
