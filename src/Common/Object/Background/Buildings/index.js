@@ -1,8 +1,9 @@
 //@flow
 import type Engine from "Engine";
-import StormCloudsFilter from "Filter/StormClouds/Filter";
+import StormCloudsFilter from "Filter/StormClouds2/Filter";
 import Building from "Common/Object/Background/Buildings/Building";
 import * as PIXI from "pixi.js";
+import FilterUpdater from "Filter/Updater";
 
 const NUM_BUILDINGS = 100;
 
@@ -27,7 +28,6 @@ export default class BackgroundBuildings extends PIXI.Container {
 	constructor(params: { engine: Engine }) {
 		super();
 		this.engine = params.engine;
-		// this.addChild(new PIXI.Sprite(PIXI.Texture.WHITE));
 
 		this.stage = new BackgroundStage();
 		this.buildingStage = new BackgroundBuildingStage();
@@ -65,7 +65,6 @@ export default class BackgroundBuildings extends PIXI.Container {
 	}
 
 	onResize = () => {
-		// console.log(event.target.innerWidth);
 		this.clouds.width = window.innerWidth;
 		this.clouds.height = window.innerHeight / 2;
 		this.clouds.y = -window.innerHeight / 2;
@@ -110,11 +109,14 @@ export default class BackgroundBuildings extends PIXI.Container {
 		this.clouds.height = window.innerHeight / 2;
 		this.clouds.y = -window.innerHeight / 2;
 		this.cloudFilter = new StormCloudsFilter();
-		this.cloudFilter.size = {
-			x: window.innerWidth,
-			y: window.innerHeight / 2,
-		};
+		// this.cloudFilter.size = {
+		// 	x: window.innerWidth,
+		// 	y: window.innerHeight / 2,
+		// };
 		this.clouds.filters = [this.cloudFilter];
+
+		//TODO remove filterupdater
+		this.engine.register(new FilterUpdater(this.cloudFilter));
 	}
 
 	makeBuilding() {
