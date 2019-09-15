@@ -2,7 +2,7 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 
-import Menu from "StartMenu/Container";
+import Container from "StartMenu/Container";
 
 import Point from "Utility/Point";
 import log from "loglevel";
@@ -20,7 +20,7 @@ export default class StartMenu extends Base {
 			y: 0,
 		});
 
-		this.container = new Menu({ engine: engine });
+		this.container = new Container({ engine: engine });
 		engine.stage.addChild(this.container);
 
 		document.body.style.backgroundColor = "#223337";

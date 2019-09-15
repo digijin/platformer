@@ -2,9 +2,10 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 
-import Manager from "Menu/Manager";
+import Container from "Menu/Container";
 
 import Point from "Utility/Point";
+import log from "loglevel";
 
 export default class Menu extends Base {
 	start(engine: Engine) {
@@ -18,11 +19,21 @@ export default class Menu extends Base {
 			y: 0,
 		});
 
-		engine.register(new Manager());
+		this.container = new Container({ engine: engine });
+		engine.stage.addChild(this.container);
+
+		// engine.register(new Manager());
 
 		document.body.style.backgroundColor = "#353232";
 		// engine.ui.dispatch({ type: "START_SCENE", scene: "briefing" });
 
 		window.dispatchEvent(new Event("menu-start"));
 	}
+
+	end() {
+		log.debug("Menu.end()");
+		this.engine.stage.removeChild(this.container);
+		super.end();
+	}
+
 }
