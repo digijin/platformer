@@ -52,7 +52,7 @@ float fbmnoise3(vec3 point){
 
 float terrainHeight(vec2 coord){
     // return sin(coord.x)*sin(coord.y);
-    return -abs(fbmnoise3(vec3(coord/6., iTime/100.)))*TERRAIN_MAX_HEIGHT;
+    return -abs(fbmnoise3(vec3(coord/8., iTime/100.)))*TERRAIN_MAX_HEIGHT;
 }
 vec3 getNormal(vec3 p)
 {
@@ -64,6 +64,15 @@ vec3 getNormal(vec3 p)
 
 float raymarch(vec3 eye, vec3 marchingDirection, float start, float end, float delta) {
     float t = start;
+    // return early if ray is looking down
+    if (marchingDirection.y <0.){
+        return end;
+    }
+
+    //take big first step because we know there is nothing between eye.y and -TERRAIN_MAX__HEIGHT
+    float ydiff = eye.y-(-TERRAIN_MAX_HEIGHT);//10 - - 1.5 = +8.5
+    t = ydiff / marchingDirection.y;
+
     for (int i=0; i<64; i++)
     {
         vec3 pos = eye + t*marchingDirection;
@@ -78,12 +87,14 @@ float raymarch(vec3 eye, vec3 marchingDirection, float start, float end, float d
 void main()
 {
 
-    vec3 colorFG = vec3(33., 51., 55.)/255.;
+    //    vec3 colorFG = vec3(33., 51., 55.)/255.;
+    vec3 colorFG = vec3(13., 25., 25.)/255.;
     vec3 colorBG = vec3(56., 128., 108.)/255.;
 
     vec3 viewDir = rayDirection(45.0, iResolution.xy, gl_FragCoord.xy);
-    vec3 eye = vec3(40., -10., 20.) + iPosition*100.;
+    vec3 eye = vec3(40., -20., 20.) + iPosition*100.;
     eye.z += iTime;
+    eye.x += iTime;
     mat4 viewToWorld = lookAtMatrix(eye, eye+ iRotation, vec3(0.0, 1.0, 0.0));
     vec3 worldDir = (viewToWorld * vec4(viewDir, 0.0)).xyz;
     float dist = raymarch(eye, worldDir, MIN_DIST, MAX_DIST, DELTA_DIST);
@@ -106,6 +117,8 @@ void main()
     //    0.5
     //    );
     float str = pow(-p.y/TERRAIN_MAX_HEIGHT, .2);
+
+    str = smoothstep(0., 1., str);
 
     vec3 tint = mix(colorBG, colorFG, vec3(str));
 
