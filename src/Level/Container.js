@@ -11,21 +11,28 @@ import Grid from "Grid";
 // import log from "loglevel";
 import * as PIXI from "pixi.js";
 import type Engine from "../Engine";
-import Background from "GameObject/BackgroundBuildings";
+// import Background from "GameObject/BackgroundBuildings";
+
+import BackgroundBuildings from "../Common/Object/Background/Buildings";
 
 import PlayerCharacter from "Level/Actor/Player/Character";
 import EnemyCharacter from "Level/Actor/Enemy/Character";
 import PauseMenu from "GameObject/PauseMenu";
 
-import SceneManager from 'Common/Base/SceneManager'
+import SceneManager from "Common/Base/SceneManager";
 
-class LevelContainer extends PIXI.Container {}
-export default class LevelManager extends SceneManager {
-	constructor(engine: Engine) {
+class LevelContainerInner extends PIXI.Container {
+}
+
+export default class LevelContainer extends SceneManager {
+	constructor(params: { engine: Engine }) {
 		// super.init(engine);
 		super();
-		this.engine = engine
-		this.container = new LevelContainer();
+		this.engine = params.engine;
+
+		this.addChild(new BackgroundBuildings({ engine: this.engine }));
+
+		this.container = new LevelContainerInner();
 		// this.engine.stage.addChild(this.container);
 		this.addChild(this.container);
 
@@ -39,8 +46,8 @@ export default class LevelManager extends SceneManager {
 		this.engine.register(grid);
 
 		document.body.style.backgroundColor = "#ddaaee";
-		const bg = new Background();
-		engine.register(bg);
+		// const bg = new Background();
+		// engine.register(bg);
 
 
 		// FLOWHACK
@@ -52,7 +59,7 @@ export default class LevelManager extends SceneManager {
 				x: 300,
 				y: 50,
 			}),
-			engine: engine,
+			engine: this.engine,
 		});
 		this.container.addChild(this.player);
 		this.engine.register(new PauseMenu());

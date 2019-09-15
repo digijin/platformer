@@ -8,7 +8,7 @@ uniforms.iTime = 0;
 uniforms.iMouse = [0, 0];
 uniforms.iResolution = [window.innerWidth, window.innerHeight];
 uniforms.iPosition = [0, 0, 0];
-uniforms.iRotation = [0, 0, 0];
+uniforms.iRotation = [1, 0, 0];
 
 export default class StormClouds2Filter extends PIXI.Filter {
 	constructor() {

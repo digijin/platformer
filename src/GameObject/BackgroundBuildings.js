@@ -89,6 +89,7 @@ export default class BackgroundBuildings extends GameObject {
 		//hack ReflectionFilter
 		// this.buildingStage.filters[0].time += this.engine.deltaTime;
 		this.cloudFilter.time += this.engine.deltaTime;
+		this.filter.mouse = this.engine.mouse.position;
 
 		this.stage.position.y = window.innerHeight / 2;
 		this.buildingStage.children.forEach(b => {
@@ -125,6 +126,7 @@ export default class BackgroundBuildings extends GameObject {
 			y: window.innerHeight / 2,
 		};
 		this.clouds.filters = [this.cloudFilter];
+
 	}
 
 	makeBuilding() {

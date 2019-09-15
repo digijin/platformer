@@ -116,7 +116,7 @@ export default class BackgroundBuildings extends PIXI.Container {
 		this.clouds.filters = [this.cloudFilter];
 
 		//TODO remove filterupdater
-		this.engine.register(new FilterUpdater(this.cloudFilter));
+		// this.engine.register(new FilterUpdater(this.cloudFilter));
 	}
 
 	makeBuilding() {
