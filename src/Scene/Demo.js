@@ -3,9 +3,9 @@ import type Engine from "Engine";
 // import config from "config";
 import GameObject from "GameObject";
 
-// import * as PIXI from "pixi.js";
-// import Grid from "Grid";
-// import { BlockTypes } from "Level/Grid/Block/Type";
+import * as PIXI from "pixi.js";
+
+import img from "../assets/mech.png";
 
 class Runner extends GameObject {
 	init(engine) {
@@ -25,6 +25,27 @@ export default class Demo extends Base {
 	}
 
 	doStuff() {
+
+		const texture = new PIXI.Texture(new PIXI.BaseTexture(img));
+		const sprite = new PIXI.Sprite(texture);
+		const fragment = `
+			varying vec2 vTextureCoord;
+			uniform sampler2D uSampler;
+			void main(void)
+			{
+			   gl_FragColor = texture2D(uSampler, vTextureCoord);
+			   gl_FragColor.r = vTextureCoord.x;
+			}
+			`;
+
+		const filter = new PIXI.Filter(null, fragment);
+
+		// const container = new PIXI.Container();
+		// container.filters = [filter];
+		sprite.filters = [filter];
+
+		this.engine.stage.addChild(sprite);
+
 		this.engine.register(new Runner());
 	}
 }

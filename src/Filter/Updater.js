@@ -9,14 +9,14 @@ export default class FilterUpdater extends GameObject {
 		this.filter = filter;
 		// this.position = { x: 0, y: 0, z: 0 };
 		// this.rotation = { x: 1, y: 0, z: 0 };
-		if(filter.position){
+		if (filter.position) {
 			this.position = filter.position;
-		}else{
+		} else {
 			this.position = new Vector(-4, 0, 0);
 		}
-		if(filter.rotation){
+		if (filter.rotation) {
 			this.rotation = filter.rotation;
-		}else{
+		} else {
 			this.rotation = new Vector(1, 0, 0);
 		}
 		// console.log(filter.rotation, this.rotation);
@@ -47,22 +47,26 @@ export default class FilterUpdater extends GameObject {
 			.subtract(
 				forward.multiply(
 					this.engine.input.getAxis("vertical") *
-						this.engine.deltaTime
-				)
+					this.engine.deltaTime,
+				),
 			)
 			.subtract(
 				right.multiply(
 					this.engine.input.getAxis("horizontal") *
-						this.engine.deltaTime
-				)
+					this.engine.deltaTime,
+				),
 			)
 			.subtract(
 				up.multiply(
-					this.engine.input.getAxis("ascent") * this.engine.deltaTime
-				)
+					this.engine.input.getAxis("ascent") * this.engine.deltaTime,
+				),
 			);
 		// console.log(this.position);
 		this.filter.time += this.engine.deltaTime;
+		this.filter.percent += this.engine.deltaTime;
+		if (this.filter.percent > 1) {
+			this.filter.percent = 0;
+		}
 		this.filter.mouse = this.engine.mouse.position;
 		this.filter.position = this.position;
 		this.filter.rotation = this.rotation;

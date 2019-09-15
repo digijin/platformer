@@ -17,7 +17,7 @@
 //#pragma glslify: snoise4 = require(glsl-noise/simplex/4d)
 //#pragma glslify: ease = require(glsl-easings/exponential-out)
 
-precision mediump float;
+precision highp float;
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 uniform sampler2D iChannel0;

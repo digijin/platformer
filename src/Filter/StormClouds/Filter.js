@@ -38,7 +38,7 @@ uniforms.colors = {
 
 export default class StormCloudsFilter extends PIXI.Filter {
 	constructor() {
-		super("", fragment, uniforms);
+		super(null, fragment, uniforms);
 	}
 
 	get time() {

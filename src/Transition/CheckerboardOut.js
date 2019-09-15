@@ -15,6 +15,7 @@ export default class CheckerboardOut extends Base {
 	swapped: boolean = false;
 	flashMaxWidth: number = 100;
 	manager: Object;
+
 	init(engine: Engine) {
 		log.debug("CheckerboardOut transition has begun");
 		this.tag("transition");
@@ -25,9 +26,9 @@ export default class CheckerboardOut extends Base {
 	}
 
 	update() {
-		log.debug("updating transition ", Math.floor(this.filter.percent.value * 100), "%");
-		this.filter.percent.value += this.engine.deltaTime;
-		if (this.filter.percent.value >= 1) {
+		log.debug("updating transition ", Math.floor(this.filter.percent * 100), "%");
+		this.filter.percent += this.engine.deltaTime;
+		if (this.filter.percent >= 1) {
 			this.engine.stageContainer.filters = [];
 			log.debug("CheckerboardOut transition has reached end");
 			this.endLastScene();

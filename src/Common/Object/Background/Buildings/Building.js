@@ -25,7 +25,7 @@ export default class Building {
 				b: 0.5 + Math.random() * 0.5,
 				a: 1,
 			}).toHex(),
-			width: 20 + Math.floor(Math.random() * 40),
+			width: 40 + Math.floor(Math.random() * 40),
 			floors: 20 + Math.floor(Math.random() * 40),
 			floorHeight: 4 + Math.floor(Math.random() * 4),
 			windowHeight: 2 + Math.floor(Math.random() * 4),
