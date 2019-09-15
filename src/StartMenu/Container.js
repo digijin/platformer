@@ -24,7 +24,7 @@ const FADETIME = 4;
 
 import BackgroundBuildings from "../Common/Object/Background/Buildings";
 
-export default class StartMenu extends PIXI.Container {
+export default class StartMenuContainer extends PIXI.Container {
 	ui: PIXI.Container;
 	time: number = 0;
 	fadein: PIXI.Sprite;

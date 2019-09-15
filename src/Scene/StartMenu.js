@@ -2,7 +2,7 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 
-import Menu from "StartMenu/Menu";
+import Menu from "StartMenu/Container";
 
 import Point from "Utility/Point";
 import log from "loglevel";
