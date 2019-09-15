@@ -12,7 +12,7 @@ uniforms.iMouse = [0, 0];
 uniforms.iResolution = [window.innerWidth, window.innerHeight];
 uniforms.iChannel0 = new PIXI.Texture(new PIXI.BaseTexture(texture));
 
-export default class MenuBackgroundFilter extends PIXI.Filter {
+export default class TestFilter extends PIXI.Filter {
 	constructor() {
 		super(null, fragment, uniforms);
 		log.debug(this.uniforms);

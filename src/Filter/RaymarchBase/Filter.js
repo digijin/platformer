@@ -13,30 +13,13 @@ import texture from "assets/mech.png";
 
 const uniforms = {};
 
-uniforms.iTime = {
-	type: "f",
-	value: -1,
-};
-uniforms.iMouse = {
-	type: "v2",
-	value: [0, 0],
-};
-uniforms.iResolution = {
-	type: "v2",
-	value: [window.innerWidth, window.innerHeight],
-};
-uniforms.iChannel0 = {
-	type: "sampler2D",
-	value: new PIXI.Texture(new PIXI.BaseTexture(texture)),
-};
-uniforms.iPosition = {
-	type: "v3",
-	value: [-1, 0, 0],
-};
-uniforms.iRotation = {
-	type: "v3",
-	value: [1, 0, 0],
-};
+uniforms.iTime = 0;
+uniforms.iMouse = [0, 0];
+uniforms.iResolution = [window.innerWidth, window.innerHeight];
+uniforms.iChannel0 = new PIXI.Texture(new PIXI.BaseTexture(texture));
+uniforms.iPosition = [-1, 0, 0];
+uniforms.iRotation = [1, 0, 0];
+
 // uniforms.iChannel0 = {
 // 	type: "sampler2D",
 // 	value: new PIXI.Texture(new PIXI.BaseTexture(texture))
@@ -48,7 +31,7 @@ uniforms.iRotation = {
 // 		return Math.random();
 // 	})
 // };
-export default class MenuBackgroundFilter extends PIXI.Filter {
+export default class RaymarchBaseFilter extends PIXI.Filter {
 	constructor() {
 		super("", fragment, uniforms);
 	}

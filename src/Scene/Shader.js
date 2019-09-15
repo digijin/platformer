@@ -2,7 +2,7 @@ import Base from "./Base";
 
 import type Engine from "Engine";
 import * as PIXI from "pixi.js";
-import Filter from "Filter/CheckerboardTransition/Filter";
+import Filter from "Filter/StormClouds/Filter";
 // import Filter from "Filter/Test/Filter";
 import FilterUpdater from "Filter/Updater";
 // import AntiAlias from "Filter/Antialias/Filter";

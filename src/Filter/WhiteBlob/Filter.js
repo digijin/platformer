@@ -5,22 +5,11 @@ import texture from "assets/mech.png";
 
 const uniforms = {};
 
-uniforms.iTime = {
-	type: "f",
-	value: -1,
-};
-uniforms.iMouse = {
-	type: "v2",
-	value: [0, 0],
-};
-uniforms.iResolution = {
-	type: "v2",
-	value: [window.innerWidth, window.innerHeight],
-};
-uniforms.iChannel0 = {
-	type: "sampler2D",
-	value: new PIXI.Texture(new PIXI.BaseTexture(texture)),
-};
+
+uniforms.iTime = 0;
+uniforms.iMouse = [0, 0];
+uniforms.iResolution = [window.innerWidth, window.innerHeight];
+uniforms.iChannel0 = new PIXI.Texture(new PIXI.BaseTexture(texture));
 // uniforms.iChannel0 = {
 // 	type: "sampler2D",
 // 	value: new PIXI.Texture(new PIXI.BaseTexture(texture))

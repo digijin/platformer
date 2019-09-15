@@ -5,36 +5,16 @@ import texture from "assets/mech.png";
 
 const uniforms = {};
 
-uniforms.iTime = {
-	type: "f",
-	value: -1,
-};
-uniforms.iMouse = {
-	type: "v2",
-	value: [0, 0],
-};
-uniforms.iResolution = {
-	type: "v2",
-	value: [window.innerWidth, window.innerHeight],
-};
-uniforms.iChannel0 = {
-	type: "sampler2D",
-	value: new PIXI.Texture(new PIXI.BaseTexture(texture)),
-};
-uniforms.seeds = {
-	type: "v2v",
-	// value: [0.123, 0.321, 0.456, 0.654, 0.789, 0.987]
-	value: new Array(32).fill(0).map(() => {
-		return Math.random();
-	}),
-};
-
-uniforms.colors = {
-	type: "v3v",
-	value: new Array(48).fill(0).map(() => {
-		return Math.random();
-	}),
-};
+uniforms.iTime = 0;
+uniforms.iMouse = [0, 0];
+uniforms.iResolution = [window.innerWidth, window.innerHeight];
+uniforms.iChannel0 = new PIXI.Texture(new PIXI.BaseTexture(texture));
+uniforms.seeds = new Array(32).fill(0).map(() => {
+	return Math.random();
+});
+uniforms.colors = new Array(48).fill(0).map(() => {
+	return Math.random();
+});
 
 export default class SimplexFilter extends PIXI.Filter {
 	constructor() {
