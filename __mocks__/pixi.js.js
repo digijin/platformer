@@ -6,7 +6,7 @@ class Klass {
 		this.tilePosition = { x: 0, y: 0 };
 	}
 
-	addChild() {}
+	addChild() { }
 }
 let prox = new Proxy(
 	{},
@@ -20,29 +20,33 @@ let prox = new Proxy(
 
 const pixi = {
 	utils: {
-		skipHello: () => {}
+		skipHello: () => { }
 	},
 	loader: {
-		add: () => {},
-		load: () => {},
+		add: () => { },
+		load: () => { },
 		resources: {
 			blocks: {
 				textures: []
 			}
 		}
 	},
-	autoDetectRenderer: () => {},
+	autoDetectRenderer: () => { },
 	Filter: Klass,
 	BaseTexture: Klass,
 	Texture: Klass,
 	Container: Klass,
-	BaseTexture: Klass,
 	Sprite: Klass,
 	Graphics: Klass,
 	extras: {
-		TilingSprite: Klass
+		TilingSprite: Klass,
 	},
-	BLEND_MODES: {}
+	BLEND_MODES: {},
+	Loader: {
+		shared: {
+			resources: [],
+		},
+	},
 };
 
 module.exports = pixi;
