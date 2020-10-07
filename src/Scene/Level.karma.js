@@ -20,7 +20,7 @@ function clickId(id) {
 	mouseUtil.clickSelector("#" + id);
 }
 
-describe("Scene/Level.karma.js", () => {
+xdescribe("Scene/Level.karma.js", () => {
 	let container;
 	let game;
 	// const getByTestingId = id => {

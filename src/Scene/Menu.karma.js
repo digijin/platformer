@@ -7,7 +7,7 @@ import recurseSearch from "test/util/recurseSearch";
 PIXI.Loader.shared.add("blocks", "assets/sprites.json");
 PIXI.Loader.shared.add("decor", "assets/decorsprites.json");
 
-describe("scene/menu.karma.js", () => {
+xdescribe("scene/menu.karma.js", () => {
 	let container;
 	let game;
 	const getByTestingId = id => {

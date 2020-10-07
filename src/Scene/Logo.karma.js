@@ -7,7 +7,7 @@ PIXI.Loader.shared.add("blocks", "assets/sprites.json");
 PIXI.Loader.shared.add("decor", "assets/decorsprites.json");
 // import recurseSearch from "test/util/recurseSearch";
 
-describe("Scene/Logo.karma.js", () => {
+xdescribe("Scene/Logo.karma.js", () => {
 	let container;
 	let game;
 	// const getByTestingId = id => {
